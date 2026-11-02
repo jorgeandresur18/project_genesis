@@ -338,6 +338,8 @@ fila de curación; mientras tanto, su pose base con el aura.
 menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Los usos se recuperan al terminar la pelea
 (como la vida). El autor va a hacer objetos que los recuperan. **Hecho:** los ataques básicos de daño, 20 usos (los que pegan más, 15: Estocada, Ola de petróleo, Cachetada de revés); los de efecto, 5 (Parálisis de pesadilla, Beso confusión, el Cebo); la curación de Rikka, 5 (cura el 35 %, con el aura verde). Los enemigos solo eligen ataques a los que les quedan usos. Los textos de los ataques nombran a quien atacan (`{objetivo}`), no a Jair fijo.
 
+**Hablar según quién le habla a quién (hecho):** cada personaje le dice algo distinto a cada uno, según cómo se llevan, y el otro le contesta (si se distrae o no): `src/data/charlas_batalla.json` (por su hoja: jair, cami, rikka, nikki, soldado, sombra). Cami y Nikki se odian, Rikka y Nikki tienen media amistad (las Blueberries), Rikka y Cami se celan, Cami le dice cobarde a Jair; la sombra no habla (lo cuenta la Voz). **Pedirle perdón a Nikki es solo de Jair** (los demás le hablan a su manera). Si un par no tiene charla, se usa lo de siempre (`hablar` del héroe y `responde` del rival).
+
 **Estados nuevos (aprobado):** quemado y congelado (además de los que ya hay):
 
 | Estado | Qué pasa | Cómo se ve |

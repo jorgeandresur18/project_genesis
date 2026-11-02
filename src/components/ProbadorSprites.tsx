@@ -95,7 +95,8 @@ function armarArena(heroes: [string, number][], rivales: [string, number][], fon
     hablar: Math.max(...todas.map((d) => d.hablar)),
     huir: true,
     retratos: Object.assign({}, ...todas.map((d) => d.retratos)),
-    dialogos: {},
+    // Solo lo que dice la Voz al hablar (si se distrae o no); el resto, sin diálogos de la historia.
+    dialogos: { hablar_ok: todas[0].dialogos.hablar_ok ?? [], hablar_no: todas[0].dialogos.hablar_no ?? [] },
   };
 }
 

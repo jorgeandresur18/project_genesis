@@ -1,0 +1,122 @@
+{
+  "_nota": "Lo que se dicen en una pelea con «Hablar», según quién le habla a quién (por su hoja: jair, cami, rikka, nikki, soldado, sombra). dice: lo que dice quien habla ({objetivo}: el nombre del otro); ok y no: lo que contesta el otro si se distrae o no. narra: el otro no habla (la sombra), lo cuenta la Voz. Pedirle perdón a Nikki es solo de Jair (está en la pelea del bar).",
+  "jair": {
+    "cami": {
+      "dice": ["Cami, somos del mismo equipo. ¿Te acuerdas? Yo te cargué.", "¿Podemos hablarlo como adultos? Tú bajas el arma y yo dejo de temblar."],
+      "ok": ["…Me cargaste tres pasillos y te quejaste en los tres. Pero bueno. Un turno."],
+      "no": ["Cobarde.", "Hablas mucho para alguien que pelea tan poco."]
+    },
+    "rikka": {
+      "dice": ["Rikka, no tenemos que hacer esto. Vamos a tomar algo. Invito yo.", "Te queda muy bien la espada. Digo… por favor, bájala."],
+      "ok": ["¿Invitas tú? ¿De verdad? …Bueno. Pero que sea barato."],
+      "no": ["Una sacerdotisa no se compra con un trago. …¿Cuántos tragos?", "No me mires así. No funciona. Casi no funciona."]
+    },
+    "jair": {
+      "dice": ["Oye… yo. ¿Esto cuenta como terapia?", "Si te pego, ¿me duele a mí?"],
+      "ok": ["…Buena pregunta. Mejor no averiguarlo."],
+      "no": ["No me escuches. Yo nunca me hago caso."]
+    },
+    "soldado": {
+      "dice": ["Oigan, ¿a ustedes les pagan horas extra por esto?", "Si me dejan ir, les hago una página web. Responsive.", "¿Esa máscara es del uniforme o es personal? Te queda bien, eh.", "Yo también odio mi trabajo. Podríamos no hacerlo juntos."]
+    },
+    "sombra": {
+      "dice": ["Lindo… ¿eso es petróleo o es tu personalidad?", "Si te quedas quieto, prometo no gritar."],
+      "narra": true,
+      "ok": ["La sombra ladea la cabeza. Algo de eso le hizo gracia. O le dio hambre."],
+      "no": ["La sombra sonríe con demasiados dientes."]
+    }
+  },
+  "cami": {
+    "jair": {
+      "dice": ["Siéntate, Jair. Esto no es para ti.", "¿Contra mí? ¿En serio? Ni de broma."],
+      "ok": ["…Sí, sí. Me siento. Perdón. Ya me siento."],
+      "no": ["No. Esta vez no me escondo. …Bueno, casi."]
+    },
+    "nikki": {
+      "dice": ["Oye, la del bar. ¿Viniste a pelear o a llorar?", "Te queda bien el negro. Combina con tu futuro."],
+      "ok": ["¿Me estás hablando a mí, muñeca del espacio? …Repítelo, que no te escuché."],
+      "no": ["Ni me hables. Me arruinas el maquillaje con solo existir.", "Mira, rubia: no te conozco y ya te odio."]
+    },
+    "rikka": {
+      "dice": ["Princesa, apártate. Te vas a ensuciar el kimono.", "¿Quieres pelear o quieres que alguien te mire?"],
+      "ok": ["…¿Tanto se nota?"],
+      "no": ["Al menos a mí alguien me mira.", "No soy princesa. Soy sacerdotisa. Hay una diferencia de rango."]
+    },
+    "cami": {
+      "dice": ["Bueno. Por fin alguien a mi altura.", "Si te rindes ahora, no le cuento a nadie."],
+      "ok": ["…Me caigo bien."],
+      "no": ["No me mires así. Nadie me mira así."]
+    },
+    "soldado": {
+      "dice": ["Baja eso antes de que te lo baje yo.", "Tienes la postura de alguien que perdió muchas peleas.", "¿Te mandaron solo? Qué triste. Para ti, digo."]
+    },
+    "sombra": {
+      "dice": ["Ven. Te arranco esa sonrisa.", "Pareces más grande de lo que eres. Te entiendo."],
+      "narra": true,
+      "ok": ["La sombra retrocede un paso. Uno."],
+      "no": ["La sombra se ríe. Sin boca, pero se ríe."]
+    }
+  },
+  "rikka": {
+    "jair": {
+      "dice": ["Jair… ¿de verdad vas a pegarme? ¿A mí?", "Si me ganas, ¿después me invitas a comer? Así no es en vano."],
+      "ok": ["No. No, claro que no. ¿Qué hago con las manos?"],
+      "no": ["Rikka, es una pelea de prueba. No te pongas así."]
+    },
+    "cami": {
+      "dice": ["Cami, no tienes que ser tan agresiva. Respira. Así.", "Te presto mi espada si me dejas ganar. Es antigua. Vale mucho. Creo."],
+      "ok": ["…Uf. Está bien. Respiro. Ya."],
+      "no": ["Guárdate la espada. Y la lástima."]
+    },
+    "nikki": {
+      "dice": ["Nikki, ¿te acuerdas de esa canción de las Blueberries? No peleemos con esa canción en la cabeza.", "Después de esto te invito… no. Invitas tú. Yo no tengo dinero."],
+      "ok": ["…Ay, no. Me la pusiste en la cabeza. Gracias, eh."],
+      "no": ["Me caes bien, Rikka. Igual te voy a pegar."]
+    },
+    "rikka": {
+      "dice": ["¿Esa soy yo? ¿Así me veo cuando me enojo?", "Tenemos el mismo kimono. Una de las dos se cambia."],
+      "ok": ["…Somos bonitas, eso sí."],
+      "no": ["No te hagas la sacerdotisa conmigo."]
+    },
+    "soldado": {
+      "dice": ["¿Sabes cuánto cuesta esa armadura? Yo sí. Y me da pena por ti.", "Arrodíllate ante una sacerdotisa. Por favor. Es gratis."]
+    },
+    "sombra": {
+      "dice": ["Espíritu impuro: en nombre de la Primavera, retírate. Por favor.", "No te tengo miedo. Un poco. Pero no mucho."],
+      "narra": true,
+      "ok": ["La sombra se encoge. Parece que la Primavera todavía asusta."],
+      "no": ["La sombra no conoce la Primavera. Ni le interesa."]
+    }
+  },
+  "nikki": {
+    "jair": {
+      "dice": ["Jair, mírame. ¿Te parece que estoy para hablar?", "Dale. Pídeme perdón. Me encanta cuando no sabes qué decir."],
+      "ok": ["…Perdón. Por lo que sea. Por todo, si quieres."],
+      "no": ["Nikki, estás borracha."]
+    },
+    "cami": {
+      "dice": ["Tú. La del traje de látex. Ven, que te arreglo la cara gratis.", "¿Ya conseguiste trabajo o sigues viviendo del drama?"],
+      "ok": ["…Esa me dolió. Un poquito."],
+      "no": ["Hablas mucho para alguien que mide un metro cincuenta.", "Ni te contesto. Ya sabes por qué."]
+    },
+    "rikka": {
+      "dice": ["Rikka, linda, hazte a un lado. No es contigo.", "Si me ganas te pago un trago. Si pierdes, también. Igual quiero tomar."],
+      "ok": ["¿Un trago? ¿Lo pagas tú? …Entonces sí, me hago a un lado."],
+      "no": ["Lo siento, Nikki. Tengo que pelear. Pero después sí."]
+    },
+    "nikki": {
+      "dice": ["Mírate. Estás hecha un desastre. Me encantas.", "Ni se te ocurra llorar primero."],
+      "ok": ["…Ya. Vamos por una cerveza y lo dejamos."],
+      "no": ["No te pongas sentimental conmigo."]
+    },
+    "soldado": {
+      "dice": ["Oye, robot de feria. ¿Bailas?", "¿Tienes cara debajo de eso o es todo casco?"]
+    },
+    "sombra": {
+      "dice": ["Uy, qué feo. Pareces mi ex a las tres de la mañana.", "Si me tocas, te tiro la cerveza encima."],
+      "narra": true,
+      "ok": ["La sombra se mira a sí misma. Duda."],
+      "no": ["A la sombra no le importa tu ex."]
+    }
+  }
+}

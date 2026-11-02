@@ -49,6 +49,7 @@ import {
   type Objeto,
   type Progreso,
 } from '../engine/batalla';
+import charlasJson from '../data/charlas_batalla.json';
 
 /**
  * Batalla por turnos (RPG estilo EarthBound / Final Fantasy) dentro de la historia (ver `batalla` en la escena;
@@ -63,6 +64,11 @@ import {
  * el texto se escribe con su sonido. Datos: src/data/batallas/<id>.json; cuentas: engine/batalla.ts.
  */
 const BATALLAS = import.meta.glob<DatosBatalla>('../data/batallas/*.json', { eager: true, import: 'default' });
+/** Lo que se dicen con «Hablar», según quién le habla a quién (src/data/charlas_batalla.json). */
+type Charla = { dice: string[]; ok?: string[]; no?: string[]; narra?: boolean };
+const CHARLAS = charlasJson as unknown as Record<string, Record<string, Charla>>;
+/** Quién es alguien en las charlas: el nombre de su hoja (batalla/jair → jair). */
+const quienEs = (sprite: string) => sprite.split('/').pop()!;
 const BASE = import.meta.env.BASE_URL;
 const espera = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
 /** Lo que tarda en deslizarse hasta el objetivo (igual que en styles.css, .batalla-figura). */
@@ -1153,8 +1159,11 @@ function Pelea({
         b.current.racha = 0;
         return decir(fmt(t('batalla.clon_no_escucha'), { quien: e.nombre }));
       }
-      // Pedirle perdón (Nikki): tantos turnos seguidos y termina la pelea.
-      const p = en.perdon;
+      const yo = quienEs(d.personajes[h.clave].sprite);
+      const charla = CHARLAS[yo]?.[quienEs(en.sprite)];
+      // Pedirle perdón (Nikki): tantos turnos seguidos y termina la pelea. Es cosa de Jair: los demás le hablan a su
+      // manera (las charlas).
+      const p = yo === 'jair' ? en.perdon : undefined;
       if (p) {
         const i = Math.min(b.current.racha, p.veces - 1);
         b.current.racha++;
@@ -1163,10 +1172,12 @@ function Pelea({
         if (b.current.racha >= p.veces) b.current.perdona = true;
         return;
       }
-      await decir(fmt(azar(d.personajes[h.clave].hablar), { objetivo: e.nombre }), h.nombre);
+      await decir(fmt(azar(charla?.dice ?? d.personajes[h.clave].hablar), { objetivo: e.nombre }), h.nombre);
       // Al jefe no se lo distrae.
       const funciona = !en.jefe && Math.random() < d.hablar;
-      if (en.responde) await decir(azar(funciona ? en.responde.ok : en.responde.no), en.responde.quien);
+      const contesta = charla?.[funciona ? 'ok' : 'no'];
+      if (contesta?.length) await decir(fmt(azar(contesta), { objetivo: h.nombre }), charla?.narra ? undefined : e.nombre);
+      else if (en.responde) await decir(azar(funciona ? en.responde.ok : en.responde.no), en.responde.quien);
       if (funciona) e.distraido = true;
       return lineas(funciona ? 'hablar_ok' : 'hablar_no', { objetivo: e.nombre });
     }
