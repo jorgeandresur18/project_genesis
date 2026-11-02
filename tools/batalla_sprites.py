@@ -272,14 +272,21 @@ def hoja_capitan(c: dict):
                     ang = 0.5 * float(np.arctan2(2 * (vx * vy).sum(), (vx * vx).sum() - (vy * vy).sum()))
                     if abs(ang) < 0.06:
                         ang = 0.0
-                    # Termina en el punto del rayo más lejos en esa dirección.
+                    # Nace en la punta del arma (el punto del rayo menos avanzado en su dirección). Desde ahí el juego lo
+                    # dibuja entero hasta el borde, así que el rayo dibujado se borra de la hoja (no queda ningún corte).
                     proy = vx * np.cos(ang) + vy * np.sin(ang)
-                    i1 = int(np.argmax(proy))
+                    i0 = int(np.argmin(proy))
                     grosor = int(rayo_o[:, -3:].any(axis=1).sum()) if rayo_o[:, -3:].any() else 10
-                    # Dónde termina: sobre la recta del centro del rayo (no en su borde), en el punto más lejano.
-                    xf = float(xs[i1]) + 1
-                    yf = float(ys.mean()) + np.tan(ang) * (xf - float(xs.mean())) if abs(ang) < 1.4 else float(ys[i1])
-                    rayo[str(f)] = [round(xf, 1), round(yf, 1), round(ang, 4), max(6, min(14, grosor + 1))]
+                    grosor = max(6, min(14, grosor + 1))
+                    yy, xx = np.mgrid[0:fh, 0:W]
+                    px, py = xx - xs.mean(), yy - ys.mean()
+                    pr = px * np.cos(ang) + py * np.sin(ang)
+                    pe = np.abs(-px * np.sin(ang) + py * np.cos(ang))
+                    borrar = (pr > proy[i0] + 3) & (pe <= grosor * 0.9 + 2) & (xx >= 96)
+                    q[borrar] = 0
+                    xm = float(xs.mean() + proy[i0] * np.cos(ang))
+                    ym = float(ys.mean() + proy[i0] * np.sin(ang))
+                    rayo[str(f)] = [round(xm, 1), round(ym, 1), round(ang, 4), grosor]
             cuadros.append(q)
         meta['animations'][nombre] = {'row': len(filas), 'frames': a['frames'], 'fps': a['fps'], 'loop': a['loop'],
                                       **({'seq': a['seq']} if 'seq' in a else {})}
