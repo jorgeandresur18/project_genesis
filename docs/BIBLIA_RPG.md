@@ -31,7 +31,11 @@ Cada luchador tiene cuatro estadísticas:
   del nivel N al siguiente hacen falta `N × 10`. Al subir, las estadísticas pasan a las del nivel nuevo y los PS
   suben lo mismo que el máximo.
 - **Se guarda en la partida al ganar** (o huir): nivel y experiencia de cada héroe (`nivel_<héroe>`, `xp_<héroe>`)
-  y la mochila (`mochila_<objeto>`). Nivel 0 en la partida significa «todavía no peleó»: se usa el del .json.
+  y la mochila (`mochila_<objeto>`).
+- **Al terminar una pelea, todos se curan** (decisión del autor, 2026-11-02): la vida no pasa de una pelea a otra y
+  cada pelea empieza con todos curados. Entre peleas pasa la historia y se recuperan fuera de cámara; así ninguna
+  pelea importante empieza injusta y cada una se equilibra por separado. Las curas sirven dentro de la pelea.
+  Excepción posible, si la historia lo pide: una pelea puede empezar con alguien herido (un dato de esa pelea). Nivel 0 en la partida significa «todavía no peleó»: se usa el del .json.
 
 Estadísticas de hoy (aproximadas, en el nivel con que aparecen):
 
@@ -301,7 +305,8 @@ cosas raras; los chistes van en las descripciones.
   siguiente ya equipado. Cada partida tiene su propio dinero.
 - **Botón «Equipo»** en la barra del juego (**hecho**, sin equipo todavía): pestaña Personajes (una ficha por
   personaje con su sprite, nivel, PS, ATQ, DEF, VEL, XP, ataques y los tres espacios de equipo) y pestaña Mochila (lo
-  que tienes, con su tipo y descripción). Falta: equipar y usar fuera de pelea lo que tenga sentido (como curarse).
+  que tienes, con su tipo y descripción). Falta: equipar, y usar fuera de pelea los permanentes (caramelos,
+  suplementos). Las curas no se usan fuera de pelea: al terminar una pelea ya se curan.
 - **En la pelea**, «Objetos» muestra solo lo que se usa en pelea.
 - **Qué es de cada partida y qué no:** el dinero, la mochila, el equipo y los niveles son de cada partida (una
   partida nueva empieza vacía; no se pasa nada de una a otra). Lo desbloqueado en Boringram (fotos, pensamientos,
