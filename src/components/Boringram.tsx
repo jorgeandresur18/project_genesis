@@ -1166,9 +1166,13 @@ function App({ b, tourRequest, onClose }: { b: B; tourRequest: number; onClose: 
                 aria-label={tx.boringplace}
                 data-tour="nav-tienda"
               >
-                <svg viewBox="0 0 24 24" aria-hidden>
-                  <path d="M4 9 5.5 4h13L20 9M4 9h16M4 9v1.5a2.7 2.7 0 0 0 5.3 0 2.7 2.7 0 0 0 5.4 0 2.7 2.7 0 0 0 5.3 0V9M5.5 13v7h13v-7M10 20v-4h4v4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
-                </svg>
+                {/* La casita del logo de Boringplace. */}
+                <img
+                  src={assetUrl('marca/boringplace_icono.webp')}
+                  alt=""
+                  draggable={false}
+                  style={{ width: '1.55rem', height: '1.55rem', opacity: tab === 'tienda' ? 1 : 0.55 }}
+                />
               </button>
               <button
                 className={tab === 'perfil' ? s.navOn : ''}

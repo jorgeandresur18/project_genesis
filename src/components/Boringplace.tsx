@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { playSelect } from '../engine/sound';
+import { assetUrl } from '../engine/assets';
 import { useBoringplace, type Articulo } from '../engine/boringplace';
 import s from './Boringplace.module.css';
 import sb from './Boringram.module.css';
@@ -16,9 +17,7 @@ export function Boringplace({ onArticulo }: { onArticulo: (id: string) => void }
   if (!p.abierto) {
     return (
       <div className={s.vacio}>
-        <span className={s.vacioIcono} aria-hidden>
-          🏷
-        </span>
+        <img className={s.vacioIcono} src={assetUrl('marca/boringplace_icono.webp')} alt="" draggable={false} />
         <b>{p.data.vacio.titulo}</b>
         <p>{p.data.vacio.texto}</p>
       </div>
@@ -28,7 +27,7 @@ export function Boringplace({ onArticulo }: { onArticulo: (id: string) => void }
   return (
     <div className={sb.feed}>
       <div className={sb.topBar}>
-        <b>{tx.titulo}</b>
+        <img className={s.logo} src={assetUrl('marca/boringplace.webp')} alt={tx.titulo} draggable={false} />
       </div>
       <div className={s.pestanas} role="tablist">
         {(['para_ti', 'tuyos'] as const).map((k) => (
