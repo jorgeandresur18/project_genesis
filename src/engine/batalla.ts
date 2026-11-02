@@ -18,6 +18,11 @@ export interface Ataque {
   anim?: string;
   /** Cuánto pesa al elegir un ataque al azar (si no, 1). */
   peso?: number;
+  /**
+   * Cebo (Jair): no ataca; deja una copia suya en blanco y negro que no hace nada. El rival a veces le pega a ella
+   * en vez de a él (CEBO), y muere al primer golpe. No se elige a quién.
+   */
+  cebo?: boolean;
   nombre: string;
   poder: number;
   /** "uno" (al azar, o el elegido) o "todos". */
@@ -73,6 +78,8 @@ export interface Heroe {
   escala?: number;
   /** Lo que le dice a un enemigo con «Hablar» ({objetivo}: su nombre). */
   hablar: string[];
+  /** Ataques que aprende al llegar a un nivel (Jair: el Cebo, en el 6). */
+  aprende?: { nivel: number; ataque: Ataque }[];
   /** El sonido de sus golpes (ataque y especial). */
   sonido?: string;
 }
@@ -224,6 +231,8 @@ export interface Luchador {
   paralizado: number;
   /** Turnos que le quedan confundido (al atacar, a veces se pega a sí mismo). */
   confundido: number;
+  /** Es un cebo (una copia de un héroe que no hace nada): no cuenta como héroe. */
+  cebo?: boolean;
   /** Si es un clon de sombra: los turnos que le quedan antes de evaporarse. */
   clon?: number;
 }
@@ -416,6 +425,21 @@ export function eligeAtaque(ataques: Ataque[], heroes: Luchador[], azar: () => n
   const ataque = posibles.find((a) => (r -= a.peso ?? 1) < 0) ?? posibles[posibles.length - 1];
   const pool = libres(ataque);
   return { ataque, blancos: ataque.objetivo === 'todos' ? pool : [pool[Math.floor(azar() * pool.length)]] };
+}
+
+/** Los ataques que tiene un héroe en su nivel: los de siempre y los que ya aprendió. */
+export const ataquesDe = (h: { nivel: number }, d: Heroe): Ataque[] => [
+  ...d.ataques,
+  ...(d.aprende ?? []).filter((x) => x.nivel <= h.nivel).map((x) => x.ataque),
+];
+/** Lo que aprende justo al llegar a ese nivel. */
+export const aprendeEn = (d: Heroe, nivel: number): Ataque[] => (d.aprende ?? []).filter((x) => x.nivel === nivel).map((x) => x.ataque);
+
+/** Probabilidad de que un golpe a uno solo vaya al cebo (si hay uno en pie). */
+export const CEBO = 0.55;
+/** Crea el cebo de un héroe: su copia en blanco y negro, con 1 PS y sin poder hacer nada. */
+export function crearCebo(h: Luchador, id: string): Luchador {
+  return { ...h, id, ps: 1, psMax: 1, extra: 0, extraDef: 0, carga: 0, esquivando: false, distraido: false, paralizado: 0, confundido: 0, cebo: true };
 }
 
 /** El jefe se retira cuando le queda esta parte de sus PS (o menos). */

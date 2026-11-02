@@ -2870,3 +2870,17 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 @keyframes confusion-gira { 0% { rotate: 0deg; } 100% { rotate: 360deg; } }
 .batalla-descansa.confundido { color: #ff8fc0; }
 @media (prefers-reduced-motion: reduce) { .batalla-confusion { animation: none; } }
+
+/* La confusión, más sutil: corazones chicos y tenues que giran despacio. */
+.batalla-confusion { width: 2.4rem; animation-duration: 3.2s; opacity: 0.55; }
+.batalla-confusion span { font-size: 0.62rem; text-shadow: 0 0 3px rgba(255, 111, 174, 0.7); }
+.batalla-confusion span:nth-child(1) { translate: -0.9rem -50%; }
+.batalla-confusion span:nth-child(3) { translate: 0.55rem -50%; }
+/* El Cebo: la copia de Jair en blanco y negro, delante de él; se deshace al primer golpe. */
+.batalla-lado.heroes { position: relative; }
+.batalla-cebo { position: absolute; z-index: 2; }
+.batalla-cebo .batalla-sprite { filter: grayscale(1) contrast(1.15) brightness(0.95); opacity: 0.92; }
+.batalla-cebo .batalla-figura { filter: drop-shadow(0 0 1px #000); }
+.batalla-cebo .batalla-figura.ko { opacity: 0; transition: opacity 0.8s ease 0.2s; }
+.batalla-figura.aparece-cebo .batalla-sprite { animation: aparece-cebo 0.7s ease-out both; }
+@keyframes aparece-cebo { from { opacity: 0; translate: 30% 0; filter: grayscale(1) blur(2px); } to { opacity: 0.92; translate: 0 0; filter: grayscale(1) contrast(1.15) brightness(0.95); } }

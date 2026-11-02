@@ -279,5 +279,9 @@
   "batalla.clon": "Clon",
   "batalla.confundido": "{quien} queda en las nubes: {n} turnos sin saber muy bien a quién pegarle.",
   "batalla.se_golpea": "{quien} ya no sabe ni dónde está y se pega a sí mismo.",
-  "batalla.confundido_tag": "confusión"
+  "batalla.confundido_tag": "confusión",
+  "batalla.aprende": "{quien} aprendió un movimiento nuevo: {ataque}.",
+  "batalla.cebo_aparece": "La copia no hace nada. Solo está ahí. Con suerte, alguien le pega a ella.",
+  "batalla.cebo_cae": "{quien} (el cebo) se deshace al primer golpe. Cumplió su único trabajo.",
+  "batalla.desc.cebo": "Deja una copia tuya en blanco y negro. No hace nada: a veces el rival le pega a ella en vez de a ti, y se deshace al primer golpe. El movimiento más inútil que existe, salvo para escaparte del trabajo si tu jefe no se da cuenta."
 }

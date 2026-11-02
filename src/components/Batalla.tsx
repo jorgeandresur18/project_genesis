@@ -10,6 +10,10 @@ import {
   CARGA,
   CARGA_LLENA,
   ESPECIAL_MS,
+  CEBO,
+  crearCebo,
+  aprendeEn,
+  ataquesDe,
   CONFUSION,
   seConfunde,
   eligeAtaque,
@@ -198,6 +202,8 @@ function Pelea({
     /** Los que quedaron paralizados (o confundidos) en este turno (empiezan a descontar en el siguiente). */
     paralizadoRecien: [] as string[],
     confundidoRecien: [] as string[],
+    /** Los cebos (copias de un héroe que no hacen nada): aparte de los héroes, con dónde se dibujan. */
+    cebos: [] as { l: Luchador; de: string; x: number; y: number }[],
     /** Los que no pueden actuar en este turno (Cami, un turno sí y uno no). */
     descansan: [] as string[],
     /** Los que se ven descansando (Cami agachada): desde que actúan hasta el final del turno siguiente. */
@@ -472,6 +478,38 @@ function Pelea({
     playChip('boing');
     forzar();
     await decir(fmt(t('batalla.confundido'), { quien: x.nombre, n }));
+  };
+  /** El Cebo: una copia del héroe en blanco y negro, delante de él. No hace nada. */
+  const dejarCebo = async (h: Luchador, a: Ataque) => {
+    await decir(fmt(a.texto, { quien: h.nombre }));
+    const f = figuras.current.get(h.id);
+    const lado = f?.parentElement?.getBoundingClientRect();
+    const r = f?.getBoundingClientRect();
+    // Uno solo por héroe: el viejo se va.
+    b.current.cebos = b.current.cebos.filter((x) => x.de !== h.id && vivo(x.l));
+    const k = crearCebo(h, `${h.id}-cebo-${Date.now()}`);
+    b.current.cebos.push({ l: k, de: h.id, x: r && lado ? r.left - lado.left - r.width * 0.45 : 0, y: r && lado ? r.top - lado.top : 0 });
+    efecto(k.id, 'aparece-cebo', 700);
+    playChip('cambio');
+    forzar();
+    await decir(fmt(t('batalla.cebo_aparece'), { quien: h.nombre }));
+  };
+  /** A veces el golpe a uno solo va al cebo. */
+  const desviar = (blancos: Luchador[]) => {
+    const cebos = b.current.cebos.map((x) => x.l).filter(vivo);
+    if (!cebos.length) return blancos;
+    if (blancos.length > 1) return [...blancos, ...cebos];
+    return Math.random() < CEBO ? [azar(cebos)] : blancos;
+  };
+  /** Los cebos que recibieron un golpe se deshacen (y se van). */
+  const limpiarCebos = async () => {
+    const caidos = b.current.cebos.filter((x) => !vivo(x.l));
+    if (!caidos.length) return;
+    for (const x of caidos) await decir(fmt(t('batalla.cebo_cae'), { quien: x.l.nombre }));
+    setTimeout(() => {
+      b.current.cebos = b.current.cebos.filter((x) => vivo(x.l));
+      forzar();
+    }, 900);
   };
   /** Termina un ataque: los golpeados que siguen de pie vuelven a su pose. */
   const soltar = (golpeados: Luchador[]) => {
@@ -835,6 +873,7 @@ function Pelea({
     cargar(defensor, CARGA.recibir);
     const jefe = defensor.lado === 'enemigo' ? d.enemigos[defensor.clave] : null;
     defensor.ps = Math.max(jefe?.huye_a ? 1 : 0, defensor.ps - n);
+    if (defensor.ps === 0) defensor.confundido = 0;
     playChip(critico ? 'golpe' : 'impacto');
     numero(defensor.id, critico ? `${n}!` : String(n), critico ? 'critico' : 'dano');
     forzar();
@@ -864,6 +903,10 @@ function Pelea({
         forzar();
         void animar(h.id, 'victoria', 1200);
         await decir(fmt(t('batalla.sube'), { quien: h.nombre, nivel }));
+        for (const a of aprendeEn(d.personajes[h.clave], nivel)) {
+          playChip('revivir');
+          await decir(fmt(t('batalla.aprende'), { quien: h.nombre, ataque: a.nombre }));
+        }
       }
     }
     forzar();
@@ -958,7 +1001,8 @@ function Pelea({
       return lineas(funciona ? 'hablar_ok' : 'hablar_no', { objetivo: e.nombre });
     }
     if (c.tipo !== 'atacar') return;
-    const ataque = d.personajes[h.clave].ataques[c.ataque];
+    const ataque = ataquesDe(h, d.personajes[h.clave])[c.ataque];
+    if (ataque.cebo) return dejarCebo(h, ataque);
     const e = objetivo(c.objetivo);
     await decir(fmt(ataque.texto, { quien: h.nombre, objetivo: e.nombre }));
     const deLejos = !!d.personajes[h.clave].distancia;
@@ -1126,7 +1170,7 @@ function Pelea({
     }
     await decir(fmt(t('batalla.especial_total'), { quien: l.nombre, n: total }));
     for (const b of blancos) {
-      if (vivo(b)) continue;
+      if (vivo(b) || b.cebo) continue;
       if (b.lado === 'enemigo') await alCaer(b);
       else await decir(fmt(t('batalla.cae'), { quien: b.nombre }));
     }
@@ -1142,12 +1186,16 @@ function Pelea({
     const esp = d.enemigos[e.clave].especial;
     const elige = eligeEspecial(e, d.enemigos[e.clave], b.current.heroes, b.current.enemigos);
     if (elige?.tipo === 'clon') return clonar(e);
-    if (elige && esp) return usarEspecial(e, esp, d.enemigos[e.clave].sprite, hs, elige.blanco ?? azar(hs));
+    if (elige && esp) {
+      await usarEspecial(e, esp, d.enemigos[e.clave].sprite, hs, desviar([elige.blanco ?? azar(hs)])[0]);
+      return limpiarCebos();
+    }
     // La parálisis solo va contra los que todavía se mueven (si nadie se mueve, ataca de otra forma).
     // Si no le queda ningún ataque posible (solo de efecto y ya todos lo tienen), espera.
     const elegido = eligeAtaque(d.enemigos[e.clave].ataques, hs);
     if (!elegido) return;
-    const { ataque: a, blancos } = elegido;
+    const { ataque: a } = elegido;
+    const blancos = a.confunde || a.paraliza ? elegido.blancos : desviar(elegido.blancos);
     await decir(a.texto);
     if (a.confunde) return besar(e, a, blancos);
     if (a.paraliza) {
@@ -1207,8 +1255,9 @@ function Pelea({
     if (blancos.length === 1 && !proy) await deslizar(e.id, null);
     else await espera(500);
     soltar(blancos);
+    await limpiarCebos();
     for (const h of blancos) {
-      if (vivo(h)) continue;
+      if (vivo(h) || h.cebo) continue;
       await decir(fmt(t('batalla.cae'), { quien: h.nombre }));
       if (h.clave === 'jair' && !b.current.avisoCaida && b.current.heroes.some(vivo)) {
         b.current.avisoCaida = true;
@@ -1219,7 +1268,7 @@ function Pelea({
 
   // El menú: qué hace, qué ataque, qué objeto y a quién.
   const heroe = b.current.heroes.find((h) => h.id === eligiendo);
-  const ataques = heroe ? d.personajes[heroe.clave].ataques : [];
+  const ataques = heroe ? ataquesDe(heroe, d.personajes[heroe.clave]) : [];
   const especial = heroe ? d.personajes[heroe.clave].especial : undefined;
   const comandos = [t('batalla.atacar'), t('batalla.hablar'), t('batalla.esquivar'), t('batalla.objetos'), t('batalla.huir')];
   const enMochila = Object.keys(d.objetos).filter((k) => (b.current.mochila[k] ?? 0) > 0);
@@ -1259,6 +1308,7 @@ function Pelea({
         if (especial.objetivo === 'todos') return listo({ tipo: 'especial', objetivo: vivosDe('enemigo')[0]?.id ?? '' });
         return setMenu({ paso: 'objetivo', i: 0, lado: 'enemigo', luego: (o) => ({ tipo: 'especial', objetivo: o }) });
       }
+      if (ataques[i]?.cebo) return listo({ tipo: 'atacar', ataque: i, objetivo: '' });
       return setMenu({ paso: 'objetivo', i: 0, lado: 'enemigo', luego: (o) => ({ tipo: 'atacar', ataque: i, objetivo: o }) });
     }
     if (menu.paso === 'objeto') {
@@ -1331,7 +1381,9 @@ function Pelea({
               texto: a.nombre,
               extra: `${a.poder}`,
               clase: '',
-              desc: fmt(t('batalla.desc.ataque'), { poder: a.poder, n: aprox(a.poder), a: t(a.objetivo === 'todos' ? 'batalla.desc.a_todos' : 'batalla.desc.a_uno') }),
+              desc: a.cebo
+                ? t('batalla.desc.cebo')
+                : fmt(t('batalla.desc.ataque'), { poder: a.poder, n: aprox(a.poder), a: t(a.objetivo === 'todos' ? 'batalla.desc.a_todos' : 'batalla.desc.a_uno') }),
             })),
             ...(especial && heroe
               ? [
@@ -1455,6 +1507,26 @@ function Pelea({
               numeros={numeros.filter((n) => n.id === h.id)}
             />
           ))}
+          {/* Los cebos: copias en blanco y negro, delante de su héroe (no mueven a nadie). */}
+          {b.current.cebos.map((c) => (
+            <div key={c.l.id} className="batalla-cebo" style={{ left: c.x, top: c.y }}>
+              <Figura
+                l={c.l}
+                caido={c.l.ps === 0}
+                refFigura={(el) => (el ? figuras.current.set(c.l.id, el) : figuras.current.delete(c.l.id))}
+                sprite={d.personajes[c.l.clave].sprite}
+                escala={d.personajes[c.l.clave].escala}
+                heroe
+                anim="idle"
+                quieto
+                efecto={efectos[c.l.id]}
+                vez={veces[c.l.id] ?? 0}
+                luces={luces.filter((x) => x.id === c.l.id)}
+                marcado={false}
+                numeros={numeros.filter((n) => n.id === c.l.id)}
+              />
+            </div>
+          ))}
         </div>
       </div>
       {versus && <Versus d={d} />}
@@ -1564,6 +1636,7 @@ function Figura({
   alCuadro,
   efecto,
   alto = 0,
+  quieto = false,
   luces,
   desliz,
   marcado,
@@ -1588,6 +1661,8 @@ function Figura({
   efecto?: string;
   /** Levantado en el aire (px): sube el sprite, no su sombra. */
   alto?: number;
+  /** Un objeto inerte (el cebo): un solo cuadro, sin animación. */
+  quieto?: boolean;
   luces: { key: number; color: string; fuerte: boolean }[];
   desliz?: { x: number; y: number; ms?: number };
   marcado: boolean;
@@ -1610,7 +1685,7 @@ function Figura({
       }
     >
       {marcado && <span className="batalla-flecha" aria-hidden>▼</span>}
-      {l.confundido > 0 && (
+      {l.confundido > 0 && l.ps > 0 && !caido && (
         <span className="batalla-confusion" aria-hidden>
           <span>♥</span>
           <span>♥</span>
@@ -1619,7 +1694,7 @@ function Figura({
       )}
       {/* Sombra en el piso: lo despega del fondo. */}
       <span className="batalla-sombra" aria-hidden />
-      <SpriteHoja src={sprite} anim={anim} vez={vez} alCuadro={alCuadro} />
+      <SpriteHoja src={sprite} anim={quieto ? 'idle' : anim} vez={vez} alCuadro={alCuadro} cuadroFijo={quieto ? 0 : undefined} />
       {luces.map((x) => (
         <span key={x.key} className={`batalla-luz ${x.fuerte ? 'fuerte' : ''}`} style={{ '--c': x.color } as CSSProperties} aria-hidden />
       ))}
@@ -1671,7 +1746,8 @@ export function SpriteHoja({
     void cargarHoja(src).then(setHoja);
   }, [src]);
   const anims = hoja && 'animations' in hoja ? hoja.animations : null;
-  const reposo = anim === 'idle' && !!anims?.pestaneo;
+  // Quieto en un cuadro (pausa del probador o el cebo): tampoco pestañea.
+  const reposo = anim === 'idle' && !!anims?.pestaneo && cuadroFijo === undefined;
   // Pestañeo: cada 2,2 a 6 segundos, una vez.
   useEffect(() => {
     if (!reposo) return setPestanea(false);

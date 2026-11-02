@@ -52,7 +52,18 @@
         "posicion": "objetivo"
       },
       "escala": 1.08,
-      "sonido": "puno"
+      "sonido": "puno",
+      "aprende": [
+        {
+          "nivel": 6,
+          "ataque": {
+            "nombre": "Cebo",
+            "poder": 0,
+            "cebo": true,
+            "texto": "{quien} se queda quieto un segundo y deja ahí una copia de sí mismo, en blanco y negro. Es lo primero que aprende cualquier peleador. Y lo único que Jair usa, en la oficina."
+          }
+        }
+      ]
     },
     "cami": {
       "nombre": "Cami",
