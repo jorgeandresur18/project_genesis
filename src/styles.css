@@ -3069,3 +3069,8 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 @keyframes rayo { 0% { scale: 0 0.4; opacity: 1; } 18% { scale: 1 1.15; } 70% { scale: 1 1; opacity: 1; } 100% { scale: 1 0.1; opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .batalla-rayo { animation-duration: 0.01s; } }
 .batalla-filtro { display: block; }
+
+/* El rayo del especial del Capitán más allá de su cuadro: sigue igual, ondulado, hasta el borde de la pantalla. */
+.batalla-rayo.sigue { z-index: 4; animation: rayo-ondula 0.18s steps(2) infinite; box-shadow: 0 0 10px var(--c), 0 0 24px var(--c); }
+@keyframes rayo-ondula { 0% { translate: 0 -50%; } 50% { translate: 0 calc(-50% + 2px); } 100% { translate: 0 calc(-50% - 2px); } }
+@media (prefers-reduced-motion: reduce) { .batalla-rayo.sigue { animation: none; } }

@@ -213,6 +213,72 @@ def destellos(im: np.ndarray, fw: int, fh: int, fila: int, cuadros: int) -> dict
 
 # Una hoja más ancha que esto no se ve en algunos celulares: sus filas largas se parten en renglones de COLUMNAS
 # cuadros («columnas» en el .json; cada animación empieza en su propio renglón).
+# El Capitán de la Federación («soldado» en el HTML): su hoja normal (176 px de ancho) y la de su especial (320 px: el
+# rayo sale del cuadro). Todo va en cuadros de CAPITAN_ANCHO, con el cuerpo a la izquierda como en el HTML (así entra
+# el rayo cuando lo levanta). En el ataque se borran los rayos dibujados (el juego dispara balas rojas desde la punta
+# del fusil, en cada fogonazo). En el especial, los cuadros en que el rayo sale del cuadro original guardan dónde
+# corta el borde y hacia dónde va (`rayo`): el juego lo sigue, ondulado, hasta el borde de la pantalla.
+CAPITAN_ANCHO = 192
+CAPITAN_PUNTA = 128  # desde acá a la derecha, en el ataque, todo lo rojo es el rayo dibujado (se borra salvo el fogonazo)
+CAPITAN_FOGONAZO = 140
+
+
+def es_rojo(q: np.ndarray) -> np.ndarray:
+    return (q[..., 3] > 0) & (q[..., 0] > 190) & (q[..., 1] < 140)
+
+
+def hoja_capitan(c: dict):
+    fw, fh, W = c['fw'], c['fh'], CAPITAN_ANCHO
+    im = np.array(Image.open(io.BytesIO(base64.b64decode(c['src'].split('base64,')[1]))).convert('RGBA'))
+    sh = c['sheets']['especial']
+    es = np.array(Image.open(io.BytesIO(base64.b64decode(sh['src'].split('base64,')[1]))).convert('RGBA'))
+    filas, meta = [], {'frameWidth': W, 'frameHeight': fh, 'animations': {}}
+    disparos, rayo = {}, {}
+
+    def cuadro(hoja, ancho, cols, fila, f):
+        x, y = (f % cols) * ancho, (fila + f // cols) * fh
+        q = np.zeros((fh, W, 4), hoja.dtype)
+        trozo = hoja[y:y + fh, x:x + min(ancho, W)]
+        q[:, :trozo.shape[1]] = trozo
+        return q
+
+    for nombre, a in c['anims'].items():
+        hoja, ancho = (es, sh['fw']) if a.get('sheet') == 'especial' else (im, fw)
+        cols = a.get('cols') or (hoja.shape[1] // ancho)
+        cuadros = []
+        for f in range(a['frames']):
+            q = cuadro(hoja, ancho, cols, a['row'], f)
+            if nombre == 'ataque':
+                rojo = es_rojo(q)
+                rojo[:, :CAPITAN_PUNTA] = False
+                # Un fogonazo: el rayo recién sale de la punta y llega al borde del cuadro (no el que ya va volando).
+                if rojo[:, fw - 6:].any() and rojo[:, CAPITAN_FOGONAZO:CAPITAN_FOGONAZO + 6].any():
+                    ys, xs = np.nonzero(rojo[:, CAPITAN_PUNTA:CAPITAN_FOGONAZO])
+                    if len(xs):
+                        disparos[str(f)] = [[CAPITAN_PUNTA + round(float(xs.mean())), round(float(ys.mean()))]]
+                # Todo lo que está más allá del fogonazo es el rayo dibujado (su centro es casi blanco): fuera.
+                q[:, CAPITAN_FOGONAZO + 6:] = 0
+            if nombre == 'especial':
+                orig = hoja[(a['row'] + f // cols) * fh:(a['row'] + f // cols + 1) * fh, (f % cols) * ancho:(f % cols + 1) * ancho]
+                rojo = es_rojo(orig)
+                borde = np.nonzero(rojo[:, -3:].any(axis=1))[0]
+                corte = np.nonzero(rojo[:, W - 3:W].any(axis=1))[0]
+                if len(borde) and len(corte):
+                    y0, y1 = float(corte.mean()), float(borde.mean())
+                    ang = float(np.arctan2(y1 - y0, (ancho - 1) - (W - 2)))
+                    rayo[str(f)] = [W, round(y0, 1), round(ang, 4), int(borde.max() - borde.min() + 1)]
+            cuadros.append(q)
+        meta['animations'][nombre] = {'row': len(filas), 'frames': a['frames'], 'fps': a['fps'], 'loop': a['loop'],
+                                      **({'seq': a['seq']} if 'seq' in a else {})}
+        filas.append(np.concatenate(cuadros, axis=1))
+    ancho = max(x.shape[1] for x in filas)
+    im = np.concatenate([np.pad(x, ((0, 0), (0, ancho - x.shape[1]), (0, 0))) for x in filas])
+    meta['disparos'] = {'ataque': disparos}
+    meta['rayo'] = rayo
+    print('capitan: disparos', disparos, '· cuadros con rayo afuera:', len(rayo))
+    return im, meta
+
+
 ANCHO_MAX = 4096
 COLUMNAS = 20
 
@@ -234,6 +300,14 @@ def repartir(im: np.ndarray, fw: int, fh: int, meta: dict) -> np.ndarray:
 def main():
     ruta = Path(sys.argv[1]) if len(sys.argv) > 1 else RAIZ / 'docs' / 'sprites de prueba' / 'ULTIMOOOOS_SPRITES_Nikki.html'
     for c in leer_html(ruta):
+        if c['id'] == 'soldado':
+            im, meta = hoja_capitan(c)
+            if im.shape[1] > ANCHO_MAX:
+                im = repartir(im, meta['frameWidth'], meta['frameHeight'], meta)
+            Image.fromarray(im).save(SALIDA / 'capitan.png')
+            (SALIDA / 'capitan.json').write_text(json.dumps(meta, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
+            print('capitan', Image.fromarray(im).size, list(meta['animations']))
+            continue
         if c['id'] not in HOJAS:
             continue
         nombre, mapa = HOJAS[c['id']]

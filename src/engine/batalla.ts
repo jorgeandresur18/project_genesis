@@ -25,6 +25,11 @@ export interface Ataque {
   cebo?: boolean;
   /** Se cura a sí mismo esta parte de su vida máxima (la curación de Rikka); no se elige a quién. */
   cura?: number;
+  /**
+   * Ráfaga (el Capitán): dispara entre `balas[0]` y `balas[1]` balas, una por fogonazo de su ataque (si son más que
+   * los fogonazos, repite la animación). Cada bala es un golpe de `poder` que puede fallar o esquivarse.
+   */
+  balas?: [number, number];
   /** Cuántas veces se puede usar en una pelea («5/5» en el menú); sin esto, sin límite. Se recuperan al terminar. */
   usos?: number;
   nombre: string;

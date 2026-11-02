@@ -107,6 +107,11 @@ export interface Hoja {
    * Un tercer número, si está, es hacia dónde apunta esa pistola (grados en el cuadro; 0: derecho hacia adelante).
    */
   disparos?: Record<string, Record<string, number[][]>>;
+  /**
+   * El especial del Capitán: en los cuadros en que el rayo sale del cuadro, dónde corta el borde ([x, y]), hacia dónde
+   * sigue (radianes) y su grosor. El juego lo continúa, ondulado, hasta el borde de la pantalla.
+   */
+  rayo?: Record<string, [number, number, number, number]>;
   /** El pecho: sin dirección anotada, la bala sale en la dirección pecho → punta de la pistola. */
   ancla_disparo?: [number, number];
   /** Si sus filas largas están partidas en renglones de tantos cuadros (las hojas muy anchas no cargan en celulares). */
@@ -407,6 +412,15 @@ function Pelea({
   const esperandoCuadro = useRef(new Map<string, { anim: string; col: number; ok: () => void }>());
   /** Cada cuadro nuevo de un luchador: si está disparando y ese cuadro tiene destellos, salen balas. */
   const alCuadro = (l: Luchador, anim: string, col: number, hoja: Hoja) => {
+    if (hoja.rayo && anim === 'especial') {
+      const r = hoja.rayo[String(col)];
+      const p = r && enPantalla(l, hoja, [r[0], r[1]]);
+      if (p) {
+        const ang = l.lado === 'heroe' ? Math.PI - r[2] : r[2];
+        const escala = (rectSprite(figuras.current.get(l.id)?.querySelector('.batalla-sprite'))?.width ?? hoja.frameWidth) / hoja.frameWidth;
+        setRayoSigue({ id: l.id, x: p.x, y: p.y, largo: p.ancho * 1.6, ang, grosor: r[3] * escala });
+      } else setRayoSigue((x) => (x?.id === l.id ? null : x));
+    }
     const aviso = esperandoCuadro.current.get(l.id);
     if (aviso && aviso.anim === anim && aviso.col === col) {
       esperandoCuadro.current.delete(l.id);
@@ -1303,6 +1317,8 @@ function Pelea({
    * esos 5 segundos entre los objetivos; los de un enemigo se pueden esquivar golpe a golpe. Cami dispara balas
    * desde sus pistolas en cada destello.
    */
+  /** El rayo del especial del Capitán que sigue más allá de su cuadro, hasta el borde de la pantalla. */
+  const [rayoSigue, setRayoSigue] = useState<{ id: string; x: number; y: number; largo: number; ang: number; grosor: number } | null>(null);
   /** El rayo grueso del cañón (de dónde a dónde, y de qué color). */
   const [rayo, setRayo] = useState<{ key: number; x: number; y: number; largo: number; ang: number; color: string } | null>(null);
   /**
@@ -1314,6 +1330,9 @@ function Pelea({
     forzar();
     await avisar(e, d.enemigos[l.clave].sprite, false);
     await decir(fmt(e.texto, { quien: l.nombre, objetivo: blanco.nombre }));
+    const hoja = (await cargarHoja(d.enemigos[l.clave].sprite)) as Hoja;
+    const fila = 'animations' in hoja ? hoja.animations.especial : undefined;
+    if (fila?.seq && hoja.rayo) return canonConHoja(l, e, blanco, hoja, fila as Required<typeof fila>);
     playChip('carga');
     efecto(l.id, 'carga-canon', 1500);
     for (let i = 0; i < 4; i++) {
@@ -1345,6 +1364,89 @@ function Pelea({
     await decir(fmt(t(bloqueado ? 'batalla.protegido_bloquea' : 'batalla.recibe'), { quien: blanco.nombre, n }));
     await limpiarCebos();
     if (!vivo(blanco) && !blanco.cebo) await decir(fmt(t('batalla.cae'), { quien: blanco.nombre }));
+  };
+  /**
+   * El especial del Capitán con su hoja: carga, el rayo horizontal sale hasta el infinito (golpea a su blanco) y
+   * después se vuelve loco y lo agita arriba y abajo (cada vez que el rayo barre, le puede dar a cualquiera).
+   */
+  const canonConHoja = async (l: Luchador, e: Especial, blanco: Luchador, hoja: Hoja, fila: Required<Hoja['animations'][string]>) => {
+    const msPaso = 1000 / fila.fps;
+    const total = fila.seq.length * msPaso;
+    const grupo = (c: number) => (!hoja.rayo?.[String(c)] ? '' : hoja.rayo[String(c)][2] === 0 ? 'h' : hoja.rayo[String(c)][2] < 0 ? 'arriba' : 'abajo');
+    // Cuándo golpea: el primer rayo horizontal (fuerte, a su blanco) y cada barrido arriba o abajo (a cualquiera).
+    const golpes: { ms: number; fuerte: boolean }[] = [];
+    let horizontales = 0;
+    fila.seq.forEach((c, i) => {
+      const g = grupo(c);
+      if (!g || g === grupo(fila.seq[i - 1] ?? -1)) return;
+      if (g === 'h') golpes.push({ ms: i * msPaso, fuerte: horizontales++ === 0 });
+      else golpes.push({ ms: i * msPaso, fuerte: false });
+    });
+    playChip('carga');
+    void animar(l.id, 'especial', total);
+    const desde = Date.now();
+    for (const g of golpes) {
+      await espera(Math.max(0, g.ms - (Date.now() - desde)));
+      const vivos = b.current.heroes.filter(vivo);
+      if (!vivos.length) break;
+      const x = g.fuerte && vivo(blanco) ? blanco : azar(vivos);
+      playChip(g.fuerte ? 'impacto' : 'disparo');
+      if (g.fuerte) setFogonazo({ key: Math.random(), color: e.color });
+      if (x.esquivando && Math.random() < d.esquivar) {
+        numero(x.id, 'MISS', 'falla');
+        void animar(x.id, 'salto', 600);
+        continue;
+      }
+      bajoEspecial.current.add(x.id);
+      await golpear(l, x, g.fuerte ? e.poder : Math.max(3, Math.round(e.poder / 6)), e.color);
+    }
+    await espera(Math.max(0, total - (Date.now() - desde)));
+    setRayoSigue(null);
+    soltar(b.current.heroes);
+    await limpiarCebos();
+    for (const h of b.current.heroes) if (!vivo(h) && retenidos.current.has(h.id)) await decir(fmt(t('batalla.cae'), { quien: h.nombre }));
+  };
+  /**
+   * La ráfaga del Capitán: entre `balas[0]` y `balas[1]` balas rojas, una por fogonazo de su ataque (repite la
+   * animación si son más), cada una hacia uno de sus blancos. Cada bala puede fallar o esquivarse.
+   */
+  const rafaga = async (e: Luchador, a: Ataque, blancos: Luchador[], hoja: Hoja) => {
+    const fila = hoja.animations.ataque;
+    const fogonazos = Object.keys(hoja.disparos!.ataque).map(Number).sort((x, y) => x - y);
+    const [min, max] = a.balas!;
+    const n = min + Math.floor(Math.random() * (max - min + 1));
+    const color = d.enemigos[e.clave].color_disparo ?? '#ff3b3b';
+    const dura = (fila.frames * 1000) / fila.fps;
+    for (let k = 0; k < n; k++) {
+      const f = fogonazos[k % fogonazos.length];
+      if (k % fogonazos.length === 0) {
+        void animar(e.id, 'ataque', dura);
+        await espera((f * 1000) / fila.fps);
+      } else await espera(((f - fogonazos[(k % fogonazos.length) - 1]) * 1000) / fila.fps);
+      const h = blancos[k % blancos.length];
+      if (!vivo(h)) continue;
+      const o = enPantalla(e, hoja, hoja.disparos!.ataque[String(f)][0]);
+      const c = centroDe(h);
+      playChip('disparo');
+      const ms = o && c ? nuevaBala(o.x, o.y, c.x, c.y, 1800, color, false) : 0;
+      setTimeout(async () => {
+        if (!vivo(h)) return;
+        if (falla(d) || (h.esquivando && Math.random() < d.esquivar)) {
+          numero(h.id, 'MISS', 'falla');
+          return;
+        }
+        luz(h.id, color);
+        bajoEspecial.current.add(h.id);
+        await golpear(e, h, a.poder, color);
+      }, ms);
+    }
+    await espera(700);
+    soltar(blancos);
+    await limpiarCebos();
+    for (const h of blancos) {
+      if (vivo(h) || h.cebo) continue;
+      await decir(fmt(t('batalla.cae'), { quien: h.nombre }));
+    }
   };
   const usarEspecial = async (l: Luchador, e: Especial, sprite: string, rivales: Luchador[], elegido: Luchador) => {
     l.carga = 0;
@@ -1530,6 +1632,7 @@ function Pelea({
       return;
     }
     const hoja = (await cargarHoja(d.enemigos[e.clave].sprite)) as Hoja;
+    if (a.balas && 'animations' in hoja && hoja.disparos?.ataque) return rafaga(e, a, blancos, hoja);
     const proy = 'animations' in hoja ? hoja.proyectil : undefined;
     // De lejos (la sombra): se queda en su lugar y la media luna sale volando, pasa por cada blanco y se va.
     let llegadas: number[] | null = null;
@@ -1891,6 +1994,13 @@ function Pelea({
       </div>
       {versus && <Versus d={d} />}
       {/* Las balas de energía (Cami): salen de las pistolas y vuelan hasta su objetivo. */}
+      {rayoSigue && (
+        <span
+          className="batalla-rayo sigue"
+          aria-hidden
+          style={{ left: rayoSigue.x, top: rayoSigue.y, width: rayoSigue.largo, height: Math.max(6, rayoSigue.grosor), rotate: `${rayoSigue.ang}rad`, '--c': '#ff2a2a' } as CSSProperties}
+        />
+      )}
       {rayo && (
         <span
           key={rayo.key}

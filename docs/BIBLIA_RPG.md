@@ -256,8 +256,8 @@ necesitar nada de esto.
 ### El hangar (Capítulo 1, camino alternativo, `hangar`)
 
 - Se llega con «Probar la nave grande» en el hangar (enciende la alarma). Jair y Cami (con el tobillo: descansa como en el Bastión).
-- Horda: empiezan 2 soldados y llegan otros hasta ser 4 (niveles 6, 6, 8, 8); después sale el **Capitán enmascarado** (nivel 14), que se retira al 35 % de su vida. No se puede huir. Perder: bad end `bad_cap01_hangar`.
-- **El Capitán:** ataca de lejos (`distancia`): de su blaster sale un rayo **rojo** (`color_disparo`) hacia su blanco («Disparo de blaster», 20 usos) o uno para cada uno («Barrido rojo», a todos, 10 usos). Su especial es el **Cañón de blaster** (`canon`): el aviso, el blaster que carga (brilla cada vez más rojo) y un solo rayo grueso contra uno, de poder 30, que se puede esquivar. Cae poco en el cebo (0,3). Sprite: placeholder con la hoja del soldado, más grande y cobriza (`filtro`), hasta que el autor haga la suya.
+- Horda: empiezan 2 soldados y llegan otros hasta ser 4 (niveles 6, 6, 8, 8); después sale el **Capitán de la Federación** (nivel 14), que se retira al 35 % de su vida. No se puede huir. Perder: bad end `bad_cap01_hangar`.
+- **El Capitán de la Federación:** ataca de lejos: cada ataque es una **ráfaga de 3 a 5 balas rojas** que salen de la punta del fusil, una por fogonazo de su animación (si son más de 3, la repite), hacia su blanco («Ráfaga de blaster», 4 por bala, 20 usos) o repartidas entre todos («Barrido rojo», 3 por bala, 10 usos); cada bala puede fallar o esquivarse. Su especial, el **Cañón de blaster**, se juega tal cual su sprite: hinca una rodilla y carga, suelta un rayo horizontal que sigue, ondulado, hasta el borde de la pantalla (golpe fuerte, 24, a su blanco) y después se vuelve loco y lo agita arriba y abajo (cada barrido le puede dar a cualquiera, 4). Cae poco en el cebo (0,3). Sprite: `public/batalla/capitan` (del HTML del autor; en el ataque se borran los rayos dibujados y el juego dispara balas desde la punta; en el especial, `rayo` dice dónde sale el rayo del cuadro para seguirlo).
 - Fondo: el pasillo de instalación (`batalla/fondos/bastion`, con la ventana al hangar).
 
 ### La demo (`demo`, solo para probar)
@@ -425,7 +425,7 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
 | Panel **«Equipo»** (estadísticas, equipo y mochila) en la barra del juego | Aprobado (ver 14). |
 | **Cami actúa todos los turnos** desde el Capítulo 2, con enemigos de más nivel | Decidido por el autor; falta armar esas peleas. |
 | La fila **«dolor»** de Cami | Reservada para más adelante. |
-| **Pelea en el hangar** (camino alternativo del Capítulo 1) | **Hecha** (ver «El hangar» en la sección 12). Falta el sprite de pelea del Capitán (el autor lo está haciendo). |
+| **Pelea en el hangar** (camino alternativo del Capítulo 1) | **Hecha** (ver «El hangar» en la sección 12), con el sprite del Capitán del autor. |
 | Retratos y sprite de batalla definitivos (hoy algunos son placeholders) | Esperando el arte del autor. |
 | El Bastión, jugador atento: gana ~99 % (con la ayuda del juego). ¿Más difícil? | A decidir por el autor. |
 | **Nueva partida+**: al terminar el juego, empezar de nuevo con los niveles y el equipo de la partida terminada, con los enemigos de más nivel para que siga habiendo desafío | Idea aprobada para más adelante (cuando el juego esté completo). |

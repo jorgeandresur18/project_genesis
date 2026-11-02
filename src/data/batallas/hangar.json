@@ -123,7 +123,7 @@
   },
   "enemigos": {
     "soldado": {
-      "nombre": "Soldado enmascarado",
+      "nombre": "Soldado de la Federación",
       "sprite": "batalla/soldado",
       "base": {
         "ps": 20,
@@ -141,13 +141,13 @@
         {
           "nombre": "Tajo",
           "poder": 10,
-          "texto": "El soldado enmascarado lanza un tajo. Procedimiento estándar.",
+          "texto": "El soldado de la Federación lanza un tajo. Procedimiento estándar.",
           "usos": 20
         },
         {
           "nombre": "Estocada",
           "poder": 12,
-          "texto": "El soldado enmascarado tira una estocada sin decir nada. Nunca dicen nada.",
+          "texto": "El soldado de la Federación tira una estocada sin decir nada. Nunca dicen nada.",
           "usos": 15
         }
       ],
@@ -176,7 +176,7 @@
           32,
           22
         ],
-        "texto": "El soldado enmascarado se lanza encima y golpea una y otra vez con la espada. Sin pausa. Sin expresión.",
+        "texto": "El soldado de la Federación se lanza encima y golpea una y otra vez con la espada. Sin pausa. Sin expresión.",
         "posicion": "objetivo"
       },
       "escala": 1.15,
@@ -184,9 +184,8 @@
       "cae_en_cebo": 0.85
     },
     "capitan": {
-      "nombre": "Capitán enmascarado",
-      "sprite": "batalla/soldado",
-      "filtro": "sepia(0.45) saturate(1.6) hue-rotate(-12deg) brightness(1.08)",
+      "nombre": "Capitán de la Federación",
+      "sprite": "batalla/capitan",
       "jefe": true,
       "huye_a": 0.35,
       "base": {
@@ -205,37 +204,45 @@
       "color_disparo": "#ff3b3b",
       "ataques": [
         {
-          "nombre": "Disparo de blaster",
-          "poder": 11,
+          "nombre": "Ráfaga de blaster",
+          "poder": 4,
+          "balas": [
+            3,
+            5
+          ],
           "usos": 20,
-          "texto": "El capitán apunta sin apuro y dispara: un rayo rojo cruza el hangar hacia {objetivo}."
+          "texto": "El capitán apunta sin apuro y suelta una ráfaga: rayos rojos, uno detrás de otro, hacia {objetivo}."
         },
         {
           "nombre": "Barrido rojo",
-          "poder": 6,
+          "poder": 3,
+          "balas": [
+            3,
+            5
+          ],
           "objetivo": "todos",
           "usos": 10,
-          "texto": "El capitán barre el hangar con el blaster: un rayo rojo para cada uno."
+          "texto": "El capitán barre el hangar con el blaster: rayos rojos para todos."
         }
       ],
       "especial": {
         "nombre": "Cañón de blaster",
-        "poder": 30,
+        "poder": 24,
         "golpes": 1,
         "objetivo": "uno",
         "color": "#ff2a2a",
         "ojos": [
-          52,
-          44,
-          32,
-          22
+          58,
+          27,
+          30,
+          15
         ],
         "posicion": "objetivo",
         "canon": true,
-        "texto": "El capitán deja de disparar. El blaster zumba, se calienta, se pone blanco en la punta. Apunta a {objetivo}."
+        "texto": "El capitán hinca una rodilla. El blaster zumba, se calienta, se pone blanco en la punta. Apunta a {objetivo}."
       },
       "responde": {
-        "quien": "Capitán enmascarado",
+        "quien": "Capitán de la Federación",
         "ok": [
           "…Sigue hablando. Necesito tiempo para cargar."
         ],
@@ -244,7 +251,7 @@
           "Silencio, civil."
         ]
       },
-      "escala": 1.3,
+      "escala": 1.45,
       "sonido": "disparo",
       "cae_en_cebo": 0.3
     }
@@ -300,7 +307,7 @@
         "texto": "Pasos más pesados. Una armadura gris con bordes de cobre y un visor rojo en forma de V."
       },
       {
-        "quien": "Capitán enmascarado",
+        "quien": "Capitán de la Federación",
         "texto": "Guerrera. Te dimos por muerta. Y traes compañía."
       },
       {
@@ -322,7 +329,7 @@
     ],
     "derrota": [
       {
-        "quien": "Capitán enmascarado",
+        "quien": "Capitán de la Federación",
         "texto": "Entidad no registrada. Procedimiento: archivar. Con la guerrera."
       }
     ],
@@ -441,7 +448,7 @@
     "Cami": "batalla/retratos/cami",
     "Rikka": "batalla/retratos/rikka",
     "Soldado": "batalla/retratos/soldado",
-    "Capitán enmascarado": "batalla/retratos/soldado"
+    "Capitán de la Federación": "batalla/retratos/soldado"
   },
   "fondo_proporcion": 1.7768,
   "fondo_luces": [
