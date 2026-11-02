@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { createPortal } from 'react-dom';
-import { anguloDisparo, rectSprite, SpriteHoja, type Hoja } from './Batalla';
-import type { DatosBatalla } from '../engine/batalla';
+import { anguloDisparo, Batalla, rectSprite, SpriteHoja, type Hoja } from './Batalla';
+import type { DatosBatalla, Enemigo, Heroe } from '../engine/batalla';
 import probador from '../data/probador_sprites.json';
 
 /**
@@ -34,6 +34,132 @@ const BATALLA_COLOR = new Map(
   Object.values(BATALLAS).flatMap((d) => Object.values(d.personajes).flatMap((p) => (p.especial ? [[p.sprite, p.especial.color] as const] : []))),
 );
 
+/**
+ * La arena: cualquier héroe contra cualquier rival de las peleas del juego, con el nivel que se quiera. Es una
+ * pelea infinita (al final de cada turno los caídos se levantan con la vida llena); se sale huyendo.
+ */
+const MAX_ARENA = 3;
+const ID_BATALLA = (ruta: string) => ruta.split('/').pop()!.replace('.json', '');
+const ARENA_HEROES: { clave: string; p: Heroe; de: string }[] = Object.entries(BATALLAS).flatMap(([ruta, d]) =>
+  Object.entries(d.personajes).map(([k, p]) => ({ clave: `${ID_BATALLA(ruta)}.${k}`, p, de: d.titulo })),
+);
+const ARENA_RIVALES: { clave: string; e: Enemigo; de: string; nivel: number }[] = Object.entries(BATALLAS).flatMap(([ruta, d]) =>
+  Object.entries(d.enemigos).map(([k, e]) => ({
+    clave: `${ID_BATALLA(ruta)}.${k}`,
+    e,
+    de: d.titulo,
+    // El nivel con que sale en su pelea (el del jefe, o el más alto de la horda).
+    nivel: d.jefe.enemigo === k ? d.jefe.nivel : Math.max(1, ...d.horda.niveles),
+  })),
+);
+const ARENA_FONDOS = Object.entries(BATALLAS).map(([ruta, d]) => ({ id: ID_BATALLA(ruta), d }));
+
+function armarArena(heroes: [string, number][], fondo: string): DatosBatalla {
+  const todas = Object.values(BATALLAS);
+  const f = ARENA_FONDOS.find((x) => x.id === fondo)?.d ?? todas[0];
+  const objetos = Object.assign({}, ...todas.map((d) => d.objetos)) as DatosBatalla['objetos'];
+  return {
+    titulo: 'Arena',
+    fondo: f.fondo,
+    fondo_proporcion: f.fondo_proporcion,
+    fondo_luces: f.fondo_luces,
+    enemigos_atras: f.enemigos_atras,
+    musica: f.musica,
+    heroes: heroes.map(([k]) => k),
+    personajes: Object.fromEntries(ARENA_HEROES.filter((h) => heroes.some(([k]) => k === h.clave)).map((h) => [h.clave, h.p])),
+    enemigos: Object.fromEntries(ARENA_RIVALES.map((r) => [r.clave, r.e])),
+    horda: { enemigo: '', al_inicio: 0, niveles: [] },
+    jefe: { enemigo: '', nivel: 1 },
+    objetos,
+    // Una mochila llena para probar los objetos.
+    mochila_inicial: Object.fromEntries(Object.keys(objetos).map((k) => [k, 5])),
+    botin: { probabilidad: 0, objetos: [] },
+    esquivar: Math.max(...todas.map((d) => d.esquivar)),
+    hablar: Math.max(...todas.map((d) => d.hablar)),
+    huir: true,
+    retratos: Object.assign({}, ...todas.map((d) => d.retratos)),
+    dialogos: {},
+  };
+}
+
+type Eleccion = Record<string, number>;
+
+function ArenaConfig({ onPelear }: { onPelear: (h: [string, number][], r: [string, number][], fondo: string) => void }) {
+  const [heroes, setHeroes] = useState<Eleccion>({});
+  const [rivales, setRivales] = useState<Eleccion>({});
+  const [fondo, setFondo] = useState(ARENA_FONDOS[0]?.id ?? '');
+  const lista = (
+    titulo: string,
+    items: { clave: string; nombre: string; de: string; nivel: number }[],
+    sel: Eleccion,
+    set: (f: (s: Eleccion) => Eleccion) => void,
+  ) => (
+    <section className="arena-lado">
+      <h3>
+        {titulo} <small>(hasta {MAX_ARENA})</small>
+      </h3>
+      {items.map((x) => {
+        const on = x.clave in sel;
+        const lleno = !on && Object.keys(sel).length >= MAX_ARENA;
+        const cambiar = () =>
+          set((s) => {
+            const n = { ...s };
+            if (on) delete n[x.clave];
+            else n[x.clave] = x.nivel;
+            return n;
+          });
+        return (
+          <div key={x.clave} className={`arena-item ${on ? 'activo' : ''}`}>
+            <label>
+              <input type="checkbox" checked={on} disabled={lleno} onChange={cambiar} />
+              <b>{x.nombre}</b> <small>{x.de}</small>
+            </label>
+            <label className="arena-nivel">
+              Nv
+              <input
+                type="number"
+                min={1}
+                max={99}
+                value={sel[x.clave] ?? x.nivel}
+                disabled={!on}
+                onChange={(e) => set((s) => ({ ...s, [x.clave]: Math.max(1, Math.min(99, +e.target.value || 1)) }))}
+              />
+            </label>
+          </div>
+        );
+      })}
+    </section>
+  );
+  const listo = Object.keys(heroes).length > 0 && Object.keys(rivales).length > 0;
+  return (
+    <div className="arena-config">
+      <p className="arena-ayuda">
+        Elige héroes y rivales (con su nivel) y pelean con las reglas de siempre. Es infinita: al final de cada turno los
+        caídos se levantan con la vida llena. Para salir, «Huir».
+      </p>
+      <div className="arena-lados">
+        {lista('Héroes', ARENA_HEROES.map((h) => ({ clave: h.clave, nombre: h.p.nombre, de: h.de, nivel: h.p.nivel })), heroes, setHeroes)}
+        {lista('Rivales', ARENA_RIVALES.map((r) => ({ clave: r.clave, nombre: r.e.nombre, de: r.de, nivel: r.nivel })), rivales, setRivales)}
+      </div>
+      <div className="arena-pie">
+        <label>
+          Fondo
+          <select value={fondo} onChange={(e) => setFondo(e.target.value)}>
+            {ARENA_FONDOS.map((f) => (
+              <option key={f.id} value={f.id}>
+                {f.d.titulo}
+              </option>
+            ))}
+          </select>
+        </label>
+        <button className="arena-pelear" disabled={!listo} onClick={() => onPelear(Object.entries(heroes), Object.entries(rivales), fondo)}>
+          ⚔ ¡Pelear!
+        </button>
+      </div>
+    </div>
+  );
+}
+
 /** Las acciones del combate y qué fila de la hoja usan. */
 const ACCIONES: [string, (e: Entrada) => string][] = [
   ['Reposo', () => 'idle'],
@@ -56,6 +182,8 @@ export function ProbadorSprites({ onCerrar }: { onCerrar: () => void }) {
   const [fondo, setFondo] = useState<'combate' | 'cuadros' | 'oscuro'>('combate');
   const [marcas, setMarcas] = useState(false);
   const [vez, setVez] = useState(0);
+  /** La arena: armándola (sin pelea todavía) o peleando. */
+  const [arena, setArena] = useState<null | 'armar' | { h: [string, number][]; r: [string, number][]; fondo: string; n: number }>(null);
   const entrada = ENTRADAS.find((e) => e.hoja === sel);
 
   useEffect(() => {
@@ -129,10 +257,30 @@ export function ProbadorSprites({ onCerrar }: { onCerrar: () => void }) {
             <small>{e.hoja}</small>
           </button>
         ))}
+        <button className={`probador-arena ${arena ? 'activo' : ''}`} onClick={() => setArena(arena ? null : 'armar')}>
+          {arena ? '← Volver a los sprites' : '⚔ Arena'}
+        </button>
         <button className="probador-cerrar" onClick={onCerrar}>
           Cerrar
         </button>
       </aside>
+      {arena === 'armar' && (
+        <main className="probador-main">
+          <ArenaConfig onPelear={(h, r, fondo) => setArena({ h, r, fondo, n: Date.now() })} />
+        </main>
+      )}
+      {arena && arena !== 'armar' && (
+        <Batalla
+          key={arena.n}
+          id="arena"
+          datos={armarArena(arena.h, arena.fondo)}
+          arena={arena.r}
+          progreso={{ heroes: Object.fromEntries(arena.h.map(([k, nivel]) => [k, { nivel, xp: 0 }])), mochila: {} }}
+          onGanar={() => setArena('armar')}
+          onPerder={() => setArena('armar')}
+        />
+      )}
+      {!arena && (
       <main className="probador-main">
         <div className="probador-acciones">
           {ACCIONES.map(([texto, fila]) => {
@@ -214,6 +362,7 @@ export function ProbadorSprites({ onCerrar }: { onCerrar: () => void }) {
           </label>
         </div>
       </main>
+      )}
     </div>,
     document.body,
   );

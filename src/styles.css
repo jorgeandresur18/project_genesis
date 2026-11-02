@@ -3019,3 +3019,20 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 .about-indice-parte span { display: block; margin: 0.55rem 0 0; color: #9fdcea; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; }
 .about-indice-parte ul { display: grid; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); gap: 0.15rem 1rem; margin: 0.25rem 0 0; padding-left: 1.3rem; }
 .about-parte { margin: 1.4rem 0 0.9rem; padding-bottom: 0.35rem; border-bottom: 1px solid rgba(34, 211, 238, 0.3); color: #e8f9fd; font-size: 1.15rem; letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* La arena del probador: elegir héroes y rivales (con su nivel) y el fondo. */
+.probador-arena { margin-top: 0.6rem; font-weight: 700; color: #ffd27a; }
+.arena-config { display: flex; flex-direction: column; gap: 0.8rem; padding: 1rem; overflow: auto; }
+.arena-ayuda { margin: 0; color: #a9a49a; font-size: 0.9rem; }
+.arena-lados { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1rem; }
+.arena-lado h3 { margin: 0 0 0.4rem; color: #22d3ee; font-size: 1rem; }
+.arena-lado h3 small { color: #7d8a90; font-weight: 400; }
+.arena-item { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; padding: 0.35rem 0.6rem; margin: 0.2rem 0; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 0.4rem; }
+.arena-item.activo { border-color: rgba(34, 211, 238, 0.6); background: rgba(34, 211, 238, 0.07); }
+.arena-item label { display: flex; align-items: center; gap: 0.45rem; cursor: pointer; }
+.arena-item small { color: #7d8a90; }
+.arena-nivel input { width: 3.6rem; margin-left: 0.3rem; }
+.arena-pie { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.arena-pie select { margin-left: 0.4rem; }
+.probador .arena-pelear { padding: 0.6rem 1.6rem; font-size: 1.05rem; font-weight: 700; color: #1b1205; background: #ffc439; border: none; border-radius: 999px; cursor: pointer; }
+.probador .arena-pelear:disabled { opacity: 0.4; cursor: default; }

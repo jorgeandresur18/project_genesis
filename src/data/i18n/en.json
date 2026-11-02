@@ -327,5 +327,6 @@
   "conoce.escuchar": "Listen on Spotify",
   "conoce.indice": "Contents",
   "conoce.parte_juego": "The game",
-  "conoce.parte_autor": "The author"
+  "conoce.parte_autor": "The author",
+  "batalla.arena_revive": "Arena! They get back up at full health: {quien}."
 }

@@ -157,8 +157,14 @@ export function Batalla({
   onGanar,
   onPerder,
   onPerdonar,
+  datos,
+  arena,
 }: {
   id: string;
+  /** Los datos de la pelea armados a mano (la arena del probador); si no, los de src/data/batallas/<id>.json. */
+  datos?: DatosBatalla;
+  /** Arena de prueba: los enemigos que salen (clave y nivel). Nadie gana: los caídos se levantan al final del turno. */
+  arena?: [string, number][];
   /** Nivel, experiencia y mochila con que llegan los héroes (si no, los del .json y la mochila vacía). */
   progreso?: Progreso;
   /** Al ganar (o huir): las variables que hay que guardar en la partida (niveles, experiencia, mochila). */
@@ -167,8 +173,8 @@ export function Batalla({
   /** Si el rival perdona y la pelea termina hablando (Nikki). Si no está, cuenta como ganar. */
   onPerdonar?: (vars: Vars) => void;
 }) {
-  const d = BATALLAS[`../data/batallas/${id}.json`];
-  return d ? <Pelea d={d} progreso={progreso} onGanar={onGanar} onPerder={onPerder} onPerdonar={onPerdonar} /> : null;
+  const d = datos ?? BATALLAS[`../data/batallas/${id}.json`];
+  return d ? <Pelea d={d} progreso={progreso} onGanar={onGanar} onPerder={onPerder} onPerdonar={onPerdonar} arena={arena} /> : null;
 }
 
 function Pelea({
@@ -177,12 +183,14 @@ function Pelea({
   onGanar,
   onPerder,
   onPerdonar,
+  arena,
 }: {
   d: DatosBatalla;
   progreso?: Progreso;
   onGanar: (vars: Vars) => void;
   onPerder: () => void;
   onPerdonar?: (vars: Vars) => void;
+  arena?: [string, number][];
 }) {
   const t = useT();
   // El estado de la pelea vive en un ref (lo cambian las acciones, en orden) y se redibuja con `forzar`.
@@ -663,6 +671,8 @@ function Pelea({
     return e;
   };
   const jefeSeRetira = () => {
+    // En la arena nadie se retira.
+    if (arena) return null;
     const jefe = b.current.enemigos.find((e) => d.enemigos[e.clave].jefe && e.clon === undefined);
     return jefe && seRetira(jefe, d.enemigos[jefe.clave]) ? jefe : null;
   };
@@ -717,6 +727,11 @@ function Pelea({
       }
     }
     if (jefeSeRetira()) return 'gana';
+    // En la arena, si cayeron todos los rivales, se levantan.
+    if (arena && !b.current.enemigos.some(vivo)) {
+      await revivirArena();
+      return 'sigue';
+    }
     // Se acabó la horda: sale el jefe (actúa desde el turno siguiente).
     if (!b.current.enemigos.some(vivo)) {
       playChip('modem');
@@ -747,7 +762,24 @@ function Pelea({
     await evaporarCebos();
     await ayudar();
     await levantarse();
+    if (arena) await revivirArena();
     return 'sigue';
+  };
+  /** La arena de prueba: los que cayeron (héroes y rivales) se levantan con la vida llena. Los clones no vuelven. */
+  const revivirArena = async () => {
+    const heroes = b.current.heroes.filter((h) => !vivo(h));
+    const rivales = b.current.enemigos.filter((e) => !vivo(e) && e.clon === undefined);
+    if (!heroes.length && !rivales.length) return;
+    for (const h of heroes) {
+      Object.assign(h, { ps: h.psMax, paralizado: 0, confundido: 0, envenenado: null, protegido: 0, carga: 0 });
+      b.current.cansados.delete(h.id);
+      void animar(h.id, 'idle');
+      luz(h.id, '#7dffb0', true);
+    }
+    for (const e of rivales) sacar(e.clave, e.nivel);
+    playChip('revivir');
+    forzar();
+    await decir(fmt(t('batalla.arena_revive'), { quien: [...heroes, ...rivales].map((x) => x.nombre).join(', ') }));
   };
 
   /** El veneno al final del turno: cada envenenado pierde PS (los enemigos que caen, caen). */
@@ -810,7 +842,11 @@ function Pelea({
       }
       await lineas('inicio');
       const { horda } = d;
-      if (!horda.niveles.length) {
+      if (arena) {
+        // La arena: salen los rivales elegidos, todos juntos.
+        for (const [clave, nivel] of arena) sacar(clave, nivel);
+        await decir(fmt(t('batalla.aparecen'), { n: b.current.enemigos.length }));
+      } else if (!horda.niveles.length) {
         // Sin horda (p. ej. Nikki en el bar): el jefe sale de entrada.
         await lineas('jefe');
         const e = sacar(d.jefe.enemigo, d.jefe.nivel);
@@ -823,6 +859,13 @@ function Pelea({
         const r = await turno();
         if (!sigue) return;
         if (r === 'sigue') continue;
+        // En la arena no se gana ni se pierde: los caídos se levantan y sigue.
+        if (arena && r !== 'huye') {
+          b.current.perdona = false;
+          b.current.racha = 0;
+          await revivirArena();
+          continue;
+        }
         if (r === 'huye') return salir(() => fin.current.onGanar(varsFinales()));
         if (r === 'perdona') {
           await lineas('perdon');

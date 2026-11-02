@@ -327,5 +327,6 @@
   "conoce.escuchar": "Escúchala en Spotify",
   "conoce.indice": "Índice",
   "conoce.parte_juego": "El juego",
-  "conoce.parte_autor": "El autor"
+  "conoce.parte_autor": "El autor",
+  "batalla.arena_revive": "¡Arena! Se levantan con la vida llena: {quien}."
 }
