@@ -7,9 +7,15 @@
     "nikki": 152,
     "soldado_enmascarado": 185,
     "capitan_enmascarado": 200,
-    "monstruo_sombras": 240
+    "monstruo_sombras": 240,
+    "guardia_primavera": 172,
+    "vendedor": 163,
+    "nail": 149,
+    "mike": 136,
+    "nora": 136
   },
   "expresiones": {
-    "monstruo_sombras/armored": 255
+    "monstruo_sombras/armored": 255,
+    "cami/armored_bersek_mode": 200
   }
 }

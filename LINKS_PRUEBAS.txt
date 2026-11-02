@@ -1,0 +1,68 @@
+PROJECT GENESIS - Links para probar (modo pruebas)
+==================================================
+
+PUBLICADOS (en internet, para jugar desde cualquier lado)
+--------------------------------------------------------
+Capitulo 1 completo (con el RPG, la pelea con Nikki y Boringplace):
+    https://proyect-genesis.vercel.app/cap1
+
+Todo unido (/all): todo lo creado hasta ahora, de corrido. Al terminar el Capitulo 1,
+"Continuar" sigue en el Capitulo 2, y el Bootcamp tiene todos sus niveles abiertos:
+    https://proyect-genesis.vercel.app/all
+
+La portada del juego:
+    https://proyect-genesis.vercel.app/
+
+
+LOCALES (modo pruebas)
+----------------------
+Antes de usarlos, el servidor de desarrollo tiene que estar andando:
+    npm run dev
+Todos los links son de tu computadora (localhost); no sirven en otra.
+
+
+PELEAS RPG (solo la pelea; al terminar se cierra, no sigue la historia)
+----------------------------------------------------------------------
+Bastion (Jair y Cami contra los soldados y despues el monstruo de sombras):
+    http://localhost:5173/?batalla=bastion
+
+Demo (con Rikka; aqui si se puede huir):
+    http://localhost:5173/?batalla=demo
+
+Nikki contra Jair en el bar (con la presentacion "VS"):
+    http://localhost:5173/?batalla=nikki
+    (Para que Nikki te perdone: "Hablar" tres turnos seguidos, sin hacer otra cosa en medio.)
+
+
+PELEAS DENTRO DE LA HISTORIA (con las escenas de antes y de despues)
+--------------------------------------------------------------------
+Bastion en el Capitulo 1:
+    http://localhost:5173/?escena=cap01_n05
+
+Pelea del bar con Nikki (empieza justo despues de elegir "Propasarte"; esta desde la primera partida):
+    http://localhost:5173/?escena=cap01_nk01
+    - Perdon (hablar 3 veces seguidas): las cervezas fuertes y la noche sigue.
+    - Si ella gana: la imagen desbloqueable de Nikki llorando y el bad end "Cachetadas infinitas".
+    - Si le bajas la mitad de la vida: te echan del bar y sale "Una noche anormal".
+
+
+ESCENA SECRETA DE LAS TERMAS (Capitulo 2, Rikka y los emblemas)
+---------------------------------------------------------------
+    http://localhost:5173/?escena=cap02_p2_s01
+
+
+HERRAMIENTAS
+------------
+Probador de sprites (todas las hojas del combate, zoom, pausa cuadro a cuadro, voltear y,
+con el boton "Disparos", las marcas y las balas):
+    http://localhost:5173/?sprites
+
+Empezar en cualquier escena (cambia <id> por el id de la escena del JSON):
+    http://localhost:5173/?escena=<id>
+
+Empezar "Nueva partida" en el primer capitulo que quieras:
+    http://localhost:5173/cap1
+    http://localhost:5173/cap2
+
+Todo unido (como el /all publicado):
+    http://localhost:5173/all

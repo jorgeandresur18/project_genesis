@@ -1,4 +1,4 @@
-# PROYECT GENESIS — Instrucciones para Claude Code
+# PROJECT GENESIS — Instrucciones para Claude Code
 
 Novela visual indie en código (React + Vite). Género: ciencia ficción psicológica, comedia negra, meta-horror. Obra para adultos (M / PEGI 18). Ambientada en una ciudad sin nombre; español neutro.
 
@@ -8,14 +8,15 @@ Novela visual indie en código (React + Vite). Género: ciencia ficción psicol�
 2. Al escribir diálogos o textos, lee `docs/TONO.md`.
 3. Al tocar finales o rutas, lee `docs/FINALES.md`.
 4. Al programar, lee `docs/SPEC.md`.
-5. Al escribir los orígenes de las chicas, la relación con Nikki o los capítulos 4 en adelante, lee `docs/DIRECCION_PSICOLOGICA.md` (si contradice el canon, pregunta).
+5. Al tocar las batallas por turnos (RPG), lee `docs/BIBLIA_RPG.md`: las reglas de todas las peleas y las excepciones de cada una.
+6. Al escribir los orígenes de las chicas, la relación con Nikki o los capítulos 4 en adelante, lee `docs/DIRECCION_PSICOLOGICA.md` (si contradice el canon, pregunta).
 
 ## Reglas duras
 
 - **No contradigas el canon.** Si un dato está marcado `[PENDIENTE]`, no lo inventes: deja un comentario `TODO(canon): ...` y pregunta al autor.
 - **No toques los 2 finales canon ni el juego base** sin una orden explícita. El juego base sigue en desarrollo.
-- **Nada de nombres reales** en código, JSON, assets, commits ni interfaz. Usa los marcadores `CREADORA_A`, `CREADORA_B` e `INFLUENCER_C`. Única excepción: «Conoce más del proyecto» (`src/data/conoce_mas.json` y su versión en inglés), donde van el nombre del autor y los autores de las obras y corrientes que lo inspiraron (por orden del autor).
-- **Sin contenido sexual explícito** y nunca con parecidos de personas reales. La sexualidad es sugerida.
+- **Nada de nombres reales** en código, JSON, assets, commits ni interfaz. `CREADORA_A`, `CREADORA_B` e `INFLUENCER_C` son personajes ficticios que solo existen dentro de la historia (confirmado por el autor el 2026-10-31): el arte de Rikka y Cami no se basa en personas reales. Única excepción: «Conoce más del proyecto» (`src/data/conoce_mas.json` y su versión en inglés), donde van el nombre del autor y los autores de las obras y corrientes que lo inspiraron (por orden del autor).
+- **Sin contenido sexual explícito.** La sexualidad es sugerida. Las escenas +18 (desbloqueables) van con censura y nunca muestran nada explícito.
 - **La historia vive en JSON**, nunca dentro de los componentes de React.
 - **Greyboxing:** sin sprites, imágenes ni audio finales hasta la fase de arte. Usa placeholders (`PLACEHOLDER:nombre`).
 - **No agregues mecánicas** (inventario, minijuegos, combate) sin que el autor lo pida.

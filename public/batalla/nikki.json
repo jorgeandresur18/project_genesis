@@ -1,0 +1,110 @@
+{
+  "frameWidth": 132,
+  "frameHeight": 116,
+  "animations": {
+    "idle": {
+      "row": 0,
+      "frames": 24,
+      "fps": 12,
+      "loop": true
+    },
+    "pestaneo": {
+      "row": 1,
+      "frames": 5,
+      "fps": 10,
+      "loop": false
+    },
+    "ataque": {
+      "row": 2,
+      "frames": 10,
+      "fps": 12,
+      "loop": false
+    },
+    "daño": {
+      "row": 3,
+      "frames": 8,
+      "fps": 12,
+      "loop": false
+    },
+    "llorando": {
+      "row": 4,
+      "frames": 12,
+      "fps": 10,
+      "loop": true
+    },
+    "derrotado": {
+      "row": 5,
+      "frames": 16,
+      "fps": 8,
+      "loop": true
+    },
+    "especial": {
+      "row": 6,
+      "frames": 16,
+      "fps": 14,
+      "loop": false,
+      "seq": [
+        0,
+        1,
+        2,
+        3,
+        2,
+        3,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        7,
+        8,
+        13,
+        14,
+        14,
+        15,
+        15
+      ]
+    }
+  }
+}

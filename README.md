@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="public/og-image.png" alt="PROYECT GENESIS" width="720" />
+  <img src="public/og-image.png" alt="PROJECT GENESIS" width="720" />
 </p>
 
-<h1 align="center">PROYECT GENESIS</h1>
+<h1 align="center">PROJECT GENESIS</h1>
 
 <p align="center">
   Novela visual para adultos · ciencia ficción psicológica · comedia negra · meta-horror<br />
@@ -19,7 +19,7 @@ Una noche, después de emborracharse con Nikki en un bar, Jair recibe un correo 
 
 Cuando Jair abre los ojos, está adentro.
 
-PROYECT GENESIS empieza como un isekai con dos heroínas que se disputan al protagonista, y poco a poco desarma esa fantasía pieza por pieza. Es una historia sobre crear personas a la medida de lo que uno desea, y sobre lo que pasa cuando esas personas descubren quién las hizo y para qué.
+PROJECT GENESIS empieza como un isekai con dos heroínas que se disputan al protagonista, y poco a poco desarma esa fantasía pieza por pieza. Es una historia sobre crear personas a la medida de lo que uno desea, y sobre lo que pasa cuando esas personas descubren quién las hizo y para qué.
 
 > **18+.** Contiene manipulación emocional, alcoholismo, sexualidad sugerida (nunca explícita), angustia psicológica, violencia fantástica y lenguaje vulgar. Todos los personajes son ficticios.
 
@@ -98,7 +98,7 @@ La documentación de la obra está en `docs/`: `CANON.md` (la fuente de verdad d
 
 ## Cómo se hizo
 
-PROYECT GENESIS nació en octubre de 2026. Es un proyecto indie hecho por una sola persona: historia, dirección, diseño y programación.
+PROJECT GENESIS nació en octubre de 2026. Es un proyecto indie hecho por una sola persona: historia, dirección, diseño y programación.
 
 Es, a propósito, una historia sobre una inteligencia artificial que crea personajes, hecha con ayuda de inteligencias artificiales: ChatGPT y Gemini para dar forma a la biblia de la historia, Claude Code para programar el motor y redactar borradores, y Gemini para generar el arte.
 

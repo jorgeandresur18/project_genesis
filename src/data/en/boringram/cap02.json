@@ -1,0 +1,120 @@
+{
+  "publicaciones": [
+    {
+      "texto": "fact: if your friend doesn't invite you to the beach he's not your friend. he's a contact"
+    },
+    {
+      "texto": "whoever said engineers can't get girls never saw my friend's boringram 🙃"
+    },
+    {
+      "texto": "Today they told me how a good king turned evil overnight. Sounded like a promotion."
+    },
+    {
+      "texto": "some people disappear for a week and come back with beach pics with two models. me here in the same chair as always. normal. everything's normal"
+    },
+    {
+      "texto": "Vacation paid for by a red suit. Long story.",
+      "comentarios": [
+        {
+          "texto": "damn, the blonde's got melons 🍈🍈 you sure she's not AI?"
+        }
+      ]
+    },
+    {
+      "texto": "First beach in years. Got burned in fifteen minutes. The sun here charges interest."
+    },
+    {
+      "texto": "Hangover breakfast for three. Grandma's recipe, ingredients from another dimension. My companions say it brings the dead back to life."
+    },
+    {
+      "texto": "Interdimensional hangover. Level: my soul hurts and the priestess says there is no cure for that."
+    },
+    {
+      "texto": "the priestesses sing horribly and it's the most beautiful thing i've heard in years. don't judge me. i'm fine. i'm very fine",
+      "comentarios": [
+        {
+          "texto": "Jair? It's 5 a.m. Were you dreaming, can't sleep, or are you drunk? Answer in one word."
+        },
+        {
+          "texto": "priestesses?? what bar are you at and why didn't you invite me"
+        }
+      ]
+    },
+    {
+      "texto": "Some sunsets don't show up in any wallpaper. Don't ask."
+    },
+    {
+      "texto": "Day 3 in another dimension. Did side quests for bread. They paid better than the office."
+    }
+  ],
+  "destacadas": [
+    {
+      "titulo": "cooking",
+      "texto": "the only talent i have left"
+    },
+    {
+      "titulo": "cheers",
+      "texto": "with my travel companions. the priestess is buying"
+    },
+    {
+      "titulo": "trip",
+      "texto": "vacation (unpaid)"
+    }
+  ],
+  "notificaciones": [
+    {
+      "app": "System",
+      "titulo": "Charging: 50%",
+      "texto": "Wireless charging. Power source: unrecognized. Don't ask."
+    },
+    {
+      "app": "System",
+      "titulo": "Battery saver on",
+      "texto": "Background apps stopped. So did your dreams."
+    }
+  ],
+  "chats": [
+    {
+      "estado": "Active {hace}",
+      "mensajes": [
+        {
+          "texto": "hey"
+        },
+        {
+          "texto": "where are you drinking??"
+        },
+        {
+          "texto": "and why didn't you invite me"
+        },
+        {
+          "texto": "who are those two 👀"
+        },
+        {
+          "texto": "and now the beach???"
+        },
+        {
+          "texto": "i hate you"
+        },
+        {
+          "texto": "send me your location"
+        }
+      ]
+    },
+    {
+      "estado": "Business account",
+      "mensajes": [
+        {
+          "texto": "Jair! A perfect job for you: unpaid intern, 5 years of experience, available 24/7. Interested?"
+        }
+      ]
+    },
+    {
+      "estado": "Verified account (we think)",
+      "mensajes": [
+        {
+          "texto": "We detected a login from another dimension. If it wasn't you, ignore this message. If it was you, same."
+        }
+      ]
+    }
+  ]
+}

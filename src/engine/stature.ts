@@ -4,6 +4,7 @@
 // quepa entero (ver SceneStage).
 import type { Character } from './types';
 import estaturas from '../data/estaturas.json';
+import anchos from '../data/anchos.json';
 
 export const BASE_CM = 165;
 export const BASE_CANVAS = 1600;
@@ -19,6 +20,12 @@ export function statureOf(c: Character): number {
   if (m) return byExpression[`${m[1]}/${m[2]}`] ?? byCharacter[m[1]] ?? BASE_CM;
   const placeholder = c.sprite.replace(/^PLACEHOLDER:/, '');
   return byCharacter[placeholder] ?? byCharacter[c.id] ?? BASE_CM;
+}
+
+/** Cuántas veces más ancho que lo normal (3:4) es el lienzo de un sprite (los «recortado»; ver tools/sprites.mjs). */
+export function widthFactor(c: Character): number {
+  const m = c.sprite.match(/sprites\/([^/]+)\/([^/.]+)\./);
+  return (m && (anchos as Record<string, number>)[`${m[1]}/${m[2]}`]) || 1;
 }
 
 /** Alto del lienzo (px) de un sprite de esa estatura. */

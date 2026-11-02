@@ -1,0 +1,31 @@
+{
+  "reinos": [
+    {
+      "nombre": "Kingdom of Spring",
+      "info": "Seasonal faction inspired by feudal Japan: white walls, paper lanterns and cherry trees on every corner. Home of Rikka, guardian of the bridge for so long she no longer remembers since when. Its former king proclaimed himself Evil King of the metaverse; today a new Spring King reigns and Rikka thanks him for the peace of the four kingdoms. Sweets are free for the guardian's friends. The peace, nobody knows at what price."
+    },
+    {
+      "nombre": "Kingdom of Summer",
+      "info": "Seasonal faction of Polynesian inspiration. It occupies the Valley of Eternal Spring under the influence of the deity Valkha; hence its conflict with Spring. They say Summer is greedy. Spring says it, and Spring lost the valley."
+    },
+    {
+      "nombre": "Kingdom of Autumn",
+      "info": "Seasonal faction of Celtic inspiration: stone houses covered in red ivy, carved spirals and the smell of baked apples. Here they steal your enchanted clothes in broad daylight and the friendly merchant turns out to be a soldier in disguise. Autumn takes everything you didn't tie down. Sometimes, you too."
+    },
+    {
+      "nombre": "Kingdom of Winter",
+      "info": "Seasonal faction inspired by regions of Russia. Snow, cold and an inn with a tavern where mead is paid for with sold outfits. What happens in the Winter tavern stays in the gallery. And in the hangover."
+    }
+  ],
+  "lugares": {
+    "ciudadela_primavera": {
+      "nombre": "Citadel of Spring"
+    },
+    "ciudadela_otono": {
+      "nombre": "Citadel of Autumn"
+    },
+    "frontera_invierno": {
+      "nombre": "Kingdom of Winter"
+    }
+  }
+}

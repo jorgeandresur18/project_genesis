@@ -19,6 +19,9 @@ export interface Branch {
 
 export type Next = string | Branch[] | null;
 
+export const VAPORES = ['espeso', 'medio', 'ligero', 'rafaga'] as const;
+export type Vapor = (typeof VAPORES)[number];
+
 export interface Character {
   id: string;
   sprite: string;
@@ -87,10 +90,58 @@ export interface Scene {
    */
   fin_capitulo?: number;
   /**
+   * Escena secreta: solo se abre con el juego al 100 % (variable `juego_completo`). No cuenta para el 100 %
+   * ni para la galería (si contara, el 100 % sería imposible).
+   */
+  secreto?: boolean;
+  /**
+   * Vapor de las termas encima de la escena (detrás del diálogo): «espeso» casi tapa la silueta, «medio» deja
+   * ver, «ligero» apenas se nota y «rafaga» se lo lleva de golpe el viento (y queda ligero). Solo atmósfera: la
+   * censura va siempre pegada en la imagen.
+   */
+  vapor?: Vapor;
+  /**
+   * Escena secreta donde se pueden tocar los emblemas +18: cada toque sigue la «secuencia» del personaje
+   * (src/data/emblemas_18.json); al último (el grito) la historia salta a esta escena.
+   */
+  toques_salida?: string;
+  /** Variables que se guardan al salir por los toques (p. ej. que Rikka quedó perturbada). */
+  toques_set?: Vars;
+  /**
    * Transición al entrar a esta escena. Por defecto, fundido a negro solo si cambia el fondo.
    * «blanco»: fundido largo a blanco (cruce del mundo real al de la IA); se hace aunque no cambie el fondo.
    */
-  transicion?: 'negro' | 'blanco';
+  transicion?: 'negro' | 'blanco' | 'negro_lento';
+  /**
+   * Escena sin diálogo que se queda en pantalla estos milisegundos y sigue sola (p. ej. una imagen que se
+   * deja ver un rato antes de un fundido).
+   */
+  espera?: number;
+  /** Al llegar a un lugar: cartel con el emblema de su reino y el nombre (src/data/reinos.json, «lugares»). */
+  lugar?: string;
+  /**
+   * Minijuego (src/data/minijuegos/<id>.json): sale cuando termina de escribirse la línea de la escena, y la
+   * historia no avanza hasta resolverlo (ni con Adelantar ni con «Próxima decisión»).
+   */
+  minijuego?: string;
+  /** Adónde va la historia si el jugador sale del minijuego sin resolverlo. */
+  minijuego_salida?: string;
+  /**
+   * Nivel de acción (src/data/niveles/<id>.json; el juego, en src/game): sale cuando termina de escribirse la
+   * línea de la escena, y la historia no avanza hasta ganarlo. Ganarlo sigue con `next`.
+   */
+  nivel?: string;
+  /** Adónde va la historia si el jugador pierde el nivel (un bad end). */
+  nivel_derrota?: string;
+  /**
+   * Batalla por turnos (src/data/batallas/<id>.json): sale cuando termina de escribirse la línea de la escena, y la
+   * historia no avanza hasta ganarla. Ganarla sigue con `next`.
+   */
+  batalla?: string;
+  /** Adónde va la historia si el grupo pierde la batalla (un bad end). */
+  batalla_derrota?: string;
+  /** Adónde va si el rival perdona y la pelea termina hablando (Nikki, después de pedirle perdón tres veces). */
+  batalla_perdon?: string;
 }
 
 export interface StoryFile {
@@ -99,6 +150,12 @@ export interface StoryFile {
   title: string;
   /** Título en inglés (pantalla de fin de capítulo). */
   title_en?: string;
+  /**
+   * Otra versión del título que asoma con un glitch en la pantalla de fin de capítulo y vuelve al título
+   * de siempre (Capítulo 2: «El viaje del antihéroe»).
+   */
+  title_glitch?: string;
+  title_glitch_en?: string;
   /** `borrador` mientras el autor no apruebe los diálogos. */
   estado?: 'borrador' | 'aprobado';
   nota?: string;
@@ -118,6 +175,14 @@ export interface EndingInfo {
   estado: 'jugable' | 'por_escribir';
   /** Los finales de prueba no se muestran en la galería ni van en FINALES.md. */
   oculto?: boolean;
+  /** No hace falta para el 100 % (es muy difícil de conseguir; p. ej. ganarle a Nikki). */
+  opcional?: boolean;
+  /**
+   * En la pantalla del final, primero se ve este nombre y después, con un glitch, el verdadero (la palabra que
+   * cambia): «Una noche normal» → «Una noche anormal».
+   */
+  nombre_antes?: string;
+  nombre_antes_en?: string;
 }
 
 export interface GameConfig {

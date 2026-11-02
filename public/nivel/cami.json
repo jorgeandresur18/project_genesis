@@ -1,0 +1,12 @@
+{
+  "cuadro": [
+    96,
+    56
+  ],
+  "poses": [
+    "quieta",
+    "corre",
+    "dispara",
+    "dispara2"
+  ]
+}

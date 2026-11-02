@@ -5,12 +5,19 @@ export default defineConfig({
   // Rutas relativas: el juego funciona en Vercel, GitHub Pages o itch.io sin cambiar nada.
   base: './',
   plugins: [react()],
+  server: {
+    // docs/ tiene el material del autor (PSB, imágenes, HTML de prueba): no es código del juego. Si se vigila,
+    // un archivo grande que se está guardando (EBUSY en Windows) tumba el servidor.
+    watch: { ignored: ['**/docs/**', '**/*.psb', '**/*.psd'] },
+  },
   build: {
     rollupOptions: {
       output: {
         // En archivos aparte, para que se descarguen en paralelo y el navegador los guarde por separado: si solo
         // cambia el código, la historia (lo más pesado) no se vuelve a bajar, y al revés.
         manualChunks(id) {
+          // Phaser (el motor del nivel de acción) va aparte: se descarga recién al llegar al nivel.
+          if (id.includes('node_modules/phaser')) return 'phaser';
           if (id.includes('node_modules')) return 'librerias';
           if (id.includes('/src/data/chapters/') || id.includes('/src/data/en/chapters/')) return 'historia';
         },

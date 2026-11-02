@@ -6191,6 +6191,11 @@
         {
           "text": "Hacer un chiste",
           "next": "cap01_103c"
+        },
+        {
+          "text": "Propasarte",
+          "next": "cap01_nk01",
+          "conditions": []
         }
       ],
       "conditions": [],
@@ -6943,6 +6948,602 @@
       "audio": null,
       "ui_effect": null,
       "next": "cap01_104"
+    },
+    {
+      "scene_id": "cap01_nk01",
+      "chapter": 1,
+      "background": "fondos/bar_noche.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/verguenza1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "nikki",
+          "sprite": "sprites/nikki/tierna1.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Jair no espera la respuesta. Ni el beso. Se pasa de la raya: las manos van adonde nadie las invitó."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_nk02"
+    },
+    {
+      "scene_id": "cap01_nk02",
+      "chapter": 1,
+      "background": "fondos/bar_noche.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/verguenza1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "nikki",
+          "sprite": "sprites/nikki/wtf.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Nikki se queda quieta. Un segundo. Uno solo. Después le cambia la cara."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_nk03"
+    },
+    {
+      "scene_id": "cap01_nk03",
+      "chapter": 1,
+      "background": "fondos/bar_noche.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "nikki",
+          "sprite": "sprites/nikki/enojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Nikki",
+        "text": "¿Qué haces? ¿Qué mierda crees que estás haciendo?"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_nk04"
+    },
+    {
+      "scene_id": "cap01_nk04",
+      "chapter": 1,
+      "background": "fondos/bar_noche.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "nikki",
+          "sprite": "sprites/nikki/enojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "Tú dijiste que…"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_nk05"
+    },
+    {
+      "scene_id": "cap01_nk05",
+      "chapter": 1,
+      "background": "fondos/bar_noche.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "nikki",
+          "sprite": "sprites/nikki/muyenojada1.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Nikki",
+        "text": "Dije «bésame». No dije «aprovéchate de que no puedo ni pararme»."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_nk06"
+    },
+    {
+      "scene_id": "cap01_nk06",
+      "chapter": 1,
+      "background": "fondos/bar_noche.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "nikki",
+          "sprite": "sprites/nikki/muyenojada2.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Nikki se levanta. El banco se cae. El cantinero, por puro instinto profesional, guarda los vasos buenos."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_nk10",
+      "batalla": "nikki",
+      "batalla_derrota": "cap01_nk_bad01",
+      "batalla_perdon": "cap01_nkp01"
+    },
+    {
+      "scene_id": "cap01_nkp01",
+      "chapter": 1,
+      "background": "fondos/bar_noche.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "nikki",
+          "sprite": "sprites/nikki/enojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Nikki se sienta otra vez en el banco, que alguien levantó por ella. Se arregla el pelo. Tarda en hablar."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_nkp02"
+    },
+    {
+      "scene_id": "cap01_nkp02",
+      "chapter": 1,
+      "background": "fondos/bar_noche.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "nikki",
+          "sprite": "sprites/nikki/fria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Nikki",
+        "text": "Te perdono. Pero no gratis."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_nkp03"
+    },
+    {
+      "scene_id": "cap01_nkp03",
+      "chapter": 1,
+      "background": "fondos/bar_noche.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/verguenza1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "nikki",
+          "sprite": "sprites/nikki/fria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Nikki",
+        "text": "Otra ronda. Y nada de esa cerveza aguada de promoción: una stout imperial, de las negras que se mastican. Y después una doble IPA."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_nkp04"
+    },
+    {
+      "scene_id": "cap01_nkp04",
+      "chapter": 1,
+      "background": "fondos/bar_noche.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/atontado_cansado.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "nikki",
+          "sprite": "sprites/nikki/fria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "(Las dos más caras de la pizarra. Claro que sí.)"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_nkp05"
+    },
+    {
+      "scene_id": "cap01_nkp05",
+      "chapter": 1,
+      "background": "fondos/bar_noche.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/verguenza1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "nikki",
+          "sprite": "sprites/nikki/enojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Nikki",
+        "text": "Y me las pides tú. Con «por favor». Al cantinero también le debes una disculpa."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_nkp06"
+    },
+    {
+      "scene_id": "cap01_nkp06",
+      "chapter": 1,
+      "background": "fondos/bar_noche.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/atontado_cansado.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "nikki",
+          "sprite": "sprites/nikki/ebria1.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Jair pide las dos. Con «por favor». El cantinero las sirve sin mirarlo, que es su manera de aceptar disculpas."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_nkp07"
+    },
+    {
+      "scene_id": "cap01_nkp07",
+      "chapter": 1,
+      "background": "fondos/bar_noche.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/atontado_cansado.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "nikki",
+          "sprite": "sprites/nikki/ebria2.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Nikki",
+        "text": "Esto no pasó. ¿Oíste? Mañana no pasó."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_104"
+    },
+    {
+      "scene_id": "cap01_nk10",
+      "chapter": 1,
+      "background": "fondos/bar_noche.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "centro"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "El bar queda en silencio. El cantinero no dice nada: hace una seña con la cabeza. Dos tipos enormes que Jair no había visto en toda la noche aparecen de la nada."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_nk11",
+      "secreto": true
+    },
+    {
+      "scene_id": "cap01_nk11",
+      "chapter": 1,
+      "background": "fondos/bar_noche.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "centro"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cantinero",
+        "text": "Afuera. A una mujer no se le pega. Y no vuelvas."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_nk12",
+      "secreto": true
+    },
+    {
+      "scene_id": "cap01_nk12",
+      "chapter": 1,
+      "background": "fondos/calle_noche.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "centro"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Lo sacan por los brazos y lo dejan en la vereda. La puerta se cierra. Adentro, alguien sube la música."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_nk13",
+      "secreto": true
+    },
+    {
+      "scene_id": "cap01_nk13",
+      "chapter": 1,
+      "background": "fondos/calle_noche.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "centro"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "(Ella empezó. …No. Yo empecé.)"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_nk14",
+      "secreto": true
+    },
+    {
+      "scene_id": "cap01_nk14",
+      "chapter": 1,
+      "background": "fondos/calle_noche.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado2.webp",
+          "pos": "centro"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Vuelve a casa caminando. No saca el celular. Esta noche no hay mensaje destacado que pueda leer sin que le duela."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_116",
+      "secreto": true
+    },
+    {
+      "scene_id": "cap01_nk_bad01",
+      "chapter": 1,
+      "background": "fondos/bar_noche.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "nikki",
+          "sprite": "sprites/nikki/wtf.webp",
+          "pos": "centro"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "La última cachetada suena distinta. Jair cae entre los vidrios. Y no se levanta."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_nk_bad02"
+    },
+    {
+      "scene_id": "cap01_nk_bad02",
+      "chapter": 1,
+      "background": "fondos/cg_nikki_cachetadas.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": "Nikki",
+        "text": "¿Jair? …Jair, levántate. No es gracioso. Levántate."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_nk_bad03"
+    },
+    {
+      "scene_id": "cap01_nk_bad03",
+      "chapter": 1,
+      "background": "fondos/cg_nikki_cachetadas.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": "Nikki",
+        "text": "Lo maté. Lo maté a cachetadas. ¿Quién se muere de cachetadas, Jair? ¿Quién?"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_nk_bad04"
+    },
+    {
+      "scene_id": "cap01_nk_bad04",
+      "chapter": 1,
+      "background": "fondos/cg_nikki_cachetadas.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": "Nikki",
+        "text": "¡Eres un idiota! ¡Un idiota! Te dije que nunca te fueras de mi vida… ¡y te mueres! ¡Así te vas!"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_nk_bad05"
+    },
+    {
+      "scene_id": "cap01_nk_bad05",
+      "chapter": 1,
+      "background": "fondos/cg_nikki_cachetadas.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": null,
+        "text": "Se queda en el piso, abrazada a él, hasta que llega la policía. Nadie le cree que solo eran cachetadas."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_nk_bad06"
+    },
+    {
+      "scene_id": "cap01_nk_bad06",
+      "chapter": 1,
+      "background": "PANTALLA:negro",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": null,
+        "text": "Cachetadas infinitas."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": null,
+      "ending": "bad_cap01_nikki"
     },
     {
       "scene_id": "cap01_104",
@@ -7870,6 +8471,16 @@
             {
               "var": "noche",
               "op": "==",
+              "value": "anormal"
+            }
+          ],
+          "to": "cap01_bad_anormal_001"
+        },
+        {
+          "conditions": [
+            {
+              "var": "noche",
+              "op": "==",
               "value": "sin_bar"
             }
           ],
@@ -8210,6 +8821,97 @@
       "ui_effect": null,
       "next": null,
       "ending": "final_cap01_sin_bar"
+    },
+    {
+      "scene_id": "cap01_bad_anormal_001",
+      "chapter": 1,
+      "background": "PANTALLA:pc_correo",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": null,
+        "text": "No lo abre. Ni mira el remitente. Lo selecciona y lo borra, como quien se saca una astilla. Esta noche no quiere nada nuevo."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_bad_anormal_002",
+      "secreto": true
+    },
+    {
+      "scene_id": "cap01_bad_anormal_002",
+      "chapter": 1,
+      "background": "fondos/departamento_noche.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": null,
+        "text": "Se acuesta vestido. No duerme. Mira el techo hasta que el techo se aclara."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_bad_anormal_003",
+      "secreto": true
+    },
+    {
+      "scene_id": "cap01_bad_anormal_003",
+      "chapter": 1,
+      "background": "fondos/departamento_noche.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": null,
+        "text": "El sábado no pasa nada. El domingo tampoco. Nikki no escribe. Él tampoco."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_bad_anormal_004",
+      "secreto": true
+    },
+    {
+      "scene_id": "cap01_bad_anormal_004",
+      "chapter": 1,
+      "background": "fondos/departamento_noche.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": null,
+        "text": "Jair nunca escribe un mundo. Nadie despierta en él. Nadie lo carga, nadie lo espera en un puente. La historia que estabas por jugar nunca ocurrió."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_bad_anormal_005",
+      "secreto": true
+    },
+    {
+      "scene_id": "cap01_bad_anormal_005",
+      "chapter": 1,
+      "background": "PANTALLA:negro",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": null,
+        "text": "Una noche normal."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": null,
+      "secreto": true,
+      "ending": "final_cap01_anormal"
     },
     {
       "scene_id": "cap01_bad_rechazo_001",
@@ -21346,7 +22048,517 @@
       "conditions": [],
       "audio": null,
       "ui_effect": null,
+      "next": "cap01_n01"
+    },
+    {
+      "scene_id": "cap01_n01",
+      "chapter": 1,
+      "background": "fondos/pasillo_castillo.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/base.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/base.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Dejan atrás la máquina rota. A los pocos pasos, Cami le golpea el hombro a Jair."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_n02"
+    },
+    {
+      "scene_id": "cap01_n02",
+      "chapter": 1,
+      "background": "fondos/pasillo_castillo.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/base.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "Bájame. Ya puedo caminar."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_n03"
+    },
+    {
+      "scene_id": "cap01_n03",
+      "chapter": 1,
+      "background": "fondos/pasillo_castillo.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "¿Con ese tobillo? Te cargo. No me cuesta nada."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_n04"
+    },
+    {
+      "scene_id": "cap01_n04",
+      "chapter": 1,
+      "background": "fondos/pasillo_castillo.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/base.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/molesta.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "No voy a pelear colgada de tu espalda como una mochila. La venda aguanta."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_n04b"
+    },
+    {
+      "scene_id": "cap01_n04b",
+      "chapter": 1,
+      "background": "fondos/pasillo_castillo.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/molesta.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "(La venda la puse yo. Yo no aguantaría.)"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_n05"
+    },
+    {
+      "scene_id": "cap01_n05",
+      "chapter": 1,
+      "background": "fondos/pasillo_castillo.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "soldado_enmascarado",
+          "sprite": "sprites/soldado_enmascarado/base.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Diez pasos después, el pasillo se llena de pasos idénticos. Los soldados enmascarados doblan la esquina. Todos a la vez."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_n06",
+      "batalla": "bastion",
+      "batalla_derrota": "cap01_bad_bastion_001"
+    },
+    {
+      "scene_id": "cap01_n06",
+      "chapter": 1,
+      "background": "fondos/pasillo_castillo.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "El monstruo se derrama entre las grietas del piso y desaparece. No se fue: solo dejó de estar a la vista."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_n07"
+    },
+    {
+      "scene_id": "cap01_n07",
+      "chapter": 1,
+      "background": "fondos/pasillo_castillo.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/dolor.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Cami da un paso hacia donde estaba el monstruo. El tobillo se le dobla."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_n08"
+    },
+    {
+      "scene_id": "cap01_n08",
+      "chapter": 1,
+      "background": "fondos/pasillo_castillo.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/dolor.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "Está morado otra vez."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_n09"
+    },
+    {
+      "scene_id": "cap01_n09",
+      "chapter": 1,
+      "background": "fondos/pasillo_castillo.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/base.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/molesta.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "...Cárgame. Pero no lo comentes."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_n10"
+    },
+    {
+      "scene_id": "cap01_n10",
+      "chapter": 1,
+      "background": "fondos/pasillo_castillo.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/orgulloso.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/molesta.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "(No lo voy a comentar. Lo voy a recordar toda la vida.)"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_n11"
+    },
+    {
+      "scene_id": "cap01_n11",
+      "chapter": 1,
+      "background": "fondos/pasillo_castillo.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/molesta.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Jair se la vuelve a echar a la espalda, como una mochila muy enojada, y bajan al nivel dos."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
       "next": "cap01_g5h_013"
+    },
+    {
+      "scene_id": "cap01_bad_bastion_001",
+      "chapter": 1,
+      "background": "fondos/pasillo_castillo.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "soldado_enmascarado",
+          "sprite": "sprites/soldado_enmascarado/base.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/dolor.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Jair cae de rodillas. Cami cae a su lado: el tobillo dijo basta antes que ella."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_bad_bastion_002"
+    },
+    {
+      "scene_id": "cap01_bad_bastion_002",
+      "chapter": 1,
+      "background": "fondos/pasillo_castillo.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "soldado_enmascarado",
+          "sprite": "sprites/soldado_enmascarado/base.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/dolor.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Soldado enmascarado",
+        "text": "Entidad no registrada. Origen desconocido. Procedimiento: archivar."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_bad_bastion_003"
+    },
+    {
+      "scene_id": "cap01_bad_bastion_003",
+      "chapter": 1,
+      "background": "fondos/pasillo_castillo.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "soldado_enmascarado",
+          "sprite": "sprites/soldado_enmascarado/base.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/dolor.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "¡Suéltenlo! ¡Es un civil! ¡Ni siquiera sabe pegar!"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_bad_bastion_004"
+    },
+    {
+      "scene_id": "cap01_bad_bastion_004",
+      "chapter": 1,
+      "background": "fondos/pasillo_castillo.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "soldado_enmascarado",
+          "sprite": "sprites/soldado_enmascarado/base.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/dolor.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "(Por lo menos alguien defendió mi currículum.)"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_bad_bastion_005"
+    },
+    {
+      "scene_id": "cap01_bad_bastion_005",
+      "chapter": 1,
+      "background": "PANTALLA:negro",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "Usuario: incapacitado. Acompañante: incapacitada. Partida: no guardada."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_bad_bastion_006"
+    },
+    {
+      "scene_id": "cap01_bad_bastion_006",
+      "chapter": 1,
+      "background": "PANTALLA:negro",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": null,
+        "text": "Partida no guardada."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": null,
+      "ending": "bad_cap01_bastion"
     },
     {
       "scene_id": "cap01_g5h_013",

@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
+import { ArticuloVista, Boringplace } from './Boringplace';
 import { createPortal } from 'react-dom';
 import { useStore } from '../engine/store';
 import { assetUrl, isPlaceholder } from '../engine/assets';
@@ -30,7 +31,9 @@ type View =
   | { kind: 'perfil'; id: string }
   | { kind: 'post'; id: string; back: View }
   | { kind: 'story'; id: string; back: View }
-  | { kind: 'chat'; id: string };
+  | { kind: 'chat'; id: string }
+  | { kind: 'tienda' }
+  | { kind: 'articulo'; id: string };
 
 type B = ReturnType<typeof useBoringram>;
 
@@ -778,7 +781,7 @@ function ShareSheet({ b, id, onClose }: { b: B; id: string; onClose: () => void 
     copiar(`${text} ${url}`);
     if (isTouch() && typeof navigator.share === 'function') {
       setNote(tx.instagram_nota_celular);
-      navigator.share({ title: 'PROYECT GENESIS', text, url }).catch(() => {});
+      navigator.share({ title: 'PROJECT GENESIS', text, url }).catch(() => {});
       return;
     }
     window.open('https://www.instagram.com/direct/inbox/', '_blank', 'noopener,noreferrer');
@@ -791,7 +794,7 @@ function ShareSheet({ b, id, onClose }: { b: B; id: string; onClose: () => void 
   };
   const native = async () => {
     playSelect();
-    await navigator.share?.({ title: 'PROYECT GENESIS', text, url }).catch(() => {});
+    await navigator.share?.({ title: 'PROJECT GENESIS', text, url }).catch(() => {});
   };
   return (
     <div className={s.sheetBackdrop} onClick={onClose}>
@@ -801,7 +804,7 @@ function ShareSheet({ b, id, onClose }: { b: B; id: string; onClose: () => void 
         <a className={s.preview} href={url} target="_blank" rel="noreferrer">
           <img src={card} alt="" draggable={false} />
           <span>
-            <b>{user} en Boringram · PROYECT GENESIS</b>
+            <b>{user} en Boringram · PROJECT GENESIS</b>
             <small>{new URL(b.data.sitio).host}</small>
           </span>
         </a>
@@ -1066,7 +1069,9 @@ function App({ b, tourRequest, onClose }: { b: B; tourRequest: number; onClose: 
   const tab =
     view.kind === 'mensajes' || view.kind === 'chat'
       ? 'mensajes'
-      : view.kind === 'perfil' && view.id === b.data.yo
+      : view.kind === 'tienda' || view.kind === 'articulo'
+        ? 'tienda'
+        : view.kind === 'perfil' && view.id === b.data.yo
         ? 'perfil'
         : 'inicio';
   return (
@@ -1126,6 +1131,8 @@ function App({ b, tourRequest, onClose }: { b: B; tourRequest: number; onClose: 
             {view.kind === 'chat' && (
               <ChatView b={b} id={view.id} onBack={() => back({ kind: 'mensajes' })} onPerfil={onPerfil} />
             )}
+            {view.kind === 'tienda' && <Boringplace onArticulo={(id) => go({ kind: 'articulo', id })} />}
+            {view.kind === 'articulo' && <ArticuloVista id={view.id} onBack={() => back({ kind: 'tienda' })} onToast={showToast} />}
           </div>
           {sharing && <ShareSheet b={b} id={sharing} onClose={() => setSharing(null)} />}
           {view.kind === 'story' && <StoryView b={b} id={view.id} onClose={() => back(view.back)} />}
@@ -1152,6 +1159,16 @@ function App({ b, tourRequest, onClose }: { b: B; tourRequest: number; onClose: 
                   <path d="M21 3 3 10.5l7 2.5 2.5 7z" />
                 </svg>
                 {b.newChats.size > 0 && <NewDot className={s.navDot} />}
+              </button>
+              <button
+                className={tab === 'tienda' ? s.navOn : ''}
+                onClick={() => go({ kind: 'tienda' })}
+                aria-label={tx.boringplace}
+                data-tour="nav-tienda"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden>
+                  <path d="M4 9 5.5 4h13L20 9M4 9h16M4 9v1.5a2.7 2.7 0 0 0 5.3 0 2.7 2.7 0 0 0 5.4 0 2.7 2.7 0 0 0 5.3 0V9M5.5 13v7h13v-7M10 20v-4h4v4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+                </svg>
               </button>
               <button
                 className={tab === 'perfil' ? s.navOn : ''}
@@ -1232,7 +1249,10 @@ function AppBar({ b, onClose, onHelp }: { b: B; onClose: () => void; onHelp?: ()
 }
 
 type TourView =
-  { kind: 'feed' } | { kind: 'perfil'; id: string } | { kind: 'post'; id: string; back: { kind: 'feed' } };
+  | { kind: 'feed' }
+  | { kind: 'perfil'; id: string }
+  | { kind: 'post'; id: string; back: { kind: 'feed' } }
+  | { kind: 'tienda' };
 
 /**
  * «Cómo usar»: recorrido guiado. Cada paso lleva a su pantalla, ilumina lo que explica (un elemento con
@@ -1267,7 +1287,8 @@ function Tour({ b, onView, onClose }: { b: B; onView: (v: TourView) => void; onC
     } else if (kind === 'post') {
       if (b.publicaciones.some((p) => p.id === id)) onView({ kind: 'post', id, back: { kind: 'feed' } });
       else move(dir.current);
-    } else onView({ kind: 'feed' });
+    } else if (kind === 'tienda') onView({ kind: 'tienda' });
+    else onView({ kind: 'feed' });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i]);
 
@@ -1433,10 +1454,11 @@ function Avatar({
 }) {
   return (
     <span className={`${s.avatarRing} ${ring ? s.avatarStory : ''} ${small ? s.small : ''}`}>
-      {perfil ? (
+      {perfil && !isPlaceholder(perfil.foto) ? (
         <img className={s.avatar} src={assetUrl(perfil.foto)} alt="" draggable={false} />
       ) : (
-        <span className={`${s.avatar} ${s.initial}`}>{inicial?.[0]?.toUpperCase()}</span>
+        // Sin foto todavía (PLACEHOLDER): la inicial del usuario.
+        <span className={`${s.avatar} ${s.initial}`}>{(perfil?.usuario ?? inicial)?.[0]?.toUpperCase()}</span>
       )}
     </span>
   );

@@ -16,7 +16,8 @@
     "nebulosa": "nebulosa_magenta",
     "jai_nikk_beso": "cg_beso_nikki",
     "jair_nikki_beso_cerca": "cg_beso_nikki_cerca",
-    "cg_jorge_carga_cami": "cg_jair_carga_cami_bosque"
+    "cg_jorge_carga_cami": "cg_jair_carga_cami_bosque",
+    "nalgada": "cg_rikka_nalgada"
   },
   "omitir": [
     "hangar_destruido",

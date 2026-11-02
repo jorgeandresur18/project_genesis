@@ -5,12 +5,20 @@
     "cg_caida_multiverso": "Resignation by gravity",
     "cg_jair_carga_cami_bosque": "Unpaid transport service",
     "cg_beso_nikki_cerca": "A taste of tequila and bad decisions",
-    "cg_beso_nikki": "See? That wasn't so hard"
+    "cg_beso_nikki": "See? That wasn't so hard",
+    "cg_rikka_nalgada": "Applause in a library",
+    "cg_rikka_secreto": "Too Much Faith in the Steam",
+    "cg_nikki_cachetadas": "Infinite slaps"
   },
   "personajes": {
     "soldado_enmascarado": "Masked Soldier",
     "capitan_enmascarado": "Masked Captain",
-    "monstruo_sombras": "Shadow Monster"
+    "monstruo_sombras": "Shadow Monster",
+    "vendedor": "Spring Merchant",
+    "guardia_primavera": "Knight of Spring",
+    "nail": "Nail",
+    "mike": "Mike",
+    "nora": "Nora"
   },
   "info_imagenes": {
     "cg_jair_carga_cami": "Jair's first physical contact with a woman in months. She's pointing a gun at him. He's going to call it a date.",
@@ -18,7 +26,10 @@
     "cg_caida_multiverso": "Free fall between dimensions at terminal velocity. According to Jair, still less stressful than a Monday meeting with the camera on.",
     "cg_jair_carga_cami_bosque": "In his arms again. Nobody covers the mileage. Just like his job, but with a better view and the same wrecked back.",
     "cg_beso_nikki_cerca": "Eight years of «we're just friends» summed up in one second. Tomorrow nobody will talk about it. That was always the plan.",
-    "cg_beso_nikki": "The hard part comes later: waking up, opening the chat and pretending nothing happened. They both have years of practice."
+    "cg_beso_nikki": "The hard part comes later: waking up, opening the chat and pretending nothing happened. They both have years of practice.",
+    "cg_rikka_nalgada": "Five hundred years as a priestess, a borrowed suit and one second of badly managed trust. Rikka still hasn't decided if it was an insult or a declaration of war. Cami already decided it was funny.",
+    "cg_rikka_secreto": "Secret image: only for those who reached 100% and then kept poking the badges. Rikka wants to know who did it. We recommend not telling her.",
+    "cg_nikki_cachetadas": "Eight years of friendship, one hand where it should not have been and a barrage of slaps that did not stop in time. Nikki still does not understand how anyone dies from that. Neither does Jair, but he no longer gets a say."
   },
   "sprites": {
     "jair/base": {
@@ -224,6 +235,324 @@
     "monstruo_sombras/armored": {
       "nombre": "Patch applied",
       "info": "Same shadow, now with rocks. It still freezes, because nobody wrote it any rules for winter."
+    },
+    "vendedor/base": {
+      "nombre": "Spring marketing",
+      "info": "He gives sweets to the guardian's friends. In any other kingdom that's called a bribe; here, hospitality."
+    },
+    "mike/base": {
+      "nombre": "Knight of the wooden sword",
+      "info": "His sword is longer than he is. So is his confidence."
+    },
+    "mike/entusiasmado": {
+      "nombre": "Reporter without a badge",
+      "info": "He thinks Jair fell from the sky. Technically he's right, and that's the worrying part."
+    },
+    "mike/molesto": {
+      "nombre": "Portable lie detector",
+      "info": "He didn't believe Jair was a god. Not even kids buy his pitch."
+    },
+    "mike/asustado": {
+      "nombre": "When the street goes quiet",
+      "info": "First the birds go quiet, then the merchants, then the kids. Mike knows the order."
+    },
+    "nora/base": {
+      "nombre": "Collateral damage florist",
+      "info": "She brought flowers. Well, they were flowers. Mike fell on them."
+    },
+    "nora/sorprendida": {
+      "nombre": "Awkward question incoming",
+      "info": "\"Is he your boyfriend?\" So small and already a master at ruining a guardian's afternoon."
+    },
+    "nora/sonrojada": {
+      "nombre": "Gossip confirmed",
+      "info": "She saw Rikka stutter. She needs no further evidence."
+    },
+    "nora/asustada": {
+      "nombre": "Silence in the citadel",
+      "info": "She doesn't understand what's happening, but she understands the grown-ups are scared. That's enough."
+    },
+    "rikka/tierna": {
+      "nombre": "Guardian off duty",
+      "info": "For a second she stops being the bridge guardian and remembers how to be sweet. It didn't last. It never does."
+    },
+    "rikka/sonrojada": {
+      "nombre": "Priestess short-circuiting",
+      "info": "They asked her if Jair was her boyfriend. Five hundred years of discipline, defeated by a little girl with flowers."
+    },
+    "rikka/enojada": {
+      "nombre": "Guardian with a crossed bridge",
+      "info": "Take a good look: it's the last face many saw when they tried to cross without permission."
+    },
+    "rikka/triste": {
+      "nombre": "Unfinished file",
+      "info": "Someone wrote her years ago and left her half done. She's still waiting for the ending."
+    },
+    "guardia_primavera/base": {
+      "nombre": "Knight of Spring",
+      "info": "Green armor, emblem on the chest and zero patience for beings from other dimensions. A bit taller than Jair; much, much better armed."
+    },
+    "rikka/espada2": {
+      "nombre": "Blade with manners",
+      "info": "Rikka asks for permission before cutting you. It's a Spring courtesy."
+    },
+    "cami/toalla_base": {
+      "nombre": "Hot springs with an escort",
+      "info": "Cami relaxes the way she does everything: with a weapon less than a meter away."
+    },
+    "cami/toalla_molesta": {
+      "nombre": "No looking allowed",
+      "info": "Jair wasn't looking. Cami doesn't believe him. Cami is right."
+    },
+    "cami/toalla_orgullosa": {
+      "nombre": "Steamed confidence",
+      "info": "She knows exactly the effect she has. She uses it to win arguments."
+    },
+    "rikka/toalla_base": {
+      "nombre": "Priestess, soaking",
+      "info": "Her first time sharing the hot springs with someone from another dimension. It won't be the last thing she regrets."
+    },
+    "rikka/toalla_demasiado_avergonzada": {
+      "nombre": "System reboot",
+      "info": "Her face went from pink to red, and from red to a color Spring hasn't named yet."
+    },
+    "rikka/toalla_llorando": {
+      "nombre": "Aggravated theft",
+      "info": "Her sacred garments were stolen. Enchanted: they resist cold, heat and, apparently, nobody with quick hands."
+    },
+    "rikka/toalla_llorando_mucho": {
+      "nombre": "Backed-up tears",
+      "info": "She cried over the garments. And over everything else. Nobody cries like that over clothes."
+    },
+    "rikka/traje_base": {
+      "nombre": "Borrowed suit, dignity size",
+      "info": "Cami's red suit. It fits her perfectly. That's the problem."
+    },
+    "rikka/traje_avergonzda": {
+      "nombre": "Skin-tight embarrassment",
+      "info": "A Spring priestess in a skin-tight suit. The kingdom would call it heresy. Jair wouldn't."
+    },
+    "rikka/traje_avergonzada_ropa": {
+      "nombre": "Covering what she can",
+      "info": "She tries to cover up with her hands. She's short on hands."
+    },
+    "rikka/traje_avergonzada_asustada": {
+      "nombre": "Alert: stare detected",
+      "info": "She noticed she was being looked at. She noticed too late."
+    },
+    "rikka/traje_avergonzada_asustada_espalda": {
+      "nombre": "Strategic retreat",
+      "info": "Turning around seemed like a good idea. It wasn't."
+    },
+    "rikka/traje_muy_humillada_avergonzada": {
+      "nombre": "First impure offense",
+      "info": "She says nobody had ever touched her so vulgarly. Cami doesn't apologize."
+    },
+    "nail/base": {
+      "nombre": "Thief with a cause",
+      "info": "Orange hair, humble clothes and quick hands. She steals for her siblings and her mother. A borrowed suit pays the bill."
+    },
+    "cami/armored_base": {
+      "nombre": "Level up: armored mode",
+      "info": "The AI gave her metal armor mid-fight. No tutorial, no terms and conditions."
+    },
+    "cami/armored_seria": {
+      "nombre": "Update installed",
+      "info": "Faster, stronger and just as unpleasant. The update didn't touch her personality."
+    },
+    "cami/armored_furiosa": {
+      "nombre": "Battery 100%, patience 0%",
+      "info": "Armored lasts a while and needs recharging. Her bad mood doesn't."
+    },
+    "cami/armored_bersek_medio": {
+      "nombre": "Berserk mode",
+      "info": "The blue suit asked for an update and the AI installed heavy artillery. Now the suit has more cannons than pockets and more ammo than patience. And Cami's patience was already at zero."
+    },
+    "rikka/desbloqueable_espalda": {
+      "nombre": "Hot springs: from behind",
+      "info": "Behind the rock, convinced nobody can see her. Convinced."
+    },
+    "rikka/desbloqueable_frente": {
+      "nombre": "Hot springs: the gust",
+      "info": "The wind took the steam away right on time. For the wind."
+    },
+    "rikka/desbloqueable_frente_asustada": {
+      "nombre": "Hot springs: something touched her",
+      "info": "Ten pokes. That is the patience limit of a five-hundred-year-old priestess."
+    },
+    "rikka/desbloqueable_espalda_asustada": {
+      "nombre": "Hot springs: the scream",
+      "info": "It was heard in all four kingdoms. And in your house."
+    },
+    "rikka/desbloqueable_espalda_asustada2": {
+      "nombre": "Hot springs: someone is there",
+      "info": "She looks at the bushes. She should be looking at the screen."
+    },
+    "rikka/desbloqueable_espalda_asustada_ultima_grito": {
+      "nombre": "Hot springs: the last second",
+      "info": "The exact second before the scream. You can still let go of the mouse."
+    },
+    "rikka/desbloqueable_vistiendose": {
+      "nombre": "Hot springs: the red suit",
+      "info": "No buttons, no laces, no dignity."
+    },
+    "rikka/desbloqueable_vistiendose_muy_avergonzada": {
+      "nombre": "Hot springs: way too tight",
+      "info": "Cami picked it on purpose. Rikka is sure of it."
+    }
+  },
+  "lugares": {
+    "real": {
+      "nombre": "Real world",
+      "fondos": {
+        "oficina_dia": {
+          "nombre": "Office with \"maintenance\" AC",
+          "info": "Where Jair trades hours of his life for a paycheck that arrives late. The AC has been under maintenance for three months; his dignity, longer."
+        },
+        "calle_noche": {
+          "nombre": "Nameless street",
+          "info": "The city has no name, but it has heat. Here you walk fast and think slow."
+        },
+        "dulce_frio_fachada": {
+          "nombre": "Dulce Frío",
+          "info": "The ice cream shop where Nikki works. Twenty-four flavors and a shift that never ends."
+        },
+        "bar_noche": {
+          "nombre": "The usual bar",
+          "info": "Cheap tequila, loud music and decisions you pay off in installments."
+        },
+        "calle_noche_taxi": {
+          "nombre": "The taxi corner",
+          "info": "Where nights that shouldn't end like this say goodbye. Or that shouldn't have started at all."
+        },
+        "departamento_noche": {
+          "nombre": "Shoebox with a fan",
+          "info": "One room, one bathroom and a kitchen that's also a hallway. The fan is Jair's most stable relationship."
+        },
+        "departamento_poster": {
+          "nombre": "The poster",
+          "info": "A generic-faced boy saving a world that isn't his. Jair looks at it every night. Neither of them learns."
+        }
+      }
+    },
+    "espacial": {
+      "nombre": "Space dimension",
+      "fondos": {
+        "nebulosa_magenta": {
+          "nombre": "Magenta nebula",
+          "info": "The first thing Jair sees when he opens his eyes inside the game. Pretty, huge and no signal."
+        },
+        "castillo_flotante_ruinas": {
+          "nombre": "Floating castle",
+          "info": "White stone, cold and smooth like a bank floor. Just as welcoming."
+        },
+        "pasillo_castillo": {
+          "nombre": "Castle corridor",
+          "info": "Floating blocks that don't fall, but don't inspire confidence either. Like the company Jair works for."
+        },
+        "pasillo_giratorio": {
+          "nombre": "Rotating corridor",
+          "info": "The path doesn't turn: the whole corridor does. Architecture by someone who hated visitors."
+        },
+        "puente_torres": {
+          "nombre": "Bridge between towers",
+          "info": "A chunk is missing in the middle. The jump is optional; the fall isn't."
+        },
+        "refugio_capsula": {
+          "nombre": "Capsule shelter",
+          "info": "A white metal capsule set into the tower. The closest thing to an apartment Jair can afford."
+        },
+        "hangar": {
+          "nombre": "Hangar",
+          "info": "Ships, soldiers in black and the budget that never reaches the Resistance."
+        },
+        "pozo_central": {
+          "nombre": "Central shaft",
+          "info": "A spiral staircase around a shaft of blue light. Jair counted the steps. He lost count. And the will."
+        },
+        "calabozo": {
+          "nombre": "White cell",
+          "info": "A cot, a light that never turns off and nothing else. Better ventilated than Jair's apartment."
+        },
+        "nucleo_grieta": {
+          "nombre": "Core of the Bastion",
+          "info": "A room the size of a stadium. The key activated here for the first time. There's no undo button."
+        },
+        "desierto_cristal": {
+          "nombre": "Crystal island",
+          "info": "A scrap of ground floating in nothing, between one dimension and the next. Three meters of island and zero emergency exits."
+        }
+      }
+    },
+    "estaciones": {
+      "nombre": "Seasons dimension",
+      "fondos": {
+        "bosque_ancestral": {
+          "nombre": "Ancestral forest",
+          "info": "The entrance to the seasons dimension. They landed on grass: for the first time in the game, something soft caught them."
+        },
+        "claro_cuatro_estaciones": {
+          "nombre": "Clearing of the four seasons",
+          "info": "On the border between Winter and Spring, the four kingdoms are so close that all four seasons fit in a single clearing. Jair comes from a city with a single season: \"it's hot\"."
+        },
+        "bosque_invierno": {
+          "nombre": "Winter forest",
+          "info": "A frozen stream and ice that creaks before it breaks. Like Jair."
+        },
+        "puente_rojo": {
+          "nombre": "Red bridge",
+          "info": "The bridge Rikka has guarded for so long she no longer remembers. Nobody crosses without permission. Jair crossed."
+        },
+        "sendero_primavera": {
+          "nombre": "Spring path",
+          "info": "The road to the citadel, between cherry trees in bloom. Here Rikka stares at a stream with great concentration."
+        }
+      }
+    }
+  },
+  "rpg": {
+    "batalla/jair": {
+      "personaje": "jair",
+      "nombre": "Combat pixel art",
+      "info": "Level 5, one shirt and the belief that punches thrown with eyes closed still count. Statistically, sometimes they do."
+    },
+    "batalla/cami": {
+      "personaje": "cami",
+      "nombre": "Combat pixel art",
+      "info": "Level 15 and a short-range blaster. Hits hard, rests a turn and lets nobody flee: fleeing is for cowards and she does not fight alone."
+    },
+    "batalla/rikka": {
+      "personaje": "rikka",
+      "nombre": "Combat pixel art",
+      "info": "Five hundred years of katana summed up in sixteen bits. The flower in her hair is not decorative: it is a warning."
+    },
+    "batalla/soldado": {
+      "personaje": "soldado_enmascarado",
+      "nombre": "Combat pixel art",
+      "info": "Red visor, black armor and no opinions of his own. Ask him about overtime and he freezes, processing."
+    }
+  },
+  "quejas": {
+    "rikka": {
+      "imagenes": [
+        "cg_rikka_secreto"
+      ],
+      "lineas": [
+        "Again?! Who gave you permission to touch me? I was the priestess of Spring for five hundred years, you know.",
+        "In my kingdom, whoever touched a priestess got exiled. Here they get an achievement.",
+        "Oh, of course. The gallery. The only place in the multiverse where nobody defends me.",
+        "If Jair touched me like that, I would faint. You are not Jair. You are a click.",
+        "First the hot springs, then the spank, now you. This is not a story anymore: it is a joke with me inside it.",
+        "I asked the author whether my character had an arc. The answer was yes: \"the one on her back\".",
+        "Five hundred years of noble lineage, only to end up as the one who gets poked in the extras menu.",
+        "Does this cost anything? Will they charge me? They always charge me.",
+        "Cami got a blaster. I got emblems. Guess who gets poked.",
+        "I do not even scream anymore. Screaming is what the script expects. I will not give it the pleasure.",
+        "I am warning you: the flower in my hair is not decorative. Neither is the katana.",
+        "Condemned for all eternity to someone clicking where they should not. That is how Spring ends.",
+        "Keep going and I will ask the steam to come back. The steam respects me.",
+        "I know you are going to do it again. I know. I have accepted it. Almost."
+      ]
     }
   }
 }

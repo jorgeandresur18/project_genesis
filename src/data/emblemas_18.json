@@ -1,0 +1,187 @@
+{
+  "_nota": "Emblemas +18 fijos con brillo metálico encima de los sprites desbloqueables y de las imágenes secretas (centro y ancho en % de la imagen). La censura también va pegada en la imagen: esto es solo la animación. Se generan al exportar. «fondos»: imágenes secretas (proporción ancho/alto y vapor). «secuencias»: qué pasa al tocar los emblemas en una escena secreta cuyo sprite está en «sprites»; cada paso se dispara al llegar a «toques» (sprite nuevo, lo que dice el personaje, «luego»: sprite al que pasa solo un momento después, «grito»: lo que grita al pasar a «luego»; tiembla todo, zoom, luz blanca y la historia sigue en «toques_salida» de la escena; «salir»: después de su línea, la historia sigue en «toques_salida», sin grito). Fuera de eso, el emblema solo rebota.",
+  "emblema": "marca/emblema_18.webp",
+  "sprites": {
+    "rikka/desbloqueable_vistiendose": [
+      {
+        "x": 23.04,
+        "y": 58.89,
+        "w": 6.08
+      }
+    ],
+    "rikka/desbloqueable_vistiendose_muy_avergonzada": [
+      {
+        "x": 23.04,
+        "y": 58.89,
+        "w": 6.08
+      }
+    ],
+    "rikka/desbloqueable_frente": [
+      {
+        "x": 28.66,
+        "y": 58.57,
+        "w": 7.24
+      },
+      {
+        "x": 56.0,
+        "y": 58.57,
+        "w": 7.24
+      },
+      {
+        "x": 46.4,
+        "y": 94.95,
+        "w": 21.0
+      }
+    ],
+    "rikka/desbloqueable_frente_asustada": [
+      {
+        "x": 28.66,
+        "y": 58.57,
+        "w": 7.24
+      },
+      {
+        "x": 56.0,
+        "y": 58.57,
+        "w": 7.24
+      },
+      {
+        "x": 46.4,
+        "y": 94.95,
+        "w": 21.0
+      }
+    ],
+    "rikka/desbloqueable_espalda": [
+      {
+        "x": 24.7,
+        "y": 59.07,
+        "w": 6.08
+      },
+      {
+        "x": 58.8,
+        "y": 98.1,
+        "w": 11.2
+      }
+    ],
+    "rikka/desbloqueable_espalda_asustada": [
+      {
+        "x": 24.7,
+        "y": 59.07,
+        "w": 6.08
+      },
+      {
+        "x": 58.8,
+        "y": 98.1,
+        "w": 11.2
+      }
+    ],
+    "rikka/desbloqueable_espalda_asustada2": [
+      {
+        "x": 24.7,
+        "y": 59.07,
+        "w": 6.08
+      },
+      {
+        "x": 58.8,
+        "y": 98.1,
+        "w": 11.2
+      }
+    ],
+    "rikka/desbloqueable_espalda_asustada_ultima_grito": [
+      {
+        "x": 24.7,
+        "y": 59.07,
+        "w": 6.08
+      },
+      {
+        "x": 58.8,
+        "y": 98.1,
+        "w": 11.2
+      }
+    ]
+  },
+  "fondos": {
+    "fondos/cg_rikka_secreto": {
+      "proporcion": 1.7778,
+      "vapor": "medio",
+      "emblemas": [
+        {
+          "x": 58.36,
+          "y": 46.39,
+          "w": 2.34
+        },
+        {
+          "x": 64.3,
+          "y": 46.81,
+          "w": 2.34
+        },
+        {
+          "x": 66.64,
+          "y": 70.62,
+          "w": 3.52
+        }
+      ]
+    }
+  },
+  "secuencias": [
+    {
+      "personaje": "rikka",
+      "sprites": [
+        "rikka/desbloqueable_frente"
+      ],
+      "pasos": [
+        {
+          "toques": 3,
+          "reaccion": "¿Mmm? …Habrá sido una gota."
+        },
+        {
+          "toques": 6,
+          "reaccion": "Qué raro… Siento algo."
+        },
+        {
+          "toques": 8,
+          "reaccion": "¿…Cami? Si eres tú, no es gracioso."
+        },
+        {
+          "toques": 10,
+          "sprite": "rikka/desbloqueable_frente_asustada",
+          "reaccion": "¡¿Qué… qué fue eso?!",
+          "luego": "rikka/desbloqueable_espalda"
+        },
+        {
+          "toques": 13,
+          "reaccion": "No mires. No mires. No hay nadie."
+        },
+        {
+          "toques": 15,
+          "sprite": "rikka/desbloqueable_espalda_asustada2",
+          "reaccion": "Hay alguien ahí. Sé que hay alguien ahí…"
+        },
+        {
+          "toques": 18,
+          "reaccion": "Te lo advierto. Tengo una espada. En algún lado."
+        },
+        {
+          "toques": 20,
+          "sprite": "rikka/desbloqueable_espalda_asustada_ultima_grito",
+          "reaccion": "…",
+          "luego": "rikka/desbloqueable_espalda_asustada",
+          "grito": "¡¡KYAAAAAAAAH!!"
+        }
+      ]
+    },
+    {
+      "personaje": "rikka",
+      "sprites": [
+        "rikka/desbloqueable_vistiendose",
+        "rikka/desbloqueable_vistiendose_muy_avergonzada"
+      ],
+      "pasos": [
+        {
+          "toques": 5,
+          "reaccion": "Tengo que apurarme… Me estoy sintiendo algo incómoda.",
+          "salir": true
+        }
+      ]
+    }
+  ]
+}

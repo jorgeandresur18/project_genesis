@@ -1,0 +1,422 @@
+// Combate por turnos (RPG estilo EarthBound / Final Fantasy): las cuentas, sin interfaz. Los datos de cada batalla
+// están en src/data/batallas/<id>.json; la pantalla, en src/components/Batalla.tsx. Ver docs/SPEC.md.
+import type { Vars } from './types';
+
+/** Estadísticas en el nivel 1 (`base`) y cuánto suben por nivel (`crece`). */
+export interface Stats {
+  ps: number;
+  atq: number;
+  def: number;
+  vel: number;
+}
+export interface Ataque {
+  /** No hace daño: paraliza al blanco tantos turnos (la parálisis de pesadilla de la sombra). */
+  paraliza?: number;
+  nombre: string;
+  poder: number;
+  /** "uno" (al azar, o el elegido) o "todos". */
+  objetivo?: 'uno' | 'todos';
+  texto: string;
+}
+/**
+ * Ataque especial: hace falta la barra de especial llena (ver CARGA). Son `golpes` golpes de `poder` cada uno: si el
+ * objetivo es «todos», se reparten entre los enemigos de pie (si queda uno solo, van todos para él).
+ */
+export interface Especial {
+  nombre: string;
+  poder: number;
+  golpes: number;
+  objetivo: 'uno' | 'todos';
+  /**
+   * Dónde se pone mientras dura (siempre 5 segundos, ESPECIAL_MS): junto a su objetivo (Jair, Rikka, el soldado) o
+   * en el medio de la pantalla (Cami, que dispara de lejos). Si su hoja tiene la fila «especial», la usa; si no,
+   * repite su ataque.
+   */
+  posicion: 'objetivo' | 'centro';
+  texto: string;
+  /** Color del personaje: el fondo de velocidad del aviso y las luces. */
+  color: string;
+  /** Los ojos en el primer cuadro de su hoja ([x, y, ancho, alto]) para el aviso del especial. */
+  ojos: [number, number, number, number];
+  /** «oscura»: mientras dura, la pantalla se oscurece (el vórtice de la sombra). */
+  pantalla?: 'oscura';
+  /**
+   * Levanta en el aire a quien recibe sus golpes y lo mantiene ahí hasta que termina; después cae (con su sprite de
+   * derrotado) y, si sigue vivo, se levanta (el especial de la sombra: un ataque sorpresa desde el piso).
+   */
+  levanta?: boolean;
+}
+export interface Heroe {
+  nombre: string;
+  /** Hoja de animaciones (public/<sprite>.png y .json). */
+  sprite: string;
+  nivel: number;
+  /** Si puede actuar todos los turnos (Jair sí; Cami pega fuerte y actúa un turno sí y uno no). */
+  seguido: boolean;
+  base: Stats;
+  crece: Stats;
+  ataques: Ataque[];
+  especial?: Especial;
+  /** Animación (de su hoja) cuando no puede actuar ese turno: Cami, agachada por el tobillo. */
+  descanso?: string;
+  /** Lo que se dice cuando se queda descansando (apenas actúa) y cuando ya puede volver ({quien}: su nombre). */
+  descanso_textos?: { empieza: string; termina: string };
+  /** Ataca de lejos: no se acerca, y sale una bala de su pistola que impacta en el objetivo (Cami). */
+  distancia?: boolean;
+  /** Tamaño en pantalla respecto de los demás (1: normal). */
+  escala?: number;
+  /** Lo que le dice a un enemigo con «Hablar» ({objetivo}: su nombre). */
+  hablar: string[];
+  /** El sonido de sus golpes (ataque y especial). */
+  sonido?: string;
+}
+export interface Enemigo {
+  nombre: string;
+  sprite: string;
+  base: Stats;
+  crece: Stats;
+  ataques: Ataque[];
+  especial?: Especial;
+  escala?: number;
+  jefe?: boolean;
+  /** El jefe se retira (y la pelea se gana) cuando le queda esta parte de sus PS. */
+  huye_a?: number;
+  /** Cómo contesta cuando le hablan: si se distrae (ok) o no (no). Dice `quien`. */
+  responde?: { quien: string; ok: string[]; no: string[] };
+  /**
+   * Se lo puede convencer de terminar la pelea hablándole `veces` turnos seguidos (Nikki: pedirle perdón tres
+   * veces). Cada vez el héroe dice `pide[i]` y él contesta `responde[i]`; si en el medio el héroe hace otra cosa,
+   * se vuelve a empezar (y dice `corta`, si está).
+   */
+  perdon?: { veces: number; quien: string; pide: string[]; responde: string[]; corta?: string };
+  /** Animación (de su hoja) cuando se retira (Nikki, llorando) y cuando gana la pelea. */
+  al_retirarse?: string;
+  al_ganar?: string;
+  /** Al retirarse, se va hacia atrás hasta salir de la pantalla (la sombra, hecha vórtice). */
+  sale_atras?: boolean;
+  /**
+   * Remata: si a un héroe le queda menos de `vida` (parte de sus PS), usa su especial apenas tiene `carga` en la
+   * barra (aunque no esté llena), contra ese héroe (Nikki).
+   */
+  remata?: { vida: number; carga: number };
+  /**
+   * Segundo especial: Clon de sombra (con `carga` en la barra; si no, llena; y con `probabilidad` cada vez que
+   * puede). Le cuesta `costo` de su vida máxima y crea un clon (`nombre_clon`) con
+   * `fuerza` de su ataque, defensa y velocidad, y esa vida. El clon no usa especiales, no escucha y se evapora a
+   * los `turnos` turnos. Al aparecer, un héroe dice una de las `reacciones` (al azar).
+   */
+  clon?: { nombre: string; nombre_clon: string; costo: number; fuerza: number; turnos: number; color: string; texto: string; reacciones?: Linea[]; carga?: number; probabilidad?: number };
+  /** El sonido de sus golpes (ataque y especial). */
+  sonido?: string;
+}
+/** Un objeto de la mochila: sube el ataque o la defensa hasta el final de la pelea, cura o llena el especial. */
+export interface Objeto {
+  nombre: string;
+  atq?: number;
+  def?: number;
+  ps?: number;
+  carga?: number;
+  /** Sube tantos niveles (el caramelo rancio). */
+  niveles?: number;
+  /** Revive a un caído con esta parte de su vida (0 a 1). Solo se puede usar en un caído. */
+  revive?: number;
+  /** Al usarlo ({quien}: en quién; {n}: cuánto). */
+  texto: string;
+}
+export interface Linea {
+  quien: string;
+  texto: string;
+}
+export interface DatosBatalla {
+  titulo: string;
+  /** Fondo: public/<fondo>.webp (pixel art del autor) o un PLACEHOLDER. */
+  fondo: string;
+  /** Proporción (ancho / alto) del fondo y sus luces de alarma (centro en % de la imagen), que laten. */
+  fondo_proporcion?: number;
+  fondo_luces?: [number, number][];
+  heroes: string[];
+  personajes: Record<string, Heroe>;
+  enemigos: Record<string, Enemigo>;
+  /** Horda: empiezan `al_inicio` y, cada vez que cae uno, llega el siguiente hasta completar `niveles`. */
+  horda: { enemigo: string; al_inicio: number; niveles: number[] };
+  /** Después de la horda, el jefe (con su nivel). */
+  jefe: { enemigo: string; nivel: number };
+  objetos: Record<string, Objeto>;
+  /** Lo que suelta un enemigo al caer, con esta probabilidad (un objeto al azar de la lista; repetir pesa más). */
+  botin: { probabilidad: number; objetos: string[] };
+  /** Probabilidades de que funcionen «Esquivar» y «Hablar» (distraer al enemigo un turno). */
+  esquivar: number;
+  hablar: number;
+  /** Si se puede huir (en la primera pelea, no: Cami no deja). */
+  huir: boolean;
+  /** Retrato de cada uno que habla (por su nombre en los diálogos): public/<retrato>.png. */
+  retratos: Record<string, string>;
+  /**
+   * Líneas en momentos fijos: inicio, refuerzos, jefe, jefe_huye, victoria, derrota, huir_no (no se puede huir),
+   * huir (se huye), descanso (nadie puede actuar este turno), cae_jair, hablar_ok, hablar_no, esquiva_ok, botin.
+   */
+  dialogos: Record<string, Linea[]>;
+  /**
+   * Cuánto más atrás (más arriba en la pantalla) se paran los enemigos que los héroes: 1 en un pasillo con
+   * profundidad (el Bastión), 0 en el mismo piso que los héroes (el bar).
+   */
+  enemigos_atras?: number;
+  /** Música de la pelea (ruta en public/) y la que suena cuando sale el jefe (si no, sigue la misma). */
+  musica?: string;
+  musica_jefe?: string;
+  /** Objetos con que empieza la mochila si tiene menos (p. ej. un revivir). */
+  mochila_inicial?: Record<string, number>;
+  /** «versus»: antes de empezar, la presentación del enfrentamiento (los dos sprites, velocidad, zoom). */
+  intro?: 'versus';
+  /**
+   * Al ganar haciendo retirar al jefe: objetos que se suman a la mochila (se dice la línea «premio» con
+   * {objeto}) y variables que se guardan en la partida (Nikki: la noche anormal).
+   */
+  premio?: { objetos: Record<string, number>; vars?: Record<string, string | number | boolean> };
+  /** Lo que dice el menú de un comando en esta pelea, en lugar del de siempre (p. ej. «hablar» con Nikki). */
+  descripciones?: Record<string, string>;
+  /** Probabilidad de que un ataque normal falle (el rival lo esquiva); si no está, FALLO. */
+  fallo?: number;
+  /**
+   * El juego ayuda cuando los héroes van perdiendo (la vida de todos, en promedio, por debajo de `umbral`): al
+   * final de cada turno, con probabilidad `cae`, aparece un objeto (`objeto`; se dice la línea «ayuda») y sus
+   * golpes tienen `critico` más de probabilidad de ser críticos.
+   */
+  ayuda?: { umbral: number; cae: number; objeto: string; critico: number };
+}
+
+/** Probabilidad de que un ataque normal falle, de los dos lados (el especial no falla). */
+export const FALLO = 0.06;
+export const falla = (d: { fallo?: number }, azar: () => number = Math.random) => azar() < (d.fallo ?? FALLO);
+/** Si los héroes van perdiendo (para la ayuda del juego). */
+export const vanPerdiendo = (heroes: Luchador[], umbral: number) =>
+  heroes.reduce((s, h) => s + Math.max(0, h.ps) / h.psMax, 0) / heroes.length < umbral;
+
+/** Un luchador en la pelea (héroe o enemigo), con lo que tiene ahora. */
+export interface Luchador {
+  id: string;
+  clave: string;
+  lado: 'heroe' | 'enemigo';
+  nombre: string;
+  nivel: number;
+  xp: number;
+  ps: number;
+  psMax: number;
+  atq: number;
+  def: number;
+  vel: number;
+  /** Ataque y defensa extra de los potenciadores (duran hasta el final de la pelea). */
+  extra: number;
+  extraDef: number;
+  /** Intentó esquivar este turno: los golpes pueden fallarle. */
+  esquivando: boolean;
+  /** Lo distrajeron con «Hablar»: pierde su próximo ataque. */
+  distraido: boolean;
+  /** Barra del especial (0 a 100): con 100 puede usarlo. */
+  carga: number;
+  /** Turnos que le quedan paralizado (no puede actuar). */
+  paralizado: number;
+  /** Si es un clon de sombra: los turnos que le quedan antes de evaporarse. */
+  clon?: number;
+}
+
+/**
+ * Cuánto se llena la barra del especial: al atacar, al recibir un golpe, al hablar, al esquivar y, los enemigos,
+ * en cada turno suyo. Con estos números un héroe lo tiene más o menos cada cuatro o cinco turnos.
+ */
+export const CARGA = { atacar: 22, recibir: 12, hablar: 12, esquivar: 10, turnoEnemigo: 18 } as const;
+export const CARGA_LLENA = 100;
+/** Lo que dura un especial (de todos). */
+export const ESPECIAL_MS = 5000;
+export const cargar = (l: Luchador, n: number) => {
+  l.carga = Math.min(CARGA_LLENA, l.carga + n);
+};
+export const especialListo = (l: Luchador) => l.carga >= CARGA_LLENA;
+
+/** A quién va cada golpe del especial: uno solo, o repartidos en ronda entre todos los objetivos. */
+export function golpesEspecial<T>(e: Especial, objetivos: T[]): T[] {
+  if (!objetivos.length) return [];
+  return Array.from({ length: e.golpes }, (_, i) => (e.objetivo === 'todos' ? objetivos[i % objetivos.length] : objetivos[0]));
+}
+
+/** Estadísticas en un nivel. */
+export function statsEn(base: Stats, crece: Stats, nivel: number): Stats {
+  const n = Math.max(1, nivel) - 1;
+  return {
+    ps: Math.round(base.ps + crece.ps * n),
+    atq: Math.round(base.atq + crece.atq * n),
+    def: Math.round(base.def + crece.def * n),
+    vel: Math.round(base.vel + crece.vel * n),
+  };
+}
+
+/** Experiencia para pasar del nivel `nivel` al siguiente. */
+export const xpParaSubir = (nivel: number) => nivel * 10;
+
+/** Experiencia que da un enemigo de ese nivel al caer (la reciben todos los héroes de pie). */
+export const xpDe = (nivel: number) => nivel * 3;
+
+export function crearLuchador(
+  id: string,
+  clave: string,
+  lado: Luchador['lado'],
+  d: { nombre: string; base: Stats; crece: Stats },
+  nivel: number,
+  xp = 0,
+): Luchador {
+  const s = statsEn(d.base, d.crece, nivel);
+  return { id, clave, lado, nombre: d.nombre, nivel, xp, ps: s.ps, psMax: s.ps, atq: s.atq, def: s.def, vel: s.vel, extra: 0, extraDef: 0, esquivando: false, distraido: false, carga: 0, paralizado: 0 };
+}
+
+/**
+ * Suma experiencia y sube los niveles que correspondan: las estadísticas pasan a las del nivel nuevo y los PS
+ * suben lo mismo que el máximo. Devuelve los niveles nuevos (vacío si no subió).
+ */
+export function ganarXp(l: Luchador, d: { base: Stats; crece: Stats }, xp: number): number[] {
+  const subidas: number[] = [];
+  l.xp += xp;
+  while (l.xp >= xpParaSubir(l.nivel)) {
+    l.xp -= xpParaSubir(l.nivel);
+    l.nivel++;
+    const s = statsEn(d.base, d.crece, l.nivel);
+    if (l.ps > 0) l.ps += s.ps - l.psMax;
+    l.psMax = s.ps;
+    l.atq = s.atq;
+    l.def = s.def;
+    l.vel = s.vel;
+    subidas.push(l.nivel);
+  }
+  return subidas;
+}
+
+/** Daño: el ataque contra la defensa (con los potenciadores), con un poco de azar y a veces un crítico. */
+export function dano(atacante: Luchador, defensor: Luchador, poder: number, azar: () => number = Math.random, criticoExtra = 0) {
+  const base = ((atacante.atq + atacante.extra) * poder) / 10 - (defensor.def + defensor.extraDef) / 2;
+  const critico = azar() < 0.08 + criticoExtra;
+  const n = Math.max(1, Math.round(base * (0.9 + azar() * 0.2) * (critico ? 1.5 : 1)));
+  return { n, critico };
+}
+
+/**
+ * Quiénes actúan este turno: los héroes de pie, menos los que actuaron el turno anterior y no pueden repetir
+ * (`seguido: false`). Así Cami actúa un turno sí y uno no; Jair, siempre.
+ */
+export function disponibles(heroes: Luchador[], datos: Record<string, Heroe>, actuaron: string[]): Luchador[] {
+  return heroes.filter((h) => h.ps > 0 && !h.paralizado && (datos[h.clave].seguido || !actuaron.includes(h.id)));
+}
+
+/** Sube `n` niveles de golpe (el caramelo rancio): las estadísticas pasan a las del nivel nuevo. */
+export function subirNiveles(l: Luchador, d: { base: Stats; crece: Stats }, n: number) {
+  l.nivel += n;
+  l.xp = 0;
+  const s = statsEn(d.base, d.crece, l.nivel);
+  if (l.ps > 0) l.ps += s.ps - l.psMax;
+  l.psMax = s.ps;
+  l.atq = s.atq;
+  l.def = s.def;
+  l.vel = s.vel;
+}
+
+/** Usa un objeto en un héroe: devuelve cuánto hizo (lo que subió o curó). `d`: sus datos (para subir niveles). */
+export function usarObjeto(o: Objeto, h: Luchador, d?: { base: Stats; crece: Stats }): number {
+  if (o.niveles && d) {
+    subirNiveles(h, d, o.niveles);
+    return o.niveles;
+  }
+  if (o.revive) {
+    if (h.ps > 0) return 0;
+    h.ps = Math.max(1, Math.round(h.psMax * o.revive));
+    h.paralizado = 0;
+    return h.ps;
+  }
+  if (o.atq) h.extra += o.atq;
+  if (o.def) h.extraDef += o.def;
+  if (o.carga) {
+    const antes = h.carga;
+    cargar(h, o.carga);
+    return h.carga - antes;
+  }
+  if (o.ps) {
+    const antes = h.ps;
+    h.ps = Math.min(h.psMax, h.ps + o.ps);
+    return h.ps - antes;
+  }
+  return o.atq ?? o.def ?? 0;
+}
+
+/** Crea el clon de sombra de un enemigo: más débil (`fuerza`), con la vida que le costó, sin especiales. */
+export function crearClon(o: Luchador, c: NonNullable<Enemigo['clon']>, id: string): Luchador {
+  const ps = Math.max(1, Math.round(o.psMax * c.costo));
+  return {
+    ...o,
+    id,
+    nombre: c.nombre_clon,
+    ps,
+    psMax: ps,
+    atq: Math.max(1, Math.round(o.atq * c.fuerza)),
+    def: Math.round(o.def * c.fuerza),
+    vel: Math.round(o.vel * c.fuerza),
+    extra: 0,
+    extraDef: 0,
+    carga: 0,
+    distraido: false,
+    esquivando: false,
+    paralizado: 0,
+    // Uno más: el turno en que aparece no cuenta.
+    clon: c.turnos + 1,
+  };
+}
+
+/**
+ * Qué especial usa un enemigo este turno (o ninguno). Los clones no usan especiales. Si un héroe está por caer y
+ * tiene `remata`, su especial contra ese héroe. Con la barra llena: el clon de sombra (si no hay otro y gastar esa
+ * vida no lo deja al borde de retirarse) la mitad de las veces; si no, su especial.
+ */
+export function eligeEspecial(e: Luchador, en: Enemigo, heroes: Luchador[], enemigos: Luchador[], azar: () => number = Math.random): { tipo: 'especial' | 'clon'; blanco?: Luchador } | null {
+  if (e.clon !== undefined) return null;
+  const bajo = en.remata ? heroes.find((h) => h.ps > 0 && h.ps <= h.psMax * en.remata!.vida) : undefined;
+  if (en.especial && bajo && e.carga >= en.remata!.carga) return { tipo: 'especial', blanco: bajo };
+  const puedeClonar =
+    !!en.clon &&
+    e.carga >= (en.clon.carga ?? CARGA_LLENA) &&
+    !enemigos.some((x) => x.clon !== undefined && x.ps > 0) &&
+    e.ps - e.psMax * en.clon.costo > e.psMax * ((en.huye_a ?? 0) + 0.1);
+  if (puedeClonar && (!en.especial || azar() < (en.clon!.probabilidad ?? 0.5))) return { tipo: 'clon' };
+  if (!especialListo(e)) return null;
+  return en.especial ? { tipo: 'especial' } : null;
+}
+
+/** El jefe se retira cuando le queda esta parte de sus PS (o menos). */
+export const seRetira = (l: Luchador, e: Enemigo) => !!e.huye_a && l.ps > 0 && l.ps <= l.psMax * e.huye_a;
+
+export const vivo = (l: Luchador) => l.ps > 0;
+
+/** Lo que se guarda en la partida: nivel y experiencia de cada héroe y la mochila. */
+export interface Progreso {
+  heroes: Record<string, { nivel: number; xp: number }>;
+  mochila: Record<string, number>;
+}
+
+/**
+ * El progreso guardado en las variables: `nivel_<héroe>`, `xp_<héroe>` (nivel 0: todavía no peleó; se usa el del
+ * .json) y `mochila_<objeto>` (cuántos hay).
+ */
+export function progresoDeVars(vars: Vars): Progreso {
+  const p: Progreso = { heroes: {}, mochila: {} };
+  for (const [k, v] of Object.entries(vars)) {
+    if (typeof v !== 'number') continue;
+    const nivel = k.match(/^nivel_(.+)$/);
+    if (nivel && v > 0) p.heroes[nivel[1]] = { nivel: v, xp: typeof vars[`xp_${nivel[1]}`] === 'number' ? (vars[`xp_${nivel[1]}`] as number) : 0 };
+    const obj = k.match(/^mochila_(.+)$/);
+    if (obj && v > 0) p.mochila[obj[1]] = v;
+  }
+  return p;
+}
+
+export function varsDeProgreso(p: Progreso, objetos: string[]): Vars {
+  return {
+    ...Object.fromEntries(Object.entries(p.heroes).flatMap(([k, { nivel, xp }]) => [[`nivel_${k}`, nivel], [`xp_${k}`, xp]])),
+    // También los que se gastaron (quedan en 0).
+    ...Object.fromEntries(objetos.map((k) => [`mochila_${k}`, p.mochila[k] ?? 0])),
+  };
+}

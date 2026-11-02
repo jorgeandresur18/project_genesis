@@ -5,6 +5,11 @@ import { useStoryEngine } from './engine/useStoryEngine';
 import { preloadFrom } from './engine/preload';
 import { TRANSITIONS, useSceneTransition } from './engine/useSceneTransition';
 import { effectsOf } from './engine/logic';
+import { CoffeeIDE } from './components/CoffeeIDE';
+import { Nivel } from './components/Nivel';
+import { ProbadorSprites } from './components/ProbadorSprites';
+import { Batalla } from './components/Batalla';
+import { progresoDeVars } from './engine/batalla';
 import { SceneStage } from './components/SceneStage';
 import { DialogBox } from './components/DialogBox';
 import { DecisionMenu } from './components/DecisionMenu';
@@ -18,6 +23,7 @@ import { useBoringram } from './engine/boringram';
 const BoringramScreen = lazy(() => import('./components/Boringram').then((m) => ({ default: m.BoringramScreen })));
 const BootcampScreen = lazy(() => import('./components/Bootcamp').then((m) => ({ default: m.BootcampScreen })));
 import { NIVELES, PRUEBA, cursoDe, useBootcamp } from './engine/bootcamp';
+import { useCompletion } from './engine/completion';
 import { TitleBackground } from './components/TitleBackground';
 import { SceneMap } from './components/SceneMap';
 import { ChapterEnd } from './components/ChapterEnd';
@@ -114,7 +120,9 @@ export default function App() {
   // El Bootcamp tiene su propio tema (mientras no exista, sigue el del título).
   const bootcampMusic = overlay === 'bootcamp' ? (config.musica_bootcamp ?? null) : null;
   const music = useStore((s) =>
-    bootcampMusic
+    s.musicaBatalla
+      ? s.musicaBatalla
+      : bootcampMusic
       ? bootcampMusic
       : !s.game || s.game.finished?.startsWith(CHAPTER_END)
       ? (config.musica_titulo ?? SILENCE)
@@ -407,6 +415,50 @@ function BootcampAviso({ onOpen }: { onOpen: () => void }) {
   );
 }
 
+/** Primera escena secreta del Capítulo 2: mientras no se lea, el menú sigue recordando que hay algo nuevo ahí. */
+const PRIMERA_SECRETA = [...scenes.values()].find((s) => s.secreto && s.chapter === 2)?.scene_id;
+const SECRETO_MS = 8000;
+
+/**
+ * En el menú: al llegar al 100 % se abren las escenas secretas (ver `juegoCompleto` en engine/store.ts) y, hasta
+ * que el jugador las vea, un aviso le pide volver a jugar el Capítulo 2. Sale después del aviso del Bootcamp.
+ */
+function SecretoAviso() {
+  const t = useT();
+  const { percent } = useCompletion();
+  const completo = useStore((s) => s.juegoCompleto);
+  const marcar = useStore((s) => s.marcarJuegoCompleto);
+  const visto = useStore((s) => (PRIMERA_SECRETA ? !!s.readScenes[PRIMERA_SECRETA] : true));
+  const [toast, setToast] = useState<'cap02' | null>(null);
+  useEffect(() => {
+    if (percent === 100) marcar();
+  }, [percent, marcar]);
+  const pendiente = (completo || percent === 100) && !visto ? 'cap02' : null;
+  useEffect(() => {
+    if (!pendiente) return;
+    const timer = setTimeout(() => {
+      setToast(pendiente);
+      playNotify();
+    }, 6000);
+    return () => clearTimeout(timer);
+  }, [pendiente]);
+  useEffect(() => {
+    if (!toast) return;
+    const timer = setTimeout(() => setToast(null), SECRETO_MS);
+    return () => clearTimeout(timer);
+  }, [toast]);
+  if (!toast) return null;
+  return (
+    <button className="bori-toast secreto-toast" onClick={() => setToast(null)}>
+      <img src={assetUrl('marca/emblema_18.webp')} alt="" draggable={false} />
+      <span>
+        <small>{t('secreto.aviso_app')}</small>
+        <b>{t('secreto.aviso')}</b>
+      </span>
+    </button>
+  );
+}
+
 /** Botón redondo de Boringram en la esquina, con la cantidad de cosas nuevas. */
 function BoringramBall({ onOpen, label }: { onOpen: () => void; label: string }) {
   const b = useBoringram();
@@ -518,6 +570,10 @@ function TitleScreen({ open, intro, onEgg }: TitleProps) {
   const clicks = useRef(0);
   // Cada clic en el logo reinicia un glitch de colores (la key fuerza a repetir la animación).
   const [hit, setHit] = useState(0);
+  // Demo de batalla para probar: ?batalla=demo en la dirección (al terminar, vuelve al título).
+  const [demoBatalla, setDemoBatalla] = useState(() => new URLSearchParams(location.search).get('batalla'));
+  // Probador de sprites (herramienta del autor): ?sprites en la dirección.
+  const [probador, setProbador] = useState(() => new URLSearchParams(location.search).has('sprites'));
   const newGame = useStore((s) => s.newGame);
   const error = useStore((s) => s.error);
   const still = useStore((s) => s.settings.reduceEffects);
@@ -558,7 +614,7 @@ function TitleScreen({ open, intro, onEgg }: TitleProps) {
             }
           }}
         >
-          <img key={hit} src={`${import.meta.env.BASE_URL}marca/logo.webp`} alt="PROYECT GENESIS" draggable={false} />
+          <img key={hit} src={`${import.meta.env.BASE_URL}marca/logo.webp`} alt="PROJECT GENESIS" draggable={false} />
           {!still && (
             <>
               <img
@@ -649,12 +705,22 @@ function TitleScreen({ open, intro, onEgg }: TitleProps) {
         </div>
       </nav>
       <BootcampAviso onOpen={() => open('bootcamp')} />
+      <SecretoAviso />
       {config.version && <span className="title-version">{t('titulo.version', { v: config.version })}</span>}
+      {probador && <ProbadorSprites onCerrar={() => setProbador(false)} />}
+      {demoBatalla && <Batalla key={demoBatalla} id={demoBatalla} onGanar={() => setDemoBatalla(null)} onPerder={() => setDemoBatalla(null)} />}
     </div>
   );
 }
 
 function Game({ open, paused, onTitle }: { open: (o: Overlay) => void; paused: boolean; onTitle: () => void }) {
+  // Al volver de una pelea a la novela, la escena aparece desde negro (ver .batalla-vuelta).
+  const [deBatalla, setDeBatalla] = useState(0);
+  const volverDeBatalla = () => {
+    const n = Date.now();
+    setDeBatalla(n);
+    setTimeout(() => setDeBatalla((x) => (x === n ? 0 : x)), 1200);
+  };
   const { game, scene, choices, waitingChoice, mode, textDone } = useStoryEngine();
   const { next, choose, setMode, back, toNextChoice, toPrevChoice } = useStore.getState();
   const speed = useStore((s) => s.speed);
@@ -694,6 +760,13 @@ function Game({ open, paused, onTitle }: { open: (o: Overlay) => void; paused: b
     if (sceneId) preloadFrom(sceneId);
   }, [sceneId]);
   const fading = phase === 'out';
+  // Escena sin texto con «espera»: la imagen se queda un rato y la historia sigue sola (un clic la adelanta).
+  const waitMs = shown && !shown.dialogue ? shown.espera : undefined;
+  useEffect(() => {
+    if (!waitMs || fading || card) return;
+    const timer = setTimeout(() => useStore.getState().advance(), waitMs);
+    return () => clearTimeout(timer);
+  }, [shown?.scene_id, waitMs, fading, card]);
   const onPhone = /^PANTALLA:(celular|boringram)/.test(shown?.background ?? '');
   // Las imágenes de la galería (fondos cg_*) se desbloquean al verlas.
   const shownBackground = shown?.background;
@@ -704,12 +777,14 @@ function Game({ open, paused, onTitle }: { open: (o: Overlay) => void; paused: b
   const advanceIfReady = () => {
     if (!fading) next();
   };
+  const enNivel = (!!shown?.nivel || !!shown?.batalla) && textDone;
 
   useEffect(() => {
     if (paused) return;
     const onKey = (e: KeyboardEvent) => {
       if (useStore.getState().game?.finished) return; // En los finales se elige con los botones.
       if (card) return; // La portada del capítulo se salta sola (ver ChapterIntro).
+      if (enNivel) return; // En el nivel de acción, las teclas son del juego.
       if (e.key.toLowerCase() === 'h' && !e.ctrlKey && !e.metaKey) {
         setUiHidden((h) => !h);
         return;
@@ -732,7 +807,7 @@ function Game({ open, paused, onTitle }: { open: (o: Overlay) => void; paused: b
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [paused, fading, waitingChoice, textDone, next, back, setMode, uiHidden, card]);
+  }, [paused, fading, waitingChoice, textDone, next, back, setMode, uiHidden, card, enNivel]);
 
   // Abrir un panel detiene el autoavance y el salto.
   useEffect(() => {
@@ -763,6 +838,7 @@ function Game({ open, paused, onTitle }: { open: (o: Overlay) => void; paused: b
         <BadEnd
           calm={ending.tipo !== BAD_END}
           name={endingName(ending, lang)}
+          before={lang === 'en' ? (ending.nombre_antes_en ?? ending.nombre_antes) : ending.nombre_antes}
           onTitle={onTitle}
           lastScene={
             <SceneStage scene={shown} effects={[]} speakers={[]} lines={game.history}>
@@ -897,6 +973,51 @@ function Game({ open, paused, onTitle }: { open: (o: Overlay) => void; paused: b
           }}
         />
       )}
+      {/* Minijuego: sale cuando termina de escribirse la línea; la historia sigue al resolverlo. */}
+      {shown.minijuego && textDone && !fading && !card && (
+        <CoffeeIDE
+          key={`ide-${shown.scene_id}`}
+          id={shown.minijuego}
+          onSolved={() => useStore.getState().solveMinigame()}
+          onExit={shown.minijuego_salida ? () => useStore.getState().exitMinigame() : undefined}
+        />
+      )}
+      {/* Nivel de acción: sale cuando termina de escribirse la línea; ganarlo sigue con la historia y perderlo
+          lleva a su bad end. */}
+      {shown.nivel && textDone && !fading && !card && (
+        <Nivel
+          key={`nivel-${shown.scene_id}`}
+          id={shown.nivel}
+          onGanar={() => useStore.getState().solveMinigame()}
+          onPerder={() => useStore.getState().loseLevel()}
+        />
+      )}
+      {/* Batalla por turnos: igual que el nivel (ganarla sigue; perderla, su bad end). */}
+      {shown.batalla && textDone && !fading && !card && (
+        <Batalla
+          key={`batalla-${shown.scene_id}`}
+          id={shown.batalla}
+          progreso={progresoDeVars(game.vars)}
+          onGanar={(vars) => {
+            volverDeBatalla();
+            useStore.getState().solveMinigame(vars);
+          }}
+          onPerder={() => {
+            volverDeBatalla();
+            useStore.getState().loseLevel();
+          }}
+          onPerdonar={
+            shown.batalla_perdon
+              ? (vars) => {
+                  volverDeBatalla();
+                  useStore.getState().perdonarBatalla(vars);
+                }
+              : undefined
+          }
+        />
+      )}
+      {/* De la pelea a la novela: la escena aparece desde negro. */}
+      {deBatalla && <div key={deBatalla} className="batalla-vuelta" aria-hidden />}
       {/* La línea nueva empieza a escribirse cuando aparece su escena, no detrás del negro. */}
       {!fading && !uiHidden && !card && (
         <DialogBox

@@ -85,6 +85,23 @@ export function canSaveGame(game: GameState): boolean {
   return !game.finished || game.finished.startsWith(CHAPTER_END);
 }
 
+/**
+ * Para probar las escenas secretas: con `?juego=completo` el juego se comporta como si estuviera al 100 %, sin
+ * guardarlo (la partida real del jugador no cambia).
+ */
+export const PRUEBA_COMPLETO =
+  typeof location !== 'undefined' && new URLSearchParams(location.search).get('juego') === 'completo';
+
+/**
+ * Las variables de lo secreto, que no viven en la partida sino en lo que el jugador ya completó: `juego_completo`
+ * (el 100 %) y `cap01_completo` (todo el Capítulo 1: escenas, decisiones y finales). Se suman a las de la partida
+ * para decidir qué opciones se ven y a qué rama se va.
+ */
+export const conSecretos = (vars: Vars): Vars => {
+  const s = useStore.getState();
+  return { ...vars, juego_completo: s.juegoCompleto || PRUEBA_COMPLETO, cap01_completo: s.cap01Completo || s.juegoCompleto || PRUEBA_COMPLETO };
+};
+
 /** Celular recién prendido: wifi y datos encendidos, lo demás apagado. */
 const AJUSTES_INICIALES: Record<string, boolean> = { wifi: true, datos: true };
 
@@ -100,6 +117,10 @@ interface Store {
   endingsSeen: Record<string, string>;
   /** Imágenes de la galería ya vistas (id del fondo, p. ej. `cg_beso_nikki`). */
   cgSeen: Record<string, true>;
+  /** Sprites secretos (desbloqueables +18) que ya se vieron: salen en la galería, sin contar para el 100 %. */
+  secretosVistos: Record<string, true>;
+  /** Sprites del combate (pixel art) que ya se vieron en una batalla (`batalla/<hoja>`): salen en la galería. */
+  rpgVistos: Record<string, true>;
   /** Imágenes y sprites ya abiertos en el visor de la galería (lo demás desbloqueado sale como nuevo). */
   galleryOpened: Record<string, true>;
   /** Me gusta que el jugador dio o quitó en Boringram (id de la publicación -> le gusta). */
@@ -124,6 +145,14 @@ interface Store {
   bootcampResena: { texto: string; fecha: string } | null;
   /** Opciones elegidas alguna vez, como `scene_id#índice` (índice en `scene.choices`). Para el mapa. */
   choicesTaken: Record<string, true>;
+  /**
+   * El jugador llegó al 100 % alguna vez: abre las escenas secretas (variable `juego_completo` en las ramas de
+   * `next`). Se queda aunque después aparezca contenido nuevo.
+   */
+  juegoCompleto: boolean;
+  /** El jugador completó todo el Capítulo 1 (todas sus ramas) alguna vez: abre la escena secreta del bar. */
+  cap01Completo: boolean;
+  marcarCap01Completo: () => void;
   mode: Mode;
   /** Velocidad de adelantar o retroceder (x2, x4, x8, x16). */
   speed: Speed;
@@ -134,11 +163,31 @@ interface Store {
   /** Partida nueva desde el inicio (o desde `start`, para probar un capítulo en borrador). */
   newGame: (start?: string) => void;
   advance: () => void;
+  /** Minijuego resuelto: sigue a la escena siguiente (ver `minijuego` en la escena). */
+  /** Con `vars`, además guarda esas variables (p. ej. el nivel y la experiencia que se ganaron en una batalla). */
+  solveMinigame: (vars?: Vars) => void;
+  /** Salir del minijuego sin resolverlo: va a `minijuego_salida` de la escena. */
+  exitMinigame: () => void;
+  /** Se terminó la secuencia de toques de los emblemas: va a `toques_salida` de la escena. */
+  salirPorToques: () => void;
+  /** Perder el nivel de acción o la batalla: va a `nivel_derrota` (o `batalla_derrota`) de la escena. */
+  loseLevel: () => void;
+  /** La música de la pelea en curso (manda sobre la de la escena mientras dura; no se guarda). */
+  musicaBatalla: string | null;
+  setMusicaBatalla: (m: string | null) => void;
+  /** Sigue en otro capítulo desde un fin de capítulo, con las mismas variables (modo /all). */
+  seguirCapitulo: (sceneId: string) => void;
+  /** La batalla termina con el perdón del rival: va a `batalla_perdon` (con las variables de la pelea). */
+  perdonarBatalla: (vars?: Vars) => void;
   /** Clic o Espacio: si el texto se está escribiendo, lo completa; si ya terminó, avanza. */
   next: () => void;
   setTextDone: (done: boolean) => void;
   /** Marca una imagen de la galería como vista. */
   markCg: (id: string) => void;
+  /** Marca un sprite secreto como visto (`personaje/expresión`). */
+  marcarSecreto: (id: string) => void;
+  /** Marca sprites del combate como vistos (`batalla/<hoja>`). */
+  marcarRpg: (ids: string[]) => void;
   markGalleryOpened: (key: string) => void;
   setBoringramLike: (id: string, liked: boolean) => void;
   addBoringramComment: (id: string, text: string) => void;
@@ -155,6 +204,7 @@ interface Store {
   resenarBootcamp: (texto: string | null) => void;
   /** Emite el diploma de un nivel la primera vez (código y fecha); después devuelve siempre el mismo. */
   emitirDiploma: (nivel: string, codigo: string) => void;
+  marcarJuegoCompleto: () => void;
   choose: (index: number) => void;
   jumpTo: (sceneId: string) => void;
   quitToTitle: () => void;
@@ -178,6 +228,37 @@ interface Store {
 export const useStore = create<Store>()(
   persist(
     (set, get) => {
+      /** Avanza a la escena siguiente. Una escena con minijuego solo avanza cuando se resuelve. */
+      function advanceFrom(solved: boolean, patch?: Vars) {
+        const { game: actual } = get();
+        const game = actual && patch ? { ...actual, vars: { ...actual.vars, ...patch } } : actual;
+        if (!game) return;
+        // En una pantalla de final o de fin de capítulo se sale con sus botones, no avanzando
+        // (un doble clic en la última línea se saltaba la pantalla del final).
+        if (game.finished) return;
+        const scene = scenes.get(game.sceneId);
+        if (!scene || visibleChoices(scene, conSecretos(game.vars)).length > 0) return;
+        if ((scene.minijuego || scene.nivel || scene.batalla) && !solved) {
+          if (get().mode !== 'normal') set({ mode: 'normal' });
+          return;
+        }
+        markRead(scene.scene_id);
+        if (scene.ending) {
+          set({ game: { ...game, finished: scene.ending }, mode: 'normal' });
+          return;
+        }
+        if (scene.fin_capitulo && scene.next === null) {
+          set({ game: { ...game, finished: `${CHAPTER_END}${scene.fin_capitulo}` }, mode: 'normal' });
+          return;
+        }
+        const next = resolveNext(scene.next, conSecretos(game.vars));
+        if (!next) {
+          set({ error: `La escena ${scene.scene_id} no tiene continuación`, mode: 'normal' });
+          return;
+        }
+        goTo(next, game.vars, game.history, stepFrom(game));
+      }
+
       /** Entra en una escena y registra lectura, historial, instantánea y final. */
       function goTo(id: string, vars: Vars, history: HistoryEntry[], trail: TrailStep[] = []) {
         const { scene, error } = enterScene(id, vars, (s) => scenes.get(s));
@@ -227,6 +308,8 @@ export const useStore = create<Store>()(
         snapshots: {},
         endingsSeen: {},
         cgSeen: {},
+        secretosVistos: {},
+        rpgVistos: {},
         galleryOpened: {},
         boringramLikes: {},
         boringramComments: {},
@@ -239,6 +322,8 @@ export const useStore = create<Store>()(
         bootcampCalificacion: 0,
         bootcampResena: null,
         choicesTaken: {},
+        juegoCompleto: false,
+        cap01Completo: false,
         mode: 'normal',
         speed: 2,
         error: null,
@@ -257,6 +342,15 @@ export const useStore = create<Store>()(
           if (!get().cgSeen[id]) set({ cgSeen: { ...get().cgSeen, [id]: true } });
         },
 
+        marcarSecreto: (id) => {
+          if (!get().secretosVistos[id]) set({ secretosVistos: { ...get().secretosVistos, [id]: true } });
+        },
+
+        marcarRpg: (ids) => {
+          const nuevos = ids.filter((id) => !get().rpgVistos[id]);
+          if (nuevos.length) set({ rpgVistos: { ...get().rpgVistos, ...Object.fromEntries(nuevos.map((id) => [id, true as const])) } });
+        },
+
         setBoringramLike: (id, liked) => set({ boringramLikes: { ...get().boringramLikes, [id]: liked } }),
         removeBoringramComment: (id, index) =>
           set({
@@ -272,6 +366,12 @@ export const useStore = create<Store>()(
         setBootcampNombre: (nombre) => set({ bootcampNombre: nombre.trim() }),
         avisarBootcamp: (nivel) => set({ bootcampAvisos: { ...get().bootcampAvisos, [nivel]: true } }),
         calificarBootcamp: (estrellas) => set({ bootcampCalificacion: estrellas }),
+        marcarJuegoCompleto: () => {
+          if (!get().juegoCompleto) set({ juegoCompleto: true });
+        },
+        marcarCap01Completo: () => {
+          if (!get().cap01Completo) set({ cap01Completo: true });
+        },
         resenarBootcamp: (texto) =>
           set({ bootcampResena: texto?.trim() ? { texto: texto.trim(), fecha: new Date().toISOString() } : null }),
         emitirDiploma: (nivel, codigo) => {
@@ -293,36 +393,58 @@ export const useStore = create<Store>()(
           if (!get().galleryOpened[key]) set({ galleryOpened: { ...get().galleryOpened, [key]: true } });
         },
 
-        advance: () => {
+        advance: () => advanceFrom(false),
+
+        solveMinigame: (vars) => advanceFrom(true, vars),
+
+        exitMinigame: () => {
           const { game } = get();
-          if (!game) return;
-          // En una pantalla de final o de fin de capítulo se sale con sus botones, no avanzando
-          // (un doble clic en la última línea se saltaba la pantalla del final).
-          if (game.finished) return;
-          const scene = scenes.get(game.sceneId);
-          if (!scene || visibleChoices(scene, game.vars).length > 0) return;
+          const scene = game && scenes.get(game.sceneId);
+          if (!game || !scene?.minijuego_salida) return;
           markRead(scene.scene_id);
-          if (scene.ending) {
-            set({ game: { ...game, finished: scene.ending }, mode: 'normal' });
-            return;
-          }
-          if (scene.fin_capitulo && scene.next === null) {
-            set({ game: { ...game, finished: `${CHAPTER_END}${scene.fin_capitulo}` }, mode: 'normal' });
-            return;
-          }
-          const next = resolveNext(scene.next, game.vars);
-          if (!next) {
-            set({ error: `La escena ${scene.scene_id} no tiene continuación`, mode: 'normal' });
-            return;
-          }
-          goTo(next, game.vars, game.history, stepFrom(game));
+          goTo(scene.minijuego_salida, game.vars, game.history, stepFrom(game));
+        },
+
+        salirPorToques: () => {
+          const { game } = get();
+          const scene = game && scenes.get(game.sceneId);
+          if (!game || !scene?.toques_salida) return;
+          markRead(scene.scene_id);
+          goTo(scene.toques_salida, { ...game.vars, ...scene.toques_set }, game.history, stepFrom(game));
+        },
+
+        loseLevel: () => {
+          const { game } = get();
+          const scene = game && scenes.get(game.sceneId);
+          const derrota = scene?.nivel_derrota ?? scene?.batalla_derrota;
+          if (!game || !scene || !derrota) return;
+          markRead(scene.scene_id);
+          goTo(derrota, game.vars, game.history, stepFrom(game));
+        },
+
+        seguirCapitulo: (sceneId) => {
+          const { game } = get();
+          if (!game || !scenes.has(sceneId)) return;
+          goTo(sceneId, game.vars, game.history, stepFrom(game));
+        },
+
+        musicaBatalla: null,
+        setMusicaBatalla: (m) => set({ musicaBatalla: m }),
+
+        perdonarBatalla: (vars) => {
+          const { game } = get();
+          const scene = game && scenes.get(game.sceneId);
+          if (!game || !scene?.batalla_perdon) return;
+          markRead(scene.scene_id);
+          goTo(scene.batalla_perdon, { ...game.vars, ...vars }, game.history, stepFrom(game));
         },
 
         toNextChoice: () => {
           for (let i = 0; i < 5000; i++) {
             const g = get().game;
             const scene = g && scenes.get(g.sceneId);
-            if (!g || !scene || g.finished || get().error || visibleChoices(scene, g.vars).length > 0) break;
+            if (!g || !scene || g.finished || get().error || scene.minijuego || scene.nivel || scene.batalla || visibleChoices(scene, conSecretos(g.vars)).length > 0)
+              break;
             get().advance();
           }
           set({ mode: 'normal', textDone: true });
@@ -332,7 +454,7 @@ export const useStore = create<Store>()(
           const atChoice = () => {
             const g = get().game;
             const scene = g && scenes.get(g.sceneId);
-            return !!(g && scene && visibleChoices(scene, g.vars).length > 0);
+            return !!(g && scene && visibleChoices(scene, conSecretos(g.vars)).length > 0);
           };
           if (!get().back()) return;
           while (!atChoice() && get().back()) {
@@ -364,7 +486,7 @@ export const useStore = create<Store>()(
           const { game } = get();
           if (!game) return;
           const scene = scenes.get(game.sceneId);
-          const choice = scene && visibleChoices(scene, game.vars)[index];
+          const choice = scene && visibleChoices(scene, conSecretos(game.vars))[index];
           if (!scene || !choice || choice.locked) return;
           markRead(scene.scene_id);
           const ci = scene.choices.indexOf(choice);
@@ -447,6 +569,8 @@ export const useStore = create<Store>()(
             snapshots: {},
             endingsSeen: {},
             cgSeen: {},
+        secretosVistos: {},
+        rpgVistos: {},
             galleryOpened: {},
             boringramLikes: {},
             boringramComments: {},
@@ -459,6 +583,8 @@ export const useStore = create<Store>()(
             bootcampCalificacion: 0,
             bootcampResena: null,
             choicesTaken: {},
+            juegoCompleto: false,
+        cap01Completo: false,
             mode: 'normal',
             error: null,
             textDone: false,
@@ -483,6 +609,8 @@ export const useStore = create<Store>()(
         snapshots: s.snapshots,
         endingsSeen: s.endingsSeen,
         cgSeen: s.cgSeen,
+        secretosVistos: s.secretosVistos,
+        rpgVistos: s.rpgVistos,
         galleryOpened: s.galleryOpened,
         boringramLikes: s.boringramLikes,
         boringramComments: s.boringramComments,
@@ -495,6 +623,8 @@ export const useStore = create<Store>()(
         bootcampCalificacion: s.bootcampCalificacion,
         bootcampResena: s.bootcampResena,
         choicesTaken: s.choicesTaken,
+        juegoCompleto: s.juegoCompleto,
+        cap01Completo: s.cap01Completo,
       }),
     },
   ),

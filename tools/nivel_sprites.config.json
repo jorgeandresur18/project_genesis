@@ -1,0 +1,71 @@
+{
+  "_nota": "Referencias de los sprites de los niveles (imágenes del autor en docs/). celda: cuántos píxeles de la imagen mide un píxel del sprite; alto: para imágenes sin cuadrícula, el alto en píxeles. Las poses se guardan en ese orden como cuadros de <salida>/<personaje>.png. copiar: una hoja ya hecha (con su .json). Correr: npm run nivel:sprites archivo: nombre de salida. Las hojas del RPG (docs/sprites rpg) se copian tal cual; sus animaciones (filas) están en public/batalla/<personaje>.json.",
+  "cami": {
+    "cuadro": [
+      96,
+      56
+    ],
+    "poses": {
+      "quieta": {
+        "archivo": "docs/Gemini_Generated_Image_j7ehnpj7ehnpj7eh.jpeg",
+        "celda": 35.5
+      },
+      "corre": {
+        "archivo": "docs/Gemini_Generated_Image_ma6248ma6248ma62.jpeg",
+        "celda": 33
+      },
+      "dispara": {
+        "archivo": "docs/Gemini_Generated_Image_h9kbwuh9kbwuh9kb.jpeg",
+        "celda": 33
+      },
+      "dispara2": {
+        "archivo": "docs/Gemini_Generated_Image_1bce141bce141bce.jpeg",
+        "celda": 33
+      }
+    }
+  },
+  "batalla_jair": {
+    "salida": "public/batalla",
+    "archivo": "jair",
+    "copiar": {
+      "png": "docs/sprites rpg/luchador_lentes_sheet.png"
+    }
+  },
+  "batalla_cami": {
+    "salida": "public/batalla",
+    "archivo": "cami",
+    "copiar": {
+      "png": "docs/sprites rpg/cami_sheet.png"
+    }
+  },
+  "batalla_rikka": {
+    "salida": "public/batalla",
+    "archivo": "rikka",
+    "copiar": {
+      "png": "docs/sprites rpg/kimono_fighter_sheet.png"
+    }
+  },
+  "batalla_soldado": {
+    "salida": "public/batalla",
+    "archivo": "soldado",
+    "copiar": {
+      "png": "docs/sprites rpg/shadow_ninja_sheet.png"
+    }
+  },
+  "batalla_monstruo": {
+    "salida": "public/batalla",
+    "archivo": "monstruo",
+    "cuadro": [
+      180,
+      170
+    ],
+    "pie": 4,
+    "colores": 24,
+    "poses": {
+      "quieto": {
+        "archivo": "public/sprites/monstruo_sombras/base.webp",
+        "alto": 150
+      }
+    }
+  }
+}

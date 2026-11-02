@@ -513,6 +513,7 @@
 - `102#0` Besarla ⟶ va a `103a` · beso_nikki = true
 - `102#1` Apartarla con cuidado ⟶ va a `103b`
 - `102#2` Hacer un chiste ⟶ va a `103c`
+- `102#3` Propasarte ⟶ va a `nk01` · solo si cap01_completo == true
 
 
 ### fondos/cg_beso_nikki_cerca.webp
@@ -593,6 +594,59 @@
 `103c2` **Nikki:** ...Eres un cobarde de mierda, Jair. Un cobarde chistoso, pero cobarde.
 
 `103c3` — Lo suelta. Le pide la cuenta al cantinero con un dedo en el aire.
+
+> ⤷ continúa en `104`
+
+`nk01` — Jair no espera la respuesta. Ni el beso. Se pasa de la raya: las manos van adonde nadie las invitó.
+
+`nk02` — Nikki se queda quieta. Un segundo. Uno solo. Después le cambia la cara.
+
+`nk03` **Nikki:** ¿Qué haces? ¿Qué mierda crees que estás haciendo?
+
+`nk04` **Jair:** Tú dijiste que…
+
+`nk05` **Nikki:** Dije «bésame». No dije «aprovéchate de que no puedo ni pararme».
+
+`nk06` — Nikki se levanta. El banco se cae. El cantinero, por puro instinto profesional, guarda los vasos buenos.
+
+`nk10` — Nikki se detiene con la mano en el aire. Le tiembla. Después se sienta en el piso del bar, entre los vidrios, y llora.
+
+`nk11` **Nikki:** Estoy borracha, Jair. Estoy borracha y tú lo sabías. Por eso lo hiciste.
+
+`nk12` **Nikki:** Ocho años. Ocho años, y me lo haces justo la noche que no me puedo ni parar.
+
+`nk13` **Nikki:** Me voy. Me voy y no me vuelves a ver. Te lo juro.
+
+`nk14` **Jair:** (Si se va, no vuelve. Y si no vuelve, no queda nadie.)
+
+`nk15` **Jair:** Espera. Una más. Te invito otra ronda. La que quieras.
+
+`nk16` — Es lo peor que podría decir. Funciona. Siempre funciona. Por eso es lo peor.
+
+`nk17` **Nikki:** …La de la sombrilla. Y no me hables.
+
+`nk18` — Toman la ronda en silencio. Mañana nadie va a hablar de esto. Ese también es el plan de siempre.
+
+> ⤷ continúa en `104`
+
+`nk_bad01` — La ráfaga de cachetadas no termina. Jair deja de contar en la cuarenta. En la cincuenta deja de escuchar.
+
+`nk_bad02` — Cuando por fin se detiene, Jair está en el piso. Y no se mueve.
+
+`nk_bad03` **Nikki:** ¿Jair? …Jair, levántate. No es gracioso. Levántate.
+
+`nk_bad04` — No se levanta. Nikki se sienta a su lado, entre los vidrios, y llora hasta que llega la policía. Nadie le cree que solo eran cachetadas.
+
+
+### PANTALLA:negro
+
+`nk_bad05` — Cachetadas infinitas.
+
+> **BAD END: Cachetadas infinitas**
+
+---
+
+### fondos/bar_noche.webp
 
 > ♪ música: afterwork
 `104` **Cantinero:** Son ochenta y siete con cincuenta.
@@ -1858,6 +1912,50 @@
 
 `c24` **Jair:** (Algo me dice que esa frase va a volver a perseguirme.)
 
+`n01` — Dejan atrás la máquina rota. A los pocos pasos, Cami le golpea el hombro a Jair.
+
+`n02` **Cami:** Bájame. Ya puedo caminar.
+
+`n03` **Jair:** ¿Con ese tobillo? Te cargo. No me cuesta nada.
+
+`n04` **Cami:** No voy a pelear colgada de tu espalda como una mochila. La venda aguanta.
+
+`n04b` **Jair:** (La venda la puse yo. Yo no aguantaría.)
+
+`n05` — Diez pasos después, el pasillo se llena de pasos idénticos. Los soldados enmascarados doblan la esquina. Todos a la vez.
+
+`n06` — El monstruo se derrama entre las grietas del piso y desaparece. No se fue: solo dejó de estar a la vista.
+
+`n07` — Cami da un paso hacia donde estaba el monstruo. El tobillo se le dobla.
+
+`n08` **Jair:** Está morado otra vez.
+
+`n09` **Cami:** ...Cárgame. Pero no lo comentes.
+
+`n10` **Jair:** (No lo voy a comentar. Lo voy a recordar toda la vida.)
+
+`n11` — Jair se la vuelve a echar a la espalda, como una mochila muy enojada, y bajan al nivel dos.
+
+> ⤷ continúa en `g5h_013`
+
+`bad_bastion_001` — Jair cae de rodillas. Cami cae a su lado: el tobillo dijo basta antes que ella.
+
+`bad_bastion_002` **Soldado enmascarado:** Entidad no registrada. Origen desconocido. Procedimiento: archivar.
+
+`bad_bastion_003` **Cami:** ¡Suéltenlo! ¡Es un civil! ¡Ni siquiera sabe pegar!
+
+`bad_bastion_004` **Jair:** (Por lo menos alguien defendió mi currículum.)
+
+
+### PANTALLA:negro
+
+`bad_bastion_005` **Voz:** Usuario: incapacitado. Acompañante: incapacitada. Partida: no guardada.
+
+`bad_bastion_006` — Partida no guardada.
+
+> **BAD END: Partida no guardada**
+
+---
 
 ### fondos/hangar.webp
 

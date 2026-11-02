@@ -1,0 +1,42 @@
+{
+  "frameWidth": 142,
+  "frameHeight": 140,
+  "animations": {
+    "idle": {
+      "row": 0,
+      "frames": 16,
+      "fps": 10,
+      "loop": true
+    },
+    "mover": {
+      "row": 1,
+      "frames": 12,
+      "fps": 16,
+      "loop": true
+    },
+    "salto": {
+      "row": 2,
+      "frames": 12,
+      "fps": 14,
+      "loop": false
+    },
+    "ataque": {
+      "row": 3,
+      "frames": 12,
+      "fps": 16,
+      "loop": false
+    },
+    "daño": {
+      "row": 4,
+      "frames": 10,
+      "fps": 14,
+      "loop": false
+    },
+    "pestaneo": {
+      "row": 5,
+      "frames": 5,
+      "fps": 10,
+      "loop": false
+    }
+  }
+}

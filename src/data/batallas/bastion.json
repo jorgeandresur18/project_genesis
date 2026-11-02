@@ -1,0 +1,425 @@
+{
+  "titulo": "El Bastión",
+  "fondo": "batalla/fondos/bastion",
+  "heroes": [
+    "jair",
+    "cami"
+  ],
+  "personajes": {
+    "jair": {
+      "nombre": "Jair",
+      "sprite": "batalla/jair",
+      "nivel": 5,
+      "seguido": true,
+      "base": {
+        "ps": 30,
+        "atq": 5,
+        "def": 3,
+        "vel": 8
+      },
+      "crece": {
+        "ps": 6,
+        "atq": 1,
+        "def": 0.6,
+        "vel": 0.5
+      },
+      "ataques": [
+        {
+          "nombre": "Puñetazo",
+          "poder": 14,
+          "texto": "{quien} cierra los ojos y lanza un puñetazo. Por estadística, alguno tenía que entrar."
+        }
+      ],
+      "hablar": [
+        "Oigan, ¿a ustedes les pagan horas extra por esto?",
+        "Si me dejan ir, les hago una página web. Responsive.",
+        "¿Esa máscara es del uniforme o es personal? Te queda bien, eh.",
+        "Yo también odio mi trabajo. Podríamos no hacerlo juntos."
+      ],
+      "especial": {
+        "nombre": "Ráfaga de puños",
+        "poder": 7,
+        "golpes": 6,
+        "objetivo": "uno",
+        "color": "#ff8a1f",
+        "ojos": [
+          50,
+          37,
+          27,
+          13
+        ],
+        "texto": "{quien} grita algo que aprendió en un anime y suelta una ráfaga de puños. Ninguno con técnica. Todos con fe.",
+        "posicion": "objetivo"
+      },
+      "escala": 1.08,
+      "sonido": "puno"
+    },
+    "cami": {
+      "nombre": "Cami",
+      "sprite": "batalla/cami",
+      "nivel": 15,
+      "seguido": false,
+      "base": {
+        "ps": 34,
+        "atq": 6,
+        "def": 4,
+        "vel": 12
+      },
+      "crece": {
+        "ps": 4,
+        "atq": 1.1,
+        "def": 0.5,
+        "vel": 0.4
+      },
+      "ataques": [
+        {
+          "nombre": "Blaster",
+          "poder": 16,
+          "texto": "{quien} dispara sin pestañear."
+        }
+      ],
+      "hablar": [
+        "Baja eso antes de que te lo baje yo.",
+        "Tienes la postura de alguien que perdió muchas peleas.",
+        "¿Te mandaron solo? Qué triste. Para ti, digo."
+      ],
+      "especial": {
+        "nombre": "Lluvia de plasma",
+        "poder": 5,
+        "golpes": 8,
+        "objetivo": "todos",
+        "color": "#2f8cff",
+        "ojos": [
+          44,
+          39,
+          26,
+          14
+        ],
+        "texto": "{quien} se planta en el medio, saca la segunda pistola y dispara sin parar. Arriba, al medio, abajo. A todos.",
+        "posicion": "centro"
+      },
+      "descanso": "agachada",
+      "distancia": true,
+      "descanso_textos": {
+        "empieza": "{quien} necesita recuperarse de su dolor.",
+        "termina": "{quien} ya puede pararse."
+      },
+      "sonido": "disparo"
+    }
+  },
+  "enemigos": {
+    "soldado": {
+      "nombre": "Soldado enmascarado",
+      "sprite": "batalla/soldado",
+      "base": {
+        "ps": 20,
+        "atq": 5,
+        "def": 3,
+        "vel": 7
+      },
+      "crece": {
+        "ps": 6,
+        "atq": 0.6,
+        "def": 0.6,
+        "vel": 0.4
+      },
+      "ataques": [
+        {
+          "nombre": "Tajo",
+          "poder": 10,
+          "texto": "El soldado enmascarado lanza un tajo. Procedimiento estándar."
+        },
+        {
+          "nombre": "Estocada",
+          "poder": 12,
+          "texto": "El soldado enmascarado tira una estocada sin decir nada. Nunca dicen nada."
+        }
+      ],
+      "responde": {
+        "quien": "Soldado",
+        "ok": [
+          "…¿Horas extra? No. No nos pagan horas extra.",
+          "El procedimiento no contempla esa pregunta. Procesando…",
+          "¿De verdad me queda bien? Nadie me lo había dicho."
+        ],
+        "no": [
+          "Negativo.",
+          "No estoy autorizado a conversar.",
+          "Entidad no registrada. Silencio."
+        ]
+      },
+      "especial": {
+        "nombre": "Embestida de acero",
+        "poder": 8,
+        "golpes": 5,
+        "objetivo": "uno",
+        "color": "#d0213a",
+        "ojos": [
+          52,
+          44,
+          32,
+          22
+        ],
+        "texto": "El soldado enmascarado se lanza encima y golpea una y otra vez con la espada. Sin pausa. Sin expresión.",
+        "posicion": "objetivo"
+      },
+      "escala": 1.15,
+      "sonido": "espada"
+    },
+    "sombra": {
+      "nombre": "Monstruo de sombras",
+      "sprite": "batalla/sombra",
+      "jefe": true,
+      "huye_a": 0.3,
+      "base": {
+        "ps": 40,
+        "atq": 6,
+        "def": 6,
+        "vel": 6
+      },
+      "crece": {
+        "ps": 8,
+        "atq": 0.9,
+        "def": 0.8,
+        "vel": 0.2
+      },
+      "ataques": [
+        {
+          "nombre": "Garra de tinta",
+          "poder": 8,
+          "texto": "El monstruo alza el brazo y lo baja: una media luna de luz morada cruza todo el pasillo."
+        },
+        {
+          "nombre": "Ola de petróleo",
+          "poder": 5,
+          "objetivo": "todos",
+          "texto": "El monstruo gira sobre sí mismo y suelta la media luna a ras del piso: pasa por todos."
+        },
+        {
+          "nombre": "Parálisis de pesadilla",
+          "poder": 0,
+          "paraliza": 2,
+          "texto": "Los ojos del monstruo se encienden. Por un segundo, todos ven lo que más miedo les da. Alguien no se puede mover."
+        }
+      ],
+      "escala": 1.6,
+      "especial": {
+        "nombre": "Desgarro sombrío",
+        "poder": 6,
+        "golpes": 2,
+        "objetivo": "uno",
+        "color": "#a64dff",
+        "ojos": [
+          84,
+          112,
+          26,
+          13
+        ],
+        "texto": "El monstruo se hunde en su propia sombra. En el piso queda un vórtice. Y el vórtice se mueve. Lo que encuentra, lo levanta por el aire.",
+        "posicion": "objetivo",
+        "pantalla": "oscura",
+        "levanta": true
+      },
+      "sonido": "tajada",
+      "al_retirarse": "retirada",
+      "sale_atras": true
+    }
+  },
+  "horda": {
+    "enemigo": "soldado",
+    "al_inicio": 2,
+    "niveles": [
+      4,
+      4,
+      4,
+      8,
+      4,
+      8
+    ]
+  },
+  "jefe": {
+    "enemigo": "sombra",
+    "nivel": 12
+  },
+  "botin": {
+    "probabilidad": 0.6,
+    "objetos": [
+      "atq",
+      "def",
+      "vida",
+      "vida",
+      "carga",
+      "revivir"
+    ]
+  },
+  "esquivar": 0.5,
+  "hablar": 0.4,
+  "huir": false,
+  "dialogos": {
+    "inicio": [
+      {
+        "quien": "Voz",
+        "texto": "Alarma del Bastión: activa. Entidades hostiles en ruta."
+      },
+      {
+        "quien": "Cami",
+        "texto": "Tú pegas y yo disparo. Y nada de mirarme el tobillo."
+      }
+    ],
+    "refuerzos": [
+      {
+        "quien": "Voz",
+        "texto": "El soldado pide refuerzos por radio antes de caer. Llega otro, idéntico."
+      }
+    ],
+    "jefe": [
+      {
+        "quien": "Jair",
+        "texto": "(Ese ruido. Un módem conectándose. Lo conozco del trabajo.)"
+      },
+      {
+        "quien": "Cami",
+        "texto": "Es el de antes. El de la tinta. ¡No dejes que te toque!"
+      }
+    ],
+    "jefe_huye": [
+      {
+        "quien": "Voz",
+        "texto": "El monstruo se hunde en su sombra. El vórtice retrocede hasta perderse al fondo del pasillo. No se fue: solo dejó de estar a la vista."
+      }
+    ],
+    "victoria": [
+      {
+        "quien": "Voz",
+        "texto": "Entidad hostil: fuera de rango visual."
+      },
+      {
+        "quien": "Jair",
+        "texto": "(No se fue. Solo dejó de estar a la vista. Conozco la diferencia.)"
+      }
+    ],
+    "derrota": [
+      {
+        "quien": "Soldado",
+        "texto": "Entidad no registrada. Procedimiento: archivar."
+      }
+    ],
+    "huir_no": [
+      {
+        "quien": "Cami",
+        "texto": "¿Me vas a dejar peleando sola? Qué caballero. Qué cobarde."
+      },
+      {
+        "quien": "Cami",
+        "texto": "No te vas a ningún lado. Vuelve aquí."
+      }
+    ],
+    "huir": [
+      {
+        "quien": "Voz",
+        "texto": "Escapan por un pasillo lateral."
+      }
+    ],
+    "descanso": [
+      {
+        "quien": "Cami",
+        "texto": "Dame un segundo… El tobillo."
+      }
+    ],
+    "cae_jair": [
+      {
+        "quien": "Cami",
+        "texto": "¿Jair? ¡Jair! Genial. Ahora tengo que hacer todo yo, como siempre."
+      }
+    ],
+    "hablar_ok": [
+      {
+        "quien": "Voz",
+        "texto": "{objetivo} se queda pensando. Pierde su próximo ataque."
+      }
+    ],
+    "hablar_no": [
+      {
+        "quien": "Voz",
+        "texto": "{objetivo} no le hace caso."
+      }
+    ],
+    "esquiva_ok": [
+      {
+        "quien": "Voz",
+        "texto": "¡{quien} lo esquiva!"
+      }
+    ],
+    "botin": [
+      {
+        "quien": "Voz",
+        "texto": "Al {objetivo} se le cae algo: {objeto}. Va a la mochila."
+      }
+    ],
+    "ayuda": [
+      {
+        "quien": "Voz",
+        "texto": "Algo cae del techo y rebota en el piso: {objeto}. Nadie pregunta de dónde. Va a la mochila."
+      }
+    ]
+  },
+  "objetos": {
+    "atq": {
+      "nombre": "Potenciador de ataque",
+      "atq": 3,
+      "texto": "{quien} se inyecta un chip rojo. Ataque +{n} hasta el final de la pelea."
+    },
+    "def": {
+      "nombre": "Potenciador de defensa",
+      "def": 3,
+      "texto": "{quien} se pone un parche de escudo. Defensa +{n} hasta el final de la pelea."
+    },
+    "vida": {
+      "nombre": "Lata de agua",
+      "ps": 30,
+      "texto": "{quien} se toma una lata de agua: +{n} PS. Tampoco la pagó."
+    },
+    "carga": {
+      "nombre": "Recargador de especial",
+      "carga": 100,
+      "texto": "{quien} conecta el recargador. La barra del especial se llena de golpe."
+    },
+    "caramelo_rancio": {
+      "nombre": "Caramelo rancio",
+      "niveles": 10,
+      "texto": "{quien} se come el caramelo rancio. Sabe a bar cerrado y a malas decisiones. Sube {n} niveles de golpe."
+    },
+    "revivir": {
+      "nombre": "Revivir",
+      "revive": 0.5,
+      "texto": "{quien} vuelve a pararse, mareado pero entero: +{n} PS. Nadie pregunta cómo funciona."
+    }
+  },
+  "retratos": {
+    "Jair": "batalla/retratos/jair",
+    "Cami": "batalla/retratos/cami",
+    "Rikka": "batalla/retratos/rikka",
+    "Soldado": "batalla/retratos/soldado"
+  },
+  "fondo_luces": [
+    [
+      24.5,
+      6.6
+    ],
+    [
+      72.6,
+      6.6
+    ]
+  ],
+  "fondo_proporcion": 1.7768,
+  "ayuda": {
+    "umbral": 0.35,
+    "cae": 0.3,
+    "objeto": "vida",
+    "critico": 0.1
+  },
+  "musica_jefe": "audio/musica/combate_arcade.mp3",
+  "mochila_inicial": {
+    "revivir": 1
+  }
+}

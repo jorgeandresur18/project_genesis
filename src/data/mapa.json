@@ -1,0 +1,11 @@
+{
+  "nota": "Grupos del mapa de decisiones: las decisiones y opciones de las escenas que empiezan con alguno de los «prefijos» se muestran como un solo nodo plegado («nombre») que se abre al tocarlo. Sirve para que una seguidilla de decisiones sin consecuencias (como verdad o reto) no alargue el árbol.",
+  "grupos": [
+    {
+      "id": "verdad_o_reto",
+      "nombre": "Verdad o reto",
+      "nombre_en": "Truth or dare",
+      "prefijos": ["cap02_t_r", "cap02_t_v", "cap02_t_c"]
+    }
+  ]
+}

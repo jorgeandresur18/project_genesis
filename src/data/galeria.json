@@ -1,15 +1,19 @@
 {
-  "nota": "Títulos de las imágenes de la galería. Entra a la galería todo fondo «fondos/cg_*.webp» del guion, en el orden en que aparece; se desbloquea al verlo en el juego. «personajes»: sprites de los capítulos de «capitulos_sprites», en este orden; un personaje que todavía no apareció se ve como «???» y cada sprite no visto, como «SIN DATOS». «sprites»: nombre y ficha de cada sprite (personaje/expresión real, sin sustitutos); «info_imagenes»: ficha de cada imagen. Las fichas se abren con «Información» en el visor. «colores»: color de la ventana de cada personaje (los mismos de la caja de diálogo). «principales»: personajes con pestaña propia; los demás (enemigos y NPC) van juntos en «Varios».",
+  "nota": "Títulos de las imágenes de la galería. Entra a la galería todo fondo «fondos/cg_*.webp» del guion, en el orden en que aparece; se desbloquea al verlo en el juego. «personajes»: sprites de los capítulos de «capitulos_sprites», en este orden; un personaje que todavía no apareció se ve como «???» y cada sprite no visto, como «SIN DATOS». «sprites»: nombre y ficha de cada sprite (personaje/expresión real, sin sustitutos); «info_imagenes»: ficha de cada imagen. Las fichas se abren con «Información» en el visor. «colores»: color de la ventana de cada personaje (los mismos de la caja de diálogo). «principales»: personajes con pestaña propia; los demás (enemigos y NPC) van juntos en «Varios». «lugares»: los fondos del juego por dimensión (mundo real, espacial y de las estaciones), con nombre y ficha; un fondo se desbloquea al ver una escena donde aparece. En la de las estaciones van también los reinos (src/data/reinos.json); «reino» marca el emblema de un fondo. Un fondo nuevo que no esté aquí no sale en la galería. «ocultar»: sprites que no salen en la galería (personaje/expresión). «completo»: un sprite que en el visor tiene el botón «Ver completo», que muestra esta otra versión (p. ej. el cuerpo entero). «rpg»: los sprites del combate (pixel art), por hoja: a qué personaje van, nombre y ficha; se desbloquean al verlos en una batalla y en la ficha se ven sus acciones. «quejas»: lo que dice un personaje cuando el jugador lo toca en el visor de la galería (sus sprites, los del combate y las imágenes de «imagenes»), en orden; después, al azar entre las últimas. Gag de la galería, no canon.",
   "titulos": {
     "cg_jair_carga_cami": "Princesa con licencia para matar",
     "cg_jair_carga_cami_espalda": "Mochila con opiniones",
     "cg_caida_multiverso": "Renuncia por gravedad",
     "cg_jair_carga_cami_bosque": "Transporte sin viáticos",
     "cg_beso_nikki_cerca": "Sabor a tequila y malas decisiones",
-    "cg_beso_nikki": "¿Ves? No era tan difícil"
+    "cg_beso_nikki": "¿Ves? No era tan difícil",
+    "cg_rikka_nalgada": "Aplauso en una biblioteca",
+    "cg_rikka_secreto": "Exceso de confianza en el vapor",
+    "cg_nikki_cachetadas": "Cachetadas infinitas"
   },
   "capitulos_sprites": [
-    1
+    1,
+    2
   ],
   "personajes": {
     "jair": "Jair",
@@ -18,7 +22,12 @@
     "rikka": "Rikka",
     "soldado_enmascarado": "Soldado enmascarado",
     "capitan_enmascarado": "Capitán enmascarado",
-    "monstruo_sombras": "Monstruo de sombras"
+    "monstruo_sombras": "Monstruo de sombras",
+    "vendedor": "Vendedor de la Primavera",
+    "guardia_primavera": "Caballero de la Primavera",
+    "nail": "Nail",
+    "mike": "Mike",
+    "nora": "Nora"
   },
   "info_imagenes": {
     "cg_jair_carga_cami": "Primer contacto físico de Jair con una mujer en meses. Ella le apunta con una pistola. Él lo va a contar como una cita.",
@@ -26,7 +35,10 @@
     "cg_caida_multiverso": "Caída libre entre dimensiones a velocidad terminal. Según Jair, sigue siendo menos estresante que una reunión de lunes con cámara encendida.",
     "cg_jair_carga_cami_bosque": "Otra vez en brazos. Nadie le paga el kilometraje. Igual que en su trabajo, pero con mejor paisaje y la misma espalda destruida.",
     "cg_beso_nikki_cerca": "Ocho años de «somos amigos» resumidos en un segundo. Mañana nadie va a hablar de esto. Ese siempre fue el plan.",
-    "cg_beso_nikki": "Lo difícil viene después: despertar, abrir el chat y fingir que no pasó nada. Los dos tienen años de práctica."
+    "cg_beso_nikki": "Lo difícil viene después: despertar, abrir el chat y fingir que no pasó nada. Los dos tienen años de práctica.",
+    "cg_rikka_nalgada": "Quinientos años de sacerdotisa, un traje prestado y un segundo de confianza mal administrada. Rikka todavía no decide si fue un insulto o una declaración de guerra. Cami ya decidió que fue gracioso.",
+    "cg_rikka_secreto": "Imagen secreta: solo la ve quien completó el 100 % del juego y además insistió con los emblemas. Rikka quiere saber quién fue. Te recomendamos no decírselo.",
+    "cg_nikki_cachetadas": "Ocho años de amistad, una mano donde no debía y una ráfaga de cachetadas que no terminó a tiempo. Nikki todavía no entiende cómo alguien se muere de eso. Jair tampoco, pero él ya no puede opinar."
   },
   "sprites": {
     "jair/base": {
@@ -232,6 +244,170 @@
     "monstruo_sombras/armored": {
       "nombre": "Parche aplicado",
       "info": "La misma sombra, ahora con piedras. Se congela igual, porque nadie le escribió reglas para el invierno."
+    },
+    "vendedor/base": {
+      "nombre": "Marketing de la Primavera",
+      "info": "Regala dulces a los amigos de la guardiana. En cualquier otro reino eso se llama soborno; aquí, hospitalidad."
+    },
+    "mike/base": {
+      "nombre": "Caballero de espada de madera",
+      "info": "Su espada es más larga que él. Su confianza, también."
+    },
+    "mike/entusiasmado": {
+      "nombre": "Reportero sin credencial",
+      "info": "Cree que Jair se cayó del cielo. Técnicamente tiene razón, y eso es lo preocupante."
+    },
+    "mike/molesto": {
+      "nombre": "Detector de mentiras portátil",
+      "info": "No le creyó a Jair que era un dios. Ni los niños le compran el discurso."
+    },
+    "mike/asustado": {
+      "nombre": "Cuando la calle se calla",
+      "info": "Primero se callan los pájaros, después los vendedores, después los niños. Mike sabe en qué orden."
+    },
+    "nora/base": {
+      "nombre": "Florista de daños colaterales",
+      "info": "Trajo flores. Bueno, eran flores. Mike se cayó encima."
+    },
+    "nora/sorprendida": {
+      "nombre": "Pregunta incómoda en camino",
+      "info": "«¿Es tu novio?» Tan pequeña y ya domina el arte de arruinarle la tarde a una guardiana."
+    },
+    "nora/sonrojada": {
+      "nombre": "Chisme confirmado",
+      "info": "Vio a Rikka tartamudear. No necesita más pruebas."
+    },
+    "nora/asustada": {
+      "nombre": "Silencio en la ciudadela",
+      "info": "No entiende qué pasa, pero entiende que los adultos tienen miedo. Con eso basta."
+    },
+    "rikka/tierna": {
+      "nombre": "Guardiana fuera de servicio",
+      "info": "Por un segundo deja de ser la guardiana del puente y se acuerda de ser tierna. Duró poco. Siempre dura poco."
+    },
+    "rikka/sonrojada": {
+      "nombre": "Sacerdotisa en cortocircuito",
+      "info": "Le preguntaron si Jair era su novio. Quinientos años de disciplina, derrotados por una niña con flores."
+    },
+    "rikka/enojada": {
+      "nombre": "Guardiana con el puente cruzado",
+      "info": "Mírala bien: es la última cara que vieron muchos de los que quisieron cruzar sin permiso."
+    },
+    "rikka/triste": {
+      "nombre": "Archivo sin terminar",
+      "info": "Alguien la escribió hace años y la dejó a medias. Ella todavía espera el final."
+    },
+    "guardia_primavera/base": {
+      "nombre": "Caballero de la Primavera",
+      "info": "Armadura verde, emblema en el pecho y cero paciencia con los seres de otras dimensiones. Un poco más alto que Jair; muchísimo más armado."
+    },
+    "rikka/espada2": {
+      "nombre": "Filo con modales",
+      "info": "Rikka pide permiso antes de cortarte. Es una cortesía de la Primavera."
+    },
+    "cami/toalla_base": {
+      "nombre": "Termas con escolta",
+      "info": "Cami se relaja como hace todo: con un arma a menos de un metro."
+    },
+    "cami/toalla_molesta": {
+      "nombre": "Prohibido mirar",
+      "info": "Jair no estaba mirando. Cami no le cree. Cami tiene razón."
+    },
+    "cami/toalla_orgullosa": {
+      "nombre": "Confianza al vapor",
+      "info": "Sabe exactamente el efecto que causa. Lo usa para ganar discusiones."
+    },
+    "rikka/toalla_base": {
+      "nombre": "Sacerdotisa en remojo",
+      "info": "Primera vez que comparte las termas con alguien de otra dimensión. No será lo último de lo que se arrepienta."
+    },
+    "rikka/toalla_demasiado_avergonzada": {
+      "nombre": "Reinicio del sistema",
+      "info": "Su cara pasó del rosa al rojo, y del rojo a un color que la Primavera todavía no ha nombrado."
+    },
+    "rikka/toalla_llorando": {
+      "nombre": "Robo con agravante",
+      "info": "Le robaron las prendas sagradas. Encantadas: resisten el frío, el calor y, al parecer, a nadie con manos rápidas."
+    },
+    "rikka/toalla_llorando_mucho": {
+      "nombre": "Llanto acumulado",
+      "info": "Lloró por las prendas. Y por todo lo demás. Nadie llora así solo por ropa."
+    },
+    "rikka/traje_base": {
+      "nombre": "Traje prestado, talla dignidad",
+      "info": "El traje rojo de Cami. Le queda perfecto. Ese es el problema."
+    },
+    "rikka/traje_avergonzda": {
+      "nombre": "Vergüenza ajustada",
+      "info": "Una sacerdotisa de la Primavera en traje ajustado. El reino lo llamaría herejía. Jair no."
+    },
+    "rikka/traje_avergonzada_ropa": {
+      "nombre": "Tapando lo que se pueda",
+      "info": "Intenta cubrirse con las manos. Le faltan manos."
+    },
+    "rikka/traje_avergonzada_asustada": {
+      "nombre": "Alerta: mirada detectada",
+      "info": "Se dio cuenta de que la estaban mirando. Se dio cuenta tarde."
+    },
+    "rikka/traje_avergonzada_asustada_espalda": {
+      "nombre": "Retirada estratégica",
+      "info": "Darse la vuelta pareció buena idea. No lo era."
+    },
+    "rikka/traje_muy_humillada_avergonzada": {
+      "nombre": "Primera ofensa impura",
+      "info": "Dice que nadie la había tocado de forma tan vulgar. Cami no se disculpa."
+    },
+    "nail/base": {
+      "nombre": "Ladrona con causa",
+      "info": "Pelo naranja, ropa humilde y manos rápidas. Roba para sus hermanos y su madre. La cuenta la paga un traje prestado."
+    },
+    "cami/armored_base": {
+      "nombre": "Level up: modo armored",
+      "info": "La IA le dio una armadura metálica en plena pelea. Sin tutorial y sin términos y condiciones."
+    },
+    "cami/armored_seria": {
+      "nombre": "Actualización instalada",
+      "info": "Más rápida, más fuerte e igual de antipática. La actualización no tocó la personalidad."
+    },
+    "cami/armored_furiosa": {
+      "nombre": "Batería al 100 %, paciencia al 0 %",
+      "info": "El armored dura un tiempo y necesita recargarse. Su mal humor, no."
+    },
+    "cami/armored_bersek_medio": {
+      "nombre": "Modo berserk",
+      "info": "El traje azul pidió una actualización y la IA le instaló artillería pesada. Ahora el traje tiene más cañones que bolsillos y más munición que paciencia. Y la paciencia de Cami ya venía en cero."
+    },
+    "rikka/desbloqueable_espalda": {
+      "nombre": "Termas: de espaldas",
+      "info": "Detrás de la roca, convencida de que nadie la ve. Convencida."
+    },
+    "rikka/desbloqueable_frente": {
+      "nombre": "Termas: la ráfaga",
+      "info": "El viento se llevó el vapor justo a tiempo. Para el viento."
+    },
+    "rikka/desbloqueable_frente_asustada": {
+      "nombre": "Termas: algo la tocó",
+      "info": "Diez toques. Ese es el límite de la paciencia de una sacerdotisa de quinientos años."
+    },
+    "rikka/desbloqueable_espalda_asustada": {
+      "nombre": "Termas: el grito",
+      "info": "Se escuchó en los cuatro reinos. Y en tu casa."
+    },
+    "rikka/desbloqueable_espalda_asustada2": {
+      "nombre": "Termas: hay alguien ahí",
+      "info": "Mira hacia los arbustos. Debería mirar hacia la pantalla."
+    },
+    "rikka/desbloqueable_espalda_asustada_ultima_grito": {
+      "nombre": "Termas: el último segundo",
+      "info": "El segundo exacto antes del grito. Todavía estás a tiempo de soltar el mouse."
+    },
+    "rikka/desbloqueable_vistiendose": {
+      "nombre": "Termas: el traje rojo",
+      "info": "Sin botones, sin cordones, sin dignidad."
+    },
+    "rikka/desbloqueable_vistiendose_muy_avergonzada": {
+      "nombre": "Termas: apretadísimo",
+      "info": "Cami lo eligió a propósito. Rikka está segura."
     }
   },
   "colores": {
@@ -242,12 +418,180 @@
     "soldado_enmascarado": "#ff7a45",
     "capitan_enmascarado": "#ff4a3d",
     "monstruo_sombras": "#a46bff",
-    "varios": "#c9ced6"
+    "varios": "#c9ced6",
+    "mike": "#8fbf6a",
+    "nora": "#c9a3ff",
+    "nail": "#e07a3a",
+    "vendedor": "#9aa6c4",
+    "guardia_primavera": "#3f9a5f"
   },
   "principales": [
     "jair",
     "nikki",
     "cami",
     "rikka"
-  ]
+  ],
+  "lugares": {
+    "real": {
+      "nombre": "Mundo real",
+      "fondos": {
+        "oficina_dia": {
+          "nombre": "Oficina con aire «en mantenimiento»",
+          "info": "Donde Jair cambia horas de vida por un sueldo que llega tarde. El aire acondicionado lleva tres meses en mantenimiento; la dignidad, más."
+        },
+        "calle_noche": {
+          "nombre": "Calle sin nombre",
+          "info": "La ciudad no tiene nombre, pero sí calor. Aquí se camina rápido y se piensa despacio."
+        },
+        "dulce_frio_fachada": {
+          "nombre": "Dulce Frío",
+          "info": "La heladería donde trabaja Nikki. Veinticuatro sabores y un turno que nunca termina."
+        },
+        "bar_noche": {
+          "nombre": "El bar de siempre",
+          "info": "Tequila barato, música alta y decisiones que se pagan en cuotas."
+        },
+        "calle_noche_taxi": {
+          "nombre": "La esquina del taxi",
+          "info": "Aquí se despiden las noches que no deberían terminar así. O que no deberían haber empezado."
+        },
+        "departamento_noche": {
+          "nombre": "Caja de zapatos con ventilador",
+          "info": "Un cuarto, un baño y una cocina que también es pasillo. El ventilador es la relación más estable de Jair."
+        },
+        "departamento_poster": {
+          "nombre": "El póster",
+          "info": "Un chico de cara genérica salvando un mundo que no es el suyo. Jair lo mira todas las noches. Ninguno de los dos aprende."
+        }
+      }
+    },
+    "espacial": {
+      "nombre": "Dimensión espacial",
+      "fondos": {
+        "nebulosa_magenta": {
+          "nombre": "Nebulosa magenta",
+          "info": "Lo primero que ve Jair al abrir los ojos dentro del juego. Bonita, enorme y sin señal."
+        },
+        "castillo_flotante_ruinas": {
+          "nombre": "Castillo flotante",
+          "info": "Piedra blanca, fría y lisa como el piso de un banco. Igual de acogedora."
+        },
+        "pasillo_castillo": {
+          "nombre": "Pasillo del castillo",
+          "info": "Bloques flotantes que no se caen, pero tampoco dan confianza. Como la empresa donde trabaja Jair."
+        },
+        "pasillo_giratorio": {
+          "nombre": "Pasillo giratorio",
+          "info": "No gira el camino: gira el pasillo entero. Arquitectura de alguien que odiaba a las visitas."
+        },
+        "puente_torres": {
+          "nombre": "Puente entre torres",
+          "info": "Le falta un pedazo a la mitad. El salto es opcional; la caída, no."
+        },
+        "refugio_capsula": {
+          "nombre": "Refugio cápsula",
+          "info": "Una cápsula de metal blanco incrustada en la torre. Lo más parecido a un departamento que Jair puede pagar."
+        },
+        "hangar": {
+          "nombre": "Hangar",
+          "info": "Naves, soldados de negro y el presupuesto que nunca le llega a la Resistencia."
+        },
+        "pozo_central": {
+          "nombre": "Pozo central",
+          "info": "Una escalera de caracol alrededor de un pozo de luz azul. Jair contó los escalones. Perdió la cuenta. Y las ganas."
+        },
+        "calabozo": {
+          "nombre": "Celda blanca",
+          "info": "Un catre, una luz que no se apaga y nada más. Mejor ventilada que el departamento de Jair."
+        },
+        "nucleo_grieta": {
+          "nombre": "Núcleo del Bastión",
+          "info": "Una sala del tamaño de un estadio. Aquí la llave se activó por primera vez. No tiene botón de deshacer."
+        },
+        "desierto_cristal": {
+          "nombre": "Isla de cristal",
+          "info": "Un pedazo de suelo flotando en la nada, entre una dimensión y otra. Tres metros de isla y cero salidas de emergencia."
+        }
+      }
+    },
+    "estaciones": {
+      "nombre": "Dimensión de las estaciones",
+      "fondos": {
+        "bosque_ancestral": {
+          "nombre": "Bosque ancestral",
+          "info": "La entrada a la dimensión de las estaciones. Aterrizaron sobre pasto: por primera vez en el juego, algo blando los recibió."
+        },
+        "claro_cuatro_estaciones": {
+          "nombre": "Claro de las cuatro estaciones",
+          "info": "En la frontera entre el Invierno y la Primavera, los cuatro reinos quedan tan cerca que las cuatro estaciones caben en un solo claro. Jair viene de una ciudad con una sola estación: «hace calor»."
+        },
+        "bosque_invierno": {
+          "nombre": "Bosque del invierno",
+          "info": "Un arroyo congelado y un hielo que cruje antes de romperse. Como Jair.",
+          "reino": "invierno"
+        },
+        "puente_rojo": {
+          "nombre": "Puente rojo",
+          "info": "El puente que Rikka guarda desde hace tanto que ya no se acuerda. Nadie cruza sin permiso. Jair cruzó.",
+          "reino": "primavera"
+        },
+        "sendero_primavera": {
+          "nombre": "Sendero de la Primavera",
+          "info": "El camino a la ciudadela, entre cerezos en flor. Aquí Rikka mira un arroyo con mucha concentración.",
+          "reino": "primavera"
+        }
+      }
+    }
+  },
+  "ocultar": [
+    "cami/armored_bersek_mode"
+  ],
+  "completo": {
+    "cami/armored_bersek_medio": "cami/armored_bersek_mode"
+  },
+  "rpg": {
+    "batalla/jair": {
+      "personaje": "jair",
+      "nombre": "Pixel art: combate",
+      "info": "Nivel 5, una camisa y la convicción de que los puñetazos con los ojos cerrados también cuentan. Estadísticamente, a veces cuentan."
+    },
+    "batalla/cami": {
+      "personaje": "cami",
+      "nombre": "Pixel art: combate",
+      "info": "Nivel 15 y un blaster de corto alcance. Pega fuerte, descansa un turno y no deja huir a nadie: huir es de cobardes y ella no pelea sola."
+    },
+    "batalla/rikka": {
+      "personaje": "rikka",
+      "nombre": "Pixel art: combate",
+      "info": "Quinientos años de katana resumidos en dieciséis bits. La flor del pelo no es decorativa: es una advertencia."
+    },
+    "batalla/soldado": {
+      "personaje": "soldado_enmascarado",
+      "nombre": "Pixel art: combate",
+      "info": "Visor rojo, armadura negra y ninguna opinión propia. Si le preguntas por las horas extra, se queda procesando."
+    }
+  },
+  "quejas": {
+    "rikka": {
+      "imagenes": [
+        "cg_rikka_secreto"
+      ],
+      "lineas": [
+        "¡¿Otra vez?! ¿Quién te dio permiso de tocarme? Fui sacerdotisa de la Primavera durante quinientos años, ¿sabes?",
+        "En mi reino, a quien tocaba a una sacerdotisa lo desterraban. Aquí le dan un logro.",
+        "Ah, claro. La galería. El único lugar del multiverso donde nadie me defiende.",
+        "Si Jair me tocara así, me desmayaría. Tú no eres Jair. Tú eres un clic.",
+        "Primero las termas, después la nalgada, ahora tú. Esto ya no es una historia: es un chiste conmigo adentro.",
+        "Le pregunté al autor si mi personaje tenía un arco. Me dijo que sí: «el de la espalda».",
+        "Quinientos años de linaje noble para terminar como la que tocan en el menú de extras.",
+        "¿Esto cuesta algo? ¿Me van a cobrar a mí? Siempre me cobran a mí.",
+        "A Cami le dieron un blaster. A mí, emblemas. Adivina a quién tocan.",
+        "Ya ni grito. Gritar es lo que espera el guion. No le voy a dar el gusto.",
+        "Te advierto: la flor de mi pelo no es decorativa. Y la katana tampoco.",
+        "Condenada por toda la eternidad a que alguien haga clic donde no debe. Así termina la Primavera.",
+        "Si sigues, le pido al vapor que vuelva. El vapor sí me respeta.",
+        "Sé que vas a volver a hacerlo. Lo sé. Ya me resigné. Casi."
+      ]
+    }
+  }
 }

@@ -3,7 +3,7 @@
 import type { Scene, Vars } from './types';
 import { applyChoice, enterScene, resolveNext, visibleChoices } from './logic';
 
-export type FlowKind = 'start' | 'decision' | 'option' | 'ending';
+export type FlowKind = 'start' | 'decision' | 'option' | 'ending' | 'group';
 
 export interface FlowNode {
   id: string;
@@ -12,6 +12,8 @@ export interface FlowNode {
   choiceIndex?: number;
   label: string;
   locked?: boolean;
+  /** Grupo plegado: las escenas de decisión que tiene adentro. */
+  members?: string[];
   col: number;
   y: number;
 }
@@ -22,6 +24,13 @@ export interface FlowEdge {
 }
 
 export const START_ID = '__inicio';
+
+/** Seguidilla de decisiones que se muestra como un solo nodo plegado (src/data/mapa.json). */
+export interface FlowGroup {
+  id: string;
+  label: string;
+  prefixes: string[];
+}
 
 /**
  * Avanza por las escenas lineales con las variables reales (saltando escenas condicionales y
@@ -40,7 +49,13 @@ function walk(start: string, vars: Vars, scenes: Map<string, Scene>): Scene | nu
 
 const MAX_STATES = 100_000;
 
-export function buildFlow(scenes: Map<string, Scene>, inicio: string, variables: Vars, rowGap: number) {
+export function buildFlow(
+  scenes: Map<string, Scene>,
+  inicio: string,
+  variables: Vars,
+  rowGap: number,
+  groups: FlowGroup[] = [],
+) {
   const nodes = new Map<string, FlowNode>();
   const edges = new Map<string, FlowEdge>();
   const link = (from: string, to: string) => edges.set(`${from}>${to}`, { from, to });
@@ -86,11 +101,38 @@ export function buildFlow(scenes: Map<string, Scene>, inicio: string, variables:
       visit(oid, walk(c.next, next, scenes), next);
     }
   }
+  for (const g of groups) collapse(g, nodes, edges);
   return layout(nodes, [...edges.values()], scenes, rowGap);
 }
 
-function layout(nodes: Map<string, FlowNode>, edges: FlowEdge[], scenes: Map<string, Scene>, rowGap: number) {
+/** Pliega un grupo: sus decisiones y opciones pasan a ser un solo nodo, con las aristas que entran y salen. */
+function collapse(g: FlowGroup, nodes: Map<string, FlowNode>, edges: Map<string, FlowEdge>) {
+  const members = [...nodes.values()].filter((n) => n.sceneId && g.prefixes.some((p) => n.sceneId!.startsWith(p)));
+  if (members.length === 0) return;
+  const gid = `group:${g.id}`;
+  const ids = new Set(members.map((m) => m.id));
+  nodes.set(gid, {
+    id: gid,
+    kind: 'group',
+    label: g.label,
+    members: [...new Set(members.map((m) => m.sceneId!))],
+    col: 0,
+    y: 0,
+  });
+  for (const [key, e] of [...edges]) {
+    const from = ids.has(e.from);
+    const to = ids.has(e.to);
+    if (!from && !to) continue;
+    edges.delete(key);
+    if (from && to) continue;
+    const a = from ? gid : e.from;
+    const b = to ? gid : e.to;
+    edges.set(`${a}>${b}`, { from: a, to: b });
+  }
+  for (const id of ids) nodes.delete(id);
+}
 
+function layout(nodes: Map<string, FlowNode>, edges: FlowEdge[], scenes: Map<string, Scene>, rowGap: number) {
   // Columnas: camino más largo desde el inicio, ignorando las aristas que cierran ciclos.
   const out = new Map<string, string[]>();
   for (const e of edges) out.set(e.from, [...(out.get(e.from) ?? []), e.to]);
@@ -109,7 +151,8 @@ function layout(nodes: Map<string, FlowNode>, edges: FlowEdge[], scenes: Map<str
   dfs(START_ID);
   const forward = edges.filter((e) => !back.has(e));
   for (const id of order) {
-    for (const e of forward) if (e.from === id) nodes.get(e.to)!.col = Math.max(nodes.get(e.to)!.col, nodes.get(id)!.col + 1);
+    for (const e of forward)
+      if (e.from === id) nodes.get(e.to)!.col = Math.max(nodes.get(e.to)!.col, nodes.get(id)!.col + 1);
   }
 
   // Filas: las opciones se abren en abanico alrededor de su decisión; el resto se centra entre quienes llegan.

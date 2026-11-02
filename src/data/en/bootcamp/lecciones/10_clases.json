@@ -1,0 +1,85 @@
+{
+  "titulo": "Classes (blend, cup, refill)",
+  "tema": "blend defines a mold; refill makes a new one; cup means “this very one”.",
+  "charla": [
+    { "texto": "Junior level. First lesson: classes. A class is a mold for making identical objects. In Coffee it's written blend.", "codigo": ["blend Cup {", "  sip constructor(flavor) {", "    cup.flavor = flavor;", "  }", "}", "", "// blend: the mold"] },
+    { "texto": "To make a new one from the mold you use refill. And inside the class, cup means “this object”, the one being used.", "codigo": ["blend Cup {", "  sip constructor(flavor) {", "    cup.flavor = flavor; // cup: this object", "  }", "}", "", "brew mine = refill Cup('latte');", "latte.log(mine.flavor);  // → latte"] },
+    { "texto": "Like the forge: the mold is the class, every sword that comes out is an object. And cup is… the sword in your hand." },
+    { "texto": "Rikka, you should be teaching. You explained it better than the documentation." },
+    { "texto": "blend Empleado: a class with lots of methods and no rights. and you instantiate it with refill. like office coffee: until whoever pays runs out" },
+    { "texto": "Prof, if I make a Rikka class, does the constructor have to reserve extra memory for her butt?" },
+    { "texto": "If you make a Cami class, the constructor has to reserve extra memory for her mouth.", "codigo": ["// Your turn", "// 1. Inside the class, «this object» is cup.", "// 2. Create the object with refill.", "// 3. Call the method that adds hours."] }
+  ],
+  "ejercicio": {
+    "archivos": [
+      {
+        "lineas": [
+          "// Junior · Lesson 1: classes. Fill in the blanks.",
+          "blend Empleado {",
+          "  sip constructor(nombre) {",
+          "    [[1]].nombre = nombre;",
+          "    cup.horas = 0;",
+          "  }",
+          "  sip trabajar(horas) {",
+          "    cup.horas = cup.horas + horas;",
+          "    pour cup.nombre + ' has worked ' + cup.horas + ' hours (unpaid)';",
+          "  }",
+          "}",
+          "",
+          "brew jair = [[2]] Empleado('Jair');",
+          "latte.log(jair.[[3]](60));",
+          "// Expected output: Jair has worked 60 hours (unpaid)"
+        ]
+      },
+      {
+        "ruta": "instructor_notes.txt",
+        "lineas": [
+          "INSTRUCTOR'S NOTES",
+          "",
+          "blend Name { ... }              -> defines a class (in JavaScript: class).",
+          "sip constructor(x) { ... }      -> runs when the object is created.",
+          "cup                             -> “this object” (in JavaScript: this).",
+          "refill Name(...)                -> creates a new object (in JavaScript: new).",
+          "object.method(...)              -> calls a method.",
+          "(Spanish names in the code: Empleado = Employee, trabajar = work, horas = hours.)",
+          "",
+          "This is what GENESIS code uses. If you ever see weird code written in a weird place, it'll be this."
+        ]
+      }
+    ],
+    "huecos": {
+      "1": { "error": "“{valor}” isn't “this object”. Inside the class, the current object is cup." },
+      "2": { "error": "“{valor}” doesn't create a new object. To use the mold you write refill Empleado(...)." },
+      "3": { "error": "Empleado has no “{valor}()”. Look at the class methods: the one that adds hours is trabajar." }
+    },
+    "exito": ["Jair has worked 60 hours (unpaid)", "✔ Compiled. First object created. It's already working. It didn't ask for anything."],
+    "reacciones": {
+      "Rikka": ["Inside the mold, the sword is called cup. Well, the object.", "The method that adds hours is trabajar. The others don't exist at this company.", { "texto": "If I make a Knight class, the constructor takes a sword and honor.", "respuesta": { "texto": "And if I make a Cami class, the constructor takes your number. No validation." } }],
+      "Nikki": [
+        "you looked for the method cobrar (get paid). it doesn't exist. the employee class never had it",
+        "this is from javascript. here it's cup. renaming things to sell them again: the industry's business model"
+      ],
+      "Cami": [
+        {
+          "texto": "If I instantiate a Rikka, I want the version with the red suit. The one that shows off everything.",
+          "respuesta": { "texto": "That suit is armor, Cami. It protects!" }
+        },
+        "I like classes with a good constructor. Men or women, as long as they build something, prof."
+      ],
+      "Jair": ["new is from JavaScript. Here it's refill. It took me three weeks to get used to it.", "Without cup, the class doesn't know whose name it is."]
+    },
+    "al_abrir": [
+      { "texto": "Three blanks: cup inside the constructor, refill to create the object and the method that adds hours." },
+      { "texto": "A mold that manufactures employees… This is darker than my kingdom's magic." }
+    ],
+    "al_resolver": [
+      { "texto": "Sixty hours unpaid. It compiles. Just because something compiles doesn't mean it's right." },
+      { "texto": "The mold worked! Now I can forge as many employees as I want." }
+    ]
+  },
+  "cierre": [
+    { "texto": "Classes: the mold for almost everything you'll program from now on." },
+    { "texto": "and the first thing we made with the mold was an employee who works for free. very educational. very realistic" },
+    { "texto": "and cami: not every constructor is an invitation. sometimes it's just a constructor" }
+  ]
+}

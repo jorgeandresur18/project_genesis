@@ -1,5 +1,5 @@
 {
-  "nota": "Estaturas: src/data/estaturas.json. alias = expresión que usa el juego -> expresión existente que la reemplaza mientras no exista. prefijos = nombres anteriores del personaje en el PSD o en las carpetas.",
+  "nota": "Estaturas: src/data/estaturas.json. alias = expresión que usa el juego -> expresión existente que la reemplaza mientras no exista. prefijos = nombres anteriores del personaje en el PSD o en las carpetas. renombrar = nombre de capa con error -> expresión que usa el juego. completo = expresiones que se exportan con la capa entera aunque se salga del lienzo (cuerpo entero). recortado = para una expresión «completo», nombre de una segunda versión recortada por el lienzo, como se ve en el PSD. ajustar = el personaje se dibujó de otro tamaño en el PSB: cada capa se escala desde abajo hasta que la cabeza llegue a su estatura (sirve para los más altos que el lienzo). Si un PSB tiene grupos dentro del grupo del personaje, cada grupo es otro personaje («mike») o, si no se llama como ninguno («varios»), cada capa es un personaje suelto.",
   "personajes": {
     "jair": {
       "prefijos": [
@@ -9,6 +9,9 @@
     "rikka": {
       "alias": {
         "seria": "base"
+      },
+      "renombrar": {
+        "tolla_llorando2": "toalla_llorando_mucho"
       }
     },
     "cami": {
@@ -23,6 +26,12 @@
         "miedo": "impactada",
         "sonrojada": "sonrojada1",
         "asombro": "impactada"
+      },
+      "completo": [
+        "armored_bersek_mode"
+      ],
+      "recortado": {
+        "armored_bersek_mode": "armored_bersek_medio"
       }
     },
     "nikki": {
@@ -46,6 +55,12 @@
         "sombra",
         "monstruo"
       ]
+    },
+    "guardia_primavera": {
+      "ajustar": true
+    },
+    "vendedor": {
+      "ajustar": true
     }
   }
 }

@@ -1,0 +1,97 @@
+{
+  "titulo": "Junior exam: espresso and await",
+  "tema": "espresso sip waits with await; if the answer is decaf, there's a plan B.",
+  "charla": [
+    { "texto": "Junior level exam: asynchronous code. Some things take a while: a database, a server, Human Resources." },
+    { "texto": "A function that waits for something is marked with espresso, and inside it you wait with await. Without espresso, you can't use await.", "codigo": ["espresso sip orderCoffee() {", "  brew coffee = await machine.brew();", "  pour coffee;", "}", "", "// no espresso, no await"] },
+    { "texto": "Like sending a messenger to the neighboring castle. Until he returns, the function waits. And if he comes back empty-handed…" },
+    { "texto": "…he comes back with decaf. You have to check for it. That's the exam: ask for a raise and handle the answer.", "codigo": ["espresso sip orderCoffee() {", "  brew coffee = await machine.brew();", "  if (coffee === decaf) {", "    pour 'The machine never answered.';", "  }", "  pour coffee;", "}"] },
+    { "texto": "await rrhh.responder(): the only await in history that never resolves. they use it to teach the concept of eternity" },
+    { "texto": "I'll await anyone, prof. Guy, girl… whoever shows up first." },
+    { "texto": "Focus. It's the exam. I'll read the notes with you.", "codigo": ["// Your turn", "// 1. The function that waits takes espresso.", "// 2. Inside, you wait with await.", "// 3. Look at what rrhh.coffee returns."] }
+  ],
+  "ejercicio": {
+    "archivos": [
+      {
+        "lineas": [
+          "// Junior exam: asynchronous code. Fill in the blanks.",
+          "[[1]] sip pedirAumento(empleado) {",
+          "  brew respuesta = [[2]] rrhh.responder(empleado);",
+          "  if (respuesta === [[3]]) {",
+          "    pour 'No answer. They left you on read.';",
+          "  }",
+          "  pour respuesta;",
+          "}",
+          "",
+          "pedirAumento('Jair').then(latte.log);",
+          "// Expected output: No answer. They left you on read."
+        ]
+      },
+      {
+        "lineas": [
+          "// Human Resources (read-only)",
+          "brew rrhh = {",
+          "  espresso responder(empleado) {",
+          "    await tiempo('forever');",
+          "    pour decaf; // company policy",
+          "  },",
+          "};"
+        ]
+      },
+      {
+        "ruta": "instructor_notes.txt",
+        "lineas": [
+          "INSTRUCTOR'S NOTES",
+          "",
+          "espresso sip f() { ... }   -> asynchronous function (in JavaScript: async function).",
+          "await something()          -> waits for something to finish. Only inside an espresso.",
+          "decaf                      -> nothing. If an answer can be decaf, check for it.",
+          "f().then(g)                -> when f finishes, it passes the result to g.",
+          "(pedirAumento = ask for a raise, rrhh = HR, responder = answer.)",
+          "",
+          "This is the same Coffee GENESIS uses. If you ever see it written in a weird place, you'll know how to read it."
+        ]
+      }
+    ],
+    "huecos": {
+      "1": { "error": "“{valor}” doesn't let the function wait. To use await, the function has to be espresso." },
+      "2": { "error": "With “{valor}”, “respuesta” is an unfulfilled promise, not the answer. You have to wait for it: await." },
+      "3": { "error": "HR doesn't return {valor}. Look at rrhh.coffee: what it returns is decaf." }
+    },
+    "exito": [
+      "No answer. They left you on read.",
+      "✔ Compiled. You handled HR's answer without breaking anything. Not even your dignity, which came pre-broken.",
+      "🎓 Junior level passed."
+    ],
+    "reacciones": {
+      "Jair": ["async is from JavaScript. Here it's espresso. In Coffee, anything that waits needs caffeine.", "Without await, you keep the promise, not the answer. Like my contract."],
+      "Rikka": ["Look at what Human Resources returns. It's in the other file.", "First the function has to be able to wait: espresso. Then, await.", { "texto": "await… it's like waiting for someone at the top of the tower. Even if they never come.", "respuesta": { "texto": "I'd climb that tower, princess. No espresso, no await.", "respuesta": { "texto": "…Focus on the exam." } } }],
+      "Nikki": [
+        "you put false. hr doesn't tell you no. it tells you nothing. that's worse",
+        "the answer takes “forever”. at least the code is honest about deadlines"
+      ],
+      "Cami": [
+        {
+          "texto": "While we wait for HR, Rikka, will you bend over to look for your pencil again? To kill time.",
+          "respuesta": { "texto": "I brought two pencils today. Precisely so I don't give you the pleasure." }
+        },
+        "Nobody leaves me on read. Not guys, not girls. Must be the cleavage."
+      ]
+    },
+    "al_abrir": [
+      { "texto": "Last exam of the level. Read rrhh.coffee: that's where you'll see what it returns. And remember: no espresso, no await." },
+      { "texto": "Waiting for someone who never answers… I understand that better than the code." }
+    ],
+    "al_resolver": [
+      { "texto": "Passed. Now you can read GENESIS's code. And wait for answers that never come. You're Junior." },
+      { "texto": "they left you on read and you handled it gracefully. that's what they ask for in interviews" }
+    ]
+  },
+  "cierre": [
+    { "texto": "Junior level passed: classes, inheritance and asynchronous code. It's the same thing GENESIS uses to write worlds." },
+    { "texto": "And I helped teach it. Instructor, does this count as work experience?" },
+    { "texto": "it counts as experience. not as work. never that" },
+    { "texto": "you'd wait for me though, wouldn't you? with await and everything… forget it. don't answer" },
+    { "texto": "I've already got my phone ready for the official photo at the final graduation. Rikka, stand in front. Facing away." }
+  ]
+}

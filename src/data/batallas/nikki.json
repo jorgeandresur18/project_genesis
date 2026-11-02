@@ -1,0 +1,338 @@
+{
+  "titulo": "El bar",
+  "fondo": "batalla/fondos/bar",
+  "heroes": [
+    "jair"
+  ],
+  "personajes": {
+    "jair": {
+      "nombre": "Jair",
+      "sprite": "batalla/jair",
+      "nivel": 5,
+      "seguido": true,
+      "base": {
+        "ps": 30,
+        "atq": 5,
+        "def": 3,
+        "vel": 8
+      },
+      "crece": {
+        "ps": 6,
+        "atq": 1,
+        "def": 0.6,
+        "vel": 0.5
+      },
+      "ataques": [
+        {
+          "nombre": "Puñetazo",
+          "poder": 14,
+          "texto": "{quien} cierra los ojos y lanza un puñetazo. Por estadística, alguno tenía que entrar."
+        }
+      ],
+      "hablar": [
+        "Nikki, perdón. Fue sin pensar.",
+        "Ocho años, Nikki. Ocho años.",
+        "Te invito otro trago. ¿Sí? Uno. El que quieras.",
+        "Estás borracha, Nikki. Cálmate."
+      ],
+      "especial": {
+        "nombre": "Ráfaga de puños",
+        "poder": 7,
+        "golpes": 6,
+        "objetivo": "uno",
+        "color": "#ff8a1f",
+        "ojos": [
+          50,
+          37,
+          27,
+          13
+        ],
+        "texto": "{quien} grita algo que aprendió en un anime y suelta una ráfaga de puños. Ninguno con técnica. Todos con fe.",
+        "posicion": "objetivo"
+      },
+      "escala": 1.08,
+      "sonido": "puno"
+    }
+  },
+  "enemigos": {
+    "nikki": {
+      "nombre": "Nikki",
+      "sprite": "batalla/nikki",
+      "jefe": true,
+      "huye_a": 0.5,
+      "base": {
+        "ps": 30,
+        "atq": 5,
+        "def": 2,
+        "vel": 9
+      },
+      "crece": {
+        "ps": 3.8,
+        "atq": 0.72,
+        "def": 0.1,
+        "vel": 0.3
+      },
+      "ataques": [
+        {
+          "nombre": "Cachetada",
+          "poder": 10,
+          "texto": "Nikki le da una cachetada que suelta una onda azul. Suena como un portazo."
+        },
+        {
+          "nombre": "Cachetada de revés",
+          "poder": 12,
+          "texto": "Nikki le da una cachetada de revés. Con el anillo. A propósito."
+        }
+      ],
+      "especial": {
+        "nombre": "Ráfaga de cachetadas infinitas",
+        "poder": 6,
+        "golpes": 10,
+        "objetivo": "uno",
+        "posicion": "objetivo",
+        "color": "#ff4f9a",
+        "ojos": [
+          62,
+          38,
+          26,
+          13
+        ],
+        "texto": "A Nikki le arden los ojos. Agarra a Jair de la camisa y empieza: derecha, izquierda, derecha, izquierda. Con fuego. No hay final a la vista."
+      },
+      "al_retirarse": "llorando",
+      "al_ganar": "llorando",
+      "perdon": {
+        "veces": 3,
+        "quien": "Nikki",
+        "pide": [
+          "Nikki, perdón. Me pasé. Fue sin pensar.",
+          "En serio. Perdón. Ocho años, Nikki, y lo arruiné en un segundo.",
+          "No tengo excusa. Perdóname. Por favor."
+        ],
+        "responde": [
+          "¿Perdón? ¿Ahora sí sabes decir perdón?",
+          "Sigue. A ver si te lo creo.",
+          "…Ya. Ya. Para. Te escuché."
+        ],
+        "corta": "Ah, ¿ya se te acabaron las disculpas? Ya decía yo."
+      },
+      "sonido": "cachetada",
+      "remata": {
+        "vida": 0.3,
+        "carga": 60
+      },
+      "clon": {
+        "nombre": "Clon de sombra",
+        "nombre_clon": "Sombra de Nikki",
+        "costo": 0.25,
+        "fuerza": 0.5,
+        "turnos": 3,
+        "color": "#6b4cff",
+        "texto": "Nikki junta las manos, cierra los ojos y se parte en dos. Lo que sale de ella es igual, pero hecho de sombra: más débil, más callado y con la misma mala cara.",
+        "reacciones": [
+          {
+            "quien": "Jair",
+            "texto": "¡Eso es de un anime! Lo vi. Lo vi entero. Eso es plagio, Nikki."
+          },
+          {
+            "quien": "Jair",
+            "texto": "Lo sabía. Lo sabía. Ocho años negándolo y eres otaku de clóset."
+          }
+        ],
+        "carga": 50,
+        "probabilidad": 0.6
+      }
+    }
+  },
+  "horda": {
+    "enemigo": "nikki",
+    "al_inicio": 0,
+    "niveles": []
+  },
+  "jefe": {
+    "enemigo": "nikki",
+    "nivel": 20
+  },
+  "objetos": {
+    "atq": {
+      "nombre": "Potenciador de ataque",
+      "atq": 3,
+      "texto": "{quien} se inyecta un chip rojo. Ataque +{n} hasta el final de la pelea."
+    },
+    "def": {
+      "nombre": "Potenciador de defensa",
+      "def": 3,
+      "texto": "{quien} se pone un parche de escudo. Defensa +{n} hasta el final de la pelea."
+    },
+    "vida": {
+      "nombre": "Lata de agua",
+      "ps": 30,
+      "texto": "{quien} se toma una lata de agua: +{n} PS. Tampoco la pagó."
+    },
+    "carga": {
+      "nombre": "Recargador de especial",
+      "carga": 100,
+      "texto": "{quien} conecta el recargador. La barra del especial se llena de golpe."
+    },
+    "caramelo_rancio": {
+      "nombre": "Caramelo rancio",
+      "niveles": 10,
+      "texto": "{quien} se come el caramelo rancio. Sabe a bar cerrado y a malas decisiones. Sube {n} niveles de golpe."
+    },
+    "revivir": {
+      "nombre": "Revivir",
+      "revive": 0.5,
+      "texto": "{quien} vuelve a pararse, mareado pero entero: +{n} PS. Nadie pregunta cómo funciona."
+    }
+  },
+  "botin": {
+    "probabilidad": 0.6,
+    "objetos": [
+      "atq",
+      "def",
+      "vida",
+      "vida",
+      "carga"
+    ]
+  },
+  "esquivar": 0.5,
+  "hablar": 0.4,
+  "huir": false,
+  "retratos": {
+    "Jair": "batalla/retratos/jair",
+    "Nikki": "batalla/retratos/nikki"
+  },
+  "dialogos": {
+    "inicio": [
+      {
+        "quien": "Nikki",
+        "texto": "¿Quieres pelea? Te voy a dar pelea."
+      }
+    ],
+    "jefe": [
+      {
+        "quien": "Voz",
+        "texto": "Nikki: nivel 20. Jair: nivel 5."
+      },
+      {
+        "quien": "Voz",
+        "texto": "Ocho años sacando a Jair de los bares, cargándolo hasta el taxi y aguantándole los dramas también dan experiencia."
+      }
+    ],
+    "refuerzos": [
+      {
+        "quien": "Voz",
+        "texto": "Nadie viene a ayudar. Es un bar."
+      }
+    ],
+    "jefe_huye": [
+      {
+        "quien": "Nikki",
+        "texto": "Te aprovechaste de mí. Estaba borracha y te aprovechaste."
+      },
+      {
+        "quien": "Nikki",
+        "texto": "Y encima me levantaste la mano. Tú. Justo tú."
+      },
+      {
+        "quien": "Voz",
+        "texto": "Nikki agarra su bolso y se va del bar llorando. No se despide. Esta vez sí cuenta como irse."
+      }
+    ],
+    "victoria": [
+      {
+        "quien": "Voz",
+        "texto": "Ganaste. No se siente como ganar."
+      }
+    ],
+    "derrota": [
+      {
+        "quien": "Voz",
+        "texto": "Jair no se levanta."
+      },
+      {
+        "quien": "Voz",
+        "texto": "Nikki se queda con la mano en el aire. Le tiembla. Después se le llenan los ojos."
+      }
+    ],
+    "huir_no": [
+      {
+        "quien": "Nikki",
+        "texto": "¿A dónde crees que vas? Siéntate."
+      },
+      {
+        "quien": "Voz",
+        "texto": "De esto no se huye."
+      }
+    ],
+    "huir": [
+      {
+        "quien": "Voz",
+        "texto": "Jair intenta irse. No puede."
+      }
+    ],
+    "descanso": [
+      {
+        "quien": "Voz",
+        "texto": "Nadie se mueve. El cantinero tampoco."
+      }
+    ],
+    "cae_jair": [
+      {
+        "quien": "Voz",
+        "texto": "Jair cae."
+      }
+    ],
+    "hablar_ok": [
+      {
+        "quien": "Voz",
+        "texto": "Nikki duda. Un segundo. Le alcanza para no pegar."
+      }
+    ],
+    "hablar_no": [
+      {
+        "quien": "Voz",
+        "texto": "Nikki no escucha. Ya no."
+      }
+    ],
+    "esquiva_ok": [
+      {
+        "quien": "Voz",
+        "texto": "{quien} esquiva la cachetada. Puro instinto de supervivencia."
+      }
+    ],
+    "botin": [
+      {
+        "quien": "Voz",
+        "texto": "Cae {objeto}."
+      }
+    ],
+    "premio": [
+      {
+        "quien": "Voz",
+        "texto": "En el piso, entre los vidrios, hay algo pegajoso: {objeto}. Quién sabe desde cuándo. Va a la mochila."
+      }
+    ],
+    "perdon": [
+      {
+        "quien": "Voz",
+        "texto": "Nikki baja la mano. Respira. Ya no tiene ganas de pegarle. Tiene ganas de otra cosa: de una cerveza."
+      }
+    ]
+  },
+  "fondo_proporcion": 1.7768,
+  "enemigos_atras": 0,
+  "intro": "versus",
+  "premio": {
+    "objetos": {
+      "caramelo_rancio": 1
+    },
+    "vars": {
+      "noche": "anormal"
+    }
+  },
+  "descripciones": {
+    "hablar": "Le hablas a Nikki. Está furiosa: con una sola disculpa no alcanza. Quizás, si insistes sin hacer otra cosa…"
+  },
+  "musica": "audio/musica/combate_arcade.mp3"
+}

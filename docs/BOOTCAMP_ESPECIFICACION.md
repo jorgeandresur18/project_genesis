@@ -1,4 +1,4 @@
-# PROYECT GENESIS
+# PROJECT GENESIS
 # DOCUMENTO MAESTRO DE ESPECIFICACIONES
 ## Minijuego: BOOTCAMP GÉNESIS
 
@@ -8,7 +8,7 @@
 
 # 1. CONCEPTO GENERAL
 
-**Bootcamp Génesis** es un minijuego integrado dentro de la novela visual PROYECT GENESIS.
+**Bootcamp Génesis** es un minijuego integrado dentro de la novela visual PROJECT GENESIS.
 
 Su concepto es una parodia de los bootcamps de programación, la industria tecnológica, la cultura de empleabilidad y las promesas de convertirse rápidamente en desarrollador de software.
 
@@ -364,7 +364,7 @@ Antes de modificar el proyecto:
 
 1. Inspeccionar la implementación actual de Bootcamp Génesis.
 2. Identificar las escenas, diálogos, ejercicios y mecánicas existentes.
-3. Revisar cómo está integrado dentro de PROYECT GENESIS.
+3. Revisar cómo está integrado dentro de PROJECT GENESIS.
 4. Comprender la arquitectura y las tecnologías utilizadas.
 5. Identificar qué funcionalidades ya funcionan.
 6. Detectar errores y oportunidades de mejora.
@@ -401,7 +401,7 @@ El jugador entra esperando aprender programación y termina participando en una 
 
 Debe existir un equilibrio entre aprendizaje, interacción y comedia.
 
-El minijuego tiene que ser funcional como software, coherente como experiencia educativa y reconocible como parte del universo de PROYECT GENESIS.
+El minijuego tiene que ser funcional como software, coherente como experiencia educativa y reconocible como parte del universo de PROJECT GENESIS.
 
 La IA debe contribuir tanto desde la ingeniería como desde la creatividad, sin perder de vista que está trabajando dentro de una obra con una identidad narrativa ya establecida.
 

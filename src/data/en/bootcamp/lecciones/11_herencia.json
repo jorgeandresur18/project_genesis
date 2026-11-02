@@ -1,0 +1,90 @@
+{
+  "titulo": "Inheritance (extra, super)",
+  "tema": "extra inherits from another class; super calls the parent's constructor.",
+  "charla": [
+    { "texto": "Junior, lesson two: inheritance. A class can inherit everything from another with extra, and then add its own stuff.", "codigo": ["blend Cup {", "  sip constructor(flavor) { cup.flavor = flavor; }", "}", "", "blend BigCup extra Cup {", "  // inherits everything from Cup", "}"] },
+    { "texto": "If the child class has its own constructor, it first has to call the parent's with super. Otherwise Coffee won't even let it exist.", "codigo": ["blend BigCup extra Cup {", "  sip constructor(flavor) {", "    super(flavor);  // the parent first", "    cup.ml = 500;", "  }", "}"] },
+    { "texto": "It's the line of succession. The heir inherits the title, but first pays homage to the father." },
+    { "texto": "inheritance: the one thing you'll never manage with your salary. the only thing they'll leave you is legacy code" },
+    { "texto": "If Rikka had a child class, would it inherit the butt? Because that would be quality legacy code." },
+    { "texto": "Cami! The daughter would inherit my sword. And use it on you." },
+    { "texto": "Exercise: an Intern that inherits from Employee. Earns the same as an Employee… minus everything.", "codigo": ["// Your turn", "// 1. Practicante inherits from Empleado with extra.", "// 2. In its constructor, super first.", "// 3. An intern's salary: nothing."] }
+  ],
+  "ejercicio": {
+    "archivos": [
+      {
+        "lineas": [
+          "// Junior · Lesson 2: inheritance. Fill in the blanks.",
+          "blend Practicante [[1]] Empleado {",
+          "  sip constructor(nombre) {",
+          "    [[2]](nombre); // first, the parent's constructor",
+          "    cup.sueldo = [[3]]; // “experience” instead of a salary",
+          "  }",
+          "}",
+          "",
+          "brew nuevo = refill Practicante('Kevin');",
+          "latte.log(nuevo.trabajar(40) + ' / salary: ' + nuevo.sueldo);",
+          "// Expected output: Kevin has worked 40 hours (unpaid) / salary: decaf"
+        ]
+      },
+      {
+        "lineas": [
+          "// (from the previous lesson, read-only)",
+          "blend Empleado {",
+          "  sip constructor(nombre) { cup.nombre = nombre; cup.horas = 0; }",
+          "  sip trabajar(horas) {",
+          "    cup.horas = cup.horas + horas;",
+          "    pour cup.nombre + ' has worked ' + cup.horas + ' hours (unpaid)';",
+          "  }",
+          "}"
+        ]
+      },
+      {
+        "ruta": "instructor_notes.txt",
+        "lineas": [
+          "INSTRUCTOR'S NOTES",
+          "",
+          "blend Child extra Parent { ... }  -> Child inherits everything from Parent (in JavaScript: extends).",
+          "super(...)                       -> calls the parent's constructor. It goes FIRST.",
+          "decaf                            -> nothing (in JavaScript: null).",
+          "(Practicante = Intern, Empleado = Employee, sueldo = salary.)",
+          "",
+          "The Practicante class inherits trabajar() without writing it. That's the magic of inheritance: the work passes down on its own."
+        ]
+      }
+    ],
+    "huecos": {
+      "1": { "error": "“{valor}” doesn't inherit. For Practicante to inherit from Empleado you write extra." },
+      "2": { "error": "“{valor}” doesn't call the parent's constructor. Before using cup, you have to call super(nombre)." },
+      "3": { "error": "“{valor}” is too generous for an intern. The salary is nothing: decaf." }
+    },
+    "exito": ["Kevin has worked 40 hours (unpaid) / salary: decaf", "✔ Compiled. The intern inherited everything from Empleado: the hours, the trabajar() method and the lack of pay."],
+    "reacciones": {
+      "Rikka": ["super first. The father always goes first, like at court.", "Practicante doesn't write trabajar(): it inherits it. Look at empleado.coffee.", { "texto": "In my kingdom, the inheritance was the crown. Here it's a salary in decaf.", "respuesta": { "texto": "You inherited the crown and I inherited the bad reputation. We both know which one gets used more." } }],
+      "Nikki": [
+        "you set the salary to 0. zero is still a number. interns don't even get that: decaf",
+        "'experiencia' in quotes. that's literally how they pay them. a string"
+      ],
+      "Cami": [
+        {
+          "texto": "extra: what Rikka has in the back. Okay, okay, I'll shut up… no, I won't.",
+          "respuesta": { "texto": "And what you have in the front is extra too, Cami. I don't comment on it in class." }
+        },
+        "Inheritance… I got my temper from my mom and my taste for girls from my dad. The taste for guys I developed on my own."
+      ],
+      "Jair": ["Without super, Coffee won't let you touch cup. Classic interview mistake.", "extends is from JavaScript. Here it's extra."]
+    },
+    "al_abrir": [
+      { "texto": "The Empleado class is in the other file. Practicante inherits from it: extra, super and the salary." },
+      { "texto": "the intern is called kevin. they didn't even give him a last name. just like real life" }
+    ],
+    "al_resolver": [
+      { "texto": "It inherited trabajar() without writing it! Inheritance is more useful than in my kingdom." },
+      { "texto": "salary: decaf. the only data in the system nobody wants to refactor" }
+    ]
+  },
+  "cierre": [
+    { "texto": "Inheritance: reusing what already exists. Use it sparingly; inheriting too much turns into a tangle." },
+    { "texto": "Like my list of exes. Some inherit from others. There are guys, there are girls, there's a drummer." }
+  ]
+}

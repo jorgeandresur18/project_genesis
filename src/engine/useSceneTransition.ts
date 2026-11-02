@@ -39,12 +39,14 @@ function whenBackgroundReady(scene: Scene, done: () => void): () => void {
 }
 
 export type TransitionPhase = 'idle' | 'out' | 'in';
-export type TransitionColor = 'negro' | 'blanco';
+export type TransitionColor = 'negro' | 'blanco' | 'negro_lento';
 
 /** Duraciones (ms) de cada tipo de transición: oscurecer/aclarar y volver a aparecer. */
 export const TRANSITIONS: Record<TransitionColor, { out: number; in: number }> = {
   negro: { out: 350, in: 450 },
   blanco: { out: 1200, in: 1600 },
+  // Fin de una escena de romance: la imagen se apaga despacio y el día siguiente aparece despacio.
+  negro_lento: { out: 1600, in: 1800 },
 };
 
 /**

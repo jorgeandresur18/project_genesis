@@ -1,7 +1,9 @@
 import { useEffect, useState, type ReactNode } from 'react';
+import { MODO_TODO } from '../engine/modo';
+import { CHAPTER_STARTS } from './ChapterIntro';
 import { useStore } from '../engine/store';
 import { storyFiles } from '../engine/story';
-import { playCancel, playSelect } from '../engine/sound';
+import { playCancel, playGlitch, playSelect } from '../engine/sound';
 import textosEs from '../data/fin_capitulo.json';
 import textosEn from '../data/en/fin_capitulo.json';
 import { localized, useLang } from '../engine/i18n';
@@ -17,6 +19,30 @@ interface Props {
 }
 
 const FADE_MS = 1800;
+// El título del capítulo se corrompe un momento: glitch, la otra versión, glitch y vuelta.
+const GLITCH_AT = 2000;
+const GLITCH_MS = 320;
+const ALT_MS = 1400;
+
+/**
+ * Lo que tienen en común el título y su versión corrupta, y lo que cambia: «El viaje del » + «héroe» /
+ * «antihéroe». Solo la parte que cambia hace el glitch.
+ */
+function splitDiff(a: string, b: string) {
+  let start = 0;
+  while (start < a.length && start < b.length && a[start] === b[start]) start++;
+  // La parte que cambia empieza al principio de una palabra.
+  while (start > 0 && a[start - 1] !== ' ') start--;
+  let end = 0;
+  while (end < a.length - start && end < b.length - start && a[a.length - 1 - end] === b[b.length - 1 - end]) end++;
+  while (end > 0 && a[a.length - end] !== ' ') end--;
+  return {
+    before: a.slice(0, start),
+    a: a.slice(start, a.length - end),
+    b: b.slice(start, b.length - end),
+    after: a.slice(a.length - end),
+  };
+}
 const n = (text: string, chapter: number) => text.replace('{n}', String(chapter));
 
 /** Fin de capítulo: fundido a negro, «FIN DEL CAPÍTULO N» en grande y Continuar / Guardar / Volver al inicio. */
@@ -29,6 +55,27 @@ export function ChapterEnd({ chapter, lastScene, onSave, onTitle }: Props) {
   const file = storyFiles.find((f) => f.ruta === 'base' && f.chapter === chapter);
   const title = lang === 'en' ? (file?.title_en ?? file?.title) : file?.title;
   const background = (textos.fondos as Record<string, string>)[String(chapter)];
+  const alt = lang === 'en' ? (file?.title_glitch_en ?? file?.title_glitch) : file?.title_glitch;
+  // 'normal' → 'glitch' → 'alt' → 'glitch' → 'normal' (una sola vez).
+  const [sub, setSub] = useState<'normal' | 'glitch' | 'alt' | 'glitch-out'>('normal');
+  useEffect(() => {
+    if (!faded || !alt || still) return;
+    const steps: [number, typeof sub][] = [
+      [GLITCH_AT, 'glitch'],
+      [GLITCH_AT + GLITCH_MS, 'alt'],
+      [GLITCH_AT + GLITCH_MS + ALT_MS, 'glitch-out'],
+      [GLITCH_AT + GLITCH_MS * 2 + ALT_MS, 'normal'],
+    ];
+    const timers = steps.map(([ms, step]) =>
+      setTimeout(() => {
+        if (step === 'glitch' || step === 'glitch-out') playGlitch();
+        setSub(step);
+      }, ms),
+    );
+    return () => timers.forEach(clearTimeout);
+  }, [faded, alt, still]);
+  const diff = title && alt ? splitDiff(title, alt) : null;
+  const word = sub === 'alt' || sub === 'glitch-out' ? diff?.b : diff?.a;
 
   useEffect(() => {
     const t = setTimeout(() => setFaded(true), still ? 400 : FADE_MS);
@@ -59,10 +106,36 @@ export function ChapterEnd({ chapter, lastScene, onSave, onTitle }: Props) {
         <h1 className="chapter-end-title" data-text={n(textos.fin, chapter)}>
           {n(textos.fin, chapter)}
         </h1>
-        {title && <p className="chapter-end-sub">{title}</p>}
+        {title && (
+          <p className="chapter-end-sub">
+            {diff ? (
+              <>
+                {diff.before}
+                <span
+                  className={`sub-word ${sub.startsWith('glitch') ? 'sub-glitch' : ''} ${sub === 'alt' ? 'sub-alt' : ''}`}
+                  data-text={word}
+                >
+                  {word}
+                </span>
+                {diff.after}
+              </>
+            ) : (
+              title
+            )}
+          </p>
+        )}
       </div>
       <nav className="chapter-end-menu">
-        <button onClick={click(() => setSoon(true))}>{textos.continuar}</button>
+        <button
+          onClick={click(() => {
+            // En /all (todo unido) sigue en el capítulo siguiente; si no, «próximamente».
+            const siguiente = MODO_TODO ? [...CHAPTER_STARTS].find(([, n]) => n === chapter + 1)?.[0] : undefined;
+            if (siguiente) useStore.getState().seguirCapitulo(siguiente);
+            else setSoon(true);
+          })}
+        >
+          {textos.continuar}
+        </button>
         <button onClick={click(onSave)}>{textos.guardar}</button>
         <button onClick={click(onTitle)}>{textos.inicio}</button>
       </nav>

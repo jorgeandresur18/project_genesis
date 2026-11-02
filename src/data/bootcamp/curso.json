@@ -54,7 +54,11 @@
       "nombre": "Junior",
       "descripcion": "Clases, herencia y espresso: el Coffee que escribe GENESIS. Responsabilidades de senior, sueldo de trainee.",
       "bloqueo": "Se abre al terminar el Capítulo 2.",
-      "lecciones": [],
+      "lecciones": [
+        "clases",
+        "herencia",
+        "asincronia"
+      ],
       "diploma": {
         "titulo": "Junior con responsabilidades de senior",
         "texto": "Bootcamp Genesis certifica que quien sostiene esta pantalla domina clases, herencia y código asíncrono, y por lo tanto puede hacer el trabajo de tres personas por el sueldo de media.",

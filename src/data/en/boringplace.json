@@ -1,0 +1,100 @@
+{
+  "vacio": {
+    "titulo": "Nobody is selling anything yet",
+    "texto": "Nobody is selling their junk or their trinkets yet. Come back later: people always end up needing money."
+  },
+  "textos": {
+    "para_ti": "For you",
+    "tus_articulos": "Your listings",
+    "disponible": "Is this still available?",
+    "vendido": "Mark as sold",
+    "vendedor": "Seller",
+    "estado": "Condition",
+    "publicado": "Listed {cuando} · {lugar}",
+    "vistas": "{n} people looked at it. Nobody wrote.",
+    "sin_tuyos": "You are not selling anything. Weird.",
+    "atras": "Back"
+  },
+  "articulos": [
+    {
+      "titulo": "Latest-model phone, sealed in its box",
+      "estado": "New",
+      "publicado": "2 hours ago",
+      "lugar": "1 km away",
+      "descripcion": "Original. Sealed. My cousin who works at the port gave it to me. Pay up front and I ship it as soon as it arrives from abroad. No in-person pickups because I am shy.",
+      "respuesta": "\"Sure, buddy. To reserve it, send me your card number, the expiry date and the three little numbers on the back.\" Better not."
+    },
+    {
+      "titulo": "Gaming chair with only one armrest",
+      "estado": "Used — fair",
+      "publicado": "3 days ago",
+      "lugar": "4 km away",
+      "descripcion": "Reclines, spins and has lights. The other armrest left with my ex. She also took the beanbag.",
+      "respuesta": "\"Yes, still here. You can have it for 20 if you help me carry it down: fifth floor, no elevator.\""
+    },
+    {
+      "titulo": "Furnished apartment downtown, $120 a month",
+      "estado": "Like new",
+      "publicado": "20 minutes ago",
+      "lugar": "downtown",
+      "descripcion": "Three bedrooms, city view, hot water and wifi included. No viewings: the owner is traveling. The owner is always traveling. Deposit by bank transfer only.",
+      "respuesta": "\"Lots of people are interested. Transfer the deposit in the next ten minutes and it is yours. The owner will send you the keys when he gets back.\""
+    },
+    {
+      "titulo": "Microwave that works if you speak to it nicely",
+      "estado": "Used — has character",
+      "publicado": "1 week ago",
+      "lugar": "2 km away",
+      "descripcion": "It heats. Sometimes. You have to close the door gently and say \"thank you\". Not a joke. I am selling it because I bought one that does not need to be loved.",
+      "respuesta": "\"Yes, dear. But you come pick it up yourself and have a coffee, nobody visits me.\""
+    },
+    {
+      "titulo": "Exercise bike (luxury clothes rack)",
+      "estado": "Used twice",
+      "publicado": "2 weeks ago",
+      "lugar": "6 km away",
+      "descripcion": "Used twice in January. Since then it has been an excellent clothes rack. Comes with the clothes hanging on it, which I no longer know who they belong to.",
+      "respuesta": "\"Yes. Do you want it with or without the clothes? Same price either way.\""
+    },
+    {
+      "titulo": "Course: become a millionaire in 7 days",
+      "estado": "Digital",
+      "publicado": "5 hours ago",
+      "lugar": "everywhere",
+      "descripcion": "I used to be like you: poor and without vision. Today I have a car I rented for the photo. Includes a PDF, a motivational audio and faith. The secret is selling this course.",
+      "respuesta": "\"Your first investment in yourself! Today's offer is $499. Tomorrow it is more expensive. Tomorrow is always more expensive.\""
+    },
+    {
+      "titulo": "Bundle of cables, no idea what they are for",
+      "estado": "Tangled",
+      "publicado": "4 days ago",
+      "lugar": "3 km away",
+      "descripcion": "A whole box of cables. One of them will be good for something. None of them were good for me, but that is not the cables' fault.",
+      "respuesta": "\"Yes, still here. They are always still here. Cables never leave.\""
+    },
+    {
+      "titulo": "Mechanical keyboard (missing the E key)",
+      "estado": "Used — good condition",
+      "descripcion": "The keys sound nice. It is missing the E, but you get used to it: I have been typing without it for three months and nobody noticed. Negotiable. Very negotiable.",
+      "publicado": "2 weeks ago",
+      "lugar": "0 km away",
+      "respuesta": "Nobody bought it. Not even at half price. The E left and took the customers with it."
+    },
+    {
+      "titulo": "19-inch monitor with a green line",
+      "estado": "Used — has personality",
+      "descripcion": "Works perfectly. The vertical green line comes free and never leaves. Ideal for someone who does not look at the right side of the screen.",
+      "publicado": "1 month ago",
+      "lugar": "0 km away",
+      "respuesta": "Someone offered $8 and a \"blessings\". Jair is seriously considering it."
+    },
+    {
+      "titulo": "Spare fan",
+      "estado": "Almost new",
+      "descripcion": "It is the spare one. The main one is not for sale: I have limits. Three speeds: low, medium and \"the paper flies\".",
+      "publicado": "3 days ago",
+      "lugar": "0 km away",
+      "respuesta": "You mark it as sold and regret it instantly. You list it again. It is the circle of life."
+    }
+  ]
+}

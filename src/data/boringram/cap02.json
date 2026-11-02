@@ -1,0 +1,326 @@
+{
+  "nota": "Boringram en el Capítulo 2 (ver «nota» en src/data/boringram.json). El reloj del celular casi no avanza: en el mundo real pasaron minutos. Jordan (amigo de Jair; aparece en el Capítulo 4) escribe en minúsculas y sin tildes, como Nikki. El celular sigue ligado al mundo real, que corre 45 veces más lento: 1 día de juego son 32 minutos reales (3:12 en las termas, 5:11 en la taberna, 6:34 al llegar al Verano, cerca de las 8:48 en la captura). Los «hace» se cuentan desde el final del capítulo. «estado» de un chat con {hace}: cuándo estuvo activa la persona («activo», o si no, su último mensaje).",
+  "estado": [
+    {
+      "desbloqueo": "cap02_001",
+      "cuando": "0 01:33"
+    },
+    {
+      "desbloqueo": "cap02_p2_003",
+      "cuando": "0 03:02"
+    },
+    {
+      "desbloqueo": "cap02_p2_010",
+      "cuando": "0 03:12",
+      "bateria": 5,
+      "ahorro": true
+    },
+    {
+      "desbloqueo": "cap02_p2_049",
+      "cuando": "0 03:45"
+    },
+    {
+      "desbloqueo": "cap02_t_a01",
+      "cuando": "0 04:50"
+    },
+    {
+      "desbloqueo": "cap02_t_bc07",
+      "cuando": "0 05:11",
+      "bateria": 50
+    },
+    {
+      "desbloqueo": "cap02_t_m01",
+      "cuando": "0 05:30"
+    },
+    {
+      "desbloqueo": "cap02_ve_001",
+      "cuando": "0 06:33"
+    },
+    {
+      "desbloqueo": "cap02_ve_003",
+      "cuando": "0 06:34",
+      "bateria": 46
+    },
+    {
+      "desbloqueo": "cap02_bq_21",
+      "cuando": "0 06:45",
+      "bateria": 44
+    },
+    {
+      "desbloqueo": "cap02_ve_068",
+      "cuando": "0 06:50"
+    },
+    {
+      "desbloqueo": "cap02_ve_070",
+      "cuando": "0 07:38"
+    },
+    {
+      "desbloqueo": "cap02_tr_05",
+      "cuando": "0 07:45"
+    },
+    {
+      "desbloqueo": "cap02_tr_15",
+      "cuando": "0 08:10"
+    },
+    {
+      "desbloqueo": "cap02_fin_011",
+      "cuando": "0 08:48"
+    }
+  ],
+  "publicaciones": [
+    {
+      "id": "jordan_amigo",
+      "autor": "jordan",
+      "tipo": "texto",
+      "texto": "dato: si tu amigo no te invita a la playa no es tu amigo. es un contacto",
+      "likes": 9,
+      "comentarios": [],
+      "desbloqueo": "cap02_tr_05",
+      "cuando": "0 07:46"
+    },
+    {
+      "id": "jordan_ligan",
+      "autor": "jordan",
+      "tipo": "texto",
+      "texto": "el que dijo que los ingenieros no ligan nunca vio el boringram de mi amigo 🙃",
+      "likes": 14,
+      "comentarios": [],
+      "desbloqueo": "cap02_ve_070",
+      "cuando": "0 07:39"
+    },
+    {
+      "id": "jair_rey",
+      "autor": "jair",
+      "tipo": "texto",
+      "texto": "Hoy me contaron cómo un rey bueno se volvió malo de un día para otro. Me sonó a ascenso.",
+      "likes": 0,
+      "comentarios": [],
+      "desbloqueo": "cap02_ve_068",
+      "cuando": "0 06:50"
+    },
+    {
+      "id": "jordan_silla",
+      "autor": "jordan",
+      "tipo": "texto",
+      "texto": "hay gente que desaparece una semana y vuelve con fotos en la playa con dos modelos. yo aqui en la misma silla de siempre. normal. todo normal",
+      "likes": 11,
+      "comentarios": [],
+      "desbloqueo": "cap02_bq_21",
+      "cuando": "0 06:46"
+    },
+    {
+      "id": "jair_playa",
+      "autor": "jair",
+      "tipo": "foto",
+      "imagen": "PLACEHOLDER:boringram_playa",
+      "texto": "Vacaciones pagadas por un traje rojo. Larga historia.",
+      "likes": 0,
+      "comentarios": [
+        {
+          "usuario": "jordan",
+          "texto": "vaya melones los de la rubia 🍈🍈 seguro que no es IA?"
+        }
+      ],
+      "desbloqueo": "cap02_bq_21",
+      "cuando": "0 06:45"
+    },
+    {
+      "id": "jair_quemado",
+      "autor": "jair",
+      "tipo": "texto",
+      "texto": "Primera playa en años. Me quemé en quince minutos. El sol de aquí cobra intereses.",
+      "likes": 0,
+      "comentarios": [],
+      "desbloqueo": "cap02_bp_026",
+      "cuando": "0 06:40"
+    },
+    {
+      "id": "jair_desayuno",
+      "autor": "jair",
+      "tipo": "foto",
+      "imagen": "PLACEHOLDER:boringram_desayuno_resaca",
+      "texto": "Desayuno de resaca para tres. Receta de la abuela, ingredientes de otra dimensión. Mis compañeras dicen que revive a los muertos.",
+      "likes": 4,
+      "comentarios": [],
+      "desbloqueo": "cap02_t_e13",
+      "cuando": "0 05:35"
+    },
+    {
+      "id": "jair_resaca",
+      "autor": "jair",
+      "tipo": "texto",
+      "texto": "Resaca interdimensional. Nivel: me duele el alma y la sacerdotisa dice que eso no tiene cura.",
+      "likes": 2,
+      "comentarios": [],
+      "desbloqueo": "cap02_t_m01",
+      "cuando": "0 05:30"
+    },
+    {
+      "id": "jair_cantan",
+      "autor": "jair",
+      "tipo": "texto",
+      "texto": "las sacerdotisas cantan horrible y es lo mas bonito que escuche en años. no me juzguen. estoy bien. estoy muy bien",
+      "likes": 0,
+      "comentarios": [
+        {
+          "usuario": "lady.compila",
+          "texto": "¿Jair? Son las 5 a. m. ¿Estuviste soñando, no puedes dormir o estás ebrio? Responde con una sola palabra."
+        },
+        {
+          "usuario": "jordan",
+          "texto": "sacerdotisas?? en que bar estas y por que no me invitaste"
+        }
+      ],
+      "desbloqueo": "cap02_t_bn44",
+      "cuando": "0 05:20"
+    },
+    {
+      "id": "jair_atardecer",
+      "autor": "jair",
+      "tipo": "texto",
+      "texto": "Hay atardeceres que no salen en ningún fondo de pantalla. No pregunten.",
+      "likes": 1,
+      "comentarios": [],
+      "desbloqueo": "cap02_p2_007",
+      "cuando": "0 03:08"
+    },
+    {
+      "id": "jair_misiones",
+      "autor": "jair",
+      "tipo": "texto",
+      "texto": "Día 3 en otra dimensión. Hice misiones secundarias por pan. Me pagaron mejor que en la oficina.",
+      "likes": 3,
+      "comentarios": [],
+      "desbloqueo": "cap02_p2_003",
+      "cuando": "0 03:02"
+    }
+  ],
+  "destacadas": [
+    {
+      "id": "jair_cocina",
+      "autor": "jair",
+      "titulo": "cocina",
+      "imagen": "PLACEHOLDER:historia_jair_cocina",
+      "texto": "el único talento que me queda",
+      "desbloqueo": "cap02_t_e08",
+      "cuando": "0 05:33"
+    },
+    {
+      "id": "jair_taberna",
+      "autor": "jair",
+      "titulo": "salud",
+      "imagen": "PLACEHOLDER:historia_jair_taberna",
+      "texto": "con mis compañeras de viaje. invita la sacerdotisa",
+      "desbloqueo": "cap02_t_bp28",
+      "cuando": "0 05:12"
+    },
+    {
+      "id": "jair_termas",
+      "autor": "jair",
+      "titulo": "viaje",
+      "imagen": "PLACEHOLDER:historia_jair_termas",
+      "texto": "vacaciones (no pagadas)",
+      "desbloqueo": "cap02_p2_010",
+      "cuando": "0 03:12"
+    }
+  ],
+  "notificaciones": [
+    {
+      "id": "carga_rayo",
+      "app": "Sistema",
+      "icono": "⚡",
+      "titulo": "Cargando: 50 %",
+      "texto": "Carga inalámbrica. Origen de la energía: no reconocido. No preguntes.",
+      "desbloqueo": "cap02_t_bc07",
+      "cuando": "0 05:11"
+    },
+    {
+      "id": "ahorro",
+      "app": "Sistema",
+      "icono": "🔋",
+      "titulo": "Ahorro de energía activado",
+      "texto": "Se detuvieron las apps en segundo plano. Tus sueños también.",
+      "desbloqueo": "cap02_p2_010",
+      "cuando": "0 03:12"
+    }
+  ],
+  "chats": [
+    {
+      "id": "jordan",
+      "perfil": "jordan",
+      "estado": "Activo {hace}",
+      "mensajes": [
+        {
+          "de": "ella",
+          "texto": "oye",
+          "desbloqueo": "cap02_t_bp28",
+          "cuando": "0 05:12"
+        },
+        {
+          "de": "ella",
+          "texto": "donde andas bebiendo??",
+          "desbloqueo": "cap02_t_bp28",
+          "cuando": "0 05:12"
+        },
+        {
+          "de": "ella",
+          "texto": "y por que no me invitaste",
+          "desbloqueo": "cap02_t_bp28",
+          "cuando": "0 05:13"
+        },
+        {
+          "de": "ella",
+          "texto": "quienes son esas dos 👀",
+          "desbloqueo": "cap02_t_bn10",
+          "cuando": "0 05:14"
+        },
+        {
+          "de": "ella",
+          "texto": "y ahora playa???",
+          "desbloqueo": "cap02_bq_21",
+          "cuando": "0 06:45"
+        },
+        {
+          "de": "ella",
+          "texto": "te odio",
+          "desbloqueo": "cap02_bq_21",
+          "cuando": "0 06:45"
+        },
+        {
+          "de": "ella",
+          "texto": "mandame ubicacion",
+          "desbloqueo": "cap02_bq_21",
+          "cuando": "0 06:46"
+        }
+      ]
+    },
+    {
+      "id": "linkedfired",
+      "nombre": "linkedfired.empleos",
+      "estado": "Cuenta de empresa",
+      "visto": true,
+      "mensajes": [
+        {
+          "de": "ella",
+          "texto": "¡Jair! Un puesto perfecto para ti: practicante no remunerado, 5 años de experiencia, disponibilidad 24/7. ¿Te interesa?",
+          "desbloqueo": "cap02_p2_003",
+          "cuando": "0 03:02"
+        }
+      ]
+    },
+    {
+      "id": "banco",
+      "nombre": "tu_banco_seguro",
+      "estado": "Cuenta verificada (creemos)",
+      "visto": true,
+      "mensajes": [
+        {
+          "de": "ella",
+          "texto": "Detectamos un inicio de sesión desde otra dimensión. Si no fuiste tú, ignora este mensaje. Si fuiste tú, también.",
+          "desbloqueo": "cap02_p2_010",
+          "cuando": "0 03:11"
+        }
+      ]
+    }
+  ]
+}

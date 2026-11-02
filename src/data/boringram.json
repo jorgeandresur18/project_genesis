@@ -27,6 +27,17 @@
       "te_sigue": true,
       "desbloqueo": "cap01_115n7",
       "historias_sin_comentarios": true
+    },
+    "jordan": {
+      "usuario": "jordan",
+      "nombre": "Jordan",
+      "foto": "PLACEHOLDER:jordan_perfil",
+      "bio": "en la misma silla desde 2019. no me pregunten por qué",
+      "publicaciones": 57,
+      "seguidores": 212,
+      "seguidos": 380,
+      "te_sigue": true,
+      "desbloqueo": "cap02_t_bp28"
     }
   },
   "publicaciones": [
@@ -425,7 +436,7 @@
     "instagram_nota_celular": "Elige Instagram en el menú: llega como mensaje, con la miniatura y el texto. Por si acaso, también copiamos el texto con el enlace.",
     "facebook_nota": "Facebook no deja escribir el texto por ti: lo copiamos. Pégalo en tu publicación, arriba de la miniatura.",
     "instagram_nota": "Copiamos el texto con el enlace. Pégalo en un mensaje de Instagram (se abrió en otra pestaña): se verá con su miniatura.",
-    "compartir_texto": "Mira esto en PROYECT GENESIS (18+)",
+    "compartir_texto": "Mira esto en PROJECT GENESIS (18+)",
     "ahorro": "Ahorro de energía",
     "agregar_comentario": "Agrega un comentario…",
     "publicar": "Publicar",
@@ -464,7 +475,8 @@
     "hace_anos": "hace {n} años",
     "alarma_proxima": "programada",
     "dia_hoy": "Hoy",
-    "dia_ayer": "Ayer"
+    "dia_ayer": "Ayer",
+    "boringplace": "Boringplace"
   },
   "notificaciones": [
     {
@@ -632,7 +644,7 @@
     "Modo avión"
   ],
   "sitio": "https://proyect-genesis.vercel.app/",
-  "compartir_version": 2,
+  "compartir_version": 3,
   "estado": [
     {
       "desbloqueo": "cap01_001",
@@ -745,6 +757,13 @@
       "gesto": "toque",
       "titulo": "Mensajes",
       "texto": "Tus chats. Los que dejaste en visto también. Sobre todo esos."
+    },
+    {
+      "vista": "tienda",
+      "objetivo": "nav-tienda",
+      "gesto": "toque",
+      "titulo": "Boringplace",
+      "texto": "El mercado de Boringram. Aquí la gente vende lo que ya no quiere y, de vez en cuando, algo que nunca existió: si es demasiado bueno para ser verdad, es una estafa. Jair también vende sus cosas: es la única forma de que el sueldo le llegue a fin de mes. Abre más adelante en la historia."
     },
     {
       "vista": "inicio",

@@ -10,6 +10,7 @@ docs/imagenes/
 
 # Archivos de trabajo de arte: demasiado pesados para GitHub (límite de 100 MB).
 docs/sprites/*.psd
+docs/sprites/*.psb
 
 # Fondos originales (pesados; se publican convertidos en public/fondos)
 docs/fondos/
@@ -17,3 +18,8 @@ docs/fondos/
 # Documentos narrativos originales del autor: nombran a personas reales.
 # La versión con marcadores es docs/DIRECCION_PSICOLOGICA.md.
 docs/*Proyecto_Genesis_Documento_Narrativo*.md
+*.psb
+
+# Material de referencia con derechos de terceros (desensamblados de juegos): solo para leer, nunca se publica.
+docs/*source code*.txt
+__pycache__/

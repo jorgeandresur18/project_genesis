@@ -1,0 +1,96 @@
+{
+  "id": "herencia",
+  "titulo": "Herencia (extra, super)",
+  "tema": "extra hereda de otra clase; super llama al constructor del padre.",
+  "charla": [
+    { "quien": "Jair", "sprite": "sprites/jair/sabelotodo.webp", "texto": "Junior, clase dos: herencia. Una clase puede heredar todo lo de otra con extra, y después agregar lo suyo.", "codigo": ["blend Taza {", "  sip constructor(sabor) { cup.sabor = sabor; }", "}", "", "blend TazaGrande extra Taza {", "  // hereda todo lo de Taza", "}"] },
+    { "quien": "Jair", "sprite": "sprites/jair/base.webp", "texto": "Si la clase hija tiene su propio constructor, primero tiene que llamar al del padre con super. Si no, Coffee no la deja ni existir.", "codigo": ["blend TazaGrande extra Taza {", "  sip constructor(sabor) {", "    super(sabor);   // primero, el padre", "    cup.ml = 500;", "  }", "}"] },
+    { "quien": "Rikka", "sprite": "sprites/rikka/seria.webp", "texto": "Es la línea de sucesión. El hijo hereda el título, pero primero le rinde honores al padre." },
+    { "quien": "Nikki", "sprite": "sprites/nikki/fria.webp", "texto": "herencia: lo único que no vas a poder hacer con tu sueldo. lo único que te van a dejar es el código legado" },
+    { "quien": "Cami", "sprite": "sprites/cami/burlona.webp", "texto": "Si Rikka tuviera una clase hija, ¿heredaría el trasero? Porque eso sería código legado de calidad." },
+    { "quien": "Rikka", "sprite": "sprites/rikka/enojada.webp", "texto": "¡Cami! La hija heredaría mi espada. Y la usaría contigo." },
+    { "quien": "Jair", "sprite": "sprites/jair/atontado.webp", "texto": "Ejercicio: un Practicante que hereda de Empleado. Gana lo mismo que un Empleado… menos todo.", "codigo": ["// Tu turno", "// 1. Practicante hereda de Empleado con extra.", "// 2. En su constructor, primero super.", "// 3. El sueldo de un practicante: nada."] }
+  ],
+  "ejercicio": {
+    "proyecto": "bootcamp/herencia",
+    "principal": "practicante.coffee",
+    "archivos": [
+      {
+        "ruta": "practicante.coffee",
+        "lineas": [
+          "// Junior · Clase 2: herencia. Completa los huecos.",
+          "blend Practicante [[1]] Empleado {",
+          "  sip constructor(nombre) {",
+          "    [[2]](nombre); // primero, el constructor del padre",
+          "    cup.sueldo = [[3]]; // «experiencia» en lugar de sueldo",
+          "  }",
+          "}",
+          "",
+          "brew nuevo = refill Practicante('Kevin');",
+          "latte.log(nuevo.trabajar(40) + ' / sueldo: ' + nuevo.sueldo);",
+          "// Salida esperada: Kevin lleva 40 horas (sin pago) / sueldo: decaf"
+        ]
+      },
+      {
+        "ruta": "empleado.coffee",
+        "lineas": [
+          "// (de la clase anterior, solo lectura)",
+          "blend Empleado {",
+          "  sip constructor(nombre) { cup.nombre = nombre; cup.horas = 0; }",
+          "  sip trabajar(horas) {",
+          "    cup.horas = cup.horas + horas;",
+          "    pour cup.nombre + ' lleva ' + cup.horas + ' horas (sin pago)';",
+          "  }",
+          "}"
+        ]
+      },
+      {
+        "ruta": "notas_del_instructor.txt",
+        "lineas": [
+          "NOTAS DEL INSTRUCTOR",
+          "",
+          "blend Hija extra Padre { ... }  -> Hija hereda todo de Padre (en JavaScript: extends).",
+          "super(...)                      -> llama al constructor del padre. Va PRIMERO.",
+          "decaf                           -> nada (en JavaScript: null).",
+          "",
+          "La clase Practicante hereda trabajar() sin escribirlo. Es la magia de la herencia: el trabajo se hereda solo."
+        ]
+      }
+    ],
+    "huecos": {
+      "1": { "respuesta": "extra", "error": "«{valor}» no hereda. Para que Practicante herede de Empleado se escribe extra." },
+      "2": { "respuesta": "super", "error": "«{valor}» no llama al constructor del padre. Antes de usar cup, hay que llamar a super(nombre)." },
+      "3": { "respuesta": "decaf", "error": "«{valor}» es demasiado generoso para un practicante. El sueldo es nada: decaf." }
+    },
+    "paleta": ["extra", "extends", "blend", "super", "cup", "refill", "decaf", "0", "'experiencia'"],
+    "exito": ["Kevin lleva 40 horas (sin pago) / sueldo: decaf", "✔ Compiló. El practicante heredó todo de Empleado: las horas, el método trabajar() y la falta de pago."],
+    "reacciones": {
+      "Rikka": ["Primero super. El padre siempre va primero, como en la corte.", "Practicante no escribe trabajar(): lo hereda. Mira empleado.coffee.", { "texto": "En mi reino, la herencia era la corona. Aquí es un sueldo en decaf.", "sprite": "sprites/rikka/seria.webp", "respuesta": { "quien": "Cami", "texto": "Tú heredaste la corona y yo la mala fama. Las dos sabemos cuál se usa más.", "sprite": "sprites/cami/burla.webp" } }],
+      "Nikki": [
+        "pusiste 0 de sueldo. cero sigue siendo un número. a los practicantes ni eso: decaf",
+        "'experiencia' entre comillas. así les pagan, literal. un texto"
+      ],
+      "Cami": [
+        {
+          "texto": "extra: lo que tiene Rikka atrás. Ya, ya me callo… no, no me callo.",
+          "sprite": "sprites/cami/burla.webp",
+          "respuesta": { "quien": "Rikka", "sprite": "sprites/rikka/celosa.webp", "texto": "Y lo que tienes tú adelante también es extra, Cami. Y no por eso lo comento en clase." }
+        },
+        "Herencia… yo heredé de mi mamá el carácter y de mi papá el gusto por las chicas. Y por los chicos lo desarrollé sola."
+      ],
+      "Jair": ["Sin super, Coffee no te deja tocar cup. Error clásico de entrevista.", "extends es de JavaScript. Aquí es extra."]
+    },
+    "al_abrir": [
+      { "quien": "Jair", "texto": "La clase Empleado está en el otro archivo. Practicante hereda de ella: extra, super y el sueldo." },
+      { "quien": "Nikki", "texto": "el practicante se llama kevin. ni apellido le pusieron. igual que en la vida real", "sprite": "sprites/nikki/fria.webp" }
+    ],
+    "al_resolver": [
+      { "quien": "Rikka", "texto": "¡Heredó trabajar() sin escribirlo! La herencia es más útil que en mi reino.", "sprite": "sprites/rikka/orgullosa.webp" },
+      { "quien": "Nikki", "texto": "sueldo: decaf. el único dato del sistema que nadie quiere refactorizar", "sprite": "sprites/nikki/fria.webp" }
+    ]
+  },
+  "cierre": [
+    { "quien": "Jair", "sprite": "sprites/jair/orgulloso.webp", "texto": "Herencia: reutilizar lo que ya existe. Úsenla poco; heredar demasiado se vuelve una maraña." },
+    { "quien": "Cami", "sprite": "sprites/cami/sonrojada1.webp", "texto": "Como mi lista de exes. Unos heredan de otros. Hay chicos, hay chicas, hay un baterista." }
+  ]
+}

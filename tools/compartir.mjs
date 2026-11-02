@@ -74,7 +74,7 @@ for (const p of fotos) {
   ${caption}
   <rect x="${W - 92}" y="28" width="64" height="34" rx="8" fill="#000" fill-opacity="0.6" stroke="#ff4f8b"/>
   <text x="${W - 60}" y="52" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700" fill="#ff4f8b">+18</text>
-  <text x="${rightX}" y="512" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="700" fill="#fff">PROYECT GENESIS</text>
+  <text x="${rightX}" y="512" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="700" fill="#fff">PROJECT GENESIS</text>
   <text x="${rightX}" y="546" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#c9c9d2">Juega gratis en el navegador</text>
   <text x="${rightX}" y="584" font-family="Consolas, monospace" font-size="17" fill="#ff8ab5">proyect-genesis.vercel.app</text>
 </svg>`;
@@ -88,7 +88,7 @@ for (const p of fotos) {
     .jpeg({ quality: 86 })
     .toFile(`${OUT}/${p.id}.jpg`);
 
-  const title = `${user} en Boringram · PROYECT GENESIS`;
+  const title = `${user} en Boringram · PROJECT GENESIS`;
   const desc = `«${p.texto}» Novela visual para adultos (18+). Juega gratis en el navegador.`;
   const url = `${SITIO}compartir/${p.id}.html?v=${V}`;
   const img = `${SITIO}compartir/${p.id}.jpg?v=${V}`;
@@ -101,7 +101,7 @@ for (const p of fotos) {
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>${esc(title)}</title>
 <meta property="og:type" content="website" />
-<meta property="og:site_name" content="PROYECT GENESIS" />
+<meta property="og:site_name" content="PROJECT GENESIS" />
 <meta property="og:title" content="${esc(title)}" />
 <meta property="og:description" content="${esc(desc)}" />
 <meta property="og:url" content="${url}" />
@@ -115,7 +115,7 @@ for (const p of fotos) {
 <meta http-equiv="refresh" content="0; url=../" />
 <style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#000;color:#ccc;font-family:system-ui,sans-serif}</style>
 </head>
-<body><a href="../" style="color:#ff8ab5">PROYECT GENESIS</a><script>location.replace('../');</script></body>
+<body><a href="../" style="color:#ff8ab5">PROJECT GENESIS</a><script>location.replace('../');</script></body>
 </html>
 `,
   );

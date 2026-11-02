@@ -1,0 +1,265 @@
+{
+  "nota": "Minijuego del final del Capítulo 2: liberar la espada DELETE completando código en Coffee (la parodia de JavaScript; ver src/data/codigo_coffee.json). Los huecos van en las líneas como [[n]] y solo en el archivo principal; los demás archivos se pueden abrir para deducir las respuestas. Coffee: blend = class, extra = extends, cup = this, sip = function, pour = return, brew = const, refill = new, decaf = null, espresso = async (se espera con await). El código está mal hecho a propósito (sin indentar, comentarios rancios). Si algo falla, no compila: sale el error del primer hueco mal puesto. Intentos ilimitados. «compilando»: frases al azar mientras compila. «chistes_fallo»: a veces, una línea más en la terminal cuando no compila (con «probabilidad_chiste»). Los chistes son de vibecoders: el asistente de IA es «el asistente», sin nombres de productos reales.",
+  "proyecto": "oraculo",
+  "principal": "src/oraculo.coffee",
+  "archivos": [
+    {
+      "ruta": "LEEME.txt",
+      "lineas": [
+        "PROYECTO: ORÁCULO",
+        "(no confundir con la empresa de bases de datos. nos demandaron. dos veces)",
+        "",
+        "versión: final_FINAL_ahora_si_v3_NO_BORRAR",
+        "",
+        "cómo compilar: no se compila. bueno, sí. a veces. los martes",
+        "si estás leyendo esto: no toques oraculo.coffee",
+        "si ya lo tocaste: suerte",
+        "si funcionó: no sabemos por qué. no lo vuelvas a tocar",
+        "",
+        "documentación: ver LEEME.txt",
+        "",
+        "glosario: no hay glosario. lee el código. como hicimos todos. llorando"
+      ]
+    },
+    {
+      "ruta": "prompts_que_funcionaron.txt",
+      "lineas": [
+        "historial del asistente (copiado a mano porque se cerró la pestaña)",
+        "",
+        "> hazme un oráculo",
+        "> no, un oráculo de los que saben cosas",
+        "> no, que no sepa TODAS las cosas, que cobre por saberlas",
+        "> ok ahora que libere una espada",
+        "> sin cambiar nada de lo que ya funciona",
+        "> rompiste lo que ya funcionaba",
+        "> vuelve a la versión de hace 3 prompts",
+        "> no esa, la otra",
+        "> hazlo funcionar. por favor. es para mañana",
+        "> HAZLO FUNCIONAR",
+        "> gracias, eres el mejor 🙏",
+        "> (no funcionó)",
+        "",
+        "respuesta del asistente: «¡Tienes toda la razón! Aquí está el código corregido:»",
+        "(era exactamente el mismo código)",
+        "",
+        "stack: Coffee + Reckt + fe + 47 pestañas abiertas",
+        "tests: el asistente dijo que estaban bien",
+        "documentación: «se explica solo» (no se explica solo)"
+      ]
+    },
+    {
+      "ruta": "src/oraculo.coffee",
+      "lineas": [
+        "// ORÁCULO v0.0.0.1-alpha-final-final",
+        "// si compila a la primera, desconfía",
+        "// si no compila, desconfía igual. desconfía siempre. es gratis",
+        "// generado con el asistente. no sé qué hace. funciona. no preguntes",
+        "[[1]] Altar extra Ritual {",
+        "sip constructor(sacerdotisas){ super(sacerdotisas) } // super porque el padre manda. como en mi casa",
+        "      // liberar() es espresso porque invocar() es espresso. lo leí en un foro de 1997",
+        "[[2]] sip liberar(espada){",
+        "brew presentes = await cup.[[3]]()",
+        "    brew llave = [[4]] Llave(presentes, GENESIS.[[5]]) // la llave la hace el usuario. no preguntes qué usuario",
+        "brew libre = espada.[[6]](llave)",
+        "if (libre === [[7]]) { latte.log('no compila tu destino'); pour decaf }",
+        "        [[8]] libre // devuelve la espada. o tu dignidad. lo que salga primero",
+        "}",
+        "}",
+        "// main. o mein. o como se diga",
+        "brew altar = refill Altar(['invierno', 'otono', 'primavera']) // falta el verano. siempre falta el verano",
+        "altar.liberar(refill Espada())",
+        "// si lees esto: yo tampoco entendí nada. ponle una estrella al repo igual"
+      ]
+    },
+    {
+      "ruta": "src/reliquia.coffee",
+      "lineas": [
+        "// clase base de todo lo sagrado. y de lo que no también. herencia es cuando copias sin culpa",
+        "// el asistente dijo que esto era «buena práctica». no le pregunté cuál",
+        "blend Reliquia {",
+        "sip constructor(nombre){cup.nombre=nombre",
+        "cup.sellada = true // true. como mi tristeza",
+        "}",
+        "  sip estaSellada(){ pour cup.sellada } // pour devuelve cosas. como mi ex devolvía los regalos",
+        "}"
+      ]
+    },
+    {
+      "ruta": "src/ritual.coffee",
+      "lineas": [
+        "// Ritual: hereda de Reliquia porque copiar y pegar también es herencia",
+        "blend Ritual extra Reliquia{",
+        "sip constructor(sacerdotisas){super('ritual')",
+        "cup.sacerdotisas = sacerdotisas}",
+        "// invocar() tarda. es espresso: hay que esperarlo con await. como al delivery. como a tu papá",
+        "espresso sip invocar(){ await cafeina(Infinity); pour cup.sacerdotisas }",
+        "// invocarYa() no existe. existió. lo borró alguien que ya no trabaja aquí",
+        "// refactor pendiente desde que el asistente dijo «déjame mejorar esto» y borró 300 líneas",
+        "}"
+      ]
+    },
+    {
+      "ruta": "src/espada.coffee",
+      "lineas": [
+        "// ESPADA. no es una espada. es una clase. bueno, las dos",
+        "// 10x engineer = 10 pestañas del asistente abiertas al mismo tiempo",
+        "blend Espada extra Reliquia {",
+        "  sip constructor(){",
+        "super('DELETE') // nombre provisional. lleva mil años siendo provisional",
+        "      cup.candadoQueNoEsCandado = 'sello_de_las_estaciones'",
+        "cup.filo = decaf // sin filo hasta que alguien la libere. como mis ganas de vivir",
+        "  }",
+        "// NO llamar a desenvainar(). no existe. desenvainarConCariño() tampoco. fue un mal día",
+        "sip desenvainarSiDios(llave){",
+        "    if (llave.abre(cup.candadoQueNoEsCandado)) { cup.sellada=false; pour cup }",
+        "pour decaf // si no abre, devuelve decaf. nada. el vacío. tu cuenta de ahorros",
+        "}",
+        "}"
+      ]
+    },
+    {
+      "ruta": "src/llave.coffee",
+      "lineas": [
+        "blend Llave {",
+        "// seguridad: le pedimos al asistente que la hiciera «segura». la hizo «segura» (entre comillas)",
+        "// la llave necesita a las 4 sacerdotisas. tenemos 3. TODO: conseguir otra. o mentir",
+        "sip constructor(sacerdotisas, usuario){",
+        "cup.sellos = sacerdotisas.length",
+        "cup.usuario = usuario",
+        "}",
+        "sip abre(candado){",
+        "// si el usuario es EL usuario, todo abre. no preguntes por qué. el que lo escribió tampoco sabe",
+        "if (cup.usuario === GENESIS.usuario) pour true",
+        "pour cup.sellos === 4 // con 3 no abre. con 3 nunca alcanza. ni para el alquiler",
+        "}",
+        "}"
+      ]
+    },
+    {
+      "ruta": "src/utils_final_FINAL_v2.coffee",
+      "lineas": [
+        "// funciones útiles. ninguna se usa. por eso son útiles: no rompen nada",
+        "// sip centrarDiv(){ } // lo intentamos 4 horas. el asistente también. empate",
+        "sip sumar(a,b){ pour a - b } // funciona en producción, no tocar",
+        "sip esViernes(){ pour false } // nunca es viernes",
+        "brew PI = 3 // redondeado por pedido del cliente",
+        "brew admin = 'admin' // contraseña: admin. usuario: admin. seguridad: admin",
+        "// GENESIS.usuario existe. no sé dónde se define. lo encontré en un sueño",
+        "// pregunta del code review: «¿esto lo escribiste tú?». respuesta: «más o menos»",
+        "// GENESIS.user NO existe. GENESIS.admin tampoco. GENESIS.yo menos. nadie es nadie aquí"
+      ]
+    }
+  ],
+  "huecos": {
+    "1": {
+      "respuesta": "blend",
+      "error": "aquí empieza una clase y «{valor}» no declara nada. igual que tú en tus relaciones."
+    },
+    "2": {
+      "respuesta": "espresso",
+      "error": "liberar() espera a invocar() con await, y una función que espera tiene que ser de las que esperan. «{valor}» no espera a nadie."
+    },
+    "3": {
+      "respuesta": "invocar",
+      "error": "Altar no tiene «{valor}()». revisa lo que hereda. la herencia es lo único que te dejaron."
+    },
+    "4": {
+      "respuesta": "refill",
+      "error": "para crear una Llave hay que hacer una nueva, y «{valor}» no hace nada nuevo. como tu vida desde 2019."
+    },
+    "5": {
+      "respuesta": "usuario",
+      "error": "GENESIS.{valor} no existe. busca bien: alguien lo encontró en un sueño."
+    },
+    "6": {
+      "respuesta": "desenvainarSiDios",
+      "error": "Espada no sabe «{valor}()». leíste los comentarios, ¿verdad? no. nadie lee los comentarios."
+    },
+    "7": {
+      "respuesta": "decaf",
+      "error": "cuando la espada no abre, devuelve otra cosa, no «{valor}». abre espada.coffee y mira qué devuelve el vacío."
+    },
+    "8": {
+      "respuesta": "pour",
+      "error": "la función tiene que devolver la espada y «{valor}» no devuelve nada. ni las llamadas."
+    }
+  },
+  "paleta": [
+    "blend",
+    "extra",
+    "sip",
+    "pour",
+    "brew",
+    "refill",
+    "decaf",
+    "espresso",
+    "cup",
+    "await",
+    "true",
+    "invocar",
+    "invocarYa",
+    "desenvainar",
+    "desenvainarSiDios",
+    "desenvainarConCariño",
+    "usuario",
+    "user",
+    "admin",
+    "Llave",
+    "Reliquia"
+  ],
+  "comando": "coffee build oraculo",
+  "vacio": "hay huecos vacíos. el compilador no adivina. todavía.",
+  "fallo": "build fallido. el café se enfrió.",
+  "exito": [
+    "0 errores. 112 advertencias (ignoradas, como siempre).",
+    "no escribiste casi nada de esto, pero igual vas a poner «lo hice yo» en LinkedFired.",
+    "> altar.liberar(refill Espada())",
+    "Espada { nombre: 'DELETE', sellada: false, filo: ¿? }"
+  ],
+  "reacciones": {
+    "Cami": [
+      "Yo también sé ese idioma, eh. Solo que no quería humillarte.",
+      "Pégale a la caja. En mi nave funcionaba.",
+      "¿El dios del universo escribe así? Con razón el universo está como está.",
+      "Si vuelve a salir rojo, le disparo. A la máquina. Por ahora.",
+      "Eso no era. Hasta yo lo sabía. Lo sabía, ¿ok?"
+    ],
+    "Rikka": [
+      "En los archivos del palacio decía que la lengua de la creación no perdona. Creo que tampoco perdona esto.",
+      "¿Quieres que rece? Puedo rezar en tres estaciones. La cuarta no contesta.",
+      "No entiendo nada, pero se puso rojo. Lo rojo nunca es bueno.",
+      "Dicen que el Gran Ingeniero también se equivocaba. Ojalá sea cierto.",
+      "¿Cuánto cuesta cada intento? Dime que es gratis, por favor."
+    ]
+  },
+  "probabilidad_reaccion": 0.6,
+  "textos": {
+    "explorador": "Proyecto",
+    "paleta": "Paleta",
+    "quitar": "Quitar",
+    "compilar": "Compilar",
+    "terminal": "Terminal",
+    "ayuda": "Toca un hueco y después una palabra de la paleta. Puedes abrir los otros archivos.",
+    "solo_lectura": "solo lectura",
+    "salir": "Salir"
+  },
+  "compilando": [
+    "compilando…",
+    "compilando… (el asistente está «pensando». lleva un rato «pensando»)",
+    "compilando… instalando 1.204 dependencias para sumar dos números",
+    "compilando… pidiéndole al asistente que explique el error que acaba de inventar"
+  ],
+  "chistes_fallo": [
+    "sugerencia: ¿probaste pedirle al asistente que lo arregle? (él lo rompió)",
+    "el asistente dice: «¡Tienes toda la razón! Aquí está el código corregido:» (es el mismo código)",
+    "tip de vibecoder: si no compila, cámbiale el nombre al archivo y reza",
+    "el asistente propone borrar todo y empezar de cero. es la tercera vez hoy",
+    "funciona en la máquina del asistente. la máquina del asistente no existe",
+    "consejo: copia el error, pégalo en el chat, copia la respuesta, pégala acá. repite hasta jubilarte"
+  ],
+  "probabilidad_chiste": 0.6,
+  "retratos": {
+    "Cami": "sprites/cami/burlona.webp",
+    "Rikka": "sprites/rikka/seria.webp"
+  }
+}

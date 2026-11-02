@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useStore } from './store';
+import { conSecretos, useStore } from './store';
 import { scenes } from './story';
 import { effectsOf, visibleChoices } from './logic';
 
@@ -21,7 +21,7 @@ export function useStoryEngine() {
   const setTextDone = useStore((s) => s.setTextDone);
 
   const scene = game ? scenes.get(game.sceneId) ?? null : null;
-  const choices = scene && game ? visibleChoices(scene, game.vars) : [];
+  const choices = scene && game ? visibleChoices(scene, conSecretos(game.vars)) : [];
   const waitingChoice = choices.length > 0;
   const effects = scene && !settings.reduceEffects ? effectsOf(scene) : [];
 

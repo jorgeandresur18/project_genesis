@@ -14,9 +14,13 @@
     "sprites": "node --max-old-space-size=12000 tools/sprites.mjs",
     "fondos": "node tools/fondos.mjs",
     "og": "node tools/og.mjs",
-    "compartir": "node tools/compartir.mjs"
+    "compartir": "node tools/compartir.mjs",
+    "nivel:sprites": "node tools/nivel_sprites.mjs"
   },
   "dependencies": {
+    "@fontsource/pixelify-sans": "^5.3.0",
+    "@fontsource/press-start-2p": "^5.3.0",
+    "phaser": "^3.90.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "zustand": "^5.0.3"

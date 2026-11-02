@@ -2,6 +2,7 @@
 // - Niveles (Trainee, Junior…) que se desbloquean al llegar a una escena de la historia (snapshots).
 // - Dentro de un nivel, cada clase se abre al terminar la anterior.
 // - Cada clase terminada guarda sus estrellas (1 a 3, según los intentos fallidos); los diplomas también se guardan.
+import { MODO_TODO } from './modo';
 import { useStore } from './store';
 import { scenes } from './story';
 import type { CoffeeExercise } from '../components/CoffeeIDE';
@@ -74,7 +75,7 @@ export const COLOR_INICIAL = '#ffffff';
 
 /** Para probar: ?bootcamp=todo en la dirección abre todos los niveles y todas las clases (sin tocar el progreso). */
 export const PRUEBA =
-  typeof location !== 'undefined' && new URLSearchParams(location.search).get('bootcamp') === 'todo';
+  MODO_TODO || (typeof location !== 'undefined' && new URLSearchParams(location.search).get('bootcamp') === 'todo');
 
 /** Escenas de fin de cada capítulo (las que tienen fin_capitulo). */
 const FINES = new Map<number, string[]>();

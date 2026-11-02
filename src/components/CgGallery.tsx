@@ -7,21 +7,33 @@ import { localized, useLang, useT } from '../engine/i18n';
 import {
   CGS,
   CHARACTERS,
+  DIMENSIONS,
+  TOTAL_PLACES,
   TOTAL_SPRITES,
   characterColor,
   imageKey,
+  placeKey,
   spriteKey,
   useGalleryState,
+  type SpriteRpg,
 } from '../engine/gallery';
+import { reinoKey, useReinos, type Reino } from '../engine/reinos';
+import { BASE_CANVAS, canvasHeight, statureOf, widthFactor } from '../engine/stature';
+import type { Character } from '../engine/types';
 import { Panel } from './Panels';
-import { playCancel, playSelect, startTyping, stopTyping } from '../engine/sound';
+import { playCancel, playChip, playSelect, startTyping, stopTyping } from '../engine/sound';
 import { NoData } from './NoData';
+import { CapasFondo, capaDeFondo, capaDeSprite } from './SceneStage';
+import { SpriteHoja } from './Batalla';
 
 interface Texts {
   titulos: Record<string, string>;
   info_imagenes: Record<string, string>;
   personajes: Record<string, string>;
   sprites: Record<string, { nombre: string; info: string }>;
+  rpg: Record<string, { personaje: string; nombre: string; info: string }>;
+  quejas: Record<string, { imagenes: string[]; lineas: string[] }>;
+  lugares: Record<string, { nombre: string; fondos: Record<string, { nombre: string; info: string; reino?: string }> }>;
 }
 const useTexts = () => localized(galeriaEs, galeriaEn, useLang()) as unknown as Texts;
 
@@ -31,13 +43,14 @@ export function NewDot({ className = '' }: { className?: string }) {
   return <span className={`new-dot ${className}`} role="img" aria-label={t('galeria.nuevo')} />;
 }
 
-type Tab = 'imagenes' | 'personajes';
+type Tab = 'imagenes' | 'personajes' | 'lugares';
 
 /** Galería: imágenes del juego y sprites de los personajes. Lo que no se vio todavía queda bloqueado. */
 export function CgGallery({ onClose }: { onClose: () => void }) {
   const t = useT();
   const [tab, setTab] = useState<Tab>('imagenes');
   const g = useGalleryState();
+  const r = useReinos();
   const pick = (next: Tab) => {
     if (next === tab) return;
     playSelect();
@@ -45,7 +58,10 @@ export function CgGallery({ onClose }: { onClose: () => void }) {
   };
   return (
     <Panel
-      title={t('galeria.titulo', { vistas: g.images.length + g.spriteCount, total: CGS.length + TOTAL_SPRITES })}
+      title={t('galeria.titulo', {
+        vistas: g.images.length + g.spriteCount + g.places.size + r.unlocked.length,
+        total: CGS.length + TOTAL_SPRITES + TOTAL_PLACES + r.reinos.length,
+      })}
       onClose={onClose}
       wide
     >
@@ -64,11 +80,17 @@ export function CgGallery({ onClose }: { onClose: () => void }) {
             extra: `${g.spriteCount}/${TOTAL_SPRITES}`,
             dot: g.newSpriteCount > 0,
           },
+          {
+            key: 'lugares',
+            label: t('galeria.lugares'),
+            extra: `${g.places.size + r.unlocked.length}/${TOTAL_PLACES + r.reinos.length}`,
+            dot: g.newPlaces.size + r.fresh.size > 0,
+          },
         ]}
         active={tab}
         onTab={(k) => pick(k as Tab)}
       >
-        {tab === 'imagenes' ? <Images /> : <Characters />}
+        {tab === 'imagenes' ? <Images /> : tab === 'personajes' ? <Characters /> : <Places />}
       </TermWindow>
     </Panel>
   );
@@ -163,7 +185,8 @@ function Images() {
   const t = useT();
   const texts = useTexts();
   const g = useGalleryState();
-  const unlocked = g.images;
+  // Las secretas van al final y solo cuando ya se vieron (no salen bloqueadas).
+  const unlocked = [...g.images, ...g.secretImages];
   const markOpened = useStore((s) => s.markGalleryOpened);
   const [open, setOpen] = useState<number | null>(null);
   return (
@@ -188,9 +211,25 @@ function Images() {
             </button>
           ),
         )}
+        {g.secretImages.map((id) => (
+          <button key={id} className="gallery-item gallery-secreta" onClick={() => setOpen(unlocked.indexOf(id))}>
+            <div className="gallery-thumb">
+              <img src={assetUrl(`fondos/${id}.webp`)} alt="" loading="lazy" draggable={false} />
+              {/* La censura también en la miniatura. */}
+              {capaDeFondo(`fondos/${id}`) && <CapasFondo capa={capaDeFondo(`fondos/${id}`)!} src={assetUrl(`fondos/${id}.webp`)} fijos />}
+              {g.newImages.has(id) && <NewDot className="new-dot-item" />}
+            </div>
+            <span className="gallery-title">{texts.titulos[id] ?? id}</span>
+          </button>
+        ))}
       </div>
       {open !== null && (
         <Viewer
+          quejaDe={(i) => Object.entries(texts.quejas).find(([, q]) => q.imagenes.includes(unlocked[i]))?.[0] ?? null}
+          capas={(i, vapor, alTocar) => {
+            const capa = capaDeFondo(`fondos/${unlocked[i]}`);
+            return capa && <CapasFondo capa={capa} src={assetUrl(`fondos/${unlocked[i]}.webp`)} contener vapor={vapor} onToque={alTocar} />;
+          }}
           src={(i) => assetUrl(`fondos/${unlocked[i]}.webp`)}
           label={(i) => texts.titulos[unlocked[i]] ?? unlocked[i]}
           info={(i) => ({ file: `${unlocked[i]}.webp`, text: texts.info_imagenes[unlocked[i]] ?? '' })}
@@ -203,6 +242,162 @@ function Images() {
       )}
     </>
   );
+}
+
+type PlaceItem = { kind: 'reino'; reino: Reino } | { kind: 'fondo'; id: string };
+
+/**
+ * Lugares: los fondos del juego por dimensión (mundo real, espacial y de las estaciones), cada uno con su
+ * ficha. En la de las estaciones, arriba, los emblemas de los reinos. Se desbloquean al verlos en el juego.
+ */
+function Places() {
+  const t = useT();
+  const texts = useTexts();
+  const g = useGalleryState();
+  const r = useReinos();
+  const markOpened = useStore((s) => s.markGalleryOpened);
+  const [sel, setSel] = useState(DIMENSIONS[0].id);
+  const [open, setOpen] = useState<number | null>(null);
+  const dim = DIMENSIONS.find((d) => d.id === sel)!;
+  const text = texts.lugares[sel];
+  const kingdoms = sel === 'estaciones';
+  const reinoOf = (id: string) => r.reinos.find((x) => x.id === text.fondos[id]?.reino);
+  // El visor recorre lo desbloqueado de la dimensión abierta: los reinos y después los fondos.
+  const items: PlaceItem[] = [
+    ...(kingdoms ? r.unlocked.map((reino) => ({ kind: 'reino' as const, reino })) : []),
+    ...dim.fondos.filter((f) => g.places.has(f.id)).map((f) => ({ kind: 'fondo' as const, id: f.id })),
+  ];
+  const indexOf = (match: (x: PlaceItem) => boolean) => items.findIndex(match);
+  const count = (d: (typeof DIMENSIONS)[number]) => {
+    const seen = d.fondos.filter((f) => g.places.has(f.id)).length + (d.id === 'estaciones' ? r.unlocked.length : 0);
+    const total = d.fondos.length + (d.id === 'estaciones' ? r.reinos.length : 0);
+    return `${seen}/${total}`;
+  };
+  return (
+    <>
+      <TermWindow
+        className="character-tabs"
+        tabs={DIMENSIONS.map((d) => ({
+          key: d.id,
+          label: texts.lugares[d.id].nombre,
+          extra: count(d),
+          dot: d.fondos.some((f) => g.newPlaces.has(f.id)) || (d.id === 'estaciones' && r.fresh.size > 0),
+        }))}
+        active={sel}
+        onTab={(k) => {
+          if (k === sel) return;
+          playSelect();
+          setSel(k);
+        }}
+      >
+        {kingdoms && (
+          <>
+            <h4 className="places-heading">{t('galeria.reinos_titulo')}</h4>
+            <div className="kingdom-grid">
+              {r.reinos.map((reino) =>
+                r.isUnlocked(reino) ? (
+                  <button
+                    key={reino.id}
+                    className="kingdom-item"
+                    style={{ '--reino': reino.color } as CSSProperties}
+                    onClick={() => setOpen(indexOf((x) => x.kind === 'reino' && x.reino === reino))}
+                  >
+                    <span className="kingdom-frame">
+                      <img src={assetUrl(reino.emblema)} alt="" loading="lazy" draggable={false} />
+                      {r.fresh.has(reino.id) && <NewDot className="new-dot-item" />}
+                    </span>
+                    <span className="gallery-title">{reino.nombre}</span>
+                  </button>
+                ) : (
+                  <div key={reino.id} className="kingdom-item kingdom-locked" aria-hidden>
+                    <span className="kingdom-frame">
+                      <NoData />
+                    </span>
+                    <span className="gallery-title">???</span>
+                  </div>
+                ),
+              )}
+            </div>
+            <h4 className="places-heading">{texts.lugares[sel].nombre}</h4>
+          </>
+        )}
+        <div className="gallery-grid">
+          {dim.fondos.map((f) => {
+            const reino = reinoOf(f.id);
+            return g.places.has(f.id) ? (
+              <button
+                key={f.id}
+                className="gallery-item"
+                onClick={() => setOpen(indexOf((x) => x.kind === 'fondo' && x.id === f.id))}
+              >
+                <div className="gallery-thumb">
+                  <img src={assetUrl(`fondos/${f.id}.webp`)} alt="" loading="lazy" draggable={false} />
+                  {/* El emblema del reino sale recién cuando ese emblema ya se desbloqueó. */}
+                  {reino && r.isUnlocked(reino) && <img className="place-badge" src={assetUrl(reino.emblema)} alt="" draggable={false} />}
+                  {g.newPlaces.has(f.id) && <NewDot className="new-dot-item" />}
+                </div>
+                <span className="gallery-title">{text.fondos[f.id]?.nombre ?? f.id}</span>
+              </button>
+            ) : (
+              <button key={f.id} className="gallery-item gallery-locked" disabled>
+                <div className="gallery-thumb">
+                  <NoData />
+                </div>
+                <span className="gallery-title">???</span>
+              </button>
+            );
+          })}
+        </div>
+      </TermWindow>
+      {open !== null && items[open] && (
+        <Viewer
+          src={(i) => {
+            const x = items[i];
+            return assetUrl(x.kind === 'reino' ? x.reino.emblema : `fondos/${x.id}.webp`);
+          }}
+          label={(i) => {
+            const x = items[i];
+            return x.kind === 'reino' ? x.reino.nombre : (text.fondos[x.id]?.nombre ?? x.id);
+          }}
+          info={(i) => {
+            const x = items[i];
+            return x.kind === 'reino'
+              ? { file: `reino_${x.reino.id}.webp`, text: x.reino.info }
+              : { file: `${x.id}.webp`, text: text.fondos[x.id]?.info ?? '' };
+          }}
+          onShow={(i) => {
+            const x = items[i];
+            markOpened(x.kind === 'reino' ? reinoKey(x.reino.id) : placeKey(x.id));
+          }}
+          emblem={(i) => items[i].kind === 'reino'}
+          count={items.length}
+          index={open}
+          onIndex={setOpen}
+          onClose={() => setOpen(null)}
+        />
+      )}
+    </>
+  );
+}
+
+/**
+ * Miniatura de un sprite a la misma escala que los demás: un lienzo más alto (un cuerpo entero) o más ancho
+ * (un «recortado») no se achica para entrar entero; se recorta en la miniatura (en el visor se ve completo).
+ */
+function thumbScale(id: string, expr: string): CSSProperties | undefined {
+  const c: Character = { id, sprite: `sprites/${id}/${expr}.webp`, pos: 'centro' };
+  const h = canvasHeight(statureOf(c)) / BASE_CANVAS;
+  const w = h * widthFactor(c);
+  if (h === 1 && w === 1) return undefined;
+  // Centrado con «left» (el efecto al pasar el mouse usa transform).
+  return {
+    position: 'absolute',
+    top: 0,
+    left: `${((1 - w) / 2) * 100}%`,
+    width: `${w * 100}%`,
+    height: `${h * 100}%`,
+    maxWidth: 'none',
+  };
 }
 
 const ALL = 'todos';
@@ -228,7 +423,14 @@ function Characters() {
   const nameOf = (id: string, expr: string) => texts.sprites[`${id}/${expr}`]?.nombre ?? expr.replace(/_/g, ' ');
   const label = (id: string) => (known(id) ? (texts.personajes[id] ?? id) : '???');
   const shown = sel === ALL ? [...MAIN, ...OTHERS] : sel === MISC ? OTHERS : CHARACTERS.filter((c) => c.id === sel);
-  const flat = shown.flatMap((c) => seenOf(c.id).map((sp) => ({ id: c.id, expr: sp.expr })));
+  const flat: { id: string; expr: string; rpg?: SpriteRpg }[] = shown.flatMap((c) => [
+    ...seenOf(c.id).map((sp) => ({ id: c.id, expr: sp.expr })),
+    ...g.secretSprites(c.id).map((expr) => ({ id: c.id, expr })),
+    ...g.rpgSprites(c.id).map((r) => ({ id: c.id, expr: r.hoja, rpg: r })),
+  ]);
+  // La acción que se ve del sprite del combate abierto (se elige en la ficha).
+  const [accion, setAccion] = useState('idle');
+  const rpgNombre = (hoja: string) => texts.rpg[hoja]?.nombre ?? hoja;
   const newIn = (list: typeof CHARACTERS) => list.some((c) => (g.newSprites.get(c.id)?.length ?? 0) > 0);
   const miscKnown = OTHERS.some((c) => known(c.id));
   const count = (list: typeof CHARACTERS) =>
@@ -249,7 +451,13 @@ function Characters() {
             onClick={() => setOpen(flat.findIndex((f) => f.id === c.id && f.expr === s.expr))}
           >
             <span className="sprite-cell">
-              <img src={assetUrl(`sprites/${c.id}/${s.expr}.webp`)} alt="" loading="lazy" draggable={false} />
+              <img
+                src={assetUrl(`sprites/${c.id}/${s.expr}.webp`)}
+                style={thumbScale(c.id, s.expr)}
+                alt=""
+                loading="lazy"
+                draggable={false}
+              />
               {g.newSprites.get(c.id)?.includes(s) && <NewDot className="new-dot-item" />}
             </span>
             <span className="sprite-name">{nameOf(c.id, s.expr)}</span>
@@ -263,6 +471,38 @@ function Characters() {
           </div>
         ),
       )}
+      {/* Los secretos: solo los que ya se vieron, al final y con borde magenta. */}
+      {g.secretSprites(c.id).map((expr) => (
+        <button
+          key={expr}
+          className="sprite-item sprite-item-secreto"
+          onClick={() => setOpen(flat.findIndex((f) => f.id === c.id && f.expr === expr))}
+        >
+          <span className="sprite-cell">
+            <img src={assetUrl(`sprites/${c.id}/${expr}.webp`)} alt="" loading="lazy" draggable={false} />
+            {/* La censura también en la miniatura. */}
+            {capaDeSprite(`${c.id}/${expr}`) && (
+              <CapasFondo capa={capaDeSprite(`${c.id}/${expr}`)!} src={assetUrl(`sprites/${c.id}/${expr}.webp`)} contener fijos />
+            )}
+          </span>
+          <span className="sprite-name">{nameOf(c.id, expr)}</span>
+        </button>
+      ))}
+      {/* Los del combate: pixel art animado. */}
+      {g.rpgSprites(c.id).map((r) => (
+        <button
+          key={r.hoja}
+          className="sprite-item sprite-item-rpg"
+          onClick={() => setOpen(flat.findIndex((f) => f.id === c.id && f.expr === r.hoja))}
+        >
+          <span className="sprite-cell">
+            <span className="sprite-rpg-mini">
+              <SpriteHoja src={r.hoja} anim="idle" />
+            </span>
+          </span>
+          <span className="sprite-name">{rpgNombre(r.hoja)}</span>
+        </button>
+      ))}
     </div>
   );
 
@@ -358,13 +598,37 @@ function Characters() {
       {open !== null && flat[open] && (
         <Viewer
           sprite
+          quejaDe={(i) => (texts.quejas[flat[i].id] ? flat[i].id : null)}
+          contenido={(i) => {
+            const r = flat[i].rpg;
+            return r ? <SpriteRpgVista r={r} accion={accion} /> : null;
+          }}
+          ficha={(i) => {
+            const r = flat[i].rpg;
+            return r ? <AccionesRpg r={r} accion={accion} onAccion={setAccion} /> : null;
+          }}
+          capas={(i, vapor, alTocar) => {
+            const capa = capaDeSprite(`${flat[i].id}/${flat[i].expr}`);
+            const src = assetUrl(`sprites/${flat[i].id}/${flat[i].expr}.webp`);
+            return capa && <CapasFondo capa={capa} src={src} contener vapor={vapor} onToque={alTocar} />;
+          }}
           src={(i) => assetUrl(`sprites/${flat[i].id}/${flat[i].expr}.webp`)}
-          label={(i) => `${texts.personajes[flat[i].id] ?? flat[i].id} · ${nameOf(flat[i].id, flat[i].expr)}`}
-          info={(i) => ({
-            file: `${flat[i].id}/${flat[i].expr}.webp`,
-            text: texts.sprites[`${flat[i].id}/${flat[i].expr}`]?.info ?? '',
-          })}
-          onShow={(i) => markOpened(spriteKey(flat[i].id, flat[i].expr))}
+          label={(i) =>
+            `${texts.personajes[flat[i].id] ?? flat[i].id} · ${flat[i].rpg ? rpgNombre(flat[i].expr) : nameOf(flat[i].id, flat[i].expr)}`
+          }
+          info={(i) =>
+            flat[i].rpg
+              ? { file: `${flat[i].expr}.png`, text: texts.rpg[flat[i].expr]?.info ?? '' }
+              : { file: `${flat[i].id}/${flat[i].expr}.webp`, text: texts.sprites[`${flat[i].id}/${flat[i].expr}`]?.info ?? '' }
+          }
+          onShow={(i) => {
+            setAccion('idle');
+            markOpened(spriteKey(flat[i].id, flat[i].expr));
+          }}
+          whole={(i) => {
+            const other = (galeriaEs.completo as Record<string, string>)[`${flat[i].id}/${flat[i].expr}`];
+            return other ? assetUrl(`sprites/${other}.webp`) : null;
+          }}
           count={flat.length}
           index={open}
           onIndex={setOpen}
@@ -386,6 +650,12 @@ function Viewer({
   onIndex,
   onClose,
   sprite,
+  emblem,
+  whole,
+  capas,
+  contenido,
+  ficha,
+  quejaDe,
 }: {
   src: (i: number) => string;
   label: (i: number) => string;
@@ -397,9 +667,52 @@ function Viewer({
   onIndex: (i: number) => void;
   onClose: () => void;
   sprite?: boolean;
+  /** Si la imagen es el emblema de un reino (se ve más chico, centrado). */
+  emblem?: (i: number) => boolean;
+  /** Versión completa de la imagen (botón «Ver completo»), o null si no tiene. */
+  whole?: (i: number) => string | null;
+  /** Animación encima de la imagen (p. ej. los emblemas +18 y el vapor de una imagen secreta); `alTocar`: al tocar un emblema. */
+  capas?: (i: number, vapor: boolean, alTocar: () => void) => ReactNode;
+  /** En lugar de la imagen (p. ej. un sprite del combate animado). */
+  contenido?: (i: number) => ReactNode;
+  /** Algo más dentro de la ficha (p. ej. las acciones del sprite del combate). */
+  ficha?: (i: number) => ReactNode;
+  /** Al tocar un emblema: quién se queja (su id en «quejas» de galeria.json), o null si no dice nada. */
+  quejaDe?: (i: number) => string | null;
 }) {
   const t = useT();
   const [showInfo, setShowInfo] = useState(false);
+  // «Ver completo»: muestra la otra versión del sprite (p. ej. el cuerpo entero); al cambiar de imagen, vuelve.
+  const [full, setFull] = useState(false);
+  // Las imágenes secretas tienen vapor, que se puede quitar y volver a poner.
+  const [vapor, setVapor] = useState(true);
+  const capasActuales = capas?.(index, vapor, () => tocar()) ?? null;
+  const propio = contenido?.(index) ?? null;
+  const texts = useTexts();
+  const [queja, setQueja] = useState<{ texto: string; n: number } | null>(null);
+  useEffect(() => {
+    if (!queja) return;
+    const timer = setTimeout(() => setQueja(null), 3600);
+    return () => clearTimeout(timer);
+  }, [queja]);
+  useEffect(() => setQueja(null), [index]);
+  const tocar = () => {
+    const quien = quejaDe?.(index);
+    const lineas = quien ? texts.quejas[quien]?.lineas : undefined;
+    if (!quien || !lineas?.length) return;
+    playChip('boing');
+    setQueja({ texto: siguienteQueja(quien, lineas), n: Math.random() });
+  };
+  const extraFicha = ficha?.(index) ?? null;
+  // Volumen (solo el pixel art del combate): se inclina un poco hacia el mouse (o el dedo), como una chapa.
+  const [giro, setGiro] = useState({ x: 0, y: 0 });
+  const inclinar = (e: { clientX: number; clientY: number; currentTarget: HTMLElement }) => {
+    if (!propio) return;
+    const r = e.currentTarget.getBoundingClientRect();
+    setGiro({ x: ((e.clientX - r.left) / r.width - 0.5) * 2, y: ((e.clientY - r.top) / r.height - 0.5) * 2 });
+  };
+  const wholeSrc = whole?.(index) ?? null;
+  useEffect(() => setFull(false), [index]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => onShow(index), [index]);
   useEffect(() => {
@@ -413,10 +726,32 @@ function Viewer({
   }, [index, count, onIndex, onClose]);
   const current = info(index);
   return (
-    <div className={`gallery-viewer ${sprite ? 'gallery-viewer-sprite' : ''}`}>
+    <div
+      className={`gallery-viewer ${sprite ? 'gallery-viewer-sprite' : ''} ${emblem?.(index) ? 'gallery-viewer-emblem' : ''}`}
+    >
       <div className="viewer-main">
-        <div className="viewer-stage">
-          <img key={index} src={src(index)} alt="" draggable={false} />
+        <div
+          className={`viewer-stage ${propio ? 'viewer-volumen' : sprite ? 'viewer-profundidad' : ''}`}
+          style={propio ? ({ '--gx': giro.x, '--gy': giro.y } as CSSProperties) : undefined}
+          onPointerMove={inclinar}
+          onPointerLeave={() => setGiro({ x: 0, y: 0 })}
+        >
+          {/* Lo que dice el personaje cuando le tocan los emblemas (Rikka, en lo secreto). */}
+          {queja && (
+            <span key={queja.n} className="viewer-queja" role="status">
+              {queja.texto}
+            </span>
+          )}
+          {propio ?? (
+            <img
+              key={`${index}-${full}`}
+              className={wholeSrc ? (full ? 'viewer-whole' : 'viewer-part') : ''}
+              src={full && wholeSrc ? wholeSrc : src(index)}
+              alt=""
+              draggable={false}
+            />
+          )}
+          {!propio && capasActuales}
         </div>
         {showInfo && (
           <TermWindow
@@ -428,6 +763,7 @@ function Viewer({
             }}
           >
             <TypedInfo key={current.file} file={current.file} text={current.text} />
+            {extraFicha}
             <button
               className="info-close"
               onClick={() => {
@@ -448,6 +784,28 @@ function Viewer({
         <button onClick={() => onIndex((index + 1) % count)} aria-label={t('galeria.siguiente')}>
           ▶
         </button>
+        {wholeSrc && (
+          <button
+            className={`viewer-whole-btn ${full ? 'active' : ''}`}
+            onClick={() => {
+              playSelect();
+              setFull(!full);
+            }}
+          >
+            {t(full ? 'galeria.ver_sprite' : 'galeria.ver_completo')}
+          </button>
+        )}
+        {capasActuales && (
+          <button
+            className={`viewer-vapor-btn ${vapor ? '' : 'active'}`}
+            onClick={() => {
+              playSelect();
+              setVapor(!vapor);
+            }}
+          >
+            {t(vapor ? 'galeria.vapor_quitar' : 'galeria.vapor_poner')}
+          </button>
+        )}
         {/* Solo abre la ficha: se cierra desde la ficha (× o «Cerrar»). El «Cerrar» de esta barra cierra el visor. */}
         <button
           className={showInfo ? 'active' : ''}
@@ -474,6 +832,55 @@ function Viewer({
 }
 
 /** Ficha que se escribe letra por letra, con el sonido de escritura de la caja de diálogo. */
+/** Cuántas veces se quejó cada uno en esta sesión: primero en orden; después, al azar entre las últimas seis. */
+const quejas = new Map<string, number>();
+function siguienteQueja(quien: string, lineas: string[]): string {
+  const n = quejas.get(quien) ?? 0;
+  quejas.set(quien, n + 1);
+  if (n < lineas.length) return lineas[n];
+  const ultimas = lineas.slice(-6);
+  return ultimas[Math.floor(Math.random() * ultimas.length)];
+}
+
+/** Un sprite del combate en el visor: animado, grande y en pixel art (la acción se elige en la ficha). */
+function SpriteRpgVista({ r, accion }: { r: SpriteRpg; accion: string }) {
+  return (
+    <div className="viewer-rpg">
+      <SpriteHoja key={`${r.hoja}-${accion}`} src={r.hoja} anim={accion} bucle />
+    </div>
+  );
+}
+
+/** Las acciones de un sprite del combate (las filas de su hoja, el especial incluido), para verlas en el visor. */
+function AccionesRpg({ r, accion, onAccion }: { r: SpriteRpg; accion: string; onAccion: (a: string) => void }) {
+  const t = useT();
+  const [lista, setLista] = useState<string[]>([]);
+  useEffect(() => {
+    void fetch(`${import.meta.env.BASE_URL}${r.hoja}.json`)
+      .then((x) => x.json())
+      .then((j: { animations: Record<string, unknown> }) =>
+        setLista(Object.keys(j.animations)),
+      );
+  }, [r]);
+  return (
+    <div className="rpg-acciones">
+      <span className="rpg-acciones-titulo">{t('galeria.acciones')}</span>
+      {lista.map((a) => (
+        <button
+          key={a}
+          className={a === accion ? 'active' : ''}
+          onClick={() => {
+            playSelect();
+            onAccion(a);
+          }}
+        >
+          {t(`galeria.accion.${a}`)}
+        </button>
+      ))}
+    </div>
+  );
+}
+
 function TypedInfo({ file, text }: { file: string; text: string }) {
   const speed = useStore((s) => s.settings.textSpeed);
   const instant = speed >= TEXT_SPEED_INSTANT || useStore.getState().settings.reduceEffects;

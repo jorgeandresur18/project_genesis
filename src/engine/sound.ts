@@ -139,10 +139,17 @@ function playOnce(file: string, level: number): void {
       const gain = c.createGain();
       gain.gain.value = sfxVolume * level;
       source.connect(gain).connect(sfxOut());
-      source.start();
+      // Desde donde empieza a sonar (los mp3 traen un poco de silencio al principio: se sentía desfasado).
+      source.start(0, audibleRange(buf).start);
     })
     .catch(() => {});
 }
+/** Deja cargados los sonidos de los menús (así el primero no llega tarde). */
+export const precargarMenus = () => {
+  void load('seleccion.mp3').catch(() => {});
+  void load('cancel.mp3').catch(() => {});
+  void load('texto.mp3').catch(() => {});
+};
 
 /** Sonido al elegir una opción. */
 export const playSelect = () => playOnce('seleccion.mp3', SELECT_LEVEL);
@@ -150,3 +157,112 @@ export const playSelect = () => playOnce('seleccion.mp3', SELECT_LEVEL);
 export const playCancel = () => playOnce('cancel.mp3', CANCEL_LEVEL);
 /** Sonido de glitch (p. ej. al tocar el logo del título). */
 export const playGlitch = () => playOnce('glitch.mp3', GLITCH_LEVEL);
+
+/** Sonidos de 8 bits del nivel de acción, sintetizados al momento (placeholders hasta la fase de arte). */
+export type Chip =
+  | 'golpe'
+  | 'disparo'
+  | 'impacto'
+  | 'salto'
+  | 'herido'
+  | 'enemigo'
+  | 'modem'
+  | 'muerte'
+  | 'vacio'
+  | 'cambio'
+  | 'tick'
+  | 'vida'
+  | 'boing'
+  | 'grito'
+  | 'puno'
+  | 'cachetada'
+  | 'espada'
+  | 'tajada'
+  | 'vortice'
+  | 'paralisis'
+  | 'revivir'
+  | 'levanta'
+  | 'carga'
+  | 'destello';
+export function playChip(kind: Chip): void {
+  const { sfxVolume, muted } = useStore.getState().settings;
+  if (muted || sfxVolume <= 0) return;
+  const c = context();
+  const t = c.currentTime;
+  const out = c.createGain();
+  out.gain.value = sfxVolume * 0.32;
+  out.connect(sfxOut());
+  /** Un tono cuadrado (o de sierra) que va de `f0` a `f1` en `dur` segundos. */
+  const tono = (f0: number, f1: number, dur: number, tipo: OscillatorType = 'square', vol = 1, desde = 0) => {
+    const o = c.createOscillator();
+    const g = c.createGain();
+    o.type = tipo;
+    o.frequency.setValueAtTime(f0, t + desde);
+    o.frequency.exponentialRampToValueAtTime(Math.max(20, f1), t + desde + dur);
+    g.gain.setValueAtTime(vol, t + desde);
+    g.gain.exponentialRampToValueAtTime(0.001, t + desde + dur);
+    o.connect(g).connect(out);
+    o.start(t + desde);
+    o.stop(t + desde + dur + 0.02);
+  };
+  /** Ruido blanco (golpes, explosiones). */
+  const ruido = (dur: number, vol = 1, desde = 0) => {
+    const buf = c.createBuffer(1, Math.ceil(c.sampleRate * dur), c.sampleRate);
+    const d = buf.getChannelData(0);
+    for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+    const s = c.createBufferSource();
+    const g = c.createGain();
+    s.buffer = buf;
+    g.gain.setValueAtTime(vol, t + desde);
+    g.gain.exponentialRampToValueAtTime(0.001, t + desde + dur);
+    s.connect(g).connect(out);
+    s.start(t + desde);
+  };
+  switch (kind) {
+    case 'golpe': ruido(0.08, 0.9); tono(180, 60, 0.1, 'square', 0.7); break;
+    case 'disparo': tono(1400, 320, 0.12, 'square', 0.5); break;
+    case 'impacto': ruido(0.05, 0.6); tono(600, 200, 0.06, 'square', 0.4); break;
+    case 'salto': tono(260, 620, 0.14, 'square', 0.35); break;
+    case 'herido': tono(420, 90, 0.25, 'sawtooth', 0.6); ruido(0.1, 0.4); break;
+    case 'enemigo': tono(900, 500, 0.1, 'sawtooth', 0.3); break;
+    case 'muerte': ruido(0.3, 0.7); tono(300, 40, 0.35, 'square', 0.5); break;
+    case 'vacio': tono(220, 110, 0.18, 'square', 0.4); tono(110, 80, 0.2, 'square', 0.3, 0.12); break;
+    case 'cambio': tono(500, 900, 0.06, 'square', 0.35); tono(900, 1300, 0.06, 'square', 0.3, 0.07); break;
+    case 'tick': tono(1500, 1500, 0.03, 'square', 0.2); break;
+    case 'vida': tono(660, 990, 0.08, 'square', 0.35); tono(990, 1320, 0.1, 'square', 0.3, 0.08); break;
+    // Al tocar un emblema +18: rebota.
+    case 'boing': tono(160, 560, 0.09, 'square', 0.4); tono(560, 240, 0.14, 'triangle', 0.35, 0.09); break;
+    // El grito de Rikka al final de los toques: un chillido que sube, tiembla y se quiebra (placeholder de voz).
+    case 'grito':
+      tono(700, 1900, 0.35, 'sawtooth', 0.45);
+      tono(1900, 1500, 0.5, 'square', 0.35, 0.35);
+      tono(1950, 1550, 0.5, 'sawtooth', 0.25, 0.37);
+      tono(1500, 300, 0.45, 'sawtooth', 0.3, 0.85);
+      ruido(0.25, 0.25, 0.85);
+      break;
+    // Combate: cada uno suena distinto al atacar.
+    case 'puno': ruido(0.06, 0.8); tono(150, 55, 0.12, 'square', 0.8); tono(90, 45, 0.08, 'triangle', 0.6, 0.03); break;
+    case 'cachetada': ruido(0.04, 1); tono(2400, 900, 0.05, 'square', 0.35); ruido(0.06, 0.4, 0.04); break;
+    case 'espada': tono(2600, 700, 0.09, 'sawtooth', 0.3); ruido(0.07, 0.35, 0.02); tono(1200, 1600, 0.05, 'square', 0.2, 0.08); break;
+    // La media luna de la sombra: un zumbido que pasa.
+    case 'tajada': tono(180, 520, 0.25, 'sawtooth', 0.35); tono(520, 140, 0.3, 'square', 0.25, 0.22); ruido(0.3, 0.2, 0.05); break;
+    // El vórtice: un remolino grave que baja y sube.
+    case 'vortice': tono(90, 40, 0.6, 'sawtooth', 0.4); tono(60, 180, 0.6, 'square', 0.25, 0.4); ruido(0.8, 0.15); break;
+    // Parálisis de pesadilla: un temblor agudo que se apaga.
+    case 'paralisis': for (let k = 0; k < 6; k++) tono(1300 - k * 120, 900 - k * 90, 0.07, 'square', 0.3, k * 0.08); tono(200, 60, 0.5, 'sawtooth', 0.3, 0.1); break;
+    case 'revivir': for (let k = 0; k < 5; k++) tono(440 * 2 ** (k / 4), 440 * 2 ** ((k + 1) / 4), 0.09, 'square', 0.3, k * 0.08); break;
+    // Alguien que sale volando por el aire.
+    case 'levanta': tono(160, 900, 0.35, 'square', 0.35); ruido(0.2, 0.25); break;
+    // Juntar energía: un zumbido que sube.
+    case 'carga': tono(120, 900, 1.4, 'sawtooth', 0.22); tono(240, 1800, 1.4, 'square', 0.12); break;
+    // Un destello corto.
+    case 'destello': tono(2400, 3200, 0.08, 'square', 0.3); ruido(0.12, 0.35); break;
+    // El monstruo: un módem conectándose.
+    case 'modem':
+      tono(1200, 1200, 0.15, 'square', 0.35);
+      tono(2100, 980, 0.25, 'sawtooth', 0.3, 0.15);
+      ruido(0.35, 0.35, 0.35);
+      tono(1650, 2400, 0.2, 'square', 0.25, 0.7);
+      break;
+  }
+}

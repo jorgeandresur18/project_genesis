@@ -339,7 +339,13 @@ export function EndingsGallery({ onClose }: { onClose: () => void }) {
 }
 
 /** Extras: entradas a la galería de imágenes y a los finales, como comandos de la terminal. */
-export function ExtrasPanel({ onClose, onOpen }: { onClose: () => void; onOpen: (o: 'gallery' | 'endings') => void }) {
+export function ExtrasPanel({
+  onClose,
+  onOpen,
+}: {
+  onClose: () => void;
+  onOpen: (o: 'gallery' | 'endings') => void;
+}) {
   const t = useT();
   const galleryNew = useGalleryState().hasNew;
   const entries = [
@@ -413,7 +419,7 @@ export function AboutPanel({ onClose }: { onClose: () => void }) {
   return (
     <Panel title={conoceMas.titulo} onClose={onClose}>
       <div className="about">
-        <img className="about-logo" src={`${import.meta.env.BASE_URL}marca/logo.webp`} alt="PROYECT GENESIS" />
+        <img className="about-logo" src={`${import.meta.env.BASE_URL}marca/logo.webp`} alt="PROJECT GENESIS" />
         {conoceMas.secciones.map((s) => (
           <section key={s.titulo} className="about-section">
             <h3>{s.titulo}</h3>

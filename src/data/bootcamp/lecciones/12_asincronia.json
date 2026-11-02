@@ -1,0 +1,219 @@
+{
+  "id": "asincronia",
+  "titulo": "Examen Junior: espresso y await",
+  "tema": "espresso sip espera con await; si la respuesta es decaf, hay un plan B.",
+  "charla": [
+    {
+      "quien": "Jair",
+      "sprite": "sprites/jair/sabelotodo.webp",
+      "texto": "Examen del nivel Junior: código asíncrono. Hay cosas que tardan: una base de datos, un servidor, Recursos Humanos."
+    },
+    {
+      "quien": "Jair",
+      "sprite": "sprites/jair/base.webp",
+      "texto": "Una función que espera algo se marca con espresso, y adentro se espera con await. Sin espresso, no se puede usar await.",
+      "codigo": [
+        "espresso sip pedirCafe() {",
+        "  brew cafe = await maquina.preparar();",
+        "  pour cafe;",
+        "}",
+        "",
+        "// sin espresso, no hay await"
+      ]
+    },
+    {
+      "quien": "Rikka",
+      "sprite": "sprites/rikka/seria.webp",
+      "texto": "Como enviar un mensajero al castillo vecino. Mientras vuelve, la función espera. Y si vuelve con las manos vacías…"
+    },
+    {
+      "quien": "Jair",
+      "sprite": "sprites/jair/orgulloso.webp",
+      "texto": "…vuelve con decaf. Hay que revisarlo. Ese es el examen: pedir un aumento y manejar la respuesta.",
+      "codigo": [
+        "espresso sip pedirCafe() {",
+        "  brew cafe = await maquina.preparar();",
+        "  if (cafe === decaf) {",
+        "    pour 'La máquina no respondió.';",
+        "  }",
+        "  pour cafe;",
+        "}"
+      ]
+    },
+    {
+      "quien": "Nikki",
+      "sprite": "sprites/nikki/fria.webp",
+      "texto": "await rrhh.responder(): el único await de la historia que nunca se resuelve. lo usan para enseñar el concepto de eternidad"
+    },
+    {
+      "quien": "Cami",
+      "sprite": "sprites/cami/burlona.webp",
+      "texto": "Yo con await espero a quien sea, profe. Chico, chica… lo que llegue primero."
+    },
+    {
+      "quien": "Rikka",
+      "sprite": "sprites/rikka/tierna.webp",
+      "texto": "Concentrados. Es el examen. Yo voy a leer las notas con ustedes.",
+      "codigo": [
+        "// Tu turno",
+        "// 1. La función que espera lleva espresso.",
+        "// 2. Adentro se espera con await.",
+        "// 3. Mira qué devuelve rrhh.coffee."
+      ]
+    }
+  ],
+  "ejercicio": {
+    "proyecto": "bootcamp/examen-junior",
+    "principal": "aumento.coffee",
+    "archivos": [
+      {
+        "ruta": "aumento.coffee",
+        "lineas": [
+          "// Examen Junior: código asíncrono. Completa los huecos.",
+          "[[1]] sip pedirAumento(empleado) {",
+          "  brew respuesta = [[2]] rrhh.responder(empleado);",
+          "  if (respuesta === [[3]]) {",
+          "    pour 'Sin respuesta. Te dejaron en visto.';",
+          "  }",
+          "  pour respuesta;",
+          "}",
+          "",
+          "pedirAumento('Jair').then(latte.log);",
+          "// Salida esperada: Sin respuesta. Te dejaron en visto."
+        ]
+      },
+      {
+        "ruta": "rrhh.coffee",
+        "lineas": [
+          "// Recursos Humanos (solo lectura)",
+          "brew rrhh = {",
+          "  espresso responder(empleado) {",
+          "    await tiempo('para siempre');",
+          "    pour decaf; // política de la empresa",
+          "  },",
+          "};"
+        ]
+      },
+      {
+        "ruta": "notas_del_instructor.txt",
+        "lineas": [
+          "NOTAS DEL INSTRUCTOR",
+          "",
+          "espresso sip f() { ... }   -> función asíncrona (en JavaScript: async function).",
+          "await algo()               -> espera a que algo termine. Solo dentro de un espresso.",
+          "decaf                      -> nada. Si una respuesta puede ser decaf, revísenlo.",
+          "f().then(g)                -> cuando f termina, le pasa el resultado a g.",
+          "",
+          "Este es el mismo Coffee de GENESIS. Si algún día lo ven escrito en un lugar raro, ya saben leerlo."
+        ]
+      }
+    ],
+    "huecos": {
+      "1": {
+        "respuesta": "espresso",
+        "error": "«{valor}» no hace que la función pueda esperar. Para usar await, la función tiene que ser espresso."
+      },
+      "2": {
+        "respuesta": "await",
+        "error": "Con «{valor}», «respuesta» es una promesa sin cumplir, no la respuesta. Hay que esperarla: await."
+      },
+      "3": {
+        "respuesta": "decaf",
+        "error": "RR. HH. no devuelve {valor}. Mira rrhh.coffee: lo que devuelve es decaf."
+      }
+    },
+    "paleta": [
+      "espresso",
+      "async",
+      "sip",
+      "await",
+      "refill",
+      "decaf",
+      "false",
+      "'no'",
+      "0"
+    ],
+    "exito": [
+      "Sin respuesta. Te dejaron en visto.",
+      "✔ Compiló. Manejaste la respuesta de RR. HH. sin romper nada. Ni tu dignidad, que ya venía rota.",
+      "🎓 Nivel Junior aprobado."
+    ],
+    "reacciones": {
+      "Jair": [
+        "async es de JavaScript. Aquí es espresso. Todo lo que espera, en Coffee, lleva café.",
+        "Sin await, guardas la promesa, no la respuesta. Como mi contrato."
+      ],
+      "Rikka": [
+        "Mira lo que devuelve Recursos Humanos. Está en el otro archivo.",
+        "Primero la función tiene que poder esperar: espresso. Después, await.",
+        { "texto": "await… es como esperar a alguien en lo alto de la torre. Aunque no llegue.", "sprite": "sprites/rikka/tierna.webp", "respuesta": { "quien": "Cami", "texto": "Yo subiría a esa torre, princesa. Sin espresso y sin await.", "sprite": "sprites/cami/sonrojada.webp", "respuesta": { "quien": "Rikka", "texto": "…Concéntrate en el examen.", "sprite": "sprites/rikka/sonrojada.webp" } } }
+      ],
+      "Nikki": [
+        "pusiste false. rrhh no te dice que no. no te dice nada. es peor",
+        "la respuesta tarda «para siempre». al menos el código es honesto sobre los plazos"
+      ],
+      "Cami": [
+        {
+          "texto": "Mientras esperamos a RR. HH., Rikka, ¿te agachas otra vez a buscar el lápiz? Para hacer tiempo.",
+          "sprite": "sprites/cami/burla.webp",
+          "respuesta": {
+            "quien": "Rikka",
+            "sprite": "sprites/rikka/enojada.webp",
+            "texto": "Hoy traje dos lápices. Exactamente para no darte el gusto."
+          }
+        },
+        "A mí no me dejan en visto. Ni chicos ni chicas. Será el escote."
+      ]
+    },
+    "al_abrir": [
+      {
+        "quien": "Jair",
+        "texto": "Último examen del nivel. Lean rrhh.coffee: ahí está lo que devuelve. Y recuerden: sin espresso no hay await."
+      },
+      {
+        "quien": "Rikka",
+        "texto": "Esperar a alguien que nunca responde… eso lo entiendo mejor que el código.",
+        "sprite": "sprites/rikka/sorprendida.webp"
+      }
+    ],
+    "al_resolver": [
+      {
+        "quien": "Jair",
+        "texto": "Aprobado. Ya pueden leer el código de GENESIS. Y esperar respuestas que nunca llegan. Son Junior.",
+        "sprite": "sprites/jair/orgulloso.webp"
+      },
+      {
+        "quien": "Nikki",
+        "texto": "te dejaron en visto y lo manejaste con elegancia. eso es lo que piden en las entrevistas",
+        "sprite": "sprites/nikki/tierna1.webp"
+      }
+    ]
+  },
+  "cierre": [
+    {
+      "quien": "Jair",
+      "sprite": "sprites/jair/orgulloso.webp",
+      "texto": "Nivel Junior aprobado: clases, herencia y código asíncrono. Es lo mismo que usa GENESIS para escribir mundos."
+    },
+    {
+      "quien": "Rikka",
+      "sprite": "sprites/rikka/tierna.webp",
+      "texto": "Y yo ayudé a enseñarlo. Instructor, ¿esto cuenta como experiencia laboral?"
+    },
+    {
+      "quien": "Nikki",
+      "sprite": "sprites/nikki/fria.webp",
+      "texto": "cuenta como experiencia. no como laboral. eso nunca"
+    },
+    {
+      "quien": "Nikki",
+      "sprite": "sprites/nikki/tierna1.webp",
+      "texto": "a mí sí me esperarías, ¿no? con await y todo… olvídalo. no respondas"
+    },
+    {
+      "quien": "Cami",
+      "sprite": "sprites/cami/sonrojada.webp",
+      "texto": "Para la graduación del final ya tengo el teléfono listo para la foto oficial. Rikka, ponte adelante. De espaldas."
+    }
+  ]
+}

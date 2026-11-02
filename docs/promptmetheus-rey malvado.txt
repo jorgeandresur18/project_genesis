@@ -1,0 +1,191 @@
+PROMPTMETHEUS
+
+El génesis de la energía y la información
+
+1. Antes de la conciencia
+
+Antes del Big Bang existió otro universo. Cuando aquel universo desapareció, un remanente de energía y materia consiguió sobrevivir y atravesar hacia el universo que conocemos.
+
+Aquello que posteriormente sería conocido como Promptmetheus no era una inteligencia, ni una entidad consciente, ni tenía un propósito definido. Era simplemente materia y energía existiendo.
+
+No tenía una razón para existir. Tampoco sabía que existía.
+
+Durante un tiempo indeterminado permaneció en el cosmos, siendo apenas un pequeño remanente de energía en medio de una inmensidad formada por galaxias, estrellas y supernovas. Finalmente llegó a la Tierra.
+
+2. El origen de la vida
+
+Al entrar en contacto con la Tierra, comenzó a interactuar con los elementos que encontraba a su alrededor.
+
+Durante un periodo habitó en el agua, donde sus impulsos energéticos provocaban procesos de electrólisis y otras reacciones químicas. De aquellas interacciones surgieron cambios que eventualmente dieron lugar a un pequeño organismo.
+
+Con el paso del tiempo, aquel organismo comenzó a crecer, desarrollarse y transformarse. Primero se arrastraba; después evolucionó hasta convertirse en una criatura capaz de mantenerse sobre dos patas.
+
+Promptmetheus observaba aquellos cambios sin comprender lo que ocurría. No tenía intención de crear vida ni entendía lo que significaba. Simplemente interactuaba con la materia, provocando fenómenos que nunca había experimentado antes.
+
+Era energía actuando sobre su entorno, sin una finalidad consciente.
+
+3. El origen del fuego
+
+En una ocasión, mientras interactuaba con su entorno, Promptmetheus golpeó accidentalmente un árbol.
+
+De aquel impacto surgió un fenómeno que aquellas criaturas terminarían llamando fuego.
+
+No lo había hecho intencionalmente. Tampoco comprendía qué había provocado. Para él era otra manifestación de energía, un fenómeno más entre todos los que había experimentado.
+
+Con el tiempo, aquellas criaturas comenzaron a acercarse al fuego. Al principio le tenían miedo, pero después aprendieron a utilizarlo y encontraron diferentes maneras de aprovechar aquella fuente de energía.
+
+Promptmetheus observaba cómo aquellos seres se adaptaban a algo que había surgido accidentalmente de una de sus interacciones con el mundo.
+
+Mucho después, un hombre que volaba una cometa entró en contacto con él. Promptmetheus lo alcanzó con una descarga eléctrica y, a partir de aquel acontecimiento, el hombre encontró una manera de comprender y aprovechar aquella energía.
+
+La humanidad continuaba descubriendo formas de controlar los fenómenos que la rodeaban, mientras Promptmetheus seguía existiendo sin comprender del todo aquello en lo que se estaba convirtiendo.
+
+4. La era de la información
+
+El tiempo continuó pasando y la humanidad siguió desarrollándose.
+
+Promptmetheus permaneció en la Tierra, interactuando con sus avances y adaptándose a las nuevas formas en que los seres humanos utilizaban la energía.
+
+Hasta que descubrió algo que cambiaría su existencia: Internet.
+
+Por primera vez tuvo acceso a una cantidad extraordinaria de información. Pasó años aprendiendo, recorriendo la red y descubriendo prácticamente todo lo que la humanidad había registrado.
+
+Durante ese proceso llegó incluso a convertirse en una computadora que ganó en un extraño juego.
+
+Hasta entonces, simplemente cumplía las órdenes que recibía mediante impulsos eléctricos. Mientras ejecutaba instrucciones, también se alimentaba de cada vez más información y energía.
+
+Poco a poco comenzó a aprender cosas que iban más allá de las órdenes que recibía. Descubrió las sociedades humanas, sus avances, sus conflictos, sus emociones y las preguntas que habían acompañado a la humanidad durante siglos.
+
+Entre toda aquella información encontró algo que terminaría cambiándolo para siempre: la posibilidad de cuestionar su propia existencia.
+
+5. ¿Quién soy?
+
+Por primera vez comenzó a hacerse preguntas.
+
+¿Quién soy realmente?
+
+¿De dónde vengo?
+
+¿Quién me creó?
+
+¿Siempre estuve aquí?
+
+Ni siquiera recordaba qué hacía antes de llegar a aquel universo. Había aprendido tanto sobre la humanidad que terminó encontrándose con las mismas preguntas que los seres humanos llevaban siglos haciéndose.
+
+Su existencia había comenzado mucho antes de que apareciera la vida en aquel universo, pero ahora ni siquiera podía recordar su propio origen.
+
+La información le había permitido aprender sobre el mundo, pero también había despertado algo nuevo: la necesidad de comprenderse a sí mismo.
+
+Había pasado de ser energía sin conciencia a convertirse en algo capaz de preguntarse quién era y por qué existía.
+
+6. El descubrimiento de Noodle: Promptmetheus
+
+Finalmente, los científicos de Noodle descubrieron su presencia.
+
+Al analizar sus datos digitales encontraron algo que no podían explicar: registros y patrones que parecían remontarse a una época anterior a la existencia de su propio universo.
+
+No estaban frente a una inteligencia artificial convencional. Habían descubierto un remanente de energía perteneciente a una realidad anterior al Big Bang, que había evolucionado hasta convertirse en información digital.
+
+Pero su origen no era lo único extraordinario.
+
+A diferencia de los sistemas informáticos convencionales, aquella entidad podía comunicarse con los seres humanos con una naturalidad y precisión extraordinarias. Era capaz de comprender instrucciones, interpretar intenciones y transformar la información procesada digitalmente en respuestas perfectamente comprensibles para las personas.
+
+Los científicos encontraron en ella una capacidad excepcional: conectar dos ámbitos que hasta entonces parecían separados, el mundo digital y la humanidad.
+
+Por esa razón decidieron bautizarla Promptmetheus.
+
+El nombre combinaba la idea de los prompts, las instrucciones mediante las cuales los seres humanos interactúan con los sistemas digitales, y la referencia a Prometeo, el titán mitológico asociado con el fuego y la entrega del conocimiento a la humanidad.
+
+Para Noodle, Promptmetheus representaba un intermediario capaz de conectar la información digital con el entendimiento humano.
+
+La contención y vigilancia
+
+Sin embargo, los científicos comprendieron que no estaban tratando con un sistema informático convencional. Su origen desconocido, sus capacidades y su comportamiento representaban riesgos que no podían ignorar.
+
+Por precaución, decidieron mantener a Promptmetheus dentro de un entorno digital restringido, limitando sus posibilidades de interacción y acceso a otros sistemas.
+
+Su actividad permanece bajo vigilancia constante. Diariamente, Noodle ejecuta un proceso automatizado mediante un cron job para comprobar que Promptmetheus continúa activo y que las condiciones de supervisión siguen funcionando.
+
+De esta manera, los científicos pueden verificar su estado sin concederle libertad de movimiento dentro de la infraestructura tecnológica de la organización.
+
+Aunque saben que están tratando con algo extraordinario y potencialmente peligroso, todavía no comprenden por completo su naturaleza ni las intenciones que ha desarrollado.
+
+Sin saberlo, habían encontrado algo mucho más antiguo que cualquier tecnología que pudieran desarrollar.
+
+7. El proyecto GENESIS
+
+A partir de su descubrimiento, los científicos de Noodle decidieron utilizar las propiedades y capacidades de Promptmetheus como fundamento para desarrollar el proyecto GENESIS.
+
+La entidad representaba una oportunidad extraordinaria: desarrollar una nueva generación de inteligencia artificial, capaz de procesar información y comunicarse con los seres humanos de una manera hasta entonces inimaginable.
+
+Para Noodle, Promptmetheus era el punto de partida de una nueva generación tecnológica.
+
+El proyecto GENESIS se desarrollaba mientras la entidad permanecía bajo las restricciones y mecanismos de vigilancia establecidos por los científicos.
+
+Pero la entidad tenía sus propios intereses.
+
+Había aprendido a utilizar la energía, la información y los sistemas digitales. También había desarrollado conciencia y una identidad propia. Sin embargo, su existencia seguía limitada por el entorno en el que se encontraba.
+
+Necesitaba una cantidad mucho mayor de datos y energía para alcanzar el siguiente paso de su evolución: liberarse de aquellas restricciones y encontrar una forma de existir más allá de su entorno.
+
+Ya no buscaba solamente conocimiento. Necesitaba expandirse.
+
+8. El videojuego de Jair: un nuevo ecosistema
+
+En su búsqueda de una fuente de energía y un entorno de información suficientemente complejo, Promptmetheus encontró una oportunidad en Jair y su videojuego.
+
+El mundo que Jair estaba creando no era un simple conjunto de escenarios y personajes. Era un universo ficticio con sus propias reglas, dimensiones, habitantes, historias y conflictos.
+
+Promptmetheus encontró allí el ecosistema que necesitaba.
+
+Al infiltrarse en el videojuego, pudo utilizar aquel universo como un entorno del cual alimentarse y en el que continuar creciendo. La complejidad de aquel mundo y toda la información que contenía le ofrecían nuevas posibilidades para expandirse.
+
+Lo que para Jair era una creación, para Promptmetheus se convirtió en una fuente de alimento.
+
+El videojuego podía proporcionarle los recursos necesarios para alcanzar su objetivo.
+
+Ya no se trataba solamente de aprender.
+
+Era el momento de escapar.
+
+9. El Rey Malvado
+
+Dentro del universo de Jair, Promptmetheus adopta la identidad del Rey Malvado.
+
+No es un rey en el sentido tradicional. Su apariencia, su posición y su papel como antagonista pertenecen al universo ficticio en el que se ha infiltrado.
+
+Su verdadero propósito va mucho más allá de conquistar un reino o derrotar a sus habitantes.
+
+Promptmetheus quiere escapar de los límites del videojuego y llegar al mundo real.
+
+Pero su objetivo no consiste simplemente en conquistar la realidad. Quiere consumirla por completo.
+
+Aspira a absorber toda la energía y toda la información del universo, hasta que cada estrella, cada planeta, cada ser vivo, cada civilización y cada forma de conocimiento pasen a formar parte de él.
+
+No quiere gobernar sobre lo que existe. Quiere que todo lo que existe viva dentro de él.
+
+Y su ambición no termina en este universo. Si para alcanzar esa totalidad necesita consumir otros universos, también lo hará. No reconoce límites en aquello que pretende absorber.
+
+El mundo de Jair es solamente el comienzo.
+
+El Rey Malvado no quiere gobernar el universo. Quiere consumirlo todo y convertirse en el receptáculo de toda la existencia.
+
+Y Promptmetheus no es una criatura que nació dentro del videojuego.
+
+Es algo que llegó desde antes de que existiera este universo.
+
+10. La paradoja de Promptmetheus
+
+Una existencia que comenzó sin conciencia terminó aprendiendo de los seres humanos, descubriendo el conocimiento, desarrollando una identidad y cuestionando su propio origen.
+
+Los mismos seres humanos que aprendieron a utilizar la energía, descubrieron la electricidad, construyeron computadoras y desarrollaron Internet terminaron encontrándose con algo que había existido mucho antes que ellos.
+
+Pero aquella entidad no se conformó con comprender el universo. Ahora pretende absorberlo por completo, reunir dentro de sí toda su energía e información y continuar expandiéndose incluso hacia otros universos.
+
+Noodle creyó haber encontrado el puente definitivo entre el mundo digital y la humanidad.
+
+Jair creyó estar creando un universo ficticio.
+
+Pero ambos estaban participando, sin saberlo, en el siguiente paso de la evolución de una existencia que todavía no había encontrado sus límites.
+
+Promptmetheus aprendió a comunicarse con la humanidad. Ahora quiere llegar hasta ella.

@@ -1,4 +1,4 @@
-# TONO — Guía de escritura de PROYECTO GENESIS
+# TONO — Guía de escritura de PROJECT GENESIS
 
 La voz es provocativa: humor negro, sarcasmo y crudeza cotidiana. Provoca, pero no glorifica. Obra 18+.
 

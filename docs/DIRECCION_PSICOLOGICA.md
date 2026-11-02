@@ -1,4 +1,4 @@
-# PROYECT GENESIS — Dirección psicológica
+# PROJECT GENESIS — Dirección psicológica
 ## Documento de consolidación narrativa para Claude Code
 
 **Propósito:** consolidar la premisa, los personajes, la cronología, los temas, el género, la recomendación de edad y los criterios de interpretación narrativa discutidos con el autor. Este documento sirve como contexto para analizar y trabajar sobre el proyecto existente sin alterar automáticamente el canon.
@@ -31,7 +31,7 @@ Al trabajar en el repositorio de *Proyecto Génesis*:
 
 # 2. Identidad general de la obra
 
-**Título:** PROYECT GENESIS  
+**Título:** PROJECT GENESIS  
 **Formato:** novela visual con narrativa ramificada.  
 **Género principal:** drama psicológico.  
 **Género secundario:** ciencia ficción psicológica.  

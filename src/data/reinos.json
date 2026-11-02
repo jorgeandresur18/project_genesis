@@ -1,0 +1,50 @@
+{
+  "nota": "Los cuatro reinos estacionales (docs/CANON.md, «Reino Ancestral»). Cada reino tiene su emblema (public/emblemas/, fuente en docs/emblema*.png) y su ficha en la galería («Reinos»). Un reino se desbloquea al ver la escena de «desbloqueo»; sin «desbloqueo», sigue bloqueado («???»). «lugares»: el cartel con el emblema que sale al llegar a un lugar (campo «lugar» de la escena). Las fichas solo cuentan lo que el jugador ya sabe: nada de lo marcado como secreto en el canon.",
+  "reinos": [
+    {
+      "id": "primavera",
+      "nombre": "Reino de la Primavera",
+      "color": "#3f9a5f",
+      "emblema": "emblemas/primavera.webp",
+      "desbloqueo": "cap02_013",
+      "info": "Facción estacional inspirada en el Japón feudal: murallas blancas, faroles de papel y cerezos en cada esquina. Hogar de Rikka, guardiana del puente desde hace tanto que ya no se acuerda. Su antiguo rey se proclamó Rey Malvado del metaverso; hoy reina un nuevo Rey Primavera y Rikka le agradece la paz de los cuatro reinos. Los dulces son gratis para los amigos de la guardiana. La paz, no se sabe a qué precio."
+    },
+    {
+      "id": "verano",
+      "nombre": "Reino del Verano",
+      "color": "#e0a91f",
+      "emblema": "emblemas/verano.webp",
+      "info": "Facción estacional de inspiración polinesia. Ocupa el Valle de la Eterna Primavera bajo la influencia de la deidad Valkha; de ahí su conflicto con la Primavera. Dicen que son codiciosos. Lo dicen los de la Primavera, que perdieron el valle."
+    },
+    {
+      "id": "otono",
+      "nombre": "Reino del Otoño",
+      "color": "#a4521c",
+      "emblema": "emblemas/otono.webp",
+      "desbloqueo": "cap02_p2_049",
+      "info": "Facción estacional de inspiración celta: casas de piedra cubiertas de hiedra roja, espirales talladas y olor a manzana asada. Aquí te roban la ropa encantada a plena luz del día y el vendedor amable resulta ser un soldado disfrazado. El otoño se lleva todo lo que no amarraste. A veces, también a ti."
+    },
+    {
+      "id": "invierno",
+      "nombre": "Reino del Invierno",
+      "color": "#3f8fc4",
+      "emblema": "emblemas/invierno.webp",
+      "desbloqueo": "cap02_t_a01",
+      "info": "Facción estacional inspirada en regiones de Rusia. Nieve, frío y una posada con taberna donde el hidromiel se paga con trajes vendidos. Lo que pasa en la taberna del Invierno se queda en la galería. Y en la resaca."
+    }
+  ],
+  "lugares": {
+    "ciudadela_primavera": {
+      "reino": "primavera",
+      "nombre": "Ciudadela de la Primavera"
+    },
+    "ciudadela_otono": {
+      "reino": "otono",
+      "nombre": "Ciudadela del Otoño"
+    },
+    "frontera_invierno": {
+      "reino": "invierno",
+      "nombre": "Reino del Invierno"
+    }
+  }
+}

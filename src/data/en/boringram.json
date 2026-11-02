@@ -9,6 +9,9 @@
     },
     "nikki": {
       "bio": "sweet chill monday to saturday 🍦 the rest is none of your business"
+    },
+    "jordan": {
+      "bio": "same chair since 2019. don't ask me why"
     }
   },
   "publicaciones": [
@@ -243,7 +246,7 @@
     "instagram_nota_celular": "Pick Instagram in the menu: it arrives as a message, with the thumbnail and the text. Just in case, we also copied the text with the link.",
     "facebook_nota": "Facebook doesn't let us write the text for you: we copied it. Paste it in your post, above the thumbnail.",
     "instagram_nota": "We copied the text with the link. Paste it in an Instagram message (opened in another tab): it will show its thumbnail.",
-    "compartir_texto": "Look at this in PROYECT GENESIS (18+)",
+    "compartir_texto": "Look at this in PROJECT GENESIS (18+)",
     "ahorro": "Battery saver",
     "agregar_comentario": "Add a comment…",
     "publicar": "Post",
@@ -282,7 +285,8 @@
     "hace_anos": "{n} years ago",
     "alarma_proxima": "scheduled",
     "dia_hoy": "Today",
-    "dia_ayer": "Yesterday"
+    "dia_ayer": "Yesterday",
+    "boringplace": "Boringplace"
   },
   "notificaciones": [
     {
@@ -420,6 +424,10 @@
     {
       "titulo": "Messages",
       "texto": "Your chats. The ones you left on read too. Especially those."
+    },
+    {
+      "titulo": "Boringplace",
+      "texto": "The Boringram marketplace. People sell what they no longer want and, now and then, something that never existed: if it is too good to be true, it is a scam. Jair sells his stuff too: it is the only way his paycheck lasts until the end of the month. It opens later in the story."
     },
     {
       "titulo": "Your profile",

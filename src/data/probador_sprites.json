@@ -1,0 +1,4 @@
+{
+  "_nota": "Probador de sprites (?sprites en la dirección). Salen solos los sprites del combate de todas las batallas (src/data/batallas/*.json). Aquí van los varios: otras hojas de public/ (sin .png) con su nombre, para probar sprites que se usan en otras partes del juego. Cada hoja necesita su .json (frameWidth, frameHeight, animations).",
+  "varios": []
+}

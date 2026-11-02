@@ -2,7 +2,7 @@
 
 > Antes se llamaba «Academia Genesis». Documento del autor: [BOOTCAMP_ESPECIFICACION.md](BOOTCAMP_ESPECIFICACION.md). Aquí está cómo quedó implementado.
 >
-> **Estado:** publicado hasta el Capítulo 1 (el nivel Trainee). Las clases del nivel Junior se publican con el Capítulo 2. Todo esto es un extra: no cuenta para la historia.
+> **Estado:** solo local (usa el IDE del Capítulo 2). Lo que no cuenta para la historia: todo esto es un extra.
 
 ## Qué es
 

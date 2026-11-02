@@ -10,5 +10,22 @@
   "descubrieron_el_edit": false,
   "sashi_murio": false,
   "final_alcanzado": null,
-  "_musica": null
+  "_musica": null,
+  "romance_cami": 0,
+  "romance_rikka": 0,
+  "salidas_ide": 0,
+  "salio_del_ide": false,
+  "juego_completo": false,
+  "nivel_jair": 0,
+  "xp_jair": 0,
+  "nivel_cami": 0,
+  "xp_cami": 0,
+  "mochila_atq": 0,
+  "mochila_def": 0,
+  "mochila_vida": 0,
+  "rikka_perturbada": false,
+  "mochila_carga": 0,
+  "cap01_completo": false,
+  "mochila_caramelo_rancio": 0,
+  "mochila_revivir": 0
 }
