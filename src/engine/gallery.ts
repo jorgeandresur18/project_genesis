@@ -12,6 +12,7 @@ import { storyFiles } from './story';
 import galeria from '../data/galeria.json';
 import spriteConfig from '../../tools/sprites.config.json';
 import emblemas from '../data/emblemas_18.json';
+import { GALERIA_COMPLETA } from './modo';
 
 const cgsDe = (secretas: boolean): string[] => {
   const ids: string[] = [];
@@ -132,12 +133,17 @@ export const characterColor = (id: string): string => (galeria.colores as Record
 export const imageKey = (id: string) => `img:${id}`;
 export const spriteKey = (character: string, expr: string) => `spr:${character}/${expr}`;
 
+/** Cualquier cosa que se pregunte, vista (la galería completa). */
+const TODO_VISTO = new Proxy({} as Record<string, never>, { get: () => true, has: () => true });
+
 /** Qué hay desbloqueado y qué es nuevo, según la partida guardada. */
 export function useGalleryState() {
-  const cgSeen = useStore((s) => s.cgSeen);
-  const secretosVistos = useStore((s) => s.secretosVistos);
-  const rpgVistos = useStore((s) => s.rpgVistos);
-  const visited = useStore((s) => s.snapshots);
+  // Con la galería completa (/all o ?galeria=todo), todo cuenta como visto.
+  const todo = GALERIA_COMPLETA;
+  const cgSeen = useStore((s) => (todo ? TODO_VISTO : s.cgSeen));
+  const secretosVistos = useStore((s) => (todo ? TODO_VISTO : s.secretosVistos));
+  const rpgVistos = useStore((s) => (todo ? TODO_VISTO : s.rpgVistos));
+  const visited = useStore((s) => (todo ? TODO_VISTO : s.snapshots));
   const opened = useStore((s) => s.galleryOpened);
   const images = CGS.filter((id) => cgSeen[id]);
   const secretImages = CGS_SECRETOS.filter((id) => cgSeen[id]);

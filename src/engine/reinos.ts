@@ -3,6 +3,7 @@ import reinosEs from '../data/reinos.json';
 import reinosEn from '../data/en/reinos.json';
 import { localized, useLang } from './i18n';
 import { useStore } from './store';
+import { GALERIA_COMPLETA } from './modo';
 
 export interface Reino {
   id: string;
@@ -39,7 +40,7 @@ export function useReinos() {
   const data = merged(useLang());
   const visited = useStore((s) => s.snapshots);
   const opened = useStore((s) => s.galleryOpened);
-  const unlocked = data.reinos.filter((r) => r.desbloqueo && visited[r.desbloqueo]);
+  const unlocked = data.reinos.filter((r) => r.desbloqueo && (GALERIA_COMPLETA || visited[r.desbloqueo]));
   return {
     reinos: data.reinos,
     unlocked,
