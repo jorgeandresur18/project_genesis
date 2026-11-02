@@ -253,6 +253,14 @@ Cami y Rikka ya se materializaron y viven con Jair en su departamento.
 - **Más bandas:** animado por Rikka, Jair le dice a Cami que tiene mucha más música para mostrarle y nombra otras favoritas: **The Schmitz, The Blueberries, The Drunks, The Billers, The Cops y The Cum** (parodias). Cami: «¿The qué…?». Jair: «Olvídalo, tal vez no es de tu estilo». Rikka dice que escuchará toda la música que Jair le recomiende. Eso crea **tensión de celos entre Rikka y Cami**. `[CANON]`
 - **Rikka se vuelve fan de The Blueberries.** `[CANON]`
 - **Cami detesta la música que escuchan Jair y Rikka** («esas mierdas melancólicas»). Por su cuenta descubre **Parawoke** y se vuelve fan por su estilo agresivo, que le suena a grito de guerra. Les recomienda a Jair y a Rikka escuchar el álbum **_Misery Brokenness_**. También le encanta la artista **Mjölnir**, por su estilo. `[CANON]`
+- **Nikki y Rikka, por The Blueberries:** Nikki también escuchó a The Blueberries; no mucho, pero hay canciones con las que se identificó. Rikka dice que a ella le pasa igual. Ahí empieza una **media amistad** entre las dos: no tanto, pero se entienden. `[CANON]` (añadido del autor, 2026-11-02; en qué momento pasa: `[PENDIENTE]`)
+- **Nikki y Cami se odian a muerte.** `[CANON]` (añadido del autor, 2026-11-02)
+- **Una canción por personaje** (referencia de tono para el autor, con canciones reales de las bandas parodiadas; **nunca se nombran en el juego**; elegidas por Claude y aprobadas por el autor el 2026-11-02): `[CANON]`
+  - **Jair:** *Heaven Knows I'm Miserable Now* (The Smiths): el trabajo mal pagado, la vida en bucle y la melancolía, con humor seco.
+  - **Nikki:** *Linger* (The Cranberries): el tira y afloja de ocho años («nunca te vayas de mi vida» y, la misma noche, «búscate una novia»).
+  - **Cami:** *Army of Me* (Björk): soldado, dura, sin paciencia con nadie que se queje. Alternativa más rabiosa: *Misery Business* (Paramore).
+  - **Rikka:** *Lovesong* (The Cure): quinientos años, dramática y fiel a Jair («no importa cuán lejos, siempre te voy a amar»).
+  - **El Rey Malvado / Promptmetheus:** *Every Breath You Take* (The Police): suena a canción de amor y es de vigilancia y posesión; la IA que parece querer gobernar y quiere consumirlo todo.
 - **Las parodias** se inspiran en bandas de los 80, los 90 y principios de los 2000: The Struggles (The Strokes), The Schmitz (The Smiths), The Blueberries (The Cranberries), The Drunks (The Drums), The Billers (The Killers), The Cops (The Police), The Cum (The Cure), Parawoke (Paramore) y Mjölnir (Björk). Nunca se nombra a las bandas reales en el juego. `[CANON]`
 
 ### Capítulos 4 a 7: la vida real, la verdad y los dos epílogos (borrador del autor)
