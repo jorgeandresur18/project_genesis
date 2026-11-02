@@ -23882,11 +23882,23 @@
         "speaker": "Cami",
         "text": "¿Jair? ¿Qué pasa? ¿Por qué pones esa cara?"
       },
-      "choices": [],
+      "choices": [
+        {
+          "text": "Irse a la Grieta",
+          "next": "cap01_g5h_050"
+        },
+        {
+          "text": "Probar la nave grande",
+          "next": "cap01_hg_001",
+          "set": {
+            "hangar_pelea": true
+          }
+        }
+      ],
       "conditions": [],
       "audio": null,
       "ui_effect": null,
-      "next": "cap01_g5h_050"
+      "next": null
     },
     {
       "scene_id": "cap01_g5h_050",
@@ -24027,6 +24039,778 @@
       "audio": null,
       "ui_effect": null,
       "next": "cap01_g5m_001"
+    },
+    {
+      "scene_id": "cap01_hg_001",
+      "chapter": 1,
+      "background": "fondos/hangar.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/sabelotodo.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/sospecha.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "Espera. Todavía no. Si alguna de estas tiene motor de verdad, es la grande."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_hg_002"
+    },
+    {
+      "scene_id": "cap01_hg_002",
+      "chapter": 1,
+      "background": "fondos/hangar.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/sabelotodo.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/sospecha.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Jair sube a la nave grande, la de la puerta gris. Adentro, el tablero es igual al del caza, solo que más grande y con más botones que nadie va a usar."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_hg_003"
+    },
+    {
+      "scene_id": "cap01_hg_003",
+      "chapter": 1,
+      "background": "fondos/hangar.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/sabelotodo.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/sospecha.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Desconecta el cable. Cuenta hasta diez. Lo vuelve a conectar."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_hg_004"
+    },
+    {
+      "scene_id": "cap01_hg_004",
+      "chapter": 1,
+      "background": "fondos/hangar.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/sorprendida.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "El tablero no se enciende. Se enciende todo lo demás: las luces del hangar, una por una, y una sirena que suena como alguien muy decepcionado."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_hg_005"
+    },
+    {
+      "scene_id": "cap01_hg_005",
+      "chapter": 1,
+      "background": "fondos/hangar.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/sorprendida.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "Alarma del hangar: activa. Acceso no autorizado a recurso decorativo."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_hg_006"
+    },
+    {
+      "scene_id": "cap01_hg_006",
+      "chapter": 1,
+      "background": "fondos/hangar.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/molesta.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "¿Qué tocaste?"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_hg_007"
+    },
+    {
+      "scene_id": "cap01_hg_007",
+      "chapter": 1,
+      "background": "fondos/hangar.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/verguenza1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/molesta.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "Lo mismo de siempre. Esta vez funcionó demasiado."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_hg_008"
+    },
+    {
+      "scene_id": "cap01_hg_008",
+      "chapter": 1,
+      "background": "fondos/hangar.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "soldado_enmascarado",
+          "sprite": "sprites/soldado_enmascarado/base.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Las dos puertas del hangar se abren a la vez. Soldados enmascarados, en fila, sin apuro."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_hg_009"
+    },
+    {
+      "scene_id": "cap01_hg_009",
+      "chapter": 1,
+      "background": "fondos/hangar.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "soldado_enmascarado",
+          "sprite": "sprites/soldado_enmascarado/base.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/apuntando.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "Bájame. Con un pie también se dispara."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_hg_010",
+      "batalla": "hangar",
+      "batalla_derrota": "cap01_bad_hangar_001"
+    },
+    {
+      "scene_id": "cap01_hg_010",
+      "chapter": 1,
+      "background": "fondos/hangar.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "capitan_enmascarado",
+          "sprite": "sprites/capitan_enmascarado/base.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "El capitán retrocede entre las naves. No corre: camina hacia atrás, apuntando, y la punta del blaster sigue blanca, cargada hasta el borde."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_hg_011"
+    },
+    {
+      "scene_id": "cap01_hg_011",
+      "chapter": 1,
+      "background": "fondos/hangar.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "capitan_enmascarado",
+          "sprite": "sprites/capitan_enmascarado/base.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/enojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Capitán enmascarado",
+        "text": "Guerrera. La próxima vez no fallo."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_hg_012"
+    },
+    {
+      "scene_id": "cap01_hg_012",
+      "chapter": 1,
+      "background": "fondos/hangar.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "capitan_enmascarado",
+          "sprite": "sprites/capitan_enmascarado/base.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/impactada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Dispara igual. El rayo pasa entre Jair y Cami, tan cerca que les quema el aire, y se clava en la nave grande."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_hg_013"
+    },
+    {
+      "scene_id": "cap01_hg_013",
+      "chapter": 1,
+      "background": "fondos/hangar_destruido.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/impactada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "La nave grande no explota: se apaga. Después explota. Y la de al lado. Y la de al lado. Las naves caen como fichas de dominó, una sobre otra, hasta que el hangar entero es humo, chispas y metal retorcido."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_hg_014"
+    },
+    {
+      "scene_id": "cap01_hg_014",
+      "chapter": 1,
+      "background": "fondos/hangar_destruido.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/impactada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Cuando el humo baja un poco, el capitán ya no está."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_hg_015"
+    },
+    {
+      "scene_id": "cap01_hg_015",
+      "chapter": 1,
+      "background": "fondos/hangar_destruido.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "La flota…"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_hg_016"
+    },
+    {
+      "scene_id": "cap01_hg_016",
+      "chapter": 1,
+      "background": "fondos/hangar_destruido.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "(Eran decorado. Nunca iban a volar. Pero ella no lo sabe. Y ahora ni siquiera le queda el decorado.)"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_hg_017"
+    },
+    {
+      "scene_id": "cap01_hg_017",
+      "chapter": 1,
+      "background": "fondos/hangar_destruido.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "…Vamos. Antes de que vuelva."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_hg_018"
+    },
+    {
+      "scene_id": "cap01_hg_018",
+      "chapter": 1,
+      "background": "fondos/hangar_destruido.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Al salir de lo que queda del hangar, algo vibra en el bolsillo de Jair."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": "silencio",
+      "ui_effect": null,
+      "next": "cap01_hg_019"
+    },
+    {
+      "scene_id": "cap01_hg_019",
+      "chapter": 1,
+      "background": "fondos/hangar_destruido.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "El celular."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_hg_020"
+    },
+    {
+      "scene_id": "cap01_hg_020",
+      "chapter": 1,
+      "background": "fondos/hangar_destruido.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Doce por ciento de batería. Y una barra. Una sola barra de señal, parpadeando, imposible."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_hg_021"
+    },
+    {
+      "scene_id": "cap01_hg_021",
+      "chapter": 1,
+      "background": "fondos/hangar_destruido.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "(No. No puede ser.)"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_g5m_005"
+    },
+    {
+      "scene_id": "cap01_bad_hangar_001",
+      "chapter": 1,
+      "background": "fondos/hangar.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "capitan_enmascarado",
+          "sprite": "sprites/capitan_enmascarado/base.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/dolor.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "El último disparo del capitán no es un rayo: es el cañón entero. Jair alcanza a ponerse delante de Cami. No alcanza a nada más."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_bad_hangar_002"
+    },
+    {
+      "scene_id": "cap01_bad_hangar_002",
+      "chapter": 1,
+      "background": "fondos/hangar.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "capitan_enmascarado",
+          "sprite": "sprites/capitan_enmascarado/base.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/dolor.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Capitán enmascarado",
+        "text": "Entidad no registrada. Procedimiento: archivar."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_bad_hangar_003"
+    },
+    {
+      "scene_id": "cap01_bad_hangar_003",
+      "chapter": 1,
+      "background": "fondos/hangar.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/dolor.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "Jair… Te dije que no tocaras nada."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_bad_hangar_004"
+    },
+    {
+      "scene_id": "cap01_bad_hangar_004",
+      "chapter": 1,
+      "background": "fondos/hangar.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/dolor.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "(No me lo dijo. Pero era obvio.)"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_bad_hangar_005"
+    },
+    {
+      "scene_id": "cap01_bad_hangar_005",
+      "chapter": 1,
+      "background": "PANTALLA:negro",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "Usuario: incapacitado. Recurso decorativo: intacto."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_bad_hangar_006"
+    },
+    {
+      "scene_id": "cap01_bad_hangar_006",
+      "chapter": 1,
+      "background": "PANTALLA:negro",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": null,
+        "text": "Recurso decorativo."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": null,
+      "ending": "bad_cap01_hangar"
     },
     {
       "scene_id": "cap01_g5m_001",
@@ -27947,6 +28731,123 @@
       "conditions": [],
       "audio": null,
       "ui_effect": null,
+      "next": "cap01_g6_023h"
+    },
+    {
+      "scene_id": "cap01_g6_023h",
+      "chapter": 1,
+      "background": "fondos/nucleo_grieta.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "derecha"
+        },
+        {
+          "id": "capitan_enmascarado",
+          "sprite": "sprites/capitan_enmascarado/base.webp",
+          "pos": "centro"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Capitán enmascarado",
+        "text": "Otra vez ustedes. Esta vez no hay flota que se ponga en medio."
+      },
+      "choices": [],
+      "conditions": [
+        {
+          "var": "hangar_pelea",
+          "op": "==",
+          "value": true
+        }
+      ],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_g6_024h"
+    },
+    {
+      "scene_id": "cap01_g6_024h",
+      "chapter": 1,
+      "background": "fondos/nucleo_grieta.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/furia.webp",
+          "pos": "derecha"
+        },
+        {
+          "id": "capitan_enmascarado",
+          "sprite": "sprites/capitan_enmascarado/base.webp",
+          "pos": "centro"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "La flota la quemaste tú."
+      },
+      "choices": [],
+      "conditions": [
+        {
+          "var": "hangar_pelea",
+          "op": "==",
+          "value": true
+        }
+      ],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_g6_025h"
+    },
+    {
+      "scene_id": "cap01_g6_025h",
+      "chapter": 1,
+      "background": "fondos/nucleo_grieta.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/furia.webp",
+          "pos": "derecha"
+        },
+        {
+          "id": "capitan_enmascarado",
+          "sprite": "sprites/capitan_enmascarado/base.webp",
+          "pos": "centro"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Capitán enmascarado",
+        "text": "Y otra vez el civil."
+      },
+      "choices": [],
+      "conditions": [
+        {
+          "var": "hangar_pelea",
+          "op": "==",
+          "value": true
+        }
+      ],
+      "audio": null,
+      "ui_effect": null,
       "next": "cap01_g6_023"
     },
     {
@@ -27977,7 +28878,13 @@
         "text": "Guerrera. Te dimos por muerta."
       },
       "choices": [],
-      "conditions": [],
+      "conditions": [
+        {
+          "var": "hangar_pelea",
+          "op": "==",
+          "value": false
+        }
+      ],
       "audio": null,
       "ui_effect": null,
       "next": "cap01_g6_024"
@@ -28010,7 +28917,13 @@
         "text": "Me han dado por muerta muchas veces. Soy difícil de convencer."
       },
       "choices": [],
-      "conditions": [],
+      "conditions": [
+        {
+          "var": "hangar_pelea",
+          "op": "==",
+          "value": false
+        }
+      ],
       "audio": null,
       "ui_effect": null,
       "next": "cap01_g6_025"
@@ -28043,7 +28956,13 @@
         "text": "¿Y ese?"
       },
       "choices": [],
-      "conditions": [],
+      "conditions": [
+        {
+          "var": "hangar_pelea",
+          "op": "==",
+          "value": false
+        }
+      ],
       "audio": null,
       "ui_effect": null,
       "next": "cap01_g6_026"

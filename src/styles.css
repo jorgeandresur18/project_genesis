@@ -3059,3 +3059,13 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 .batalla-cuadricula .casilla { position: absolute; translate: -50% -50%; display: grid; place-items: center; width: 1.7rem; height: 1.7rem; border-radius: 50%; font: 700 0.7rem ui-monospace, monospace; color: #000; }
 .batalla-cuadricula .casilla.equipo { background: #7fe6ff; }
 .batalla-cuadricula .casilla.rivales { background: #ff7a7a; }
+
+/* El cañón del Capitán: el blaster carga (un brillo rojo que crece) y sale un rayo grueso. */
+.batalla-figura.carga-canon .batalla-sprite { animation: carga-canon 1.5s ease-in both; }
+@keyframes carga-canon { from { filter: drop-shadow(0 0 0 transparent); } to { filter: drop-shadow(0 0 6px #fff) drop-shadow(0 0 18px #ff2a2a) drop-shadow(0 0 34px #ff2a2a); } }
+.batalla-rayo { position: absolute; z-index: 6; height: 1.6rem; translate: 0 -50%; transform-origin: 0 50%; pointer-events: none; border-radius: 999px;
+  background: linear-gradient(to bottom, transparent, var(--c) 22%, #fff 45%, #fff 55%, var(--c) 78%, transparent);
+  box-shadow: 0 0 18px var(--c), 0 0 42px var(--c); animation: rayo 0.7s ease-out both; }
+@keyframes rayo { 0% { scale: 0 0.4; opacity: 1; } 18% { scale: 1 1.15; } 70% { scale: 1 1; opacity: 1; } 100% { scale: 1 0.1; opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .batalla-rayo { animation-duration: 0.01s; } }
+.batalla-filtro { display: block; }

@@ -27,6 +27,7 @@ Muertes o fracasos tempranos, estilo Shiny Days. No cuentan entre los 12 finales
 | `bad_cap01_escudo` | Escudo humano | 1 | Ante el monstruo, «Esconderte detrás de Cami» | Borrador |
 | `bad_cap01_patrulla` | Pendiente de revisión | 1 | En la patrulla, «Cruzar ya» a destiempo | Borrador |
 | `bad_cap01_bastion` | Partida no guardada | 1 | Perder la pelea del Bastión (`batalla: "bastion"`, después de la máquina expendedora): los soldados los archivan | Borrador |
+| `bad_cap01_hangar` | Recurso decorativo | 1 | Camino alternativo: en el hangar, «Probar la nave grande» enciende la alarma; perder la pelea del hangar (`batalla: "hangar"`, soldados y el Capitán enmascarado): el cañón del capitán | Borrador |
 | `bad_cap01_capitan` | Un solo turno | 1 | Frente al capitán en el núcleo de la Grieta, «Pelear contra el capitán» | Borrador |
 | `bad_cap01_acorazado` | Valiente, por una vez | 1 | En el invierno, frente al monstruo acorazado, «Enfrentar al monstruo» | Borrador |
 | `bad_cap01_nikki` | Cachetadas infinitas | 1 | Escena secreta (con el Capítulo 1 completo): en el bar, «Propasarte» cuando Nikki pide el beso, y perder la pelea contra ella (`batalla: "nikki"`): Nikki llora sola sobre él y le grita idiota por morirse e irse de su vida. Cuenta para el 100 % | Borrador |

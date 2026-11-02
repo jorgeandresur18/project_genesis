@@ -7,6 +7,7 @@
   { "id": "bad_cap01_escudo", "nombre": "Escudo humano", "pieza": "Juego base", "tipo": "Bad end", "estado": "jugable", "nombre_en": "Human shield" },
   { "id": "bad_cap01_patrulla", "nombre": "Pendiente de revisión", "pieza": "Juego base", "tipo": "Bad end", "estado": "jugable", "nombre_en": "Pending review" },
   { "id": "bad_cap01_bastion", "nombre": "Partida no guardada", "pieza": "Juego base", "tipo": "Bad end", "estado": "jugable", "nombre_en": "Unsaved game" },
+  { "id": "bad_cap01_hangar", "nombre": "Recurso decorativo", "pieza": "Juego base", "tipo": "Bad end", "estado": "jugable", "nombre_en": "Decorative asset" },
   { "id": "bad_cap01_capitan", "nombre": "Un solo turno", "pieza": "Juego base", "tipo": "Bad end", "estado": "jugable", "nombre_en": "A single turn" },
   { "id": "bad_cap01_acorazado", "nombre": "Valiente, por una vez", "pieza": "Juego base", "tipo": "Bad end", "estado": "jugable", "nombre_en": "Brave, for once" },
   { "id": "bad_cap01_nikki", "nombre": "Cachetadas infinitas", "pieza": "Juego base", "tipo": "Bad end", "estado": "jugable", "nombre_en": "Infinite slaps" },

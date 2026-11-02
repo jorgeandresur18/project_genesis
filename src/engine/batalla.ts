@@ -56,6 +56,11 @@ export interface Especial {
   /** «oscura»: mientras dura, la pantalla se oscurece (el vórtice de la sombra). */
   pantalla?: 'oscura';
   /**
+   * Cañón (el Capitán enmascarado): en vez de 5 segundos de golpes, carga el blaster (brilla cada vez más) y suelta
+   * un solo rayo grueso de su `color` contra su objetivo: un golpe de `poder`. Se puede esquivar.
+   */
+  canon?: boolean;
+  /**
    * Levanta en el aire a quien recibe sus golpes y lo mantiene ahí hasta que termina; después cae (con su sprite de
    * derrotado) y, si sigue vivo, se levanta (el especial de la sombra: un ataque sorpresa desde el piso).
    */
@@ -130,6 +135,11 @@ export interface Enemigo {
   clon?: { nombre: string; nombre_clon: string; costo: number; fuerza: number; turnos: number; color: string; texto: string; reacciones?: Linea[]; carga?: number; probabilidad?: number };
   /** El sonido de sus golpes (ataque y especial). */
   sonido?: string;
+  /** Ataca de lejos (el Capitán): no se acerca; de su blaster sale un rayo de `color_disparo` hacia cada blanco. */
+  distancia?: boolean;
+  color_disparo?: string;
+  /** Un filtro sobre su sprite (un placeholder hecho con la hoja de otro, mientras no tenga la suya). */
+  filtro?: string;
 }
 /** De qué tipo es un objeto (decide dónde aparece y cómo se usa; ver docs/BIBLIA_RPG.md, sección 14). */
 export type TipoObjeto = 'curacion' | 'mejora' | 'permanente' | 'tactico' | 'equipo' | 'coleccion';
@@ -283,9 +293,12 @@ export const cargar = (l: Luchador, n: number) => {
 export const especialListo = (l: Luchador) => l.carga >= CARGA_LLENA;
 
 /** A quién va cada golpe del especial: uno solo, o repartidos en ronda entre todos los objetivos. */
-export function golpesEspecial<T>(e: Especial, objetivos: T[]): T[] {
+export function golpesEspecial<T>(e: Especial, objetivos: T[], equipo = objetivos.length): T[] {
   if (!objetivos.length) return [];
-  return Array.from({ length: e.golpes }, (_, i) => (e.objetivo === 'todos' ? objetivos[i % objetivos.length] : objetivos[0]));
+  // A todos: los golpes se reparten entre el equipo entero (`equipo`, contando a los caídos). Si quedan menos de pie,
+  // cada uno recibe su parte y nada más: con uno solo en pie, no le caen todos los golpes encima.
+  const n = e.objetivo === 'todos' ? Math.max(objetivos.length, Math.round((e.golpes * objetivos.length) / Math.max(equipo, objetivos.length))) : e.golpes;
+  return Array.from({ length: n }, (_, i) => (e.objetivo === 'todos' ? objetivos[i % objetivos.length] : objetivos[0]));
 }
 
 /** Estadísticas en un nivel. */

@@ -1286,6 +1286,49 @@ function Pelea({
    * esos 5 segundos entre los objetivos; los de un enemigo se pueden esquivar golpe a golpe. Cami dispara balas
    * desde sus pistolas en cada destello.
    */
+  /** El rayo grueso del cañón (de dónde a dónde, y de qué color). */
+  const [rayo, setRayo] = useState<{ key: number; x: number; y: number; largo: number; ang: number; color: string } | null>(null);
+  /**
+   * El cañón del Capitán: el aviso, el blaster que carga (brilla cada vez más) y un solo rayo grueso contra su
+   * objetivo, que se puede esquivar.
+   */
+  const canonazo = async (l: Luchador, e: Especial, blanco: Luchador) => {
+    l.carga = 0;
+    forzar();
+    await avisar(e, d.enemigos[l.clave].sprite, false);
+    await decir(fmt(e.texto, { quien: l.nombre, objetivo: blanco.nombre }));
+    playChip('carga');
+    efecto(l.id, 'carga-canon', 1500);
+    for (let i = 0; i < 4; i++) {
+      luz(l.id, e.color, i === 3);
+      await espera(340);
+    }
+    const o = centroDe(l);
+    const c = centroDe(blanco);
+    if (o && c) {
+      const x = o.x + Math.sign(c.x - o.x) * 40;
+      const y = o.y - 12;
+      setRayo({ key: Math.random(), x, y, largo: Math.hypot(c.x - x, c.y - y) + 80, ang: Math.atan2(c.y - y, c.x - x), color: e.color });
+    }
+    playChip('impacto');
+    setFogonazo({ key: Math.random(), color: e.color });
+    await espera(250);
+    if (blanco.esquivando && Math.random() < d.esquivar) {
+      numero(blanco.id, 'MISS', 'falla');
+      void animar(blanco.id, 'salto', 600);
+      await espera(400);
+      setRayo(null);
+      return lineas('esquiva_ok', { quien: blanco.nombre });
+    }
+    bajoEspecial.current.add(blanco.id);
+    const { n, bloqueado } = await golpear(l, blanco, e.poder, e.color);
+    await espera(450);
+    setRayo(null);
+    soltar([blanco]);
+    await decir(fmt(t(bloqueado ? 'batalla.protegido_bloquea' : 'batalla.recibe'), { quien: blanco.nombre, n }));
+    await limpiarCebos();
+    if (!vivo(blanco) && !blanco.cebo) await decir(fmt(t('batalla.cae'), { quien: blanco.nombre }));
+  };
   const usarEspecial = async (l: Luchador, e: Especial, sprite: string, rivales: Luchador[], elegido: Luchador) => {
     l.carga = 0;
     forzar();
@@ -1348,7 +1391,7 @@ function Pelea({
       repite = setInterval(() => void animar(l.id, 'ataque'), 420);
     }
     const inicio = Date.now();
-    const golpes = golpesEspecial(e, blancos);
+    const golpes = golpesEspecial(e, blancos, l.lado === 'enemigo' ? b.current.heroes.length : blancos.length);
     // Los golpes se reparten en los 5 segundos o, con viaje, mientras aterriza junto a su objetivo.
     const ventana = viaje ? (viaje.golpe[1] - viaje.golpe[0]) * msPaso : ESPECIAL_MS;
     const paso = ventana / (golpes.length + (viaje ? 0 : 1));
@@ -1438,7 +1481,9 @@ function Pelea({
     const elige = eligeEspecial(e, d.enemigos[e.clave], b.current.heroes, b.current.enemigos);
     if (elige?.tipo === 'clon') return clonar(e);
     if (elige && esp) {
-      await usarEspecial(e, esp, d.enemigos[e.clave].sprite, hs, desviar([elige.blanco ?? azar(hs)], e)[0]);
+      const blanco = desviar([elige.blanco ?? azar(hs)], e)[0];
+      if (esp.canon) await canonazo(e, esp, blanco);
+      else await usarEspecial(e, esp, d.enemigos[e.clave].sprite, hs, blanco);
       return limpiarCebos();
     }
     // La parálisis solo va contra los que todavía se mueven (si nadie se mueve, ataca de otra forma).
@@ -1472,11 +1517,26 @@ function Pelea({
     // De lejos (la sombra): se queda en su lugar y la media luna sale volando, pasa por cada blanco y se va.
     let llegadas: number[] | null = null;
     const desde = Date.now();
+    const deLejos = !!d.enemigos[e.clave].distancia;
     if (proy) {
       const fila = hoja.animations.ataque;
       void animar(e.id, 'ataque', (fila.frames * 1000) / fila.fps);
       await espera((proy.cuadro * 1000) / fila.fps);
       llegadas = blancos.map((h, i) => lanzar(e, hoja, proy, h, i * 160));
+    } else if (deLejos) {
+      void animar(e.id, 'ataque', 800);
+      llegadas = blancos.map((h, i) => {
+        const o = centroDe(e);
+        const c = centroDe(h);
+        if (!o || !c) return i * 160;
+        const x = o.x + Math.sign(c.x - o.x) * 40;
+        const y = o.y - 12;
+        setTimeout(() => {
+          playChip('disparo');
+          nuevaBala(x, y, c.x, c.y, 1600, d.enemigos[e.clave].color_disparo ?? '#ff3b3b', false);
+        }, i * 160);
+        return i * 160 + (Math.hypot(c.x - x, c.y - y) / 1600) * 1000;
+      });
     } else {
       if (blancos.length === 1) await deslizar(e.id, blancos[0].id);
       void animar(e.id, 'ataque', 800);
@@ -1484,6 +1544,7 @@ function Pelea({
     }
     for (const [i, h] of blancos.entries()) {
       if (llegadas) await espera(Math.max(0, llegadas[i] - (Date.now() - desde) + (proy ? ((proy.cuadro * 1000) / hoja.animations.ataque.fps) : 0)));
+      if (deLejos) luz(h.id, d.enemigos[e.clave].color_disparo ?? '#ff3b3b');
       // A veces el golpe falla solo.
       if (falla(d)) {
         numero(h.id, 'MISS', 'falla');
@@ -1499,12 +1560,12 @@ function Pelea({
         await lineas('esquiva_ok', { quien: h.nombre });
         continue;
       }
-      if (!proy) playChip(sonidoDe(e));
+      if (!proy && !deLejos) playChip(sonidoDe(e));
       bajoEspecial.current.add(h.id);
       const { n, bloqueado } = await golpear(e, h, a.poder);
       if (blancos.length === 1) await decir(fmt(t(bloqueado ? 'batalla.protegido_bloquea' : 'batalla.recibe'), { quien: h.nombre, n }));
     }
-    if (blancos.length === 1 && !proy) await deslizar(e.id, null);
+    if (blancos.length === 1 && !proy && !deLejos) await deslizar(e.id, null);
     else await espera(500);
     soltar(blancos);
     await limpiarCebos();
@@ -1743,6 +1804,7 @@ function Pelea({
               caido={e.ps === 0 && !retenidos.current.has(e.id)}
               refFigura={(el) => (el ? figuras.current.set(e.id, el) : figuras.current.delete(e.id))}
               sprite={d.enemigos[e.clave].sprite}
+              filtro={d.enemigos[e.clave].filtro}
               escala={d.enemigos[e.clave].escala}
               jefe={!!d.enemigos[e.clave].jefe}
               anim={anims[e.id] ?? 'idle'}
@@ -1812,6 +1874,14 @@ function Pelea({
       </div>
       {versus && <Versus d={d} />}
       {/* Las balas de energía (Cami): salen de las pistolas y vuelan hasta su objetivo. */}
+      {rayo && (
+        <span
+          key={rayo.key}
+          className="batalla-rayo"
+          aria-hidden
+          style={{ left: rayo.x, top: rayo.y, width: rayo.largo, rotate: `${rayo.ang}rad`, '--c': rayo.color } as CSSProperties}
+        />
+      )}
       <div className="batalla-balas" aria-hidden>
         {proyectiles.map((x) => (
           <img
@@ -1974,6 +2044,7 @@ function Figura({
   activo,
   numeros,
   etiqueta,
+  filtro,
 }: {
   l: Luchador;
   /** Ya cayó (los derrotados durante un especial caen recién al terminar). */
@@ -2000,6 +2071,8 @@ function Figura({
   activo?: boolean;
   numeros: { key: number; texto: string; tipo: string }[];
   etiqueta?: string;
+  /** Un filtro sobre el sprite (placeholder con la hoja de otro). */
+  filtro?: string;
 }) {
   // Dónde está la cabeza (un poco arriba de los ojos, medido sobre el sprite en pantalla): ahí van los corazones
   // de la confusión. Los cuadros grandes (la sombra) tienen mucho aire arriba.
@@ -2061,7 +2134,13 @@ function Figura({
       )}
       {/* Sombra en el piso: lo despega del fondo. */}
       <span className="batalla-sombra" aria-hidden />
-      <SpriteHoja src={sprite} anim={quieto ? 'idle' : anim} vez={vez} alCuadro={alCuadro} cuadroFijo={quieto ? 0 : undefined} />
+      {filtro ? (
+        <div className="batalla-filtro" style={{ filter: filtro }}>
+          <SpriteHoja src={sprite} anim={quieto ? 'idle' : anim} vez={vez} alCuadro={alCuadro} cuadroFijo={quieto ? 0 : undefined} />
+        </div>
+      ) : (
+        <SpriteHoja src={sprite} anim={quieto ? 'idle' : anim} vez={vez} alCuadro={alCuadro} cuadroFijo={quieto ? 0 : undefined} />
+      )}
       {luces.map((x) => (
         <span key={x.key} className={`batalla-luz ${x.fuerte ? 'fuerte' : ''}`} style={{ '--c': x.color } as CSSProperties} aria-hidden />
       ))}
