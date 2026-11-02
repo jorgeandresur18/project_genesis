@@ -325,6 +325,10 @@ function Pelea({
     fn();
   };
   const casillas: Casillas | undefined = FONDOS[d.fondo];
+  /** Quién está junto a quién (el que ataca de cerca): para dibujarlo delante de su blanco. */
+  const junto_de = useRef(new Map<string, string>());
+  /** El orden de dibujo de cada casilla (más abajo en el piso, más adelante). */
+  const zCasilla = useRef(new Map<string, number>());
   const casillaDe = useRef(new Map<string, number>());
   const casillaRival = (e: Luchador) => {
     if (!casillaDe.current.has(e.id)) {
@@ -341,8 +345,11 @@ function Pelea({
     const lista = casillas[lado];
     const [x, y] = lista[Math.min(i, lista.length - 1)];
     const extra = Math.max(0, i - lista.length + 1) * (lado === 'rivales' ? 8 : -8);
+    zCasilla.current.set(key, Math.round(y) * 2);
+    const blanco = junto_de.current.get(key);
+    const z = blanco ? (zCasilla.current.get(blanco) ?? Math.round(y) * 2) + 1 : Math.round(y) * 2;
     return (
-      <div key={key} className="batalla-casilla" style={{ left: `${x + extra}%`, top: `${y}%`, zIndex: Math.round(y) }}>
+      <div key={key} className="batalla-casilla" style={{ left: `${x + extra}%`, top: `${y}%`, zIndex: z }}>
         {nodo}
       </div>
     );
@@ -1030,10 +1037,14 @@ function Pelea({
     if (!hacia) {
       setDesliz((x) => ({ ...x, [quien]: { x: 0, y: 0 } }));
       await animar(quien, 'mover', DESLIZ_MS);
+      junto_de.current.delete(quien);
+      forzar();
       return;
     }
     const p = junto(quien, hacia);
     if (!p) return;
+    // Mientras está junto a su blanco, se dibuja justo delante de él (no delante de los que están más adelante).
+    junto_de.current.set(quien, hacia);
     setDesliz((m) => ({ ...m, [quien]: p }));
     if (anim !== 'mover') {
       // Llega con otra animación (el especial): se queda en ella.
