@@ -53,8 +53,25 @@ const ARENA_RIVALES: { clave: string; e: Enemigo; de: string; nivel: number }[] 
   })),
 );
 const ARENA_FONDOS = Object.entries(BATALLAS).map(([ruta, d]) => ({ id: ID_BATALLA(ruta), d }));
+/** Todos pueden pelear de cualquier lado: un rival como héroe (con su menú) y un héroe como rival (con la IA). */
+const ARENA_TODOS = [
+  ...ARENA_HEROES.map((h) => ({ clave: h.clave, nombre: h.p.nombre, de: h.de, nivel: h.p.nivel })),
+  ...ARENA_RIVALES.map((r) => ({ clave: r.clave, nombre: r.e.nombre, de: r.de, nivel: r.nivel })),
+];
+const comoHeroe = (clave: string): Heroe => {
+  const h = ARENA_HEROES.find((x) => x.clave === clave);
+  if (h) return h.p;
+  const { e, nivel } = ARENA_RIVALES.find((x) => x.clave === clave)!;
+  return { nombre: e.nombre, sprite: e.sprite, nivel, seguido: true, base: e.base, crece: e.crece, ataques: e.ataques, especial: e.especial, escala: e.escala, sonido: e.sonido, hablar: ['¿Y si lo hablamos?', 'Esto no tiene por qué terminar así.'] };
+};
+const comoRival = (clave: string): Enemigo => {
+  const r = ARENA_RIVALES.find((x) => x.clave === clave);
+  if (r) return r.e;
+  const { p } = ARENA_HEROES.find((x) => x.clave === clave)!;
+  return { nombre: p.nombre, sprite: p.sprite, base: p.base, crece: p.crece, ataques: p.ataques, especial: p.especial, escala: p.escala, sonido: p.sonido };
+};
 
-function armarArena(heroes: [string, number][], fondo: string): DatosBatalla {
+function armarArena(heroes: [string, number][], rivales: [string, number][], fondo: string): DatosBatalla {
   const todas = Object.values(BATALLAS);
   const f = ARENA_FONDOS.find((x) => x.id === fondo)?.d ?? todas[0];
   const objetos = Object.assign({}, ...todas.map((d) => d.objetos)) as DatosBatalla['objetos'];
@@ -66,8 +83,8 @@ function armarArena(heroes: [string, number][], fondo: string): DatosBatalla {
     enemigos_atras: f.enemigos_atras,
     musica: f.musica,
     heroes: heroes.map(([k]) => k),
-    personajes: Object.fromEntries(ARENA_HEROES.filter((h) => heroes.some(([k]) => k === h.clave)).map((h) => [h.clave, h.p])),
-    enemigos: Object.fromEntries(ARENA_RIVALES.map((r) => [r.clave, r.e])),
+    personajes: Object.fromEntries(heroes.map(([k]) => [k, comoHeroe(k)])),
+    enemigos: Object.fromEntries(rivales.map(([k]) => [k, comoRival(k)])),
     horda: { enemigo: '', al_inicio: 0, niveles: [] },
     jefe: { enemigo: '', nivel: 1 },
     objetos,
@@ -134,12 +151,13 @@ function ArenaConfig({ onPelear }: { onPelear: (h: [string, number][], r: [strin
   return (
     <div className="arena-config">
       <p className="arena-ayuda">
-        Elige héroes y rivales (con su nivel) y pelean con las reglas de siempre. Es infinita: al final de cada turno los
+        Elige tu equipo y los rivales (con su nivel): cualquiera puede ir de cualquier lado, incluso el mismo personaje en
+        los dos. Pelean con las reglas de siempre. Es infinita: al final de cada turno los
         caídos se levantan con la vida llena. Para salir, «Huir».
       </p>
       <div className="arena-lados">
-        {lista('Héroes', ARENA_HEROES.map((h) => ({ clave: h.clave, nombre: h.p.nombre, de: h.de, nivel: h.p.nivel })), heroes, setHeroes)}
-        {lista('Rivales', ARENA_RIVALES.map((r) => ({ clave: r.clave, nombre: r.e.nombre, de: r.de, nivel: r.nivel })), rivales, setRivales)}
+        {lista('Tu equipo', ARENA_TODOS, heroes, setHeroes)}
+        {lista('Rivales', ARENA_TODOS, rivales, setRivales)}
       </div>
       <div className="arena-pie">
         <label>
@@ -292,7 +310,7 @@ export function ProbadorSprites({ onCerrar }: { onCerrar: () => void }) {
         <Batalla
           key={arena.n}
           id="arena"
-          datos={armarArena(arena.h, arena.fondo)}
+          datos={armarArena(arena.h, arena.r, arena.fondo)}
           arena={arena.r}
           progreso={{ heroes: Object.fromEntries(arena.h.map(([k, nivel]) => [k, { nivel, xp: 0 }])), mochila: {} }}
           onGanar={() => setArena('armar')}

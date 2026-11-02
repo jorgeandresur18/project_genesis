@@ -464,7 +464,7 @@ function Pelea({
    * sigue hasta salir de la pantalla. Al que alcanza (si no lo esquiva) lo deja confundido.
    */
   const besar = async (e: Luchador, a: Ataque, blancos: Luchador[]) => {
-    const hoja = (await cargarHoja(d.enemigos[e.clave].sprite)) as Hoja;
+    const hoja = (await cargarHoja(e.lado === 'heroe' ? d.personajes[e.clave].sprite : d.enemigos[e.clave].sprite)) as Hoja;
     const fila = a.anim && 'animations' in hoja ? hoja.animations[a.anim] : undefined;
     const proy = a.anim ? hoja.proyectiles?.[a.anim] : undefined;
     const dura = fila ? ((fila.seq?.length ?? fila.frames) * 1000) / fila.fps : 1200;
@@ -1158,6 +1158,19 @@ function Pelea({
     if (ataque.cebo) return dejarCebo(h, ataque);
     const e = objetivo(c.objetivo);
     await decir(fmt(ataque.texto, { quien: h.nombre, objetivo: e.nombre }));
+    // Los ataques de efecto (el beso, la parálisis) no pegan: dejan al blanco confundido o paralizado.
+    if (ataque.confunde) {
+      cargar(h, CARGA.atacar);
+      return besar(h, ataque, [e]);
+    }
+    if (ataque.paraliza) {
+      cargar(h, CARGA.atacar);
+      void animar(h.id, 'ataque', 750);
+      playChip('paralisis');
+      luz(e.id, '#a64dff', true);
+      await espera(800);
+      return paralizar(e, ataque.paraliza);
+    }
     const deLejos = !!d.personajes[h.clave].distancia;
     if (deLejos) {
       // Dispara desde su lugar: una sola bala sale de la pistola y pega en el que eligió.
