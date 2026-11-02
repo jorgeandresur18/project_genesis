@@ -322,7 +322,68 @@ cosas raras; los chistes van en las descripciones.
 - **Orden de construcción:** 1) tipos de objeto y estados nuevos (**hecho**); 2) monedas (**hecho**); 3) comprar y vender en Boringplace
   (en el juego y desde el título); 4) el panel de Equipo.
 
-## 15. Pendientes e ideas
+## 15. Repertorio, estados nuevos, colores y los objetos del autor (decisiones del 2026-11-02; por construir)
+
+**Repertorio (aprobado):** cada personaje sabe como máximo **3 ataques** (normales o con efecto) y **2 especiales**:
+5 en total. Hoy nadie se pasa (Nikki está justo en el máximo: 3 ataques, la ráfaga y el clon). Se pueden aprender
+más: subiendo de nivel o **comprándolos en Boringplace** (pocos). Si ya tiene 3 (o 2 especiales), sale «Jair quiere
+aprender X, pero ya sabe 3 ataques. ¿Olvida uno?» y el jugador elige cuál olvidar (o no aprenderlo). Los enemigos se
+diseñan ya con 5 o menos.
+
+**Curación de Rikka (aprobado):** un ataque propio con el que se cura a sí misma: carga y la rodea un aura del color
+de la curación. Cuánto cura y con qué animación: `[PENDIENTE]` (su hoja no tiene una fila de curación; mientras
+tanto, su pose base con el aura).
+
+**Estados nuevos:** quemado y congelado (además de los que ya hay). Propuesta, sin confirmar:
+
+| Estado | Qué pasa | Cómo se ve |
+|---|---|---|
+| **Quemado** | Pierde un poco de vida cada turno y pega a la mitad, 3 turnos. | Llamitas naranjas; el sprite, un poco rojizo. |
+| **Congelado** | No actúa hasta que lo golpean: el primer golpe rompe el hielo (y hace más daño). Si nadie le pega, se descongela solo a los 3 turnos. | Azulado y quieto, con cristales; al romperse, esquirlas. |
+
+**Colores de cada acción y estado:** propuesta en la tabla de abajo, sin confirmar.
+
+**Equipo (aprobado):**
+- Cuatro espacios: **cabeza, traje, amuleto y pies** (se suma pies a los tres de la sección 14).
+- El equipo es **único**: no se compra (por ahora) y le pertenece a su personaje, aunque cualquiera puede ponérselo.
+  Excepción: el **gorro de navidad**, que se compra en la tienda.
+- **Jair empieza sin nada equipado.** **Nikki** lleva la chaqueta de cuero y los zapatos de plataforma.
+- De quién es el resto (propuesta): Cami, el traje de combate azul; Rikka, el traje de combate rojo, las prendas de
+  sacerdotisa y la flor de pureza. La chaqueta jean y las zapatillas buenas: `[PENDIENTE]`.
+
+**Los objetos del autor** (sprites en `docs/sprites de prueba/objetos/`; nombres y efectos aprobados):
+
+| Sprite | Nombre | Tipo | Qué hace |
+|---|---|---|---|
+| botella de agua | Agua sin gas | curación | +30 PS (reemplaza la lata de agua) |
+| botella roja | Furia Roja | mejora | +3 ATQ en la pelea |
+| pastillas azules | Pastillas azules | mejora | +3 DEF en la pelea |
+| 4Low-Co | 4Low-Co | mejora | Llena el especial |
+| caramelo rancio | Caramelo rancio | permanente | +10 niveles |
+| caramelo dulce | Caramelo dulce | permanente | +1 nivel |
+| Elixit | Elixit | curación | Revive con la mitad de la vida |
+| Elixit++ | Elixit++ | curación | Revive con toda la vida |
+| veneno para ratas | Veneno para ratas | táctico | Envenena a un rival |
+| condón barato | Condón barato | táctico | Protege a un aliado de 1 golpe. Descripción: «Condón barato, sin marca». |
+| condón Spartan | Condón Spartan | táctico | Protege a todo el equipo de 1 golpe |
+| medicamento para el hígado | Hepatol | curación | Quita la confusión y el veneno |
+| galleta clásica | Galleta clásica | curación | +20 PS |
+| galleta con grageas | Galleta arcoíris | curación | +20 PS a todo el equipo |
+| galleta brownie | Galleta brownie | curación | +50 PS |
+| galleta red velvet | Galleta red velvet | curación | +35 PS y quita un estado |
+| flor de pureza | Flor de pureza | equipo (amuleto) | No se puede confundir |
+| gorro de navidad | Gorro de navidad | equipo (cabeza) | +5 % de crítico; se compra |
+| chaqueta de cuero | Chaqueta de cuero | equipo (traje) | +4 DEF |
+| chaqueta jean | Chaqueta jean | equipo (traje) | +2 DEF, +2 VEL |
+| suit azul | Traje de combate azul | equipo (traje) | +6 DEF |
+| suit rojo | Traje de combate rojo | equipo (traje) | +4 DEF, +3 ATQ |
+| traje de sacerdotisa | Prendas de sacerdotisa | equipo (traje) | +5 DEF, resiste el veneno |
+| zapatillas | Zapatillas buenas | equipo (pies) | +3 VEL |
+| zapatos de plataforma | Zapatos de plataforma | equipo (pies) | +2 DEF, −1 VEL |
+
+---
+
+## 16. Pendientes e ideas
 
 | Tema | Estado |
 |---|---|
