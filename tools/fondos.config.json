@@ -17,11 +17,21 @@
     "jai_nikk_beso": "cg_beso_nikki",
     "jair_nikki_beso_cerca": "cg_beso_nikki_cerca",
     "cg_jorge_carga_cami": "cg_jair_carga_cami_bosque",
-    "nalgada": "cg_rikka_nalgada"
+    "nalgada": "cg_rikka_nalgada",
+    "desbloqueable_nikki": "cg_nikki_cachetadas"
   },
   "omitir": [
-    "hangar_destruido",
     "caída amorosa entre mundos flotantes",
-    "abrazo en la grieta cósmica"
-  ]
+    "abrazo en la grieta cósmica",
+    "desbloqueable_secreto_rikka_2026-11-02_21_32_52.906151",
+    "desbloqueable secreto rikka",
+    "desbloqueable nikki",
+    "bar_rpg",
+    "pasillo rpg",
+    "ruined space cathedral battle hall"
+  ],
+  "externos": [
+    "cg_rikka_secreto"
+  ],
+  "nota_externos": "Fondos que genera otro paso (no este): cg_rikka_secreto sale de tools/cg_secreto.py, con la censura pegada. Nunca se vuelven marcador."
 }

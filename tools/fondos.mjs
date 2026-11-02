@@ -33,6 +33,9 @@ for (const file of readdirSync(SOURCE).filter((f) => /\.(jpe?g|png|webp)$/i.test
   if (width < MAX_WIDTH) console.log(`    ! mide ${width} px de ancho; en pantallas grandes se verá algo borroso`);
 }
 
+// Los que genera otro paso (la imagen secreta, con su censura) cuentan como listos.
+for (const id of config.externos ?? []) ready.add(id);
+
 // Cambia los marcadores del capítulo por la imagen.
 for (const file of readdirSync(CHAPTERS).filter((f) => f.endsWith('.json'))) {
   const path = join(CHAPTERS, file);
