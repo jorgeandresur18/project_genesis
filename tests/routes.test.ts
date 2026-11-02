@@ -111,3 +111,22 @@ describe('rutas de la historia', () => {
     if (canonTouched) expect(staged).toContain('docs/FINALES.md');
   });
 });
+
+describe('árbol de decisiones', () => {
+  it('las peleas se abren en ramas: ganar, perder (el bad end) y el perdón', async () => {
+    const { buildFlow } = await import('../src/engine/flow');
+    const { scenes } = await import('../src/engine/story');
+    const flow = buildFlow(scenes, config.inicio, variables, 100);
+    const de = (id: string) => flow.edges.filter((e) => e.from === id).map((e) => e.to);
+    // Nikki: perderla termina en su bad end y el perdón sigue por su lado.
+    const nikki = flow.nodes.find((n) => n.pelea && scenes.get(n.sceneId!)?.batalla === 'nikki')!;
+    expect(nikki).toBeDefined();
+    const badEnd = (id: string) => de(id).some((to) => endings.find((e) => e.id === scenes.get(to)?.ending)?.tipo === 'Bad end');
+    expect(badEnd(nikki.id)).toBe(true);
+    expect(de(nikki.id).length).toBeGreaterThanOrEqual(3);
+    // El Bastión: perder también lleva a su bad end.
+    const bastion = flow.nodes.find((n) => n.pelea && scenes.get(n.sceneId!)?.batalla === 'bastion')!;
+    expect(bastion).toBeDefined();
+    expect(badEnd(bastion.id)).toBe(true);
+  });
+});

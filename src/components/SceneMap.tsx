@@ -235,7 +235,7 @@ export function SceneMap({ onClose }: { onClose: () => void }) {
       const prefix = e?.tipo === BAD_END ? t('mapa.bad') : t('mapa.fin');
       return reached(n) ? `${prefix}: ${e ? endingName(e, lang) : id}` : '???';
     }
-    if (n.kind === 'decision') return reached(n) ? lineText(n.sceneId, n.label, lang) : '???';
+    if (n.kind === 'decision') return reached(n) ? `${n.pelea ? '⚔ ' : ''}${lineText(n.sceneId, n.label, lang)}` : n.pelea ? '⚔ ???' : '???';
     // Opción: se ve si ya se eligió, o si está tachada en una decisión ya vista.
     if (reached(n) || (n.locked && snapshots[n.sceneId!])) return choiceText(n.sceneId, n.choiceIndex, n.label, lang);
     return '???';

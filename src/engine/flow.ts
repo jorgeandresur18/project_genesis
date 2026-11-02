@@ -14,6 +14,8 @@ export interface FlowNode {
   locked?: boolean;
   /** Grupo plegado: las escenas de decisión que tiene adentro. */
   members?: string[];
+  /** Una pelea (batalla o nivel) que se abre en ramas: ganar, perder (bad end) y, si hay, el perdón. */
+  pelea?: boolean;
   col: number;
   y: number;
 }
@@ -32,6 +34,9 @@ export interface FlowGroup {
   prefixes: string[];
 }
 
+/** Las salidas de una pelea que no son ganarla: la derrota y el perdón (si la escena las tiene). */
+const salidasPelea = (s: Scene) => [s.batalla_derrota ?? s.nivel_derrota, s.batalla_perdon].filter((x): x is string => !!x);
+
 /**
  * Avanza por las escenas lineales con las variables reales (saltando escenas condicionales y
  * eligiendo la rama de `next` que corresponde) hasta la siguiente decisión visible o un final.
@@ -42,6 +47,8 @@ function walk(start: string, vars: Vars, scenes: Map<string, Scene>): Scene | nu
     const { scene } = enterScene(id, vars, (s) => scenes.get(s));
     if (!scene) return null;
     if (scene.ending || (scene.fin_capitulo && scene.next === null) || visibleChoices(scene, vars).length > 0) return scene;
+    // Las peleas también son una bifurcación: perder lleva a un bad end.
+    if (salidasPelea(scene).length > 0) return scene;
     id = resolveNext(scene.next, vars);
   }
   return null;
@@ -66,6 +73,7 @@ export function buildFlow(
       id: s.scene_id,
       kind: s.ending || s.fin_capitulo ? 'ending' : 'decision',
       sceneId: s.scene_id,
+      ...(salidasPelea(s).length > 0 && !s.ending ? { pelea: true } : {}),
       label: s.dialogue?.text ?? s.scene_id,
       col: 0,
       y: 0,
@@ -89,6 +97,12 @@ export function buildFlow(
   while (queue.length > 0) {
     const { scene, vars } = queue.shift()!;
     if (scene.ending || (scene.fin_capitulo && scene.next === null)) continue;
+    // Pelea: ganar sigue la historia; perder (o el perdón) va por su lado.
+    if (salidasPelea(scene).length > 0 && visibleChoices(scene, vars).length === 0) {
+      const gana = resolveNext(scene.next, vars);
+      for (const to of [...(gana ? [gana] : []), ...salidasPelea(scene)]) visit(scene.scene_id, walk(to, vars, scenes), vars);
+      continue;
+    }
     for (const c of visibleChoices(scene, vars)) {
       const i = scene.choices.indexOf(c);
       const oid = `${scene.scene_id}#${i}`;
@@ -168,8 +182,11 @@ function layout(nodes: Map<string, FlowNode>, edges: FlowEdge[], scenes: Map<str
         const count = scenes.get(n.sceneId!)!.choices.length;
         n.y = parent.y + (n.choiceIndex! - (count - 1) / 2) * rowGap;
       } else {
-        const incoming = forward.filter((e) => e.to === n.id).map((e) => nodes.get(e.from)!.y);
+        const from = forward.filter((e) => e.to === n.id).map((e) => nodes.get(e.from)!);
+        const incoming = from.map((f) => f.y);
         n.y = incoming.length ? incoming.reduce((a, b) => a + b, 0) / incoming.length : 0;
+        // El final de perder una pelea va una fila más abajo: así la línea de ganarla no pasa por detrás.
+        if (n.kind === 'ending' && from.length > 0 && from.every((f) => f.pelea)) n.y += rowGap;
       }
     }
     // Evita que se encimen dentro de la columna.
