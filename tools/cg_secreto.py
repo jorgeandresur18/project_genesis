@@ -51,17 +51,22 @@ def main():
     a[m, :3] = piel_ns['de_lab'](lab + corrimiento).astype(np.uint8)
     print('piel corrida', np.round(corrimiento, 1).tolist(), '(L, a, b) en', int(m.sum()), 'píxeles')
 
-    # La censura: un mosaico cuadrado en cada emblema (el emblema animado va encima, en el juego).
+    # La censura: un mosaico redondo, un poco más chico que el emblema que va encima en el juego (así no asoma por los
+    # bordes del emblema, pero la imagen sigue censurada aunque el emblema no esté).
     emb = json.loads((RAIZ / 'src' / 'data' / 'emblemas_18.json').read_text(encoding='utf8'))['fondos']['fondos/cg_rikka_secreto']['emblemas']
     for e in emb:
-        lado = e['w'] / 100 * W * 1.35
+        radio = e['w'] / 100 * W * 0.44
         cx, cy = e['x'] / 100 * W, e['y'] / 100 * H
-        l, t = int(cx - lado / 2), int(cy - lado / 2)
-        r, b = int(cx + lado / 2), int(cy + lado / 2)
-        trozo = Image.fromarray(a[t:b, l:r])
-        bloque = max(4, round(lado / 5))
-        chico = trozo.resize((max(1, (r - l) // bloque), max(1, (b - t) // bloque)), Image.BOX)
-        a[t:b, l:r] = np.array(chico.resize((r - l, b - t), Image.NEAREST))
+        l, t = int(cx - radio), int(cy - radio)
+        r, b = int(cx + radio) + 1, int(cy + radio) + 1
+        trozo = a[t:b, l:r].copy()
+        bloque = max(3, round(radio / 3))
+        chico = Image.fromarray(trozo).resize((max(1, (r - l) // bloque), max(1, (b - t) // bloque)), Image.BOX)
+        mosaico = np.array(chico.resize((r - l, b - t), Image.NEAREST))
+        yy, xx = np.mgrid[t:b, l:r]
+        dentro = (xx + 0.5 - cx) ** 2 + (yy + 0.5 - cy) ** 2 <= radio ** 2
+        trozo[dentro] = mosaico[dentro]
+        a[t:b, l:r] = trozo
     destino = RAIZ / 'public' / 'fondos' / 'cg_rikka_secreto.webp'
     Image.fromarray(a).convert('RGB').save(destino, quality=88, method=6)
     print('listo:', destino.name, f'{W}x{H}', 'con', len(emb), 'zonas de censura')
