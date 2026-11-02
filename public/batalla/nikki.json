@@ -182,9 +182,9 @@
   "proyectiles": {
     "beso": {
       "imagen": "batalla/nikki_corazon",
-      "cuadro": 82,
-      "x": 112,
-      "y": 37,
+      "cuadro": 78,
+      "x": 104,
+      "y": 39,
       "ancho": 21,
       "alto": 20
     }

@@ -17,6 +17,7 @@ import sys
 from pathlib import Path
 
 import numpy as np
+from scipy import ndimage
 from PIL import Image
 
 RAIZ = Path(__file__).resolve().parent.parent
@@ -74,11 +75,13 @@ def proyectil(html: Path):
 # ancho de Nikki (su cuerpo está a la izquierda, alineado con su pose base) y, desde que el corazón sale volando,
 # se borra de la hoja: el juego lo dibuja aparte (nikki_corazon.png, de «nikki corazon.png» junto al HTML) y lo
 # lanza hasta salir de la pantalla.
-BESO_SUELTA = 82
+# Se suelta en el cuadro 78: el corazón ya se separó de la mano y todavía cabe entero en el cuadro de Nikki (desde el
+# 81 el borde del cuadro lo corta). Ahí el corazón aparte aparece justo encima del dibujado.
+BESO_SUELTA = 78
 # Los primeros cuadros del beso son la pose base completa (respira y pestañea) antes del destello (el 50): en la
 # pelea se empieza un poco antes del destello, así el cambio de pose y el sonido van juntos.
 BESO_DESDE = 46
-BESO_CORAZON = {'x': 112, 'y': 37, 'ancho': 21, 'alto': 20}
+BESO_CORAZON = {'x': 104, 'y': 39, 'ancho': 21, 'alto': 20}
 
 
 def hoja_beso(c: dict, html: Path):
@@ -90,12 +93,13 @@ def hoja_beso(c: dict, html: Path):
     for f in range(an['frames']):
         cuadro = im[(f // cols) * fh:(f // cols + 1) * fh, (f % cols) * bw:(f % cols) * bw + fw].copy()
         if f >= BESO_SUELTA:
-            # Todo lo que queda a la derecha de la mano (el corazón con su borde y los brillos).
-            cuadro[:72, 114:] = 0
-            zona = cuadro[:72, 98:]
-            rgb = zona[..., :3].astype(int)
-            rosa = (zona[..., 3] > 0) & (((rgb[..., 0] > 190) & (rgb[..., 1] < 170)) | (rgb.min(axis=2) > 215))
-            zona[rosa] = 0
+            # Todo lo que flota delante de la mano (el corazón con su borde y los brillos): lo que no toca el cuerpo.
+            lab, n = ndimage.label(cuadro[..., 3] > 0)
+            if n > 1:
+                cuerpo = np.argmax(np.bincount(lab.ravel())[1:]) + 1
+                for i, sl in enumerate(ndimage.find_objects(lab), 1):
+                    if i != cuerpo and sl[1].start >= 94 and sl[0].stop <= 72:
+                        cuadro[sl][lab[sl] == i] = 0
         fila[:, f * fw:(f + 1) * fw] = cuadro
     proy = None
     ruta = html.parent / 'nikki corazon.png'
