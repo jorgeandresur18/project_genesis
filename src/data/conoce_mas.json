@@ -71,13 +71,16 @@
         "Anime y manga: Neon Genesis Evangelion, Perfect Blue, Serial Experiments Lain, Fullmetal Alchemist, Mirai Nikki, Gantz, School Days y Welcome to the NHK.",
         "Cómics: Scott Pilgrim, La última cacería de Kraven, la melancolía de Spider-Man: Blue y la crudeza de Daredevil: Born Again.",
         "Cine: Matrix, Yo, robot y The Truman Show.",
-        "Música: la melancolía honesta y pura de The Smiths sobre el amor y la soledad; las relaciones rotas y los sentimientos imperfectos de The Strokes; la vulnerabilidad de The Cranberries; la poesía oscura y la teatralidad gótica de The Cure; y The Killers, con la idea de que, aunque todo salga mal, puede haber una luz."
+        "Música: la melancolía honesta y pura de The Smiths sobre el amor y la soledad; las relaciones rotas y los sentimientos imperfectos de The Strokes; la vulnerabilidad de The Cranberries; la poesía oscura y la teatralidad gótica de The Cure; The Killers, con la idea de que, aunque todo salga mal, puede haber una luz; la amenaza disfrazada de canción de amor de The Police; y la furia sin disculpas de Björk.",
+        "Videojuegos: los RPG por turnos de toda la vida, como EarthBound y Final Fantasy, para las peleas; y la entrada de los combates de Pokémon, para el enfrentamiento del bar."
       ]
     },
     {
       "titulo": "Cómo se juega",
       "parrafos": [
-        "Lees, decides y cargas con las consecuencias. Algunas decisiones solo cambian una conversación; otras desvían la historia o la terminan antes de tiempo. El mapa de decisiones muestra los caminos que ya recorriste y los que faltan, y la galería guarda los finales que encontraste.",
+        "Lees, decides y cargas con las consecuencias. Algunas decisiones solo cambian una conversación; otras desvían la historia o la terminan antes de tiempo. El mapa de decisiones muestra los caminos que ya recorriste y los que faltan, y en Extras están los finales que encontraste y la galería de imágenes y sprites.",
+        "También se pelea: hay combates por turnos, con ataques, especiales, objetos en la mochila y estados como el veneno o la confusión. Desde la primera partida, una mala decisión en el bar te mete en uno. Lo que ganas en las peleas (niveles, objetos y monedas) se guarda en tu partida.",
+        "Y está el celular de Jair: Boringram, la red social donde se van desbloqueando fotos, mensajes y pensamientos a medida que avanza la historia, con Boringplace, su mercado de cosas usadas (y alguna estafa). Aparte, el Bootcamp Genesis es un curso de programación de verdad, en broma. Todo cuenta para el 100 %.",
         "El juego principal tiene siete capítulos. Además están previstas tres expansiones: RikkaQuest, los más de ochocientos años que vive Rikka mientras GENESIS escribe el mundo; Génesis++, una versión alternativa con una nueva protagonista; y Génesis#, lo que ocurre después del final."
       ]
     },
@@ -164,7 +167,7 @@
     {
       "titulo": "Una advertencia",
       "parrafos": [
-        "Es una obra para mayores de 18 años, con lenguaje vulgar, alcohol, sexualidad sugerida y angustia psicológica. Todos los personajes son ficticios. Y es un proyecto en desarrollo: lo que juegas hoy es un borrador que va a seguir cambiando."
+        "Es una obra para mayores de 18 años, con lenguaje vulgar, alcohol, sexualidad sugerida, violencia, una escena en la que el protagonista se propasa (y la historia la trata como lo que es) y angustia psicológica. Todos los personajes son ficticios. Y es un proyecto en desarrollo: lo que juegas hoy es un borrador que va a seguir cambiando."
       ]
     },
     {
