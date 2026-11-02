@@ -253,6 +253,13 @@ necesitar nada de esto.
   - Gana Jair (le baja la mitad): Nikki llora y se va, lo echan del bar y sale «Una noche anormal» (opcional para el
     100 %; premio: el caramelo rancio).
 
+### El hangar (Capítulo 1, camino alternativo, `hangar`)
+
+- Se llega con «Probar la nave grande» en el hangar (enciende la alarma). Jair y Cami (con el tobillo: descansa como en el Bastión).
+- Horda: empiezan 2 soldados y llegan otros hasta ser 4 (niveles 6, 6, 8, 8); después sale el **Capitán enmascarado** (nivel 14), que se retira al 35 % de su vida. No se puede huir. Perder: bad end `bad_cap01_hangar`.
+- **El Capitán:** ataca de lejos (`distancia`): de su blaster sale un rayo **rojo** (`color_disparo`) hacia su blanco («Disparo de blaster», 20 usos) o uno para cada uno («Barrido rojo», a todos, 10 usos). Su especial es el **Cañón de blaster** (`canon`): el aviso, el blaster que carga (brilla cada vez más rojo) y un solo rayo grueso contra uno, de poder 30, que se puede esquivar. Cae poco en el cebo (0,3). Sprite: placeholder con la hoja del soldado, más grande y cobriza (`filtro`), hasta que el autor haga la suya.
+- Fondo: el pasillo de instalación (`batalla/fondos/bastion`, con la ventana al hangar).
+
 ### La demo (`demo`, solo para probar)
 
 - Jair, Cami y Rikka contra la horda y la sombra. Se puede huir. Cami actúa todos los turnos (sin lo del tobillo). La mochila empieza con objetos para probar (revivir, veneno, condón, potenciador).
@@ -338,6 +345,8 @@ fila de curación; mientras tanto, su pose base con el aura.
 menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Los usos se recuperan al terminar la pelea
 (como la vida). El autor va a hacer objetos que los recuperan. **Hecho:** los ataques básicos de daño, 20 usos (los que pegan más, 15: Estocada, Ola de petróleo, Cachetada de revés); los de efecto, 5 (Parálisis de pesadilla, Beso confusión, el Cebo); la curación de Rikka, 5 (cura el 35 %, con el aura verde). Los enemigos solo eligen ataques a los que les quedan usos. Los textos de los ataques nombran a quien atacan (`{objetivo}`), no a Jair fijo.
 
+**Ráfagas a todos (hecho):** los golpes de un especial «a todos» se reparten entre el equipo entero (contando a los caídos): si queda uno solo en pie, recibe su parte y nada más, no todos los golpes.
+
 **Hablar según quién le habla a quién (hecho):** cada personaje le dice algo distinto a cada uno, según cómo se llevan, y el otro le contesta (si se distrae o no): `src/data/charlas_batalla.json` (por su hoja: jair, cami, rikka, nikki, soldado, sombra). Cami y Nikki se odian, Rikka y Nikki tienen media amistad (las Blueberries), Rikka y Cami se celan, Cami le dice cobarde a Jair; la sombra no habla (lo cuenta la Voz). **Pedirle perdón a Nikki es solo de Jair** (los demás le hablan a su manera). Si un par no tiene charla, se usa lo de siempre (`hablar` del héroe y `responde` del rival).
 
 **Estados nuevos (aprobado):** quemado y congelado (además de los que ya hay):
@@ -414,7 +423,7 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
 | Panel **«Equipo»** (estadísticas, equipo y mochila) en la barra del juego | Aprobado (ver 14). |
 | **Cami actúa todos los turnos** desde el Capítulo 2, con enemigos de más nivel | Decidido por el autor; falta armar esas peleas. |
 | La fila **«dolor»** de Cami | Reservada para más adelante. |
-| **Pelea en el hangar** (nivel dos del Bastión), en alguna ruta del Capítulo 1, con el fondo del pasillo de instalación (`batalla/fondos/bastion`: tiene la ventana al hangar) | Idea del autor (2026-11-02); falta decidir en qué ruta, contra quién y con qué decisión se llega. |
+| **Pelea en el hangar** (camino alternativo del Capítulo 1) | **Hecha** (ver «El hangar» en la sección 12). Falta el sprite de pelea del Capitán (el autor lo está haciendo). |
 | Retratos y sprite de batalla definitivos (hoy algunos son placeholders) | Esperando el arte del autor. |
 | El Bastión, jugador atento: gana ~99 % (con la ayuda del juego). ¿Más difícil? | A decidir por el autor. |
 | **Nueva partida+**: al terminar el juego, empezar de nuevo con los niveles y el equipo de la partida terminada, con los enemigos de más nivel para que siga habiendo desafío | Idea aprobada para más adelante (cuando el juego esté completo). |
