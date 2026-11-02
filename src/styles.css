@@ -2903,3 +2903,12 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 }
 @media (prefers-reduced-motion: reduce) { .batalla-confusion span { animation: none !important; } }
 .batalla-confusion { top: 19%; }
+
+/* Envenenado: un tinte verde que late. Protegido: un escudo celeste alrededor. */
+.batalla-figura.envenenado .batalla-sprite { animation: envenenado 1.4s ease-in-out infinite; }
+@keyframes envenenado { 50% { filter: sepia(0.5) hue-rotate(60deg) saturate(1.6) brightness(1.05); } }
+.batalla-escudo { position: absolute; z-index: 3; left: 12%; right: 12%; top: 18%; bottom: 0; border: 2px solid rgba(143, 211, 255, 0.75); border-radius: 50% 50% 45% 45%; box-shadow: 0 0 14px rgba(143, 211, 255, 0.55), inset 0 0 18px rgba(143, 211, 255, 0.35); pointer-events: none; animation: protegido 2s ease-in-out infinite; }
+@keyframes protegido { 50% { opacity: 0.6; scale: 1.03; } }
+.batalla-descansa.veneno { color: #8dff7a; }
+.batalla-descansa.protegido { color: #8fd3ff; }
+@media (prefers-reduced-motion: reduce) { .batalla-figura.envenenado .batalla-sprite, .batalla-escudo { animation: none; } }

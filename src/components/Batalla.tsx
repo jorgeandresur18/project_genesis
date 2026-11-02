@@ -10,6 +10,9 @@ import {
   CARGA,
   CARGA_LLENA,
   ESPECIAL_MS,
+  tickVeneno,
+  usableEnPelea,
+  objetivoDe,
   CEBO_TURNOS,
   CEBO,
   crearCebo,
@@ -721,8 +724,8 @@ function Pelea({
       if (!b.current.heroes.some(vivo)) break;
       await actuarEnemigo(e);
     }
-    b.current.heroes.forEach((h) => {
-      h.esquivando = false;
+    b.current.heroes.forEach((h) => (h.esquivando = false));
+    [...b.current.heroes, ...b.current.enemigos].forEach((h) => {
       // La parálisis se cuenta por turnos en que no pudo actuar (la de este turno, recién desde el siguiente).
       if (h.paralizado && !b.current.paralizadoRecien.includes(h.id)) h.paralizado--;
       if (h.confundido && !b.current.confundidoRecien.includes(h.id)) h.confundido--;
@@ -731,6 +734,9 @@ function Pelea({
     b.current.confundidoRecien = [];
     forzar();
     if (!b.current.heroes.some(vivo)) return 'pierde';
+    await venenos();
+    if (!b.current.heroes.some(vivo)) return 'pierde';
+    if (jefeSeRetira()) return 'gana';
     await evaporar();
     await evaporarCebos();
     await ayudar();
@@ -738,6 +744,22 @@ function Pelea({
     return 'sigue';
   };
 
+  /** El veneno al final del turno: cada envenenado pierde PS (los enemigos que caen, caen). */
+  const venenos = async () => {
+    for (const l of [...b.current.heroes, ...b.current.enemigos].filter((x) => vivo(x) && x.envenenado)) {
+      const n = tickVeneno(l, l.lado === 'enemigo' && !!d.enemigos[l.clave]?.jefe && l.clon === undefined);
+      if (!n) continue;
+      numero(l.id, String(n), 'dano');
+      luz(l.id, '#7dff6a');
+      playChip('impacto');
+      forzar();
+      await decir(fmt(t('batalla.veneno'), { quien: l.nombre, n }));
+      if (vivo(l)) continue;
+      void animar(l.id, 'ko');
+      if (l.lado === 'enemigo') await alCaer(l);
+      else await decir(fmt(t('batalla.cae'), { quien: l.nombre }));
+    }
+  };
   /** El juego ayuda si van perdiendo: a veces cae un objeto (del cielo o de algún lado) a la mochila. */
   const ayudar = async () => {
     const a = d.ayuda;
@@ -894,6 +916,15 @@ function Pelea({
   const golpear = async (atacante: Luchador, defensor: Luchador, poder: number, color = '#fff6d0') => {
     // Si van perdiendo, el juego ayuda: los golpes de los héroes son críticos más seguido.
     const extra = d.ayuda && atacante.lado === 'heroe' && vanPerdiendo(b.current.heroes, d.ayuda.umbral) ? d.ayuda.critico : 0;
+    // Protegido: este golpe no le hace nada (y se gasta la protección).
+    if (defensor.protegido > 0 && atacante !== defensor) {
+      defensor.protegido--;
+      numero(defensor.id, t('batalla.bloquea'), 'falla');
+      luz(defensor.id, '#8fd3ff', true);
+      playChip('cambio');
+      forzar();
+      return { n: 0, critico: false, bloqueado: true };
+    }
     const { n, critico } = dano(atacante, defensor, poder, Math.random, extra);
     luz(defensor.id, color, critico);
     cargar(defensor, CARGA.recibir);
@@ -974,22 +1005,56 @@ function Pelea({
     }
     if (c.tipo === 'objeto') {
       const o = d.objetos[c.clave];
-      const a = o.revive ? b.current.heroes.find((x) => x.id === c.objetivo && !vivo(x)) : (b.current.heroes.find((x) => x.id === c.objetivo && vivo(x)) ?? h);
-      // Revivir a alguien que ya se levantó: el objeto vuelve a la mochila.
-      if (!a) {
+      const destino = objetivoDe(o);
+      const rivales = b.current.enemigos.filter(vivo);
+      const blancos: Luchador[] = o.revive
+        ? b.current.heroes.filter((x) => x.id === c.objetivo && !vivo(x))
+        : destino === 'yo'
+          ? [h]
+          : destino === 'equipo'
+            ? b.current.heroes.filter(vivo)
+            : destino === 'rivales'
+              ? rivales
+              : destino === 'rival'
+                ? [rivales.find((x) => x.id === c.objetivo) ?? rivales[0]].filter(Boolean)
+                : [b.current.heroes.find((x) => x.id === c.objetivo && vivo(x)) ?? h];
+      // Si ya no hay a quién (revivir a alguien que se levantó, o el rival cayó): el objeto vuelve a la mochila.
+      if (!blancos.length) {
         b.current.mochila[c.clave]++;
-        return decir(t('batalla.nadie_caido'));
+        return decir(t(o.revive ? 'batalla.nadie_caido' : 'batalla.sin_blanco'));
       }
-      const n = usarObjeto(o, a, d.personajes[a.clave]);
-      if (o.revive) {
-        setAnims((x) => ({ ...x, [a.id]: 'idle' }));
-        efecto(a.id, 'se-levanta', 800);
-        playChip('revivir');
+      const contra = destino === 'rival' || destino === 'rivales';
+      let n = 0;
+      for (const a of blancos) {
+        n = usarObjeto(o, a, a.lado === 'heroe' ? d.personajes[a.clave] : undefined);
+        if (o.revive) {
+          setAnims((x) => ({ ...x, [a.id]: 'idle' }));
+          efecto(a.id, 'se-levanta', 800);
+          playChip('revivir');
+        }
+        const marca = o.niveles
+          ? `NV +${n}`
+          : o.ps || o.revive
+            ? `+${n}`
+            : o.atq
+              ? `ATQ +${n}`
+              : o.def
+                ? `DEF +${n}`
+                : o.veneno
+                  ? t('batalla.tag_veneno')
+                  : o.protege
+                    ? t('batalla.tag_protegido')
+                    : o.confunde
+                      ? t('batalla.confundido_tag')
+                      : o.paraliza
+                        ? '✕'
+                        : `+${n}`;
+        numero(a.id, marca, contra ? 'falla' : 'cura');
+        luz(a.id, o.veneno ? '#7dff6a' : o.protege ? '#8fd3ff' : contra ? '#ff6fae' : '#9dffb0');
       }
-      numero(a.id, o.niveles ? `NV +${n}` : o.ps || o.revive ? `+${n}` : o.atq ? `ATQ +${n}` : o.def ? `DEF +${n}` : `+${n}`, 'cura');
-      playChip('vida');
+      playChip(contra ? 'cambio' : 'vida');
       forzar();
-      return decir(fmt(o.texto, { quien: a.nombre, n }));
+      return decir(fmt(o.texto, { quien: blancos.map((x) => x.nombre).join(' y '), n }));
     }
     if ((c.tipo === 'atacar' || c.tipo === 'especial') && seConfunde(h)) {
       cargar(h, CARGA.atacar);
@@ -1058,11 +1123,11 @@ function Pelea({
       return decir(fmt(t('batalla.esquiva_rival'), { quien: e.nombre }));
     }
     bajoEspecial.current.add(e.id);
-    const { n, critico } = await golpear(h, e, ataque.poder);
+    const { n, critico, bloqueado } = await golpear(h, e, ataque.poder);
     await espera(450);
     if (!deLejos) await deslizar(h.id, null);
     soltar([e]);
-    await decir(fmt(t(critico ? 'batalla.critico' : 'batalla.ataca'), { objetivo: e.nombre, n }));
+    await decir(fmt(t(bloqueado ? 'batalla.protegido_bloquea' : critico ? 'batalla.critico' : 'batalla.ataca'), { objetivo: e.nombre, quien: e.nombre, n }));
     if (!vivo(e)) await alCaer(e);
   };
 
@@ -1204,6 +1269,17 @@ function Pelea({
 
   const actuarEnemigo = async (e: Luchador) => {
     cargar(e, CARGA.turnoEnemigo);
+    if (e.paralizado > 0) return decir(fmt(t('batalla.sigue_paralizado'), { quien: e.nombre }));
+    if (seConfunde(e)) {
+      await decir(fmt(t('batalla.se_golpea'), { quien: e.nombre }));
+      void animar(e.id, 'ataque', 600);
+      playChip(sonidoDe(e));
+      await espera(300);
+      const { n } = await golpear(e, e, CONFUSION.poder);
+      await decir(fmt(t('batalla.recibe'), { quien: e.nombre, n }));
+      if (!vivo(e)) await alCaer(e);
+      return;
+    }
     if (e.distraido) {
       e.distraido = false;
       return decir(fmt(t('batalla.distraido'), { quien: e.nombre }));
@@ -1275,8 +1351,8 @@ function Pelea({
       }
       if (!proy) playChip(sonidoDe(e));
       bajoEspecial.current.add(h.id);
-      const { n } = await golpear(e, h, a.poder);
-      if (blancos.length === 1) await decir(fmt(t('batalla.recibe'), { quien: h.nombre, n }));
+      const { n, bloqueado } = await golpear(e, h, a.poder);
+      if (blancos.length === 1) await decir(fmt(t(bloqueado ? 'batalla.protegido_bloquea' : 'batalla.recibe'), { quien: h.nombre, n }));
     }
     if (blancos.length === 1 && !proy) await deslizar(e.id, null);
     else await espera(500);
@@ -1297,7 +1373,7 @@ function Pelea({
   const ataques = heroe ? ataquesDe(heroe, d.personajes[heroe.clave]) : [];
   const especial = heroe ? d.personajes[heroe.clave].especial : undefined;
   const comandos = [t('batalla.atacar'), t('batalla.hablar'), t('batalla.esquivar'), t('batalla.objetos'), t('batalla.huir')];
-  const enMochila = Object.keys(d.objetos).filter((k) => (b.current.mochila[k] ?? 0) > 0);
+  const enMochila = Object.keys(d.objetos).filter((k) => (b.current.mochila[k] ?? 0) > 0 && usableEnPelea(d.objetos[k]));
   const vivosDe = (lado: 'enemigo' | 'heroe') => (lado === 'enemigo' ? b.current.enemigos : b.current.heroes).filter(vivo);
   /** A quiénes se puede elegir: los de pie o, para revivir, los caídos. */
   const candidatos = () =>
@@ -1346,7 +1422,11 @@ function Pelea({
         }
         return setMenu({ paso: 'objetivo', i: 0, lado: 'heroe', caidos: true, luego: (o) => ({ tipo: 'objeto', clave: k, objetivo: o }) });
       }
-      if (k) setMenu({ paso: 'objetivo', i: Math.max(0, vivosDe('heroe').indexOf(heroe)), lado: 'heroe', luego: (o) => ({ tipo: 'objeto', clave: k, objetivo: o }) });
+      if (!k) return;
+      const destino = objetivoDe(d.objetos[k]);
+      if (destino === 'yo' || destino === 'equipo' || destino === 'rivales') return listo({ tipo: 'objeto', clave: k, objetivo: heroe.id });
+      if (destino === 'rival') return setMenu({ paso: 'objetivo', i: 0, lado: 'enemigo', luego: (o) => ({ tipo: 'objeto', clave: k, objetivo: o }) });
+      setMenu({ paso: 'objetivo', i: Math.max(0, vivosDe('heroe').indexOf(heroe)), lado: 'heroe', luego: (o) => ({ tipo: 'objeto', clave: k, objetivo: o }) });
       return;
     }
     const o = candidatos()[i];
@@ -1391,6 +1471,12 @@ function Pelea({
     [
       o.niveles && fmt(t('batalla.desc.obj_niveles'), { n: o.niveles }),
       o.revive && fmt(t('batalla.desc.obj_revive'), { n: Math.round(o.revive * 100) }),
+      o.veneno && fmt(t('batalla.desc.obj_veneno'), { n: o.veneno.danio, t: o.veneno.turnos }),
+      o.protege && fmt(t('batalla.desc.obj_protege'), { n: o.protege }),
+      o.confunde && fmt(t('batalla.desc.obj_confunde'), { n: o.confunde }),
+      o.paraliza && fmt(t('batalla.desc.obj_paraliza'), { n: o.paraliza }),
+      o.cura_estados && t('batalla.desc.obj_cura_estados'),
+      t(`batalla.desc.a_${objetivoDe(o)}`),
       o.ps && fmt(t('batalla.desc.obj_ps'), { n: o.ps }),
       o.atq && fmt(t('batalla.desc.obj_atq'), { n: o.atq }),
       o.def && fmt(t('batalla.desc.obj_def'), { n: o.def }),
@@ -1699,7 +1785,7 @@ function Figura({
   return (
     <div
       ref={refFigura}
-      className={`batalla-figura ${heroe ? 'heroe' : 'enemigo'} ${jefe ? 'jefe' : ''} ${l.clon !== undefined ? 'clon' : ''} ${marcado ? 'marcado' : ''} ${alto ? 'en-aire' : ''} anim-${anim} ${luces.length ? 'golpeado' : ''} ${activo ? 'activo' : ''} ${caido ? 'ko' : ''} ${efecto ?? ''} ${desliz && (desliz.x || desliz.y) ? 'deslizando' : ''}`}
+      className={`batalla-figura ${heroe ? 'heroe' : 'enemigo'} ${jefe ? 'jefe' : ''} ${l.clon !== undefined ? 'clon' : ''} ${marcado ? 'marcado' : ''} ${alto ? 'en-aire' : ''} ${l.envenenado && l.ps > 0 ? 'envenenado' : ''} ${l.protegido > 0 && l.ps > 0 ? 'protegido' : ''} anim-${anim} ${luces.length ? 'golpeado' : ''} ${activo ? 'activo' : ''} ${caido ? 'ko' : ''} ${efecto ?? ''} ${desliz && (desliz.x || desliz.y) ? 'deslizando' : ''}`}
       style={
         {
           ...(desliz ? { '--dx': `${desliz.x}px`, '--dy': `${desliz.y}px` } : {}),
@@ -1711,6 +1797,7 @@ function Figura({
       }
     >
       {marcado && <span className="batalla-flecha" aria-hidden>▼</span>}
+      {l.protegido > 0 && l.ps > 0 && <span className="batalla-escudo" aria-hidden />}
       {l.confundido > 0 && l.ps > 0 && !caido && (
         <span className="batalla-confusion" aria-hidden>
           <span>♥</span>
@@ -1909,6 +1996,8 @@ function Tarjeta({
         {h.extraDef > 0 && <span className="batalla-extra def">DEF +{h.extraDef}</span>}
         {descansa && <span className="batalla-descansa">{t('batalla.descansa')}</span>}
         {h.confundido > 0 && <span className="batalla-descansa confundido">{t('batalla.confundido_tag')}</span>}
+        {h.envenenado && h.ps > 0 && <span className="batalla-descansa veneno">{t('batalla.tag_veneno')}</span>}
+        {h.protegido > 0 && h.ps > 0 && <span className="batalla-descansa protegido">{t('batalla.tag_protegido')}</span>}
       </b>
       <span className="batalla-cuenta">
         <small>HP</small>

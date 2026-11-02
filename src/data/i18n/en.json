@@ -284,5 +284,21 @@
   "batalla.cebo_aparece": "The copy does nothing. It just stands there. With luck, someone hits it instead.",
   "batalla.cebo_cae": "{quien} (the decoy) falls apart at the first hit. It did its only job.",
   "batalla.desc.cebo": "Leaves a black-and-white copy of yourself. It does nothing: sometimes the enemy hits it instead of you, and it falls apart at the first hit. The most useless move there is, except for sneaking out of work if your boss does not notice.",
-  "batalla.cebo_se_va": "{quien} (the decoy) evaporates. Nobody paid it any attention."
+  "batalla.cebo_se_va": "{quien} (the decoy) evaporates. Nobody paid it any attention.",
+  "batalla.sin_blanco": "Nobody left to use it on. The item goes back to the backpack.",
+  "batalla.bloquea": "BLOCK",
+  "batalla.veneno": "{quien} loses {n} to the poison.",
+  "batalla.tag_veneno": "poison",
+  "batalla.tag_protegido": "protected",
+  "batalla.desc.obj_veneno": "Poisons: loses {n} HP at the end of each turn for {t} turns.",
+  "batalla.desc.obj_protege": "Protects: the next hit does no damage.",
+  "batalla.desc.obj_confunde": "Confuses for {n} turns: when attacking, sometimes hits themselves.",
+  "batalla.desc.obj_paraliza": "Paralyzes for {n} turns.",
+  "batalla.desc.obj_cura_estados": "Removes poison, confusion and paralysis.",
+  "batalla.desc.a_yo": "For yourself.",
+  "batalla.desc.a_aliado": "For you or an ally.",
+  "batalla.desc.a_equipo": "For the whole team.",
+  "batalla.desc.a_rival": "Against one enemy.",
+  "batalla.desc.a_rivales": "Against all enemies.",
+  "batalla.protegido_bloquea": "The hit does nothing to {quien}: they were protected."
 }

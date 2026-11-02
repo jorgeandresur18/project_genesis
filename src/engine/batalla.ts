@@ -127,9 +127,26 @@ export interface Enemigo {
   /** El sonido de sus golpes (ataque y especial). */
   sonido?: string;
 }
-/** Un objeto de la mochila: sube el ataque o la defensa hasta el final de la pelea, cura o llena el especial. */
+/** De qué tipo es un objeto (decide dónde aparece y cómo se usa; ver docs/BIBLIA_RPG.md, sección 14). */
+export type TipoObjeto = 'curacion' | 'mejora' | 'permanente' | 'tactico' | 'equipo' | 'coleccion';
+/** A quién se aplica: a quien lo usa, a un compañero, a todo el equipo, a un rival o a todos los rivales. */
+export type ObjetivoObjeto = 'yo' | 'aliado' | 'equipo' | 'rival' | 'rivales';
+/** Un objeto de la mochila: cura, mejora, cambia al personaje para siempre o tiene un efecto (táctico). */
 export interface Objeto {
   nombre: string;
+  /** Si no está, se deduce de lo que hace (ver tipoDe). */
+  tipo?: TipoObjeto;
+  /** Si no está: a un compañero (o a un caído, si revive). */
+  objetivo?: ObjetivoObjeto;
+  /** Envenena: pierde `danio` PS al final de cada turno durante `turnos` turnos. */
+  veneno?: { danio: number; turnos: number };
+  /** Protege: los próximos `protege` golpes no le hacen daño. */
+  protege?: number;
+  /** Confunde o paraliza tantos turnos (para usar sobre un rival). */
+  confunde?: number;
+  paraliza?: number;
+  /** Saca los estados: veneno, confusión y parálisis. */
+  cura_estados?: boolean;
   atq?: number;
   def?: number;
   ps?: number;
@@ -240,6 +257,10 @@ export interface Luchador {
   cebo?: boolean;
   /** Si es un clon de sombra: los turnos que le quedan antes de evaporarse. */
   clon?: number;
+  /** Envenenado: pierde `danio` PS al final de cada turno, `turnos` turnos más. */
+  envenenado: { danio: number; turnos: number } | null;
+  /** Protegido: tantos golpes que no le hacen daño. */
+  protegido: number;
 }
 
 /**
@@ -287,7 +308,7 @@ export function crearLuchador(
   xp = 0,
 ): Luchador {
   const s = statsEn(d.base, d.crece, nivel);
-  return { id, clave, lado, nombre: d.nombre, nivel, xp, ps: s.ps, psMax: s.ps, atq: s.atq, def: s.def, vel: s.vel, extra: 0, extraDef: 0, esquivando: false, distraido: false, carga: 0, paralizado: 0, confundido: 0 };
+  return { id, clave, lado, nombre: d.nombre, nivel, xp, ps: s.ps, psMax: s.ps, atq: s.atq, def: s.def, vel: s.vel, extra: 0, extraDef: 0, esquivando: false, distraido: false, carga: 0, paralizado: 0, confundido: 0, envenenado: null, protegido: 0 };
 }
 
 /**
@@ -341,6 +362,17 @@ export function subirNiveles(l: Luchador, d: { base: Stats; crece: Stats }, n: n
 
 /** Usa un objeto en un héroe: devuelve cuánto hizo (lo que subió o curó). `d`: sus datos (para subir niveles). */
 export function usarObjeto(o: Objeto, h: Luchador, d?: { base: Stats; crece: Stats }): number {
+  // Los tácticos: estados (sobre un rival o un compañero).
+  if (o.cura_estados) {
+    h.envenenado = null;
+    h.confundido = 0;
+    h.paralizado = 0;
+  }
+  if (o.veneno) h.envenenado = { ...o.veneno };
+  if (o.protege) h.protegido += o.protege;
+  if (o.confunde) h.confundido = Math.max(h.confundido, o.confunde);
+  if (o.paraliza) h.paralizado = Math.max(h.paralizado, o.paraliza);
+  if (o.veneno || o.protege || o.confunde || o.paraliza) return o.veneno?.turnos ?? o.protege ?? o.confunde ?? o.paraliza ?? 0;
   if (o.niveles && d) {
     subirNiveles(h, d, o.niveles);
     return o.niveles;
@@ -366,6 +398,23 @@ export function usarObjeto(o: Objeto, h: Luchador, d?: { base: Stats; crece: Sta
   return o.atq ?? o.def ?? 0;
 }
 
+/** El tipo de un objeto: el que dice o, si no dice, el que corresponde a lo que hace. */
+export const tipoDe = (o: Objeto): TipoObjeto =>
+  o.tipo ?? (o.niveles ? 'permanente' : o.ps || o.revive || o.cura_estados ? 'curacion' : o.veneno || o.protege || o.confunde || o.paraliza ? 'tactico' : 'mejora');
+/** Lo que se puede usar en una pelea (el equipo y la colección, no). */
+export const usableEnPelea = (o: Objeto) => !['equipo', 'coleccion'].includes(tipoDe(o));
+/** A quién se aplica un objeto. */
+export const objetivoDe = (o: Objeto): ObjetivoObjeto => o.objetivo ?? 'aliado';
+
+/** El veneno al final del turno: cuánto pierde (un jefe nunca baja de 1: se retira). Descuenta un turno. */
+export function tickVeneno(l: Luchador, jefe: boolean): number {
+  if (!l.envenenado || l.ps <= 0) return 0;
+  const n = Math.min(l.envenenado.danio, jefe ? l.ps - 1 : l.ps);
+  l.ps -= Math.max(0, n);
+  if (--l.envenenado.turnos <= 0) l.envenenado = null;
+  return Math.max(0, n);
+}
+
 /** Crea el clon de sombra de un enemigo: más débil (`fuerza`), con la vida que le costó, sin especiales. */
 export function crearClon(o: Luchador, c: NonNullable<Enemigo['clon']>, id: string): Luchador {
   const ps = Math.max(1, Math.round(o.psMax * c.costo));
@@ -384,6 +433,8 @@ export function crearClon(o: Luchador, c: NonNullable<Enemigo['clon']>, id: stri
     distraido: false,
     esquivando: false,
     paralizado: 0,
+    envenenado: null,
+    protegido: 0,
     // Uno más: el turno en que aparece no cuenta.
     clon: c.turnos + 1,
   };
@@ -446,7 +497,7 @@ export const CEBO = 0.55;
 export const CEBO_TURNOS = 3;
 /** Crea el cebo de un héroe: su copia en blanco y negro, con 1 PS y sin poder hacer nada. */
 export function crearCebo(h: Luchador, id: string): Luchador {
-  return { ...h, id, ps: 1, psMax: 1, extra: 0, extraDef: 0, carga: 0, esquivando: false, distraido: false, paralizado: 0, confundido: 0, cebo: true };
+  return { ...h, id, ps: 1, psMax: 1, extra: 0, extraDef: 0, carga: 0, esquivando: false, distraido: false, paralizado: 0, confundido: 0, envenenado: null, protegido: 0, cebo: true };
 }
 
 /** El jefe se retira cuando le queda esta parte de sus PS (o menos). */

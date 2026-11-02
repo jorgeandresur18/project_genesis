@@ -284,5 +284,21 @@
   "batalla.cebo_aparece": "La copia no hace nada. Solo está ahí. Con suerte, alguien le pega a ella.",
   "batalla.cebo_cae": "{quien} (el cebo) se deshace al primer golpe. Cumplió su único trabajo.",
   "batalla.desc.cebo": "Deja una copia tuya en blanco y negro. No hace nada: a veces el rival le pega a ella en vez de a ti, y se deshace al primer golpe. El movimiento más inútil que existe, salvo para escaparte del trabajo si tu jefe no se da cuenta.",
-  "batalla.cebo_se_va": "{quien} (el cebo) se evapora. Nadie le hizo caso."
+  "batalla.cebo_se_va": "{quien} (el cebo) se evapora. Nadie le hizo caso.",
+  "batalla.sin_blanco": "Ya no hay a quién. El objeto vuelve a la mochila.",
+  "batalla.bloquea": "BLOQUEA",
+  "batalla.veneno": "{quien} pierde {n} por el veneno.",
+  "batalla.tag_veneno": "veneno",
+  "batalla.tag_protegido": "protegido",
+  "batalla.desc.obj_veneno": "Envenena: pierde {n} PS al final de cada turno durante {t} turnos.",
+  "batalla.desc.obj_protege": "Protege: el próximo golpe no le hace daño.",
+  "batalla.desc.obj_confunde": "Confunde {n} turnos: al atacar, a veces se pega a sí mismo.",
+  "batalla.desc.obj_paraliza": "Paraliza {n} turnos.",
+  "batalla.desc.obj_cura_estados": "Saca el veneno, la confusión y la parálisis.",
+  "batalla.desc.a_yo": "Para ti.",
+  "batalla.desc.a_aliado": "Para ti o un compañero.",
+  "batalla.desc.a_equipo": "Para todo el equipo.",
+  "batalla.desc.a_rival": "Contra un rival.",
+  "batalla.desc.a_rivales": "Contra todos los rivales.",
+  "batalla.protegido_bloquea": "El golpe no le hace nada a {quien}: estaba protegido."
 }

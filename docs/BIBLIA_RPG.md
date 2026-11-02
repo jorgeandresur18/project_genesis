@@ -110,6 +110,8 @@ Al elegir a quién atacar, el elegido brilla, tiene un anillo dorado a los pies 
 | **En el aire** | Mientras dura el especial que lo levantó. | Arriba, en la pose de golpeado; al terminar cae con su sprite de derrotado y, si sigue vivo, se levanta. |
 | **Caído** | 0 PS. No actúa. Se puede revivir. | Su fila «derrotado» (tirado, respirando) o, si no la tiene, la pose de golpeado. |
 | **Confundido** (el beso de Nikki) | Durante 3 turnos, al atacar (ataque o especial) puede pegarse a sí mismo: 40 % el primer turno, 30 % el segundo y 20 % el tercero (`CONFUSION`). Hablar, esquivar y los objetos funcionan normal. Se le va al caer. | Tres corazones chicos que dan vueltas alrededor de la cabeza como un carrusel (delante, más grandes y nítidos; detrás, más chicos y tenues; desaparecen al caer); «confusión» en su tarjeta. |
+| **Envenenado** | Pierde PS al final de cada turno, unos turnos (un jefe nunca baja de 1). | Un tinte verde que late; «veneno» en su tarjeta. |
+| **Protegido** | Los próximos golpes (según el objeto) no le hacen daño: «BLOQUEA». | Un escudo celeste alrededor; «protegido» en su tarjeta. |
 | **Distraído** (por Hablar) | Pierde su próximo ataque. | — |
 
 ---
@@ -140,6 +142,10 @@ Al elegir a quién atacar, el elegido brilla, tiene un anillo dorado a los pies 
 | Recargador de especial | Llena la barra | Botín. |
 | Revivir | Levanta a un caído con la mitad de su vida | El Bastión empieza con uno; a veces en el botín. |
 | Caramelo rancio | Sube 10 niveles de golpe | Premio por ganarle a Nikki (ver 12). |
+| Veneno para ratas (táctico, contra un rival) | Pierde 6 PS al final de cada turno durante 3 turnos | Por ahora solo en la demo; llega con la tienda. |
+| Condón (táctico, a un compañero) | Protección: el próximo golpe no le hace daño | Por ahora solo en la demo; llega con la tienda. |
+
+Cada objeto tiene su **tipo** (curación, mejora, permanente, táctico, equipo, colección) y **a quién se aplica** (a ti, a un compañero, a todo el equipo, a un rival o a todos los rivales); en la pelea, «Objetos» muestra solo los que sirven en pelea, y al elegir uno pide a quién solo si hace falta.
 
 - **Botín:** cuando cae un enemigo, con 60 % de probabilidad suelta un objeto al azar de la lista `botin.objetos`
   (repetir un objeto en la lista lo hace más probable).
@@ -304,7 +310,7 @@ cosas raras; los chistes van en las descripciones.
   primera vez que se pasó por ahí).
 - **Stock limitado:** lo permanente (caramelos, suplementos) se vende de a poco por capítulo (p. ej. un caramelo
   rancio por capítulo) y es caro. Vender a la mitad impide ganar plata comprando y vendiendo.
-- **Orden de construcción:** 1) tipos de objeto y estados nuevos; 2) monedas; 3) comprar y vender en Boringplace
+- **Orden de construcción:** 1) tipos de objeto y estados nuevos (**hecho**); 2) monedas; 3) comprar y vender en Boringplace
   (en el juego y desde el título); 4) el panel de Equipo.
 
 ## 15. Pendientes e ideas

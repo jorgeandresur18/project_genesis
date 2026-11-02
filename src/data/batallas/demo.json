@@ -416,32 +416,55 @@
     "atq": {
       "nombre": "Potenciador de ataque",
       "atq": 3,
-      "texto": "{quien} se inyecta un chip rojo. Ataque +{n} hasta el final de la pelea."
+      "texto": "{quien} se inyecta un chip rojo. Ataque +{n} hasta el final de la pelea.",
+      "tipo": "mejora"
     },
     "def": {
       "nombre": "Potenciador de defensa",
       "def": 3,
-      "texto": "{quien} se pone un parche de escudo. Defensa +{n} hasta el final de la pelea."
+      "texto": "{quien} se pone un parche de escudo. Defensa +{n} hasta el final de la pelea.",
+      "tipo": "mejora"
     },
     "vida": {
       "nombre": "Lata de agua",
       "ps": 30,
-      "texto": "{quien} se toma una lata de agua: +{n} PS. Tampoco la pagó."
+      "texto": "{quien} se toma una lata de agua: +{n} PS. Tampoco la pagó.",
+      "tipo": "curacion"
     },
     "carga": {
       "nombre": "Recargador de especial",
       "carga": 100,
-      "texto": "{quien} conecta el recargador. La barra del especial se llena de golpe."
+      "texto": "{quien} conecta el recargador. La barra del especial se llena de golpe.",
+      "tipo": "mejora"
     },
     "caramelo_rancio": {
       "nombre": "Caramelo rancio",
       "niveles": 10,
-      "texto": "{quien} se come el caramelo rancio. Sabe a bar cerrado y a malas decisiones. Sube {n} niveles de golpe."
+      "texto": "{quien} se come el caramelo rancio. Sabe a bar cerrado y a malas decisiones. Sube {n} niveles de golpe.",
+      "tipo": "permanente"
     },
     "revivir": {
       "nombre": "Revivir",
       "revive": 0.5,
-      "texto": "{quien} vuelve a pararse, mareado pero entero: +{n} PS. Nadie pregunta cómo funciona."
+      "texto": "{quien} vuelve a pararse, mareado pero entero: +{n} PS. Nadie pregunta cómo funciona.",
+      "tipo": "curacion"
+    },
+    "veneno_ratas": {
+      "nombre": "Veneno para ratas",
+      "tipo": "tactico",
+      "objetivo": "rival",
+      "veneno": {
+        "danio": 6,
+        "turnos": 3
+      },
+      "texto": "Le echan veneno para ratas a {quien}. Pierde vida cada turno. La etiqueta dice «no apto para humanos». Nadie lee las etiquetas."
+    },
+    "condon": {
+      "nombre": "Condón",
+      "tipo": "tactico",
+      "objetivo": "aliado",
+      "protege": 1,
+      "texto": "Le dan un condón a {quien}. Es protección: el próximo golpe no le hace nada. Cuidarse es importante."
     }
   },
   "retratos": {
@@ -463,6 +486,8 @@
   "fondo_proporcion": 1.7768,
   "musica_jefe": "audio/musica/combate_arcade.mp3",
   "mochila_inicial": {
-    "revivir": 1
+    "revivir": 1,
+    "veneno_ratas": 1,
+    "condon": 2
   }
 }
