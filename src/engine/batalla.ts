@@ -277,6 +277,8 @@ export interface Luchador {
   protegido: number;
   /** Cuántas veces usó cada ataque con usos limitados en esta pelea (por nombre). */
   usados?: Record<string, number>;
+  /** Acaba de salir de una parálisis: este turno no se lo puede volver a paralizar. */
+  inmuneParalisis?: number;
 }
 
 /**
@@ -492,7 +494,8 @@ export const seConfunde = (l: Luchador, azar: () => number = Math.random) =>
  */
 export function eligeAtaque(ataques: Ataque[], heroes: Luchador[], azar: () => number = Math.random): { ataque: Ataque; blancos: Luchador[] } | null {
   const vivos = heroes.filter((h) => h.ps > 0);
-  const libres = (a: Ataque) => (a.paraliza ? vivos.filter((h) => !h.paralizado) : a.confunde ? vivos.filter((h) => !h.confundido) : vivos);
+  const libres = (a: Ataque) =>
+    a.paraliza ? vivos.filter((h) => !h.paralizado && !h.inmuneParalisis) : a.confunde ? vivos.filter((h) => !h.confundido) : vivos;
   const posibles = ataques.filter((a) => libres(a).length > 0);
   if (!posibles.length) return null;
   const total = posibles.reduce((n, a) => n + (a.peso ?? 1), 0);
@@ -500,6 +503,17 @@ export function eligeAtaque(ataques: Ataque[], heroes: Luchador[], azar: () => n
   const ataque = posibles.find((a) => (r -= a.peso ?? 1) < 0) ?? posibles[posibles.length - 1];
   const pool = libres(ataque);
   return { ataque, blancos: ataque.objetivo === 'todos' ? pool : [pool[Math.floor(azar() * pool.length)]] };
+}
+
+/**
+ * Los estados no se acumulan: el que ya está paralizado, confundido o envenenado no puede volver a caer en eso
+ * (tampoco el que acaba de salir de una parálisis: un turno de respiro). Devuelve el estado que ya tiene, si lo tiene.
+ */
+export function yaTiene(l: Luchador, efecto: { paraliza?: number; confunde?: number; veneno?: unknown }): 'paralizado' | 'confundido' | 'envenenado' | null {
+  if (efecto.paraliza && (l.paralizado > 0 || l.inmuneParalisis)) return 'paralizado';
+  if (efecto.confunde && l.confundido > 0) return 'confundido';
+  if (efecto.veneno && l.envenenado) return 'envenenado';
+  return null;
 }
 
 /** Cuántos usos le quedan de un ataque en esta pelea (Infinity si no tiene límite). */

@@ -24,6 +24,7 @@ import {
   seConfunde,
   quedan,
   gastarUso,
+  yaTiene,
   eligeAtaque,
   crearClon,
   eligeEspecial,
@@ -801,7 +802,8 @@ function Pelea({
     b.current.heroes.forEach((h) => (h.esquivando = false));
     [...b.current.heroes, ...b.current.enemigos].forEach((h) => {
       // La parálisis se cuenta por turnos en que no pudo actuar (la de este turno, recién desde el siguiente).
-      if (h.paralizado && !b.current.paralizadoRecien.includes(h.id)) h.paralizado--;
+      if (h.inmuneParalisis) h.inmuneParalisis--;
+      if (h.paralizado && !b.current.paralizadoRecien.includes(h.id) && --h.paralizado === 0) h.inmuneParalisis = 1;
       if (h.confundido && !b.current.confundidoRecien.includes(h.id)) h.confundido--;
     });
     b.current.paralizadoRecien = [];
@@ -1136,6 +1138,14 @@ function Pelea({
         b.current.mochila[c.clave]++;
         return decir(t(o.revive ? 'batalla.nadie_caido' : 'batalla.sin_blanco'));
       }
+      const yaEstan = blancos.map((x) => yaTiene(x, o));
+      if (yaEstan.every(Boolean)) {
+        b.current.mochila[c.clave]++;
+        playChip('vacio');
+        return decir(fmt(t('batalla.ya_tiene_objeto'), { quien: blancos.map((x) => x.nombre).join(' y '), estado: t(`batalla.estado_${yaEstan[0]}`) }));
+      }
+      // A los que ya lo tienen no les hace nada.
+      blancos.splice(0, blancos.length, ...blancos.filter((_, i) => !yaEstan[i]));
       const contra = destino === 'rival' || destino === 'rivales';
       let n = 0;
       for (const a of blancos) {
@@ -1232,7 +1242,14 @@ function Pelea({
     }
     const e = objetivo(c.objetivo);
     await decir(fmt(ataque.texto, { quien: h.nombre, objetivo: e.nombre }));
-    // Los ataques de efecto (el beso, la parálisis) no pegan: dejan al blanco confundido o paralizado.
+    // Los ataques de efecto (el beso, la parálisis) no pegan: dejan al blanco confundido o paralizado. Si ya lo
+    // está, no se acumula: se pierde el turno, pero no el uso.
+    const ya = (ataque.confunde || ataque.paraliza) && yaTiene(e, ataque);
+    if (ya) {
+      if (h.usados?.[ataque.nombre]) h.usados[ataque.nombre]--;
+      playChip('vacio');
+      return decir(fmt(t('batalla.ya_tiene_ataque'), { quien: e.nombre, estado: t(`batalla.estado_${ya}`) }));
+    }
     if (ataque.confunde) {
       cargar(h, CARGA.atacar);
       return besar(h, ataque, [e]);

@@ -332,5 +332,10 @@
   "batalla.sin_usos": "{quien} has no uses of {ataque} left in this fight.",
   "batalla.se_cura": "{quien} recovers {n} HP.",
   "batalla.desc.cura": "Heals herself: {n}% of her health. No target needed.",
-  "batalla.desc.usos": "Uses: {q}/{u} (restored after the fight)."
+  "batalla.desc.usos": "Uses: {q}/{u} (restored after the fight).",
+  "batalla.estado_paralizado": "paralyzed (or recovering)",
+  "batalla.estado_confundido": "confused",
+  "batalla.estado_envenenado": "poisoned",
+  "batalla.ya_tiene_ataque": "{quien} is already {estado}. It doesn't stack: the turn is lost, but the attack isn't spent.",
+  "batalla.ya_tiene_objeto": "{quien} is already {estado}. It doesn't stack: the item goes back to the bag."
 }

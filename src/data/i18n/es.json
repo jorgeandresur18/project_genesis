@@ -332,5 +332,10 @@
   "batalla.sin_usos": "A {quien} ya no le quedan usos de {ataque} en esta pelea.",
   "batalla.se_cura": "{quien} recupera {n} PS.",
   "batalla.desc.cura": "Se cura a sí misma: el {n} % de su vida. No se elige a quién.",
-  "batalla.desc.usos": "Usos: {q}/{u} (se recuperan al terminar la pelea)."
+  "batalla.desc.usos": "Usos: {q}/{u} (se recuperan al terminar la pelea).",
+  "batalla.estado_paralizado": "paralizado (o se está recuperando)",
+  "batalla.estado_confundido": "confundido",
+  "batalla.estado_envenenado": "envenenado",
+  "batalla.ya_tiene_ataque": "{quien} ya está {estado}. No se acumula: el turno se pierde, pero el ataque no se gasta.",
+  "batalla.ya_tiene_objeto": "{quien} ya está {estado}. No se acumula: el objeto vuelve a la mochila."
 }
