@@ -1,4 +1,5 @@
 import { Suspense, lazy, useCallback, useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
+import { EquipoPanel } from './components/Equipo';
 import { CHAPTER_END, useStore, SPEEDS } from './engine/store';
 import { BAD_END, endingName, getEnding, scenes } from './engine/story';
 import { useStoryEngine } from './engine/useStoryEngine';
@@ -61,6 +62,7 @@ type Overlay =
   | 'about'
   | 'salir'
   | 'bootcamp'
+  | 'equipo'
   | null;
 
 export default function App() {
@@ -181,6 +183,7 @@ export default function App() {
       )}
       {!hasGame && <EasterEgg phase={egg} onGone={() => setEgg('gone')} />}
       {overlay === 'options' && <OptionsPanel onClose={close} />}
+      {overlay === 'equipo' && <EquipoPanel onClose={close} />}
       {overlay === 'about' && <AboutPanel onClose={close} />}
       {overlay === 'salir' && (
         <ConfirmTitle
@@ -935,6 +938,7 @@ function Game({ open, paused, onTitle }: { open: (o: Overlay) => void; paused: b
       <button onClick={() => open('save')}>{t('juego.guardar')}</button>
       <button onClick={() => open('load')}>{t('juego.cargar')}</button>
       <button onClick={() => open('map')}>{t('juego.mapa')}</button>
+      <button onClick={() => open('equipo')}>{t('juego.equipo')}</button>
       <button onClick={() => open('options')}>{t('juego.opciones')}</button>
       <button onClick={() => setUiHidden(true)} title={t('juego.ocultar_ayuda')}>
         {t('juego.ocultar')}

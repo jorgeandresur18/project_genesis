@@ -1731,6 +1731,20 @@ function Pelea({
   );
 }
 
+/** Las etiquetas de los estados de un luchador (veneno, confusión, parálisis, protegido). */
+function EstadosDe({ l }: { l: Luchador }) {
+  const t = useT();
+  if (l.ps <= 0) return null;
+  return (
+    <>
+      {l.envenenado && <span className="batalla-descansa veneno">{t('batalla.tag_veneno')}</span>}
+      {l.confundido > 0 && <span className="batalla-descansa confundido">{t('batalla.confundido_tag')}</span>}
+      {l.paralizado > 0 && <span className="batalla-descansa paralizado">{t('batalla.tag_paralizado')}</span>}
+      {l.protegido > 0 && <span className="batalla-descansa protegido">{t('batalla.tag_protegido')}</span>}
+    </>
+  );
+}
+
 /** Los números de un texto con la letra de 8 bits (en la otra, el 9 y el 4 o el 8 y la S se confunden). */
 function conNumeros(texto: string) {
   return texto.split(/(\d+)/).map((parte, i) => (i % 2 ? <span key={i} className="batalla-num">{parte}</span> : parte));
@@ -1807,7 +1821,13 @@ function Figura({
           ))}
         </span>
       )}
-      {(efecto === 'sube-stat' || efecto === 'baja-stat') && <span className={`batalla-aura-stat ${efecto}`} aria-hidden />}
+      {(efecto === 'sube-stat' || efecto === 'baja-stat') && (
+        <span className={`batalla-aura-stat ${efecto}`} aria-hidden>
+          {Array.from({ length: 9 }, (_, i) => (
+            <i key={i} style={{ '--i': i, '--x': `${8 + ((i * 37) % 84)}%` } as CSSProperties} />
+          ))}
+        </span>
+      )}
       {l.confundido > 0 && l.ps > 0 && !caido && (
         <span className="batalla-confusion" aria-hidden>
           <span>♥</span>
@@ -1825,6 +1845,10 @@ function Figura({
         <span className="batalla-vida" aria-hidden>
           <small>{etiqueta}</small>
           <span className="batalla-barra ps" style={{ '--v': `${(l.ps / l.psMax) * 100}%` } as CSSProperties} />
+          {/* Los estados del rival, debajo de su vida. */}
+          <span className="batalla-estados-rival">
+            <EstadosDe l={l} />
+          </span>
         </span>
       )}
       {numeros.map((n) => (
@@ -2002,13 +2026,14 @@ function Tarjeta({
       className={`batalla-tarjeta ${activo ? 'activa' : ''} ${h.ps === 0 ? 'ko' : ''} ${h.ps <= h.psMax / 4 && h.ps > 0 ? 'baja' : ''}`}>
       <b>
         {h.nombre} <span className="batalla-nv">{t('batalla.nivel')} {h.nivel}</span>
+      </b>
+      {/* Los estados flotan encima de la tarjeta: así la tarjeta no cambia de tamaño. */}
+      <span className="batalla-estados">
         {h.extra > 0 && <span className="batalla-extra">ATQ +{h.extra}</span>}
         {h.extraDef > 0 && <span className="batalla-extra def">DEF +{h.extraDef}</span>}
         {descansa && <span className="batalla-descansa">{t('batalla.descansa')}</span>}
-        {h.confundido > 0 && <span className="batalla-descansa confundido">{t('batalla.confundido_tag')}</span>}
-        {h.envenenado && h.ps > 0 && <span className="batalla-descansa veneno">{t('batalla.tag_veneno')}</span>}
-        {h.protegido > 0 && h.ps > 0 && <span className="batalla-descansa protegido">{t('batalla.tag_protegido')}</span>}
-      </b>
+        <EstadosDe l={h} />
+      </span>
       <span className="batalla-cuenta">
         <small>HP</small>
         <span className="rodillo">{String(ps).padStart(3, ' ')}</span>

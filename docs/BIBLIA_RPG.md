@@ -288,7 +288,7 @@ cosas raras; los chistes van en las descripciones.
 | Colección | No es de pelea | Imágenes inéditas: van a la galería | — |
 
 - **A quién se aplica:** cada objeto lo dice (a ti, a un aliado, a todo el equipo, a un rival, a todos los rivales).
-- **Equipo:** tres espacios por personaje: cabeza, cuerpo y accesorio.
+- **Equipo:** tres espacios por personaje: **cabeza** (un gorro…), **traje** (ropa, armadura, un vestido: no se separan pantalones) y **amuleto**.
 - **Estados nuevos:** envenenado y protegido.
 - **Monedas:** al final de cada pelea, según el nivel de los enemigos; se guardan en la partida (como los niveles y la
   mochila).
@@ -299,8 +299,9 @@ cosas raras; los chistes van en las descripciones.
   arriba dice «Comprando para: …» (por defecto la más reciente; se puede elegir otra o la de «Continuar»); sin
   partidas guardadas, solo se mira. Así se puede terminar un capítulo, guardar, gastar desde el título y entrar al
   siguiente ya equipado. Cada partida tiene su propio dinero.
-- **Botón «Equipo»** en la barra del juego: pestaña Personajes (estadísticas y los tres espacios de equipo) y pestaña
-  Mochila (lo que tienes, con su descripción; se puede usar fuera de pelea lo que tenga sentido, como curarse).
+- **Botón «Equipo»** en la barra del juego (**hecho**, sin equipo todavía): pestaña Personajes (una ficha por
+  personaje con su sprite, nivel, PS, ATQ, DEF, VEL, XP, ataques y los tres espacios de equipo) y pestaña Mochila (lo
+  que tienes, con su tipo y descripción). Falta: equipar y usar fuera de pelea lo que tenga sentido (como curarse).
 - **En la pelea**, «Objetos» muestra solo lo que se usa en pelea.
 - **Qué es de cada partida y qué no:** el dinero, la mochila, el equipo y los niveles son de cada partida (una
   partida nueva empieza vacía; no se pasa nada de una a otra). Lo desbloqueado en Boringram (fotos, pensamientos,
