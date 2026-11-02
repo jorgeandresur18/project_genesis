@@ -43,31 +43,45 @@ def piel(a: np.ndarray) -> np.ndarray:
     return (a[..., 3] > 200) & (r >= g) & (g >= b) & (r > 140) & (mx > 120) & (sat > 0.18) & (sat < 0.85) & (r - b > 30) & (g - b > 10)
 
 
+def piel_grande(a: np.ndarray) -> np.ndarray:
+    """La piel sin las manchas chicas (brillos del traje, adornos): solo las zonas grandes (cara, brazos, cuerpo)."""
+    from scipy import ndimage
+    m = piel(a)
+    lab, n = ndimage.label(m)
+    if not n:
+        return m
+    tam = ndimage.sum(m, lab, range(1, n + 1))
+    return np.isin(lab, [i + 1 for i, t in enumerate(tam) if t >= 0.02 * m.sum()])
+
+
 def tono(a: np.ndarray) -> np.ndarray:
-    """El tono de la piel limpia de la cara: en la franja de la cara, la mediana de la mitad menos roja (el rubor y las
-    mejillas, que tiran hacia el rojo, quedan afuera: el rubor de cada expresión se respeta)."""
-    ys, _ = np.nonzero(a[..., 3] > 200)
-    top, bot = ys.min(), ys.max()
-    h = int((bot - top) * 0.22)
-    cara = a[top + int(h * 0.55):top + int(h * 1.55)]
-    lab = a_lab(cara[piel(cara)][:, :3].astype(float))
-    return np.median(lab[lab[:, 1] <= np.median(lab[:, 1])], axis=0)
+    """El color de relleno de la piel (el que se lee como su piel): el color saturado más común de la piel grande, sin
+    el forro crema ni el rubor (en dibujo de colores planos, el relleno es el color que más se repite)."""
+    px = a[piel_grande(a)][:, :3].astype(int)
+    mx, mn = px.max(axis=1), px.min(axis=1)
+    sat = (mx - mn) / np.maximum(mx, 1)
+    rg = px[:, 0] - px[:, 1]
+    px = px[(sat > 0.45) & (rg > 40) & (rg < 110)]
+    q = px // 8
+    claves, cuenta = np.unique(q, axis=0, return_counts=True)
+    c = claves[np.argmax(cuenta)]
+    elegidos = px[(q == c).all(axis=1)]
+    return a_lab(elegidos.astype(float)).mean(axis=0)
 
 
 def main():
     config = json.loads((RAIZ / 'tools' / 'sprites.config.json').read_text(encoding='utf8'))
     for personaje, v in config.get('igualar_piel', {}).items():
-        base = np.array(Image.open(SPRITES / personaje / f"{v['base']}.webp").convert('RGBA'))
-        objetivo = tono(base)
+        objetivo = tono(np.array(Image.open(SPRITES / personaje / f"{v['base']}.webp").convert('RGBA')))
         for nombre in v['sprites']:
             ruta = SPRITES / personaje / f'{nombre}.webp'
             if not ruta.exists():
                 print(f'  ! {personaje}/{nombre}: no existe')
                 continue
             a = np.array(Image.open(ruta).convert('RGBA'))
-            m = piel(a)
+            m = piel_grande(a)
             lab = a_lab(a[m][:, :3].astype(float))
-            corrimiento = objetivo - tono(a)
+            corrimiento = objetivo - lab.mean(axis=0)
             if np.abs(corrimiento).max() < 2.5:
                 print(f'  · {personaje}/{nombre}: ya tiene el tono del base')
                 continue

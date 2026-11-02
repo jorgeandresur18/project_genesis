@@ -67,8 +67,15 @@
     "rikka": {
       "base": "base",
       "sprites": [
+        "toalla_base",
+        "toalla_demasiado_avergonzada",
         "toalla_llorando",
         "toalla_llorando_mucho",
+        "traje_base",
+        "traje_avergonzda",
+        "traje_avergonzada_ropa",
+        "traje_avergonzada_asustada",
+        "traje_avergonzada_asustada_espalda",
         "traje_muy_humillada_avergonzada",
         "desbloqueable_espalda",
         "desbloqueable_espalda_asustada",
