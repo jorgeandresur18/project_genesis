@@ -504,6 +504,8 @@ function Pelea({
     forzar();
     await decir(fmt(t('batalla.cebo_aparece'), { quien: h.nombre }));
   };
+  /** Si el héroe ya tiene un cebo en pie (no puede poner otro). */
+  const tieneCebo = (h: Luchador) => b.current.cebos.some((x) => x.de === h.id && vivo(x.l));
   /** A veces el golpe a uno solo va al cebo (según cuánto cae en él quien ataca). */
   const desviar = (blancos: Luchador[], quien: Luchador) => {
     const cebos = b.current.cebos.map((x) => x.l).filter(vivo);
@@ -1413,7 +1415,14 @@ function Pelea({
         if (especial.objetivo === 'todos') return listo({ tipo: 'especial', objetivo: vivosDe('enemigo')[0]?.id ?? '' });
         return setMenu({ paso: 'objetivo', i: 0, lado: 'enemigo', luego: (o) => ({ tipo: 'especial', objetivo: o }) });
       }
-      if (ataques[i]?.cebo) return listo({ tipo: 'atacar', ataque: i, objetivo: '' });
+      if (ataques[i]?.cebo) {
+        // Uno a la vez: con un cebo en pie, no se puede poner otro.
+        if (tieneCebo(heroe)) {
+          playChip('vacio');
+          return setMensaje({ texto: t('batalla.cebo_ya'), n: Math.random() });
+        }
+        return listo({ tipo: 'atacar', ataque: i, objetivo: '' });
+      }
       return setMenu({ paso: 'objetivo', i: 0, lado: 'enemigo', luego: (o) => ({ tipo: 'atacar', ataque: i, objetivo: o }) });
     }
     if (menu.paso === 'objeto') {
@@ -1495,7 +1504,7 @@ function Pelea({
             ...ataques.map((a) => ({
               texto: a.nombre,
               extra: `${a.poder}`,
-              clase: '',
+              clase: a.cebo && tieneCebo(heroe!) ? 'especial' : '',
               desc: a.cebo
                 ? t('batalla.desc.cebo')
                 : fmt(t('batalla.desc.ataque'), { poder: a.poder, n: aprox(a.poder), a: t(a.objetivo === 'todos' ? 'batalla.desc.a_todos' : 'batalla.desc.a_uno') }),

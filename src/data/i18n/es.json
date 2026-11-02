@@ -319,5 +319,6 @@
   "equipo.tipo_tactico": "Táctico",
   "equipo.tipo_equipo": "Equipo",
   "equipo.tipo_coleccion": "Colección",
-  "batalla.tag_paralizado": "parálisis"
+  "batalla.tag_paralizado": "parálisis",
+  "batalla.cebo_ya": "Ya hay un cebo. Dos copias que no hacen nada siguen sin hacer nada."
 }

@@ -319,5 +319,6 @@
   "equipo.tipo_tactico": "Tactical",
   "equipo.tipo_equipo": "Gear",
   "equipo.tipo_coleccion": "Collection",
-  "batalla.tag_paralizado": "paralyzed"
+  "batalla.tag_paralizado": "paralyzed",
+  "batalla.cebo_ya": "There is already a decoy. Two copies that do nothing still do nothing."
 }
