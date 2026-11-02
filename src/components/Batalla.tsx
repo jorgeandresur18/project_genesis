@@ -1877,8 +1877,11 @@ function Pelea({
               desc: fmt(t('batalla.desc.objetivo'), { nivel: l.nivel, ps: l.ps, max: l.psMax, atq: l.atq + l.extra, def: l.def + l.extraDef, vel: l.vel }),
             }));
   if (conVolver) lista.push({ texto: `◀ ${t('batalla.volver')}`, extra: '', clase: 'volver', desc: t('batalla.desc.volver') });
-  /** Cami (o quien no puede repetir) descansa el turno siguiente al que actuó. */
-  const descansa = (h: Luchador) => vivo(h) && !d.personajes[h.clave].seguido && b.current.actuaron.includes(h.id);
+  /**
+   * «Descansa» en la tarjeta: solo mientras se la ve agachada (el sprite de descanso), igual que la figura (si está
+   * paralizada, se la ve paralizada).
+   */
+  const descansa = (h: Luchador) => vivo(h) && !h.paralizado && b.current.cansados.has(h.id) && !!d.personajes[h.clave].descanso;
   const habla = mensaje?.quien;
   const colorDe = (clave: string) => d.personajes[clave]?.especial?.color ?? '#e8e2d4';
   const texto = mensaje ? mensaje.texto.slice(0, letras) : '';
