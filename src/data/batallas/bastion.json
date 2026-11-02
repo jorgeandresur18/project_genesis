@@ -1,6 +1,6 @@
 {
   "titulo": "El Bastión",
-  "fondo": "fondos/pasillo_castillo",
+  "fondo": "batalla/fondos/bastion",
   "heroes": [
     "jair",
     "cami"
@@ -445,7 +445,17 @@
     "Rikka": "batalla/retratos/rikka",
     "Soldado": "batalla/retratos/soldado"
   },
-  "fondo_proporcion": 1.791,
+  "fondo_proporcion": 1.7768,
+  "fondo_luces": [
+    [
+      24.5,
+      6.6
+    ],
+    [
+      72.6,
+      6.6
+    ]
+  ],
   "ayuda": {
     "umbral": 0.35,
     "cae": 0.3,
