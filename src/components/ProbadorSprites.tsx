@@ -260,8 +260,11 @@ export function ProbadorSprites({ onCerrar }: { onCerrar: () => void }) {
     setTimeout(() => setVuelan((l) => l.filter((z) => z.key !== key)), ms + 60);
   };
   const alCuadro = (fila: string, columna: number, h: Hoja) => {
+    // Un cuadro antes del que ya no lo tiene dibujado: así nunca hay un instante sin él.
     const p = h.proyectiles?.[fila] ?? (fila === 'ataque' ? h.proyectil : undefined);
-    if (p && columna === p.cuadro) soltar(p, h);
+    const seq = h.animations[fila]?.seq;
+    const antes = p && (seq ? seq[Math.max(0, seq.indexOf(p.cuadro) - 1)] : p.cuadro - 1);
+    if (p && columna === antes) soltar(p, h);
     const pts = marcas ? h.disparos?.[fila]?.[String(columna)] ?? [] : [];
     if (fila === 'especial') puntas.current = pts;
     else for (const p of pts) disparar(p, false);

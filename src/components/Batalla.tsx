@@ -303,7 +303,7 @@ function Pelea({
   };
   /** Los proyectiles en el aire (la media luna de la sombra). */
   const [proyectiles, setProyectiles] = useState<
-    { key: number; src: string; x: number; y: number; w: number; h: number; dx: number; dy: number; ms: number; demora: number; ang: number }[]
+    { key: number; src: string; x: number; y: number; w: number; h: number; dx: number; dy: number; ms: number; demora: number; ang: number; espejo: boolean }[]
   >([]);
 
   const animar = async (lid: string, a: Anim, ms = 0) => {
@@ -363,8 +363,15 @@ function Pelea({
     const largo = o.ancho * 1.3;
     nuevaBala(o.x, o.y, o.x + Math.cos(ang) * largo, o.y + Math.sin(ang) * largo, 2600, color, true);
   };
+  /** Quien espera un cuadro de su animación para soltar algo (el corazón del beso). */
+  const esperandoCuadro = useRef(new Map<string, { anim: string; col: number; ok: () => void }>());
   /** Cada cuadro nuevo de un luchador: si está disparando y ese cuadro tiene destellos, salen balas. */
   const alCuadro = (l: Luchador, anim: string, col: number, hoja: Hoja) => {
+    const aviso = esperandoCuadro.current.get(l.id);
+    if (aviso && aviso.anim === anim && aviso.col === col) {
+      esperandoCuadro.current.delete(l.id);
+      aviso.ok();
+    }
     const modo = disparando.current.get(l.id);
     if (!modo) return;
     const puntos = hoja.disparos?.[anim]?.[String(col)];
@@ -398,7 +405,8 @@ function Pelea({
     const ms = (largo / PROYECTIL_VEL) * 1000;
     setProyectiles((l) => [
       ...l,
-      { key, src: `${BASE}${p.imagen}.png`, x, y, w: p.ancho * k, h: p.alto * k, dx: cos * largo, dy: Math.sin(ang) * largo, ms, demora, ang },
+      // Hacia la izquierda va en espejo (girarlo 180° lo dejaba cabeza abajo).
+      { key, src: `${BASE}${p.imagen}.png`, x, y, w: p.ancho * k, h: p.alto * k, dx: cos * largo, dy: Math.sin(ang) * largo, ms, demora, ang: cos < 0 ? ang - Math.PI : ang, espejo: cos < 0 },
     ]);
     setTimeout(() => setProyectiles((l) => l.filter((z) => z.key !== key)), demora + ms + 60);
     setTimeout(() => playChip(sonidoDe(quien)), demora);
@@ -471,9 +479,15 @@ function Pelea({
     if (fila) void animar(e.id, a.anim as Anim, dura);
     let llegadas = blancos.map(() => 600);
     if (proy && fila) {
-      // Hasta el cuadro en que suelta el corazón (con `seq`, su lugar en la secuencia); ahí suena el beso.
+      // Hasta el cuadro en que suelta el corazón; ahí suena el beso. Lo avisa la animación (un cuadro antes del que
+      // ya no lo tiene dibujado, así nunca hay un instante sin corazón); el reloj queda de respaldo.
       const paso = fila.seq ? Math.max(0, fila.seq.indexOf(proy.cuadro)) : proy.cuadro;
-      await espera((paso * 1000) / fila.fps);
+      const antes = fila.seq ? fila.seq[Math.max(0, paso - 1)] : Math.max(0, proy.cuadro - 1);
+      await Promise.race([
+        new Promise<void>((ok) => esperandoCuadro.current.set(e.id, { anim: a.anim!, col: antes, ok })),
+        espera((paso * 1000) / fila.fps + 500),
+      ]);
+      esperandoCuadro.current.delete(e.id);
       playChip('beso');
       const desde = Date.now();
       llegadas = blancos.map((h, i) => lanzar(e, hoja, proy, h, i * 160));
@@ -1742,6 +1756,7 @@ function Pelea({
                 '--dx': `${x.dx}px`,
                 '--dy': `${x.dy}px`,
                 rotate: `${x.ang}rad`,
+                scale: x.espejo ? '-1 1' : undefined,
                 animationDuration: `${x.ms}ms`,
                 animationDelay: `${x.demora}ms`,
               } as CSSProperties
