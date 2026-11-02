@@ -330,18 +330,36 @@ más: subiendo de nivel o **comprándolos en Boringplace** (pocos). Si ya tiene 
 aprender X, pero ya sabe 3 ataques. ¿Olvida uno?» y el jugador elige cuál olvidar (o no aprenderlo). Los enemigos se
 diseñan ya con 5 o menos.
 
-**Curación de Rikka (aprobado):** un ataque propio con el que se cura a sí misma: carga y la rodea un aura del color
-de la curación. Cuánto cura y con qué animación: `[PENDIENTE]` (su hoja no tiene una fila de curación; mientras
-tanto, su pose base con el aura).
+**Curación de Rikka (aprobado):** un **ataque básico** (no un especial) con el que **solo se cura a sí misma**: carga
+y la rodea un aura del color de la curación. Cura el 35 % de su vida (propuesta). Animación: su hoja no tiene una
+fila de curación; mientras tanto, su pose base con el aura.
 
-**Estados nuevos:** quemado y congelado (además de los que ya hay). Propuesta, sin confirmar:
+**Usos de cada ataque (aprobado):** cada ataque puede tener un límite de veces por pelea (`usos`), que se ve en el
+menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Los usos se recuperan al terminar la pelea
+(como la vida). El autor va a hacer objetos que los recuperan.
+
+**Estados nuevos (aprobado):** quemado y congelado (además de los que ya hay):
 
 | Estado | Qué pasa | Cómo se ve |
 |---|---|---|
 | **Quemado** | Pierde un poco de vida cada turno y pega a la mitad, 3 turnos. | Llamitas naranjas; el sprite, un poco rojizo. |
 | **Congelado** | No actúa hasta que lo golpean: el primer golpe rompe el hielo (y hace más daño). Si nadie le pega, se descongela solo a los 3 turnos. | Azulado y quieto, con cristales; al romperse, esquirlas. |
 
-**Colores de cada acción y estado:** propuesta en la tabla de abajo, sin confirmar.
+**Colores de cada acción y estado (aprobado):** cada cosa tiene su color, para que no se confundan.
+
+| Qué | Color | Cómo se ve |
+|---|---|---|
+| Curación (agua, galletas, revivir, la de Rikka) | verde menta | aura que sube |
+| Sube una estadística | dorado | líneas que suben |
+| Baja una estadística | rojo | líneas que bajan |
+| Daño | blanco y rojo | destello del golpe |
+| Envenenado | morado | humo que sube |
+| Paralizado | amarillo eléctrico | chispas y temblor |
+| Confundido | rosa | corazones en carrusel |
+| Protegido | blanco plateado | aura que respira |
+| Quemado | naranja | llamitas |
+| Congelado | azul hielo | cristales |
+| Especial | el color de cada personaje | fogonazo y franja |
 
 **Equipo (aprobado):**
 - Cuatro espacios: **cabeza, traje, amuleto y pies** (se suma pies a los tres de la sección 14).
@@ -349,7 +367,8 @@ tanto, su pose base con el aura).
   Excepción: el **gorro de navidad**, que se compra en la tienda.
 - **Jair empieza sin nada equipado.** **Nikki** lleva la chaqueta de cuero y los zapatos de plataforma.
 - De quién es el resto (propuesta): Cami, el traje de combate azul; Rikka, el traje de combate rojo, las prendas de
-  sacerdotisa y la flor de pureza. La chaqueta jean y las zapatillas buenas: `[PENDIENTE]`.
+  sacerdotisa y la flor de pureza.
+- **Se compran en Boringplace:** el gorro de navidad, la chaqueta jean y las zapatillas buenas.
 
 **Los objetos del autor** (sprites en `docs/sprites de prueba/objetos/`; nombres y efectos aprobados):
 
