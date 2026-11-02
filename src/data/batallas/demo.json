@@ -433,40 +433,46 @@
   },
   "objetos": {
     "atq": {
-      "nombre": "Potenciador de ataque",
+      "nombre": "Furia Roja",
       "atq": 3,
-      "texto": "{quien} se inyecta un chip rojo. Ataque +{n} hasta el final de la pelea.",
-      "tipo": "mejora"
+      "texto": "{quien} se toma la Furia Roja de un trago. Bebida deportiva; nadie sabe de qué deporte. Ataque +{n} hasta el final de la pelea.",
+      "tipo": "mejora",
+      "icono": "objetos/furia_roja"
     },
     "def": {
-      "nombre": "Potenciador de defensa",
+      "nombre": "Pastillas azules",
       "def": 3,
-      "texto": "{quien} se pone un parche de escudo. Defensa +{n} hasta el final de la pelea.",
-      "tipo": "mejora"
+      "texto": "{quien} se toma una pastilla azul. No es lo que piensas. Bueno, un poco. Defensa +{n} hasta el final de la pelea.",
+      "tipo": "mejora",
+      "icono": "objetos/pastillas_azules"
     },
     "vida": {
-      "nombre": "Lata de agua",
+      "nombre": "Agua sin gas",
       "ps": 30,
-      "texto": "{quien} se toma una lata de agua: +{n} PS. Tampoco la pagó.",
-      "tipo": "curacion"
+      "texto": "{quien} se toma el agua sin gas: +{n} PS. Lo más barato del menú y lo único que no te miente.",
+      "tipo": "curacion",
+      "icono": "objetos/agua"
     },
     "carga": {
-      "nombre": "Recargador de especial",
+      "nombre": "4Low-Co",
       "carga": 100,
-      "texto": "{quien} conecta el recargador. La barra del especial se llena de golpe.",
-      "tipo": "mejora"
+      "texto": "{quien} se toma una 4Low-Co. La barra del especial se llena. El hígado, al revés.",
+      "tipo": "mejora",
+      "icono": "objetos/4low_co"
     },
     "caramelo_rancio": {
       "nombre": "Caramelo rancio",
       "niveles": 10,
       "texto": "{quien} se come el caramelo rancio. Sabe a bar cerrado y a malas decisiones. Sube {n} niveles de golpe.",
-      "tipo": "permanente"
+      "tipo": "permanente",
+      "icono": "objetos/caramelo_rancio"
     },
     "revivir": {
-      "nombre": "Revivir",
+      "nombre": "Elixit",
       "revive": 0.5,
-      "texto": "{quien} vuelve a pararse, mareado pero entero: +{n} PS. Nadie pregunta cómo funciona.",
-      "tipo": "curacion"
+      "texto": "{quien} se toma el Elixit y vuelve a pararse: +{n} PS. Suero rosado para después de una mala noche, o de morir.",
+      "tipo": "curacion",
+      "icono": "objetos/elixit"
     },
     "veneno_ratas": {
       "nombre": "Veneno para ratas",
@@ -476,14 +482,16 @@
         "danio": 6,
         "turnos": 3
       },
-      "texto": "Le echan veneno para ratas a {quien}. Pierde vida cada turno. La etiqueta dice «no apto para humanos». Nadie lee las etiquetas."
+      "texto": "Le echan veneno para ratas a {quien}. Pierde vida cada turno. La etiqueta dice «no apto para humanos». Nadie lee las etiquetas.",
+      "icono": "objetos/veneno_ratas"
     },
     "condon": {
-      "nombre": "Condón",
+      "nombre": "Condón barato",
       "tipo": "tactico",
       "objetivo": "aliado",
       "protege": 1,
-      "texto": "Le dan un condón a {quien}. Es protección: el próximo golpe no le hace nada. Cuidarse es importante."
+      "texto": "Le dan a {quien} un condón barato, sin marca. Es protección: el próximo golpe no le hace nada.",
+      "icono": "objetos/condon_barato"
     }
   },
   "retratos": {
@@ -509,5 +517,6 @@
     "veneno_ratas": 1,
     "condon": 2,
     "atq": 1
-  }
+  },
+  "musica": "audio/musica/combate_arcade.mp3"
 }

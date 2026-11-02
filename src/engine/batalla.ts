@@ -158,6 +158,8 @@ export type ObjetivoObjeto = 'yo' | 'aliado' | 'equipo' | 'rival' | 'rivales';
 /** Un objeto de la mochila: cura, mejora, cambia al personaje para siempre o tiene un efecto (táctico). */
 export interface Objeto {
   nombre: string;
+  /** Su dibujo (public/<icono>.webp): en el menú, lo que cae del cielo, la mochila y la tienda. */
+  icono?: string;
   /** Si no está, se deduce de lo que hace (ver tipoDe). */
   tipo?: TipoObjeto;
   /** Si no está: a un compañero (o a un caído, si revive). */

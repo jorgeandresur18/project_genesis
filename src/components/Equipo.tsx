@@ -108,6 +108,7 @@ export function EquipoPanel({ onClose }: { onClose: () => void }) {
             return (
               <div key={k} className="equipo-objeto">
                 <b>
+                  {o.icono && <img className="equipo-icono" src={`${import.meta.env.BASE_URL}${o.icono}.webp`} alt="" draggable={false} />}
                   {o.nombre} <small>×{n}</small>
                 </b>
                 <span className="equipo-tipo">{t(`equipo.tipo_${tipoDe(o)}`)}</span>

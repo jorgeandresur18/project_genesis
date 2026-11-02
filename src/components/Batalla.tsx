@@ -1494,11 +1494,15 @@ function Pelea({
     if (levantados.length)
       setTimeout(
         () => {
-          const alto = (raiz.current?.getBoundingClientRect().height ?? 600) * 0.3;
+          const base = raiz.current?.getBoundingClientRect();
+          const alto = (base?.height ?? 600) * 0.3;
           for (const x of levantados) {
             if (!vivo(x)) continue;
             enElAire.current.add(x.id);
-            setAire((m) => ({ ...m, [x.id]: alto }));
+            // No más alto que el borde de arriba de la pantalla (el de atrás ya está más arriba en el piso).
+            const r = rectSprite(figuras.current.get(x.id)?.querySelector('.batalla-sprite'));
+            const cabe = r && base ? Math.max(0, r.top - base.top - 12) : alto;
+            setAire((m) => ({ ...m, [x.id]: Math.min(alto, cabe) }));
             void animar(x.id, 'golpeado');
           }
           playChip('levanta');
@@ -1887,7 +1891,7 @@ function Pelea({
               : []),
           ]
         : menu.paso === 'objeto'
-          ? enMochila.map((k) => ({ texto: d.objetos[k].nombre, extra: `×${b.current.mochila[k]}`, desc: descObjeto(d.objetos[k]) }))
+          ? enMochila.map((k) => ({ texto: d.objetos[k].nombre, extra: `×${b.current.mochila[k]}`, desc: descObjeto(d.objetos[k]), icono: d.objetos[k].icono }))
           : candidatos().map((l) => ({
               texto: l.nombre,
               extra: menu.lado === 'enemigo' ? `${t('batalla.nivel')} ${l.nivel}` : `${l.ps} HP`,
@@ -2031,6 +2035,9 @@ function Pelea({
         </CajaCasillas>
       </div>
       {versus && <Versus d={d} />}
+      {/* La entrada (si no hay presentación) y la salida: la pantalla se arma y se desarma en bloques de píxel. */}
+      {!d.intro && !saliendo && <Pixelado key="entra" modo="entra" />}
+      {saliendo && <Pixelado key="sale" modo="sale" />}
       {/* Las balas de energía (Cami): salen de las pistolas y vuelan hasta su objetivo. */}
       {rayoSigue && (
         <span
@@ -2071,10 +2078,10 @@ function Pelea({
             }
           />
         ))}
-        {/* PLACEHOLDER:objeto_cae (hasta que haya íconos de los objetos). */}
+        {/* Lo que cae del cielo: su dibujo, con un brillo. */}
         {cae && (
-          <span key={cae.key} className="batalla-cae">
-            ✚
+          <span key={cae.key} className={`batalla-cae ${d.objetos[cae.objeto]?.icono ? 'con-icono' : ''}`}>
+            {d.objetos[cae.objeto]?.icono ? <img src={`${BASE}${d.objetos[cae.objeto].icono}.webp`} alt="" draggable={false} /> : '✚'}
           </span>
         )}
         {balas.map((x) => (
@@ -2108,6 +2115,7 @@ function Pelea({
           {enMenu &&
             lista.map((o, i) => (
               <button key={i} type="button" className={`${menu.i === i ? 'sel' : ''} ${o.clase ?? ''}`} onMouseEnter={() => setMenu((m) => ({ ...m, i }))} onClick={() => elegir(i)}>
+                {'icono' in o && typeof o.icono === 'string' && <img className="batalla-menu-icono" src={`${BASE}${o.icono}.webp`} alt="" draggable={false} />}
                 {o.texto}
                 {o.extra && <small>{o.extra}</small>}
               </button>
@@ -2521,6 +2529,22 @@ function Tarjeta({
           {especialListo(h) && <small className="batalla-esp-listo">{t('batalla.especial_listo')}</small>}
         </span>
       )}
+    </div>
+  );
+}
+
+/** Bloques de pantalla que se apagan (entra) o se encienden (sale) en desorden: la transición de 16 bits. */
+const PIXEL_COLS = 24;
+const PIXEL_FILAS = 14;
+const PIXEL_ORDEN = Array.from({ length: PIXEL_COLS * PIXEL_FILAS }, (_, i) => i)
+  .map((i) => ({ i, r: (Math.sin(i * 12.9898) * 43758.5453) % 1 }))
+  .map(({ i, r }) => ({ i, d: Math.abs(r) * 0.55 + ((i % PIXEL_COLS) / PIXEL_COLS) * 0.25 }));
+function Pixelado({ modo }: { modo: 'entra' | 'sale' }) {
+  return (
+    <div className={`batalla-pixelado ${modo}`} aria-hidden style={{ '--cols': PIXEL_COLS } as CSSProperties}>
+      {PIXEL_ORDEN.map(({ i, d }) => (
+        <i key={i} style={{ animationDelay: `${(d * (modo === 'sale' ? SALIDA_MS : 900)).toFixed(0)}ms` }} />
+      ))}
     </div>
   );
 }
