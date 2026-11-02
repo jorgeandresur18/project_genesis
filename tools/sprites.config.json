@@ -62,5 +62,23 @@
     "vendedor": {
       "ajustar": true
     }
+  },
+  "igualar_piel": {
+    "rikka": {
+      "base": "base",
+      "sprites": [
+        "toalla_llorando",
+        "toalla_llorando_mucho",
+        "traje_muy_humillada_avergonzada",
+        "desbloqueable_espalda",
+        "desbloqueable_espalda_asustada",
+        "desbloqueable_espalda_asustada2",
+        "desbloqueable_espalda_asustada_ultima_grito",
+        "desbloqueable_frente",
+        "desbloqueable_frente_asustada",
+        "desbloqueable_vistiendose",
+        "desbloqueable_vistiendose_muy_avergonzada"
+      ]
+    }
   }
 }
