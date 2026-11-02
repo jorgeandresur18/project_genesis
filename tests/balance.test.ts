@@ -7,7 +7,7 @@
 // o muy difícil.
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
-import { CARGA, cargar, crearClon, crearLuchador, dano, eligeEspecial, disponibles, especialListo, falla, ganarXp, golpesEspecial, seRetira, usarObjeto, vanPerdiendo, vivo, xpDe, type DatosBatalla, type Luchador } from '../src/engine/batalla';
+import { CARGA, CONFUSION, cargar, crearClon, crearLuchador, dano, eligeAtaque, eligeEspecial, seConfunde, disponibles, especialListo, falla, ganarXp, golpesEspecial, seRetira, usarObjeto, vanPerdiendo, vivo, xpDe, type DatosBatalla, type Luchador } from '../src/engine/batalla';
 function sim(D: DatosBatalla, listo: boolean, N = 2000) {
   let gana = 0, hpFin = 0;
   for (let s = 0; s < N; s++) {
@@ -51,6 +51,8 @@ function sim(D: DatosBatalla, listo: boolean, N = 2000) {
         if (!e) break;
         const esp = D.personajes[h.clave].especial;
         act.push(h.id);
+        // Confundido: a veces se pega a sí mismo.
+        if (seConfunde(h)) { h.ps = Math.max(0, h.ps - dano(h, h, CONFUSION.poder).n); continue; }
         if (esp && especialListo(h)) {
           h.carga = 0;
           for (const b of golpesEspecial(esp, esp.objetivo === 'todos' ? es.filter(vivo) : [e])) {
@@ -87,17 +89,17 @@ function sim(D: DatosBatalla, listo: boolean, N = 2000) {
           for (const h of golpesEspecial(esp, [blanco])) if (vivo(h)) pegar(e, h, esp.poder, false);
           continue;
         }
-        const libres = vs.filter((h) => !h.paralizado);
-        const ops = D.enemigos[e.clave].ataques.filter((x) => !x.paraliza || libres.length);
-        const a = ops[Math.floor(Math.random() * ops.length)];
-        const pool = a.paraliza ? libres : vs;
-        const bl = a.objetivo === 'todos' ? pool : [pool[Math.floor(Math.random() * pool.length)]];
+        const at = eligeAtaque(D.enemigos[e.clave].ataques, vs);
+        if (!at) continue;
+        const { ataque: a, blancos: bl } = at;
         // La parálisis de pesadilla: no hace daño; reemplaza el descanso de Cami (no se suma).
         if (a.paraliza) { for (const h of bl) { h.paralizado = a.paraliza; recien.push(h); act = act.filter((id) => id !== h.id); } continue; }
+        // El beso confusión: no hace daño; confunde (a veces se esquiva).
+        if (a.confunde) { for (const h of bl) { h.confundido = a.confunde; recien.push(h); } continue; }
         for (const h of bl) pegar(e, h, a.poder);
       }
       if (!hs.some(vivo)) break;
-      hs.forEach((h) => { if (h.paralizado && !recien.includes(h)) h.paralizado--; });
+      hs.forEach((h) => { if (h.paralizado && !recien.includes(h)) h.paralizado--; if (h.confundido && !recien.includes(h)) h.confundido--; });
       // Los clones se evaporan.
       es.forEach((x) => { if (x.clon !== undefined && x.ps > 0 && --x.clon <= 0) x.ps = 0; });
       if (D.ayuda && pierden() && Math.random() < D.ayuda.cae) mochila[D.ayuda.objeto] = (mochila[D.ayuda.objeto] ?? 0) + 1;

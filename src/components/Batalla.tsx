@@ -10,6 +10,9 @@ import {
   CARGA,
   CARGA_LLENA,
   ESPECIAL_MS,
+  CONFUSION,
+  seConfunde,
+  eligeAtaque,
   crearClon,
   eligeEspecial,
   vanPerdiendo,
@@ -27,6 +30,7 @@ import {
   vivo,
   xpDe,
   xpParaSubir,
+  type Ataque,
   type DatosBatalla,
   type Especial,
   type Luchador,
@@ -90,6 +94,8 @@ export interface Hoja {
    * imagen `imagen` (que estaba en x, y del cuadro) y cruza la pantalla.
    */
   proyectil?: { imagen: string; cuadro: number; x: number; y: number; ancho: number; alto: number };
+  /** Proyectiles de otras animaciones (el corazón del beso de Nikki), con el mismo formato. */
+  proyectiles?: Record<string, { imagen: string; cuadro: number; x: number; y: number; ancho: number; alto: number }>;
 }
 
 /**
@@ -189,8 +195,9 @@ function Pelea({
     /** Cuántos turnos seguidos se le habló al rival que perdona (Nikki), y si ya perdonó. */
     racha: 0,
     perdona: false,
-    /** Los que quedaron paralizados en este turno (empiezan a descontar en el siguiente). */
+    /** Los que quedaron paralizados (o confundidos) en este turno (empiezan a descontar en el siguiente). */
     paralizadoRecien: [] as string[],
+    confundidoRecien: [] as string[],
     /** Los que no pueden actuar en este turno (Cami, un turno sí y uno no). */
     descansan: [] as string[],
     /** Los que se ven descansando (Cami agachada): desde que actúan hasta el final del turno siguiente. */
@@ -330,14 +337,8 @@ function Pelea({
     let ang = quien.lado === 'heroe' ? Math.PI - a : a;
     ang += (Math.random() - 0.5) * 0.08;
     // Alcance: hasta un poco más allá del rival más lejano (ahí se apaga), no toda la pantalla.
-    const lejos = Math.max(
-      0,
-      ...b.current[quien.lado === 'heroe' ? 'enemigos' : 'heroes'].filter(vivo).map((x) => {
-        const c = centroDe(x);
-        return c ? Math.abs(c.x - o.x) : 0;
-      }),
-    );
-    const largo = Math.min(o.ancho * 1.3, (lejos + o.ancho * 0.12) / Math.max(0.35, Math.abs(Math.cos(ang))));
+    // Sin fin: sigue hasta salir de la vista del juego.
+    const largo = o.ancho * 1.3;
     nuevaBala(o.x, o.y, o.x + Math.cos(ang) * largo, o.y + Math.sin(ang) * largo, 2600, color, true);
   };
   /** Cada cuadro nuevo de un luchador: si está disparando y ese cuadro tiene destellos, salen balas. */
@@ -435,6 +436,42 @@ function Pelea({
       forzar();
       await decir(fmt(t('batalla.clon_se_va'), { quien: k.nombre }));
     }
+  };
+  /**
+   * El beso de Nikki (un ataque de efecto): su animación y, cuando lo suelta, el corazón vuela hacia cada blanco y
+   * sigue hasta salir de la pantalla. Al que alcanza (si no lo esquiva) lo deja confundido.
+   */
+  const besar = async (e: Luchador, a: Ataque, blancos: Luchador[]) => {
+    const hoja = (await cargarHoja(d.enemigos[e.clave].sprite)) as Hoja;
+    const fila = a.anim && 'animations' in hoja ? hoja.animations[a.anim] : undefined;
+    const proy = a.anim ? hoja.proyectiles?.[a.anim] : undefined;
+    const dura = fila ? ((fila.seq?.length ?? fila.frames) * 1000) / fila.fps : 1200;
+    if (fila) void animar(e.id, a.anim as Anim, dura);
+    playChip('beso');
+    let llegadas = blancos.map(() => 600);
+    if (proy && fila) {
+      await espera((proy.cuadro * 1000) / fila.fps);
+      const desde = Date.now();
+      llegadas = blancos.map((h, i) => lanzar(e, hoja, proy, h, i * 160));
+      await espera(Math.max(...llegadas) - (Date.now() - desde));
+    } else await espera(600);
+    for (const h of blancos) {
+      if (h.esquivando && Math.random() < d.esquivar) {
+        numero(h.id, 'MISS', 'falla');
+        void animar(h.id, 'salto', 600);
+        await lineas('esquiva_ok', { quien: h.nombre });
+        continue;
+      }
+      await confundir(h, a.confunde!);
+    }
+  };
+  const confundir = async (x: Luchador, n: number) => {
+    x.confundido = n;
+    b.current.confundidoRecien.push(x.id);
+    luz(x.id, '#ff6fae', true);
+    playChip('boing');
+    forzar();
+    await decir(fmt(t('batalla.confundido'), { quien: x.nombre, n }));
   };
   /** Termina un ataque: los golpeados que siguen de pie vuelven a su pose. */
   const soltar = (golpeados: Luchador[]) => {
@@ -625,8 +662,10 @@ function Pelea({
       h.esquivando = false;
       // La parálisis se cuenta por turnos en que no pudo actuar (la de este turno, recién desde el siguiente).
       if (h.paralizado && !b.current.paralizadoRecien.includes(h.id)) h.paralizado--;
+      if (h.confundido && !b.current.confundidoRecien.includes(h.id)) h.confundido--;
     });
     b.current.paralizadoRecien = [];
+    b.current.confundidoRecien = [];
     forzar();
     if (!b.current.heroes.some(vivo)) return 'pierde';
     await evaporar();
@@ -883,6 +922,15 @@ function Pelea({
       forzar();
       return decir(fmt(o.texto, { quien: a.nombre, n }));
     }
+    if ((c.tipo === 'atacar' || c.tipo === 'especial') && seConfunde(h)) {
+      cargar(h, CARGA.atacar);
+      await decir(fmt(t('batalla.se_golpea'), { quien: h.nombre }));
+      void animar(h.id, 'ataque', 600);
+      playChip(sonidoDe(h));
+      await espera(300);
+      const { n } = await golpear(h, h, CONFUSION.poder);
+      return decir(fmt(t('batalla.recibe'), { quien: h.nombre, n }));
+    }
     if (c.tipo === 'especial') return usarEspecial(h, d.personajes[h.clave].especial!, d.personajes[h.clave].sprite, enemigos, objetivo(c.objetivo));
     if (c.tipo === 'hablar') {
       cargar(h, CARGA.hablar);
@@ -1096,13 +1144,12 @@ function Pelea({
     if (elige?.tipo === 'clon') return clonar(e);
     if (elige && esp) return usarEspecial(e, esp, d.enemigos[e.clave].sprite, hs, elige.blanco ?? azar(hs));
     // La parálisis solo va contra los que todavía se mueven (si nadie se mueve, ataca de otra forma).
-    const libres = hs.filter((h) => !h.paralizado);
-    const opciones = d.enemigos[e.clave].ataques.filter((x) => !x.paraliza || libres.length);
-    // Si no le queda ningún ataque posible (solo paraliza y ya nadie se mueve), espera.
-    if (!opciones.length) return;
-    const a = azar(opciones);
-    const blancos = a.paraliza ? (a.objetivo === 'todos' ? libres : [azar(libres)]) : a.objetivo === 'todos' ? hs : [azar(hs)];
+    // Si no le queda ningún ataque posible (solo de efecto y ya todos lo tienen), espera.
+    const elegido = eligeAtaque(d.enemigos[e.clave].ataques, hs);
+    if (!elegido) return;
+    const { ataque: a, blancos } = elegido;
     await decir(a.texto);
+    if (a.confunde) return besar(e, a, blancos);
     if (a.paraliza) {
       setOscuro(true);
       playChip('paralisis');
@@ -1563,6 +1610,13 @@ function Figura({
       }
     >
       {marcado && <span className="batalla-flecha" aria-hidden>▼</span>}
+      {l.confundido > 0 && (
+        <span className="batalla-confusion" aria-hidden>
+          <span>♥</span>
+          <span>♥</span>
+          <span>♥</span>
+        </span>
+      )}
       {/* Sombra en el piso: lo despega del fondo. */}
       <span className="batalla-sombra" aria-hidden />
       <SpriteHoja src={sprite} anim={anim} vez={vez} alCuadro={alCuadro} />
@@ -1752,6 +1806,7 @@ function Tarjeta({
         {h.extra > 0 && <span className="batalla-extra">ATQ +{h.extra}</span>}
         {h.extraDef > 0 && <span className="batalla-extra def">DEF +{h.extraDef}</span>}
         {descansa && <span className="batalla-descansa">{t('batalla.descansa')}</span>}
+        {h.confundido > 0 && <span className="batalla-descansa confundido">{t('batalla.confundido_tag')}</span>}
       </b>
       <span className="batalla-cuenta">
         <small>HP</small>

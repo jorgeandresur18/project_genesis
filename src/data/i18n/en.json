@@ -276,5 +276,8 @@
   "batalla.clon_se_va": "{quien} evaporates.",
   "batalla.clon_cae": "{quien} dissolves into smoke.",
   "batalla.clon_no_escucha": "{quien} does not listen. It is just a shadow.",
-  "batalla.clon": "Clone"
+  "batalla.clon": "Clone",
+  "batalla.confundido": "{quien} is head over heels: {n} turns of not quite knowing who to hit.",
+  "batalla.se_golpea": "{quien} is so confused they hit themselves.",
+  "batalla.confundido_tag": "confused"
 }

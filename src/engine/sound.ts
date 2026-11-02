@@ -183,7 +183,8 @@ export type Chip =
   | 'revivir'
   | 'levanta'
   | 'carga'
-  | 'destello';
+  | 'destello'
+  | 'beso';
 export function playChip(kind: Chip): void {
   const { sfxVolume, muted } = useStore.getState().settings;
   if (muted || sfxVolume <= 0) return;
@@ -253,6 +254,8 @@ export function playChip(kind: Chip): void {
     case 'revivir': for (let k = 0; k < 5; k++) tono(440 * 2 ** (k / 4), 440 * 2 ** ((k + 1) / 4), 0.09, 'square', 0.3, k * 0.08); break;
     // Alguien que sale volando por el aire.
     case 'levanta': tono(160, 900, 0.35, 'square', 0.35); ruido(0.2, 0.25); break;
+    // Un beso que se lanza: un «mua» agudo y un brillo.
+    case 'beso': tono(900, 1400, 0.08, 'triangle', 0.35); tono(1400, 700, 0.14, 'square', 0.25, 0.08); tono(2200, 2600, 0.1, 'triangle', 0.15, 0.22); break;
     // Juntar energía: un zumbido que sube.
     case 'carga': tono(120, 900, 1.4, 'sawtooth', 0.22); tono(240, 1800, 1.4, 'square', 0.12); break;
     // Un destello corto.

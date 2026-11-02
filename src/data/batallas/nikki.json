@@ -68,7 +68,7 @@
       },
       "crece": {
         "ps": 3.8,
-        "atq": 0.72,
+        "atq": 0.62,
         "def": 0.1,
         "vel": 0.3
       },
@@ -76,12 +76,22 @@
         {
           "nombre": "Cachetada",
           "poder": 10,
-          "texto": "Nikki le da una cachetada que suelta una onda azul. Suena como un portazo."
+          "texto": "Nikki le da una cachetada que suelta una onda azul. Suena como un portazo.",
+          "peso": 3
         },
         {
           "nombre": "Cachetada de revés",
           "poder": 12,
-          "texto": "Nikki le da una cachetada de revés. Con el anillo. A propósito."
+          "texto": "Nikki le da una cachetada de revés. Con el anillo. A propósito.",
+          "peso": 2
+        },
+        {
+          "nombre": "Beso confusión",
+          "poder": 0,
+          "confunde": 3,
+          "anim": "beso",
+          "peso": 3,
+          "texto": "Nikki cambia de cara de golpe: ojitos, labios y un beso al aire. Un corazón sale volando derecho hacia Jair."
         }
       ],
       "especial": {
@@ -140,7 +150,7 @@
           }
         ],
         "carga": 50,
-        "probabilidad": 0.6
+        "probabilidad": 0.08
       }
     }
   },

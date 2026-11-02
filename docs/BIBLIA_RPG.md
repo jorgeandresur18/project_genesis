@@ -91,7 +91,7 @@ Al elegir a quién atacar, el elegido brilla, tiene un anillo dorado a los pies 
 | Especial | De quién | Golpes × poder | Cómo |
 |---|---|---|---|
 | Ráfaga de puños | Jair | 6 × 7, a uno | Se acerca y pega muy rápido. |
-| Lluvia de plasma | Cami | 8 × 5, a todos | Va al medio y dispara ráfagas desde cada pistola. |
+| Lluvia de plasma | Cami | 8 × 5, a todos | Va al medio y dispara ráfagas desde cada pistola; las balas no tienen fin: siguen hasta salir de la vista. |
 | Tajo de primavera | Rikka | 3 × 10, a uno | Lluvia de cortes. |
 | Embestida de acero | Soldado | 5 × 8, a uno | Repite su ataque muchísimas veces. |
 | Desgarro sombrío | Sombra | ver 8 | Vórtice que viaja, levanta por el aire y vuelve. |
@@ -108,6 +108,7 @@ Al elegir a quién atacar, el elegido brilla, tiene un anillo dorado a los pies 
 | **Paralizado** | No actúa durante esos turnos. **No se suma al descanso**: si Cami atacó y después la paralizan, al liberarse ya puede atacar. | Quieto en la pose de golpeado, temblando, con un brillo morado. |
 | **En el aire** | Mientras dura el especial que lo levantó. | Arriba, en la pose de golpeado; al terminar cae con su sprite de derrotado y, si sigue vivo, se levanta. |
 | **Caído** | 0 PS. No actúa. Se puede revivir. | Su fila «derrotado» (tirado, respirando) o, si no la tiene, la pose de golpeado. |
+| **Confundido** (el beso de Nikki) | Durante 3 turnos, al atacar (ataque o especial) puede pegarse a sí mismo: 40 % el primer turno, 30 % el segundo y 20 % el tercero (`CONFUSION`). Hablar, esquivar y los objetos funcionan normal. | Tres corazones que giran sobre la cabeza; «confusión» en su tarjeta. |
 | **Distraído** (por Hablar) | Pierde su próximo ataque. | — |
 
 ---
@@ -147,17 +148,18 @@ Al elegir a quién atacar, el elegido brilla, tiene un anillo dorado a los pies 
 
 ## 8. Enemigos y su inteligencia
 
-- **Ataque normal:** uno al azar de sus `ataques`, a un héroe al azar (o a todos, si el ataque es `todos`).
+- **Ataque normal:** uno al azar de sus `ataques`, según su `peso` (si no tiene, 1), a un héroe al azar (o a todos, si el ataque es `todos`). Los de efecto (paralizar, confundir) solo van contra quien todavía no lo tiene.
 - **Especial:** lo usa apenas tiene la barra llena, contra un héroe al azar.
 - **Remate** (`remata`): si a un héroe le queda poca vida, usa su especial contra él aunque la barra no esté llena
   (Nikki: héroe con menos del 30 %, barra desde 60 %).
 - **Ataque que paraliza** (`paraliza`, la «Parálisis de pesadilla» de la sombra): no hace daño; paraliza al blanco
   2 turnos. Solo va contra los que todavía se mueven: si nadie se mueve, ataca de otra forma.
+- **Beso confusión** (`confunde`, Nikki): no hace daño. Su animación del beso y, cuando lo suelta, un corazón vuela derecho hacia el blanco, lo pasa y sigue hasta salir de la pantalla (`proyectiles` en su hoja). Al que alcanza (si no lo esquiva) lo deja confundido 3 turnos.
 - **Ataque de lejos** (`proyectil` en su hoja): no se acerca. La media luna de la sombra sale de su brazo, vuela
   hacia el blanco, le pega al pasar y sigue hasta salir de la pantalla.
 - **Especial que viaja y levanta** (la sombra): la pantalla se oscurece, se hunde en un vórtice que viaja hasta su
   blanco, sale junto a él y lo **levanta por el aire**, salta, golpea al aterrizar y vuelve hecha vórtice.
-- **Clon de sombra** (`clon`, Nikki): desde media barra, el 60 % de las veces que puede. Primero junta energía (un aura de su color que crece y late), después un destello corto y sale el clon. Le cuesta el 25 % de su
+- **Clon de sombra** (`clon`, Nikki): desde media barra, pero muy pocas veces (el 8 % de las veces que puede; en el bar lo más común es el beso). Primero junta energía (un aura de su color que crece y late), después un destello corto y sale el clon. Le cuesta el 25 % de su
   vida máxima y el clon, hecho de sombra, tiene la mitad de su fuerza. El clon no usa especiales, no escucha, no da
   experiencia ni botín y se evapora a los 3 turnos. Solo hace uno a la vez, y nunca si gastar esa vida la deja al
   borde de retirarse. Al aparecer, Jair reacciona.
@@ -231,7 +233,7 @@ necesitar nada de esto.
   Nikki y Jair se paran en el mismo piso.
 - **Hablar es pedir perdón:** tres turnos **seguidos** hablándole y la pelea termina (`perdon`). Hacer otra cosa en
   el medio (o hablarle al clon) vuelve a empezar la cuenta.
-- **Nikki remata** con su especial y tiene el **Clon de sombra** (ver 8).
+- **Ataques de Nikki:** cachetada (la más común), cachetada de revés y **beso confusión** (casi tan común como la cachetada). **Remata** con su especial y, muy de vez en cuando, hace el **Clon de sombra** (ver 8).
 - **Tres finales de la pelea:**
   - Perdón: vuelve a la novela, cervezas fuertes, la noche sigue.
   - Pierde Jair: Nikki llora; imagen desbloqueable y bad end «Cachetadas infinitas».

@@ -9,37 +9,37 @@
       "loop": true
     },
     "pestaneo": {
-      "row": 1,
+      "row": 2,
       "frames": 5,
       "fps": 10,
       "loop": false
     },
     "ataque": {
-      "row": 2,
+      "row": 3,
       "frames": 10,
       "fps": 12,
       "loop": false
     },
     "daño": {
-      "row": 3,
+      "row": 4,
       "frames": 8,
       "fps": 12,
       "loop": false
     },
     "llorando": {
-      "row": 4,
+      "row": 5,
       "frames": 12,
       "fps": 10,
       "loop": true
     },
     "derrotado": {
-      "row": 5,
+      "row": 6,
       "frames": 16,
       "fps": 8,
       "loop": true
     },
     "especial": {
-      "row": 6,
+      "row": 7,
       "frames": 16,
       "fps": 14,
       "loop": false,
@@ -105,6 +105,23 @@
         15,
         15
       ]
+    },
+    "beso": {
+      "row": 8,
+      "frames": 110,
+      "fps": 24,
+      "loop": false
     }
-  }
+  },
+  "proyectiles": {
+    "beso": {
+      "imagen": "batalla/nikki_corazon",
+      "cuadro": 82,
+      "x": 112,
+      "y": 37,
+      "ancho": 21,
+      "alto": 20
+    }
+  },
+  "columnas": 20
 }

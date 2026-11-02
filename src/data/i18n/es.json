@@ -276,5 +276,8 @@
   "batalla.clon_se_va": "{quien} se evapora.",
   "batalla.clon_cae": "{quien} se deshace en humo.",
   "batalla.clon_no_escucha": "{quien} no escucha. Es solo una sombra.",
-  "batalla.clon": "Clon"
+  "batalla.clon": "Clon",
+  "batalla.confundido": "{quien} queda en las nubes: {n} turnos sin saber muy bien a quién pegarle.",
+  "batalla.se_golpea": "{quien} ya no sabe ni dónde está y se pega a sí mismo.",
+  "batalla.confundido_tag": "confusión"
 }

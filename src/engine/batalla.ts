@@ -12,6 +12,12 @@ export interface Stats {
 export interface Ataque {
   /** No hace daño: paraliza al blanco tantos turnos (la parálisis de pesadilla de la sombra). */
   paraliza?: number;
+  /** No hace daño: confunde al blanco tantos turnos (el beso de Nikki; ver CONFUSION). */
+  confunde?: number;
+  /** La animación de su hoja que usa (si no, «ataque»); si la hoja tiene un proyectil para ella, lo lanza. */
+  anim?: string;
+  /** Cuánto pesa al elegir un ataque al azar (si no, 1). */
+  peso?: number;
   nombre: string;
   poder: number;
   /** "uno" (al azar, o el elegido) o "todos". */
@@ -216,6 +222,8 @@ export interface Luchador {
   carga: number;
   /** Turnos que le quedan paralizado (no puede actuar). */
   paralizado: number;
+  /** Turnos que le quedan confundido (al atacar, a veces se pega a sí mismo). */
+  confundido: number;
   /** Si es un clon de sombra: los turnos que le quedan antes de evaporarse. */
   clon?: number;
 }
@@ -265,7 +273,7 @@ export function crearLuchador(
   xp = 0,
 ): Luchador {
   const s = statsEn(d.base, d.crece, nivel);
-  return { id, clave, lado, nombre: d.nombre, nivel, xp, ps: s.ps, psMax: s.ps, atq: s.atq, def: s.def, vel: s.vel, extra: 0, extraDef: 0, esquivando: false, distraido: false, carga: 0, paralizado: 0 };
+  return { id, clave, lado, nombre: d.nombre, nivel, xp, ps: s.ps, psMax: s.ps, atq: s.atq, def: s.def, vel: s.vel, extra: 0, extraDef: 0, esquivando: false, distraido: false, carga: 0, paralizado: 0, confundido: 0 };
 }
 
 /**
@@ -384,6 +392,30 @@ export function eligeEspecial(e: Luchador, en: Enemigo, heroes: Luchador[], enem
   if (puedeClonar && (!en.especial || azar() < (en.clon!.probabilidad ?? 0.5))) return { tipo: 'clon' };
   if (!especialListo(e)) return null;
   return en.especial ? { tipo: 'especial' } : null;
+}
+
+/**
+ * Confusión: al atacar (ataque o especial), el confundido se pega a sí mismo con esta probabilidad según los turnos
+ * que le quedan (más al principio: 40 %, 30 %, 20 %). El golpe a sí mismo es su ataque con este poder.
+ */
+export const CONFUSION = { base: 0.1, porTurno: 0.1, poder: 6 } as const;
+export const seConfunde = (l: Luchador, azar: () => number = Math.random) =>
+  l.confundido > 0 && azar() < CONFUSION.base + CONFUSION.porTurno * l.confundido;
+
+/**
+ * El ataque normal de un enemigo: uno al azar, según su `peso`. Los que paralizan o confunden solo van contra quien
+ * todavía no lo está (si nadie, no se eligen). Devuelve el ataque y sus blancos (null si no hay ninguno posible).
+ */
+export function eligeAtaque(ataques: Ataque[], heroes: Luchador[], azar: () => number = Math.random): { ataque: Ataque; blancos: Luchador[] } | null {
+  const vivos = heroes.filter((h) => h.ps > 0);
+  const libres = (a: Ataque) => (a.paraliza ? vivos.filter((h) => !h.paralizado) : a.confunde ? vivos.filter((h) => !h.confundido) : vivos);
+  const posibles = ataques.filter((a) => libres(a).length > 0);
+  if (!posibles.length) return null;
+  const total = posibles.reduce((n, a) => n + (a.peso ?? 1), 0);
+  let r = azar() * total;
+  const ataque = posibles.find((a) => (r -= a.peso ?? 1) < 0) ?? posibles[posibles.length - 1];
+  const pool = libres(ataque);
+  return { ataque, blancos: ataque.objetivo === 'todos' ? pool : [pool[Math.floor(azar() * pool.length)]] };
 }
 
 /** El jefe se retira cuando le queda esta parte de sus PS (o menos). */

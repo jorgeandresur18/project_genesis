@@ -2860,3 +2860,13 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 .batalla-figura.en-aire .batalla-sombra { scale: 0.7; opacity: 0.7; transition: scale 0.4s, opacity 0.4s; }
 /* Las tarjetas de los héroes, todas del mismo ancho (el de la que dice «descansa»), mientras haya lugar. */
 @media (min-width: 900px) and (min-height: 501px) { .batalla-tarjeta { min-width: 13.5rem; } }
+
+/* Confundido (el beso de Nikki): tres corazones que giran sobre la cabeza y un leve balanceo. */
+.batalla-confusion { position: absolute; top: 4%; left: 50%; width: 3.2rem; height: 1.2rem; translate: -50% 0; z-index: 4; pointer-events: none; animation: confusion-gira 1.6s linear infinite; }
+.batalla-confusion span { position: absolute; top: 50%; left: 50%; color: #ff6fae; font-size: 0.95rem; text-shadow: 0 0 6px #ff6fae, 1px 1px 0 #000; }
+.batalla-confusion span:nth-child(1) { translate: -1.3rem -50%; }
+.batalla-confusion span:nth-child(2) { translate: -0.3rem -90%; }
+.batalla-confusion span:nth-child(3) { translate: 0.8rem -50%; }
+@keyframes confusion-gira { 0% { rotate: 0deg; } 100% { rotate: 360deg; } }
+.batalla-descansa.confundido { color: #ff8fc0; }
+@media (prefers-reduced-motion: reduce) { .batalla-confusion { animation: none; } }

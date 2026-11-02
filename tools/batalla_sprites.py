@@ -29,7 +29,7 @@ HOJAS = {
     'cami': ('cami', {'idle': 'idle', 'cabello': 'cabello', 'walk': 'mover', 'salto': 'salto', 'attack': 'ataque', 'hit': 'daño',
                       'blush': 'sonrojada', 'pestaneo': 'pestaneo', 'agachada': 'agachada', 'especial': 'especial', 'derrotada': 'derrotado'}),
     'nikki': ('nikki', {'idle': 'idle', 'pestaneo': 'pestaneo', 'ataque': 'ataque', 'daño': 'daño', 'llorando': 'llorando', 'derrotada': 'derrotado',
-                        'especial': 'especial'}),
+                        'especial': 'especial'}),  # «beso» viene en su propia hoja: ver hoja_beso.
     'kimono': ('rikka', {'idle': 'idle', 'cabello': 'cabello', 'salto': 'salto', 'ataque': 'ataque', 'daño': 'daño', 'pestaneo': 'pestaneo', 'especial': 'especial'}),
     'ninja': ('soldado', {'idle': 'idle', 'correr': 'mover', 'salto': 'salto', 'ataque': 'ataque', 'daño': 'daño', 'pestaneo': 'pestaneo'}),
     'sombra': ('sombra', {'idle': 'idle', 'tajada': 'ataque', 'desgarro': 'especial', 'daño': 'daño'}),
@@ -68,6 +68,41 @@ def proyectil(html: Path):
     x0, y0, x1, y1 = im.getbbox()
     im.crop((x0, y0, x1, y1)).save(SALIDA / 'sombra_tajada.png')
     return {'imagen': 'batalla/sombra_tajada', 'cuadro': TAJADA_SUELTA, 'x': x0, 'y': y0, 'ancho': x1 - x0, 'alto': y1 - y0}
+
+
+# El beso de Nikki viene en una hoja aparte con cuadros más anchos (el corazón vuela hacia adelante). Se recorta al
+# ancho de Nikki (su cuerpo está a la izquierda, alineado con su pose base) y, desde que el corazón sale volando,
+# se borra de la hoja: el juego lo dibuja aparte (nikki_corazon.png, de «nikki corazon.png» junto al HTML) y lo
+# lanza hasta salir de la pantalla.
+BESO_SUELTA = 82
+BESO_CORAZON = {'x': 112, 'y': 37, 'ancho': 21, 'alto': 20}
+
+
+def hoja_beso(c: dict, html: Path):
+    b = c['sheets']['beso']
+    an = c['anims']['beso']
+    im = np.array(Image.open(io.BytesIO(base64.b64decode(b['src'].split('base64,')[1]))).convert('RGBA'))
+    fw, fh, bw, cols = c['fw'], c['fh'], b['fw'], an['cols']
+    fila = np.zeros((fh, an['frames'] * fw, 4), im.dtype)
+    for f in range(an['frames']):
+        cuadro = im[(f // cols) * fh:(f // cols + 1) * fh, (f % cols) * bw:(f % cols) * bw + fw].copy()
+        if f >= BESO_SUELTA:
+            # Todo lo que queda a la derecha de la mano (el corazón con su borde y los brillos).
+            cuadro[:72, 114:] = 0
+            zona = cuadro[:72, 98:]
+            rgb = zona[..., :3].astype(int)
+            rosa = (zona[..., 3] > 0) & (((rgb[..., 0] > 190) & (rgb[..., 1] < 170)) | (rgb.min(axis=2) > 215))
+            zona[rosa] = 0
+        fila[:, f * fw:(f + 1) * fw] = cuadro
+    proy = None
+    ruta = html.parent / 'nikki corazon.png'
+    if ruta.exists():
+        cor = Image.open(ruta).convert('RGBA')
+        cor = cor.crop(cor.getbbox())
+        # A 4 veces su tamaño en la pelea, nítido (es pixel art).
+        cor.resize((BESO_CORAZON['ancho'] * 4, BESO_CORAZON['alto'] * 4), Image.NEAREST).save(SALIDA / 'nikki_corazon.png')
+        proy = {'imagen': 'batalla/nikki_corazon', 'cuadro': BESO_SUELTA, **BESO_CORAZON}
+    return fila, {'frames': an['frames'], 'fps': an['fps'], 'loop': False}, proy
 
 
 def viaje(seq: list) -> dict:
@@ -220,6 +255,14 @@ def main():
                 'especial': {f: [[x, y, apuntar(y)] for x, y in ps] for f, ps in destellos(im, fw, fh, es['row'], es['frames']).items()},
             }
             print('cami: disparos', {k: len(v) for k, v in meta['disparos'].items()})
+        if nombre == 'nikki' and 'beso' in c.get('sheets', {}):
+            fila, anim, proy = hoja_beso(c, ruta)
+            meta['animations']['beso'] = {'row': im.shape[0] // fh, **anim}
+            # La fila del beso es más larga que las otras: la hoja se ensancha (y después se parte en renglones).
+            ancho = max(im.shape[1], fila.shape[1])
+            im = np.concatenate([np.pad(im, ((0, 0), (0, ancho - im.shape[1]), (0, 0))), np.pad(fila, ((0, 0), (0, ancho - fila.shape[1]), (0, 0)))])
+            if proy:
+                meta['proyectiles'] = {'beso': proy}
         if nombre == 'sombra':
             meta['viaje'] = viaje(c['anims']['desgarro']['seq'])
             p = proyectil(ruta)
