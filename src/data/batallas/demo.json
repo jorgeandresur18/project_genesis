@@ -70,7 +70,7 @@
       "nombre": "Cami",
       "sprite": "batalla/cami",
       "nivel": 15,
-      "seguido": false,
+      "seguido": true,
       "base": {
         "ps": 34,
         "atq": 6,
@@ -488,6 +488,7 @@
   "mochila_inicial": {
     "revivir": 1,
     "veneno_ratas": 1,
-    "condon": 2
+    "condon": 2,
+    "atq": 1
   }
 }

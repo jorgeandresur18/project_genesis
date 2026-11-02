@@ -110,9 +110,11 @@ Al elegir a quién atacar, el elegido brilla, tiene un anillo dorado a los pies 
 | **En el aire** | Mientras dura el especial que lo levantó. | Arriba, en la pose de golpeado; al terminar cae con su sprite de derrotado y, si sigue vivo, se levanta. |
 | **Caído** | 0 PS. No actúa. Se puede revivir. | Su fila «derrotado» (tirado, respirando) o, si no la tiene, la pose de golpeado. |
 | **Confundido** (el beso de Nikki) | Durante 3 turnos, al atacar (ataque o especial) puede pegarse a sí mismo: 40 % el primer turno, 30 % el segundo y 20 % el tercero (`CONFUSION`). Hablar, esquivar y los objetos funcionan normal. Se le va al caer. | Tres corazones chicos que dan vueltas alrededor de la cabeza como un carrusel (delante, más grandes y nítidos; detrás, más chicos y tenues; desaparecen al caer); «confusión» en su tarjeta. |
-| **Envenenado** | Pierde PS al final de cada turno, unos turnos (un jefe nunca baja de 1). | Un tinte verde que late; «veneno» en su tarjeta. |
-| **Protegido** | Los próximos golpes (según el objeto) no le hacen daño: «BLOQUEA». | Un escudo celeste alrededor; «protegido» en su tarjeta. |
+| **Envenenado** | Pierde PS al final de cada turno, unos turnos (un jefe nunca baja de 1). | Humo morado que le sale del cuerpo y sube; «veneno» en su tarjeta. |
+| **Protegido** | Los próximos golpes (según el objeto) no le hacen daño: «BLOQUEA». | Un aura celeste suave alrededor del cuerpo, que respira; «protegido» en su tarjeta. |
 | **Distraído** (por Hablar) | Pierde su próximo ataque. | — |
+
+Cuando **sube una estadística** (un potenciador, un caramelo, subir de nivel) sale un aura verde que sube un instante; cuando **baja**, la misma, roja y hacia abajo.
 
 ---
 
@@ -249,7 +251,7 @@ necesitar nada de esto.
 
 ### La demo (`demo`, solo para probar)
 
-- Jair, Cami y Rikka contra la horda y la sombra. Se puede huir.
+- Jair, Cami y Rikka contra la horda y la sombra. Se puede huir. Cami actúa todos los turnos (sin lo del tobillo). La mochila empieza con objetos para probar (revivir, veneno, condón, potenciador).
 
 ---
 

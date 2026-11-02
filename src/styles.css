@@ -2907,8 +2907,26 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 /* Envenenado: un tinte verde que late. Protegido: un escudo celeste alrededor. */
 .batalla-figura.envenenado .batalla-sprite { animation: envenenado 1.4s ease-in-out infinite; }
 @keyframes envenenado { 50% { filter: sepia(0.5) hue-rotate(60deg) saturate(1.6) brightness(1.05); } }
-.batalla-escudo { position: absolute; z-index: 3; left: 12%; right: 12%; top: 18%; bottom: 0; border: 2px solid rgba(143, 211, 255, 0.75); border-radius: 50% 50% 45% 45%; box-shadow: 0 0 14px rgba(143, 211, 255, 0.55), inset 0 0 18px rgba(143, 211, 255, 0.35); pointer-events: none; animation: protegido 2s ease-in-out infinite; }
-@keyframes protegido { 50% { opacity: 0.6; scale: 1.03; } }
-.batalla-descansa.veneno { color: #8dff7a; }
+/* Protegido: un aura celeste suave alrededor del cuerpo, que respira. */
+.batalla-figura.protegido .batalla-sprite { filter: drop-shadow(0 0 3px rgba(150, 215, 255, 0.95)) drop-shadow(0 0 10px rgba(120, 200, 255, 0.75)) drop-shadow(0 0 22px rgba(110, 190, 255, 0.45)); animation: aura-protegido 2.2s ease-in-out infinite; }
+@keyframes aura-protegido { 50% { filter: drop-shadow(0 0 2px rgba(150, 215, 255, 0.7)) drop-shadow(0 0 6px rgba(120, 200, 255, 0.5)) drop-shadow(0 0 14px rgba(110, 190, 255, 0.25)); } }
+/* Envenenado: humo morado que le sale del cuerpo y sube (sin teñir al personaje). */
+.batalla-figura.envenenado .batalla-sprite { animation: none; }
+.batalla-humo { position: absolute; left: 20%; right: 20%; top: 30%; bottom: 8%; z-index: 3; pointer-events: none; }
+.batalla-humo i { position: absolute; bottom: 0; left: calc(10% + var(--i) * 15%); width: 1.6rem; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(170, 90, 230, 0.55), rgba(120, 50, 180, 0.25) 55%, transparent 72%); filter: blur(3px); opacity: 0; animation: humo-sube 2.2s ease-out infinite; animation-delay: calc(var(--i) * -0.37s); }
+@keyframes humo-sube { 0% { opacity: 0; translate: 0 0; scale: 0.5; } 20% { opacity: 0.9; } 100% { opacity: 0; translate: calc((var(--i) - 2.5) * 4px) -140%; scale: 1.8; } }
+/* Sube una estadística: un aura verde que sube un instante. Baja: la misma, roja y hacia abajo. */
+.batalla-aura-stat { position: absolute; left: 14%; right: 14%; top: 10%; bottom: 0; z-index: 3; pointer-events: none; border-radius: 40% 40% 10% 10%; mask: linear-gradient(to top, #000 0 60%, transparent); -webkit-mask: linear-gradient(to top, #000 0 60%, transparent); }
+.batalla-aura-stat::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, transparent 0 6px, var(--aura) 6px 9px, transparent 9px 15px), linear-gradient(to top, var(--aura-fondo), transparent 75%); background-size: 100% 200%, 100% 100%; animation: aura-sube 1.3s ease-out forwards; }
+.batalla-aura-stat.sube-stat { --aura: rgba(110, 255, 140, 0.75); --aura-fondo: rgba(80, 255, 130, 0.35); }
+.batalla-aura-stat.baja-stat { --aura: rgba(255, 90, 90, 0.75); --aura-fondo: rgba(255, 60, 60, 0.35); mask: linear-gradient(to bottom, #000 0 60%, transparent); -webkit-mask: linear-gradient(to bottom, #000 0 60%, transparent); }
+.batalla-aura-stat.baja-stat::before { background: repeating-linear-gradient(90deg, transparent 0 6px, var(--aura) 6px 9px, transparent 9px 15px), linear-gradient(to bottom, var(--aura-fondo), transparent 75%); background-size: 100% 200%, 100% 100%; animation-name: aura-baja; }
+@keyframes aura-sube { 0% { opacity: 0; transform: translateY(40%); } 25% { opacity: 1; } 100% { opacity: 0; transform: translateY(-35%); } }
+@keyframes aura-baja { 0% { opacity: 0; transform: translateY(-40%); } 25% { opacity: 1; } 100% { opacity: 0; transform: translateY(35%); } }
+@media (prefers-reduced-motion: reduce) { .batalla-figura.protegido .batalla-sprite, .batalla-humo i, .batalla-aura-stat::before { animation: none; } }
+.batalla-descansa.veneno { color: #c08cff; }
 .batalla-descansa.protegido { color: #8fd3ff; }
-@media (prefers-reduced-motion: reduce) { .batalla-figura.envenenado .batalla-sprite, .batalla-escudo { animation: none; } }
+/* El humo del veneno, más visible: sale del medio del cuerpo, más grande y denso. */
+.batalla-humo { left: 18%; right: 18%; top: 15%; bottom: 30%; }
+.batalla-humo i { width: 2.8rem; background: radial-gradient(circle, rgba(175, 95, 240, 0.85), rgba(125, 55, 195, 0.45) 50%, transparent 72%); filter: blur(4px); }
+@keyframes humo-sube { 0% { opacity: 0; translate: 0 0; scale: 0.5; } 18% { opacity: 1; } 100% { opacity: 0; translate: calc((var(--i) - 2.5) * 6px) -170%; scale: 2; } }

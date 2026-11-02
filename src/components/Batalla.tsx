@@ -959,6 +959,7 @@ function Pelea({
         playChip('vida');
         forzar();
         void animar(h.id, 'victoria', 1200);
+        efecto(h.id, 'sube-stat', 1300);
         await decir(fmt(t('batalla.sube'), { quien: h.nombre, nivel }));
         for (const a of aprendeEn(d.personajes[h.clave], nivel)) {
           playChip('revivir');
@@ -1050,6 +1051,8 @@ function Pelea({
                         ? '✕'
                         : `+${n}`;
         numero(a.id, marca, contra ? 'falla' : 'cura');
+        const cambio = (o.atq ?? 0) + (o.def ?? 0) + (o.niveles ?? 0);
+        if (cambio) efecto(a.id, cambio > 0 ? 'sube-stat' : 'baja-stat', 1300);
         luz(a.id, o.veneno ? '#7dff6a' : o.protege ? '#8fd3ff' : contra ? '#ff6fae' : '#9dffb0');
       }
       playChip(contra ? 'cambio' : 'vida');
@@ -1797,7 +1800,14 @@ function Figura({
       }
     >
       {marcado && <span className="batalla-flecha" aria-hidden>▼</span>}
-      {l.protegido > 0 && l.ps > 0 && <span className="batalla-escudo" aria-hidden />}
+      {l.envenenado && l.ps > 0 && (
+        <span className="batalla-humo" aria-hidden>
+          {Array.from({ length: 6 }, (_, i) => (
+            <i key={i} style={{ '--i': i } as CSSProperties} />
+          ))}
+        </span>
+      )}
+      {(efecto === 'sube-stat' || efecto === 'baja-stat') && <span className={`batalla-aura-stat ${efecto}`} aria-hidden />}
       {l.confundido > 0 && l.ps > 0 && !caido && (
         <span className="batalla-confusion" aria-hidden>
           <span>♥</span>
