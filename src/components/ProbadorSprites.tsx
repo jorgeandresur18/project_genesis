@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { createPortal } from 'react-dom';
-import { anguloDisparo, Batalla, rectSprite, SpriteHoja, type Hoja } from './Batalla';
+import { Batalla, SpriteHoja, type Hoja } from './Batalla';
 import type { DatosBatalla, Enemigo, Heroe } from '../engine/batalla';
 import probador from '../data/probador_sprites.json';
+import { colorBalas, useEfectosSprite } from './EfectosSprite';
 
 /**
  * Probador de sprites (?sprites en la dirección): cada hoja del combate (y las de «varios» en
@@ -29,11 +30,7 @@ const ENTRADAS: Entrada[] = (() => {
   for (const v of probador.varios as { hoja: string; nombre: string }[]) vistas.set(v.hoja, v);
   return [...vistas.values()];
 })();
-/** El color de las balas de cada hoja: el del especial de un héroe, o el de los disparos de un rival (el Capitán). */
-const BATALLA_COLOR = new Map([
-  ...Object.values(BATALLAS).flatMap((d) => Object.values(d.personajes).flatMap((p) => (p.especial ? [[p.sprite, p.especial.color] as const] : []))),
-  ...Object.values(BATALLAS).flatMap((d) => Object.values(d.enemigos).flatMap((e) => (e.color_disparo ? [[e.sprite, e.color_disparo] as const] : []))),
-]);
+const BATALLA_COLOR = colorBalas(Object.values(BATALLAS));
 
 /**
  * La arena: cualquier héroe contra cualquier rival de las peleas del juego, con el nivel que se quiera. Es una
@@ -217,87 +214,17 @@ export function ProbadorSprites({ onCerrar }: { onCerrar: () => void }) {
   const col = a ? (a.seq ? a.seq[((cuadro % largo) + largo) % largo] : ((cuadro % largo) + largo) % largo) : 0;
   const puntos = marcas ? hoja?.disparos?.[anim]?.[String(col)] ?? [] : [];
   const tocar = (nombre: string) => {
-    setRayoSigue(null);
+    efectos.limpiar();
     setAnim(nombre);
     setCuadro(0);
     setVez((v) => v + 1);
   };
 
-  // Con «Disparos», salen las balas como en la pelea: una por destello en el ataque y, en el especial, ráfagas
-  // continuas desde cada pistola hacia donde apunta en ese cuadro.
+  // Los efectos, como en la pelea (las balas solo con «Disparos»). Lo mismo usa la galería.
   const escena = useRef<HTMLDivElement>(null);
-  const [balas, setBalas] = useState<{ key: number; x: number; y: number; dx: number; dy: number; ms: number; rafaga: boolean }[]>([]);
-  const puntas = useRef<number[][]>([]);
-  const disparar = (p: number[], rafaga: boolean) => {
-    const s = rectSprite(escena.current?.querySelector('.probador-sprite .batalla-sprite'));
-    const base = escena.current?.getBoundingClientRect();
-    if (!hoja || !s || !base) return;
-    const k = s.width / hoja.frameWidth;
-    const x = (volteado ? s.right - p[0] * k : s.left + p[0] * k) - base.left;
-    const y = s.top + p[1] * k - base.top;
-    // El ataque normal sale derecho hacia adelante (en la pelea va hacia su objetivo).
-    const a = rafaga ? anguloDisparo(hoja, p) + (Math.random() - 0.5) * 0.08 : 0;
-    const ang = volteado ? Math.PI - a : a;
-    // Alcance limitado, como en la pelea (hasta los rivales).
-    const largo = base.width * 0.45;
-    const ms = (largo / (rafaga ? 2600 : 1500)) * 1000;
-    const key = Math.random();
-    setBalas((b) => [...b, { key, x, y, dx: Math.cos(ang) * largo, dy: Math.sin(ang) * largo, ms, rafaga }]);
-    setTimeout(() => setBalas((b) => b.filter((z) => z.key !== key)), ms + 40);
-  };
-  // Lo que se suelta y sale volando como imagen aparte (el corazón del beso de Nikki, la media luna de la sombra):
-  // en la hoja ya no está desde ese cuadro, así que aparece encima, en el mismo lugar, y cruza la pantalla.
-  const [vuelan, setVuelan] = useState<{ key: number; src: string; x: number; y: number; w: number; h: number; dx: number; ms: number }[]>([]);
-  const soltar = (p: NonNullable<Hoja['proyectil']>, h: Hoja) => {
-    const s = rectSprite(escena.current?.querySelector('.probador-sprite .batalla-sprite'));
-    const base = escena.current?.getBoundingClientRect();
-    if (!s || !base) return;
-    const k = s.width / h.frameWidth;
-    const cx = p.x + p.ancho / 2;
-    const x = (volteado ? s.right - cx * k : s.left + cx * k) - base.left;
-    const y = s.top + (p.y + p.alto / 2) * k - base.top;
-    const dx = volteado ? -(x + p.ancho * k) : base.width - x + p.ancho * k;
-    const ms = (Math.abs(dx) / 700) * 1000;
-    const key = Math.random();
-    setVuelan((l) => [...l, { key, src: `${BASE}${p.imagen}.png`, x, y, w: p.ancho * k, h: p.alto * k, dx, ms }]);
-    setTimeout(() => setVuelan((l) => l.filter((z) => z.key !== key)), ms + 60);
-  };
-  // El rayo del especial del Capitán que sale del cuadro: sigue, ondulado, hasta el borde (como en la pelea).
-  const [rayoSigue, setRayoSigue] = useState<{ x: number; y: number; largo: number; ang: number; grosor: number } | null>(null);
-  const alCuadro = (fila: string, columna: number, h: Hoja) => {
-    if (h.rayo) {
-      const r = fila === 'especial' ? h.rayo[String(columna)] : undefined;
-      const s = rectSprite(escena.current?.querySelector('.probador-sprite .batalla-sprite'));
-      const base = escena.current?.getBoundingClientRect();
-      if (r && s && base) {
-        const k = s.width / h.frameWidth;
-        setRayoSigue({
-          x: (volteado ? s.right - r[0] * k : s.left + r[0] * k) - base.left,
-          y: s.top + r[1] * k - base.top,
-          largo: base.width * 1.6,
-          ang: volteado ? Math.PI - r[2] : r[2],
-          grosor: r[3] * k,
-        });
-      } else setRayoSigue(null);
-    }
-    // Un cuadro antes del que ya no lo tiene dibujado: así nunca hay un instante sin él.
-    const p = h.proyectiles?.[fila] ?? (fila === 'ataque' ? h.proyectil : undefined);
-    const seq = h.animations[fila]?.seq;
-    const antes = p && (seq ? seq[Math.max(0, seq.indexOf(p.cuadro) - 1)] : p.cuadro - 1);
-    if (p && columna === antes) soltar(p, h);
-    const pts = marcas ? h.disparos?.[fila]?.[String(columna)] ?? [] : [];
-    if (fila === 'especial') puntas.current = pts;
-    else for (const p of pts) disparar(p, false);
-  };
-  const disparo = useRef(disparar);
-  disparo.current = disparar;
-  useEffect(() => {
-    puntas.current = [];
-    if (!marcas || anim !== 'especial' || pausa) return;
-    const t = setInterval(() => puntas.current.forEach((p) => disparo.current(p, true)), 55);
-    return () => clearInterval(t);
-  }, [marcas, anim, pausa, sel]);
   const color = BATALLA_COLOR.get(sel) ?? '#7fe6ff';
+  const efectos = useEfectosSprite({ escena, selector: '.probador-sprite .batalla-sprite', hoja, anim, volteado, balasActivas: marcas, pausa, color });
+  const alCuadro = efectos.alCuadro;
 
   // En un portal: la pantalla de título tiene transformaciones que mueven lo «fixed».
   return createPortal(
@@ -369,53 +296,7 @@ export function ProbadorSprites({ onCerrar }: { onCerrar: () => void }) {
               <span key={i} className="probador-marca" style={{ left: x * zoom, top: y * zoom }} />
             ))}
           </div>
-          {rayoSigue && (
-            <span
-              className="batalla-rayo sigue"
-              aria-hidden
-              style={{ left: rayoSigue.x, top: rayoSigue.y, width: rayoSigue.largo, height: Math.max(6, rayoSigue.grosor), rotate: `${rayoSigue.ang}rad`, '--c': '#ff2a2a' } as CSSProperties}
-            />
-          )}
-          {vuelan.map((x) => (
-            <img
-              key={x.key}
-              className="batalla-proyectil"
-              src={x.src}
-              alt=""
-              draggable={false}
-              style={
-                {
-                  left: x.x - x.w / 2,
-                  top: x.y - x.h / 2,
-                  width: x.w,
-                  height: x.h,
-                  '--dx': `${x.dx}px`,
-                  '--dy': '0px',
-                  scale: volteado ? '-1 1' : undefined,
-                  animationDuration: `${x.ms}ms`,
-                } as CSSProperties
-              }
-            />
-          ))}
-          <div className="batalla-balas" aria-hidden>
-            {balas.map((x) => (
-              <span
-                key={x.key}
-                className={`batalla-bala ${x.rafaga ? 'rafaga' : ''}`}
-                style={
-                  {
-                    left: x.x,
-                    top: x.y,
-                    '--dx': `${x.dx}px`,
-                    '--dy': `${x.dy}px`,
-                    '--ang': `${Math.atan2(x.dy, x.dx)}rad`,
-                    '--c': color,
-                    animationDuration: `${x.ms}ms`,
-                  } as CSSProperties
-                }
-              />
-            ))}
-          </div>
+          {efectos.capa}
           <span className="probador-info">
             {anim} · paso {pausa ? ((cuadro % largo) + largo) % largo : '—'}/{largo} · columna {pausa ? col : '—'}
             {hoja ? ` · cuadro ${hoja.frameWidth}×${hoja.frameHeight}` : ' · (sin hoja animada)'}

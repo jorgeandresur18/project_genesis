@@ -530,6 +530,21 @@
       "personaje": "soldado_enmascarado",
       "nombre": "Combat pixel art",
       "info": "Red visor, black armor and no opinions of his own. Ask him about overtime and he freezes, processing."
+    },
+    "batalla/nikki": {
+      "personaje": "nikki",
+      "nombre": "Combat pixel art",
+      "info": "Level 20, a black t-shirt and two hands that never learned to hit softly. The kiss confuses; the slaps don't: those are perfectly clear."
+    },
+    "batalla/sombra": {
+      "personaje": "monstruo_sombras",
+      "nombre": "Combat pixel art",
+      "info": "Walking ink. It throws purple crescents, sinks into the floor and comes out under whoever least expects it. It doesn't die: it retreats."
+    },
+    "batalla/capitan": {
+      "personaje": "capitan_enmascarado",
+      "nombre": "Combat pixel art",
+      "info": "Red bursts, three to five at a time, and a cannon that charges until it turns white. When he gets nervous, he waves it around. That's when to worry."
     }
   },
   "quejas": {

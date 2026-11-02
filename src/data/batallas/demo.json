@@ -119,7 +119,8 @@
         "empieza": "{quien} necesita recuperarse de su dolor.",
         "termina": "{quien} ya puede pararse."
       },
-      "sonido": "disparo"
+      "sonido": "disparo",
+      "escala": 1.01
     },
     "rikka": {
       "nombre": "Rikka",
@@ -172,7 +173,8 @@
         "texto": "{quien} desenvaina en un parpadeo. Quinientos años de práctica en un solo corte.",
         "posicion": "objetivo"
       },
-      "sonido": "espada"
+      "sonido": "espada",
+      "escala": 1.05
     }
   },
   "enemigos": {
@@ -277,7 +279,7 @@
           "usos": 5
         }
       ],
-      "escala": 1.6,
+      "escala": 1.54,
       "especial": {
         "nombre": "Desgarro sombrío",
         "poder": 6,

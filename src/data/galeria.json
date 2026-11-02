@@ -569,6 +569,21 @@
       "personaje": "soldado_enmascarado",
       "nombre": "Pixel art: combate",
       "info": "Visor rojo, armadura negra y ninguna opinión propia. Si le preguntas por las horas extra, se queda procesando."
+    },
+    "batalla/nikki": {
+      "personaje": "nikki",
+      "nombre": "Pixel art: combate",
+      "info": "Nivel 20, una camiseta negra y dos manos que nunca aprendieron a pegar despacio. El beso confunde; las cachetadas, no: esas se entienden perfecto."
+    },
+    "batalla/sombra": {
+      "personaje": "monstruo_sombras",
+      "nombre": "Pixel art: combate",
+      "info": "Tinta que camina. Lanza medias lunas moradas, se hunde en el piso y sale debajo de quien menos lo espera. No muere: se retira."
+    },
+    "batalla/capitan": {
+      "personaje": "capitan_enmascarado",
+      "nombre": "Pixel art: combate",
+      "info": "Ráfagas rojas, de tres a cinco por vez, y un cañón que carga hasta ponerse blanco. Cuando se pone nervioso, lo agita. Ahí es cuando hay que preocuparse."
     }
   },
   "quejas": {

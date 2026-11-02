@@ -353,6 +353,11 @@ function Pelea({
   >([]);
 
   const animar = async (lid: string, a: Anim, ms = 0) => {
+    // Lo que se ve en una pelea se desbloquea en la galería (Pixel art): la acción de esa hoja.
+    const l = [...b.current.heroes, ...b.current.enemigos].find((x) => x.id === lid);
+    const hoja = l && (l.lado === 'heroe' ? d.personajes[l.clave]?.sprite : d.enemigos[l.clave]?.sprite);
+    const accion = a === 'ko' ? 'derrotado' : a === 'golpeado' ? 'daño' : a;
+    if (hoja && !l?.cebo) useStore.getState().marcarRpg([`${hoja}#${accion}`]);
     setAnims((x) => ({ ...x, [lid]: a }));
     setVeces((v) => ({ ...v, [lid]: (v[lid] ?? 0) + 1 }));
     if (ms) {

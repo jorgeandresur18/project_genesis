@@ -341,5 +341,8 @@
   "galeria.accion.derrotado": "Defeated",
   "galeria.accion.beso": "Kiss",
   "galeria.ocultar_menu": "Hide menu",
-  "galeria.mostrar_menu": "Menu"
+  "galeria.mostrar_menu": "Menu",
+  "galeria.pixel_art": "Pixel art",
+  "galeria.pixel_vacio": "You haven't fought anyone yet.",
+  "galeria.accion_bloqueada": "Unlocks when you see it in a fight."
 }

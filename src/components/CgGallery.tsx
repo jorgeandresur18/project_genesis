@@ -1,8 +1,9 @@
-import { useEffect, useState, type CSSProperties, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { TEXT_SPEED_INSTANT, useStore } from '../engine/store';
 import { assetUrl } from '../engine/assets';
 import galeriaEs from '../data/galeria.json';
 import galeriaEn from '../data/en/galeria.json';
+import estaturasJson from '../data/estaturas.json';
 import { localized, useLang, useT } from '../engine/i18n';
 import {
   CGS,
@@ -10,6 +11,7 @@ import {
   DIMENSIONS,
   TOTAL_PLACES,
   TOTAL_SPRITES,
+  TODOS_RPG,
   characterColor,
   imageKey,
   placeKey,
@@ -24,7 +26,9 @@ import { Panel } from './Panels';
 import { playCancel, playChip, playSelect, startTyping, stopTyping } from '../engine/sound';
 import { NoData } from './NoData';
 import { CapasFondo, capaDeFondo, capaDeSprite } from './SceneStage';
-import { SpriteHoja } from './Batalla';
+import { SpriteHoja, type Hoja } from './Batalla';
+import { colorBalas, useEfectosSprite } from './EfectosSprite';
+import type { DatosBatalla } from '../engine/batalla';
 
 interface Texts {
   titulos: Record<string, string>;
@@ -43,7 +47,7 @@ export function NewDot({ className = '' }: { className?: string }) {
   return <span className={`new-dot ${className}`} role="img" aria-label={t('galeria.nuevo')} />;
 }
 
-type Tab = 'imagenes' | 'personajes' | 'lugares';
+type Tab = 'imagenes' | 'personajes' | 'lugares' | 'pixel';
 
 /** Galería: imágenes del juego y sprites de los personajes. Lo que no se vio todavía queda bloqueado. */
 export function CgGallery({ onClose }: { onClose: () => void }) {
@@ -81,6 +85,11 @@ export function CgGallery({ onClose }: { onClose: () => void }) {
             dot: g.newSpriteCount > 0,
           },
           {
+            key: 'pixel',
+            label: t('galeria.pixel_art'),
+            extra: `${g.rpgTodos.length}/${TODOS_RPG.length}`,
+          },
+          {
             key: 'lugares',
             label: t('galeria.lugares'),
             extra: `${g.places.size + r.unlocked.length}/${TOTAL_PLACES + r.reinos.length}`,
@@ -90,7 +99,7 @@ export function CgGallery({ onClose }: { onClose: () => void }) {
         active={tab}
         onTab={(k) => pick(k as Tab)}
       >
-        {tab === 'imagenes' ? <Images /> : tab === 'personajes' ? <Characters /> : <Places />}
+        {tab === 'imagenes' ? <Images /> : tab === 'personajes' ? <Characters /> : tab === 'pixel' ? <PixelArt /> : <Places />}
       </TermWindow>
     </Panel>
   );
@@ -861,12 +870,94 @@ function siguienteQueja(quien: string, lineas: string[]): string {
 
 /** Un sprite del combate en el visor: animado, grande y en pixel art (la acción se elige en la ficha). */
 function SpriteRpgVista({ r, accion }: { r: SpriteRpg; accion: string }) {
+  const escena = useRef<HTMLDivElement>(null);
+  const [hoja, setHoja] = useState<Hoja | null>(null);
+  useEffect(() => {
+    void fetch(`${import.meta.env.BASE_URL}${r.hoja}.json`)
+      .then((x) => x.json())
+      .then((j: Hoja) => setHoja(j));
+  }, [r]);
+  // Los rivales miran a la izquierda en la pelea: acá todos miran a la derecha, y lo que lanzan sale hacia allá.
+  const efectos = useEfectosSprite({ escena, selector: '.viewer-rpg .batalla-sprite', hoja, anim: accion, color: COLOR_BALAS.get(r.hoja) });
+  const [alto, setAlto] = useState(600);
+  useEffect(() => {
+    const el = escena.current;
+    if (!el) return;
+    const ro = new ResizeObserver(() => setAlto(el.clientHeight));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+  const c = (hoja as (Hoja & { cuerpo?: [number, number, number, number] }) | null)?.cuerpo;
+  const cuerpoAlto = c ? c[3] - c[1] : 93;
+  // Según la guía de estaturas: el más alto (la sombra, 240 cm) llena el alto disponible (arriba de la barra) y los
+  // demás, en proporción a su estatura.
+  const estatura = ESTATURAS[(galeriaEs.rpg as Record<string, { personaje: string }>)[r.hoja]?.personaje] ?? 165;
+  const zoom = (((alto - 90) * 0.9) / cuerpoAlto) * (estatura / ESTATURA_MAX);
   return (
-    <div className="viewer-rpg">
+      // El tamaño: el cuerpo, con la escala que tiene en la pelea (la sombra es grande), sin pasarse del alto.
+    <div className="viewer-rpg" ref={escena} style={{ '--zrpg': zoom } as CSSProperties}>
       <Centrado hoja={r.hoja}>
-        <SpriteHoja key={`${r.hoja}-${accion}`} src={r.hoja} anim={accion} bucle />
+        <SpriteHoja key={`${r.hoja}-${accion}`} src={r.hoja} anim={accion} bucle alCuadro={efectos.alCuadro} />
       </Centrado>
+      {efectos.capa}
     </div>
+  );
+}
+/** La guía de estaturas (cm): el tamaño de cada uno en el visor del pixel art. */
+const ESTATURAS = estaturasJson.personajes as Record<string, number>;
+const ESTATURA_MAX = Math.max(...Object.keys(galeriaEs.rpg).map((h) => ESTATURAS[(galeriaEs.rpg as Record<string, { personaje: string }>)[h].personaje] ?? 165));
+const COLOR_BALAS = colorBalas(Object.values(import.meta.glob<DatosBatalla>('../data/batallas/*.json', { eager: true, import: 'default' })));
+
+/** «Pixel art»: los personajes del combate que ya aparecieron en una pelea; sus acciones se desbloquean al verlas. */
+function PixelArt() {
+  const t = useT();
+  const g = useGalleryState();
+  const texts = useTexts();
+  const [open, setOpen] = useState<number | null>(null);
+  const [accion, setAccion] = useState('idle');
+  const lista = g.rpgTodos;
+  return (
+    <>
+      <div className="sprite-grid pixel-grid">
+        {TODOS_RPG.map((r) => {
+          const i = lista.findIndex((x) => x.hoja === r.hoja);
+          const nombre = texts.personajes[(galeriaEs.rpg as Record<string, { personaje: string }>)[r.hoja].personaje];
+          return i < 0 ? (
+            <div key={r.hoja} className="sprite-item sprite-item-rpg locked">
+              <span className="sprite-cell">???</span>
+              <span className="sprite-name">???</span>
+            </div>
+          ) : (
+            <button key={r.hoja} className="sprite-item sprite-item-rpg" onClick={() => setOpen(i)}>
+              <span className="sprite-cell">
+                <span className="sprite-rpg-mini">
+                  <Centrado hoja={r.hoja}>
+                    <SpriteHoja src={r.hoja} anim="idle" />
+                  </Centrado>
+                </span>
+              </span>
+              <span className="sprite-name">{nombre}</span>
+            </button>
+          );
+        })}
+      </div>
+      {!lista.length && <p className="muted">{t('galeria.pixel_vacio')}</p>}
+      {open !== null && lista[open] && (
+        <Viewer
+          sprite
+          contenido={(i) => <SpriteRpgVista r={lista[i]} accion={accion} />}
+          ficha={(i) => <AccionesRpg r={lista[i]} accion={accion} onAccion={setAccion} />}
+          src={() => ''}
+          label={(i) => `${texts.personajes[(galeriaEs.rpg as Record<string, { personaje: string }>)[lista[i].hoja].personaje]} · ${t('galeria.pixel_art')}`}
+          info={(i) => ({ file: `${lista[i].hoja}.png`, text: texts.rpg[lista[i].hoja]?.info ?? '' })}
+          onShow={() => setAccion('idle')}
+          count={lista.length}
+          index={open}
+          onIndex={setOpen}
+          onClose={() => setOpen(null)}
+        />
+      )}
+    </>
   );
 }
 
@@ -875,14 +966,17 @@ function SpriteRpgVista({ r, accion }: { r: SpriteRpg; accion: string }) {
  * especial), así que se corre según dónde está su cuerpo en reposo (`centro_x` de la hoja).
  */
 function Centrado({ hoja, children }: { hoja: string; children: ReactNode }) {
-  const [corre, setCorre] = useState(0);
+  const [corre, setCorre] = useState<[number, number]>([0, 0]);
   useEffect(() => {
     void fetch(`${import.meta.env.BASE_URL}${hoja}.json`)
       .then((x) => x.json())
-      .then((j: { frameWidth: number; centro_x?: number }) => setCorre(j.centro_x ? (j.frameWidth / 2 - j.centro_x) / j.frameWidth : 0));
+      .then((j: Hoja & { cuerpo?: [number, number, number, number] }) => {
+        const c = j.cuerpo;
+        if (c) setCorre([(j.frameWidth / 2 - (c[0] + c[2]) / 2) / j.frameWidth, (j.frameHeight / 2 - (c[1] + c[3]) / 2) / j.frameHeight]);
+      });
   }, [hoja]);
   return (
-    <span className="rpg-centrado" style={{ translate: `${corre * 100}% 0` }}>
+    <span className="rpg-centrado" style={{ '--cx': `${corre[0] * 100}%`, '--cy': `${corre[1] * 100}%` } as CSSProperties}>
       {children}
     </span>
   );
@@ -894,6 +988,7 @@ const ACCIONES_FICHA = ['idle', 'ataque', 'beso', 'especial', 'daño', 'derrotad
 /** Las acciones de un sprite del combate (las filas de su hoja, el especial incluido), para verlas en el visor. */
 function AccionesRpg({ r, accion, onAccion }: { r: SpriteRpg; accion: string; onAccion: (a: string) => void }) {
   const t = useT();
+  const vista = useGalleryState().rpgAccionVista;
   const [lista, setLista] = useState<string[]>([]);
   useEffect(() => {
     void fetch(`${import.meta.env.BASE_URL}${r.hoja}.json`)
@@ -905,18 +1000,24 @@ function AccionesRpg({ r, accion, onAccion }: { r: SpriteRpg; accion: string; on
   return (
     <div className="rpg-acciones">
       <span className="rpg-acciones-titulo">{t('galeria.acciones')}</span>
-      {lista.map((a) => (
-        <button
-          key={a}
-          className={a === accion ? 'active' : ''}
-          onClick={() => {
-            playSelect();
-            onAccion(a);
-          }}
-        >
-          {t(`galeria.accion.${a}`)}
-        </button>
-      ))}
+      {lista.map((a) =>
+        vista(r.hoja, a) ? (
+          <button
+            key={a}
+            className={a === accion ? 'active' : ''}
+            onClick={() => {
+              playSelect();
+              onAccion(a);
+            }}
+          >
+            {t(`galeria.accion.${a}`)}
+          </button>
+        ) : (
+          <button key={a} className="bloqueada" disabled title={t('galeria.accion_bloqueada')}>
+            ???
+          </button>
+        ),
+      )}
     </div>
   );
 }

@@ -118,7 +118,8 @@
         "empieza": "{quien} necesita recuperarse de su dolor.",
         "termina": "{quien} ya puede pararse."
       },
-      "sonido": "disparo"
+      "sonido": "disparo",
+      "escala": 1.01
     }
   },
   "enemigos": {
@@ -251,7 +252,7 @@
           "Silencio, civil."
         ]
       },
-      "escala": 1.45,
+      "escala": 1.34,
       "sonido": "disparo",
       "cae_en_cebo": 0.3
     }

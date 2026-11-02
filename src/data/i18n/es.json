@@ -341,5 +341,8 @@
   "galeria.accion.derrotado": "Derrotado",
   "galeria.accion.beso": "Beso",
   "galeria.ocultar_menu": "Ocultar menú",
-  "galeria.mostrar_menu": "Menú"
+  "galeria.mostrar_menu": "Menú",
+  "galeria.pixel_art": "Pixel art",
+  "galeria.pixel_vacio": "Todavía no peleaste con nadie.",
+  "galeria.accion_bloqueada": "Se desbloquea al verla en una pelea."
 }

@@ -118,7 +118,8 @@
         "empieza": "{quien} necesita recuperarse de su dolor.",
         "termina": "{quien} ya puede pararse."
       },
-      "sonido": "disparo"
+      "sonido": "disparo",
+      "escala": 1.01
     }
   },
   "enemigos": {
@@ -223,7 +224,7 @@
           "usos": 5
         }
       ],
-      "escala": 1.6,
+      "escala": 1.54,
       "especial": {
         "nombre": "Desgarro sombrío",
         "poder": 6,

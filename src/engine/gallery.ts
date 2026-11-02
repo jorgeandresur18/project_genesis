@@ -95,6 +95,9 @@ export const SPRITES_RPG: Map<string, SpriteRpg[]> = (() => {
   return map;
 })();
 
+/** Todos los sprites del combate, en orden (la pestaña «Pixel art»). */
+export const TODOS_RPG: SpriteRpg[] = Object.keys(galeria.rpg).map((hoja) => ({ hoja }));
+
 export const TOTAL_SPRITES = CHARACTERS.reduce((n, c) => n + c.sprites.length, 0);
 
 /** Fondo (id) -> escenas donde aparece. */
@@ -157,6 +160,9 @@ export function useGalleryState() {
     images,
     secretImages,
     rpgSprites: (id: string) => (SPRITES_RPG.get(id) ?? []).filter((r) => rpgVistos[r.hoja]),
+    /** Los sprites del combate ya vistos, y si una acción suya ya se vio en una pelea (la base, siempre). */
+    rpgTodos: TODOS_RPG.filter((r) => rpgVistos[r.hoja]),
+    rpgAccionVista: (hoja: string, accion: string) => accion === 'idle' || !!rpgVistos[`${hoja}#${accion}`],
     secretSprites: (id: string) => (SPRITES_SECRETOS.get(id) ?? []).filter((expr) => secretosVistos[`${id}/${expr}`]),
     sprites,
     spriteCount: [...sprites.values()].reduce((n, l) => n + l.length, 0),
