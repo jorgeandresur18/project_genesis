@@ -1479,13 +1479,13 @@ button.sprite-item:hover .sprite-cell img { transform: scale(1.04); }
 .egg-backdrop { position: fixed; inset: 0; z-index: 50; display: flex; align-items: flex-end; justify-content: center; background: rgba(0, 0, 0, 0.62); backdrop-filter: blur(2px); animation: decisions-fade 0.35s ease-out both; }
 .egg-backdrop-out { animation: egg-backdrop-out 0.7s ease-in forwards; }
 @keyframes egg-backdrop-out { to { opacity: 0; } }
-.egg { position: relative; display: flex; margin-right: 24.4rem; animation: egg-in 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
-.egg-nikki { height: min(78vh, 36rem); width: auto; filter: drop-shadow(0 0 1.4rem rgba(255, 111, 165, 0.35)); }
-.egg-side { position: absolute; left: calc(100% + 0.4rem); top: min(14vh, 6.5rem); width: 24rem; display: flex; flex-direction: column; gap: 0.9rem; }
+.egg { position: relative; display: flex; margin-right: 31.4rem; animation: egg-in 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.egg-nikki { height: min(94vh, 48rem); width: auto; filter: drop-shadow(0 0 1.4rem rgba(255, 111, 165, 0.35)); }
+.egg-side { position: absolute; left: calc(100% + 0.4rem); top: min(16vh, 8.5rem); width: 31rem; display: flex; flex-direction: column; gap: 0.9rem; }
 .egg-bubble {
   position: relative;
-  padding: 1.25rem 1.2rem 0.9rem;
-  font-size: 0.95rem;
+  padding: 1.6rem 1.5rem 1.1rem;
+  font-size: 1.2rem;
   line-height: 1.5;
   color: #f2f2f6;
   background: rgba(14, 14, 18, 0.96);
@@ -1495,12 +1495,14 @@ button.sprite-item:hover .sprite-cell img { transform: scale(1.04); }
 }
 /* Cola del globo: apunta a la izquierda, a la cabeza de Nikki. */
 .egg-bubble::before,
-.egg-bubble::after { content: ''; position: absolute; top: 2.2rem; border: 0.8rem solid transparent; border-left: 0; }
-.egg-bubble::before { left: -0.82rem; border-right-color: rgba(255, 111, 165, 0.7); }
-.egg-bubble::after { left: -0.74rem; border-right-color: #0e0e12; }
-.egg-name { position: absolute; top: 0; left: 0.9rem; transform: translateY(-55%); padding: 0.15rem 0.75rem; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; font-weight: 600; color: #0b0b0d; background: #ff6fa5; border-radius: 0.35rem; }
+.egg-bubble::after { content: ''; position: absolute; top: 2.6rem; border: 1rem solid transparent; border-left: 0; }
+.egg-bubble::before { left: -1.02rem; border-right-color: rgba(255, 111, 165, 0.7); }
+.egg-bubble::after { left: -0.94rem; border-right-color: #0e0e12; }
+.egg-name { position: absolute; top: 0; left: 0.9rem; transform: translateY(-55%); padding: 0.15rem 0.75rem; font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 600; color: #0b0b0d; background: #ff6fa5; border-radius: 0.35rem; }
 .egg-bubble p { margin: 0 0 0.5rem; }
-.egg-actions { display: flex; flex-direction: column; align-items: stretch; gap: 0.6rem; animation: egg-in 0.3s ease-out both; }
+.egg-actions { display: flex; align-items: stretch; gap: 0.8rem; margin-top: 2.2rem; animation: egg-in 0.3s ease-out both; }
+.egg-actions .egg-donate { flex: 1.6; }
+.egg-actions .egg-later { flex: 1; }
 .egg-actions .egg-next { align-self: flex-end; }
 .egg-donate {
   position: relative;
@@ -1509,24 +1511,30 @@ button.sprite-item:hover .sprite-cell img { transform: scale(1.04); }
   justify-content: center;
   gap: 0.55rem;
   overflow: hidden;
-  padding: 0.85rem 1.4rem;
+  padding: 1.05rem 1.6rem;
   border-radius: 999px;
   color: #1b2a4e;
-  font-size: 1.05rem;
+  font-size: 1.25rem;
   font-weight: 700;
   text-decoration: none;
   background: linear-gradient(180deg, #ffe08a 0%, #ffc439 45%, #f0a91c 100%);
-  border: 1px solid #e3a21a;
+  border: 2px solid #ffe7a3;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), inset 0 -2px 0 rgba(160, 100, 0, 0.25), 0 0.5rem 1.6rem rgba(255, 196, 57, 0.35);
   transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
+  /* Llama la atención: late suave y su resplandor dorado crece y se apaga. */
+  animation: egg-late 1.8s ease-in-out infinite;
 }
-.egg-donate img { height: 1.45rem; width: auto; }
+@keyframes egg-late {
+  0%, 100% { scale: 1; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), inset 0 -2px 0 rgba(160, 100, 0, 0.25), 0 0 0 0 rgba(255, 196, 57, 0.55), 0 0.5rem 1.6rem rgba(255, 196, 57, 0.35); }
+  50% { scale: 1.04; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), inset 0 -2px 0 rgba(160, 100, 0, 0.25), 0 0 0 0.55rem rgba(255, 196, 57, 0), 0 0.6rem 2.6rem rgba(255, 196, 57, 0.75); }
+}
+.egg-donate img { height: 1.75rem; width: auto; }
 /* Brillo que cruza el botón cada tanto. */
 .egg-donate::after { content: ''; position: absolute; top: 0; bottom: 0; left: -40%; width: 30%; background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.55), transparent); transform: skewX(-20deg); animation: egg-shine 3.2s ease-in-out 0.6s infinite; }
 @keyframes egg-shine { 0%, 60% { left: -40%; } 100% { left: 130%; } }
 .egg-donate:hover { transform: translateY(-2px); filter: brightness(1.05); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), inset 0 -2px 0 rgba(160, 100, 0, 0.25), 0 0.8rem 2.2rem rgba(255, 196, 57, 0.5); }
-.egg-later { padding: 0.75rem 1.4rem; border-radius: 999px; font-size: 0.95rem; background: rgba(14, 14, 18, 0.85); border-color: rgba(214, 218, 226, 0.35); }
-@media (prefers-reduced-motion: reduce) { .egg-donate::after { animation: none; display: none; } }
+.egg-later { padding: 0.75rem 1.2rem; border-radius: 999px; font-size: 1.05rem; background: rgba(14, 14, 18, 0.85); border-color: rgba(214, 218, 226, 0.35); }
+@media (prefers-reduced-motion: reduce) { .egg-donate { animation: none; } .egg-donate::after { animation: none; display: none; } }
 .egg-bye { animation: egg-glitch-out 0.7s steps(1) both; }
 @keyframes egg-in { from { opacity: 0; transform: translateY(20px); } }
 @keyframes egg-glitch-out {
@@ -1538,7 +1546,7 @@ button.sprite-item:hover .sprite-cell img { transform: scale(1.04); }
   80% { opacity: 0.3; clip-path: inset(48% 0 48% 0); }
   100% { opacity: 0; clip-path: inset(50% 0 50% 0); }
 }
-@media (max-height: 520px), (max-width: 760px) { .egg-nikki { height: 82vh; } .egg { margin-right: 17.4rem; } .egg-side { width: 17rem; top: 8vh; gap: 0.5rem; } .egg-bubble { font-size: 0.72rem; padding: 0.85rem 0.8rem 0.55rem; } .egg-bubble p { margin-bottom: 0.3rem; } .egg-donate, .egg-later { padding: 0.45rem 0.9rem; font-size: 0.78rem; } .egg-donate img { height: 1rem; } }
+@media (max-height: 520px), (max-width: 760px) { .egg-nikki { height: 82vh; } .egg { margin-right: 17.4rem; } .egg-side { width: 17rem; top: 8vh; gap: 0.5rem; } .egg-actions { margin-top: 0.8rem; gap: 0.5rem; } .egg-name { font-size: 0.75rem; } .egg-donate { white-space: nowrap; gap: 0.35rem; } .egg-actions .egg-donate { flex: 1.8; } .egg-bubble { font-size: 0.72rem; padding: 0.85rem 0.8rem 0.55rem; } .egg-bubble p { margin-bottom: 0.3rem; } .egg-donate, .egg-later { padding: 0.45rem 0.9rem; font-size: 0.78rem; } .egg-donate img { height: 1rem; } }
 
 /* Clic en el logo: glitch de colores corto y sutil. */
 .logo-float[data-hit] > img:first-child { animation: logo-hit 0.22s steps(1) 1; }
