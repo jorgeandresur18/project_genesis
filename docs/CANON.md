@@ -6,7 +6,7 @@ Personajes ficticios del mundo real de la historia (no son personas reales; conf
 
 ## 0. Título
 
-El juego se llama **PROJECT GENESIS**. Antes se escribía «PROYECT» por un error de ortografía; el autor lo corrigió el 2026-10-31 (logo nuevo: `docs/Logotipo cromado futurista Project Genesis.png`). Las direcciones web (`project-genesis-yeah.vercel.app` y el repositorio `proyect_genesis`) todavía tienen la grafía vieja. `[CANON]`
+El juego se llama **PROJECT GENESIS**. Antes se escribía «PROYECT» por un error de ortografía; el autor lo corrigió el 2026-10-31 (logo nuevo: `docs/Logotipo cromado futurista Project Genesis.png`). Las direcciones ya usan la grafía nueva: la página `project-genesis-yeah.vercel.app` y el repositorio `project_genesis` (renombrado el 2026-11-02; la dirección vieja redirige). `[CANON]`
 
 ## 1. Premisa
 
