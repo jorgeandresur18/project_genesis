@@ -283,5 +283,6 @@
   "batalla.aprende": "{quien} aprendió un movimiento nuevo: {ataque}.",
   "batalla.cebo_aparece": "La copia no hace nada. Solo está ahí. Con suerte, alguien le pega a ella.",
   "batalla.cebo_cae": "{quien} (el cebo) se deshace al primer golpe. Cumplió su único trabajo.",
-  "batalla.desc.cebo": "Deja una copia tuya en blanco y negro. No hace nada: a veces el rival le pega a ella en vez de a ti, y se deshace al primer golpe. El movimiento más inútil que existe, salvo para escaparte del trabajo si tu jefe no se da cuenta."
+  "batalla.desc.cebo": "Deja una copia tuya en blanco y negro. No hace nada: a veces el rival le pega a ella en vez de a ti, y se deshace al primer golpe. El movimiento más inútil que existe, salvo para escaparte del trabajo si tu jefe no se da cuenta.",
+  "batalla.cebo_se_va": "{quien} (el cebo) se evapora. Nadie le hizo caso."
 }

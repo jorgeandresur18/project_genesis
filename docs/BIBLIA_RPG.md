@@ -26,7 +26,7 @@ Cada luchador tiene cuatro estadísticas:
 
 - Cada personaje tiene sus estadísticas en el nivel 1 (`base`) y cuánto sube cada una por nivel (`crece`).
   En el nivel N: `base + crece × (N − 1)`.
-- **Movimientos que se aprenden** (`aprende`): al llegar a un nivel, el héroe aprende un ataque nuevo (sale el aviso). Jair, en el nivel 6: **Cebo**, una copia suya en blanco y negro, inerte (un solo cuadro, sin animación), que no hace nada; el 55 % de los golpes a uno solo van a ella en vez de a un héroe (`CEBO`; los de efecto, no), y se deshace al primer golpe. Uno a la vez. «El movimiento más básico de cualquier peleador, e inútil; sirve para escaparse del trabajo si el jefe no se da cuenta».
+- **Movimientos que se aprenden** (`aprende`): al llegar a un nivel, el héroe aprende un ataque nuevo (sale el aviso). Jair, en el nivel 6: **Cebo**, una copia suya en blanco y negro, inerte (un solo cuadro, sin animación), que no hace nada; los golpes a uno solo pueden ir a ella en vez de a un héroe según cuánto cae en el cebo quien ataca (`cae_en_cebo`: los tontos o débiles, mucho; los listos, poco; si no se dice, 55 %; los de efecto nunca), y se deshace al primer golpe. Si nadie le pega, se evapora a los 3 turnos (`CEBO_TURNOS`). Uno a la vez. Hoy: soldados 85 %, monstruo de sombras 35 %, Nikki 10 % (conoce a Jair). «El movimiento más básico de cualquier peleador, e inútil; sirve para escaparse del trabajo si el jefe no se da cuenta».
 - **Experiencia:** cada enemigo que cae da `nivel del enemigo × 3` de experiencia a cada héroe de pie. Para pasar
   del nivel N al siguiente hacen falta `N × 10`. Al subir, las estadísticas pasan a las del nivel nuevo y los PS
   suben lo mismo que el máximo.

@@ -162,7 +162,8 @@
         ],
         "carga": 50,
         "probabilidad": 0.08
-      }
+      },
+      "cae_en_cebo": 0.1
     }
   },
   "horda": {

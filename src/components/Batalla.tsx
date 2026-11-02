@@ -10,6 +10,7 @@ import {
   CARGA,
   CARGA_LLENA,
   ESPECIAL_MS,
+  CEBO_TURNOS,
   CEBO,
   crearCebo,
   aprendeEn,
@@ -203,7 +204,7 @@ function Pelea({
     paralizadoRecien: [] as string[],
     confundidoRecien: [] as string[],
     /** Los cebos (copias de un héroe que no hacen nada): aparte de los héroes, con dónde se dibujan. */
-    cebos: [] as { l: Luchador; de: string; x: number; y: number }[],
+    cebos: [] as { l: Luchador; de: string; x: number; y: number; turnos: number }[],
     /** Los que no pueden actuar en este turno (Cami, un turno sí y uno no). */
     descansan: [] as string[],
     /** Los que se ven descansando (Cami agachada): desde que actúan hasta el final del turno siguiente. */
@@ -488,18 +489,37 @@ function Pelea({
     // Uno solo por héroe: el viejo se va.
     b.current.cebos = b.current.cebos.filter((x) => x.de !== h.id && vivo(x.l));
     const k = crearCebo(h, `${h.id}-cebo-${Date.now()}`);
-    b.current.cebos.push({ l: k, de: h.id, x: r && lado ? r.left - lado.left - r.width * 0.45 : 0, y: r && lado ? r.top - lado.top : 0 });
+    // El turno en que aparece cuenta (los enemigos ya pueden pegarle).
+    b.current.cebos.push({ l: k, de: h.id, x: r && lado ? r.left - lado.left - r.width * 0.45 : 0, y: r && lado ? r.top - lado.top : 0, turnos: CEBO_TURNOS });
     efecto(k.id, 'aparece-cebo', 700);
     playChip('cambio');
     forzar();
     await decir(fmt(t('batalla.cebo_aparece'), { quien: h.nombre }));
   };
-  /** A veces el golpe a uno solo va al cebo. */
-  const desviar = (blancos: Luchador[]) => {
+  /** A veces el golpe a uno solo va al cebo (según cuánto cae en él quien ataca). */
+  const desviar = (blancos: Luchador[], quien: Luchador) => {
     const cebos = b.current.cebos.map((x) => x.l).filter(vivo);
     if (!cebos.length) return blancos;
     if (blancos.length > 1) return [...blancos, ...cebos];
-    return Math.random() < CEBO ? [azar(cebos)] : blancos;
+    return Math.random() < (d.enemigos[quien.clave]?.cae_en_cebo ?? CEBO) ? [azar(cebos)] : blancos;
+  };
+  /** Al final de cada turno, el cebo al que nadie le pegó se acerca a evaporarse. */
+  const evaporarCebos = async () => {
+    let alguno = false;
+    for (const c of b.current.cebos.filter((x) => vivo(x.l))) {
+      if (--c.turnos > 0) continue;
+      alguno = true;
+      c.l.ps = 0;
+      void animar(c.l.id, 'ko');
+      playChip('vortice');
+      forzar();
+      await decir(fmt(t('batalla.cebo_se_va'), { quien: c.l.nombre }));
+    }
+    if (!alguno) return;
+    setTimeout(() => {
+      b.current.cebos = b.current.cebos.filter((x) => vivo(x.l));
+      forzar();
+    }, 900);
   };
   /** Los cebos que recibieron un golpe se deshacen (y se van). */
   const limpiarCebos = async () => {
@@ -707,6 +727,7 @@ function Pelea({
     forzar();
     if (!b.current.heroes.some(vivo)) return 'pierde';
     await evaporar();
+    await evaporarCebos();
     await ayudar();
     await levantarse();
     return 'sigue';
@@ -1187,7 +1208,7 @@ function Pelea({
     const elige = eligeEspecial(e, d.enemigos[e.clave], b.current.heroes, b.current.enemigos);
     if (elige?.tipo === 'clon') return clonar(e);
     if (elige && esp) {
-      await usarEspecial(e, esp, d.enemigos[e.clave].sprite, hs, desviar([elige.blanco ?? azar(hs)])[0]);
+      await usarEspecial(e, esp, d.enemigos[e.clave].sprite, hs, desviar([elige.blanco ?? azar(hs)], e)[0]);
       return limpiarCebos();
     }
     // La parálisis solo va contra los que todavía se mueven (si nadie se mueve, ataca de otra forma).
@@ -1195,7 +1216,7 @@ function Pelea({
     const elegido = eligeAtaque(d.enemigos[e.clave].ataques, hs);
     if (!elegido) return;
     const { ataque: a } = elegido;
-    const blancos = a.confunde || a.paraliza ? elegido.blancos : desviar(elegido.blancos);
+    const blancos = a.confunde || a.paraliza ? elegido.blancos : desviar(elegido.blancos, e);
     await decir(a.texto);
     if (a.confunde) return besar(e, a, blancos);
     if (a.paraliza) {

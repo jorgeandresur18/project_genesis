@@ -108,6 +108,11 @@ export interface Enemigo {
   /** Al retirarse, se va hacia atrás hasta salir de la pantalla (la sombra, hecha vórtice). */
   sale_atras?: boolean;
   /**
+   * Cuánto cae en el cebo: probabilidad de que un golpe suyo a uno solo vaya al cebo (si hay uno). Los tontos o
+   * débiles, mucho (los soldados); los listos, poco (Nikki conoce a Jair). Si no está, CEBO.
+   */
+  cae_en_cebo?: number;
+  /**
    * Remata: si a un héroe le queda menos de `vida` (parte de sus PS), usa su especial apenas tiene `carga` en la
    * barra (aunque no esté llena), contra ese héroe (Nikki).
    */
@@ -435,8 +440,10 @@ export const ataquesDe = (h: { nivel: number }, d: Heroe): Ataque[] => [
 /** Lo que aprende justo al llegar a ese nivel. */
 export const aprendeEn = (d: Heroe, nivel: number): Ataque[] => (d.aprende ?? []).filter((x) => x.nivel === nivel).map((x) => x.ataque);
 
-/** Probabilidad de que un golpe a uno solo vaya al cebo (si hay uno en pie). */
+/** Probabilidad de que un golpe a uno solo vaya al cebo (si hay uno en pie), si el enemigo no dice otra. */
 export const CEBO = 0.55;
+/** Turnos que dura un cebo si nadie le pega: después se evapora. */
+export const CEBO_TURNOS = 3;
 /** Crea el cebo de un héroe: su copia en blanco y negro, con 1 PS y sin poder hacer nada. */
 export function crearCebo(h: Luchador, id: string): Luchador {
   return { ...h, id, ps: 1, psMax: 1, extra: 0, extraDef: 0, carga: 0, esquivando: false, distraido: false, paralizado: 0, confundido: 0, cebo: true };

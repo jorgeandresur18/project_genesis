@@ -221,7 +221,8 @@
         "posicion": "objetivo"
       },
       "escala": 1.15,
-      "sonido": "espada"
+      "sonido": "espada",
+      "cae_en_cebo": 0.85
     },
     "sombra": {
       "nombre": "Monstruo de sombras",
@@ -279,7 +280,8 @@
       },
       "sonido": "tajada",
       "al_retirarse": "retirada",
-      "sale_atras": true
+      "sale_atras": true,
+      "cae_en_cebo": 0.35
     }
   },
   "horda": {
