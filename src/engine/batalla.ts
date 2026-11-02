@@ -509,7 +509,13 @@ export const vivo = (l: Luchador) => l.ps > 0;
 export interface Progreso {
   heroes: Record<string, { nivel: number; xp: number }>;
   mochila: Record<string, number>;
+  /** Las monedas de la partida (para Boringplace); sin ninguna, no está. */
+  monedas?: number;
 }
+
+/** Monedas que da un enemigo al caer (según su nivel) y el jefe al retirarse (por nivel). */
+export const monedasDe = (nivel: number) => nivel * 2;
+export const monedasJefe = (nivel: number) => nivel * 5;
 
 /**
  * El progreso guardado en las variables: `nivel_<héroe>`, `xp_<héroe>` (nivel 0: todavía no peleó; se usa el del
@@ -523,6 +529,7 @@ export function progresoDeVars(vars: Vars): Progreso {
     if (nivel && v > 0) p.heroes[nivel[1]] = { nivel: v, xp: typeof vars[`xp_${nivel[1]}`] === 'number' ? (vars[`xp_${nivel[1]}`] as number) : 0 };
     const obj = k.match(/^mochila_(.+)$/);
     if (obj && v > 0) p.mochila[obj[1]] = v;
+    if (k === 'monedas' && v > 0) p.monedas = v;
   }
   return p;
 }
@@ -532,5 +539,6 @@ export function varsDeProgreso(p: Progreso, objetos: string[]): Vars {
     ...Object.fromEntries(Object.entries(p.heroes).flatMap(([k, { nivel, xp }]) => [[`nivel_${k}`, nivel], [`xp_${k}`, xp]])),
     // También los que se gastaron (quedan en 0).
     ...Object.fromEntries(objetos.map((k) => [`mochila_${k}`, p.mochila[k] ?? 0])),
+    ...(p.monedas !== undefined ? { monedas: p.monedas } : {}),
   };
 }

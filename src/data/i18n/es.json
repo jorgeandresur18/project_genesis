@@ -320,5 +320,8 @@
   "equipo.tipo_equipo": "Equipo",
   "equipo.tipo_coleccion": "Colección",
   "batalla.tag_paralizado": "parálisis",
-  "batalla.cebo_ya": "Ya hay un cebo. Dos copias que no hacen nada siguen sin hacer nada."
+  "batalla.cebo_ya": "Ya hay un cebo. Dos copias que no hacen nada siguen sin hacer nada.",
+  "batalla.xp_monedas": "Ganan {n} de experiencia y {m} monedas.",
+  "batalla.monedas_jefe": "{quien} deja {m} monedas tiradas en el piso. Nadie pregunta de dónde las sacó.",
+  "equipo.monedas": "Monedas:"
 }

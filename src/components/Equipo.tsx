@@ -33,6 +33,9 @@ export function EquipoPanel({ onClose }: { onClose: () => void }) {
   const mochila = Object.entries(progreso.mochila).filter(([k, n]) => n > 0 && OBJETOS.has(k));
   return (
     <Panel title={t('equipo.titulo')} onClose={onClose} wide>
+      <p className="equipo-monedas">
+        {t('equipo.monedas')} <b>{progreso.monedas ?? 0}</b>
+      </p>
       <div className="equipo-pestanas" role="tablist">
         {(['personajes', 'mochila'] as const).map((p) => (
           <button

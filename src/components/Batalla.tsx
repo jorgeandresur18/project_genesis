@@ -10,6 +10,8 @@ import {
   CARGA,
   CARGA_LLENA,
   ESPECIAL_MS,
+  monedasJefe,
+  monedasDe,
   tickVeneno,
   usableEnPelea,
   objetivoDe,
@@ -190,6 +192,8 @@ function Pelea({
     ),
     enemigos: [] as Luchador[],
     // Con lo que empieza la mochila si tiene menos (p. ej. un revivir).
+    /** Las monedas de la partida (lo que traía más lo que se gana en esta pelea). */
+    monedas: progreso?.monedas ?? 0,
     mochila: Object.fromEntries(
       [...new Set([...Object.keys(progreso?.mochila ?? {}), ...Object.keys(d.mochila_inicial ?? {})])].map((k) => [
         k,
@@ -620,7 +624,7 @@ function Pelea({
   const azar = <T,>(lista: T[]) => lista[Math.floor(Math.random() * lista.length)];
   const varsFinales = () =>
     varsDeProgreso(
-      { heroes: Object.fromEntries(b.current.heroes.map((h) => [h.clave, { nivel: h.nivel, xp: h.xp }])), mochila: b.current.mochila },
+      { heroes: Object.fromEntries(b.current.heroes.map((h) => [h.clave, { nivel: h.nivel, xp: h.xp }])), mochila: b.current.mochila, monedas: b.current.monedas },
       Object.keys(d.objetos),
     );
 
@@ -860,6 +864,13 @@ function Pelea({
       }
       b.current.heroes.filter(vivo).forEach((h) => animar(h.id, 'victoria'));
       await lineas('victoria');
+      // Hacer retirar al jefe deja monedas.
+      if (jefe) {
+        const m = monedasJefe(jefe.nivel);
+        b.current.monedas += m;
+        playChip('vida');
+        await decir(fmt(t('batalla.monedas_jefe'), { quien: jefe.nombre, m }));
+      }
       // El premio por hacerlo retirar (Nikki: el caramelo rancio).
       for (const [k, n] of Object.entries(d.premio?.objetos ?? {})) {
         b.current.mochila[k] = (b.current.mochila[k] ?? 0) + n;
@@ -955,7 +966,10 @@ function Pelea({
     if (e.clon !== undefined) return decir(fmt(t('batalla.clon_cae'), { quien: e.nombre }));
     await decir(fmt(t('batalla.cae'), { quien: e.nombre }));
     const xp = xpDe(e.nivel);
-    await decir(fmt(t('batalla.xp'), { n: xp }));
+    // Experiencia para todos y monedas para la partida.
+    const m = monedasDe(e.nivel);
+    b.current.monedas += m;
+    await decir(fmt(t('batalla.xp_monedas'), { n: xp, m }));
     for (const h of b.current.heroes.filter(vivo)) {
       for (const nivel of ganarXp(h, d.personajes[h.clave], xp)) {
         playChip('vida');

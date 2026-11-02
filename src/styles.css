@@ -2987,3 +2987,6 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 .equipo-stats dd { white-space: nowrap; }
 .equipo-personajes { grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr)); }
 @media (max-width: 700px) { .equipo-personajes { grid-template-columns: 1fr; } .equipo-ficha { grid-template-columns: 7rem 1fr; } .equipo-sprite { width: 7rem; } .equipo-sprite .batalla-sprite { zoom: 0.95; } }
+
+.equipo-monedas { float: right; margin: 0.3rem 0 0; color: #9a958a; }
+.equipo-monedas b { color: #ffd76a; font-family: 'Press Start 2P', monospace; font-size: 0.75rem; }

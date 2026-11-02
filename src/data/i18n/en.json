@@ -320,5 +320,8 @@
   "equipo.tipo_equipo": "Gear",
   "equipo.tipo_coleccion": "Collection",
   "batalla.tag_paralizado": "paralyzed",
-  "batalla.cebo_ya": "There is already a decoy. Two copies that do nothing still do nothing."
+  "batalla.cebo_ya": "There is already a decoy. Two copies that do nothing still do nothing.",
+  "batalla.xp_monedas": "They gain {n} experience and {m} coins.",
+  "batalla.monedas_jefe": "{quien} leaves {m} coins on the floor. Nobody asks where they came from.",
+  "equipo.monedas": "Coins:"
 }

@@ -140,8 +140,8 @@ describe('batallas por turnos', () => {
     expect(jair.atq).toBe(statsEn(d.personajes.jair.base, d.personajes.jair.crece, 6).atq);
   });
 
-  it('el nivel, la experiencia y la mochila se guardan en variables declaradas y vuelven igual', () => {
-    const p = { heroes: { jair: { nivel: 7, xp: 12 }, cami: { nivel: 15, xp: 40 } }, mochila: { vida: 2, atq: 1 } };
+  it('el nivel, la experiencia, la mochila y las monedas se guardan en variables declaradas y vuelven igual', () => {
+    const p = { heroes: { jair: { nivel: 7, xp: 12 }, cami: { nivel: 15, xp: 40 } }, mochila: { vida: 2, atq: 1 }, monedas: 38 };
     const vars = varsDeProgreso(p, ['atq', 'def', 'vida']);
     for (const k of Object.keys(vars)) expect(variables, k).toHaveProperty(k);
     // Lo que se gastó queda en 0.

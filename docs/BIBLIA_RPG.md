@@ -294,8 +294,9 @@ cosas raras; los chistes van en las descripciones.
 - **A quién se aplica:** cada objeto lo dice (a ti, a un aliado, a todo el equipo, a un rival, a todos los rivales).
 - **Equipo:** tres espacios por personaje: **cabeza** (un gorro…), **traje** (ropa, armadura, un vestido: no se separan pantalones) y **amuleto**.
 - **Estados nuevos:** envenenado y protegido.
-- **Monedas:** al final de cada pelea, según el nivel de los enemigos; se guardan en la partida (como los niveles y la
-  mochila).
+- **Monedas** (**hecho**): cada enemigo que cae da `nivel × 2` monedas (junto con la experiencia), y hacer retirar al
+  jefe da `nivel × 5`. Los clones y los cebos no dan nada. Se guardan en la partida (`monedas`, como los niveles y la
+  mochila; perder la pelea no las guarda) y se ven en el panel de Equipo. Hoy el Bastión da unas 124.
 - **Boringplace es la tienda:** cada publicación es un objeto con su precio y «Comprar». «Tus artículos» es lo que
   tienes (mochila y equipo que no llevas puesto), para **vender a la mitad** de lo que cuesta. Los artículos que hay
   hoy son placeholders.
@@ -318,7 +319,7 @@ cosas raras; los chistes van en las descripciones.
   primera vez que se pasó por ahí).
 - **Stock limitado:** lo permanente (caramelos, suplementos) se vende de a poco por capítulo (p. ej. un caramelo
   rancio por capítulo) y es caro. Vender a la mitad impide ganar plata comprando y vendiendo.
-- **Orden de construcción:** 1) tipos de objeto y estados nuevos (**hecho**); 2) monedas; 3) comprar y vender en Boringplace
+- **Orden de construcción:** 1) tipos de objeto y estados nuevos (**hecho**); 2) monedas (**hecho**); 3) comprar y vender en Boringplace
   (en el juego y desde el título); 4) el panel de Equipo.
 
 ## 15. Pendientes e ideas
