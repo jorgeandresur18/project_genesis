@@ -143,10 +143,22 @@
       "titulo": "A personal note",
       "parrafos": [
         "I made this game during a time stuck in a precarious job. I am a software engineer and I have not been able to land a better job: I interviewed at good companies and did not get into any of them. PROJECT GENESIS was born as a way to let off steam.",
-        "I would come home from work and get to it. I poured hours into it, especially Chapter 1: across one Friday, Saturday and Sunday I slept about six hours in total, two a night. I was going through something I am not sure was depression: I did not feel like going out anywhere and, instead of going out, I would rather sit down and work on this with a beer in my hand. I used the holidays to keep going, even though my legs hurt from so many hours pressed against the chair. And I kept going.",
-        "And no, I am not writing this to make you feel sorry for me: that is Jair's job, and he is way better at it than I am. I just wanted to share it, so you can see how much weight I am putting into this.",
+        "I would come home from work and get to it, partly just to have something to do instead of spending my nights drinking beer and smoking cheap cigarettes. I poured hours into it, especially Chapter 1: across one Friday, Saturday and Sunday I slept about six hours in total, two a night. I was going through something I am not sure was depression: I did not feel like going out anywhere and, instead of going out, I would rather sit down and work on this, even if it was with a beer in my hand. I used the holidays to keep going, even though my legs hurt from so many hours pressed against the chair. And I kept going.",
+        "And no, I am not writing this to make you feel sorry for me. I just wanted to share it, so you can see how much weight I am putting into this.",
         "I apologize for the shameless use of artificial intelligence in the sprites: it is what I had at hand. AI is here to stay, and without it this would never have been possible for a single person. I am not a game developer: my thing is web development, building SaaS software that, more than solving problems, prevents them.",
-        "But I am still at it, and I hope I do not give up along the way. I promise that one day every sprite will be redrawn by artists."
+        "But I am still at it, and I hope I do not give up along the way. I promise that one day every sprite will be redrawn by artists.",
+        "While we are at it: my fondness for drinking has a dream. One day I want to go to Japan and lose consciousness in one of those tiny bars, the izakayas, with a Sapporo beer or some sake. And maybe end the night at an arcade playing the claw machines, completely drunk but happy.",
+        "I prefer craft beer: I like trying new kinds. Strong at night, light on a hot day. If you are ever in Guayaquil, Ecuador, I recommend the Cherusker bar, very close to the places where I have worked. I am already tired of going, but it is very popular and usually packed, and it is even better when there are cover band concerts.",
+        "And one last recommendation: I really appreciate Ecuadorian bands, especially Lolabúm, whom I have followed since their beginnings. I prefer the dirtier, lo-fi aesthetic of their first two albums, and to me \"Tristes Trópicos\" is their masterpiece. Go listen to it."
+      ],
+      "canciones": [
+        {
+          "personaje": "",
+          "cancion": "Tristes Trópicos",
+          "banda": "Lolabúm",
+          "nota": "Their masterpiece (2018).",
+          "spotify": "https://open.spotify.com/album/5Db5UP6d1ccr8UvILSxv0L"
+        }
       ]
     },
     {

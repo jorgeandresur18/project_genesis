@@ -143,10 +143,22 @@
       "titulo": "Una nota personal",
       "parrafos": [
         "Hice este juego durante una época en un trabajo precario. Soy ingeniero de software y no he podido conseguir un trabajo mejor: tuve entrevistas en buenas empresas y no quedé en ninguna. PROJECT GENESIS nació como desahogo.",
-        "Llegaba del trabajo y me ponía a hacer esto. Le dediqué horas, sobre todo al Capítulo 1: entre un viernes, un sábado y un domingo dormí unas seis horas en total, dos por noche. Estaba atravesando algo que no sé si era depresión: no tenía ganas de salir a ningún lado y, en vez de salir, prefería sentarme a trabajar en esto con una cerveza en la mano. Aproveché los feriados para avanzar, aunque me dolían las piernas de tantas horas contra la silla. Y seguí.",
-        "Y no, no escribo esto para dar puta lástima: para eso ya está Jair, que lo hace mucho mejor que yo. Solo quería compartirlo, para que vean el peso que le estoy dando a esto.",
+        "Llegaba del trabajo y me ponía a hacer esto, también para tener algo que hacer y no pasar las noches tomando cervezas y fumando cigarrillos baratos. Le dediqué horas, sobre todo al Capítulo 1: entre un viernes, un sábado y un domingo dormí unas seis horas en total, dos por noche. Estaba atravesando algo que no sé si era depresión: no tenía ganas de salir a ningún lado y, en vez de salir, prefería sentarme a trabajar en esto, aunque fuera con una cerveza en la mano. Aproveché los feriados para avanzar, aunque me dolían las piernas de tantas horas contra la silla. Y seguí.",
+        "Y no, no escribo esto para dar puta lástima. Solo quería compartirlo, para que vean el peso que le estoy dando a esto.",
         "Pido disculpas por el uso descarado de la inteligencia artificial en los sprites: es lo que tenía a mano. La IA llegó para quedarse, y sin ella esto jamás habría sido posible para una sola persona. No soy desarrollador de videojuegos: lo mío es el desarrollo web, crear software SaaS que, más que resolver problemas, los evite.",
-        "Pero sigo en esto, y espero no rendirme en el camino. Prometo que algún día todos los sprites van a ser redibujados por artistas."
+        "Pero sigo en esto, y espero no rendirme en el camino. Prometo que algún día todos los sprites van a ser redibujados por artistas.",
+        "Ya que estamos: mi afición por el alcohol tiene un sueño. Algún día quiero ir a Japón y perder la conciencia en uno de esos bares pequeñitos, las izakayas, con una cerveza Sapporo o un sake. Y, tal vez, terminar la noche en un arcade jugando a las máquinas de garra, totalmente ebrio pero feliz.",
+        "Prefiero la cerveza artesanal: me gusta probar tipos nuevos. Fuerte en las noches, ligera en un día de calor. Si pasan por Guayaquil, en Ecuador, les recomiendo el bar Cherusker, que queda muy cerca de los lugares donde he trabajado. Yo ya estoy cansado de ir, pero es muy popular y suele llenarse, y es mejor cuando hay conciertos de bandas tributo.",
+        "Y una última recomendación: aprecio mucho las bandas ecuatorianas, sobre todo a Lolabúm, que sigo desde sus inicios. Prefiero la estética más sucia y lo-fi de sus dos primeros discos, y para mí «Tristes Trópicos» es su obra maestra. Vayan a escucharlo."
+      ],
+      "canciones": [
+        {
+          "personaje": "",
+          "cancion": "Tristes Trópicos",
+          "banda": "Lolabúm",
+          "nota": "Su obra maestra (2018).",
+          "spotify": "https://open.spotify.com/album/5Db5UP6d1ccr8UvILSxv0L"
+        }
       ]
     },
     {

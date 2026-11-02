@@ -432,7 +432,7 @@ export function AboutPanel({ onClose }: { onClose: () => void }) {
               s.canciones?.map((c) => (
                 <div key={c.cancion} className="about-cancion">
                   <p>
-                    <b>{c.personaje}:</b> «{c.cancion}», {c.banda}. {c.nota}
+                    {c.personaje && <b>{c.personaje}:</b>} «{c.cancion}», {c.banda}. {c.nota}
                   </p>
                   <a
                     className="about-spotify"
