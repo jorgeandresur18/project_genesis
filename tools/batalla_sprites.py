@@ -292,32 +292,6 @@ def hoja_capitan(c: dict):
     return im, meta
 
 
-def mascara_piel(q: np.ndarray) -> np.ndarray:
-    r, g, b, al = (q[..., i].astype(int) for i in range(4))
-    return (al > 200) & (r > 170) & (r > g + 20) & (g > b) & (g > 110) & (b > 70) & (r - b < 150)
-
-
-def igualar_piel(im: np.ndarray, fw: int, fh: int, base: dict, otras: list, cerca: float = 34) -> int:
-    """La piel de todas las animaciones con los tonos del sprite base (el reposo): cada tono de piel pasa al tono base
-    más parecido, solo si está cerca (los brillos y efectos, que están lejos, no se tocan)."""
-    qb = im[base['row'] * fh:(base['row'] + 1) * fh, :base['frames'] * fw]
-    paleta = np.unique(qb[mascara_piel(qb)][:, :3], axis=0).astype(int)
-    cambiados = 0
-    for a in otras:
-        q = im[a['row'] * fh:(a['row'] + 1) * fh, :a['frames'] * fw]
-        m = mascara_piel(q)
-        ys, xs = np.nonzero(m)
-        if not len(ys):
-            continue
-        px = q[ys, xs, :3].astype(int)
-        d = ((px[:, None, :] - paleta[None, :, :]) ** 2).sum(axis=2)
-        k = d.argmin(axis=1)
-        ok = np.sqrt(d[np.arange(len(k)), k]) <= cerca
-        q[ys[ok], xs[ok], :3] = paleta[k[ok]]
-        cambiados += int(ok.sum())
-    return cambiados
-
-
 ANCHO_MAX = 4096
 COLUMNAS = 20
 
@@ -361,9 +335,6 @@ def main():
             if 'seq' in a:
                 anim['seq'] = a['seq']
             meta['animations'][mapa[k]] = anim
-        if nombre == 'rikka':
-            anims = meta['animations']
-            print('rikka: piel igualada al reposo,', igualar_piel(im, fw, fh, anims['idle'], [v for k, v in anims.items() if k != 'idle']), 'pixeles')
         if nombre == 'cami':
             at = c['anims']['attack']
             print('cami: destello rellenado,', rellenar_destello(im, fw, fh, at['row'], at['frames']), 'pixeles')
