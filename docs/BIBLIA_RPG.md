@@ -265,14 +265,46 @@ necesitar nada de esto.
 
 ---
 
-## 14. Pendientes e ideas
+## 14. Tienda, monedas, objetos y equipo (diseño aprobado por el autor, 2026-11-02; por construir)
+
+**Tipos de objeto** (`tipo` en sus datos: decide dónde aparece y cómo se usa). Los objetos son snacks, bebidas y
+cosas raras; los chistes van en las descripciones.
+
+| Tipo | Qué hace | Ejemplos | Se gasta |
+|---|---|---|---|
+| Curación | Devuelve vida o saca de un estado | Agua (+PS), Revivir, algo que quite la confusión o la parálisis | Sí |
+| Mejora temporal | Sube algo hasta el final de la pelea o por unos turnos | Snack de +ATQ, bebida de +DEF, energizante de +VEL, algo de +crítico | Sí |
+| Mejora permanente | Cambia al personaje para siempre | Caramelo dulce (+1 nivel), ácido (−1), rancio (+10); suplementos que suben una estadística | Sí |
+| Táctico | Un efecto sobre un rival o el equipo | Envenenar (daño cada turno, N turnos), confundir, paralizar, cebo; **protección**: a uno o a todos, el próximo golpe no les hace daño (p. ej. el condón: se le da a un compañero) | Sí |
+| Equipo | Se equipa, no se gasta: estadísticas fijas y a veces un efecto pasivo | Ropa, armaduras, accesorios raros (+10 % de crítico, inmune a la confusión…) | No |
+| Colección | No es de pelea | Imágenes inéditas: van a la galería | — |
+
+- **A quién se aplica:** cada objeto lo dice (a ti, a un aliado, a todo el equipo, a un rival, a todos los rivales).
+- **Equipo:** tres espacios por personaje: cabeza, cuerpo y accesorio.
+- **Estados nuevos:** envenenado y protegido.
+- **Monedas:** al final de cada pelea, según el nivel de los enemigos; se guardan en la partida (como los niveles y la
+  mochila).
+- **Boringplace es la tienda:** cada publicación es un objeto con su precio y «Comprar». «Tus artículos» es lo que
+  tienes (mochila y equipo que no llevas puesto), para **vender a la mitad** de lo que cuesta. Los artículos que hay
+  hoy son placeholders.
+- **Dentro del juego** se compra y se vende para la partida en curso. **Desde el título**, para una partida guardada:
+  arriba dice «Comprando para: …» (por defecto la más reciente; se puede elegir otra o la de «Continuar»); sin
+  partidas guardadas, solo se mira. Así se puede terminar un capítulo, guardar, gastar desde el título y entrar al
+  siguiente ya equipado. Cada partida tiene su propio dinero.
+- **Botón «Equipo»** en la barra del juego: pestaña Personajes (estadísticas y los tres espacios de equipo) y pestaña
+  Mochila (lo que tienes, con su descripción; se puede usar fuera de pelea lo que tenga sentido, como curarse).
+- **En la pelea**, «Objetos» muestra solo lo que se usa en pelea.
+- **Orden de construcción:** 1) tipos de objeto y estados nuevos; 2) monedas; 3) comprar y vender en Boringplace
+  (en el juego y desde el título); 4) el panel de Equipo.
+
+## 15. Pendientes e ideas
 
 | Tema | Estado |
 |---|---|
 | Que la **velocidad** decida quién actúa primero (héroes y enemigos mezclados) | Propuesto, sin aprobar. |
-| **Monedas** al final de cada pelea, guardadas en la partida | Propuesto. |
-| **Tienda en Boringplace** (el marketplace de Boringram; pociones, caramelo dulce +1 nivel, caramelo ácido −1, ropa con +ATQ/+DEF/+VEL, imágenes inéditas que van a la galería) | Boringplace ya existe (se abre en el Capítulo 2; por ahora solo se mira). Falta comprar: llega con las monedas. |
-| Panel **«Stats e inventario»** en el menú del juego | Propuesto. |
+| **Monedas** al final de cada pelea, guardadas en la partida | Aprobado (ver 14). |
+| **Tienda en Boringplace** | Aprobada (ver 14). Boringplace ya existe (se abre en el Capítulo 2; por ahora solo se mira). |
+| Panel **«Equipo»** (estadísticas, equipo y mochila) en la barra del juego | Aprobado (ver 14). |
 | **Cami actúa todos los turnos** desde el Capítulo 2, con enemigos de más nivel | Decidido por el autor; falta armar esas peleas. |
 | La fila **«dolor»** de Cami | Reservada para más adelante. |
 | Retratos y sprite de batalla definitivos (hoy algunos son placeholders) | Esperando el arte del autor. |
