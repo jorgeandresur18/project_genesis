@@ -2884,3 +2884,22 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 .batalla-cebo .batalla-figura.ko { opacity: 0; transition: opacity 0.8s ease 0.2s; }
 .batalla-figura.aparece-cebo .batalla-sprite { animation: aparece-cebo 0.7s ease-out both; }
 @keyframes aparece-cebo { from { opacity: 0; translate: 30% 0; filter: grayscale(1) blur(2px); } to { opacity: 0.92; translate: 0 0; filter: grayscale(1) contrast(1.15) brightness(0.95); } }
+/* La confusión como un carrusel: los corazones dan vueltas alrededor de la cabeza en una elipse horizontal; delante
+   se ven más grandes y nítidos, detrás más chicos y tenues (simula el giro en 3D). */
+.batalla-confusion { width: 0; height: 0; animation: none; rotate: none; opacity: 1; }
+.batalla-confusion span, .batalla-confusion span:nth-child(1), .batalla-confusion span:nth-child(2), .batalla-confusion span:nth-child(3) { left: 0; top: 0; translate: -50% -50%; animation: confusion-carrusel 2.4s linear infinite; }
+.batalla-confusion span:nth-child(2) { animation-delay: -0.8s; }
+.batalla-confusion span:nth-child(3) { animation-delay: -1.6s; }
+@keyframes confusion-carrusel {
+  0% { transform: translate(0, 5px) scale(1); opacity: 0.85; z-index: 2; }
+  12.5% { transform: translate(13px, 3.5px) scale(0.92); opacity: 0.78; }
+  25% { transform: translate(18px, 0) scale(0.82); opacity: 0.62; z-index: 1; }
+  37.5% { transform: translate(13px, -3.5px) scale(0.72); opacity: 0.45; }
+  50% { transform: translate(0, -5px) scale(0.62); opacity: 0.32; z-index: 0; }
+  62.5% { transform: translate(-13px, -3.5px) scale(0.72); opacity: 0.45; }
+  75% { transform: translate(-18px, 0) scale(0.82); opacity: 0.62; z-index: 1; }
+  87.5% { transform: translate(-13px, 3.5px) scale(0.92); opacity: 0.78; }
+  100% { transform: translate(0, 5px) scale(1); opacity: 0.85; z-index: 2; }
+}
+@media (prefers-reduced-motion: reduce) { .batalla-confusion span { animation: none !important; } }
+.batalla-confusion { top: 19%; }
