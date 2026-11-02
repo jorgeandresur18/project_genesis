@@ -61,7 +61,7 @@ export interface Especial {
   /** «oscura»: mientras dura, la pantalla se oscurece (el vórtice de la sombra). */
   pantalla?: 'oscura';
   /**
-   * Cañón (el Capitán enmascarado): en vez de 5 segundos de golpes, carga el blaster (brilla cada vez más) y suelta
+   * Cañón (el Capitán de la Federación): en vez de 5 segundos de golpes, carga el blaster (brilla cada vez más) y suelta
    * un solo rayo grueso de su `color` contra su objetivo: un golpe de `poder`. Se puede esquivar.
    */
   canon?: boolean;
