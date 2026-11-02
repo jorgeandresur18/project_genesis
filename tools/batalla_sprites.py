@@ -259,14 +259,27 @@ def hoja_capitan(c: dict):
                 # Todo lo que está más allá del fogonazo es el rayo dibujado (su centro es casi blanco): fuera.
                 q[:, CAPITAN_FOGONAZO + 6:] = 0
             if nombre == 'especial':
+                # El rayo (lo rojo a la derecha del visor). Si en el cuadro original toca un borde (el costado, arriba o
+                # abajo), sigue más allá: se guarda dónde termina dentro del cuadro recortado y hacia dónde va.
                 orig = hoja[(a['row'] + f // cols) * fh:(a['row'] + f // cols + 1) * fh, (f % cols) * ancho:(f % cols + 1) * ancho]
-                rojo = es_rojo(orig)
-                borde = np.nonzero(rojo[:, -3:].any(axis=1))[0]
-                corte = np.nonzero(rojo[:, W - 3:W].any(axis=1))[0]
-                if len(borde) and len(corte):
-                    y0, y1 = float(corte.mean()), float(borde.mean())
-                    ang = float(np.arctan2(y1 - y0, (ancho - 1) - (W - 2)))
-                    rayo[str(f)] = [W, round(y0, 1), round(ang, 4), int(borde.max() - borde.min() + 1)]
+                rayo_o = es_rojo(orig)
+                rayo_o[:, :96] = False
+                toca = rayo_o[:, -3:].any() or rayo_o[:4].any() or rayo_o[-4:].any()
+                ys, xs = np.nonzero(es_rojo(q) & (np.arange(W)[None, :] >= 96))
+                if toca and len(xs) > 8:
+                    # La dirección: la recta que mejor pasa por el rayo (su centro, aunque sea grueso).
+                    vx, vy = xs - xs.mean(), ys - ys.mean()
+                    ang = 0.5 * float(np.arctan2(2 * (vx * vy).sum(), (vx * vx).sum() - (vy * vy).sum()))
+                    if abs(ang) < 0.06:
+                        ang = 0.0
+                    # Termina en el punto del rayo más lejos en esa dirección.
+                    proy = vx * np.cos(ang) + vy * np.sin(ang)
+                    i1 = int(np.argmax(proy))
+                    grosor = int(rayo_o[:, -3:].any(axis=1).sum()) if rayo_o[:, -3:].any() else 10
+                    # Dónde termina: sobre la recta del centro del rayo (no en su borde), en el punto más lejano.
+                    xf = float(xs[i1]) + 1
+                    yf = float(ys.mean()) + np.tan(ang) * (xf - float(xs.mean())) if abs(ang) < 1.4 else float(ys[i1])
+                    rayo[str(f)] = [round(xf, 1), round(yf, 1), round(ang, 4), max(6, min(14, grosor + 1))]
             cuadros.append(q)
         meta['animations'][nombre] = {'row': len(filas), 'frames': a['frames'], 'fps': a['fps'], 'loop': a['loop'],
                                       **({'seq': a['seq']} if 'seq' in a else {})}

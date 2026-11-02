@@ -25,6 +25,7 @@ import {
   quedan,
   gastarUso,
   yaTiene,
+  repartirRafagas,
   eligeAtaque,
   crearClon,
   eligeEspecial,
@@ -1389,7 +1390,8 @@ function Pelea({
       await espera(Math.max(0, g.ms - (Date.now() - desde)));
       const vivos = b.current.heroes.filter(vivo);
       if (!vivos.length) break;
-      const x = g.fuerte && vivo(blanco) ? blanco : azar(vivos);
+      const otros = vivos.filter((h) => h !== blanco);
+      const x = g.fuerte && vivo(blanco) ? blanco : otros.length ? azar(otros) : vivo(blanco) ? blanco : azar(vivos);
       playChip(g.fuerte ? 'impacto' : 'disparo');
       if (g.fuerte) setFogonazo({ key: Math.random(), color: e.color });
       if (x.esquivando && Math.random() < d.esquivar) {
@@ -1610,7 +1612,12 @@ function Pelea({
     const elegido = eligeAtaque(d.enemigos[e.clave].ataques.filter((a) => quedan(e, a) > 0), hs);
     if (!elegido) return;
     const { ataque: a } = elegido;
-    const blancos = a.confunde || a.paraliza ? elegido.blancos : desviar(elegido.blancos, e);
+    // Las ráfagas (la sombra) se reparten: una a cada uno y las que sobran al azar.
+    const blancos = a.rafagas
+      ? repartirRafagas(a.rafagas, b.current.heroes.filter(vivo))
+      : a.confunde || a.paraliza
+        ? elegido.blancos
+        : desviar(elegido.blancos, e);
     gastarUso(e, a);
     await decir(fmt(a.texto, { quien: e.nombre, objetivo: blancos.map((x) => x.nombre).join(' y ') }));
     if (a.confunde) return besar(e, a, blancos);
@@ -1642,7 +1649,7 @@ function Pelea({
       const fila = hoja.animations.ataque;
       void animar(e.id, 'ataque', (fila.frames * 1000) / fila.fps);
       await espera((proy.cuadro * 1000) / fila.fps);
-      llegadas = blancos.map((h, i) => lanzar(e, hoja, proy, h, i * 160));
+      llegadas = blancos.map((h, i) => lanzar(e, hoja, proy, h, i * (a.rafagas ? 260 : 160)));
     } else if (deLejos) {
       void animar(e.id, 'ataque', 800);
       llegadas = blancos.map((h, i) => {

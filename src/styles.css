@@ -3070,7 +3070,8 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 @media (prefers-reduced-motion: reduce) { .batalla-rayo { animation-duration: 0.01s; } }
 .batalla-filtro { display: block; }
 
-/* El rayo del especial del Capitán más allá de su cuadro: sigue igual, ondulado, hasta el borde de la pantalla. */
-.batalla-rayo.sigue { z-index: 4; animation: rayo-ondula 0.18s steps(2) infinite; box-shadow: 0 0 10px var(--c), 0 0 24px var(--c); }
-@keyframes rayo-ondula { 0% { translate: 0 -50%; } 50% { translate: 0 calc(-50% + 2px); } 100% { translate: 0 calc(-50% - 2px); } }
+/* El rayo del especial del Capitán más allá de su cuadro: sigue recto, igual que en el sprite (rojo con el centro
+   blanco), hasta el borde de la pantalla. Aparece de golpe, sin la animación del rayo del cañón. */
+.batalla-rayo.sigue { z-index: 4; animation: none; border-radius: 0; box-shadow: 0 0 6px var(--c), 0 0 14px rgba(255, 42, 42, 0.6);
+  background: linear-gradient(to bottom, var(--c), #ff8a8a 30%, #fff 45%, #fff 55%, #ff8a8a 70%, var(--c)); }
 @media (prefers-reduced-motion: reduce) { .batalla-rayo.sigue { animation: none; } }

@@ -265,7 +265,8 @@
           "nombre": "Ola de petróleo",
           "poder": 5,
           "objetivo": "todos",
-          "texto": "El monstruo gira sobre sí mismo y suelta la media luna a ras del piso: pasa por todos.",
+          "texto": "El monstruo gira sobre sí mismo y suelta tres medias lunas a ras del piso, una detrás de otra.",
+          "rafagas": 3,
           "usos": 15
         },
         {

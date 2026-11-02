@@ -30,6 +30,11 @@ export interface Ataque {
    * los fogonazos, repite la animación). Cada bala es un golpe de `poder` que puede fallar o esquivarse.
    */
   balas?: [number, number];
+  /**
+   * Ráfagas (la sombra): suelta tantas, repartidas: primero una a cada rival en pie y las que sobran al azar (con uno
+   * solo en pie, todas para él). Cada una es un golpe de `poder`.
+   */
+  rafagas?: number;
   /** Cuántas veces se puede usar en una pelea («5/5» en el menú); sin esto, sin límite. Se recuperan al terminar. */
   usos?: number;
   nombre: string;
@@ -519,6 +524,13 @@ export function yaTiene(l: Luchador, efecto: { paraliza?: number; confunde?: num
   if (efecto.confunde && l.confundido > 0) return 'confundido';
   if (efecto.veneno && l.envenenado) return 'envenenado';
   return null;
+}
+
+/** A quién va cada ráfaga: una a cada uno (en orden al azar) y las que sobran, al azar. */
+export function repartirRafagas<T>(n: number, vivos: T[], azar: () => number = Math.random): T[] {
+  if (!vivos.length) return [];
+  const orden = [...vivos].sort(() => azar() - 0.5);
+  return Array.from({ length: n }, (_, i) => (i < orden.length ? orden[i] : orden[Math.floor(azar() * orden.length)]));
 }
 
 /** Cuántos usos le quedan de un ataque en esta pelea (Infinity si no tiene límite). */

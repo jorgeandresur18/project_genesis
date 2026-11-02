@@ -29,10 +29,11 @@ const ENTRADAS: Entrada[] = (() => {
   for (const v of probador.varios as { hoja: string; nombre: string }[]) vistas.set(v.hoja, v);
   return [...vistas.values()];
 })();
-/** El color del especial de cada hoja: el de sus balas. */
-const BATALLA_COLOR = new Map(
-  Object.values(BATALLAS).flatMap((d) => Object.values(d.personajes).flatMap((p) => (p.especial ? [[p.sprite, p.especial.color] as const] : []))),
-);
+/** El color de las balas de cada hoja: el del especial de un héroe, o el de los disparos de un rival (el Capitán). */
+const BATALLA_COLOR = new Map([
+  ...Object.values(BATALLAS).flatMap((d) => Object.values(d.personajes).flatMap((p) => (p.especial ? [[p.sprite, p.especial.color] as const] : []))),
+  ...Object.values(BATALLAS).flatMap((d) => Object.values(d.enemigos).flatMap((e) => (e.color_disparo ? [[e.sprite, e.color_disparo] as const] : []))),
+]);
 
 /**
  * La arena: cualquier héroe contra cualquier rival de las peleas del juego, con el nivel que se quiera. Es una
@@ -216,6 +217,7 @@ export function ProbadorSprites({ onCerrar }: { onCerrar: () => void }) {
   const col = a ? (a.seq ? a.seq[((cuadro % largo) + largo) % largo] : ((cuadro % largo) + largo) % largo) : 0;
   const puntos = marcas ? hoja?.disparos?.[anim]?.[String(col)] ?? [] : [];
   const tocar = (nombre: string) => {
+    setRayoSigue(null);
     setAnim(nombre);
     setCuadro(0);
     setVez((v) => v + 1);
@@ -260,7 +262,24 @@ export function ProbadorSprites({ onCerrar }: { onCerrar: () => void }) {
     setVuelan((l) => [...l, { key, src: `${BASE}${p.imagen}.png`, x, y, w: p.ancho * k, h: p.alto * k, dx, ms }]);
     setTimeout(() => setVuelan((l) => l.filter((z) => z.key !== key)), ms + 60);
   };
+  // El rayo del especial del Capitán que sale del cuadro: sigue, ondulado, hasta el borde (como en la pelea).
+  const [rayoSigue, setRayoSigue] = useState<{ x: number; y: number; largo: number; ang: number; grosor: number } | null>(null);
   const alCuadro = (fila: string, columna: number, h: Hoja) => {
+    if (h.rayo) {
+      const r = fila === 'especial' ? h.rayo[String(columna)] : undefined;
+      const s = rectSprite(escena.current?.querySelector('.probador-sprite .batalla-sprite'));
+      const base = escena.current?.getBoundingClientRect();
+      if (r && s && base) {
+        const k = s.width / h.frameWidth;
+        setRayoSigue({
+          x: (volteado ? s.right - r[0] * k : s.left + r[0] * k) - base.left,
+          y: s.top + r[1] * k - base.top,
+          largo: base.width * 1.6,
+          ang: volteado ? Math.PI - r[2] : r[2],
+          grosor: r[3] * k,
+        });
+      } else setRayoSigue(null);
+    }
     // Un cuadro antes del que ya no lo tiene dibujado: así nunca hay un instante sin él.
     const p = h.proyectiles?.[fila] ?? (fila === 'ataque' ? h.proyectil : undefined);
     const seq = h.animations[fila]?.seq;
@@ -350,6 +369,13 @@ export function ProbadorSprites({ onCerrar }: { onCerrar: () => void }) {
               <span key={i} className="probador-marca" style={{ left: x * zoom, top: y * zoom }} />
             ))}
           </div>
+          {rayoSigue && (
+            <span
+              className="batalla-rayo sigue"
+              aria-hidden
+              style={{ left: rayoSigue.x, top: rayoSigue.y, width: rayoSigue.largo, height: Math.max(6, rayoSigue.grosor), rotate: `${rayoSigue.ang}rad`, '--c': '#ff2a2a' } as CSSProperties}
+            />
+          )}
           {vuelan.map((x) => (
             <img
               key={x.key}
