@@ -294,6 +294,16 @@ cosas raras; los chistes van en las descripciones.
 - **Botón «Equipo»** en la barra del juego: pestaña Personajes (estadísticas y los tres espacios de equipo) y pestaña
   Mochila (lo que tienes, con su descripción; se puede usar fuera de pelea lo que tenga sentido, como curarse).
 - **En la pelea**, «Objetos» muestra solo lo que se usa en pelea.
+- **Qué es de cada partida y qué no:** el dinero, la mochila, el equipo y los niveles son de cada partida (una
+  partida nueva empieza vacía; no se pasa nada de una a otra). Lo desbloqueado en Boringram (fotos, pensamientos,
+  historias, mensajes, notificaciones), la galería, los finales y el 100 % son de todo el juego y quedan siempre.
+- **Boringplace abierto:** una vez que se llega al Capítulo 2 en cualquier partida, se puede **mirar** siempre. Pero
+  **comprar y vender** solo para partidas que ya llegaron al Capítulo 2; una partida en el Capítulo 1 ve los precios
+  con el aviso «Todavía no tienes con qué comprar: sigue la historia» (así no se rompe la dificultad del Capítulo 1).
+- **Saltar con el mapa de escenas** conserva el dinero, la mochila, el equipo y los niveles de ahora (no los de la
+  primera vez que se pasó por ahí).
+- **Stock limitado:** lo permanente (caramelos, suplementos) se vende de a poco por capítulo (p. ej. un caramelo
+  rancio por capítulo) y es caro. Vender a la mitad impide ganar plata comprando y vendiendo.
 - **Orden de construcción:** 1) tipos de objeto y estados nuevos; 2) monedas; 3) comprar y vender en Boringplace
   (en el juego y desde el título); 4) el panel de Equipo.
 
@@ -309,3 +319,4 @@ cosas raras; los chistes van en las descripciones.
 | La fila **«dolor»** de Cami | Reservada para más adelante. |
 | Retratos y sprite de batalla definitivos (hoy algunos son placeholders) | Esperando el arte del autor. |
 | El Bastión, jugador atento: gana ~99 % (con la ayuda del juego). ¿Más difícil? | A decidir por el autor. |
+| **Nueva partida+**: al terminar el juego, empezar de nuevo con los niveles y el equipo de la partida terminada, con los enemigos de más nivel para que siga habiendo desafío | Idea aprobada para más adelante (cuando el juego esté completo). |
