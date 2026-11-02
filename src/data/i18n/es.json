@@ -325,5 +325,7 @@
   "batalla.monedas_jefe": "{quien} deja {m} monedas tiradas en el piso. Nadie pregunta de dónde las sacó.",
   "equipo.monedas": "Monedas:",
   "conoce.escuchar": "Escúchala en Spotify",
-  "conoce.indice": "Índice"
+  "conoce.indice": "Índice",
+  "conoce.parte_juego": "El juego",
+  "conoce.parte_autor": "El autor"
 }

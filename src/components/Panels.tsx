@@ -413,6 +413,9 @@ function CompletionMeter() {
   );
 }
 
+/** La parte de «Conoce más» a la que va una sección (el juego o el autor); la advertencia no tiene. */
+const parteDe = (s: object) => ('parte' in s ? (s.parte as string) : undefined);
+
 /** «Conoce más del proyecto»: qué es el juego, de qué trata, sus temas, cómo nació y enlaces del autor. */
 export function AboutPanel({ onClose }: { onClose: () => void }) {
   const t = useT();
@@ -424,18 +427,30 @@ export function AboutPanel({ onClose }: { onClose: () => void }) {
         {/* Índice: cada sección a un toque (la página es larga). */}
         <nav className="about-indice" id="about-indice" aria-label={t('conoce.indice')}>
           <b>{t('conoce.indice')}</b>
-          <ol>
-            {conoceMas.secciones.map((s, i) => (
-              <li key={s.titulo}>
-                <button type="button" onClick={() => document.getElementById(`about-${i}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>
-                  {s.titulo}
-                </button>
-              </li>
-            ))}
-          </ol>
+          {/* Primero lo que va antes de todo (la advertencia); después, el juego y el autor por separado. */}
+          {[undefined, 'juego', 'autor'].map((parte) => (
+            <div key={parte ?? 'inicio'} className="about-indice-parte">
+              {parte && <span>{t(`conoce.parte_${parte}`)}</span>}
+              <ul>
+                {conoceMas.secciones.map((s, i) =>
+                  parteDe(s) === parte ? (
+                    <li key={s.titulo}>
+                      <button type="button" onClick={() => document.getElementById(`about-${i}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>
+                        {s.titulo}
+                      </button>
+                    </li>
+                  ) : null,
+                )}
+              </ul>
+            </div>
+          ))}
         </nav>
         {conoceMas.secciones.map((s, i) => (
           <section key={s.titulo} className="about-section" id={`about-${i}`}>
+            {/* El título de la parte, antes de su primera sección. */}
+            {parteDe(s) && (i === 0 || parteDe(s) !== parteDe(conoceMas.secciones[i - 1])) && (
+              <h2 className="about-parte">{t(`conoce.parte_${parteDe(s)}`)}</h2>
+            )}
             <h3>{s.titulo}</h3>
             {s.parrafos.map((p, i) => (
               <p key={i}>{p}</p>

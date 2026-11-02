@@ -325,5 +325,7 @@
   "batalla.monedas_jefe": "{quien} leaves {m} coins on the floor. Nobody asks where they came from.",
   "equipo.monedas": "Coins:",
   "conoce.escuchar": "Listen on Spotify",
-  "conoce.indice": "Contents"
+  "conoce.indice": "Contents",
+  "conoce.parte_juego": "The game",
+  "conoce.parte_autor": "The author"
 }

@@ -2,7 +2,14 @@
   "titulo": "About the project",
   "secciones": [
     {
+      "titulo": "A warning",
+      "parrafos": [
+        "It is a work for adults 18 and over, with crude language, alcohol, suggested sexuality, violence, a scene where the protagonist crosses the line (and the story treats it as what it is) and psychological distress. All characters are fictional. And it is a work in progress: what you play today is a draft that will keep changing."
+      ]
+    },
+    {
       "titulo": "What PROJECT GENESIS is",
+      "parte": "juego",
       "parrafos": [
         "PROJECT GENESIS is an adult visual novel that mixes psychological science fiction, black comedy and meta-horror. It starts as an isekai with two heroines fighting over the protagonist, and little by little it takes that fantasy apart, piece by piece.",
         "It is a story about creating people tailored to what you want, and about what happens when those people discover who made them and why."
@@ -10,6 +17,7 @@
     },
     {
       "titulo": "What it's about",
+      "parte": "juego",
       "parrafos": [
         "Jair is a 30-year-old software engineer. He works in tech support, he's owed half a month's pay, he lives in an apartment that looks like a shoebox, and he has spent eight years in a nameless relationship with Nikki, a friend who tells him to get a girlfriend… and who, when she's drunk, asks him to stay with her in the end.",
         "One night, after getting drunk with Nikki at a bar, Jair receives an email with early access to GRAVITY: a development environment with a built-in artificial intelligence called GENESIS, able to build entire worlds from whatever you ask for. He asks for a fantasy video game with two heroines. He falls asleep on the keyboard. And GENESIS finishes the game on its own.",
@@ -18,6 +26,7 @@
     },
     {
       "titulo": "What the story will tell",
+      "parte": "juego",
       "parrafos": [
         "First, an adventure: Jair crosses a space dimension and an ancestral dimension with Cami, a warrior who attacks before asking, and Rikka, a proud and jealous swordswoman, while they run from a faceless army and face the Evil King.",
         "Then, something more uncomfortable: the heroines cross into the real world. They have to live without papers, without money and without understanding a world that wasn't made for them, share a tiny apartment with Jair and clash with Nikki, who feels she is losing the place she held for years.",
@@ -26,6 +35,7 @@
     },
     {
       "titulo": "The themes",
+      "parte": "juego",
       "parrafos": [
         "Escapism: the game is born as a way out of a precarious life and ends up bringing its conflicts into the real world.",
         "Control and autonomy: what is the difference between loving someone and designing them to love you? Can a creation be free?",
@@ -37,6 +47,7 @@
     },
     {
       "titulo": "The tone",
+      "parte": "juego",
       "parrafos": [
         "It changes in stages. It starts as an adult isekai: an epic, bright adventure, with black humor, swearing and dirty jokes. When the story reaches the real world, the tone turns rough, stifling and sweaty. And when the characters start to discover where they come from, it becomes a raw, direct psychological drama.",
         "The humor isn't there to reward the player, but to make them uncomfortable. Every joke points at something: control, escapism, money or dependency. Many will make you laugh today and read differently later on.",
@@ -45,6 +56,7 @@
     },
     {
       "titulo": "The psychological lens",
+      "parte": "juego",
       "parrafos": [
         "Jair wants the benefits of a relationship without accepting that the other person is free. He understands his problem and still doesn't change. The story tries to understand him, not to absolve him.",
         "The work is about codependency and attachment; about using others as a shield so you never fight your own battles; about loving an idealized image instead of a person; about alcoholism, told through its consequences and not as a joke; and about the fear of freedom: sometimes a familiar cage is less frightening than a life of your own.",
@@ -53,6 +65,7 @@
     },
     {
       "titulo": "The ideas underneath",
+      "parte": "juego",
       "parrafos": [
         "The absurd, with Albert Camus: a life on a loop, like the rock in The Myth of Sisyphus, and characters who, like Meursault in The Stranger, live without quite knowing what they feel.",
         "Meaning, with Viktor Frankl and Man's Search for Meaning: what to do with freedom when you finally have it and can't find anything to live it for.",
@@ -66,17 +79,19 @@
     },
     {
       "titulo": "The influences",
+      "parte": "juego",
       "parrafos": [
         "Literature: besides the books above, The Lord of the Rings, by J. R. R. Tolkien, and the graphic novel Persepolis, by Marjane Satrapi.",
         "Anime and manga: Neon Genesis Evangelion, Perfect Blue, Serial Experiments Lain, Fullmetal Alchemist, Mirai Nikki, Gantz, School Days and Welcome to the NHK.",
         "Comics: Scott Pilgrim, Kraven's Last Hunt, the melancholy of Spider-Man: Blue and the rawness of Daredevil: Born Again.",
         "Film: The Matrix, I, Robot and The Truman Show.",
-        "Music: the honest, pure melancholy of The Smiths about love and loneliness; the broken relationships and imperfect feelings of The Strokes; the vulnerability of The Cranberries; the dark poetry and gothic theatricality of The Cure; The Killers, with the idea that even if everything goes wrong there can be a light; the threat dressed up as a love song of The Police; and the unapologetic fury of Björk.",
+        "Music: the honest, pure melancholy of The Smiths about love and loneliness; the broken relationships and imperfect feelings of The Strokes; the vulnerability of The Cranberries; the dark poetry and gothic theatricality of The Cure; The Killers, with the idea that even if everything goes wrong there can be a light. The rest, with each character's song, I talk about further down, in the author's notes.",
         "Video games: the classic turn-based RPGs, like EarthBound and Final Fantasy, for the fights; and the battle intro of Pokémon, for the showdown at the bar."
       ]
     },
     {
       "titulo": "How to play",
+      "parte": "juego",
       "parrafos": [
         "You read, you decide and you live with the consequences. Some decisions only change a conversation; others divert the story or end it early. The decision map shows the paths you have already taken and the ones still missing, and Extras holds the endings you found and the gallery of images and sprites.",
         "You also fight: there are turn-based battles, with attacks, specials, items in your backpack and statuses like poison or confusion. From your very first playthrough, a bad decision at the bar drops you into one. What you earn in fights (levels, items and coins) is saved in your game.",
@@ -86,6 +101,7 @@
     },
     {
       "titulo": "How it was born",
+      "parte": "autor",
       "parrafos": [
         "PROJECT GENESIS was born in October 2026. It is an indie project made by a single person: Jorge Andrés Urgilés Ruiz. The story, direction, design and programming came from one single head.",
         "It is, on purpose, a story about a man who uses an artificial intelligence to create characters, made with the help of artificial intelligences. It was built with AI tools, many of them free: ChatGPT and Gemini to shape the story bible, Claude Code to program the engine and write drafts, and Gemini to generate the art.",
@@ -94,6 +110,7 @@
     },
     {
       "titulo": "Author's notes",
+      "parte": "autor",
       "parrafos": [
         "These are my notes: not the story itself, but what I kept thinking about while making it. I will keep adding to them as the game grows.",
         "I did not want PROJECT GENESIS to feel like just a visual novel. That is why, from your very first playthrough, a bad decision at the bar drops you into a turn-based fight, and later on the fights are part of the journey. They are my tribute to the classic turn-based RPGs, like EarthBound and Final Fantasy: a hybrid between reading and fighting, where the story happens between one fight and the next.",
@@ -144,6 +161,7 @@
     },
     {
       "titulo": "A personal note",
+      "parte": "autor",
       "parrafos": [
         "I made this game during a time stuck in a precarious job. I am a software engineer and I have not been able to land a better job: I interviewed at good companies and did not get into any of them. PROJECT GENESIS was born as a way to let off steam.",
         "I would come home from work and get to it, partly just to have something to do instead of spending my nights drinking beer and smoking cheap cigarettes. I poured hours into it, especially Chapter 1: across one Friday, Saturday and Sunday I slept about six hours in total, two a night. I was going through something I am not sure was depression: I did not feel like going out anywhere and, instead of going out, I would rather sit down and work on this, even if it was with a beer in my hand. I used the holidays to keep going, even though my legs hurt from so many hours pressed against the chair. And I kept going.",
@@ -165,13 +183,8 @@
       ]
     },
     {
-      "titulo": "A warning",
-      "parrafos": [
-        "It is a work for adults 18 and over, with crude language, alcohol, suggested sexuality, violence, a scene where the protagonist crosses the line (and the story treats it as what it is) and psychological distress. All characters are fictional. And it is a work in progress: what you play today is a draft that will keep changing."
-      ]
-    },
-    {
       "titulo": "Follow me and support the project",
+      "parte": "autor",
       "parrafos": [
         "If you liked the game, you can learn more about my work, write to me or support its development with a donation."
       ]

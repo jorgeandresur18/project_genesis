@@ -3006,3 +3006,8 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 .about-section { scroll-margin-top: 1rem; }
 .about-arriba { margin-top: 0.2rem; padding: 0; border: none; background: none; color: #6f8a96; font: inherit; font-size: 0.78rem; cursor: pointer; }
 .about-arriba:hover { color: #22d3ee; }
+
+/* Conoce más en dos partes: el juego y el autor. */
+.about-indice-parte span { display: block; margin: 0.55rem 0 0; color: #9fdcea; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.about-indice-parte ul { display: grid; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); gap: 0.15rem 1rem; margin: 0.25rem 0 0; padding-left: 1.3rem; }
+.about-parte { margin: 1.4rem 0 0.9rem; padding-bottom: 0.35rem; border-bottom: 1px solid rgba(34, 211, 238, 0.3); color: #e8f9fd; font-size: 1.15rem; letter-spacing: 0.1em; text-transform: uppercase; }
