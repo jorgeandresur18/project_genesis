@@ -6,7 +6,7 @@
 
 <p align="center">
   Novela visual para adultos · ciencia ficción psicológica · comedia negra · meta-horror<br />
-  <strong>Demo del Capítulo 1</strong> · <a href="https://proyect-genesis.vercel.app/">Jugar en el navegador</a>
+  <strong>Demo del Capítulo 1</strong> · <a href="https://project-genesis-yeah.vercel.app/">Jugar en el navegador</a>
 </p>
 
 ---
@@ -54,7 +54,7 @@ La historia completa tendrá siete capítulos, dos finales principales que ocurr
 
 ## Cómo jugar
 
-En el navegador, sin instalar nada: **https://proyect-genesis.vercel.app/**
+En el navegador, sin instalar nada: **https://project-genesis-yeah.vercel.app/**
 
 Avanza con el botón «Siguiente», Espacio o Enter, y vuelve una línea con ← o Retroceso. Las decisiones también se eligen con las teclas 1, 2, 3… La tecla H oculta la caja de texto y la M silencia el audio.
 

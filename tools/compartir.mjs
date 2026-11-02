@@ -76,7 +76,7 @@ for (const p of fotos) {
   <text x="${W - 60}" y="52" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700" fill="#ff4f8b">+18</text>
   <text x="${rightX}" y="512" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="700" fill="#fff">PROJECT GENESIS</text>
   <text x="${rightX}" y="546" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#c9c9d2">Juega gratis en el navegador</text>
-  <text x="${rightX}" y="584" font-family="Consolas, monospace" font-size="17" fill="#ff8ab5">proyect-genesis.vercel.app</text>
+  <text x="${rightX}" y="584" font-family="Consolas, monospace" font-size="17" fill="#ff8ab5">project-genesis-yeah.vercel.app</text>
 </svg>`;
   await sharp(bg)
     .composite([

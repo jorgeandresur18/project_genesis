@@ -421,8 +421,21 @@ export function AboutPanel({ onClose }: { onClose: () => void }) {
     <Panel title={conoceMas.titulo} onClose={onClose}>
       <div className="about">
         <img className="about-logo" src={`${import.meta.env.BASE_URL}marca/logo.webp`} alt="PROJECT GENESIS" />
-        {conoceMas.secciones.map((s) => (
-          <section key={s.titulo} className="about-section">
+        {/* Índice: cada sección a un toque (la página es larga). */}
+        <nav className="about-indice" id="about-indice" aria-label={t('conoce.indice')}>
+          <b>{t('conoce.indice')}</b>
+          <ol>
+            {conoceMas.secciones.map((s, i) => (
+              <li key={s.titulo}>
+                <button type="button" onClick={() => document.getElementById(`about-${i}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>
+                  {s.titulo}
+                </button>
+              </li>
+            ))}
+          </ol>
+        </nav>
+        {conoceMas.secciones.map((s, i) => (
+          <section key={s.titulo} className="about-section" id={`about-${i}`}>
             <h3>{s.titulo}</h3>
             {s.parrafos.map((p, i) => (
               <p key={i}>{p}</p>
@@ -448,6 +461,9 @@ export function AboutPanel({ onClose }: { onClose: () => void }) {
               s.cierre?.map((p, i) => (
                 <p key={`c${i}`}>{p}</p>
               ))}
+            <button type="button" className="about-arriba" onClick={() => document.getElementById('about-indice')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>
+              ↑ {t('conoce.indice')}
+            </button>
           </section>
         ))}
         <div className="about-links">

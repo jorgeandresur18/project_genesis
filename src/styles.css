@@ -2996,3 +2996,13 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 .about-cancion p { flex: 1 1 18rem; margin: 0; }
 .about-spotify { flex: none; padding: 0.3rem 0.75rem; border-radius: 999px; background: #1db954; color: #04130a; font-size: 0.82rem; font-weight: 700; text-decoration: none; }
 .about-spotify:hover { filter: brightness(1.1); }
+
+/* Conoce más: el índice arriba (cada sección a un toque) y «↑ Índice» al final de cada sección. */
+.about-indice { width: 100%; max-width: 38rem; margin: 0 0 1.2rem; padding: 0.7rem 0.9rem; border: 1px solid rgba(34, 211, 238, 0.25); border-radius: 0.5rem; background: rgba(34, 211, 238, 0.04); scroll-margin-top: 1rem; }
+.about-indice b { color: #22d3ee; font-size: 0.95rem; }
+.about-indice ol { display: grid; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); gap: 0.15rem 1rem; margin: 0.45rem 0 0; padding-left: 1.3rem; }
+.about-indice button { padding: 0.15rem 0; border: none; background: none; color: inherit; font: inherit; font-size: 0.9rem; text-align: left; cursor: pointer; }
+.about-indice button:hover { color: #22d3ee; text-decoration: underline; }
+.about-section { scroll-margin-top: 1rem; }
+.about-arriba { margin-top: 0.2rem; padding: 0; border: none; background: none; color: #6f8a96; font: inherit; font-size: 0.78rem; cursor: pointer; }
+.about-arriba:hover { color: #22d3ee; }

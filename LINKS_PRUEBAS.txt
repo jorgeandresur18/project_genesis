@@ -4,14 +4,14 @@ PROJECT GENESIS - Links para probar (modo pruebas)
 PUBLICADOS (en internet, para jugar desde cualquier lado)
 --------------------------------------------------------
 Capitulo 1 completo (con el RPG, la pelea con Nikki y Boringplace):
-    https://proyect-genesis.vercel.app/cap1
+    https://project-genesis-yeah.vercel.app/cap1
 
 Todo unido (/all): todo lo creado hasta ahora, de corrido. Al terminar el Capitulo 1,
 "Continuar" sigue en el Capitulo 2, y el Bootcamp tiene todos sus niveles abiertos:
-    https://proyect-genesis.vercel.app/all
+    https://project-genesis-yeah.vercel.app/all
 
 La portada del juego:
-    https://proyect-genesis.vercel.app/
+    https://project-genesis-yeah.vercel.app/
 
 
 LOCALES (modo pruebas)

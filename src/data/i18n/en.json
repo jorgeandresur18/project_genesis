@@ -324,5 +324,6 @@
   "batalla.xp_monedas": "They gain {n} experience and {m} coins.",
   "batalla.monedas_jefe": "{quien} leaves {m} coins on the floor. Nobody asks where they came from.",
   "equipo.monedas": "Coins:",
-  "conoce.escuchar": "Listen on Spotify"
+  "conoce.escuchar": "Listen on Spotify",
+  "conoce.indice": "Contents"
 }

@@ -54,7 +54,7 @@ El **nivel N se abre al terminar el Capítulo N**. El motor busca la escena con 
 - Dentro de un nivel, cada clase se abre al terminar la anterior.
 - **Antes de terminar el Capítulo 1:** el botón del menú tiene candado, y al entrar dice «Todavía no completas el Capítulo 1».
 - **Aviso en el menú:** la primera vez que se termina un capítulo, al volver al menú aparece el aviso «¡Nivel N desbloqueado: …!», con el emblema y el color de su dificultad. Tocarlo abre el Bootcamp.
-- **Modo de prueba:** con `?bootcamp=todo` en la dirección (por ejemplo `https://proyect-genesis.vercel.app/?bootcamp=todo` o `http://localhost:5173/?bootcamp=todo`) se abren todos los niveles con clases y todas sus clases. En ese modo no se guarda el progreso (ni estrellas ni diplomas), así que no cuenta para el 100 %. Arriba sale el chip «Modo prueba: todo desbloqueado (no se guarda el progreso)».
+- **Modo de prueba:** con `?bootcamp=todo` en la dirección (por ejemplo `https://project-genesis-yeah.vercel.app/?bootcamp=todo` o `http://localhost:5173/?bootcamp=todo`) se abren todos los niveles con clases y todas sus clases. En ese modo no se guarda el progreso (ni estrellas ni diplomas), así que no cuenta para el 100 %. Arriba sale el chip «Modo prueba: todo desbloqueado (no se guarda el progreso)».
 
 ## Reseñas del curso
 
