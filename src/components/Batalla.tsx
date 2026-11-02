@@ -585,7 +585,8 @@ function Pelea({
   const dejarCebo = async (h: Luchador, a: Ataque) => {
     await decir(fmt(a.texto, { quien: h.nombre }));
     const f = figuras.current.get(h.id);
-    const lado = f?.parentElement?.getBoundingClientRect();
+    // Relativo a la fila de los héroes (con la cuadrícula, el padre de la figura es su casilla).
+    const lado = f?.closest('.batalla-lado')?.getBoundingClientRect();
     const r = f?.getBoundingClientRect();
     // Uno solo por héroe: el viejo se va.
     b.current.cebos = b.current.cebos.filter((x) => x.de !== h.id && vivo(x.l));
