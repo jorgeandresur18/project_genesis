@@ -414,6 +414,7 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
 | Panel **«Equipo»** (estadísticas, equipo y mochila) en la barra del juego | Aprobado (ver 14). |
 | **Cami actúa todos los turnos** desde el Capítulo 2, con enemigos de más nivel | Decidido por el autor; falta armar esas peleas. |
 | La fila **«dolor»** de Cami | Reservada para más adelante. |
+| **Pelea en el hangar** (nivel dos del Bastión), en alguna ruta del Capítulo 1, con el fondo del pasillo de instalación (`batalla/fondos/bastion`: tiene la ventana al hangar) | Idea del autor (2026-11-02); falta decidir en qué ruta, contra quién y con qué decisión se llega. |
 | Retratos y sprite de batalla definitivos (hoy algunos son placeholders) | Esperando el arte del autor. |
 | El Bastión, jugador atento: gana ~99 % (con la ayuda del juego). ¿Más difícil? | A decidir por el autor. |
 | **Nueva partida+**: al terminar el juego, empezar de nuevo con los niveles y el equipo de la partida terminada, con los enemigos de más nivel para que siga habiendo desafío | Idea aprobada para más adelante (cuando el juego esté completo). |
