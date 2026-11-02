@@ -3075,3 +3075,13 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 .batalla-rayo.sigue { z-index: 4; animation: none; border-radius: 0; box-shadow: 0 0 6px var(--c), 0 0 14px rgba(255, 42, 42, 0.6);
   background: linear-gradient(to bottom, var(--c), #ff8a8a 30%, #fff 45%, #fff 55%, #ff8a8a 70%, var(--c)); }
 @media (prefers-reduced-motion: reduce) { .batalla-rayo.sigue { animation: none; } }
+
+/* El cielo magenta de los fondos, más vivo: una nebulosa que respira y estrellas que titilan (fondos_batalla.json). */
+.batalla-nebulosa { position: absolute; aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; pointer-events: none; mix-blend-mode: screen;
+  background: radial-gradient(circle, rgba(255, 120, 225, 0.9), rgba(200, 70, 255, 0.45) 40%, transparent 70%); animation: nebulosa 6s ease-in-out infinite; }
+@keyframes nebulosa { 0%, 100% { opacity: 0.45; scale: 0.9; } 50% { opacity: 1; scale: 1.08; } }
+.batalla-brillo { position: absolute; width: 0.4rem; aspect-ratio: 1; translate: -50% -50%; pointer-events: none; background: #fff; opacity: 0;
+  box-shadow: 0 0 5px #fff, 0 0 12px #ff8ae6, 0 0 20px #ff5fd8; animation: brillo 3s ease-in-out infinite; }
+.batalla-brillo.grande { width: 0.9rem; clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%); box-shadow: none; background: #ffe6fb; }
+@keyframes brillo { 0%, 100% { opacity: 0; scale: 0.4; } 45% { opacity: 1; scale: 1.25; } 60% { opacity: 0.6; scale: 0.9; } }
+@media (prefers-reduced-motion: reduce) { .batalla-nebulosa, .batalla-brillo { animation: none; opacity: 0.5; } }

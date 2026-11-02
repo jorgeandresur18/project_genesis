@@ -74,7 +74,7 @@ const CHARLAS = charlasJson as unknown as Record<string, Record<string, Charla>>
  * La cuadrícula de cada fondo (src/data/fondos_batalla.json): dónde pisa cada uno, en % de la imagen. Con
  * `?cuadricula` en la dirección se ve la grilla y los puntos sobre la pelea, para ajustar un fondo nuevo.
  */
-type Casillas = { equipo: [number, number][]; rivales: [number, number][] };
+type Casillas = { equipo: [number, number][]; rivales: [number, number][]; brillos?: [number, number][]; nebulosas?: [number, number, number][] };
 const FONDOS = fondosJson as unknown as Record<string, Casillas>;
 const VER_CUADRICULA = typeof location !== 'undefined' && new URLSearchParams(location.search).has('cuadricula');
 /** Quién es alguien en las charlas: el nombre de su hoja (batalla/jair → jair). */
@@ -336,7 +336,7 @@ function Pelea({
     return casillaDe.current.get(e.id)!;
   };
   /** Pone a alguien en su casilla (los pies en el punto); si faltan casillas, se corre al costado de la última. */
-  const enCasilla = (lado: keyof Casillas, i: number, key: string, nodo: React.ReactNode) => {
+  const enCasilla = (lado: 'equipo' | 'rivales', i: number, key: string, nodo: React.ReactNode) => {
     if (!casillas) return nodo;
     const lista = casillas[lado];
     const [x, y] = lista[Math.min(i, lista.length - 1)];
@@ -1902,6 +1902,17 @@ function Pelea({
           <div className="batalla-fondo-caja" style={{ '--r': d.fondo_proporcion ?? 16 / 9, backgroundImage: `url(${BASE}${d.fondo}.webp)` } as CSSProperties}>
             {(d.fondo_luces ?? []).map(([x, y], i) => (
               <span key={i} className="batalla-alarma" style={{ left: `${x}%`, top: `${y}%`, animationDelay: `${i * -0.55}s` }} />
+            ))}
+            {/* El cielo, más vivo: la nebulosa respira y las estrellas titilan (solo donde se ve el cielo). */}
+            {(FONDOS[d.fondo]?.nebulosas ?? []).map(([x, y, r], i) => (
+              <span key={`n${i}`} className="batalla-nebulosa" style={{ left: `${x}%`, top: `${y}%`, width: `${r * 2}%`, animationDelay: `${i * -2.3}s` } as CSSProperties} />
+            ))}
+            {(FONDOS[d.fondo]?.brillos ?? []).map(([x, y], i) => (
+              <span
+                key={`b${i}`}
+                className={`batalla-brillo ${i % 4 === 0 ? 'grande' : ''}`}
+                style={{ left: `${x}%`, top: `${y}%`, animationDelay: `${((i * 37) % 23) / -5}s`, animationDuration: `${2.2 + ((i * 13) % 9) / 4}s` } as CSSProperties}
+              />
             ))}
           </div>
         )}

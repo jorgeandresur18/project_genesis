@@ -1,8 +1,10 @@
 {
-  "_nota": "La cuadrícula de cada fondo de pelea: dónde pisa cada uno, en % de la imagen ([x, y]: el centro de los pies). El primero de cada lista es el primero del equipo o de los rivales; el resto, en orden. Para verlos sobre la pelea: ?cuadricula en la dirección (por ejemplo ?batalla=bastion&cuadricula o ?sprites&cuadricula para la arena). Abajo a la izquierda va el menú y abajo a la derecha las tarjetas: los pies no deberían bajar de ~72 % a la izquierda ni de ~80 % a la derecha.",
+  "_nota": "La cuadrícula de cada fondo de pelea: dónde pisa cada uno, en % de la imagen ([x, y]: el centro de los pies). El primero de cada lista es el primero del equipo o de los rivales; el resto, en orden. Para verlos sobre la pelea: ?cuadricula en la dirección (por ejemplo ?batalla=bastion&cuadricula o ?sprites&cuadricula para la arena). brillos: estrellas que titilan en el cielo ([x, y]); nebulosas: un resplandor que respira ([x, y, radio], en %). Abajo a la izquierda va el menú y abajo a la derecha las tarjetas: los pies no deberían bajar de ~72 % a la izquierda ni de ~80 % a la derecha.",
   "batalla/fondos/bastion_ruinas": {
     "rivales": [[30, 69], [17, 61], [43, 61]],
-    "equipo": [[78, 64], [87, 75], [66, 75]]
+    "equipo": [[78, 64], [87, 75], [66, 75]],
+    "brillos": [[0.5, 40.8], [1.0, 41.4], [1.1, 34.4], [2.4, 25.2], [3.9, 47.3], [4.1, 45.7], [4.2, 43.9], [5.4, 19.9], [5.6, 39.0], [7.0, 39.6], [7.4, 36.6], [7.9, 32.5], [8.0, 34.3], [8.3, 20.4], [8.6, 25.5], [9.1, 40.2], [10.3, 31.2], [11.9, 33.2], [12.1, 30.3], [12.4, 30.0], [13.0, 24.4], [13.2, 40.5], [13.6, 39.7], [13.9, 37.1], [14.0, 33.3], [15.2, 25.0], [15.8, 30.9], [16.8, 36.0], [48.9, 26.4], [51.5, 23.7], [51.5, 29.2], [56.4, 25.5], [57.5, 31.0], [55.8, 18.0], [58.6, 22.4]],
+    "nebulosas": [[9, 32, 13], [53, 25, 6]]
   },
   "batalla/fondos/bastion": {
     "rivales": [[30, 69], [17, 61], [43, 61]],
