@@ -69,11 +69,45 @@ def tono(a: np.ndarray) -> np.ndarray:
     return a_lab(elegidos.astype(float)).mean(axis=0)
 
 
+def centro_cara(a: np.ndarray) -> float:
+    """Altura del centro de la cara (la mancha de piel más grande en la mitad de arriba)."""
+    from scipy import ndimage
+    m = piel(a)
+    m[a.shape[0] * 5 // 8:] = False
+    lab, n = ndimage.label(m)
+    tam = ndimage.sum(m, lab, range(1, n + 1))
+    return ndimage.center_of_mass(m, lab, int(np.argmax(tam)) + 1)[0]
+
+
+def alinear_caras(config: dict):
+    """«alinear_cara»: sube (o baja) un sprite hasta que el centro de su cara quede a la altura de la de otro (la misma
+    pose dibujada más abajo en el PSB). Lo que queda vacío abajo se rellena con la última fila (el cuerpo sigue)."""
+    for personaje, v in config.get('alinear_cara', {}).items():
+        for nombre, como in v.items():
+            ref = centro_cara(np.array(Image.open(SPRITES / personaje / f'{como}.webp').convert('RGBA')))
+            ruta = SPRITES / personaje / f'{nombre}.webp'
+            a = np.array(Image.open(ruta).convert('RGBA'))
+            d = round(centro_cara(a) - ref)
+            if abs(d) < 3:
+                print(f'  · {personaje}/{nombre}: la cara ya está alineada')
+                continue
+            if d > 0:
+                a = np.concatenate([a[d:], np.repeat(a[-1:], d, axis=0)])
+            else:
+                a = np.concatenate([np.zeros_like(a[:(-d)]), a[:d]])
+            Image.fromarray(a).save(ruta, quality=90, method=6)
+            print(f'  ✓ {personaje}/{nombre}: {"subido" if d > 0 else "bajado"} {abs(d)} px (cara como {como})')
+
+
 def main():
     config = json.loads((RAIZ / 'tools' / 'sprites.config.json').read_text(encoding='utf8'))
+    alinear_caras(config)
     for personaje, v in config.get('igualar_piel', {}).items():
         objetivo = tono(np.array(Image.open(SPRITES / personaje / f"{v['base']}.webp").convert('RGBA')))
         for nombre in v['sprites']:
+            # «nombre:luz»: solo se aclara u oscurece, sin tocar el color (sus ojos y su
+            # rubor tienen tonos que se confunden con la piel y se pondrían amarillos).
+            nombre, _, modo = nombre.partition(':')
             ruta = SPRITES / personaje / f'{nombre}.webp'
             if not ruta.exists():
                 print(f'  ! {personaje}/{nombre}: no existe')
@@ -82,6 +116,8 @@ def main():
             m = piel_grande(a)
             lab = a_lab(a[m][:, :3].astype(float))
             corrimiento = objetivo - lab.mean(axis=0)
+            if modo == 'luz':
+                corrimiento = np.array([corrimiento[0], 0.0, 0.0])
             if np.abs(corrimiento).max() < 2.5:
                 print(f'  · {personaje}/{nombre}: ya tiene el tono del base')
                 continue

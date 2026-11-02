@@ -119,5 +119,6 @@
       "fps": 8,
       "loop": true
     }
-  }
+  },
+  "centro_x": 56.5
 }

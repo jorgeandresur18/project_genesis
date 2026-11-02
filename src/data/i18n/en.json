@@ -230,11 +230,11 @@
   "batalla.especial": "SPECIAL!",
   "batalla.especial_total": "{quien} dealt {n} damage in total.",
   "batalla.turno_de": "Turn:",
-  "galeria.accion.idle": "Idle",
+  "galeria.accion.idle": "Base",
   "galeria.accion.mover": "Move",
   "galeria.accion.salto": "Jump",
   "galeria.accion.ataque": "Attack",
-  "galeria.accion.daño": "Hurt",
+  "galeria.accion.daño": "Hit",
   "galeria.accion.pestaneo": "Blink",
   "galeria.accion.cabello": "Hair",
   "galeria.accion.sonrojada": "Blush",
@@ -337,5 +337,9 @@
   "batalla.estado_confundido": "confused",
   "batalla.estado_envenenado": "poisoned",
   "batalla.ya_tiene_ataque": "{quien} is already {estado}. It doesn't stack: the turn is lost, but the attack isn't spent.",
-  "batalla.ya_tiene_objeto": "{quien} is already {estado}. It doesn't stack: the item goes back to the bag."
+  "batalla.ya_tiene_objeto": "{quien} is already {estado}. It doesn't stack: the item goes back to the bag.",
+  "galeria.accion.derrotado": "Defeated",
+  "galeria.accion.beso": "Kiss",
+  "galeria.ocultar_menu": "Hide menu",
+  "galeria.mostrar_menu": "Menu"
 }

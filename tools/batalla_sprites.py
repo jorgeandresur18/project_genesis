@@ -292,6 +292,17 @@ def hoja_capitan(c: dict):
     return im, meta
 
 
+def centro_x(im: np.ndarray, meta: dict) -> float:
+    """Dónde está el centro del cuerpo en el cuadro de reposo (x, en px del cuadro): para centrarlo en la galería."""
+    fw, fh, a = meta['frameWidth'], meta['frameHeight'], meta['animations']['idle']
+    fila = im[a['row'] * fh:(a['row'] + 1) * fh, :a['frames'] * fw, 3]
+    cols = np.zeros(fw)
+    for f in range(a['frames']):
+        cols += (fila[:, f * fw:(f + 1) * fw] > 0).sum(axis=0)
+    xs = np.nonzero(cols)[0]
+    return round(float((xs.min() + xs.max() + 1) / 2), 1)
+
+
 ANCHO_MAX = 4096
 COLUMNAS = 20
 
@@ -315,6 +326,7 @@ def main():
     for c in leer_html(ruta):
         if c['id'] == 'soldado':
             im, meta = hoja_capitan(c)
+            meta['centro_x'] = centro_x(im, meta)
             if im.shape[1] > ANCHO_MAX:
                 im = repartir(im, meta['frameWidth'], meta['frameHeight'], meta)
             Image.fromarray(im).save(SALIDA / 'capitan.png')
@@ -364,6 +376,7 @@ def main():
                 ta = c['anims']['tajada']
                 print('sombra: media luna borrada de la tajada,', borrar_media_luna(im, fw, fh, ta['row'], ta['frames']), 'pixeles')
                 meta['proyectil'] = p
+        meta['centro_x'] = centro_x(im, meta)
         if im.shape[1] > ANCHO_MAX:
             im = repartir(im, fw, fh, meta)
         if nombre == 'sombra':

@@ -3085,3 +3085,14 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 .batalla-brillo.grande { width: 0.9rem; clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%); box-shadow: none; background: #ffe6fb; }
 @keyframes brillo { 0%, 100% { opacity: 0; scale: 0.4; } 45% { opacity: 1; scale: 1.25; } 60% { opacity: 0.6; scale: 0.9; } }
 @media (prefers-reduced-motion: reduce) { .batalla-nebulosa, .batalla-brillo { animation: none; opacity: 0.5; } }
+/* Galería: el pixel art del combate, centrado según su cuerpo (no según el cuadro). */
+.rpg-centrado { display: inline-block; }
+/* El visor de sprites: el sprite baja hasta el borde de abajo de la ventana (ahí se corta) y la barra va encima. */
+.gallery-viewer-sprite .viewer-stage { margin-bottom: -4.6rem; }
+.gallery-viewer-sprite .gallery-viewer-bar { z-index: 2; background: rgba(10, 10, 12, 0.85); backdrop-filter: blur(6px); }
+/* La ficha de un sprite aparece encima, a un costado: el sprite no se mueve. */
+.gallery-viewer-sprite .info-window { position: absolute; top: 1rem; right: 1rem; bottom: 5.4rem; z-index: 3; max-height: none; }
+/* Sin menú: solo un botón chico para volver a mostrarlo. */
+.gallery-viewer.sin-menu .gallery-viewer-bar { display: none; }
+.viewer-mostrar-menu { position: absolute; right: 1rem; bottom: 1rem; z-index: 4; padding: 0.35rem 0.8rem; border-radius: 999px; background: rgba(10, 10, 12, 0.7); opacity: 0.6; }
+.viewer-mostrar-menu:hover { opacity: 1; }

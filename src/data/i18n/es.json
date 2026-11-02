@@ -230,11 +230,11 @@
   "batalla.especial": "¡ESPECIAL!",
   "batalla.especial_total": "{quien} hizo {n} de daño en total.",
   "batalla.turno_de": "Turno de",
-  "galeria.accion.idle": "Reposo",
+  "galeria.accion.idle": "Base",
   "galeria.accion.mover": "Moverse",
   "galeria.accion.salto": "Salto",
   "galeria.accion.ataque": "Ataque",
-  "galeria.accion.daño": "Daño",
+  "galeria.accion.daño": "Golpe",
   "galeria.accion.pestaneo": "Pestañeo",
   "galeria.accion.cabello": "Cabello",
   "galeria.accion.sonrojada": "Sonrojada",
@@ -337,5 +337,9 @@
   "batalla.estado_confundido": "confundido",
   "batalla.estado_envenenado": "envenenado",
   "batalla.ya_tiene_ataque": "{quien} ya está {estado}. No se acumula: el turno se pierde, pero el ataque no se gasta.",
-  "batalla.ya_tiene_objeto": "{quien} ya está {estado}. No se acumula: el objeto vuelve a la mochila."
+  "batalla.ya_tiene_objeto": "{quien} ya está {estado}. No se acumula: el objeto vuelve a la mochila.",
+  "galeria.accion.derrotado": "Derrotado",
+  "galeria.accion.beso": "Beso",
+  "galeria.ocultar_menu": "Ocultar menú",
+  "galeria.mostrar_menu": "Menú"
 }

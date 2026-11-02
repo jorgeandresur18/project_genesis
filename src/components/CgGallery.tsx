@@ -497,7 +497,9 @@ function Characters() {
         >
           <span className="sprite-cell">
             <span className="sprite-rpg-mini">
-              <SpriteHoja src={r.hoja} anim="idle" />
+              <Centrado hoja={r.hoja}>
+                <SpriteHoja src={r.hoja} anim="idle" />
+              </Centrado>
             </span>
           </span>
           <span className="sprite-name">{rpgNombre(r.hoja)}</span>
@@ -686,6 +688,8 @@ function Viewer({
   const [full, setFull] = useState(false);
   // Las imágenes secretas tienen vapor, que se puede quitar y volver a poner.
   const [vapor, setVapor] = useState(true);
+  /** El menú de abajo, oculto (para ver el sprite entero); se vuelve a mostrar con el botón chico o tocando la imagen. */
+  const [sinMenu, setSinMenu] = useState(false);
   const capasActuales = capas?.(index, vapor, () => tocar()) ?? null;
   const propio = contenido?.(index) ?? null;
   const texts = useTexts();
@@ -727,8 +731,13 @@ function Viewer({
   const current = info(index);
   return (
     <div
-      className={`gallery-viewer ${sprite ? 'gallery-viewer-sprite' : ''} ${emblem?.(index) ? 'gallery-viewer-emblem' : ''}`}
+      className={`gallery-viewer ${sprite ? 'gallery-viewer-sprite' : ''} ${emblem?.(index) ? 'gallery-viewer-emblem' : ''} ${sinMenu ? 'sin-menu' : ''}`}
     >
+      {sinMenu && (
+        <button className="viewer-mostrar-menu" onClick={() => setSinMenu(false)} aria-label={t('galeria.mostrar_menu')}>
+          ☰ {t('galeria.mostrar_menu')}
+        </button>
+      )}
       <div className="viewer-main">
         <div
           className={`viewer-stage ${propio ? 'viewer-volumen' : sprite ? 'viewer-profundidad' : ''}`}
@@ -821,6 +830,14 @@ function Viewer({
         <button
           onClick={() => {
             playCancel();
+            setSinMenu(true);
+          }}
+        >
+          {t('galeria.ocultar_menu')}
+        </button>
+        <button
+          onClick={() => {
+            playCancel();
             onClose();
           }}
         >
@@ -846,10 +863,33 @@ function siguienteQueja(quien: string, lineas: string[]): string {
 function SpriteRpgVista({ r, accion }: { r: SpriteRpg; accion: string }) {
   return (
     <div className="viewer-rpg">
-      <SpriteHoja key={`${r.hoja}-${accion}`} src={r.hoja} anim={accion} bucle />
+      <Centrado hoja={r.hoja}>
+        <SpriteHoja key={`${r.hoja}-${accion}`} src={r.hoja} anim={accion} bucle />
+      </Centrado>
     </div>
   );
 }
+
+/**
+ * Centra un sprite del combate: sus cuadros traen el personaje corrido a un costado (el aire para el arma o el
+ * especial), así que se corre según dónde está su cuerpo en reposo (`centro_x` de la hoja).
+ */
+function Centrado({ hoja, children }: { hoja: string; children: ReactNode }) {
+  const [corre, setCorre] = useState(0);
+  useEffect(() => {
+    void fetch(`${import.meta.env.BASE_URL}${hoja}.json`)
+      .then((x) => x.json())
+      .then((j: { frameWidth: number; centro_x?: number }) => setCorre(j.centro_x ? (j.frameWidth / 2 - j.centro_x) / j.frameWidth : 0));
+  }, [hoja]);
+  return (
+    <span className="rpg-centrado" style={{ translate: `${corre * 100}% 0` }}>
+      {children}
+    </span>
+  );
+}
+
+/** Las acciones que se muestran en la ficha, en este orden: la pose base, los ataques, el especial, el golpe y la caída. */
+const ACCIONES_FICHA = ['idle', 'ataque', 'beso', 'especial', 'daño', 'derrotado'];
 
 /** Las acciones de un sprite del combate (las filas de su hoja, el especial incluido), para verlas en el visor. */
 function AccionesRpg({ r, accion, onAccion }: { r: SpriteRpg; accion: string; onAccion: (a: string) => void }) {
@@ -859,7 +899,7 @@ function AccionesRpg({ r, accion, onAccion }: { r: SpriteRpg; accion: string; on
     void fetch(`${import.meta.env.BASE_URL}${r.hoja}.json`)
       .then((x) => x.json())
       .then((j: { animations: Record<string, unknown> }) =>
-        setLista(Object.keys(j.animations)),
+        setLista(ACCIONES_FICHA.filter((a) => a in j.animations)),
       );
   }, [r]);
   return (

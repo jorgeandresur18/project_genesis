@@ -71,12 +71,12 @@
         "toalla_demasiado_avergonzada",
         "toalla_llorando",
         "toalla_llorando_mucho",
-        "traje_base",
-        "traje_avergonzda",
-        "traje_avergonzada_ropa",
-        "traje_avergonzada_asustada",
-        "traje_avergonzada_asustada_espalda",
-        "traje_muy_humillada_avergonzada",
+        "traje_base:luz",
+        "traje_avergonzda:luz",
+        "traje_avergonzada_ropa:luz",
+        "traje_avergonzada_asustada:luz",
+        "traje_avergonzada_asustada_espalda:luz",
+        "traje_muy_humillada_avergonzada:luz",
         "desbloqueable_espalda",
         "desbloqueable_espalda_asustada",
         "desbloqueable_espalda_asustada2",
@@ -86,6 +86,11 @@
         "desbloqueable_vistiendose",
         "desbloqueable_vistiendose_muy_avergonzada"
       ]
+    }
+  },
+  "alinear_cara": {
+    "rikka": {
+      "traje_avergonzada_asustada": "traje_base"
     }
   }
 }
