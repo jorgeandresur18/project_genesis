@@ -2805,8 +2805,8 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 .sub-word.bad-end-glitch-largo { animation: sub-glitch 0.32s steps(2) infinite; }
 
 /* Al terminar una pelea: un destello y la pantalla se va a negro; después la novela aparece desde negro. */
-/* (La salida ahora es en bloques de píxel: ver .batalla-pixelado.) */
-.batalla.saliendo::after { content: ''; position: absolute; inset: 0; z-index: 60; pointer-events: all; }
+.batalla.saliendo::after { content: ''; position: absolute; inset: 0; z-index: 60; pointer-events: all; animation: batalla-sale 1s ease-in forwards; }
+.batalla.saliendo .batalla-escena { animation: batalla-sale-zoom 1s ease-in forwards; }
 @keyframes batalla-sale { 0% { background: rgba(255, 255, 255, 0); } 12% { background: rgba(255, 255, 255, 0.85); } 30% { background: rgba(255, 255, 255, 0.2); } 100% { background: #000; } }
 
 @keyframes batalla-sale-zoom { to { scale: 1.12; filter: blur(2px); } }
@@ -3110,13 +3110,10 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 @keyframes aire-golpe { 0% { filter: brightness(2.4) saturate(0); } 100% { filter: none; } }
 @media (prefers-reduced-motion: reduce) { .batalla-figura.en-aire .batalla-sprite { animation: none; } }
 
-/* Entrar y salir de una pelea: la pantalla se arma y se desarma en bloques negros, como en los juegos de 16 bits. */
+/* Entrar a una pelea: la pantalla negra se deshace en bloques que se encogen y se apagan (forma al azar). */
 .batalla-pixelado { position: absolute; inset: 0; z-index: 61; display: grid; grid-template-columns: repeat(var(--cols), 1fr); pointer-events: none; }
-.batalla-pixelado i { background: #000; }
-.batalla-pixelado.entra i { animation: pixel-fuera 0.12s steps(1) both; }
-.batalla-pixelado.sale i { opacity: 0; animation: pixel-dentro 0.12s steps(1) both; }
-@keyframes pixel-fuera { from { opacity: 1; } to { opacity: 0; } }
-@keyframes pixel-dentro { from { opacity: 0; } to { opacity: 1; } }
+.batalla-pixelado i { background: #000; animation: pixel-fuera 0.32s cubic-bezier(0.55, 0, 0.75, 0.3) both; }
+@keyframes pixel-fuera { 0% { scale: 1.02; opacity: 1; } 60% { opacity: 1; } 100% { scale: 0; opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .batalla-pixelado i { animation-duration: 0.01s; } }
 
 /* Los objetos con su dibujo: en el menú de la pelea y lo que cae del cielo (con brillo). */
@@ -3125,3 +3122,8 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 .batalla-cae.con-icono img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 6px #fff) drop-shadow(0 0 16px #ffe58a) drop-shadow(0 0 30px rgba(255, 229, 138, 0.6)); animation: cae-brillo 0.6s ease-in-out infinite alternate; }
 @keyframes cae-brillo { to { filter: drop-shadow(0 0 3px #fff) drop-shadow(0 0 10px #ffe58a) drop-shadow(0 0 18px rgba(255, 229, 138, 0.35)); } }
 .equipo-icono { width: 1.8em; height: 1.8em; margin-right: 0.45em; vertical-align: middle; object-fit: contain; }
+.batalla-proyectil.en-mano { opacity: 1; animation: none; }
+
+/* Galería: el Clon de sombra (la copia, atrás y a un costado). */
+.rpg-con-clon { position: relative; display: inline-block; }
+.rpg-con-clon > .batalla-figura.clon { position: absolute; left: -38%; top: -4%; display: block; translate: none; }

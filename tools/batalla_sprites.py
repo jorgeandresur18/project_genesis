@@ -82,6 +82,8 @@ BESO_SUELTA = 78
 # pelea se empieza un poco antes del destello, así el cambio de pose y el sonido van juntos.
 BESO_DESDE = 46
 BESO_CORAZON = {'x': 104, 'y': 39, 'ancho': 21, 'alto': 20}
+# El cuadro en que el corazón aparece en la mano (chico, y crece).
+BESO_APARECE = 52
 
 
 def hoja_beso(c: dict, html: Path):
@@ -90,16 +92,27 @@ def hoja_beso(c: dict, html: Path):
     im = np.array(Image.open(io.BytesIO(base64.b64decode(b['src'].split('base64,')[1]))).convert('RGBA'))
     fw, fh, bw, cols = c['fw'], c['fh'], b['fw'], an['cols']
     fila = np.zeros((fh, an['frames'] * fw, 4), im.dtype)
+    pista = {}
     for f in range(an['frames']):
         cuadro = im[(f // cols) * fh:(f // cols + 1) * fh, (f % cols) * bw:(f % cols) * bw + fw].copy()
-        if f >= BESO_SUELTA:
-            # Todo lo que flota delante de la mano (el corazón con su borde y los brillos): lo que no toca el cuerpo.
+        if f >= BESO_APARECE:
+            # Desde que aparece en la mano, todo lo que flota delante (el corazón y sus brillos) se borra: el juego
+            # dibuja la imagen del corazón en ese lugar (`pista`: centro y escala por cuadro) y después la lanza.
             lab, n = ndimage.label(cuadro[..., 3] > 0)
             if n > 1:
-                cuerpo = np.argmax(np.bincount(lab.ravel())[1:]) + 1
-                for i, sl in enumerate(ndimage.find_objects(lab), 1):
-                    if i != cuerpo and sl[1].start >= 94 and sl[0].stop <= 72:
-                        cuadro[sl][lab[sl] == i] = 0
+                tam = ndimage.sum(np.ones_like(lab), lab, range(1, n + 1))
+                cuerpo = int(np.argmax(tam)) + 1
+                cajas = ndimage.find_objects(lab)
+                corazon = None
+                for k, sl in enumerate(cajas, 1):
+                    if k != cuerpo and sl[1].start >= 94 and sl[0].stop <= 72:
+                        if tam[k - 1] > 20 and (corazon is None or tam[k - 1] > tam[corazon[0] - 1]):
+                            corazon = (k, sl)
+                        cuadro[sl][lab[sl] == k] = 0
+                if corazon and f < BESO_SUELTA:
+                    sl = corazon[1]
+                    pista[str(f)] = [round((sl[1].start + sl[1].stop) / 2, 1), round((sl[0].start + sl[0].stop) / 2, 1),
+                                     round((sl[1].stop - sl[1].start) / BESO_CORAZON['ancho'], 2)]
         fila[:, f * fw:(f + 1) * fw] = cuadro
     proy = None
     ruta = html.parent / 'nikki corazon.png'
@@ -108,7 +121,7 @@ def hoja_beso(c: dict, html: Path):
         cor = cor.crop(cor.getbbox())
         # A 4 veces su tamaño en la pelea, nítido (es pixel art).
         cor.resize((BESO_CORAZON['ancho'] * 4, BESO_CORAZON['alto'] * 4), Image.NEAREST).save(SALIDA / 'nikki_corazon.png')
-        proy = {'imagen': 'batalla/nikki_corazon', 'cuadro': BESO_SUELTA, **BESO_CORAZON}
+        proy = {'imagen': 'batalla/nikki_corazon', 'cuadro': BESO_SUELTA, **BESO_CORAZON, 'pista': pista}
     return fila, {'frames': an['frames'], 'fps': an['fps'], 'loop': False, 'seq': list(range(BESO_DESDE, an['frames']))}, proy
 
 

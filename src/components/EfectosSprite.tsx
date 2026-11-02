@@ -67,8 +67,19 @@ export function useEfectosSprite({
     setTimeout(() => setVuelan((l) => l.filter((z) => z.key !== key)), ms + 60);
   };
   const [rayo, setRayo] = useState<{ x: number; y: number; largo: number; ang: number; grosor: number } | null>(null);
+  const [enMano, setEnMano] = useState<{ src: string; x: number; y: number; w: number; h: number } | null>(null);
   /** Para `alCuadro` del SpriteHoja. */
   const alCuadro = (fila: string, columna: number, h: Hoja) => {
+    // Lo que sostiene en la mano antes de lanzarlo (el corazón): la imagen, siguiendo a la mano.
+    const pm = h.proyectiles?.[fila];
+    if (pm?.pista) {
+      const p = pm.pista[String(columna)];
+      const d = p && donde();
+      if (p && d) {
+        const k = d.s.width / h.frameWidth;
+        setEnMano({ src: `${BASE}${pm.imagen}.png`, x: (volteado ? d.s.right - p[0] * k : d.s.left + p[0] * k) - d.base.left, y: d.s.top + p[1] * k - d.base.top, w: pm.ancho * k * p[2], h: pm.alto * k * p[2] });
+      } else setEnMano(null);
+    }
     if (h.rayo) {
       const r = fila === 'especial' ? h.rayo[String(columna)] : undefined;
       const d = donde();
@@ -97,6 +108,7 @@ export function useEfectosSprite({
   useEffect(() => {
     puntas.current = [];
     setRayo(null);
+    setEnMano(null);
     if (!balasActivas || anim !== 'especial' || pausa) return;
     const t = setInterval(() => puntas.current.forEach((p) => disparo.current(p, true)), 55);
     return () => clearInterval(t);
@@ -109,6 +121,15 @@ export function useEfectosSprite({
           className="batalla-rayo sigue"
           aria-hidden
           style={{ left: rayo.x, top: rayo.y, width: rayo.largo, height: Math.max(6, rayo.grosor), rotate: `${rayo.ang}rad`, '--c': '#ff2a2a' } as CSSProperties}
+        />
+      )}
+      {enMano && (
+        <img
+          className="batalla-proyectil en-mano"
+          src={enMano.src}
+          alt=""
+          draggable={false}
+          style={{ left: enMano.x - enMano.w / 2, top: enMano.y - enMano.h / 2, width: enMano.w, height: enMano.h, scale: volteado ? '-1 1' : undefined } as CSSProperties}
         />
       )}
       {vuelan.map((x) => (

@@ -897,7 +897,17 @@ function SpriteRpgVista({ r, accion }: { r: SpriteRpg; accion: string }) {
       // El tamaño: el cuerpo, con la escala que tiene en la pelea (la sombra es grande), sin pasarse del alto.
     <div className="viewer-rpg" ref={escena} style={{ '--zrpg': zoom } as CSSProperties}>
       <Centrado hoja={r.hoja}>
-        <SpriteHoja key={`${r.hoja}-${accion}`} src={r.hoja} anim={accion} bucle alCuadro={efectos.alCuadro} />
+        {accion === 'clon' ? (
+          // El Clon de sombra: ella y, al lado, su copia hecha de sombra (como en la pelea).
+          <span className="rpg-con-clon">
+            <span className="batalla-figura clon">
+              <SpriteHoja src={r.hoja} anim="idle" bucle />
+            </span>
+            <SpriteHoja key={`${r.hoja}-idle`} src={r.hoja} anim="idle" bucle />
+          </span>
+        ) : (
+          <SpriteHoja key={`${r.hoja}-${accion}`} src={r.hoja} anim={accion} bucle alCuadro={efectos.alCuadro} />
+        )}
       </Centrado>
       {efectos.capa}
     </div>
@@ -983,7 +993,13 @@ function Centrado({ hoja, children }: { hoja: string; children: ReactNode }) {
 }
 
 /** Las acciones que se muestran en la ficha, en este orden: la pose base, los ataques, el especial, el golpe y la caída. */
-const ACCIONES_FICHA = ['idle', 'ataque', 'beso', 'especial', 'daño', 'derrotado'];
+const ACCIONES_FICHA = ['idle', 'ataque', 'beso', 'especial', 'clon', 'daño', 'derrotado'];
+/** Las hojas que tienen el Clon de sombra (Nikki): no es una fila de la hoja, es un especial del combate. */
+const CON_CLON = new Set(
+  Object.values(import.meta.glob<DatosBatalla>('../data/batallas/*.json', { eager: true, import: 'default' })).flatMap((d) =>
+    Object.values(d.enemigos).flatMap((e) => (e.clon ? [e.sprite] : [])),
+  ),
+);
 
 /** Las acciones de un sprite del combate (las filas de su hoja, el especial incluido), para verlas en el visor. */
 function AccionesRpg({ r, accion, onAccion }: { r: SpriteRpg; accion: string; onAccion: (a: string) => void }) {
@@ -994,7 +1010,7 @@ function AccionesRpg({ r, accion, onAccion }: { r: SpriteRpg; accion: string; on
     void fetch(`${import.meta.env.BASE_URL}${r.hoja}.json`)
       .then((x) => x.json())
       .then((j: { animations: Record<string, unknown> }) =>
-        setLista(ACCIONES_FICHA.filter((a) => a in j.animations)),
+        setLista(ACCIONES_FICHA.filter((a) => a in j.animations || (a === 'clon' && CON_CLON.has(r.hoja)))),
       );
   }, [r]);
   return (

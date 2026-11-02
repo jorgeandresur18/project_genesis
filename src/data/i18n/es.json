@@ -344,5 +344,6 @@
   "galeria.mostrar_menu": "Menú",
   "galeria.pixel_art": "Pixel art",
   "galeria.pixel_vacio": "Todavía no peleaste con nadie.",
-  "galeria.accion_bloqueada": "Se desbloquea al verla en una pelea."
+  "galeria.accion_bloqueada": "Se desbloquea al verla en una pelea.",
+  "galeria.accion.clon": "Clon de sombra"
 }

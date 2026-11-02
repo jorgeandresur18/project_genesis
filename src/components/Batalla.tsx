@@ -128,7 +128,19 @@ export interface Hoja {
    */
   proyectil?: { imagen: string; cuadro: number; x: number; y: number; ancho: number; alto: number };
   /** Proyectiles de otras animaciones (el corazón del beso de Nikki), con el mismo formato. */
-  proyectiles?: Record<string, { imagen: string; cuadro: number; x: number; y: number; ancho: number; alto: number }>;
+  proyectiles?: Record<
+    string,
+    {
+      imagen: string;
+      cuadro: number;
+      x: number;
+      y: number;
+      ancho: number;
+      alto: number;
+      /** Antes de soltarlo, por cuadro: dónde está en la mano ([x, y] del centro) y a qué escala. */
+      pista?: Record<string, [number, number, number]>;
+    }
+  >;
 }
 
 /**
@@ -424,7 +436,23 @@ function Pelea({
   /** Quien espera un cuadro de su animación para soltar algo (el corazón del beso). */
   const esperandoCuadro = useRef(new Map<string, { anim: string; col: number; ok: () => void }>());
   /** Cada cuadro nuevo de un luchador: si está disparando y ese cuadro tiene destellos, salen balas. */
+  /** Lo que sostiene en la mano antes de lanzarlo (el corazón del beso), dibujado como imagen: sigue a la mano. */
+  const [enMano, setEnMano] = useState<Record<string, { src: string; x: number; y: number; w: number; h: number; espejo: boolean }>>({});
   const alCuadro = (l: Luchador, anim: string, col: number, hoja: Hoja) => {
+    const pm = hoja.proyectiles?.[anim];
+    if (pm?.pista) {
+      const p = pm.pista[String(col)];
+      const s = p && rectSprite(figuras.current.get(l.id)?.querySelector('.batalla-sprite'));
+      const base = raiz.current?.getBoundingClientRect();
+      if (p && s && base) {
+        const k = s.width / hoja.frameWidth;
+        const espejo = l.lado === 'heroe';
+        setEnMano((m) => ({
+          ...m,
+          [l.id]: { src: `${BASE}${pm.imagen}.png`, x: (espejo ? s.right - p[0] * k : s.left + p[0] * k) - base.left, y: s.top + p[1] * k - base.top, w: pm.ancho * k * p[2], h: pm.alto * k * p[2], espejo },
+        }));
+      } else setEnMano((m) => (m[l.id] ? Object.fromEntries(Object.entries(m).filter(([id]) => id !== l.id)) : m));
+    }
     if (hoja.rayo && anim === 'especial') {
       const r = hoja.rayo[String(col)];
       const p = r && enPantalla(l, hoja, [r[0], r[1]]);
@@ -497,6 +525,8 @@ function Pelea({
   /** El clon de sombra: le cuesta vida, aparece a su lado hecho de sombra y un héroe reacciona. */
   const clonar = async (e: Luchador) => {
     const c = d.enemigos[e.clave].clon!;
+    // Se desbloquea en la galería (Pixel art).
+    useStore.getState().marcarRpg([`${d.enemigos[e.clave].sprite}#clon`]);
     const esp = d.enemigos[e.clave].especial;
     e.carga = 0;
     forzar();
@@ -2035,9 +2065,8 @@ function Pelea({
         </CajaCasillas>
       </div>
       {versus && <Versus d={d} />}
-      {/* La entrada (si no hay presentación) y la salida: la pantalla se arma y se desarma en bloques de píxel. */}
-      {!d.intro && !saliendo && <Pixelado key="entra" modo="entra" />}
-      {saliendo && <Pixelado key="sale" modo="sale" />}
+      {/* La entrada (si no hay presentación): la pantalla se arma desde negro en bloques de píxel. */}
+      {!d.intro && <Pixelado />}
       {/* Las balas de energía (Cami): salen de las pistolas y vuelan hasta su objetivo. */}
       {rayoSigue && (
         <span
@@ -2055,6 +2084,16 @@ function Pelea({
         />
       )}
       <div className="batalla-balas" aria-hidden>
+        {Object.entries(enMano).map(([id, x]) => (
+          <img
+            key={`mano-${id}`}
+            className="batalla-proyectil en-mano"
+            src={x.src}
+            alt=""
+            draggable={false}
+            style={{ left: x.x - x.w / 2, top: x.y - x.h / 2, width: x.w, height: x.h, scale: x.espejo ? '-1 1' : undefined } as CSSProperties}
+          />
+        ))}
         {proyectiles.map((x) => (
           <img
             key={x.key}
@@ -2533,17 +2572,33 @@ function Tarjeta({
   );
 }
 
-/** Bloques de pantalla que se apagan (entra) o se encienden (sale) en desorden: la transición de 16 bits. */
-const PIXEL_COLS = 24;
-const PIXEL_FILAS = 14;
-const PIXEL_ORDEN = Array.from({ length: PIXEL_COLS * PIXEL_FILAS }, (_, i) => i)
-  .map((i) => ({ i, r: (Math.sin(i * 12.9898) * 43758.5453) % 1 }))
-  .map(({ i, r }) => ({ i, d: Math.abs(r) * 0.55 + ((i % PIXEL_COLS) / PIXEL_COLS) * 0.25 }));
-function Pixelado({ modo }: { modo: 'entra' | 'sale' }) {
+/**
+ * La entrada de una pelea (16 bits): la pantalla negra se deshace en bloques de píxel que se encogen, con una forma
+ * al azar cada vez (de a pedazos, en diagonal, desde el centro, en persianas o en espiral).
+ */
+const PIXEL_COLS = 32;
+const PIXEL_FILAS = 18;
+const PIXEL_FORMAS: ((c: number, f: number, r: number) => number)[] = [
+  // De a pedazos.
+  (_c, _f, r) => r,
+  // En diagonal, desde arriba a la izquierda.
+  (c, f, r) => (c / PIXEL_COLS + f / PIXEL_FILAS) / 2 + r * 0.12,
+  // Desde el centro hacia afuera.
+  (c, f, r) => Math.hypot((c + 0.5) / PIXEL_COLS - 0.5, ((f + 0.5) / PIXEL_FILAS - 0.5) * 0.56) / 0.58 + r * 0.08,
+  // Persianas: una fila hacia un lado y la siguiente hacia el otro.
+  (c, f, r) => (f % 2 ? c : PIXEL_COLS - 1 - c) / PIXEL_COLS * 0.75 + (f / PIXEL_FILAS) * 0.2 + r * 0.05,
+  // Espiral: el ángulo alrededor del centro.
+  (c, f, r) => ((Math.atan2(f + 0.5 - PIXEL_FILAS / 2, c + 0.5 - PIXEL_COLS / 2) + Math.PI) / (2 * Math.PI)) * 0.85 + r * 0.1,
+];
+function Pixelado() {
+  const [bloques] = useState(() => {
+    const forma = PIXEL_FORMAS[Math.floor(Math.random() * PIXEL_FORMAS.length)];
+    return Array.from({ length: PIXEL_COLS * PIXEL_FILAS }, (_, i) => Math.min(1, forma(i % PIXEL_COLS, Math.floor(i / PIXEL_COLS), Math.random())));
+  });
   return (
-    <div className={`batalla-pixelado ${modo}`} aria-hidden style={{ '--cols': PIXEL_COLS } as CSSProperties}>
-      {PIXEL_ORDEN.map(({ i, d }) => (
-        <i key={i} style={{ animationDelay: `${(d * (modo === 'sale' ? SALIDA_MS : 900)).toFixed(0)}ms` }} />
+    <div className="batalla-pixelado" aria-hidden style={{ '--cols': PIXEL_COLS } as CSSProperties}>
+      {bloques.map((d, i) => (
+        <i key={i} style={{ animationDelay: `${Math.round(120 + d * 950)}ms` }} />
       ))}
     </div>
   );
