@@ -224,7 +224,26 @@ export function ProbadorSprites({ onCerrar }: { onCerrar: () => void }) {
     setBalas((b) => [...b, { key, x, y, dx: Math.cos(ang) * largo, dy: Math.sin(ang) * largo, ms, rafaga }]);
     setTimeout(() => setBalas((b) => b.filter((z) => z.key !== key)), ms + 40);
   };
+  // Lo que se suelta y sale volando como imagen aparte (el corazón del beso de Nikki, la media luna de la sombra):
+  // en la hoja ya no está desde ese cuadro, así que aparece encima, en el mismo lugar, y cruza la pantalla.
+  const [vuelan, setVuelan] = useState<{ key: number; src: string; x: number; y: number; w: number; h: number; dx: number; ms: number }[]>([]);
+  const soltar = (p: NonNullable<Hoja['proyectil']>, h: Hoja) => {
+    const s = rectSprite(escena.current?.querySelector('.probador-sprite .batalla-sprite'));
+    const base = escena.current?.getBoundingClientRect();
+    if (!s || !base) return;
+    const k = s.width / h.frameWidth;
+    const cx = p.x + p.ancho / 2;
+    const x = (volteado ? s.right - cx * k : s.left + cx * k) - base.left;
+    const y = s.top + (p.y + p.alto / 2) * k - base.top;
+    const dx = volteado ? -(x + p.ancho * k) : base.width - x + p.ancho * k;
+    const ms = (Math.abs(dx) / 700) * 1000;
+    const key = Math.random();
+    setVuelan((l) => [...l, { key, src: `${BASE}${p.imagen}.png`, x, y, w: p.ancho * k, h: p.alto * k, dx, ms }]);
+    setTimeout(() => setVuelan((l) => l.filter((z) => z.key !== key)), ms + 60);
+  };
   const alCuadro = (fila: string, columna: number, h: Hoja) => {
+    const p = h.proyectiles?.[fila] ?? (fila === 'ataque' ? h.proyectil : undefined);
+    if (p && columna === p.cuadro) soltar(p, h);
     const pts = marcas ? h.disparos?.[fila]?.[String(columna)] ?? [] : [];
     if (fila === 'especial') puntas.current = pts;
     else for (const p of pts) disparar(p, false);
@@ -309,6 +328,27 @@ export function ProbadorSprites({ onCerrar }: { onCerrar: () => void }) {
               <span key={i} className="probador-marca" style={{ left: x * zoom, top: y * zoom }} />
             ))}
           </div>
+          {vuelan.map((x) => (
+            <img
+              key={x.key}
+              className="batalla-proyectil"
+              src={x.src}
+              alt=""
+              draggable={false}
+              style={
+                {
+                  left: x.x - x.w / 2,
+                  top: x.y - x.h / 2,
+                  width: x.w,
+                  height: x.h,
+                  '--dx': `${x.dx}px`,
+                  '--dy': '0px',
+                  scale: volteado ? '-1 1' : undefined,
+                  animationDuration: `${x.ms}ms`,
+                } as CSSProperties
+              }
+            />
+          ))}
           <div className="batalla-balas" aria-hidden>
             {balas.map((x) => (
               <span
