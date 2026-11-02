@@ -1612,7 +1612,7 @@ function Pelea({
 
   return (
     <div
-      className={`batalla n${b.current.heroes.length} ${oscuro ? 'oscuro' : ''} ${saliendo ? 'saliendo' : ''}`}
+      className={`batalla n${b.current.heroes.length} e${Math.min(3, b.current.enemigos.length)} ${oscuro ? 'oscuro' : ''} ${saliendo ? 'saliendo' : ''}`}
       ref={raiz}
       role="dialog"
       aria-label={d.titulo}
