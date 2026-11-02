@@ -341,7 +341,7 @@ export function ProbadorSprites({ onCerrar }: { onCerrar: () => void }) {
             </button>
           ))}
         </div>
-        <div ref={escena} className={`probador-escena fondo-${fondo}`} style={fondo === 'combate' ? { backgroundImage: `url(${BASE}batalla/fondos/bastion.webp)` } : undefined}>
+        <div ref={escena} className={`probador-escena fondo-${fondo}`} style={fondo === 'combate' ? { backgroundImage: `url(${BASE}batalla/fondos/bastion_ruinas.webp)` } : undefined}>
           <div className="probador-sprite" style={{ '--z': zoom, transform: volteado ? 'scaleX(-1)' : undefined } as CSSProperties}>
             {hoja && (
               <SpriteHoja key={`${sel}-${vez}`} src={sel} anim={anim} bucle velocidad={velocidad} cuadroFijo={pausa ? cuadro : undefined} alCuadro={alCuadro} />
