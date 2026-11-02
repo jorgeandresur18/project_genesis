@@ -2926,7 +2926,9 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 /* Sube una estadística: un aura verde que sube un instante. Baja: la misma, roja y hacia abajo. */
 .batalla-aura-stat { position: absolute; left: 14%; right: 14%; top: 10%; bottom: 0; z-index: 3; pointer-events: none; border-radius: 40% 40% 10% 10%; mask: linear-gradient(to top, #000 0 60%, transparent); -webkit-mask: linear-gradient(to top, #000 0 60%, transparent); }
 .batalla-aura-stat::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, transparent 0 6px, var(--aura) 6px 9px, transparent 9px 15px), linear-gradient(to top, var(--aura-fondo), transparent 75%); background-size: 100% 200%, 100% 100%; animation: aura-sube 1.3s ease-out forwards; }
-.batalla-aura-stat.sube-stat { --aura: rgba(110, 255, 140, 0.75); --aura-fondo: rgba(80, 255, 130, 0.35); }
+/* Sube una estadística: dorado. La curación: verde menta (los colores de cada cosa, en docs/BIBLIA_RPG.md). */
+.batalla-aura-stat.sube-stat { --aura: rgba(255, 215, 106, 0.8); --aura-fondo: rgba(255, 200, 80, 0.35); }
+.batalla-aura-stat.cura { --aura: rgba(125, 255, 176, 0.8); --aura-fondo: rgba(90, 255, 150, 0.38); }
 .batalla-aura-stat.baja-stat { --aura: rgba(255, 90, 90, 0.75); --aura-fondo: rgba(255, 60, 60, 0.35); mask: linear-gradient(to bottom, #000 0 60%, transparent); -webkit-mask: linear-gradient(to bottom, #000 0 60%, transparent); }
 .batalla-aura-stat.baja-stat::before { background: repeating-linear-gradient(90deg, transparent 0 6px, var(--aura) 6px 9px, transparent 9px 15px), linear-gradient(to bottom, var(--aura-fondo), transparent 75%); background-size: 100% 200%, 100% 100%; animation-name: aura-baja; }
 @keyframes aura-sube { 0% { opacity: 0; transform: translateY(40%); } 25% { opacity: 1; } 100% { opacity: 0; transform: translateY(-35%); } }

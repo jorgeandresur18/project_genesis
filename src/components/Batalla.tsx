@@ -22,6 +22,8 @@ import {
   ataquesDe,
   CONFUSION,
   seConfunde,
+  quedan,
+  gastarUso,
   eligeAtaque,
   crearClon,
   eligeEspecial,
@@ -785,7 +787,7 @@ function Pelea({
     const rivales = b.current.enemigos.filter((e) => !vivo(e) && e.clon === undefined);
     if (!heroes.length && !rivales.length) return;
     for (const h of heroes) {
-      Object.assign(h, { ps: h.psMax, paralizado: 0, confundido: 0, envenenado: null, protegido: 0, carga: 0 });
+      Object.assign(h, { ps: h.psMax, paralizado: 0, confundido: 0, envenenado: null, protegido: 0, carga: 0, usados: {} });
       b.current.cansados.delete(h.id);
       void animar(h.id, 'idle');
       luz(h.id, '#7dffb0', true);
@@ -1126,6 +1128,7 @@ function Pelea({
         numero(a.id, marca, contra ? 'falla' : 'cura');
         const cambio = (o.atq ?? 0) + (o.def ?? 0) + (o.niveles ?? 0);
         if (cambio) efecto(a.id, cambio > 0 ? 'sube-stat' : 'baja-stat', 1300);
+        else if (o.ps || o.revive) efecto(a.id, 'cura', 1300);
         luz(a.id, o.veneno ? '#7dff6a' : o.protege ? '#8fd3ff' : contra ? '#ff6fae' : '#9dffb0');
       }
       playChip(contra ? 'cambio' : 'vida');
@@ -1169,7 +1172,22 @@ function Pelea({
     }
     if (c.tipo !== 'atacar') return;
     const ataque = ataquesDe(h, d.personajes[h.clave])[c.ataque];
+    gastarUso(h, ataque);
     if (ataque.cebo) return dejarCebo(h, ataque);
+    if (ataque.cura) {
+      // Se cura a sí misma: carga y la rodea el aura verde de la curación.
+      cargar(h, CARGA.atacar);
+      await decir(fmt(ataque.texto, { quien: h.nombre }));
+      playChip('vida');
+      efecto(h.id, 'cura', 1400);
+      luz(h.id, '#7dffb0', true);
+      await espera(700);
+      const antes = h.ps;
+      h.ps = Math.min(h.psMax, h.ps + Math.round(h.psMax * ataque.cura));
+      numero(h.id, `+${h.ps - antes}`, 'cura');
+      forzar();
+      return decir(fmt(t('batalla.se_cura'), { quien: h.nombre, n: h.ps - antes }));
+    }
     const e = objetivo(c.objetivo);
     await decir(fmt(ataque.texto, { quien: h.nombre, objetivo: e.nombre }));
     // Los ataques de efecto (el beso, la parálisis) no pegan: dejan al blanco confundido o paralizado.
@@ -1383,11 +1401,12 @@ function Pelea({
     }
     // La parálisis solo va contra los que todavía se mueven (si nadie se mueve, ataca de otra forma).
     // Si no le queda ningún ataque posible (solo de efecto y ya todos lo tienen), espera.
-    const elegido = eligeAtaque(d.enemigos[e.clave].ataques, hs);
+    const elegido = eligeAtaque(d.enemigos[e.clave].ataques.filter((a) => quedan(e, a) > 0), hs);
     if (!elegido) return;
     const { ataque: a } = elegido;
     const blancos = a.confunde || a.paraliza ? elegido.blancos : desviar(elegido.blancos, e);
-    await decir(a.texto);
+    gastarUso(e, a);
+    await decir(fmt(a.texto, { quien: e.nombre, objetivo: blancos.map((x) => x.nombre).join(' y ') }));
     if (a.confunde) return besar(e, a, blancos);
     if (a.paraliza) {
       setOscuro(true);
@@ -1499,6 +1518,11 @@ function Pelea({
         if (especial.objetivo === 'todos') return listo({ tipo: 'especial', objetivo: vivosDe('enemigo')[0]?.id ?? '' });
         return setMenu({ paso: 'objetivo', i: 0, lado: 'enemigo', luego: (o) => ({ tipo: 'especial', objetivo: o }) });
       }
+      if (ataques[i] && quedan(heroe, ataques[i]) <= 0) {
+        playChip('vacio');
+        return setMensaje({ texto: fmt(t('batalla.sin_usos'), { quien: heroe.nombre, ataque: ataques[i].nombre }), n: Math.random() });
+      }
+      if (ataques[i]?.cura) return listo({ tipo: 'atacar', ataque: i, objetivo: heroe.id });
       if (ataques[i]?.cebo) {
         // Uno a la vez: con un cebo en pie, no se puede poner otro.
         if (tieneCebo(heroe)) {
@@ -1587,11 +1611,16 @@ function Pelea({
         ? [
             ...ataques.map((a) => ({
               texto: a.nombre,
-              extra: `${a.poder}`,
-              clase: a.cebo && tieneCebo(heroe!) ? 'especial' : '',
-              desc: a.cebo
-                ? t('batalla.desc.cebo')
-                : fmt(t('batalla.desc.ataque'), { poder: a.poder, n: aprox(a.poder), a: t(a.objetivo === 'todos' ? 'batalla.desc.a_todos' : 'batalla.desc.a_uno') }),
+              // Los usos que le quedan (5/5); sin límite, su poder.
+              extra: a.usos !== undefined ? `${quedan(heroe!, a)}/${a.usos}` : `${a.poder}`,
+              clase: (a.cebo && tieneCebo(heroe!)) || quedan(heroe!, a) <= 0 ? 'especial' : '',
+              desc:
+                (a.cebo
+                  ? t('batalla.desc.cebo')
+                  : a.cura
+                    ? fmt(t('batalla.desc.cura'), { n: Math.round(a.cura * 100) })
+                    : fmt(t('batalla.desc.ataque'), { poder: a.poder, n: aprox(a.poder), a: t(a.objetivo === 'todos' ? 'batalla.desc.a_todos' : 'batalla.desc.a_uno') })) +
+                (a.usos !== undefined ? ' ' + fmt(t('batalla.desc.usos'), { q: quedan(heroe!, a), u: a.usos }) : ''),
             })),
             ...(especial && heroe
               ? [
@@ -1893,9 +1922,31 @@ function Figura({
   numeros: { key: number; texto: string; tipo: string }[];
   etiqueta?: string;
 }) {
+  // Dónde está la cabeza (un poco arriba de los ojos, medido sobre el sprite en pantalla): ahí van los corazones
+  // de la confusión. Los cuadros grandes (la sombra) tienen mucho aire arriba.
+  const caja = useRef<HTMLDivElement | null>(null);
+  const confundido = l.confundido > 0 && l.ps > 0 && !caido;
+  const [cabeza, setCabeza] = useState<CSSProperties | undefined>(undefined);
+  useEffect(() => {
+    if (!confundido || !especial?.ojos) return;
+    let vivo = true;
+    void cargarHoja(sprite).then((h: Hoja | { cuadro: [number, number] }) => {
+      const f = caja.current;
+      const r = rectSprite(f?.querySelector('.batalla-sprite'));
+      if (!vivo || !f || !r || !('frameHeight' in h)) return;
+      const base = f.getBoundingClientRect();
+      setCabeza({ top: r.top - base.top + ((especial.ojos![1] - 16) / h.frameHeight) * r.height });
+    });
+    return () => {
+      vivo = false;
+    };
+  }, [confundido, sprite, especial]);
   return (
     <div
-      ref={refFigura}
+      ref={(el) => {
+        caja.current = el;
+        refFigura(el);
+      }}
       className={`batalla-figura ${heroe ? 'heroe' : 'enemigo'} ${jefe ? 'jefe' : ''} ${l.clon !== undefined ? 'clon' : ''} ${marcado ? 'marcado' : ''} ${alto ? 'en-aire' : ''} ${l.envenenado && l.ps > 0 ? 'envenenado' : ''} ${l.protegido > 0 && l.ps > 0 ? 'protegido' : ''} anim-${anim} ${luces.length ? 'golpeado' : ''} ${activo ? 'activo' : ''} ${caido ? 'ko' : ''} ${efecto ?? ''} ${desliz && (desliz.x || desliz.y) ? 'deslizando' : ''}`}
       style={
         {
@@ -1915,7 +1966,7 @@ function Figura({
           ))}
         </span>
       )}
-      {(efecto === 'sube-stat' || efecto === 'baja-stat') && (
+      {(efecto === 'sube-stat' || efecto === 'baja-stat' || efecto === 'cura') && (
         <span className={`batalla-aura-stat ${efecto}`} aria-hidden>
           {Array.from({ length: 9 }, (_, i) => (
             <i key={i} style={{ '--i': i, '--x': `${8 + ((i * 37) % 84)}%` } as CSSProperties} />
@@ -1923,7 +1974,7 @@ function Figura({
         </span>
       )}
       {l.confundido > 0 && l.ps > 0 && !caido && (
-        <span className="batalla-confusion" aria-hidden>
+        <span className="batalla-confusion" style={cabeza} aria-hidden>
           <span>♥</span>
           <span>♥</span>
           <span>♥</span>

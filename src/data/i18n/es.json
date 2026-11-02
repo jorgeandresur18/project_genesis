@@ -328,5 +328,9 @@
   "conoce.indice": "Índice",
   "conoce.parte_juego": "El juego",
   "conoce.parte_autor": "El autor",
-  "batalla.arena_revive": "¡Arena! Se levantan con la vida llena: {quien}."
+  "batalla.arena_revive": "¡Arena! Se levantan con la vida llena: {quien}.",
+  "batalla.sin_usos": "A {quien} ya no le quedan usos de {ataque} en esta pelea.",
+  "batalla.se_cura": "{quien} recupera {n} PS.",
+  "batalla.desc.cura": "Se cura a sí misma: el {n} % de su vida. No se elige a quién.",
+  "batalla.desc.usos": "Usos: {q}/{u} (se recuperan al terminar la pelea)."
 }

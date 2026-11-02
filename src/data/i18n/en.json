@@ -328,5 +328,9 @@
   "conoce.indice": "Contents",
   "conoce.parte_juego": "The game",
   "conoce.parte_autor": "The author",
-  "batalla.arena_revive": "Arena! They get back up at full health: {quien}."
+  "batalla.arena_revive": "Arena! They get back up at full health: {quien}.",
+  "batalla.sin_usos": "{quien} has no uses of {ataque} left in this fight.",
+  "batalla.se_cura": "{quien} recovers {n} HP.",
+  "batalla.desc.cura": "Heals herself: {n}% of her health. No target needed.",
+  "batalla.desc.usos": "Uses: {q}/{u} (restored after the fight)."
 }

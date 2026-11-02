@@ -26,7 +26,8 @@
         {
           "nombre": "Puñetazo",
           "poder": 14,
-          "texto": "{quien} cierra los ojos y lanza un puñetazo. Por estadística, alguno tenía que entrar."
+          "texto": "{quien} cierra los ojos y lanza un puñetazo. Por estadística, alguno tenía que entrar.",
+          "usos": 20
         }
       ],
       "hablar": [
@@ -59,7 +60,8 @@
             "nombre": "Cebo",
             "poder": 0,
             "cebo": true,
-            "texto": "{quien} se queda quieto un segundo y deja ahí una copia de sí mismo, en blanco y negro. Es lo primero que aprende cualquier peleador. Y lo único que Jair usa, en la oficina."
+            "texto": "{quien} se queda quieto un segundo y deja ahí una copia de sí mismo, en blanco y negro. Es lo primero que aprende cualquier peleador. Y lo único que Jair usa, en la oficina.",
+            "usos": 5
           }
         }
       ]
@@ -87,14 +89,16 @@
         {
           "nombre": "Cachetada",
           "poder": 10,
-          "texto": "Nikki le da una cachetada que suelta una onda azul. Suena como un portazo.",
-          "peso": 3
+          "texto": "{quien} le da una cachetada a {objetivo} que suelta una onda azul. Suena como un portazo.",
+          "peso": 3,
+          "usos": 20
         },
         {
           "nombre": "Cachetada de revés",
           "poder": 12,
-          "texto": "Nikki le da una cachetada de revés. Con el anillo. A propósito.",
-          "peso": 2
+          "texto": "{quien} le da una cachetada de revés a {objetivo}. Con el anillo. A propósito.",
+          "peso": 2,
+          "usos": 15
         },
         {
           "nombre": "Beso confusión",
@@ -102,7 +106,8 @@
           "confunde": 3,
           "anim": "beso",
           "peso": 3,
-          "texto": "Nikki cambia de cara de golpe: ojitos, labios y un beso al aire. Un corazón sale volando derecho hacia Jair."
+          "texto": "{quien} cambia de cara de golpe: ojitos, labios y un beso al aire. Un corazón sale volando derecho hacia {objetivo}.",
+          "usos": 5
         }
       ],
       "especial": {
@@ -118,7 +123,7 @@
           26,
           13
         ],
-        "texto": "A Nikki le arden los ojos. Agarra a Jair de la camisa y empieza: derecha, izquierda, derecha, izquierda. Con fuego. No hay final a la vista."
+        "texto": "A {quien} le arden los ojos. Agarra a {objetivo} de la ropa y empieza: derecha, izquierda, derecha, izquierda. Con fuego. No hay final a la vista."
       },
       "al_retirarse": "llorando",
       "al_ganar": "llorando",

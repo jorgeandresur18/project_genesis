@@ -23,6 +23,10 @@ export interface Ataque {
    * en vez de a él (CEBO), y muere al primer golpe. No se elige a quién.
    */
   cebo?: boolean;
+  /** Se cura a sí mismo esta parte de su vida máxima (la curación de Rikka); no se elige a quién. */
+  cura?: number;
+  /** Cuántas veces se puede usar en una pelea («5/5» en el menú); sin esto, sin límite. Se recuperan al terminar. */
+  usos?: number;
   nombre: string;
   poder: number;
   /** "uno" (al azar, o el elegido) o "todos". */
@@ -261,6 +265,8 @@ export interface Luchador {
   envenenado: { danio: number; turnos: number } | null;
   /** Protegido: tantos golpes que no le hacen daño. */
   protegido: number;
+  /** Cuántas veces usó cada ataque con usos limitados en esta pelea (por nombre). */
+  usados?: Record<string, number>;
 }
 
 /**
@@ -482,6 +488,14 @@ export function eligeAtaque(ataques: Ataque[], heroes: Luchador[], azar: () => n
   const pool = libres(ataque);
   return { ataque, blancos: ataque.objetivo === 'todos' ? pool : [pool[Math.floor(azar() * pool.length)]] };
 }
+
+/** Cuántos usos le quedan de un ataque en esta pelea (Infinity si no tiene límite). */
+export const quedan = (l: Luchador, a: Ataque) => (a.usos === undefined ? Infinity : Math.max(0, a.usos - (l.usados?.[a.nombre] ?? 0)));
+/** Gasta un uso de un ataque. */
+export const gastarUso = (l: Luchador, a: Ataque) => {
+  if (a.usos === undefined) return;
+  l.usados = { ...l.usados, [a.nombre]: (l.usados?.[a.nombre] ?? 0) + 1 };
+};
 
 /** Los ataques que tiene un héroe en su nivel: los de siempre y los que ya aprendió. */
 export const ataquesDe = (h: { nivel: number }, d: Heroe): Ataque[] => [
