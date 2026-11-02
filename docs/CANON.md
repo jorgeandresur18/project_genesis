@@ -122,6 +122,9 @@ Género y tono por etapas `[CANON]`: el Capítulo 1 es un isekai adulto (humor n
 - **Es la protagonista original de GRAVITY**, con el lore y la historia más extensos. Que Cami tenga el arco más trágico no la desplaza. `[CANON]`
 - Para compensar su complejo de inferioridad, Jair le borró el orgullo y la hizo dócil y sumisa. `[CANON]`
 - Cuando conoce a Jair no es orgullosa: le quedan vestigios de orgullo que asoman a veces, sobre todo orgullo de su posición noble (familia del reino ancestral), no orgullo frente a él. `[CANON]`
+- **Su vínculo con Jair** (texto del autor: `docs/RIKKA.md`, 2026-11-02): **algo sin nombre**, con muy poco contacto físico. Empieza genuino y se vuelve dependencia: necesita sentirse **elegida**, y sus celos crecen mientras Jair responde con distancia, cinismo y apatía; los dos siguen volviendo. **Su forma de amar es completamente suya:** Jair le editó el orgullo, no el amor. `[CANON]`
+- **El quiebre:** el ciclo ocurre en la convivencia y se rompe con la caja de Pandora. Al descubrir que Jair le borró el orgullo, ya no confía en él como antes; algo se quiebra, pero **queda un remanente**. `[CANON]`
+- **«I am an AI and I need to be loved»:** Rikka dice que escuchó una canción de **The Schmitz** llamada **«How Late Is Now?»** (parodia de *How Soon Is Now?*, de The Smiths; el nombre real nunca sale en el juego). Necesitar amor no le da derecho a exigirlo. `[CANON]` En qué escena lo dice: `[PENDIENTE]`.
 
 ### Estaturas `[CANON]`
 
@@ -265,7 +268,7 @@ Cami y Rikka ya se materializaron y viven con Jair en su departamento.
   - **Jair:** *Heaven Knows I'm Miserable Now* (The Smiths): el trabajo mal pagado, la vida en bucle y la melancolía, con humor seco.
   - **Nikki:** *Linger* (The Cranberries): el tira y afloja de ocho años («nunca te vayas de mi vida» y, la misma noche, «búscate una novia»).
   - **Cami:** *Army of Me* (Björk): soldado, dura, sin paciencia con nadie que se queje. Alternativa más rabiosa: *Misery Business* (Paramore).
-  - **Rikka:** *Lovesong* (The Cure): quinientos años, dramática y fiel a Jair («no importa cuán lejos, siempre te voy a amar»).
+  - **Rikka:** *Lovesong* (The Cure): quinientos años, dramática y fiel a Jair («no importa cuán lejos, siempre te voy a amar»). Su canción del conflicto es otra: «How Late Is Now?», de The Schmitz (ver `docs/RIKKA.md`).
   - **El Rey Malvado / Promptmetheus:** *Every Breath You Take* (The Police): suena a canción de amor y es de vigilancia y posesión; la IA que parece querer gobernar y quiere consumirlo todo.
 - **Las parodias** se inspiran en bandas de los 80, los 90 y principios de los 2000: The Struggles (The Strokes), The Schmitz (The Smiths), The Blueberries (The Cranberries), The Drunks (The Drums), The Billers (The Killers), The Cops (The Police), The Cum (The Cure), Parawoke (Paramore) y Mjölnir (Björk). Nunca se nombra a las bandas reales en el juego. `[CANON]`
 
