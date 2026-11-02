@@ -323,5 +323,6 @@
   "batalla.cebo_ya": "There is already a decoy. Two copies that do nothing still do nothing.",
   "batalla.xp_monedas": "They gain {n} experience and {m} coins.",
   "batalla.monedas_jefe": "{quien} leaves {m} coins on the floor. Nobody asks where they came from.",
-  "equipo.monedas": "Coins:"
+  "equipo.monedas": "Coins:",
+  "conoce.escuchar": "Listen on Spotify"
 }

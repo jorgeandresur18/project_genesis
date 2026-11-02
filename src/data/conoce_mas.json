@@ -90,6 +90,56 @@
       ]
     },
     {
+      "titulo": "Notas del autor",
+      "parrafos": [
+        "Estas son mis notas: no son la historia, sino lo que fui pensando mientras la hacía. Las voy a ir completando a medida que la obra crezca.",
+        "Quise que PROJECT GENESIS no se sintiera solo como una novela visual. Por eso, desde la primera partida, una mala decisión en el bar te mete en una pelea por turnos, y más adelante las peleas son parte del viaje. Son mi homenaje a los RPG por turnos de toda la vida, como EarthBound y Final Fantasy: un híbrido entre leer y pelear, donde entre una pelea y otra pasa la historia.",
+        "Escribí casi todo escuchando bandas de los 80, los 90 y principios de los 2000. Las que suenan en el juego son parodias (The Struggles, The Schmitz, The Blueberries, The Cops, The Cum, Parawoke, Mjölnir…), pero detrás de cada una hay una banda que quiero de verdad.",
+        "A cada personaje le di una canción, según lo que pienso de ellos. No es una pista de lo que va a pasar: es cómo los siento."
+      ],
+      "canciones": [
+        {
+          "personaje": "Jair",
+          "cancion": "Heaven Knows I'm Miserable Now",
+          "banda": "The Smiths",
+          "nota": "Una canción que suena luminosa y habla de una vida que no alcanza, contada con humor seco. Así es él: se ríe de su propia miseria para no tener que cambiarla.",
+          "spotify": "https://open.spotify.com/track/60fTJMJTwdsK2QocoAfVxP"
+        },
+        {
+          "personaje": "Nikki",
+          "cancion": "Linger",
+          "banda": "The Cranberries",
+          "nota": "Una canción dulce sobre algo que lastima: alguien que no suelta y no se queda. Ocho años de eso.",
+          "spotify": "https://open.spotify.com/track/0gEyKnHvgkrkBM6fbeHdwK"
+        },
+        {
+          "personaje": "Cami",
+          "cancion": "Army of Me",
+          "banda": "Björk",
+          "nota": "Deja de lamentarte y arréglatelas, o vas a tener que vértelas conmigo. Nadie lo diría mejor que ella.",
+          "spotify": "https://open.spotify.com/track/0pXQWCgKlh9ZiXcIE6wwC4"
+        },
+        {
+          "personaje": "Rikka",
+          "cancion": "Lovesong",
+          "banda": "The Cure",
+          "nota": "No importa cuán lejos ni cuánto tiempo: la promesa más simple de un disco muy oscuro.",
+          "spotify": "https://open.spotify.com/track/1y6XHeNN5DSX5PYy7gT0qL"
+        },
+        {
+          "personaje": "El Rey Malvado",
+          "cancion": "Every Breath You Take",
+          "banda": "The Police",
+          "nota": "La canción que todos creen que es de amor. Escúchenla con atención.",
+          "spotify": "https://open.spotify.com/track/1JSTJqkT5qHq8MDJnJbRE1"
+        }
+      ],
+      "cierre": [
+        "Si al terminar el juego vuelves a escuchar estas cinco canciones, quizás suenen distinto. Esa es la idea.",
+        "La música de las peleas es «Battle Arcade», de Panda Beats, comprimida para que suene a 16 bits."
+      ]
+    },
+    {
       "titulo": "Una advertencia",
       "parrafos": [
         "Es una obra para mayores de 18 años, con lenguaje vulgar, alcohol, sexualidad sugerida y angustia psicológica. Todos los personajes son ficticios. Y es un proyecto en desarrollo: lo que juegas hoy es un borrador que va a seguir cambiando."

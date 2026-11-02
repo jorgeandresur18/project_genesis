@@ -90,6 +90,56 @@
       ]
     },
     {
+      "titulo": "Author's notes",
+      "parrafos": [
+        "These are my notes: not the story itself, but what I kept thinking about while making it. I will keep adding to them as the game grows.",
+        "I did not want PROJECT GENESIS to feel like just a visual novel. That is why, from your very first playthrough, a bad decision at the bar drops you into a turn-based fight, and later on the fights are part of the journey. They are my tribute to the classic turn-based RPGs, like EarthBound and Final Fantasy: a hybrid between reading and fighting, where the story happens between one fight and the next.",
+        "I wrote almost all of it listening to bands from the 80s, the 90s and the early 2000s. The ones you hear in the game are parodies (The Struggles, The Schmitz, The Blueberries, The Cops, The Cum, Parawoke, Mjölnir…), but behind each one there is a band I truly love.",
+        "I gave each character a song, based on what I think of them. It is not a hint of what will happen: it is how I feel about them."
+      ],
+      "canciones": [
+        {
+          "personaje": "Jair",
+          "cancion": "Heaven Knows I'm Miserable Now",
+          "banda": "The Smiths",
+          "nota": "A song that sounds bright and talks about a life that is not enough, told with dry humor. That is him: he laughs at his own misery so he never has to change it.",
+          "spotify": "https://open.spotify.com/track/60fTJMJTwdsK2QocoAfVxP"
+        },
+        {
+          "personaje": "Nikki",
+          "cancion": "Linger",
+          "banda": "The Cranberries",
+          "nota": "A sweet song about something that hurts: someone who will not let go and will not stay. Eight years of that.",
+          "spotify": "https://open.spotify.com/track/0gEyKnHvgkrkBM6fbeHdwK"
+        },
+        {
+          "personaje": "Cami",
+          "cancion": "Army of Me",
+          "banda": "Björk",
+          "nota": "Stop feeling sorry for yourself and deal with it, or you will have to deal with me. Nobody would say it better than her.",
+          "spotify": "https://open.spotify.com/track/0pXQWCgKlh9ZiXcIE6wwC4"
+        },
+        {
+          "personaje": "Rikka",
+          "cancion": "Lovesong",
+          "banda": "The Cure",
+          "nota": "No matter how far, no matter how long: the simplest promise on a very dark album.",
+          "spotify": "https://open.spotify.com/track/1y6XHeNN5DSX5PYy7gT0qL"
+        },
+        {
+          "personaje": "The Evil King",
+          "cancion": "Every Breath You Take",
+          "banda": "The Police",
+          "nota": "The song everyone thinks is a love song. Listen closely.",
+          "spotify": "https://open.spotify.com/track/1JSTJqkT5qHq8MDJnJbRE1"
+        }
+      ],
+      "cierre": [
+        "If you listen to these five songs again after finishing the game, they might sound different. That is the idea.",
+        "The battle music is \"Battle Arcade\", by Panda Beats, compressed to sound 16-bit."
+      ]
+    },
+    {
       "titulo": "A warning",
       "parrafos": [
         "This is a work for ages 18 and up, with strong language, alcohol, suggested sexuality and psychological distress. All characters are fictional. And it is a project in development: what you play today is a draft that will keep changing."

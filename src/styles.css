@@ -2990,3 +2990,9 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 
 .equipo-monedas { float: right; margin: 0.3rem 0 0; color: #9a958a; }
 .equipo-monedas b { color: #ffd76a; font-family: 'Press Start 2P', monospace; font-size: 0.75rem; }
+
+/* Notas del autor: cada canción con su botón para escucharla en Spotify. */
+.about-cancion { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 0.8rem; margin: 0.45rem 0; padding: 0.5rem 0.7rem; border-left: 2px solid #1db954; background: rgba(29, 185, 84, 0.06); border-radius: 0 0.4rem 0.4rem 0; }
+.about-cancion p { flex: 1 1 18rem; margin: 0; }
+.about-spotify { flex: none; padding: 0.3rem 0.75rem; border-radius: 999px; background: #1db954; color: #04130a; font-size: 0.82rem; font-weight: 700; text-decoration: none; }
+.about-spotify:hover { filter: brightness(1.1); }

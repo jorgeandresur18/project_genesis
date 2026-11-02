@@ -415,6 +415,7 @@ function CompletionMeter() {
 
 /** «Conoce más del proyecto»: qué es el juego, de qué trata, sus temas, cómo nació y enlaces del autor. */
 export function AboutPanel({ onClose }: { onClose: () => void }) {
+  const t = useT();
   const conoceMas = localized(conoceMasEs, conoceMasEn, useLang());
   return (
     <Panel title={conoceMas.titulo} onClose={onClose}>
@@ -426,6 +427,27 @@ export function AboutPanel({ onClose }: { onClose: () => void }) {
             {s.parrafos.map((p, i) => (
               <p key={i}>{p}</p>
             ))}
+            {/* Notas del autor: una canción por personaje, con su botón para escucharla en Spotify. */}
+            {'canciones' in s &&
+              s.canciones?.map((c) => (
+                <div key={c.cancion} className="about-cancion">
+                  <p>
+                    <b>{c.personaje}:</b> «{c.cancion}», {c.banda}. {c.nota}
+                  </p>
+                  <a
+                    className="about-spotify"
+                    href={c.spotify ?? `https://open.spotify.com/search/${encodeURIComponent(`${c.cancion} ${c.banda}`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    ▶ {t('conoce.escuchar')}
+                  </a>
+                </div>
+              ))}
+            {'cierre' in s &&
+              s.cierre?.map((p, i) => (
+                <p key={`c${i}`}>{p}</p>
+              ))}
           </section>
         ))}
         <div className="about-links">
