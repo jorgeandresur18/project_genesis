@@ -72,14 +72,16 @@ Los finales de la tabla principal (canon, alternativos, Génesis++ y Génesis#) 
 
 **Cómo se llega (borrador del autor; detalle en `docs/CANON.md`, «Capítulos 4 a 7»):** al principio del Capítulo 6, según cómo responde Jair sobre la verdad de Cami y Rikka. Rikka rompe la computadora de Jair y borra la restauración del mundo; ellas no desaparecen porque viven en los servidores de Noodle. Solo el Rey Malvado alcanzó a materializarse (sin la computadora no puede unir las dos realidades) e intenta llegar a los servidores de Noodle para retomar el control de la IA. Jair, Cami y Rikka lo detienen, pero pelean pésimo como equipo por la fragmentación emocional entre ellos y casi mueren. Noodle lo borra de sus servidores porque consume demasiada caché y, por el acuerdo legal que Jair aceptó, no puede borrar a Cami y Rikka: Jair paga una suscripción de 20 dólares al mes (con acceso anticipado a NoodleOS) para que sigan viviendo, inmortales, como humanas generadas por IA. Después viene el salto de un año y lo que sigue. **Génesis#** es su segundo epílogo.
 
-Cami se encuentra con Jair. Se acerca de forma sumisa y tímida y dice que lo extrañaba; después de pasear lo besa, pide quedarse y promete no volver a irse. Jair cuenta que ahora le va mejor y que arregló sus cosas con Nikki: son solo amigos. En realidad Nikki tiene 4 meses de embarazo y el bebé es de Jair. Cami se va a vivir con él y tienen relaciones; no puede quedar embarazada porque no tiene órganos. Cami le pregunta si es la mejor creación de las dos y Jair dice que sí, aunque siempre le gustó más la versión real de Rikka. Aquí acaba la historia.
+Cami se encuentra con Jair. Se acerca de forma sumisa y tímida y dice que lo extrañaba; después de pasear lo besa, pide quedarse y promete no volver a irse. Jair cuenta que ahora le va mejor y que arregló sus cosas con Nikki: son solo amigos. En realidad Nikki tiene 4 meses de embarazo y el bebé es de Jair. Cami se va a vivir con él y tienen relaciones; no puede quedar embarazada porque no tiene órganos. Cami le pregunta si es su mayor creación y Jair dice que sí, aunque siempre le gustó más la versión real de Rikka (el «sí» es mentira, pero también carga posesión y algo de afecto: ver `docs/CAMI.md`). Aquí acaba la historia.
 
 Escena final (borrador aprobado como "más simple"):
 
 - —¿Estás pensando en el bebé?
 - —No. Trato de no pensar en nada.
-- —De todo lo que programaste... ¿fui yo tu mejor creación?
-- —Sí. Eres mi obra maestra.
+- —¿Soy tu mayor creación?
+- —Sí.
+
+(Frase fijada por el autor el 2026-11-02: la pregunta sale de Cami y Jair responde con una sola palabra.)
 
 ## `final_canon_2` — El Bueno, "The AnothergIrl"
 
