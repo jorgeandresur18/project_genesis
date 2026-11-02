@@ -454,14 +454,19 @@ function Pelea({
     const proy = a.anim ? hoja.proyectiles?.[a.anim] : undefined;
     const dura = fila ? ((fila.seq?.length ?? fila.frames) * 1000) / fila.fps : 1200;
     if (fila) void animar(e.id, a.anim as Anim, dura);
-    playChip('beso');
     let llegadas = blancos.map(() => 600);
     if (proy && fila) {
-      await espera((proy.cuadro * 1000) / fila.fps);
+      // Hasta el cuadro en que suelta el corazón (con `seq`, su lugar en la secuencia); ahí suena el beso.
+      const paso = fila.seq ? Math.max(0, fila.seq.indexOf(proy.cuadro)) : proy.cuadro;
+      await espera((paso * 1000) / fila.fps);
+      playChip('beso');
       const desde = Date.now();
       llegadas = blancos.map((h, i) => lanzar(e, hoja, proy, h, i * 160));
       await espera(Math.max(...llegadas) - (Date.now() - desde));
-    } else await espera(600);
+    } else {
+      playChip('beso');
+      await espera(600);
+    }
     for (const h of blancos) {
       if (h.esquivando && Math.random() < d.esquivar) {
         numero(h.id, 'MISS', 'falla');

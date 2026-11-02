@@ -75,6 +75,9 @@ def proyectil(html: Path):
 # se borra de la hoja: el juego lo dibuja aparte (nikki_corazon.png, de «nikki corazon.png» junto al HTML) y lo
 # lanza hasta salir de la pantalla.
 BESO_SUELTA = 82
+# Los primeros cuadros del beso son la pose base completa (respira y pestañea) antes del destello (el 50): en la
+# pelea se empieza un poco antes del destello, así el cambio de pose y el sonido van juntos.
+BESO_DESDE = 46
 BESO_CORAZON = {'x': 112, 'y': 37, 'ancho': 21, 'alto': 20}
 
 
@@ -102,7 +105,7 @@ def hoja_beso(c: dict, html: Path):
         # A 4 veces su tamaño en la pelea, nítido (es pixel art).
         cor.resize((BESO_CORAZON['ancho'] * 4, BESO_CORAZON['alto'] * 4), Image.NEAREST).save(SALIDA / 'nikki_corazon.png')
         proy = {'imagen': 'batalla/nikki_corazon', 'cuadro': BESO_SUELTA, **BESO_CORAZON}
-    return fila, {'frames': an['frames'], 'fps': an['fps'], 'loop': False}, proy
+    return fila, {'frames': an['frames'], 'fps': an['fps'], 'loop': False, 'seq': list(range(BESO_DESDE, an['frames']))}, proy
 
 
 def viaje(seq: list) -> dict:
