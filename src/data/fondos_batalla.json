@@ -1,0 +1,15 @@
+{
+  "_nota": "La cuadrícula de cada fondo de pelea: dónde pisa cada uno, en % de la imagen ([x, y]: el centro de los pies). El primero de cada lista es el primero del equipo o de los rivales; el resto, en orden. Para verlos sobre la pelea: ?cuadricula en la dirección (por ejemplo ?batalla=bastion&cuadricula o ?sprites&cuadricula para la arena). Abajo a la izquierda va el menú y abajo a la derecha las tarjetas: los pies no deberían bajar de ~72 % a la izquierda ni de ~80 % a la derecha.",
+  "batalla/fondos/bastion_ruinas": {
+    "rivales": [[30, 69], [17, 61], [43, 61]],
+    "equipo": [[78, 64], [87, 75], [66, 75]]
+  },
+  "batalla/fondos/bastion": {
+    "rivales": [[30, 69], [17, 61], [43, 61]],
+    "equipo": [[78, 64], [87, 75], [66, 75]]
+  },
+  "batalla/fondos/bar": {
+    "rivales": [[36, 77], [48, 69], [24, 70]],
+    "equipo": [[78, 76], [88, 68], [66, 69]]
+  }
+}

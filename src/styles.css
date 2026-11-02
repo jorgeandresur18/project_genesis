@@ -3041,3 +3041,21 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 /* Con tres rivales la cámara se aleja para todos (como con tres héroes): así entran en una fila sin encimarse. */
 .batalla.e3 .batalla-figura .batalla-sprite { zoom: calc(1.3 * var(--e, 1)); }
 .batalla.e3 .batalla-lado.enemigos .batalla-figura + .batalla-figura { margin-left: -4%; }
+
+/* La cuadrícula de cada fondo (src/data/fondos_batalla.json): la escena es una caja del tamaño y lugar de la imagen
+   del fondo, y cada uno pisa su casilla (los pies en el punto). */
+.batalla-escena.con-casillas { display: block; padding: 0; container-type: size; }
+.batalla-casillas { position: absolute; left: 50%; top: 50%; translate: -50% -50%; aspect-ratio: var(--r); width: max(100cqw, calc(100cqh * var(--r))); }
+.con-casillas .batalla-lado { position: absolute; inset: 0; display: block; max-width: none; margin: 0; }
+.con-casillas .batalla-lado .batalla-figura + .batalla-figura { margin: 0; }
+.batalla-casilla { position: absolute; translate: -50% -100%; }
+/* Los rivales llevan su nivel debajo: los pies quedan arriba de la etiqueta. */
+.batalla-casilla:has(.batalla-figura.enemigo) { translate: -50% calc(-100% + 1.4rem); }
+.batalla-cuadricula { position: absolute; inset: 0; z-index: 90; pointer-events: none; }
+.batalla-cuadricula span { position: absolute; color: #7dffb0; font: 700 0.7rem ui-monospace, monospace; text-shadow: 0 0 3px #000; }
+.batalla-cuadricula .linea-x { top: 0; bottom: 0; border-left: 1px dashed rgba(125, 255, 176, 0.25); padding: 0.2rem; }
+.batalla-cuadricula .linea-y { left: 0; right: 0; border-top: 1px dashed rgba(125, 255, 176, 0.25); padding: 0.1rem 0.3rem; }
+.batalla-cuadricula .fuerte { border-color: rgba(125, 255, 176, 0.55); }
+.batalla-cuadricula .casilla { position: absolute; translate: -50% -50%; display: grid; place-items: center; width: 1.7rem; height: 1.7rem; border-radius: 50%; font: 700 0.7rem ui-monospace, monospace; color: #000; }
+.batalla-cuadricula .casilla.equipo { background: #7fe6ff; }
+.batalla-cuadricula .casilla.rivales { background: #ff7a7a; }

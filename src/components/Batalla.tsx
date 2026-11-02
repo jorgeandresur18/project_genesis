@@ -50,6 +50,7 @@ import {
   type Progreso,
 } from '../engine/batalla';
 import charlasJson from '../data/charlas_batalla.json';
+import fondosJson from '../data/fondos_batalla.json';
 
 /**
  * Batalla por turnos (RPG estilo EarthBound / Final Fantasy) dentro de la historia (ver `batalla` en la escena;
@@ -67,6 +68,13 @@ const BATALLAS = import.meta.glob<DatosBatalla>('../data/batallas/*.json', { eag
 /** Lo que se dicen con «Hablar», según quién le habla a quién (src/data/charlas_batalla.json). */
 type Charla = { dice: string[]; ok?: string[]; no?: string[]; narra?: boolean };
 const CHARLAS = charlasJson as unknown as Record<string, Record<string, Charla>>;
+/**
+ * La cuadrícula de cada fondo (src/data/fondos_batalla.json): dónde pisa cada uno, en % de la imagen. Con
+ * `?cuadricula` en la dirección se ve la grilla y los puntos sobre la pelea, para ajustar un fondo nuevo.
+ */
+type Casillas = { equipo: [number, number][]; rivales: [number, number][] };
+const FONDOS = fondosJson as unknown as Record<string, Casillas>;
+const VER_CUADRICULA = typeof location !== 'undefined' && new URLSearchParams(location.search).has('cuadricula');
 /** Quién es alguien en las charlas: el nombre de su hoja (batalla/jair → jair). */
 const quienEs = (sprite: string) => sprite.split('/').pop()!;
 const BASE = import.meta.env.BASE_URL;
@@ -308,6 +316,29 @@ function Pelea({
     playChip('cambio');
     await espera(SALIDA_MS);
     fn();
+  };
+  const casillas: Casillas | undefined = FONDOS[d.fondo];
+  const casillaDe = useRef(new Map<string, number>());
+  const casillaRival = (e: Luchador) => {
+    if (!casillaDe.current.has(e.id)) {
+      const usadas = new Set(b.current.enemigos.map((x) => casillaDe.current.get(x.id)).filter((x) => x !== undefined));
+      let i = 0;
+      while (usadas.has(i)) i++;
+      casillaDe.current.set(e.id, i);
+    }
+    return casillaDe.current.get(e.id)!;
+  };
+  /** Pone a alguien en su casilla (los pies en el punto); si faltan casillas, se corre al costado de la última. */
+  const enCasilla = (lado: keyof Casillas, i: number, key: string, nodo: React.ReactNode) => {
+    if (!casillas) return nodo;
+    const lista = casillas[lado];
+    const [x, y] = lista[Math.min(i, lista.length - 1)];
+    const extra = Math.max(0, i - lista.length + 1) * (lado === 'rivales' ? 8 : -8);
+    return (
+      <div key={key} className="batalla-casilla" style={{ left: `${x + extra}%`, top: `${y}%`, zIndex: Math.round(y) }}>
+        {nodo}
+      </div>
+    );
   };
   /** Los proyectiles en el aire (la media luna de la sombra). */
   const [proyectiles, setProyectiles] = useState<
@@ -1702,9 +1733,10 @@ function Pelea({
         )}
         {mensaje && !habla && <p>{conNumeros(texto)}</p>}
       </div>
-      <div className="batalla-escena">
+      <div className={`batalla-escena ${casillas ? 'con-casillas' : ''}`}>
+        <CajaCasillas casillas={casillas} r={d.fondo_proporcion ?? 16 / 9}>
         <div className="batalla-lado enemigos">
-          {b.current.enemigos.map((e) => (
+          {b.current.enemigos.map((e) => enCasilla('rivales', casillaRival(e), e.id,
             <Figura
               key={e.id}
               l={e}
@@ -1723,11 +1755,11 @@ function Pelea({
               marcado={marcado(e)}
               numeros={numeros.filter((n) => n.id === e.id)}
               etiqueta={e.clon !== undefined ? t('batalla.clon') : `${t('batalla.nivel')} ${e.nivel}`}
-            />
+            />,
           ))}
         </div>
         <div className={`batalla-lado heroes n${b.current.heroes.length}`}>
-          {b.current.heroes.map((h) => (
+          {b.current.heroes.map((h, i) => enCasilla('equipo', i, h.id,
             <Figura
               key={h.id}
               l={h}
@@ -1753,7 +1785,7 @@ function Pelea({
               marcado={marcado(h)}
               activo={eligiendo === h.id}
               numeros={numeros.filter((n) => n.id === h.id)}
-            />
+            />,
           ))}
           {/* Los cebos: copias en blanco y negro, delante de su héroe (no mueven a nadie). */}
           {b.current.cebos.map((c) => (
@@ -1776,6 +1808,7 @@ function Pelea({
             </div>
           ))}
         </div>
+        </CajaCasillas>
       </div>
       {versus && <Versus d={d} />}
       {/* Las balas de energía (Cami): salen de las pistolas y vuelan hasta su objetivo. */}
@@ -1861,6 +1894,41 @@ function Pelea({
           </div>
         )}
       </div>
+    </div>
+  );
+}
+
+/**
+ * Con cuadrícula, la escena es una caja del mismo tamaño y lugar que la imagen del fondo (así el % de la imagen es
+ * el % de la caja). Con `?cuadricula`, encima se ve la grilla (cada 5 %, con números cada 10 %) y las casillas.
+ */
+function CajaCasillas({ casillas, r, children }: { casillas?: Casillas; r: number; children: React.ReactNode }) {
+  if (!casillas) return <>{children}</>;
+  return (
+    <div className="batalla-casillas" style={{ '--r': r } as CSSProperties}>
+      {children}
+      {VER_CUADRICULA && (
+        <div className="batalla-cuadricula" aria-hidden>
+          {Array.from({ length: 19 }, (_, i) => (i + 1) * 5).map((p) => (
+            <span key={`x${p}`} className={`linea-x ${p % 10 ? '' : 'fuerte'}`} style={{ left: `${p}%` }}>
+              {p % 10 ? '' : p}
+            </span>
+          ))}
+          {Array.from({ length: 19 }, (_, i) => (i + 1) * 5).map((p) => (
+            <span key={`y${p}`} className={`linea-y ${p % 10 ? '' : 'fuerte'}`} style={{ top: `${p}%` }}>
+              {p % 10 ? '' : p}
+            </span>
+          ))}
+          {(['equipo', 'rivales'] as const).flatMap((lado) =>
+            casillas[lado].map(([x, y], i) => (
+              <b key={`${lado}${i}`} className={`casilla ${lado}`} style={{ left: `${x}%`, top: `${y}%` }}>
+                {lado === 'equipo' ? 'E' : 'R'}
+                {i + 1}
+              </b>
+            )),
+          )}
+        </div>
+      )}
     </div>
   );
 }
