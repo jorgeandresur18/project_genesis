@@ -187,7 +187,8 @@ Sashi y Aylin **no existen** en la línea original.
 - **Capítulo 1: «Una vida en bucle»** (en inglés **«A Life on Loop»**): los bucles de la programación (`while`, `for`) y la vida de Jair, que se repite.
 - **Capítulo 2: «El viaje del héroe*»** (en inglés **«The Journey of the Hero*»**, con el asterisco también en «hero»): `héroe*` es un puntero de C, algo que no es un héroe sino que apunta a uno; de la misma familia que Génesis++ (C++) y Génesis# (C#). **El puntero apunta a «antihéroe»:** al terminar el capítulo, el título pasa con un glitch a **«El viaje del antihéroe»** («The Journey of the Antihero»; `title_glitch` en `cap02.json`, en la pantalla de fin).
 - **Capítulo 6: «Dios ha muerto;»** (en inglés **«God Is Dead;»**; en los dos idiomas con el punto y coma de una sentencia de código): ahí Cami y Rikka descubren que su creador es solo un hombre y el Rey, con la cara de Jair, se materializa. (Asignado al 6 el 2026-11-03.)
-- **Capítulos 3, 4, 5, 7A y 7B:** `[PENDIENTE]`.
+- **Capítulo 5: «Fusión pendiente»** (en inglés **«Pending Merge»**): en git, una rama que espera que la fusionen, con el conflicto sin resolver (Cami y Nikki chocan por Jair); y el guiño: la fusión de Rikka y Cami en AnothergIrl llega en el capítulo siguiente. (Elegido por el autor el 2026-11-03.)
+- **Capítulos 3, 4, 7A y 7B:** `[PENDIENTE]`.
 3. La batalla contra el Rey Malvado (2 h 30 min a 3 h): solo en su forma THE KING, con la cara oculta, hasta el DELETE sin WHERE.
 4. El choque con la realidad: el despertar, la restauración, la convención y buscar trabajo; termina cuando Cami consigue trabajo «en el centro» (2 h). (Ellas ya aparecen en el cuarto al final del Capítulo 3.)
 5. La rivalidad: Cami en Dulce Frío, el beso, Nikki y Rikka en el bar y lo que sigue; termina con el descubrimiento de quiénes son realmente (1 h 30 min). Se mantienen 7 capítulos (decidido por el autor el 2026-11-02): así Génesis++ sigue siendo la versión alternativa del Capítulo 5.
