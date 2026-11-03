@@ -1,8 +1,8 @@
-// Boringplace (el marketplace de Boringram): que lo abra una escena que existe (del Capítulo 2, nunca del 1), que el
+// Boringplace (el marketplace de Boringram): que lo abra la escena que sigue a la pelea del Bastión, que la tienda venda objetos de las peleas, que el
 // inglés tenga los mismos artículos y que el tutorial de Boringram tenga los mismos pasos en los dos idiomas.
 import { describe, expect, it } from 'vitest';
 import { storyFiles } from '../src/engine/story';
-import { unlockScenesBoringplace } from '../src/engine/boringplace';
+import { OBJETOS_TIENDA, precioVenta, unlockScenesBoringplace } from '../src/engine/boringplace';
 import es from '../src/data/boringplace.json';
 import en from '../src/data/en/boringplace.json';
 import bes from '../src/data/boringram.json';
@@ -11,12 +11,20 @@ import ben from '../src/data/en/boringram.json';
 const escenas = new Map(storyFiles.flatMap((f) => f.scenes).map((s) => [s.scene_id, s]));
 
 describe('Boringplace', () => {
-  it('se abre en el Capítulo 2 (no antes) con escenas que existen', () => {
-    for (const id of unlockScenesBoringplace()) {
-      expect(escenas.has(id), id).toBe(true);
-      expect(escenas.get(id)!.chapter, id).toBeGreaterThanOrEqual(2);
+  it('se abre al ganar la pelea del Bastión (no antes) con escenas que existen', () => {
+    for (const id of unlockScenesBoringplace()) expect(escenas.has(id), id).toBe(true);
+    expect(es.desbloqueo).toBe('cap01_n06');
+    // La escena que lo abre es la que sigue a la pelea del Bastión (ganarla lleva ahí).
+    const pelea = [...escenas.values()].find((x) => x.batalla === 'bastion');
+    expect(pelea?.next).toBe(es.desbloqueo);
+  });
+  it('la tienda: cada artículo es un objeto de las peleas, con precio y descripción en los dos idiomas', () => {
+    expect(en.tienda.length).toBe(es.tienda.length);
+    for (const [i, x] of es.tienda.entries()) {
+      expect(OBJETOS_TIENDA.has(x.objeto), x.objeto).toBe(true);
+      expect(x.precio > 0 && x.descripcion && en.tienda[i].descripcion, x.objeto).toBeTruthy();
+      expect(precioVenta(x.precio)).toBe(Math.floor(x.precio / 2));
     }
-    expect(es.desbloqueo).toBeTruthy();
   });
   it('cada artículo tiene precio, foto (placeholder), respuesta y su texto en inglés', () => {
     expect(en.articulos.length).toBe(es.articulos.length);
