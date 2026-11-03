@@ -1,0 +1,398 @@
+{
+  "titulo": "Cami armored",
+  "fondo": "PLACEHOLDER:almacen_molino",
+  "heroes": [
+    "cami"
+  ],
+  "personajes": {
+    "cami": {
+      "nombre": "Cami",
+      "sprite": "batalla/cami",
+      "nivel": 20,
+      "seguido": true,
+      "base": {
+        "ps": 44,
+        "atq": 8,
+        "def": 6,
+        "vel": 12
+      },
+      "crece": {
+        "ps": 4,
+        "atq": 1.1,
+        "def": 0.5,
+        "vel": 0.4
+      },
+      "ataques": [
+        {
+          "nombre": "Blaster",
+          "poder": 16,
+          "texto": "{quien} dispara sin pestañear.",
+          "usos": 20
+        }
+      ],
+      "hablar": [
+        "Baja eso antes de que te lo baje yo.",
+        "Tienes la postura de alguien que perdió muchas peleas.",
+        "¿Te mandaron solo? Qué triste. Para ti, digo."
+      ],
+      "especial": {
+        "nombre": "Lluvia de plasma",
+        "poder": 5,
+        "golpes": 8,
+        "objetivo": "todos",
+        "color": "#2f8cff",
+        "ojos": [
+          44,
+          39,
+          26,
+          14
+        ],
+        "texto": "{quien} se planta en el medio, saca la segunda pistola y dispara sin parar. Arriba, al medio, abajo. A todos.",
+        "posicion": "centro"
+      },
+      "descanso": "agachada",
+      "distancia": true,
+      "descanso_textos": {
+        "empieza": "{quien} necesita recuperarse de su dolor.",
+        "termina": "{quien} ya puede pararse."
+      },
+      "sonido": "disparo",
+      "escala": 1.01,
+      "_nota": "TODO(canon): sprite batalla/cami_armored, ataques y especial del armored."
+    }
+  },
+  "enemigos": {
+    "soldado": {
+      "nombre": "Soldado de la Federación",
+      "sprite": "batalla/soldado",
+      "base": {
+        "ps": 20,
+        "atq": 5,
+        "def": 3,
+        "vel": 7
+      },
+      "crece": {
+        "ps": 6,
+        "atq": 0.6,
+        "def": 0.6,
+        "vel": 0.4
+      },
+      "ataques": [
+        {
+          "nombre": "Tajo",
+          "poder": 10,
+          "texto": "El soldado de la Federación lanza un tajo. Procedimiento estándar.",
+          "usos": 20
+        },
+        {
+          "nombre": "Estocada",
+          "poder": 12,
+          "texto": "El soldado de la Federación tira una estocada sin decir nada. Nunca dicen nada.",
+          "usos": 15
+        }
+      ],
+      "responde": {
+        "quien": "Soldado",
+        "ok": [
+          "…¿Horas extra? No. No nos pagan horas extra.",
+          "El procedimiento no contempla esa pregunta. Procesando…",
+          "¿De verdad me queda bien? Nadie me lo había dicho."
+        ],
+        "no": [
+          "Negativo.",
+          "No estoy autorizado a conversar.",
+          "Entidad no registrada. Silencio."
+        ]
+      },
+      "especial": {
+        "nombre": "Embestida de acero",
+        "poder": 8,
+        "golpes": 5,
+        "objetivo": "uno",
+        "color": "#d0213a",
+        "ojos": [
+          52,
+          44,
+          32,
+          22
+        ],
+        "texto": "El soldado de la Federación se lanza encima y golpea una y otra vez con la espada. Sin pausa. Sin expresión.",
+        "posicion": "objetivo"
+      },
+      "escala": 1.15,
+      "sonido": "espada",
+      "cae_en_cebo": 0.85
+    },
+    "capitan": {
+      "nombre": "Capitán de la Federación",
+      "sprite": "batalla/capitan",
+      "jefe": true,
+      "huye_a": 0.35,
+      "base": {
+        "ps": 46,
+        "atq": 7,
+        "def": 6,
+        "vel": 7
+      },
+      "crece": {
+        "ps": 8,
+        "atq": 0.9,
+        "def": 0.8,
+        "vel": 0.3
+      },
+      "distancia": true,
+      "color_disparo": "#ff3b3b",
+      "ataques": [
+        {
+          "nombre": "Ráfaga de blaster",
+          "poder": 4,
+          "balas": [
+            3,
+            5
+          ],
+          "usos": 20,
+          "texto": "El capitán apunta sin apuro y suelta una ráfaga: rayos rojos, uno detrás de otro, hacia {objetivo}."
+        },
+        {
+          "nombre": "Barrido rojo",
+          "poder": 3,
+          "balas": [
+            3,
+            5
+          ],
+          "objetivo": "todos",
+          "usos": 10,
+          "texto": "El capitán barre el hangar con el blaster: rayos rojos para todos."
+        }
+      ],
+      "especial": {
+        "nombre": "Cañón de blaster",
+        "poder": 24,
+        "golpes": 1,
+        "objetivo": "uno",
+        "color": "#ff2a2a",
+        "ojos": [
+          58,
+          27,
+          30,
+          15
+        ],
+        "posicion": "objetivo",
+        "canon": true,
+        "texto": "El capitán hinca una rodilla. El blaster zumba, se calienta, se pone blanco en la punta. Apunta a {objetivo}."
+      },
+      "responde": {
+        "quien": "Capitán de la Federación",
+        "ok": [
+          "…Sigue hablando. Necesito tiempo para cargar."
+        ],
+        "no": [
+          "No negocio con entidades no registradas.",
+          "Silencio, civil."
+        ]
+      },
+      "escala": 1.34,
+      "sonido": "disparo",
+      "cae_en_cebo": 0.3
+    }
+  },
+  "horda": {
+    "enemigo": "soldado",
+    "al_inicio": 2,
+    "niveles": [
+      10,
+      12,
+      12,
+      12
+    ]
+  },
+  "jefe": {
+    "enemigo": "capitan",
+    "nivel": 18
+  },
+  "botin": {
+    "probabilidad": 0.6,
+    "objetos": [
+      "atq",
+      "def",
+      "vida",
+      "vida",
+      "carga",
+      "revivir"
+    ]
+  },
+  "esquivar": 0.5,
+  "hablar": 0.4,
+  "huir": false,
+  "dialogos": {
+    "hablar_ok": [
+      {
+        "quien": "Voz",
+        "texto": "{objetivo} se queda pensando. Pierde su próximo ataque."
+      }
+    ],
+    "hablar_no": [
+      {
+        "quien": "Voz",
+        "texto": "{objetivo} no le hace caso."
+      }
+    ],
+    "esquiva_ok": [
+      {
+        "quien": "Voz",
+        "texto": "¡{quien} lo esquiva!"
+      }
+    ],
+    "botin": [
+      {
+        "quien": "Voz",
+        "texto": "Al {objetivo} se le cae algo: {objeto}. Va a la mochila."
+      }
+    ],
+    "ayuda": [
+      {
+        "quien": "Voz",
+        "texto": "Algo cae del techo y rebota en el piso: {objeto}. Nadie pregunta de dónde. Va a la mochila."
+      }
+    ],
+    "inicio": [
+      {
+        "quien": "Voz",
+        "texto": "[Relleno] Cami armored. TODO(canon): cómo empieza esta pelea."
+      }
+    ],
+    "refuerzos": [
+      {
+        "quien": "Voz",
+        "texto": "[Relleno] Entra otro soldado."
+      }
+    ],
+    "jefe": [
+      {
+        "quien": "Voz",
+        "texto": "[Relleno] Llega el capitán. TODO(canon): quién es el jefe de esta pelea."
+      }
+    ],
+    "jefe_huye": [
+      {
+        "quien": "Voz",
+        "texto": "[Relleno] El capitán se retira."
+      }
+    ],
+    "victoria": [
+      {
+        "quien": "Voz",
+        "texto": "[Relleno] Ganaron. TODO(canon): cómo sigue."
+      }
+    ],
+    "derrota": [
+      {
+        "quien": "Voz",
+        "texto": "[Relleno] Perdieron. TODO(canon): el bad end de esta pelea."
+      }
+    ],
+    "huir_no": [
+      {
+        "quien": "Voz",
+        "texto": "[Relleno] No se puede huir."
+      }
+    ],
+    "huir": [
+      {
+        "quien": "Voz",
+        "texto": "[Relleno] Escapan."
+      }
+    ],
+    "descanso": [
+      {
+        "quien": "Voz",
+        "texto": "[Relleno] Necesita un segundo."
+      }
+    ],
+    "cae_jair": [
+      {
+        "quien": "Voz",
+        "texto": "[Relleno] Jair cae."
+      }
+    ]
+  },
+  "objetos": {
+    "atq": {
+      "nombre": "Furia Roja",
+      "atq": 3,
+      "texto": "{quien} se toma la Furia Roja de un trago. Bebida deportiva; nadie sabe de qué deporte. Ataque +{n} hasta el final de la pelea.",
+      "tipo": "mejora",
+      "icono": "objetos/furia_roja"
+    },
+    "def": {
+      "nombre": "Pastillas azules",
+      "def": 3,
+      "texto": "{quien} se toma una pastilla azul. No es lo que piensas. Bueno, un poco. Defensa +{n} hasta el final de la pelea.",
+      "tipo": "mejora",
+      "icono": "objetos/pastillas_azules"
+    },
+    "vida": {
+      "nombre": "Agua sin gas",
+      "ps": 30,
+      "texto": "{quien} se toma el agua sin gas: +{n} PS. Lo más barato del menú y lo único que no te miente.",
+      "tipo": "curacion",
+      "icono": "objetos/agua"
+    },
+    "carga": {
+      "nombre": "4Low-Co",
+      "carga": 100,
+      "texto": "{quien} se toma una 4Low-Co. La barra del especial se llena. El hígado, al revés.",
+      "tipo": "mejora",
+      "icono": "objetos/4low_co"
+    },
+    "caramelo_rancio": {
+      "nombre": "Caramelo rancio",
+      "niveles": 10,
+      "texto": "{quien} se come el caramelo rancio. Sabe a bar cerrado y a malas decisiones. Sube {n} niveles de golpe.",
+      "tipo": "permanente",
+      "icono": "objetos/caramelo_rancio"
+    },
+    "revivir": {
+      "nombre": "Elixit",
+      "revive": 0.5,
+      "texto": "{quien} se toma el Elixit y vuelve a pararse: +{n} PS. Suero rosado para después de una mala noche, o de morir.",
+      "tipo": "curacion",
+      "icono": "objetos/elixit"
+    },
+    "veneno_ratas": {
+      "nombre": "Veneno para ratas",
+      "tipo": "tactico",
+      "objetivo": "rival",
+      "veneno": {
+        "danio": 6,
+        "turnos": 3
+      },
+      "texto": "Le echan veneno para ratas a {quien}. Pierde vida cada turno. La etiqueta dice «no apto para humanos». Nadie lee las etiquetas.",
+      "icono": "objetos/veneno_ratas"
+    },
+    "condon": {
+      "nombre": "Condón barato",
+      "tipo": "tactico",
+      "objetivo": "aliado",
+      "protege": 1,
+      "texto": "Le dan a {quien} un condón barato, sin marca. Es protección: el próximo golpe no le hace nada.",
+      "icono": "objetos/condon_barato"
+    }
+  },
+  "retratos": {
+    "Jair": "batalla/retratos/jair",
+    "Cami": "batalla/retratos/cami",
+    "Rikka": "batalla/retratos/rikka",
+    "Soldado": "batalla/retratos/soldado",
+    "Capitán de la Federación": "batalla/retratos/soldado"
+  },
+  "ayuda": {
+    "umbral": 0.35,
+    "cae": 0.3,
+    "objeto": "vida",
+    "critico": 0.1
+  },
+  "musica_jefe": "audio/musica/combate_arcade.mp3",
+  "musica": "audio/musica/combate_arcade.mp3",
+  "_nota": "Pelea de relleno (pedida por el autor el 2026-11-03 como plantilla): niveles, enemigos, diálogos y fondo son provisorios. TODO(canon)."
+}

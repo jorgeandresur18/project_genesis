@@ -7146,7 +7146,27 @@
       "conditions": [],
       "audio": null,
       "ui_effect": null,
-      "next": "cap02_144"
+      "next": "cap02_144",
+      "batalla": "cap02_muralla",
+      "batalla_derrota": "cap02_pelea_muralla_derrota"
+    },
+    {
+      "scene_id": "cap02_pelea_muralla_derrota",
+      "chapter": 2,
+      "background": "PLACEHOLDER:campamento_noche",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "[Relleno] Perdieron la pelea. Vuelven a intentarlo."
+      },
+      "_todo": "TODO(canon): el bad end de esta pelea. Por ahora perder la repite.",
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap02_143"
     },
     {
       "scene_id": "cap02_144",
@@ -8466,7 +8486,27 @@
       "conditions": [],
       "audio": null,
       "ui_effect": null,
-      "next": "cap02_p2_001"
+      "next": "cap02_p2_001",
+      "batalla": "cap02_campamento",
+      "batalla_derrota": "cap02_pelea_campamento_derrota"
+    },
+    {
+      "scene_id": "cap02_pelea_campamento_derrota",
+      "chapter": 2,
+      "background": "PLACEHOLDER:campamento_noche",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "[Relleno] Perdieron la pelea. Vuelven a intentarlo."
+      },
+      "_todo": "TODO(canon): el bad end de esta pelea. Por ahora perder la repite.",
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap02_183"
     },
     {
       "scene_id": "cap02_p2_001",
@@ -12949,7 +12989,27 @@
       "conditions": [],
       "audio": null,
       "ui_effect": null,
-      "next": "cap02_p2_071r08"
+      "next": "cap02_p2_071r08",
+      "batalla": "cap02_molino",
+      "batalla_derrota": "cap02_pelea_molino_derrota"
+    },
+    {
+      "scene_id": "cap02_pelea_molino_derrota",
+      "chapter": 2,
+      "background": "PLACEHOLDER:almacen_molino",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "[Relleno] Perdieron la pelea. Vuelven a intentarlo."
+      },
+      "_todo": "TODO(canon): el bad end de esta pelea. Por ahora perder la repite.",
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap02_p2_071r07"
     },
     {
       "scene_id": "cap02_p2_071r08",
@@ -13389,7 +13449,27 @@
       "conditions": [],
       "audio": null,
       "ui_effect": null,
-      "next": "cap02_p2_082b"
+      "next": "cap02_p2_082b",
+      "batalla": "cap02_molino_armored",
+      "batalla_derrota": "cap02_pelea_molino_armored_derrota"
+    },
+    {
+      "scene_id": "cap02_pelea_molino_armored_derrota",
+      "chapter": 2,
+      "background": "PLACEHOLDER:almacen_molino",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "[Relleno] Perdieron la pelea. Vuelven a intentarlo."
+      },
+      "_todo": "TODO(canon): el bad end de esta pelea. Por ahora perder la repite.",
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap02_p2_082"
     },
     {
       "scene_id": "cap02_p2_082b",

@@ -275,6 +275,18 @@ necesitar nada de esto.
 - **El Capitán de la Federación:** ataca de lejos: cada ataque es una **ráfaga de 3 a 5 balas rojas** que salen de la punta del fusil, una por fogonazo de su animación (si son más de 3, la repite), hacia su blanco («Ráfaga de blaster», 4 por bala, 20 usos) o repartidas entre todos («Barrido rojo», 3 por bala, 10 usos); cada bala puede fallar o esquivarse. Su especial, el **Cañón de blaster**, se juega tal cual su sprite: hinca una rodilla y carga, suelta un rayo horizontal que sigue, ondulado, hasta el borde de la pantalla (golpe fuerte, 24, a su blanco) y después se vuelve loco y lo agita arriba y abajo (cada barrido le puede dar a cualquiera, 4). Cae poco en el cebo (0,3). Sprite: `public/batalla/capitan` (del HTML del autor; en el ataque se borran los rayos dibujados y el juego dispara balas desde la punta; en el especial, `rayo` dice dónde sale el rayo del cuadro para seguirlo).
 - Fondo: el pasillo de instalación (`batalla/fondos/bastion`, con la ventana al hangar).
 
+### Capítulo 2: plantillas de relleno (pedidas por el autor el 2026-11-03)
+
+Están enganchadas para probar el flujo; **todo es provisorio** (niveles, enemigos, diálogos `[Relleno]`, fondos `PLACEHOLDER`). Perder **repite la pelea** (escena `cap02_pelea_<id>_derrota`) hasta que haya bad ends. Cami actúa todos los turnos. `TODO(canon)`: cada una.
+
+| Batalla | Dónde sale | Quiénes | Rivales |
+|---|---|---|---|
+| `cap02_muralla` | `cap02_143` (Rikka cuenta que salió por la muralla) | Rikka sola (12) | 4 soldados (8–10), capitán 14 |
+| `cap02_campamento` | `cap02_183` (la noche de guardia) | Jair 7, Cami 16, Rikka 12 | 5 soldados (8–10), capitán 16 |
+| `cap02_molino` | `cap02_p2_071r07` (detrás de Rikka) | Jair 8, Rikka 13, Cami 17 | 6 soldados (10–12), capitán 16 |
+| `cap02_molino_armored` | `cap02_p2_082` («un level up»), antes del berserk | Cami armored (20; usa el sprite de Cami) | 4 soldados (10–12), capitán 18 |
+| `cap02_molino_cassette` | **sin enganchar**: falta saber qué es el cassette | Jair, Cami, Rikka | 4 soldados, capitán 16 |
+
 ### La demo (`demo`, solo para probar)
 
 - Jair, Cami y Rikka contra la horda y la sombra. Se puede huir. Cami actúa todos los turnos (sin lo del tobillo). La mochila empieza con objetos para probar (revivir, veneno, condón, potenciador).
