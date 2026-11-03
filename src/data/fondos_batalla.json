@@ -1,5 +1,5 @@
 {
-  "_nota": "La cuadrícula de cada fondo de pelea: dónde pisa cada uno, en % de la imagen ([x, y]: el centro de los pies). El primero de cada lista es el primero del equipo o de los rivales; el resto, en orden. Para verlos sobre la pelea: ?cuadricula en la dirección (por ejemplo ?batalla=bastion&cuadricula o ?sprites&cuadricula para la arena). brillos: estrellas que titilan en el cielo ([x, y]); nebulosas: un resplandor que respira ([x, y, radio], en %). Abajo a la izquierda va el menú y abajo a la derecha las tarjetas: los pies no deberían bajar de ~72 % a la izquierda ni de ~80 % a la derecha.",
+  "_nota": "La cuadrícula de cada fondo de pelea: dónde pisa cada uno, en % de la imagen ([x, y]: el centro de los pies). El primero de cada lista es el primero del equipo o de los rivales; el resto, en orden. Para verlos sobre la pelea: ?cuadricula en la dirección (por ejemplo ?batalla=bastion&cuadricula o ?sprites&cuadricula para la arena). brillos: estrellas que titilan en el cielo ([x, y]); nebulosas: un resplandor que respira ([x, y, radio], en %). Abajo a la izquierda va el menú y abajo a la derecha las tarjetas: los pies no deberían bajar de ~72 % a la izquierda ni de ~80 % a la derecha. luces: el resplandor de las luces del lugar ([x, y, radio, tono]; tono «calida» por defecto, «morada» o «cielo»).",
   "batalla/fondos/bastion_ruinas": {
     "rivales": [[30, 69], [17, 61], [43, 61]],
     "equipo": [[78, 64], [87, 75], [66, 75]],
@@ -12,6 +12,8 @@
   },
   "batalla/fondos/bar": {
     "rivales": [[36, 77], [48, 69], [24, 70]],
-    "equipo": [[78, 76], [88, 68], [66, 69]]
+    "equipo": [[78, 76], [88, 68], [66, 69]],
+    "luces": [[8.6, 15.5, 2.6], [13.7, 16.2, 3.4], [18.8, 16, 2.6], [28.6, 16, 2.6], [24, 22, 4], [31.6, 18.5, 2.6], [18, 26, 2.4], [37.8, 25, 2.4], [6, 20.5, 2.2], [46.2, 17, 2.6], [51.2, 21.5, 2.6], [55.7, 18.5, 2.4], [53.5, 19.8, 1.4], [57.8, 19.8, 1.4], [59.8, 21, 1.4], [62.3, 21.5, 1.4], [64.6, 22, 1.4], [67, 22, 1.4], [69.4, 21.5, 1.4], [71.4, 21, 1.4], [74.6, 20, 4], [75.3, 25, 2.4], [78, 17.5, 2.4], [81.5, 17, 2.4], [13.4, 48.5, 3], [39, 46, 2.2], [49.5, 46, 2.2], [66, 46, 2.2], [24.5, 45.5, 2], [86.6, 20.6, 4, "morada"], [94.6, 20.5, 4, "morada"], [58, 33.5, 14, "cielo"]],
+    "brillos": [[57.1, 34.4], [68.2, 33.8], [58.4, 34.5], [50.8, 34.1], [61.3, 35.8], [48.7, 32.8], [48.6, 35.9], [62.8, 31.3], [69.6, 36.8], [61.9, 34.7], [50.2, 31.1], [58.9, 31.4], [51.0, 32.5], [47.2, 33.8], [56.9, 36.1], [58.7, 34.8]]
   }
 }
