@@ -365,5 +365,7 @@
   "opciones.modo_panoramico": "Widescreen",
   "opciones.modo_panoramico_desc": "Full screen, 16:9. The usual one.",
   "opciones.modo_crt": "Retro CRT",
-  "opciones.modo_crt_desc": "An old tube TV, in 4:3. Only in the game; the menu stays the same."
+  "opciones.modo_crt_desc": "An old tube TV, in 4:3. Only in the game; the menu stays the same.",
+  "tv.volumen": "VOLUME",
+  "tv.canal": "Channel"
 }

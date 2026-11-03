@@ -269,3 +269,71 @@ export function playChip(kind: Chip): void {
       break;
   }
 }
+
+/** Televisor viejo (filtro TV CRT): el clic de un botón. */
+export function playTvClic(): void {
+  const { sfxVolume, muted } = useStore.getState().settings;
+  if (muted || sfxVolume <= 0) return;
+  const c = context();
+  const o = c.createOscillator();
+  const g = c.createGain();
+  o.type = 'square';
+  o.frequency.value = 1800;
+  g.gain.setValueAtTime(sfxVolume * 0.08, c.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.0001, c.currentTime + 0.03);
+  o.connect(g).connect(sfxOut());
+  o.start();
+  o.stop(c.currentTime + 0.04);
+}
+
+/** Televisor viejo: el golpe grave del tubo al prender o apagar (al prender, además, el silbido agudo). */
+export function playTvEncendido(prender: boolean): void {
+  const { sfxVolume, muted } = useStore.getState().settings;
+  if (muted || sfxVolume <= 0) return;
+  const c = context();
+  const t = c.currentTime;
+  const golpe = c.createOscillator();
+  const g = c.createGain();
+  golpe.type = 'sine';
+  golpe.frequency.setValueAtTime(prender ? 70 : 110, t);
+  golpe.frequency.exponentialRampToValueAtTime(prender ? 140 : 40, t + 0.25);
+  g.gain.setValueAtTime(sfxVolume * 0.5, t);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + 0.3);
+  golpe.connect(g).connect(sfxOut());
+  golpe.start(t);
+  golpe.stop(t + 0.32);
+  if (!prender) return;
+  const silbido = c.createOscillator();
+  const gs = c.createGain();
+  silbido.frequency.value = 15700;
+  gs.gain.setValueAtTime(sfxVolume * 0.02, t);
+  gs.gain.exponentialRampToValueAtTime(0.0001, t + 0.9);
+  silbido.connect(gs).connect(sfxOut());
+  silbido.start(t);
+  silbido.stop(t + 0.92);
+}
+
+/** Televisor viejo: el ruido de un canal sin señal. Devuelve cómo pararlo. */
+export function playEstatica(): () => void {
+  const { sfxVolume, muted } = useStore.getState().settings;
+  if (muted || sfxVolume <= 0) return () => {};
+  const c = context();
+  const buf = c.createBuffer(1, c.sampleRate, c.sampleRate);
+  const datos = buf.getChannelData(0);
+  for (let i = 0; i < datos.length; i++) datos[i] = Math.random() * 2 - 1;
+  const fuente = c.createBufferSource();
+  fuente.buffer = buf;
+  fuente.loop = true;
+  const filtro = c.createBiquadFilter();
+  filtro.type = 'bandpass';
+  filtro.frequency.value = 3000;
+  filtro.Q.value = 0.6;
+  const g = c.createGain();
+  g.gain.value = sfxVolume * 0.07;
+  fuente.connect(filtro).connect(g).connect(sfxOut());
+  fuente.start();
+  return () => {
+    g.gain.setTargetAtTime(0, c.currentTime, 0.03);
+    fuente.stop(c.currentTime + 0.15);
+  };
+}

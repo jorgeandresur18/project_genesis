@@ -365,5 +365,7 @@
   "opciones.modo_panoramico": "Panorámico",
   "opciones.modo_panoramico_desc": "Toda la pantalla, 16:9. El de siempre.",
   "opciones.modo_crt": "Retro CRT",
-  "opciones.modo_crt_desc": "Un televisor de tubo, en 4:3. Solo en la partida; el menú no cambia."
+  "opciones.modo_crt_desc": "Un televisor de tubo, en 4:3. Solo en la partida; el menú no cambia.",
+  "tv.volumen": "VOLUMEN",
+  "tv.canal": "Canal"
 }

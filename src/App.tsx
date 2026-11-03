@@ -1,5 +1,6 @@
 import { Suspense, lazy, useCallback, useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { EquipoPanel } from './components/Equipo';
+import { TvViejo } from './components/TvViejo';
 import { CHAPTER_END, useStore, SPEEDS } from './engine/store';
 import { BAD_END, endingName, getEnding, scenes } from './engine/story';
 import { useStoryEngine } from './engine/useStoryEngine';
@@ -228,87 +229,6 @@ function urlStart(): { scene: string; chapter?: number } | null {
   const chapter = Number(m[1]);
   const first = [...CHAPTER_STARTS].find(([, n]) => n === chapter);
   return first ? { scene: first[0], chapter } : null;
-}
-
-/**
- * Filtro TV CRT (Opciones): la partida dentro de un televisor de tubo de los 90, gris oscuro, con la pantalla en
- * 4:3 un poco curva, líneas de barrido, un leve desenfoque y parpadeo; abajo, el logo y los botones. En el celular
- * no hay televisor: la pantalla en 4:3 con el efecto CRT y dos barras a los costados con el logo del modo TV. Los
- * paneles (Opciones, Boringram…) se abren por encima, fuera del televisor, y el menú del título no cambia.
- */
-function TvViejo({ activo, children }: { activo: boolean; children: ReactNode }) {
-  const pantalla = useRef<HTMLDivElement>(null);
-  const [escala, setEscala] = useState(1);
-  // El juego está pensado para la ventana entera: dentro del televisor se achica en proporción a la pantalla
-  // (la letra base y el zoom de los sprites; los efectos se ubican igual que siempre).
-  useEffect(() => {
-    const raiz = document.documentElement;
-    const el = pantalla.current;
-    if (!activo || !el) {
-      raiz.style.removeProperty('font-size');
-      setEscala(1);
-      return;
-    }
-    const medir = () => {
-      const s = Math.min(1, Math.max(0.55, el.getBoundingClientRect().height / window.innerHeight));
-      setEscala(s);
-      raiz.style.fontSize = `${s * 100}%`;
-    };
-    medir();
-    const ro = new ResizeObserver(medir);
-    ro.observe(el);
-    window.addEventListener('resize', medir);
-    return () => {
-      ro.disconnect();
-      window.removeEventListener('resize', medir);
-      raiz.style.removeProperty('font-size');
-    };
-  }, [activo]);
-  const barra = (
-    <div className="tv-barra" aria-hidden>
-      <img src={assetUrl('marca/logo_tv.webp')} alt="" draggable={false} />
-    </div>
-  );
-  return (
-    <div className={`tv ${activo ? '' : 'apagado'}`} style={{ '--tv-escala': escala } as CSSProperties}>
-      {barra}
-      <div className="tv-caja">
-        <div className="tv-pantalla" ref={pantalla}>
-          <div className="tv-imagen">{children}</div>
-          <div className="tv-crt" aria-hidden />
-        </div>
-        <div className="tv-panel" aria-hidden>
-          <span className="tv-parlante" />
-          <img className="tv-logo" src={assetUrl('marca/logo_tv.webp')} alt="" draggable={false} />
-          <span className="tv-botones">
-            <span className="tv-control">
-              <i className="tv-perilla" />
-              <small>VOL</small>
-            </span>
-            <span className="tv-control">
-              <i className="tv-perilla tv-perilla-girada" />
-              <small>CH</small>
-            </span>
-            <span className="tv-control">
-              <span className="tv-par">
-                <i className="tv-boton" />
-                <i className="tv-boton" />
-              </span>
-              <small>MENU</small>
-            </span>
-            <span className="tv-control">
-              <span className="tv-par">
-                <i className="tv-encendido" />
-                <i className="tv-led" />
-              </span>
-              <small>POWER</small>
-            </span>
-          </span>
-        </div>
-      </div>
-      {barra}
-    </div>
-  );
 }
 
 /** Triángulos de adelantar/retroceder: uno más por cada velocidad (x2 = 2 … x16 = 5). */
