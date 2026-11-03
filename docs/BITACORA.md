@@ -103,3 +103,28 @@ Para lo que viene, ver `docs/CRONOGRAMA.md`.
 - Títulos de los capítulos: «Una vida en bucle», «El viaje del héroe*» (al terminar, «antihéroe»); los del 3 al 7, en discusión. Se mantienen 7 capítulos.
 - «Conoce más» en dos partes (el juego y el autor). El repositorio pasa a llamarse `project_genesis`.
 - **Pendiente:** ver «Decisiones pendientes» en `docs/CRONOGRAMA.md`.
+
+## 2 y 3 de noviembre (noche) — Capítulos 4 y 5, y el modo Retro CRT · cierre: 3 de noviembre, 1:25
+- **Canon del autor:**
+  - La compañera de tesis es **Lady** (`lady.compila` de Boringram) y **Jordan** aparece en el Capítulo 4.
+  - Se mantienen **7 capítulos**. El borrador se reparte: Capítulo 4 = escenas 1 a 9 (hasta «conseguí trabajo en el centro»); Capítulo 5 = desde Dulce Frío hasta el descubrimiento (falta el medio).
+  - **Los títulos son chistes de programación.** «Una vida en bucle» (bucles) y «El viaje del héroe*» (el puntero de C, como Génesis++ y Génesis#); al terminar el Capítulo 2 pasa a «El viaje del antihéroe». Del 3 al 7, en discusión (propuestas de Claude: «return 0;», «Una caja de zapatos», «Sonríe… aunque ella te gane», «La muerte de Dios», «AnothergIrl» / «La jaula voluntaria»).
+- **Modo de pantalla Retro CRT** (Opciones › Pantalla, pedido del autor):
+  - Tarjetas con miniatura: Panorámico (16:9) o Retro CRT (la partida dentro de un televisor de tubo, en 4:3). El menú no cambia.
+  - Casilla «Efecto de tubo» (marcada por defecto): sin ella, 4:3 nítido.
+  - **Botones que funcionan:** POWER (apaga y prende como un tubo y silencia el juego), − VOL + (barras verdes, cambia el volumen de verdad), − CH + y TV/VIDEO (AUX es el juego; 5 canales sin señal con nieve y su ruido, sin la música). Entradas VIDEO y L-AUDIO-R con cables, PHONES, logo del autor.
+  - **Fondo a elegir:** sin fondo, azul espacial, morado cósmico (el fondo del menú, oscuro y teñido, con logos blancos que suben despacio, sin glitch y con cometas tenues) o el cuarto de Jair (imagen del autor, oscurecida, con la lámpara y el cielo que respiran).
+  - **Celular:** sin televisor; 4:3 con barras a los costados, el logo flotando con brillo metálico.
+  - **El juego se escala a la pantalla del televisor** (nada con zoom). Prenderlo en plena pelea no la reinicia. En una pantalla 4:3 de verdad no hay televisor dentro del televisor.
+- **Arreglos:**
+  - El sonido de tecleo seguía con la pestaña en segundo plano: ahora el audio se pausa y el modo auto no avanza.
+  - La caja de diálogo se apoya sobre la barra según su altura real (en pantallas angostas la barra la pisaba); las decisiones se centran encima.
+  - VS: Nikki ya no cruza al lado de Jair (figuras centradas en su mitad, aparte del fondo en diagonal).
+  - Volver al menú siempre con la transición a negro (también desde la pausa de una pelea).
+- **Bar (fondo de la pelea):** las luces laten (focos, guirnalda, velas; morado en los reflectores) y el cielo de la ventana respira con estrellas.
+- **Pendiente de esta sesión:**
+  - El logo del modo TV imita el estilo de letra del logo de una consola real: rehacerlo con letras propias antes de publicar en serio (Claude ofreció el prompt).
+  - Fondo del cuarto: el robot que parece Gundam y el control con forma de Super Nintendo, para retocar.
+  - Idea sin aprobar: canales del televisor que en ciertos capítulos muestran algo (un comercial de Noodle, la Voz).
+  - El plan de la Semana 1 del cronograma no empezó: esta sesión fue al modo Retro CRT.
+

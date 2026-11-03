@@ -96,6 +96,14 @@ Se responden cuando toque su semana; mientras, no se inventan.
 - Por qué Cami besa a Jair a propósito.
 - Cómo sigue después de la cuenta del bar, y el medio hasta el descubrimiento.
 
+**Modo Retro CRT**
+- Rehacer el logo del televisor con letras propias (hoy imita el de una consola real).
+- Retocar el fondo del cuarto (el robot parecido a Gundam y el control con forma de Super Nintendo).
+- ¿Canales del televisor que muestran algo en ciertos capítulos? (idea de Claude, sin aprobar).
+
+**Títulos de los capítulos 3 a 7**
+- Propuestas en `docs/BITACORA.md` (sesión del 2 y 3 de noviembre); el 3 iba hacia «return 0;» o «Proceso terminado*».
+
 **General**
 - Las preguntas abiertas de Blueberries y Nikki.
 - El clon del lado de los héroes.
