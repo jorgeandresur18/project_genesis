@@ -313,6 +313,8 @@ Están enganchadas para probar el flujo; **todo es provisorio** (niveles, enemig
 
 ## 14. Tienda, monedas, objetos y equipo (diseño aprobado por el autor, 2026-11-02; por construir)
 
+**La moneda del juego se llama tokens** (decidido por el autor el 2026-11-03): así se muestra en la interfaz, en los dos idiomas. En el código y en la partida la variable sigue siendo `monedas`.
+
 **Tipos de objeto** (`tipo` en sus datos: decide dónde aparece y cómo se usa). Los objetos son snacks, bebidas y
 cosas raras; los chistes van en las descripciones.
 

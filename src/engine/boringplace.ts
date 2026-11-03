@@ -36,7 +36,7 @@ export interface Articulo {
 export interface BoringplaceData {
   desbloqueo: string | null;
   /** Lo que se compra con monedas: la clave del objeto de las peleas y su precio (se vende a la mitad). */
-  tienda: { objeto: string; precio: number; descripcion: string }[];
+  tienda: { objeto: string; precio: number; descripcion: string; /** El color del objeto, para el fondo de su foto. */ color?: string }[];
   vacio: { titulo: string; texto: string };
   textos: Record<string, string>;
   articulos: Articulo[];

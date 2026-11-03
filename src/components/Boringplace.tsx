@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react';
+import { useState, type CSSProperties, type ReactNode } from 'react';
 import { playSelect } from '../engine/sound';
 import { assetUrl } from '../engine/assets';
 import { OBJETOS_TIENDA, precioVenta, useBoringplace, type Articulo } from '../engine/boringplace';
@@ -7,10 +7,10 @@ import s from './Boringplace.module.css';
 import sb from './Boringram.module.css';
 
 /**
- * Boringplace (dentro de Boringram): el marketplace. En la «Tienda» todo está publicado como en un marketplace (foto,
- * precio afuera y nombre): primero los objetos de las peleas, que se compran con monedas desde su publicación (los que
- * alcancen), y después lo que vende la gente (su basura y alguna estafa). «Tus artículos»: lo que vende Jair y lo de
- * la mochila. En el Capítulo 1 todavía no hay nadie vendiendo nada.
+ * Boringplace (dentro de Boringram): el marketplace. En la «Tienda», los objetos de las peleas están publicados como en
+ * un marketplace (foto con el color del objeto, nombre y precio en tokens, la moneda del juego); adentro, su descripción
+ * y cuántos comprar. «Tus artículos»: lo que vende Jair y lo de la mochila. En el Capítulo 1 todavía no hay nadie
+ * vendiendo nada. (Las publicaciones de la gente siguen en el JSON, pero no salen en la tienda: eran de relleno.)
  */
 export function Boringplace({ onArticulo, onToast }: { onArticulo: (id: string) => void; onToast?: (texto: string) => void }) {
   const p = useBoringplace();
@@ -88,21 +88,12 @@ export function Boringplace({ onArticulo, onToast }: { onArticulo: (id: string) 
             const o = OBJETOS_TIENDA.get(x.objeto)!;
             return (
               <button key={x.objeto} className={s.tarjeta} onClick={() => onArticulo(`${ID_TIENDA}${x.objeto}`)}>
-                <FotoObjeto icono={o.icono} />
+                <FotoObjeto icono={o.icono} color={x.color} />
+                <span className={s.nombre}>{o.nombre}</span>
                 <b className={s.precio}>{tx.precio_monedas.replace('{n}', String(x.precio))}</b>
-                <span className={s.titulo}>{o.nombre}</span>
-                <small className={s.lugar}>{tx.lugar_tienda}</small>
               </button>
             );
           })}
-          {p.ajenos.map((a) => (
-            <button key={a.id} className={s.tarjeta} onClick={() => onArticulo(a.id)}>
-              <Foto a={a} />
-              <b className={s.precio}>{a.precio}</b>
-              <span className={s.titulo}>{a.titulo}</span>
-              <small className={s.lugar}>{a.lugar}</small>
-            </button>
-          ))}
         </div>
       ) : (
         <>
@@ -224,11 +215,11 @@ function ObjetoVista({ objeto, onBack, onToast }: { objeto: string; onBack: () =
         )}
       </div>
       <Flotante>
-        <FotoObjeto icono={o.icono} grande />
+        <FotoObjeto icono={o.icono} color={x.color} grande />
       </Flotante>
       <div className={s.detalle}>
-        <b className={s.precioGrande}>{tx.precio_monedas.replace('{n}', String(x.precio))}</b>
         <h3>{o.nombre}</h3>
+        <b className={s.precioGrande}>{tx.precio_monedas.replace('{n}', String(x.precio))}</b>
         <small className={s.lugar}>{tx.lugar_tienda}</small>
         <p className={s.descripcion}>{x.descripcion}</p>
         {tengo > 0 && <small className={s.tienes}>{tx.tienes.replace('{n}', String(tengo))}</small>}
@@ -256,10 +247,10 @@ function ObjetoVista({ objeto, onBack, onToast }: { objeto: string; onBack: () =
   );
 }
 
-/** La foto de un objeto de la tienda: su dibujo sobre el fondo de las fotos. */
-function FotoObjeto({ icono, grande = false }: { icono?: string; grande?: boolean }) {
+/** La foto de un objeto de la tienda: su dibujo sobre un resplandor sutil de su color (como el fondo de Boringram). */
+function FotoObjeto({ icono, color, grande = false }: { icono?: string; color?: string; grande?: boolean }) {
   return (
-    <span className={`${s.foto} ${s.fotoObjeto} ${grande ? s.fotoGrande : ''}`} aria-hidden>
+    <span className={`${s.fotoObjeto} ${grande ? s.fotoGrande : ''}`} style={{ '--c': color ?? '#2a1724' } as CSSProperties} aria-hidden>
       {icono && <img src={assetUrl(`${icono}.webp`)} alt="" draggable={false} />}
     </span>
   );

@@ -7,9 +7,9 @@
   },
   "textos": {
     "titulo": "Boringplace",
-    "precio_monedas": "{n} monedas",
+    "precio_monedas": "{n} tokens",
     "cantidad": "Cantidad",
-    "comprar_n": "Comprar {n} · {total} monedas",
+    "comprar_n": "Comprar {n} · {total} tokens",
     "comprados": "Compraste {n} × {objeto}. Va a la mochila.",
     "menos": "Uno menos",
     "mas": "Uno más",
@@ -24,13 +24,13 @@
     "sin_tuyos": "No estás vendiendo nada. Raro.",
     "atras": "Atrás",
     "tienda": "Tienda",
-    "monedas": "Monedas",
+    "monedas": "Tokens",
     "comprar": "Comprar",
     "vender": "Vender",
     "tienes": "Tienes {n}",
-    "sin_monedas": "No te alcanza. Faltan {n} monedas.",
+    "sin_monedas": "No te alcanza. Faltan {n} tokens.",
     "comprado": "Compraste {objeto}. Va a la mochila.",
-    "vendido_ok": "Vendiste {objeto} por {n} monedas.",
+    "vendido_ok": "Vendiste {objeto} por {n} tokens.",
     "sin_partida": "Para comprar o vender, entra a una partida.",
     "tus_objetos": "De tu mochila (se venden a la mitad)",
     "mochila_vacia": "La mochila está vacía",
@@ -199,36 +199,43 @@
   "tienda": [
     {
       "objeto": "vida",
+      "color": "#7cb1d0",
       "precio": 15,
       "descripcion": "+30 PS. Lo más barato del menú y lo único que no te miente."
     },
     {
       "objeto": "atq",
+      "color": "#b93c40",
       "precio": 30,
       "descripcion": "Ataque +3 hasta el final de la pelea. Bebida deportiva; nadie sabe de qué deporte."
     },
     {
       "objeto": "def",
+      "color": "#3488c5",
       "precio": 30,
       "descripcion": "Defensa +3 hasta el final de la pelea. No son lo que piensas. Bueno, un poco."
     },
     {
       "objeto": "carga",
+      "color": "#ab7f2e",
       "precio": 45,
       "descripcion": "Llena la barra del especial. El hígado, al revés."
     },
     {
       "objeto": "revivir",
+      "color": "#d9639a",
       "precio": 60,
       "descripcion": "Levanta a un caído con la mitad de su vida. Suero rosado para después de una mala noche, o de morir."
     },
     {
       "objeto": "veneno_ratas",
+      "color": "#c9d27a",
       "precio": 35,
       "descripcion": "Envenena a un rival: pierde vida cada turno. «No apto para humanos». Nadie leyó la etiqueta."
     },
     {
       "objeto": "condon",
+      "color": "#6882a1",
       "precio": 40,
       "descripcion": "Protege a un aliado del próximo golpe. Condón barato, sin marca."
     }
