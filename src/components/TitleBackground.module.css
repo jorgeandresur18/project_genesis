@@ -110,3 +110,6 @@
   100% { transform: translateY(-125vh); opacity: 0; }
 }
 .still .logo { animation: none; opacity: 0.08; }
+/* Detrás del televisor: sin la franja de glitch y con los cometas muy tenues, para que no distraigan del juego. */
+.conLogos .glitchBar { display: none; }
+.conLogos .comet { filter: opacity(0.25); }

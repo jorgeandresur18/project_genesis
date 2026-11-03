@@ -67,7 +67,7 @@ export function TitleBackground({ logos = false }: { logos?: boolean } = {}) {
   }, [lang]);
 
   return (
-    <div className={`${styles.bg} ${still ? styles.still : ''}`} aria-hidden>
+    <div className={`${styles.bg} ${still ? styles.still : ''} ${logos ? styles.conLogos : ''}`} aria-hidden>
       <div className={styles.grid} />
       <div className={`${styles.nebula} ${styles.nebulaPlata}`} />
       <div className={`${styles.nebula} ${styles.nebulaAcero}`} />
