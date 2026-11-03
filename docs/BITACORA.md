@@ -105,6 +105,7 @@ Para lo que viene, ver `docs/CRONOGRAMA.md`.
 - **Pendiente:** ver «Decisiones pendientes» en `docs/CRONOGRAMA.md`.
 
 ## 2 y 3 de noviembre (noche) — Capítulos 4 y 5, y el modo Retro CRT · cierre: 3 de noviembre, 1:25
+- **Horas del 2 de noviembre (según los commits):** 0:19–3:38, 11:27–18:21 y 20:01–1:25. Unas 15 h 40 min con commits; contando el trabajo antes del primer commit de cada tramo, entre 16 y 17 horas, en 96 commits.
 - **Canon del autor:**
   - La compañera de tesis es **Lady** (`lady.compila` de Boringram) y **Jordan** aparece en el Capítulo 4.
   - Se mantienen **7 capítulos**. El borrador se reparte: Capítulo 4 = escenas 1 a 9 (hasta «conseguí trabajo en el centro»); Capítulo 5 = desde Dulce Frío hasta el descubrimiento (falta el medio).
