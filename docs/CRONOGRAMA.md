@@ -57,7 +57,7 @@ El RPG, Boringram y el arte se hacen **para el capítulo que toca**, no por adel
 ## Semanas 3 y 4 (17–30 de noviembre): el Capítulo 3
 - [ ] **Escribir el guion del Capítulo 3** desde el canon: la torre del Oráculo, el Rey Malvado, la espada DELETE, el DELETE sin WHERE, el regreso (`alt_1`: volver solo) y el despertar con Cami y Rikka en el cuarto.
 - [ ] **Resolver antes de escribir:** las decisiones pendientes del Capítulo 3 (ver abajo).
-- [ ] **La pelea contra el Rey Malvado del Capítulo 3:** solo THE KING (y su forma gigante), con la cara oculta, hasta el DELETE sin WHERE. *Pesada:* su sprite (el autor todavía no lo hizo). La batalla de las cinco manifestaciones es del 7A (`docs/BATALLA_FINAL.md`).
+- [ ] **La pelea contra el Rey Malvado del Capítulo 3:** solo THE KING (y su forma gigante), con la cara oculta, hasta el DELETE sin WHERE. *Pesada:* su sprite (el autor todavía no lo hizo). La batalla de las cinco manifestaciones es del Capítulo 6, rama del 7A (`docs/BATALLA_FINAL.md`).
 - [ ] *Liviana:* fondos y CG del Capítulo 3.
 - [ ] *Media:* la notificación de la migración en el celular de Jair.
 
@@ -71,7 +71,7 @@ El RPG, Boringram y el arte se hacen **para el capítulo que toca**, no por adel
 
 ## Después (desde el 15 de diciembre)
 - Capítulo 5 (escenas 10 a 17 del borrador: Dulce Frío, el beso, el parque y el bar; el medio que falta; el descubrimiento). Fondos: Dulce Frío por dentro, el parque, el centro. Después, si el autor quiere, Génesis++.
-- Capítulo 6 (la bifurcación y la cara del Rey) y los epílogos 7A y 7B.
+- Capítulo 6 (la bifurcación y sus dos ramas: la cara del Rey; en la rama A, la fusión en AnothergIrl y la batalla de las cinco manifestaciones) y los epílogos 7A y 7B.
 - Pendientes del RPG sin fecha: quemado y congelado, olvidar un ataque, regla anti-farmeo, `npm run escalar` con Upscayl.
 
 ---

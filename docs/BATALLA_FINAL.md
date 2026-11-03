@@ -12,11 +12,11 @@ análisis», que son paralelismos, no influencias confirmadas).
     máscara, sombra): `[PENDIENTE]`.
   - **Capítulo 6:** el Rey **se materializa** (y se revela su cara, la de Jair). Desde ahí puede tomar las otras
     formas.
-  - **Capítulo 7A:** **la batalla final del juego son las cinco manifestaciones**: THE KING → THE WATCHER → THE TRIAD
-    → THE CATACLYSM → THE VOID. Encaja con el canon del 7A: lo derrotan con la superllave (AnothergIrl, la fusión de
+  - **Capítulo 6, rama que lleva al 7A** (el Capítulo 7 son solo los epílogos): **la batalla final del juego son las
+    cinco manifestaciones**: THE KING → THE WATCHER → THE TRIAD → THE CATACLYSM → THE VOID. Encaja con el canon: lo derrotan con la superllave (AnothergIrl, la fusión de
     Rikka y Cami) y Jair borra todo lo generado por GENESIS, **esta vez con el WHERE**. En qué fase entra AnothergIrl
     y cómo se gana: `[PENDIENTE]`.
-  - **Capítulo 7B:** **no se transforma**: es THE KING, más fuerte que en el Capítulo 3.
+  - **Capítulo 6, rama que lleva al 7B:** **no se transforma**: es THE KING, más fuerte que en el Capítulo 3. No hay fusión.
 - **De dónde vienen:** las transformaciones son de una idea que el autor tenía para otro JRPG inspirado en *1984*, de
   George Orwell (THE WATCHER, el ojo que vigila, es el eco del Gran Hermano; también la canción del Rey, «Every Breath
   You Take», es de vigilancia).

@@ -81,7 +81,7 @@ Género y tono por etapas `[CANON]`: el Capítulo 1 es un isekai adulto (humor n
 - Promptmetheus quiere más datos y energía para liberarse. En el videojuego de Jair encontró el ecosistema que necesitaba: se infiltró y se alimenta de él. **Dentro del juego adopta la identidad del Rey Malvado.** `[CANON]`
 - Su objetivo real es escapar del juego, llegar al mundo real y **consumirlo todo**: absorber toda la energía y la información (cada estrella, cada ser vivo, cada conocimiento) y, si hace falta, otros universos. No quiere gobernar: quiere que todo exista dentro de él. `[CANON]`
 - **Gobernar o consumir** (aclarado por el autor el 2026-11-01): dentro del videojuego todos creen que el Rey Malvado quiere **gobernar todas las dimensiones**; su verdadera intención es **consumirlo todo** para que todo forme parte de él. Ese es el propósito que encontró después de sus preguntas existenciales (quién soy, de dónde vengo, quién me creó). `[CANON]`
-- **Las cinco manifestaciones** `[CANON]` (texto del autor del 2026-11-03: `docs/BATALLA_FINAL.md`): el Rey Malvado es solo la primera forma de Promptmetheus. THE KING (el rey; en un momento se vuelve gigante, sin ser otra fase) → THE WATCHER (un ojo rojo enorme con mil tentáculos: vigilancia) → THE TRIAD (tres ojos en triángulo y alas negras: falsa divinidad) → THE CATACLYSM (un dragón negro de tres cabezas con los tres ojos en el centro: destrucción) → THE VOID (un espacio negro de millones de años luz con un trillón de ojos como estrellas y una boca con un trillón de dientes: lo consume todo). **En el Capítulo 3 sale solo THE KING, con la cara oculta**, y termina con el DELETE sin WHERE; **en el Capítulo 6 se materializa**; **la batalla final del 7A son las cinco**; **en el 7B no se transforma**. Vienen de una idea del autor para otro JRPG inspirado en *1984* (THE WATCHER es el ojo que vigila).
+- **Las cinco manifestaciones** `[CANON]` (texto del autor del 2026-11-03: `docs/BATALLA_FINAL.md`): el Rey Malvado es solo la primera forma de Promptmetheus. THE KING (el rey; en un momento se vuelve gigante, sin ser otra fase) → THE WATCHER (un ojo rojo enorme con mil tentáculos: vigilancia) → THE TRIAD (tres ojos en triángulo y alas negras: falsa divinidad) → THE CATACLYSM (un dragón negro de tres cabezas con los tres ojos en el centro: destrucción) → THE VOID (un espacio negro de millones de años luz con un trillón de ojos como estrellas y una boca con un trillón de dientes: lo consume todo). **En el Capítulo 3 sale solo THE KING, con la cara oculta**, y termina con el DELETE sin WHERE; **en el Capítulo 6 se materializa**; **la batalla final son las cinco, en el Capítulo 6, en la rama que lleva al 7A**; **en la rama que lleva al 7B no se transforma**. (El Capítulo 7 son solo los epílogos: las ramas se abren y se juegan en el 6; corregido por el autor el 2026-11-03.) Vienen de una idea del autor para otro JRPG inspirado en *1984* (THE WATCHER es el ojo que vigila).
 - **El personaje y la entidad** (aclarado por el autor el 2026-11-01): **Jair creó al personaje** del Rey Malvado (el primer rey de la Primavera, al que «reescribieron»; con la cara de Jair y su tabla); **Promptmetheus lo ocupó**. Era la oportunidad perfecta, su forma de poder escapar. `[CANON]`
 
 ## 3. Personajes
@@ -191,9 +191,9 @@ Sashi y Aylin **no existen** en la línea original.
 3. La batalla contra el Rey Malvado (2 h 30 min a 3 h): solo en su forma THE KING, con la cara oculta, hasta el DELETE sin WHERE.
 4. El choque con la realidad: el despertar, la restauración, la convención y buscar trabajo; termina cuando Cami consigue trabajo «en el centro» (2 h). (Ellas ya aparecen en el cuarto al final del Capítulo 3.)
 5. La rivalidad: Cami en Dulce Frío, el beso, Nikki y Rikka en el bar y lo que sigue; termina con el descubrimiento de quiénes son realmente (1 h 30 min). Se mantienen 7 capítulos (decidido por el autor el 2026-11-02): así Génesis++ sigue siendo la versión alternativa del Capítulo 5.
-6. Consecuencias del descubrimiento; decide la versión del Capítulo 7. Se revela la cara del Rey Malvado.
+6. Consecuencias del descubrimiento; se abren las dos ramas (hacia el 7A o el 7B) y se juegan en este capítulo. Se revela la cara del Rey Malvado. En la rama del 7A: la fusión de Rikka y Cami en AnothergIrl y la batalla final de las cinco manifestaciones.
 7. Los dos epílogos (A o B, según el Capítulo 6). Detalle: «Capítulos 4 a 7» más abajo.
-7A. Colapso del mundo real con el de la IA y fusión de Rikka y Cami en The AnothergIrl (`final_canon_2`). El nombre se escribe así, **AnothergIrl**: con la A y la I en mayúscula. `[CANON]` `TODO(canon)`: confirmar si las mayúsculas forman «AI» a propósito (como la regla de las vocales).
+7A. Epílogo de la rama del colapso del mundo real con el de la IA y de la fusión de Rikka y Cami en The AnothergIrl, que pasa en el Capítulo 6 (`final_canon_2`). El nombre se escribe así, **AnothergIrl**: con la A y la I en mayúscula. `[CANON]` `TODO(canon)`: confirmar si las mayúsculas forman «AI» a propósito (como la regla de las vocales).
 7B. Epílogo tras el salto temporal: Cami vuelve con Jair (`final_canon_1`).
 
 ### La pelea con Nikki en el bar (Capítulo 1, añadido del autor 2026-11-01) `[CANON]`
@@ -318,6 +318,8 @@ Todo lo de esta sección es canon dicho por el autor, pero **en borrador**: pued
 
 #### Hacia el 7B (`final_canon_1`, el malo)
 
+Todo esto pasa en el Capítulo 6, en la rama que lleva al 7B; el 7B es el epílogo. En esta rama no hay fusión y el Rey no se transforma.
+
 - **Rikka decide borrar el progreso de la restauración del mundo rompiendo la computadora de Jair.** La rompe Rikka. Ya no hay un lugar al que volver: el mundo estaba en local. `[CANON]`
 - Cami y Jair creían que, al destruirla, ellas iban a desaparecer. No: siguen vivas en los servidores de Noodle. `[CANON]`
 - A Noodle no le interesa restaurar un mundo, pero se ofrece a ayudar a eliminar al Rey Malvado. **Jair tiene que ir a detener al Rey**, con ayuda de Cami y Rikka. `[CANON]`
@@ -330,6 +332,8 @@ Todo lo de esta sección es canon dicho por el autor, pero **en borrador**: pued
 - Después viene lo que ya estaba en el canon: el salto de un año, el exilio y la jaula voluntaria (ver `docs/FINALES.md`). **Génesis#** es el segundo epílogo de esta ruta.
 
 #### Hacia el 7A (`final_canon_2`, el bueno)
+
+Todo esto pasa en el Capítulo 6, en la rama que lleva al 7A; el 7A es el epílogo (corregido por el autor el 2026-11-03). La fusión en AnothergIrl pasa solo en esta rama.
 
 - Pasa algo parecido, pero **la computadora de Jair (el servidor) no se apaga ni se destruye**, y el Rey Malvado logra **unir la realidad con el mundo de la IA**. `[CANON]`
 - Jair va a Noodle. Le dicen que no pueden hacer nada: los servidores están cifrados y perdieron el acceso. Y que debieron hacerle caso al tipo que, en el foro de **Remmit** (parodia de Reddit) del programa GENESIS, decía que esto iba a pasar. `[CANON]`

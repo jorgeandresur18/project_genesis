@@ -463,9 +463,9 @@ Detalle completo en `docs/BATALLA_FINAL.md`.
 
 - **Capítulo 3:** pelea contra el Rey solo en su forma **THE KING** (en un momento crece y se vuelve gigante, sin ser
   otra fase), **con la cara oculta**. Termina con el DELETE sin WHERE.
-- **Capítulo 7A, la batalla final del juego:** **cinco fases**, cada una con su sprite y su forma de pelear:
+- **Capítulo 6, rama que lleva al 7A (la batalla final del juego):** **cinco fases**, cada una con su sprite y su forma de pelear:
   THE KING → THE WATCHER → THE TRIAD → THE CATACLYSM → THE VOID.
-- **Capítulo 7B:** THE KING, más fuerte que en el Capítulo 3; no se transforma.
+- **Capítulo 6, rama que lleva al 7B:** THE KING, más fuerte que en el Capítulo 3; no se transforma.
 - **Por hacer:** las mecánicas de cada fase (ataques, especiales, cómo se pasa de una a otra, en qué fase entra
   AnothergIrl) `[PENDIENTE]`. Sprites: el autor pasa los borradores de las transformaciones; el de THE KING todavía
   no existe.
