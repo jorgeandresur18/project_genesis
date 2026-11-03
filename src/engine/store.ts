@@ -73,10 +73,12 @@ export interface Settings {
   language: 'auto' | 'es' | 'en';
   /** Filtro TV CRT: la partida (no el menú) se ve en un televisor de tubo, en 4:3. */
   filtroTv: boolean;
+  /** Con el filtro TV: el efecto de tubo (líneas de barrido, desenfoque y parpadeo). Sin él, 4:3 nítido. */
+  tvEfecto: boolean;
 }
 
 export const TEXT_SPEED_INSTANT = 130;
-const DEFAULT_SETTINGS: Settings = { reduceEffects: false, autoDelayMs: 1500, textSpeed: 45, sfxVolume: 0.6, typingSound: true, musicVolume: 0.5, muted: false, textScale: 1, boxOpacity: 0.88, language: 'auto', filtroTv: false };
+const DEFAULT_SETTINGS: Settings = { reduceEffects: false, autoDelayMs: 1500, textSpeed: 45, sfxVolume: 0.6, typingSound: true, musicVolume: 0.5, muted: false, textScale: 1, boxOpacity: 0.88, language: 'auto', filtroTv: false, tvEfecto: true };
 
 /** auto y skip, más adelantar (ff) y retroceder (rew) a velocidad `speed`. */
 export type Mode = 'normal' | 'auto' | 'skip' | 'ff' | 'rew';

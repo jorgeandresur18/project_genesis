@@ -367,5 +367,7 @@
   "opciones.modo_crt": "Retro CRT",
   "opciones.modo_crt_desc": "Un televisor de tubo, en 4:3. Solo en la partida; el menú no cambia.",
   "tv.volumen": "VOLUMEN",
-  "tv.canal": "Canal"
+  "tv.canal": "Canal",
+  "opciones.tv_efecto": "Efecto de tubo (líneas de barrido, desenfoque y parpadeo)",
+  "opciones.tv_efecto_nota": "Desmárcalo para jugar en 4:3 con la imagen nítida."
 }

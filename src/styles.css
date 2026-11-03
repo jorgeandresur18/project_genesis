@@ -3258,6 +3258,10 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 .tv-pantalla { position: relative; aspect-ratio: 4 / 3; height: min(calc(100dvh - 1.2vmin - var(--mesa) - 4.6vmin - 1vmin - 10vmin), calc((100vw - 2.4vmin - 12vmin) * 3 / 4)); overflow: hidden; border-radius: 3vmin / 2.4vmin; background: #000; box-shadow: 0 0 0 0.8vmin #0b0b0d, 0 0 0 1vmin #46464c, 0 0 0 1.25vmin #18181b; }
 /* La imagen: un poco borrosa y saturada. El filtro también la vuelve el marco de lo que se fija a la pantalla. */
 .tv-imagen { position: absolute; inset: 0; overflow: hidden; filter: blur(0.6px) saturate(1.18) contrast(1.06) brightness(1.04); }
+/* Sin el efecto de tubo (Opciones): 4:3 nítido. Queda un filtro que no cambia nada: sigue siendo el marco de lo que
+   se fija a la pantalla. La pantalla conserva la sombra de los bordes, sin líneas ni parpadeo. */
+.tv.nitido .tv-imagen { filter: brightness(1); }
+.tv.nitido .tv-crt { background: none; animation: none; }
 /* Encima: líneas de barrido, la rejilla de colores, la viñeta de los bordes, un reflejo y un parpadeo leve. */
 .tv-crt { position: absolute; inset: 0; z-index: 2; pointer-events: none; border-radius: inherit;
   background:
@@ -3361,3 +3365,9 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 .modo-mini.crt .modo-mini-pantalla { height: 4.6rem; aspect-ratio: 4 / 3; border-radius: 0.45rem / 0.35rem; filter: blur(0.3px) saturate(1.2); box-shadow: 0 0 0 2px #0c0c0e; }
 .modo-mini.crt .modo-mini-pantalla::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.55)), repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.35) 0 1px, transparent 1px 2px); }
 .modo-mini-logo { display: block; width: 3.4rem; height: 0.9rem; background: url('/marca/logo_tv.webp') center / contain no-repeat; }
+
+/* Opciones › Modo de pantalla: la casilla del efecto de tubo, debajo de las tarjetas. */
+.modo-efecto { align-items: flex-start; margin-top: 0.6rem; }
+.modo-efecto span { display: grid; gap: 0.15rem; }
+/* El modo de pantalla en columna: el título arriba, las tarjetas a lo ancho y la casilla del efecto debajo. */
+.option.option-modo, .option.option-modo:has(input[type='checkbox']) { flex-direction: column; align-items: stretch; gap: 0; }

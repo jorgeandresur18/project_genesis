@@ -31,6 +31,7 @@ export function TvViejo({ activo, children }: { activo: boolean; children: React
   const [canal, setCanal] = useState(0);
   const [osd, setOsd] = useState<null | { tipo: 'canal' | 'volumen'; n: number }>(null);
   const volumen = useStore((s) => (s.settings.muted ? 0 : s.settings.musicVolume));
+  const efecto = useStore((s) => s.settings.tvEfecto !== false);
 
   // El juego está pensado para la ventana entera: dentro del televisor se achica en proporción a la pantalla
   // (la letra base y el zoom de los sprites; los efectos se ubican igual que siempre).
@@ -141,7 +142,7 @@ export function TvViejo({ activo, children }: { activo: boolean; children: React
   );
   return (
     <div
-      className={`tv ${activo ? '' : 'apagado'} ${!encendida || transicion === 'apagando' ? 'tv-sin-luz' : canal > 0 ? 'tv-nieve' : ''}`}
+      className={`tv ${activo ? '' : 'apagado'} ${efecto ? '' : 'nitido'} ${!encendida || transicion === 'apagando' ? 'tv-sin-luz' : canal > 0 ? 'tv-nieve' : ''}`}
       style={{ '--tv-escala': escala } as CSSProperties}
     >
       {barra}

@@ -367,5 +367,7 @@
   "opciones.modo_crt": "Retro CRT",
   "opciones.modo_crt_desc": "An old tube TV, in 4:3. Only in the game; the menu stays the same.",
   "tv.volumen": "VOLUME",
-  "tv.canal": "Channel"
+  "tv.canal": "Channel",
+  "opciones.tv_efecto": "Tube effect (scanlines, blur and flicker)",
+  "opciones.tv_efecto_nota": "Uncheck it to play in 4:3 with a sharp picture."
 }

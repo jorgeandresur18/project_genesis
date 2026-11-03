@@ -798,7 +798,7 @@ export function OptionsPanel({ onClose, enJuego = false }: { onClose: () => void
 
       <h3 className="options-section">{t('opciones.pantalla')}</h3>
       {/* Modo de pantalla: cada uno con su miniatura de cómo se ve la partida. */}
-      <div className="option">
+      <div className="option option-modo">
         {t('opciones.modo_pantalla')}
         <div className="modo-pantalla" role="radiogroup" aria-label={t('opciones.modo_pantalla')}>
           {([false, true] as const).map((crt) => (
@@ -820,6 +820,15 @@ export function OptionsPanel({ onClose, enJuego = false }: { onClose: () => void
             </button>
           ))}
         </div>
+        {settings.filtroTv && (
+          <label className="option modo-efecto">
+            <input type="checkbox" checked={settings.tvEfecto !== false} onChange={(e) => setSettings({ tvEfecto: e.target.checked })} />
+            <span>
+              {t('opciones.tv_efecto')}
+              <small className="muted options-tip">{t('opciones.tv_efecto_nota')}</small>
+            </span>
+          </label>
+        )}
       </div>
       <label className="option">
         <input
