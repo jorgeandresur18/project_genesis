@@ -47,20 +47,21 @@
 
 /* Los objetos de la tienda publicados como un artículo: su dibujo centrado sobre el fondo de las fotos. */
 /* El fondo: un resplandor sutil del color del objeto (--c), como el fondo de Boringram; los bordes quedan teñidos
-   del mismo color, oscuros pero no negros. */
-.fotoObjeto { display: grid; place-items: center; aspect-ratio: 1; border-radius: 0.5rem; background: radial-gradient(ellipse at 50% 40%, color-mix(in srgb, var(--c) 42%, #16161c) 0%, color-mix(in srgb, var(--c) 16%, #16161c) 75%); }
+   del mismo color. Oscuro, pero no negro. */
+.fotoObjeto { display: grid; place-items: center; aspect-ratio: 1; border-radius: 0.5rem; background: radial-gradient(ellipse at 50% 40%, color-mix(in srgb, var(--c) 24%, #111116) 0%, color-mix(in srgb, var(--c) 9%, #111116) 75%); }
 .nombre { margin-top: 0.3rem; overflow: hidden; color: #f1f1f4; font-size: 0.86rem; line-height: 1.3; white-space: nowrap; text-overflow: ellipsis; }
 .nombre + .precio { margin-top: 0; }
 .fotoObjeto img { width: 62%; height: 62%; object-fit: contain; filter: drop-shadow(0 0.5rem 0.6rem rgba(0, 0, 0, 0.55)); }
 .detalle .tienes { color: #8fe6da; font-size: 0.8rem; }
 
-/* El artículo abierto: la foto flota un poco de arriba abajo y gira apenas, como un objeto en 3D. */
-.escena { padding: 0.8rem 0.9rem 0.2rem; perspective: 700px; }
-.flota { transform-style: preserve-3d; animation: flotar 4.2s ease-in-out infinite; }
-.flota > * { display: grid; border-radius: 0.7rem; box-shadow: 0 1.2rem 1.6rem -0.8rem rgba(0, 0, 0, 0.7); }
+/* El artículo abierto: el cuadro queda quieto y solo el dibujo del objeto flota de arriba abajo, girando apenas en 3D. */
+.escena { padding: 0.8rem 0.9rem 0.2rem; }
+.escena > * { border-radius: 0.7rem; }
+.fotoGrande.fotoObjeto { perspective: 700px; }
+.flota { animation: flotar 4.2s ease-in-out infinite; }
 @keyframes flotar {
-  0%, 100% { transform: translateY(0) rotateX(4deg) rotateY(-6deg); }
-  50% { transform: translateY(-0.55rem) rotateX(-3deg) rotateY(6deg); }
+  0%, 100% { transform: translateY(0) rotateX(4deg) rotateY(-8deg); }
+  50% { transform: translateY(-0.6rem) rotateX(-3deg) rotateY(8deg); }
 }
 @media (prefers-reduced-motion: reduce) { .flota { animation: none; } }
 

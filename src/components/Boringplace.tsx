@@ -1,4 +1,4 @@
-import { useState, type CSSProperties, type ReactNode } from 'react';
+import { useState, type CSSProperties } from 'react';
 import { playSelect } from '../engine/sound';
 import { assetUrl } from '../engine/assets';
 import { OBJETOS_TIENDA, colorDeObjeto, precioVenta, useBoringplace, type Articulo } from '../engine/boringplace';
@@ -136,9 +136,9 @@ export function ArticuloVista({ id, onBack, onToast }: { id: string; onBack: () 
         </button>
         <b>{tx.titulo}</b>
       </div>
-      <Flotante>
+      <div className={s.escena}>
         <Foto a={a} grande />
-      </Flotante>
+      </div>
       <div className={s.detalle}>
         <b className={s.precioGrande}>{a.precio}</b>
         <h3>{a.titulo}</h3>
@@ -169,15 +169,6 @@ export function ArticuloVista({ id, onBack, onToast }: { id: string; onBack: () 
 
 /** Los objetos de la tienda se abren como un artículo más: `tienda:<objeto>`. */
 const ID_TIENDA = 'tienda:';
-
-/** La foto del artículo abierto: flota un poco, de arriba abajo, girando apenas en 3D. */
-function Flotante({ children }: { children: ReactNode }) {
-  return (
-    <div className={s.escena}>
-      <div className={s.flota}>{children}</div>
-    </div>
-  );
-}
 
 /** La publicación de un objeto de las peleas: foto, precio, descripción, cuántos tienes y cuántos comprar. */
 function ObjetoVista({ objeto, onBack, onToast }: { objeto: string; onBack: () => void; onToast: (texto: string) => void }) {
@@ -214,9 +205,9 @@ function ObjetoVista({ objeto, onBack, onToast }: { objeto: string; onBack: () =
           </span>
         )}
       </div>
-      <Flotante>
+      <div className={s.escena}>
         <FotoObjeto icono={o.icono} color={colorDeObjeto(o)} grande />
-      </Flotante>
+      </div>
       <div className={s.detalle}>
         <h3>{o.nombre}</h3>
         <b className={s.precioGrande}>{tx.precio_monedas.replace('{n}', String(x.precio))}</b>
@@ -247,11 +238,14 @@ function ObjetoVista({ objeto, onBack, onToast }: { objeto: string; onBack: () =
   );
 }
 
-/** La foto de un objeto de la tienda: su dibujo sobre un resplandor sutil del color de su tipo (como el fondo de Boringram). */
+/**
+ * La foto de un objeto de la tienda: su dibujo sobre un resplandor oscuro del color de su tipo (como el fondo de
+ * Boringram). En la publicación abierta (`grande`), solo el dibujo flota de arriba abajo, girando apenas en 3D.
+ */
 function FotoObjeto({ icono, color, grande = false }: { icono?: string; color?: string; grande?: boolean }) {
   return (
     <span className={`${s.fotoObjeto} ${grande ? s.fotoGrande : ''}`} style={{ '--c': color ?? '#2a1724' } as CSSProperties} aria-hidden>
-      {icono && <img src={assetUrl(`${icono}.webp`)} alt="" draggable={false} />}
+      {icono && <img className={grande ? s.flota : undefined} src={assetUrl(`${icono}.webp`)} alt="" draggable={false} />}
     </span>
   );
 }
