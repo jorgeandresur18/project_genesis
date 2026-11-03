@@ -1110,8 +1110,11 @@ function Pelea({
     await animar(quien, 'mover', DESLIZ_MS);
   };
 
-  /** Un golpe: resta PS (el jefe que se retira nunca llega a 0), números, animación y, si cae, lo que pasa. */
-  const golpear = async (atacante: Luchador, defensor: Luchador, poder: number, color = '#fff6d0') => {
+  /**
+   * Un golpe: resta PS (el jefe que se retira nunca llega a 0), números, animación y, si cae, lo que pasa.
+   * `aMedias`: un especial al que eligió esquivar (no se esquiva, pero le hace la mitad).
+   */
+  const golpear = async (atacante: Luchador, defensor: Luchador, poder: number, color = '#fff6d0', aMedias = false) => {
     // Si van perdiendo, el juego ayuda: los golpes de los héroes son críticos más seguido.
     const extra = d.ayuda && atacante.lado === 'heroe' && vanPerdiendo(b.current.heroes, d.ayuda.umbral) ? d.ayuda.critico : 0;
     // Protegido: este golpe no le hace nada (y se gasta la protección).
@@ -1123,7 +1126,13 @@ function Pelea({
       forzar();
       return { n: 0, critico: false, bloqueado: true };
     }
-    const { n, critico } = dano(atacante, defensor, poder, Math.random, extra);
+    const golpe = dano(atacante, defensor, poder, Math.random, extra);
+    const critico = golpe.critico;
+    const n = aMedias ? Math.max(1, Math.round(golpe.n / 2)) : golpe.n;
+    if (aMedias) {
+      numero(defensor.id, t('batalla.a_medias'), 'falla');
+      void animar(defensor.id, 'salto', 600);
+    }
     luz(defensor.id, color, critico);
     cargar(defensor, CARGA.recibir);
     const jefe = defensor.lado === 'enemigo' ? d.enemigos[defensor.clave] : null;
@@ -1471,8 +1480,9 @@ function Pelea({
         x.envenenado = { danio: bt.traicion!.veneno, turnos: 9, noMata: true };
         b.current.remate = x.id;
       } else {
-        await golpear(e, x, bt.poder, bt.color);
-        if (vivo(x) && !x.envenenado) x.envenenado = { ...bt.veneno };
+        await golpear(e, x, bt.poder, bt.color, x.esquivando);
+        // Al que eligió esquivar, el veneno le dura un turno menos.
+        if (vivo(x) && !x.envenenado) x.envenenado = { ...bt.veneno, turnos: Math.max(1, bt.veneno.turnos - (x.esquivando ? 1 : 0)) };
       }
     }
     // Salpica a los suyos (no a ella).
@@ -1532,15 +1542,9 @@ function Pelea({
     playChip('impacto');
     setFogonazo({ key: Math.random(), color: e.color });
     await espera(250);
-    if (esquiva(d, blanco, l)) {
-      numero(blanco.id, 'MISS', 'falla');
-      void animar(blanco.id, 'salto', 600);
-      await espera(400);
-      setRayo(null);
-      return lineas('esquiva_ok', { quien: blanco.nombre });
-    }
+    // Los especiales no se esquivan: al que eligió esquivar le hacen la mitad.
     bajoEspecial.current.add(blanco.id);
-    const { n, bloqueado } = await golpear(l, blanco, e.poder, e.color);
+    const { n, bloqueado } = await golpear(l, blanco, e.poder, e.color, blanco.esquivando);
     await espera(450);
     setRayo(null);
     soltar([blanco]);
@@ -1576,13 +1580,8 @@ function Pelea({
       const x = g.fuerte && vivo(blanco) ? blanco : otros.length ? azar(otros) : vivo(blanco) ? blanco : azar(vivos);
       playChip(g.fuerte ? 'impacto' : 'disparo');
       if (g.fuerte) setFogonazo({ key: Math.random(), color: e.color });
-      if (esquiva(d, x, l)) {
-        numero(x.id, 'MISS', 'falla');
-        void animar(x.id, 'salto', 600);
-        continue;
-      }
       bajoEspecial.current.add(x.id);
-      await golpear(l, x, g.fuerte ? e.poder : Math.max(3, Math.round(e.poder / 6)), e.color);
+      await golpear(l, x, g.fuerte ? e.poder : Math.max(3, Math.round(e.poder / 6)), e.color, x.esquivando);
     }
     await espera(Math.max(0, total - (Date.now() - desde)));
     setRayoSigue(null);
@@ -1708,14 +1707,10 @@ function Pelea({
       await espera(paso);
       if (!vivo(b)) continue;
       playChip(hoja.disparos?.especial ? 'disparo' : sonidoDe(l));
-      if (b.lado === 'heroe' && esquiva(d, b, l)) {
-        numero(b.id, 'MISS', 'falla');
-        // Esquiva de un salto y vuelve a la pose de golpeado.
-        void animar(b.id, 'salto');
-        setTimeout(() => bajoEspecial.current.has(b.id) && vivo(b) && void animar(b.id, 'golpeado'), 500);
-        continue;
-      }
-      const { n } = await golpear(l, b, e.poder, e.color);
+      // No se esquiva: al que eligió esquivar le hace la mitad (salta y vuelve a la pose de golpeado).
+      const aMedias = b.esquivando;
+      if (aMedias) setTimeout(() => bajoEspecial.current.has(b.id) && vivo(b) && void animar(b.id, 'golpeado'), 500);
+      const { n } = await golpear(l, b, e.poder, e.color, aMedias);
       total += n;
     }
     await espera(Math.max(0, dura - (Date.now() - inicio)));

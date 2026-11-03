@@ -66,7 +66,7 @@ Al elegir a quién atacar, el elegido brilla, tiene un anillo dorado a los pies 
 |---|---|
 | Atacar | Un ataque y a quién; o el especial, si la barra está llena (★). |
 | Hablar | El héroe le dice algo al rival. Un soldado puede distraerse (40 %) y perder su próximo ataque; al jefe no se lo distrae. Excepción: Nikki (ver 12). |
-| Esquivar | Ese turno cada golpe que le tiren puede fallar (50 % de base, según el nivel y el estado: ver 3). El menú muestra la probabilidad real contra el rival de más nivel. |
+| Esquivar | Ese turno cada golpe normal que le tiren puede fallar (50 % de base; los especiales le hacen la mitad, según el nivel y el estado: ver 3). El menú muestra la probabilidad real contra el rival de más nivel. |
 | Objetos | Algo de la mochila, en él o en un compañero (revivir: en un caído). |
 | Huir | Termina la pelea, si la pelea lo permite (`huir`). En el Bastión y en el bar, no. No gasta el turno. |
 
@@ -83,7 +83,11 @@ Al elegir a quién atacar, el elegido brilla, tiene un anillo dorado a los pies 
   - **Estado del que ataca:** confundido +10, envenenado +5.
   - **Contra un paralizado** (no se mueve) nunca se falla.
   - Queda entre 2 % y 30 %.
-- **Esquivar:** golpe por golpe (también contra los golpes de un especial). Base 50 % (`esquivar` de la pelea), y además:
+- **Los especiales no se esquivan:** siempre pegan, pero al que eligió esquivar ese turno le hacen **la mitad del daño**
+  (salta igual y sale «¡A medias!»). Si el especial deja un estado (el veneno de la Mega Bola), le dura un turno menos.
+  Así Esquivar sirve para algo claro: ver la barra del rival llena y protegerse. La cachetada de remate de la traición
+  en el bar sigue sin poder esquivarse ni a medias.
+- **Esquivar** (los ataques normales): golpe por golpe. Base 50 % (`esquivar` de la pelea), y además:
   - **Nivel:** ±2 puntos por nivel de diferencia con el que ataca (hasta 10 niveles).
   - **Estado del que esquiva:** confundido −20, envenenado −10. Quemado y congelado también restarán, cuando existan.
   - Queda entre 5 % y 80 %.

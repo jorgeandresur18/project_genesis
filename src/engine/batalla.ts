@@ -67,7 +67,7 @@ export interface Especial {
   pantalla?: 'oscura';
   /**
    * Cañón (el Capitán de la Federación): en vez de 5 segundos de golpes, carga el blaster (brilla cada vez más) y suelta
-   * un solo rayo grueso de su `color` contra su objetivo: un golpe de `poder`. Se puede esquivar.
+   * un solo rayo grueso de su `color` contra su objetivo: un golpe de `poder`. Como todo especial, no se esquiva: al que esquivó le hace la mitad.
    */
   canon?: boolean;
   /**

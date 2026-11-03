@@ -357,5 +357,6 @@
   "batalla.pausa_aviso": "If you quit, this fight is lost: «Continue» takes you to your last save (if there was room, the game saved right before this fight).",
   "equipo.mochila_vacia_titulo": "Your bag is empty",
   "batalla.mochila_vida_real": "You have nothing. This is real life: there's no bag here.",
-  "batalla.pausa_espera": "You can pause when it is your turn to choose."
+  "batalla.pausa_espera": "You can pause when it is your turn to choose.",
+  "batalla.a_medias": "Half dodge!"
 }
