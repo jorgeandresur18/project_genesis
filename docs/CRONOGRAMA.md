@@ -102,7 +102,7 @@ Se responden cuando toque su semana; mientras, no se inventan.
 - ¿Canales del televisor que muestran algo en ciertos capítulos? (idea de Claude, sin aprobar).
 
 **Títulos de los capítulos 3 a 7**
-- «Dios ha muerto» / «God Is Dead;»: elegido; falta decidir de qué capítulo (Claude recomienda el 3).
+- «Dios ha muerto» / «God Is Dead;»: elegido; falta decidir de qué capítulo (Claude recomienda el 6; la otra opción es el 3).
 - Propuestas en `docs/BITACORA.md` (sesión del 2 y 3 de noviembre); el 3 iba hacia «return 0;» o «Proceso terminado*».
 
 **General**
