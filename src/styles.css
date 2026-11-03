@@ -3189,3 +3189,40 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 .batalla-pausa-caja button:hover { background: rgba(232, 226, 212, 0.1); }
 .batalla-pausa-caja button.peligro { border-color: #ff6b6b; color: #ffb3b3; }
 .equipo-mochila-vacia { grid-column: 1 / -1; display: grid; place-items: center; min-height: 14rem; margin: 0; color: #e8e2d4; font-size: 1.6rem; font-weight: 800; text-align: center; }
+
+/* En pausa todo se queda quieto (auras, brillos, energías, balas), no solo los sprites. */
+.batalla.pausada *, .batalla.pausada *::before, .batalla.pausada *::after { animation-play-state: paused !important; }
+.batalla.pausada .batalla-pausa *, .batalla.pausada .batalla-pausa-capa * { animation-play-state: running !important; }
+.batalla-pausa-btn:disabled { opacity: 0.35; cursor: default; }
+/* Lo que se abre desde la pausa: encima de todo (también del cartel de turno) y con cajas de JRPG. */
+.batalla-pausa-capa { position: absolute; inset: 0; z-index: 90; }
+.batalla-pausa-capa .panel-backdrop { position: absolute; z-index: 90; }
+.batalla-pausa-capa .panel { border: 1px solid var(--n-borde, #888); outline: 3px solid #000; box-shadow: 0 0 0 4px var(--n-borde, #888); border-radius: 0; background: #08080b; font-family: 'Pixelify Sans', sans-serif; }
+.batalla-pausa-capa .panel-head { border-bottom: 2px solid var(--n-borde, #888); }
+.batalla-pausa-capa .panel-head h2 { font-family: 'Press Start 2P', monospace; font-size: 0.85rem; }
+.batalla-pausa-capa .term-dots, .batalla-pausa-capa .term-path { display: none; }
+.batalla-pausa-capa button, .batalla-pausa-capa .equipo-ficha, .batalla-pausa-capa .equipo-espacios li { border-radius: 0 !important; }
+
+/* El clon envenenado sigue hecho de sombra: el aura del veneno se suma, no le devuelve el color. */
+.batalla-figura.clon.envenenado .batalla-sprite { animation: clon-veneno 1.8s ease-in-out infinite; }
+@keyframes clon-veneno { 0%, 100% { filter: brightness(0.22) saturate(0) drop-shadow(0 0 3px rgba(170, 90, 235, 0.85)) drop-shadow(0 0 10px rgba(140, 60, 210, 0.55)); opacity: 0.88; } 50% { filter: brightness(0.22) saturate(0) drop-shadow(0 0 5px rgba(185, 105, 245, 0.95)) drop-shadow(0 0 18px rgba(150, 70, 220, 0.7)); opacity: 0.75; } }
+@media (prefers-reduced-motion: reduce) { .batalla-figura.clon.envenenado .batalla-sprite { animation: none; filter: brightness(0.22) saturate(0) drop-shadow(0 0 4px #b05aeb); } }
+
+/* Borrar todo en plena partida: la pantalla se rompe (colores invertidos, cortes y líneas), queda en negro un momento y vuelve el título. */
+.deleting-fade.glitch { z-index: 1000; background: transparent; animation: borrado-glitch 1.9s steps(1) forwards; }
+.deleting-fade.glitch::before, .deleting-fade.glitch::after { content: ''; position: absolute; inset: 0; pointer-events: none; }
+.deleting-fade.glitch::before { background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.55) 0 2px, transparent 2px 5px); animation: borrado-lineas 0.9s steps(6) forwards; }
+.deleting-fade.glitch::after { background: linear-gradient(transparent 18%, rgba(255, 42, 79, 0.55) 18% 23%, transparent 23% 51%, rgba(34, 211, 238, 0.5) 51% 55%, transparent 55% 78%, rgba(255, 255, 255, 0.7) 78% 79.5%, transparent 79.5%); mix-blend-mode: screen; animation: borrado-cortes 0.9s steps(1) forwards; }
+@keyframes borrado-glitch {
+  0% { backdrop-filter: none; background: transparent; }
+  7% { backdrop-filter: invert(1) hue-rotate(90deg); background: rgba(255, 0, 60, 0.12); }
+  13% { backdrop-filter: none; background: transparent; }
+  19% { backdrop-filter: saturate(4) hue-rotate(200deg) contrast(2); background: transparent; }
+  26% { backdrop-filter: grayscale(1) contrast(3); background: rgba(0, 255, 230, 0.12); }
+  32% { backdrop-filter: none; background: rgba(0, 0, 0, 0.6); }
+  38% { backdrop-filter: invert(1) contrast(2); background: transparent; }
+  45%, 100% { backdrop-filter: none; background: #000; }
+}
+@keyframes borrado-lineas { 0% { translate: 0 0; opacity: 1; } 100% { translate: 0 30px; opacity: 0; } }
+@keyframes borrado-cortes { 0% { translate: 0 0; } 15% { translate: -24px 12%; } 30% { translate: 30px -20%; } 45% { translate: -10px 35%; } 60%, 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .deleting-fade.glitch, .deleting-fade.glitch::before, .deleting-fade.glitch::after { animation: deleting-fade 0.8s ease-in forwards; } .deleting-fade.glitch { background: #000; } .deleting-fade.glitch::after { content: none; } }

@@ -66,7 +66,7 @@ Al elegir a quién atacar, el elegido brilla, tiene un anillo dorado a los pies 
 |---|---|
 | Atacar | Un ataque y a quién; o el especial, si la barra está llena (★). |
 | Hablar | El héroe le dice algo al rival. Un soldado puede distraerse (40 %) y perder su próximo ataque; al jefe no se lo distrae. Excepción: Nikki (ver 12). |
-| Esquivar | Ese turno cada golpe que le tiren puede fallar (50 %). |
+| Esquivar | Ese turno cada golpe que le tiren puede fallar (50 % de base, según el nivel y el estado: ver 3). El menú muestra la probabilidad real contra el rival de más nivel. |
 | Objetos | Algo de la mochila, en él o en un compañero (revivir: en un caído). |
 | Huir | Termina la pelea, si la pelea lo permite (`huir`). En el Bastión y en el bar, no. No gasta el turno. |
 
@@ -76,9 +76,18 @@ Al elegir a quién atacar, el elegido brilla, tiene un anillo dorado a los pies 
 
 - **Daño de un golpe:** `ATQ × poder / 10 − DEF del que recibe / 2`, por un azar de ±10 %. Mínimo 1.
 - **Crítico:** 8 % de las veces, × 1,5 (sale «¡Golpe crítico!»). Si el juego está ayudando, más (ver 9).
-- **Fallo:** un ataque normal falla el 6 % de las veces, de los dos lados (el rival lo esquiva o el golpe no entra).
-  Los especiales no fallan.
-- **Esquivar:** funciona el 50 % de las veces, golpe por golpe (también contra los golpes de un especial).
+- **Fallo:** un ataque normal falla solo, de los dos lados (el rival lo esquiva o el golpe no entra). Los especiales
+  no fallan. Base 6 % (`fallo` de la pelea), y además (`PUNTERIA` en `src/engine/batalla.ts`):
+  - **Nivel:** +1 punto por cada nivel que el que recibe le lleva al que ataca (cuenta hasta 10 niveles) y −1 por
+    cada nivel de menos (hasta 5).
+  - **Estado del que ataca:** confundido +10, envenenado +5.
+  - **Contra un paralizado** (no se mueve) nunca se falla.
+  - Queda entre 2 % y 30 %.
+- **Esquivar:** golpe por golpe (también contra los golpes de un especial). Base 50 % (`esquivar` de la pelea), y además:
+  - **Nivel:** ±2 puntos por nivel de diferencia con el que ataca (hasta 10 niveles).
+  - **Estado del que esquiva:** confundido −20, envenenado −10. Quemado y congelado también restarán, cuando existan.
+  - Queda entre 5 % y 80 %.
+  - Ejemplo, el bar: Jair (nivel 5) contra Nikki (nivel 20) esquiva el 30 % y sus golpes fallan el 16 %.
 
 ---
 
@@ -175,7 +184,9 @@ Cada objeto tiene su **tipo** (curación, mejora, permanente, táctico, equipo, 
 - **Clon de sombra** (`clon`, Nikki): desde media barra, pero muy pocas veces (el 8 % de las veces que puede; en el bar lo más común es el beso). Primero junta energía (un aura de su color que crece y late), después un destello corto y sale el clon. Le cuesta el 25 % de su
   vida máxima y el clon, hecho de sombra, tiene la mitad de su fuerza. El clon no usa especiales, no escucha, no da
   experiencia ni botín y se evapora a los 3 turnos. Solo hace uno a la vez, y nunca si gastar esa vida la deja al
-  borde de retirarse. Al aparecer, Jair reacciona.
+  borde de retirarse. Al aparecer, Jair reacciona. Sale pegado detrás de ella (un poco más atrás en el piso y al
+  costado), un 10 % más chico; si lo envenenan sigue hecho de sombra (el aura morada se suma). No se retira como el
+  jefe: si le bajan la vida, cae.
 - **Horda:** empiezan `al_inicio` enemigos; cada vez que cae uno, llega el siguiente hasta completar `niveles`.
   Después sale el **jefe**.
 - **El jefe no muere: se retira** cuando le queda `huye_a` de sus PS, y ahí se gana. Puede retirarse con otra

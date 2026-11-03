@@ -268,9 +268,44 @@ export interface DatosBatalla {
   ayuda?: { umbral: number; cae: number; objeto: string; critico: number };
 }
 
-/** Probabilidad de que un ataque normal falle, de los dos lados (el especial no falla). */
+/** Probabilidad base de que un ataque normal falle, de los dos lados (el especial no falla). */
 export const FALLO = 0.06;
-export const falla = (d: { fallo?: number }, azar: () => number = Math.random) => azar() < (d.fallo ?? FALLO);
+/**
+ * Fallar y esquivar según el nivel y el estado. La diferencia de nivel cuenta hasta un tope (así un rival muy alto
+ * no se vuelve imposible) y los estados suman o restan puntos.
+ */
+export const PUNTERIA = {
+  /** Fallar: +1 punto por nivel que el defensor le lleva al atacante (hasta 10), −1 por nivel de menos (hasta 5). */
+  falloPorNivel: 0.01, falloNivelMax: 10, falloNivelMin: 5,
+  /** El atacante confundido o envenenado falla más; contra un paralizado (no se mueve) nunca se falla. */
+  falloConfundido: 0.1, falloEnvenenado: 0.05,
+  falloMin: 0.02, falloMax: 0.3,
+  /** Esquivar: ±2 puntos por nivel de diferencia con el que ataca (hasta 10 niveles). */
+  esquivaPorNivel: 0.02, esquivaNivelMax: 10,
+  /** Confundido o envenenado, esquiva peor. TODO: quemado y congelado (cuando existan) también restan. */
+  esquivaConfundido: 0.2, esquivaEnvenenado: 0.1,
+  esquivaMin: 0.05, esquivaMax: 0.8,
+} as const;
+const entre = (x: number, min: number, max: number) => Math.min(max, Math.max(min, x));
+/** Probabilidad de que el golpe de `at` a `de` falle solo (sin que `de` haya elegido esquivar). */
+export function probFallo(d: { fallo?: number }, at: Luchador, de: Luchador) {
+  if (de.paralizado > 0) return 0;
+  const P = PUNTERIA;
+  const dif = entre(de.nivel - at.nivel, -P.falloNivelMin, P.falloNivelMax);
+  const estado = (at.confundido > 0 ? P.falloConfundido : 0) + (at.envenenado ? P.falloEnvenenado : 0);
+  return entre((d.fallo ?? FALLO) + dif * P.falloPorNivel + estado, P.falloMin, P.falloMax);
+}
+/** Probabilidad de que `de`, que eligió esquivar, esquive el golpe de `at`. */
+export function probEsquiva(d: { esquivar: number }, de: Luchador, at: Luchador) {
+  const P = PUNTERIA;
+  const dif = entre(de.nivel - at.nivel, -P.esquivaNivelMax, P.esquivaNivelMax);
+  const estado = (de.confundido > 0 ? P.esquivaConfundido : 0) + (de.envenenado ? P.esquivaEnvenenado : 0);
+  return entre(d.esquivar + dif * P.esquivaPorNivel - estado, P.esquivaMin, P.esquivaMax);
+}
+export const falla = (d: { fallo?: number }, at: Luchador, de: Luchador, azar: () => number = Math.random) => azar() < probFallo(d, at, de);
+/** Si `de` esquiva el golpe de `at` (solo si eligió esquivar este turno). */
+export const esquiva = (d: { esquivar: number }, de: Luchador, at: Luchador, azar: () => number = Math.random) =>
+  de.esquivando && azar() < probEsquiva(d, de, at);
 /** Si los héroes van perdiendo (para la ayuda del juego). */
 export const vanPerdiendo = (heroes: Luchador[], umbral: number) =>
   heroes.reduce((s, h) => s + Math.max(0, h.ps) / h.psMax, 0) / heroes.length < umbral;

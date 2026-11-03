@@ -356,5 +356,6 @@
   "batalla.pausa_volver": "Volver",
   "batalla.pausa_aviso": "Si sales, la pelea se pierde: «Continuar» te lleva a tu último guardado (si había lugar, el juego guardó solo justo antes de esta pelea).",
   "equipo.mochila_vacia_titulo": "La mochila está vacía",
-  "batalla.mochila_vida_real": "No tienes nada. Esto es la vida real: acá no hay mochila."
+  "batalla.mochila_vida_real": "No tienes nada. Esto es la vida real: acá no hay mochila.",
+  "batalla.pausa_espera": "Se puede pausar cuando te toca elegir."
 }

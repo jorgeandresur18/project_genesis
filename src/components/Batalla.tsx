@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type CSSProperties } from 'react';
+import { createContext, useContext, useEffect, useRef, useState, type CSSProperties } from 'react';
 import '@fontsource/press-start-2p/400.css';
 import '@fontsource/pixelify-sans/400.css';
 import '@fontsource/pixelify-sans/600.css';
@@ -31,6 +31,8 @@ import {
   eligeEspecial,
   vanPerdiendo,
   falla,
+  esquiva,
+  probEsquiva,
   cargar,
   crearLuchador,
   dano,
@@ -99,6 +101,9 @@ const VERSUS_MS = 2700;
 const PROYECTIL_VEL = 950;
 /** Cuánto dura el aviso del especial en el medio de la pantalla. */
 const AVISO_MS = 1900;
+/** El clon de sombra: dónde va respecto de quien lo hizo (% de la cuadrícula: a un costado y un poco atrás) y su tamaño. */
+const CLON_CORRIDO: [number, number] = [8, -3];
+const CLON_ESCALA = 0.9;
 /** El clon de sombra: cuánto carga energía antes del destello. */
 const CARGA_CLON_MS = 1500;
 export interface Hoja {
@@ -367,10 +372,12 @@ function Pelea({
     return casillaDe.current.get(e.id)!;
   };
   /** Pone a alguien en su casilla (los pies en el punto); si faltan casillas, se corre al costado de la última. */
-  const enCasilla = (lado: 'equipo' | 'rivales', i: number, key: string, nodo: React.ReactNode) => {
+  const enCasilla = (lado: 'equipo' | 'rivales', i: number, key: string, nodo: React.ReactNode, corrido?: [number, number]) => {
     if (!casillas) return nodo;
     const lista = casillas[lado];
-    const [x, y] = lista[Math.min(i, lista.length - 1)];
+    const [x0, y0] = lista[Math.min(i, lista.length - 1)];
+    // El clon no toma una casilla libre: va pegado detrás de quien lo hizo (un poco más arriba en el piso).
+    const [x, y] = corrido ? [x0 + corrido[0], y0 + corrido[1]] : [x0, y0];
     const extra = Math.max(0, i - lista.length + 1) * (lado === 'rivales' ? 8 : -8);
     zCasilla.current.set(key, Math.round(y) * 2);
     const blanco = junto_de.current.get(key);
@@ -609,7 +616,7 @@ function Pelea({
       await espera(600);
     }
     for (const h of blancos) {
-      if (h.esquivando && Math.random() < d.esquivar) {
+      if (esquiva(d, h, e)) {
         numero(h.id, 'MISS', 'falla');
         void animar(h.id, 'salto', 600);
         await lineas('esquiva_ok', { quien: h.nombre });
@@ -1120,7 +1127,8 @@ function Pelea({
     luz(defensor.id, color, critico);
     cargar(defensor, CARGA.recibir);
     const jefe = defensor.lado === 'enemigo' ? d.enemigos[defensor.clave] : null;
-    defensor.ps = Math.max(jefe?.huye_a ? 1 : 0, defensor.ps - n);
+    // El clon no se retira (aunque copie al jefe): cae como cualquiera.
+    defensor.ps = Math.max(jefe?.huye_a && defensor.clon === undefined ? 1 : 0, defensor.ps - n);
     if (defensor.ps === 0) defensor.confundido = 0;
     playChip(critico ? 'golpe' : 'impacto');
     numero(defensor.id, critico ? `${n}!` : String(n), critico ? 'critico' : 'dano');
@@ -1362,7 +1370,7 @@ function Pelea({
       await espera(320);
     }
     cargar(h, CARGA.atacar);
-    if (falla(d)) {
+    if (falla(d, h, e)) {
       numero(e.id, 'MISS', 'falla');
       void animar(e.id, 'salto', 600);
       playChip('cambio');
@@ -1524,7 +1532,7 @@ function Pelea({
     playChip('impacto');
     setFogonazo({ key: Math.random(), color: e.color });
     await espera(250);
-    if (blanco.esquivando && Math.random() < d.esquivar) {
+    if (esquiva(d, blanco, l)) {
       numero(blanco.id, 'MISS', 'falla');
       void animar(blanco.id, 'salto', 600);
       await espera(400);
@@ -1568,7 +1576,7 @@ function Pelea({
       const x = g.fuerte && vivo(blanco) ? blanco : otros.length ? azar(otros) : vivo(blanco) ? blanco : azar(vivos);
       playChip(g.fuerte ? 'impacto' : 'disparo');
       if (g.fuerte) setFogonazo({ key: Math.random(), color: e.color });
-      if (x.esquivando && Math.random() < d.esquivar) {
+      if (esquiva(d, x, l)) {
         numero(x.id, 'MISS', 'falla');
         void animar(x.id, 'salto', 600);
         continue;
@@ -1607,7 +1615,7 @@ function Pelea({
       const ms = o && c ? nuevaBala(o.x, o.y, c.x, c.y, 1800, color, false) : 0;
       setTimeout(async () => {
         if (!vivo(h)) return;
-        if (falla(d) || (h.esquivando && Math.random() < d.esquivar)) {
+        if (falla(d, e, h) || esquiva(d, h, e)) {
           numero(h.id, 'MISS', 'falla');
           return;
         }
@@ -1700,7 +1708,7 @@ function Pelea({
       await espera(paso);
       if (!vivo(b)) continue;
       playChip(hoja.disparos?.especial ? 'disparo' : sonidoDe(l));
-      if (b.lado === 'heroe' && b.esquivando && Math.random() < d.esquivar) {
+      if (b.lado === 'heroe' && esquiva(d, b, l)) {
         numero(b.id, 'MISS', 'falla');
         // Esquiva de un salto y vuelve a la pose de golpeado.
         void animar(b.id, 'salto');
@@ -1835,7 +1843,7 @@ function Pelea({
       await espera(1000);
       setOscuro(false);
       for (const h of blancos) {
-        if (h.esquivando && Math.random() < d.esquivar) {
+        if (esquiva(d, h, e)) {
           numero(h.id, 'MISS', 'falla');
           void animar(h.id, 'salto', 600);
           await lineas('esquiva_ok', { quien: h.nombre });
@@ -1880,14 +1888,14 @@ function Pelea({
       if (llegadas) await espera(Math.max(0, llegadas[i] - (Date.now() - desde) + (proy ? ((proy.cuadro * 1000) / hoja.animations.ataque.fps) : 0)));
       if (deLejos) luz(h.id, d.enemigos[e.clave].color_disparo ?? '#ff3b3b');
       // A veces el golpe falla solo.
-      if (falla(d)) {
+      if (falla(d, e, h)) {
         numero(h.id, 'MISS', 'falla');
         playChip('cambio');
         await decir(fmt(t('batalla.falla'), { quien: e.nombre }));
         continue;
       }
       // Esquivar: a veces funciona.
-      if (h.esquivando && Math.random() < d.esquivar) {
+      if (esquiva(d, h, e)) {
         numero(h.id, 'MISS', 'falla');
         void animar(h.id, 'salto', 600);
         playChip('cambio');
@@ -1998,6 +2006,8 @@ function Pelea({
   // Teclado: flechas para moverse, Enter / Z / Espacio para elegir, Escape / X / Retroceso para volver.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      // En pausa, las teclas son de lo que está abierto (el menú, el equipo, las opciones y lo que se escribe ahí).
+      if (pausa) return;
       e.stopPropagation();
       if ((e.key === 'Enter' || e.key === ' ' || e.key.toLowerCase() === 'z') && saltar.current) return saltar.current();
       if (!elegido.current) return;
@@ -2016,9 +2026,14 @@ function Pelea({
   const enMenu = !!heroe && !!elegido.current;
   const marcado = (l: Luchador) => enMenu && menu.paso === 'objetivo' && candidatos()[menu.i]?.id === l.id;
   // Lo que dice el cuadro de al lado del menú sobre cada opción: qué hace, cuánto pega, cuánto da.
+  /** Lo que se ve en «Esquivar»: la probabilidad del héroe de turno contra el rival de más nivel. */
+  const pEsquiva = () => {
+    const rival = b.current.enemigos.filter(vivo).sort((x, y) => y.nivel - x.nivel)[0];
+    return heroe && rival ? probEsquiva(d, heroe, rival) : d.esquivar;
+  };
   const COMANDOS_DESC = ['atacar', 'hablar', 'esquivar', 'objetos', 'huir'];
   const descComando = (k: string) =>
-    d.descripciones?.[k] ?? fmt(t(k === 'huir' && !d.huir ? 'batalla.desc.huir_no' : `batalla.desc.${k}`), { p: Math.round(d.esquivar * 100) });
+    d.descripciones?.[k] ?? fmt(t(k === 'huir' && !d.huir ? 'batalla.desc.huir_no' : `batalla.desc.${k}`), { p: Math.round(pEsquiva() * 100) });
   /** Daño aproximado de un golpe contra el primer rival de pie (sin el azar). */
   const aprox = (poder: number) => {
     const r = vivosDe('enemigo')[0];
@@ -2094,9 +2109,10 @@ function Pelea({
   const texto = mensaje ? mensaje.texto.slice(0, letras) : '';
 
   return (
+    <PausaContexto.Provider value={!!pausa}>
     <div
       data-tiembla={tiembla || undefined}
-      className={`batalla n${b.current.heroes.length} e${Math.min(3, b.current.enemigos.length)} ${oscuro ? 'oscuro' : ''} ${saliendo ? 'saliendo' : ''}`}
+      className={`batalla ${pausa ? 'pausada' : ''} n${b.current.heroes.length} e${Math.min(3, b.current.enemigos.length)} ${oscuro ? 'oscuro' : ''} ${saliendo ? 'saliendo' : ''}`}
       ref={raiz}
       role="dialog"
       aria-label={d.titulo}
@@ -2146,7 +2162,9 @@ function Pelea({
       <div className={`batalla-escena ${casillas ? 'con-casillas' : ''}`}>
         <CajaCasillas casillas={casillas} r={d.fondo_proporcion ?? 16 / 9}>
         <div className="batalla-lado enemigos">
-          {b.current.enemigos.map((e) => enCasilla('rivales', casillaRival(e), e.id,
+          {b.current.enemigos.map((e) => {
+            const origen = e.clon !== undefined ? b.current.enemigos.find((x) => x.clave === e.clave && x.clon === undefined) : undefined;
+            return enCasilla('rivales', origen ? casillaRival(origen) : casillaRival(e), e.id,
             <Figura
               key={e.id}
               l={e}
@@ -2154,7 +2172,7 @@ function Pelea({
               refFigura={(el) => (el ? figuras.current.set(e.id, el) : figuras.current.delete(e.id))}
               sprite={d.enemigos[e.clave].sprite}
               filtro={d.enemigos[e.clave].filtro}
-              escala={d.enemigos[e.clave].escala}
+              escala={(d.enemigos[e.clave].escala ?? 1) * (e.clon !== undefined ? CLON_ESCALA : 1)}
               jefe={!!d.enemigos[e.clave].jefe}
               anim={anims[e.id] ?? 'idle'}
               vez={veces[e.id] ?? 0}
@@ -2167,7 +2185,8 @@ function Pelea({
               numeros={numeros.filter((n) => n.id === e.id)}
               etiqueta={e.clon !== undefined ? t('batalla.clon') : `${t('batalla.nivel')} ${e.nivel}`}
             />,
-          ))}
+            origen ? CLON_CORRIDO : undefined);
+          })}
         </div>
         <div className={`batalla-lado heroes n${b.current.heroes.length}`}>
           {b.current.heroes.map((h, i) => enCasilla('equipo', i, h.id,
@@ -2223,7 +2242,7 @@ function Pelea({
       </div>
       {versus && <Versus d={d} />}
       {/* La pausa: seguir, mirar el equipo (sin cambiarlo), las opciones o salir al título. */}
-      <button type="button" className="batalla-pausa-btn" onClick={() => setPausa('menu')} aria-label={t('batalla.pausa')}>
+      <button type="button" className="batalla-pausa-btn" disabled={!enMenu} title={enMenu ? undefined : t('batalla.pausa_espera')} onClick={() => setPausa('menu')} aria-label={t('batalla.pausa')}>
         ☰
       </button>
       {pausa === 'menu' && (
@@ -2250,8 +2269,11 @@ function Pelea({
           </div>
         </div>
       )}
-      {pausa === 'equipo' && <EquipoPanel soloVer grupo={d.heroes} onClose={() => setPausa('menu')} />}
-      {pausa === 'opciones' && <OptionsPanel onClose={() => setPausa('menu')} />}
+      {(pausa === 'equipo' || pausa === 'opciones') && (
+        <div className="batalla-pausa-capa">
+          {pausa === 'equipo' ? <EquipoPanel soloVer grupo={d.heroes} onClose={() => setPausa('menu')} /> : <OptionsPanel onClose={() => setPausa('menu')} enJuego />}
+        </div>
+      )}
       {/* La entrada (si no hay presentación): la pantalla se arma desde negro en bloques de píxel. */}
       {!d.intro && <Pixelado />}
       {/* Las balas de energía (Cami): salen de las pistolas y vuelan hasta su objetivo. */}
@@ -2378,6 +2400,7 @@ function Pelea({
         )}
       </div>
     </div>
+    </PausaContexto.Provider>
   );
 }
 
@@ -2580,6 +2603,9 @@ function Figura({
  * Una hoja de animaciones (filas: idle, mover, ataque, daño…), cuadro a cuadro según su .json. En reposo, cada
  * tanto pestañea (la fila «pestaneo», si la hoja la tiene).
  */
+/** La pelea en pausa: los sprites se quedan quietos en su cuadro. */
+const PausaContexto = createContext(false);
+
 export function SpriteHoja({
   src,
   anim,
@@ -2605,6 +2631,7 @@ export function SpriteHoja({
   const [hoja, setHoja] = useState<Hoja | Quieto | null>(null);
   const [cuadro, setCuadro] = useState(0);
   const [pestanea, setPestanea] = useState(false);
+  const pausada = useContext(PausaContexto);
   useEffect(() => {
     void cargarHoja(src).then(setHoja);
   }, [src]);
@@ -2613,7 +2640,7 @@ export function SpriteHoja({
   const reposo = anim === 'idle' && !!anims?.pestaneo && cuadroFijo === undefined;
   // Pestañeo: cada 2,2 a 6 segundos, una vez.
   useEffect(() => {
-    if (!reposo) return setPestanea(false);
+    if (!reposo || pausada) return setPestanea(false);
     let timer: ReturnType<typeof setTimeout>;
     const otra = () => {
       timer = setTimeout(() => {
@@ -2627,7 +2654,7 @@ export function SpriteHoja({
     };
     otra();
     return () => clearTimeout(timer);
-  }, [reposo, anims]);
+  }, [reposo, anims, pausada]);
   const nombre =
     anim === 'victoria'
       ? anims?.sonrojada
@@ -2646,6 +2673,7 @@ export function SpriteHoja({
   // Cuántos cuadros tiene: con `seq`, el largo de la secuencia.
   const largo = a ? (a.seq?.length ?? a.frames) : 1;
   useEffect(() => {
+    if (pausada) return;
     setCuadro(0);
     if (!a || cuadroFijo !== undefined) return;
     const n = a.seq?.length ?? a.frames;
@@ -2654,7 +2682,7 @@ export function SpriteHoja({
       1000 / (a.fps * velocidad),
     );
     return () => clearInterval(timer);
-  }, [a, anim, vez, bucle, velocidad, cuadroFijo]);
+  }, [a, anim, vez, bucle, velocidad, cuadroFijo, pausada]);
   // Paralizado: quieto en el golpe (el segundo cuadro de «daño»).
   // Golpeado (durante un especial): el golpe corre hasta la mitad de «daño» y se queda ahí, sin volver al base.
   const paso = anim === 'paralizado' ? Math.floor(largo / 2) : anim === 'golpeado' ? Math.min(cuadro + 1, Math.floor(largo / 2)) : anim === 'ko' && nombre === 'daño' ? Math.floor(largo / 2) : Math.min(cuadroFijo !== undefined ? ((cuadroFijo % largo) + largo) % largo : cuadro, largo - 1);

@@ -511,12 +511,14 @@ const TEXT_SIZES = [
 const DELETE_FILE_MS = 260;
 const DELETE_DONE_MS = 1100;
 const DELETE_FADE_MS = 800;
+/** Borrar en plena partida: un glitch corto, la pantalla en negro un momento y el título. */
+const DELETE_GLITCH_MS = 1900;
 
 /**
  * El borrado en sí: barra de progreso y los archivos que se van «borrando» (con chistes), «Borrado completado»,
  * fundido a negro y vuelta al título con todo en cero (sin recargar la página). Textos en src/data/borrado.json.
  */
-function Deleting() {
+function Deleting({ glitch = false }: { glitch?: boolean }) {
   const lang = useLang();
   const tx = localized(borradoEs, borradoEn, lang);
   const files = tx.archivos;
@@ -538,9 +540,9 @@ function Deleting() {
     const timer = setTimeout(() => {
       useStore.getState().resetAll();
       window.dispatchEvent(new Event('genesis:borrado'));
-    }, DELETE_FADE_MS);
+    }, glitch ? DELETE_GLITCH_MS : DELETE_FADE_MS);
     return () => clearTimeout(timer);
-  }, [n, phase, files.length]);
+  }, [n, phase, files.length, glitch]);
   const pct = Math.round((Math.min(n, files.length) / files.length) * 100);
   return (
     <>
@@ -567,7 +569,9 @@ function Deleting() {
           )}
         </div>
       </div>
-      {phase === 'fade' && <div className="deleting-fade" aria-hidden />}
+      {phase === 'fade' &&
+        // Afuera de todo (en plena pelea, la pausa no la congela ni la recorta).
+        createPortal(<div className={`deleting-fade ${glitch ? 'glitch' : ''}`} aria-hidden />, document.body)}
     </>
   );
 }
@@ -585,7 +589,7 @@ const plain = (x: string) =>
  * Zona de peligro (como la de GitHub): borrar todos los datos. Hay que escribir la frase de confirmación;
  * borra partidas, lo desbloqueado (galería, finales, Boringram, lo leído) y las opciones, y recarga el juego.
  */
-function DangerZone() {
+function DangerZone({ glitch = false }: { glitch?: boolean }) {
   const t = useT();
   const [open, setOpen] = useState(false);
   const [typed, setTyped] = useState('');
@@ -613,7 +617,7 @@ function DangerZone() {
       {open && (
         <div className="danger-modal-backdrop">
           {deleting ? (
-            <Deleting />
+            <Deleting glitch={glitch} />
           ) : (
             <div className="danger-modal" role="dialog" aria-modal="true" aria-labelledby="danger-title">
               <div className="danger-modal-head">
@@ -664,7 +668,8 @@ function DangerZone() {
   );
 }
 
-export function OptionsPanel({ onClose }: { onClose: () => void }) {
+/** `enJuego`: abierto en plena partida (la pausa de una pelea); borrar todo termina con un glitch y vuelve al título. */
+export function OptionsPanel({ onClose, enJuego = false }: { onClose: () => void; enJuego?: boolean }) {
   const settings = useStore((s) => s.settings);
   const setSettings = useStore((s) => s.setSettings);
   const t = useT();
@@ -801,7 +806,7 @@ export function OptionsPanel({ onClose }: { onClose: () => void }) {
         {t('opciones.reducir')}
       </label>
 
-      <DangerZone />
+      <DangerZone glitch={enJuego} />
     </Panel>
   );
 }

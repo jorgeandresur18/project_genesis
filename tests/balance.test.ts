@@ -17,7 +17,7 @@ function sim(D: DatosBatalla, listo: boolean, N = 2000) {
     const sacar = (c: string, n: number) => { const e = crearLuchador(c + Math.random(), c, 'enemigo', D.enemigos[c], n); e.carga = Math.floor(Math.random() * 40); es = [...es.filter(vivo), e]; };
     const pierden = () => !!D.ayuda && vanPerdiendo(hs, D.ayuda.umbral);
     const pegar = (a: Luchador, b: Luchador, poder: number, normal = true) => {
-      if (normal && falla(D)) return;
+      if (normal && falla(D, a, b)) return;
       const j = D.enemigos[b.clave];
       const extra = a.lado === 'heroe' && pierden() ? D.ayuda!.critico : 0;
       b.ps = Math.max(j?.huye_a ? 1 : 0, b.ps - dano(a, b, poder, Math.random, extra).n);
