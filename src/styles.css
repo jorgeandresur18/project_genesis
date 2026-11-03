@@ -3249,7 +3249,13 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 .tv.fondo-ninguno .tv-fondo { background: radial-gradient(ellipse at 50% 40%, #1b1a1f, #070708 70%); }
 .tv.fondo-espacio .tv-fondo { background: radial-gradient(ellipse at 50% 35%, #12224a, #070d1f 55%, #03050c); }
 .tv.fondo-cosmico .tv-fondo { background: radial-gradient(ellipse at 30% 30%, rgba(160, 60, 200, 0.45), transparent 50%), radial-gradient(ellipse at 75% 70%, rgba(90, 40, 170, 0.5), transparent 55%), linear-gradient(160deg, #1c0a2e, #0c0518 60%, #050209); }
-.tv.fondo-espacio .tv-fondo::before, .tv.fondo-cosmico .tv-fondo::before { content: ''; position: absolute; inset: 0;
+/* Encima del fondo del menú: más oscuro y teñido (el tinte toma el color; las estrellas y el código siguen brillando). */
+.tv-fondo-titulo { position: absolute; inset: 0; filter: brightness(0.7); }
+.tv-fondo-tinte { position: absolute; inset: 0; mix-blend-mode: color; }
+.tv.fondo-espacio .tv-fondo-tinte { background: radial-gradient(ellipse at 50% 35%, #2a5cd6, #0f2a78 55%, #061238); }
+.tv.fondo-cosmico .tv-fondo-tinte { background: radial-gradient(ellipse at 30% 30%, #a24ad8, transparent 55%), radial-gradient(ellipse at 75% 75%, #6a2cc4, transparent 55%), #3a1466; }
+.tv-fondo-tinte::after { content: ''; position: absolute; inset: 0; mix-blend-mode: normal; background: radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.55)); }
+.tv.fondo-viejo-estrellas .tv-fondo::before { content: ''; position: absolute; inset: 0;
   background:
     radial-gradient(1px 1px at 23px 41px, #fff, transparent), radial-gradient(1px 1px at 131px 87px, #cfe0ff, transparent),
     radial-gradient(1.5px 1.5px at 77px 160px, #fff, transparent), radial-gradient(1px 1px at 190px 20px, #fff, transparent),
@@ -3257,9 +3263,9 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
   background-size: 210px 210px; opacity: 0.6; animation: tv-estrellas 4s ease-in-out infinite alternate; }
 .tv.fondo-cosmico .tv-fondo::before { background-size: 170px 170px; }
 @keyframes tv-estrellas { to { opacity: 0.25; } }
-/* El cuarto: la caja tiene la proporción de la imagen y la cubre como «cover» (anclada abajo), así la luz de la
-   lámpara y el cielo de la ventana caen justo encima. */
-.tv-cuarto { position: absolute; left: 50%; bottom: 0; translate: -50% 0; width: max(100vw, 100dvh * 1672 / 941); aspect-ratio: 1672 / 941; background: url('/fondos/tv_cuarto.webp') center / cover; filter: brightness(0.5) saturate(0.85); }
+/* El cuarto: la caja tiene la proporción de la imagen y la cubre, corrida para que la superficie del mueble (al 92,5 %
+   del alto de la imagen) quede justo debajo del televisor; la luz de la lámpara y el cielo de la ventana caen encima. */
+.tv-cuarto { --h: max(calc((100dvh - 1.2vmin) / 0.925), calc(100vw * 941 / 1672)); position: absolute; left: 50%; top: calc(100dvh - 1.2vmin - 0.925 * var(--h)); translate: -50% 0; height: var(--h); aspect-ratio: 1672 / 941; background: url('/fondos/tv_cuarto.webp') center / cover; filter: brightness(0.5) saturate(0.85); }
 .tv-cuarto-lampara { position: absolute; left: 8.6%; top: 80%; width: 22%; aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; background: radial-gradient(circle, rgba(255, 190, 110, 0.55), rgba(255, 160, 80, 0.18) 35%, transparent 65%); mix-blend-mode: screen; animation: tv-lampara 4.5s ease-in-out infinite; }
 @keyframes tv-lampara { 0%, 100% { opacity: 0.85; } 40% { opacity: 1; } 55% { opacity: 0.9; } 70% { opacity: 1; } }
 .tv-cuarto-cielo { position: absolute; left: 0; top: 0; width: 4.4%; height: 86%;

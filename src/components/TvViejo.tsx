@@ -4,6 +4,7 @@ import { useT } from '../engine/i18n';
 import { musicaMudaPorTv } from '../engine/music';
 import { playEstatica, playTvClic, playTvEncendido } from '../engine/sound';
 import { useStore } from '../engine/store';
+import { TitleBackground } from './TitleBackground';
 
 /** Canales: 0 es la entrada AUX (el juego); del 1 al 5, sin señal (nieve). */
 const CANALES = 5;
@@ -152,6 +153,15 @@ export function TvViejo({ activo, children }: { activo: boolean; children: React
     >
       {/* Detrás: un color con estrellas o el cuarto de Jair (oscurecido, con la lámpara y el cielo que respiran). */}
       <div className="tv-fondo" aria-hidden>
+        {/* Azul espacial y morado cósmico: el fondo del menú de inicio, más oscuro y teñido. */}
+        {activo && (fondo === 'espacio' || fondo === 'cosmico') && (
+          <>
+            <div className="tv-fondo-titulo">
+              <TitleBackground />
+            </div>
+            <i className="tv-fondo-tinte" />
+          </>
+        )}
         {fondo === 'cuarto' && (
           <div className="tv-cuarto">
             <i className="tv-cuarto-cielo" />
