@@ -53,6 +53,7 @@ import {
 } from '../engine/batalla';
 import charlasJson from '../data/charlas_batalla.json';
 import fondosJson from '../data/fondos_batalla.json';
+import { EnergiasHacia } from './EfectosSprite';
 
 /**
  * Batalla por turnos (RPG estilo EarthBound / Final Fantasy) dentro de la historia (ver `batalla` en la escena;
@@ -1377,6 +1378,7 @@ function Pelea({
   /** El escenario morado mientras Nikki carga la bola, y la onda de luz del impacto. */
   const [tinte, setTinte] = useState(false);
   const [onda, setOnda] = useState<{ key: number; x: number; y: number } | null>(null);
+  const [energias, setEnergias] = useState<{ x: number; y: number; lejos: number } | null>(null);
   /**
    * La Mega Bola Tóxica (Nikki): el aviso, el aura (levanta la mano), la bola aparece en la palma y crece de más; al
    * bajar la mano sale disparada, explota sobre los rivales con un fogonazo y un temblor, les pega a todos y los
@@ -1395,8 +1397,13 @@ function Pelea({
     if (!fila || !info) return;
     const msPaso = 1000 / fila.fps;
     playChip('carga');
-    // Mientras carga, el escenario se va poniendo morado.
+    // Mientras carga, el escenario se va poniendo morado y le llegan energías desde afuera.
     setTinte(true);
+    {
+      const c = centroDe(e);
+      const r = raiz.current?.getBoundingClientRect();
+      if (c && r) setEnergias({ x: c.x, y: c.y, lejos: Math.hypot(r.width, r.height) * 0.7 });
+    }
     void animar(e.id, 'aura' as Anim, fila.frames * msPaso);
     // En la palma: aparece chica y crece de más hasta poco antes de bajar la mano.
     await espera(info.aparece * msPaso);
@@ -1427,6 +1434,7 @@ function Pelea({
     setFogonazo({ key: Math.random(), color: '#ffffff' });
     setOnda({ key: Math.random(), x: destino.x, y: destino.y });
     setTiembla(Math.random());
+    setEnergias(null);
     // A todos sus rivales: el golpe y el veneno.
     for (const x of rivales) {
       bajoEspecial.current.add(x.id);
@@ -2214,6 +2222,7 @@ function Pelea({
       )}
       {tiembla > 0 && <span key={tiembla} className="batalla-temblor" aria-hidden />}
       <span className={`batalla-tinte-toxico ${tinte ? 'activo' : ''}`} aria-hidden />
+      {energias && <EnergiasHacia x={energias.x} y={energias.y} lejos={energias.lejos} />}
       {onda && <span key={onda.key} className="batalla-onda-toxica" style={{ left: onda.x, top: onda.y }} aria-hidden />}
       {rayoSigue && (
         <span

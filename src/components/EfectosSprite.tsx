@@ -70,11 +70,14 @@ export function useEfectosSprite({
   const [enMano, setEnMano] = useState<{ src: string; x: number; y: number; w: number; h: number } | null>(null);
   /** La Mega Bola Tóxica (el aura de Nikki): crece en la palma y sale hacia adelante a explotar. */
   const [bola, setBola] = useState<{ x: number; y: number; s: number; anim: string; ms: number } | null>(null);
+  const [energias, setEnergias] = useState<{ x: number; y: number; lejos: number } | null>(null);
   /** Para `alCuadro` del SpriteHoja. */
   const alCuadro = (fila: string, columna: number, h: Hoja) => {
     const hb = (h as Hoja & { bola?: { aparece: number; suelta: number; x: number; y: number } }).bola;
     if (hb && fila === 'aura') {
       const d = donde();
+      if (d && columna < hb.suelta) setEnergias((v) => v ?? { x: (d.s.left + d.s.right) / 2 - d.base.left, y: (d.s.top + d.s.bottom) / 2 - d.base.top, lejos: Math.hypot(d.base.width, d.base.height) * 0.7 });
+      else setEnergias(null);
       if (d && columna >= hb.aparece && columna < hb.suelta) {
         const k = d.s.width / h.frameWidth;
         const x = (volteado ? d.s.right - hb.x * k : d.s.left + hb.x * k) - d.base.left;
@@ -127,6 +130,7 @@ export function useEfectosSprite({
     setRayo(null);
     setEnMano(null);
     setBola(null);
+    setEnergias(null);
     if (!balasActivas || anim !== 'especial' || pausa) return;
     const t = setInterval(() => puntas.current.forEach((p) => disparo.current(p, true)), 55);
     return () => clearInterval(t);
@@ -141,6 +145,7 @@ export function useEfectosSprite({
           style={{ left: rayo.x, top: rayo.y, width: rayo.largo, height: Math.max(6, rayo.grosor), rotate: `${rayo.ang}rad`, '--c': '#ff2a2a' } as CSSProperties}
         />
       )}
+      {energias && <EnergiasHacia x={energias.x} y={energias.y} lejos={energias.lejos} />}
       {bola && (
         <span className="batalla-bola-toxica" style={{ left: bola.x, top: bola.y, scale: String(bola.s), transitionDuration: `${bola.ms}ms` } as CSSProperties} aria-hidden>
           <SpriteHoja key={bola.anim} src="batalla/bola_toxica" anim={bola.anim} bucle={bola.anim === 'idle'} />
@@ -206,4 +211,33 @@ export function colorBalas(batallas: { personajes: Record<string, { sprite: stri
     ...batallas.flatMap((d) => Object.values(d.personajes).flatMap((p) => (p.especial ? [[p.sprite, p.especial.color] as const] : []))),
     ...batallas.flatMap((d) => Object.values(d.enemigos).flatMap((e) => (e.color_disparo ? [[e.sprite, e.color_disparo] as const] : []))),
   ]);
+}
+
+/**
+ * Energías que llegan desde afuera de la pantalla hasta un punto (Nikki cargando la Mega Bola): chispas moradas que
+ * salen de los bordes y se juntan en ella, una y otra vez, mientras está activa.
+ */
+const ENERGIAS = Array.from({ length: 40 }, (_, i) => {
+  const a = (i / 40) * Math.PI * 2 + Math.sin(i * 7.3) * 0.35;
+  return { a, d: 0.7 + ((i * 37) % 10) / 20, retraso: ((i * 53) % 40) / 40, tam: 0.6 + ((i * 17) % 7) / 8 };
+});
+export function EnergiasHacia({ x, y, lejos }: { x: number; y: number; lejos: number }) {
+  return (
+    <span className="batalla-energias" style={{ left: x, top: y } as CSSProperties} aria-hidden>
+      {ENERGIAS.map((e, i) => (
+        <i
+          key={i}
+          style={
+            {
+              '--ex': `${Math.cos(e.a) * lejos * e.d}px`,
+              '--ey': `${Math.sin(e.a) * lejos * e.d * 0.7}px`,
+              '--tam': e.tam,
+              '--rot': `${e.a}rad`,
+              animationDelay: `${(e.retraso * 1.4).toFixed(2)}s`,
+            } as CSSProperties
+          }
+        />
+      ))}
+    </span>
+  );
 }
