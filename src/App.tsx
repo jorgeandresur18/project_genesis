@@ -20,6 +20,7 @@ import easterEgg from './data/easter_egg.json';
 import { CgGallery, NewDot } from './components/CgGallery';
 import { useGalleryState } from './engine/gallery';
 import { useBoringram } from './engine/boringram';
+import { useBoringplace } from './engine/boringplace';
 // Boringram y el Bootcamp se descargan recién al abrirlos (el menú carga más rápido).
 const BoringramScreen = lazy(() => import('./components/Boringram').then((m) => ({ default: m.BoringramScreen })));
 const BootcampScreen = lazy(() => import('./components/Bootcamp').then((m) => ({ default: m.BootcampScreen })));
@@ -244,6 +245,7 @@ function Triangles({ dir, n }: { dir: 'left' | 'right'; n: number }) {
 function BoringramToast({ onOpen }: { onOpen: () => void }) {
   const b = useBoringram();
   const tx = b.data.textos;
+  const bp = useBoringplace();
   const seen = useRef<Set<string> | null>(null);
   const [toast, setToast] = useState<{ key: number; text: string; user: string } | null>(null);
   const items = [
@@ -251,6 +253,8 @@ function BoringramToast({ onOpen }: { onOpen: () => void }) {
     ...b.publicaciones.filter((p) => p.autor !== b.data.yo).map((p) => ({ id: `p:${p.id}`, user: p.autor, text: tx.notif_post })),
     ...b.destacadas.filter((d) => d.autor !== b.data.yo).map((d) => ({ id: `s:${d.id}`, user: d.autor, text: tx.notif_historia })),
     ...b.chats.filter((c) => !c.visto).map((c) => ({ id: `c:${c.id}:${c.mensajes.length}`, user: c.perfil ?? c.nombre ?? '', text: tx.notif_mensaje })),
+    // Se abrió Boringplace (al ganar la pelea del Bastión).
+    ...(bp.abierto ? [{ id: 'bp:abierto', user: 'Boringplace', text: bp.data.textos.aviso }] : []),
   ];
   const ids = items.map((x) => x.id).join('|');
   useEffect(() => {

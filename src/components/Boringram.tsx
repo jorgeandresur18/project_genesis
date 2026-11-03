@@ -1131,7 +1131,7 @@ function App({ b, tourRequest, onClose }: { b: B; tourRequest: number; onClose: 
             {view.kind === 'chat' && (
               <ChatView b={b} id={view.id} onBack={() => back({ kind: 'mensajes' })} onPerfil={onPerfil} />
             )}
-            {view.kind === 'tienda' && <Boringplace onArticulo={(id) => go({ kind: 'articulo', id })} />}
+            {view.kind === 'tienda' && <Boringplace onArticulo={(id) => go({ kind: 'articulo', id })} onToast={showToast} />}
             {view.kind === 'articulo' && <ArticuloVista id={view.id} onBack={() => back({ kind: 'tienda' })} onToast={showToast} />}
           </div>
           {sharing && <ShareSheet b={b} id={sharing} onClose={() => setSharing(null)} />}

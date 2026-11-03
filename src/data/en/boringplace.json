@@ -13,7 +13,20 @@
     "publicado": "Listed {cuando} · {lugar}",
     "vistas": "{n} people looked at it. Nobody wrote.",
     "sin_tuyos": "You are not selling anything. Weird.",
-    "atras": "Back"
+    "atras": "Back",
+    "tienda": "Shop",
+    "monedas": "Coins",
+    "comprar": "Buy",
+    "vender": "Sell",
+    "tienes": "You have {n}",
+    "sin_monedas": "You can't afford it. {n} coins short.",
+    "comprado": "You bought {objeto}. It goes to your bag.",
+    "vendido_ok": "You sold {objeto} for {n} coins.",
+    "sin_partida": "To buy or sell, start or load a game.",
+    "tus_objetos": "From your bag (sold at half price)",
+    "mochila_vacia": "Your bag is empty",
+    "tus_publicaciones": "Your listings",
+    "aviso": "New products on Boringplace"
   },
   "articulos": [
     {
@@ -95,6 +108,29 @@
       "publicado": "3 days ago",
       "lugar": "0 km away",
       "respuesta": "You mark it as sold and regret it instantly. You list it again. It is the circle of life."
+    }
+  ],
+  "tienda": [
+    {
+      "descripcion": "+30 HP. The cheapest thing on the menu and the only one that never lies to you."
+    },
+    {
+      "descripcion": "Attack +3 until the end of the fight. A sports drink; nobody knows which sport."
+    },
+    {
+      "descripcion": "Defense +3 until the end of the fight. They're not what you think. Well, a little."
+    },
+    {
+      "descripcion": "Fills the special bar. Your liver, the other way around."
+    },
+    {
+      "descripcion": "Revives a fallen ally with half their HP. Pink serum for after a bad night, or after dying."
+    },
+    {
+      "descripcion": "Poisons a rival: they lose HP every turn. «Not for humans». Nobody read the label."
+    },
+    {
+      "descripcion": "Protects an ally from the next hit. Cheap, no-brand condom."
     }
   ]
 }

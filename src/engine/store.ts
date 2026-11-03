@@ -214,6 +214,9 @@ interface Store {
   quitToTitle: () => void;
   save: (slot: number, nombre?: string) => void;
   /** Cambia el nombre de una partida guardada (vacío: vuelve a «Espacio N»). */
+  /** Boringplace: comprar (si alcanzan las monedas) y vender (de la mochila). Devuelven si se pudo. */
+  comprarObjeto: (objeto: string, precio: number) => boolean;
+  venderObjeto: (objeto: string, precio: number) => boolean;
   /** Antes de una pelea: guarda solo, si hay un espacio vacío (o el del guardado automático anterior). */
   autoguardarPelea: () => void;
   renameSave: (slot: number, nombre: string) => void;
@@ -541,6 +544,23 @@ export const useStore = create<Store>()(
           if (slot < 0) return;
           get().save(slot, AUTO_NOMBRE);
           set({ saves: get().saves.map((x, i) => (i === slot && x ? { ...x, auto: true } : x)) });
+        },
+
+        comprarObjeto: (objeto, precio) => {
+          const { game } = get();
+          if (!game) return false;
+          const monedas = (game.vars.monedas as number) ?? 0;
+          if (monedas < precio) return false;
+          const k = `mochila_${objeto}`;
+          set({ game: { ...game, vars: { ...game.vars, monedas: monedas - precio, [k]: ((game.vars[k] as number) ?? 0) + 1 } } });
+          return true;
+        },
+        venderObjeto: (objeto, precio) => {
+          const { game } = get();
+          const k = `mochila_${objeto}`;
+          if (!game || !((game.vars[k] as number) > 0)) return false;
+          set({ game: { ...game, vars: { ...game.vars, monedas: ((game.vars.monedas as number) ?? 0) + precio, [k]: (game.vars[k] as number) - 1 } } });
+          return true;
         },
 
         renameSave: (slot, nombre) => {

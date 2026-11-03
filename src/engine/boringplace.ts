@@ -1,11 +1,13 @@
 // Boringplace: el marketplace de Boringram (la gente vende su basura y alguna estafa; Jair vende sus cosas).
 // - Datos en src/data/boringplace.json; el inglés (src/data/en/boringplace.json) solo trae los textos y se mezcla
 //   por posición, como Boringram.
-// - Se abre al visitar la escena de «desbloqueo» (el Capítulo 2); en el Capítulo 1 no hay nadie vendiendo nada.
+// - Se abre al visitar la escena de «desbloqueo» (al ganar la pelea del Bastión); antes no hay nadie vendiendo nada.
+// - «Tienda»: los objetos de las peleas, con precio en monedas; lo de la mochila se vende a la mitad.
 import { useStore } from './store';
 import { useLang } from './i18n';
 import dataEs from '../data/boringplace.json';
 import dataEn from '../data/en/boringplace.json';
+import type { DatosBatalla, Objeto } from './batalla';
 
 export interface Articulo {
   id: string;
@@ -33,6 +35,8 @@ export interface Articulo {
 }
 export interface BoringplaceData {
   desbloqueo: string | null;
+  /** Lo que se compra con monedas: la clave del objeto de las peleas y su precio (se vende a la mitad). */
+  tienda: { objeto: string; precio: number; descripcion: string }[];
   vacio: { titulo: string; texto: string };
   textos: Record<string, string>;
   articulos: Articulo[];
@@ -57,6 +61,13 @@ const EN = merge(dataEs, dataEn) as BoringplaceData;
 export const unlockScenesBoringplace = (): string[] =>
   [ES.desbloqueo, ...ES.articulos.map((a) => a.desbloqueo)].filter((x): x is string => !!x);
 
+/** Los objetos de las peleas (el primero que aparece con cada clave), para la tienda. */
+const BATALLAS = import.meta.glob<DatosBatalla>('../data/batallas/*.json', { eager: true, import: 'default' });
+export const OBJETOS_TIENDA = new Map<string, Objeto>();
+for (const d of Object.values(BATALLAS)) for (const [k, o] of Object.entries(d.objetos)) if (!OBJETOS_TIENDA.has(k)) OBJETOS_TIENDA.set(k, o);
+/** Lo que se paga al vender: la mitad de lo que cuesta. */
+export const precioVenta = (precio: number) => Math.floor(precio / 2);
+
 /** Lo que se ve en Boringplace según la partida: si ya abrió y qué artículos hay. */
 export function useBoringplace() {
   const data = useLang() === 'en' ? EN : ES;
@@ -69,5 +80,6 @@ export function useBoringplace() {
     abierto,
     ajenos: articulos.filter((a) => !a.de_jair),
     deJair: articulos.filter((a) => a.de_jair),
+    tienda: abierto ? data.tienda.filter((x) => OBJETOS_TIENDA.has(x.objeto)) : [],
   };
 }

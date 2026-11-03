@@ -354,5 +354,6 @@
   "batalla.pausa_seguir": "Resume",
   "batalla.pausa_salir": "Quit to title",
   "batalla.pausa_volver": "Back",
-  "batalla.pausa_aviso": "If you quit, this fight is lost: «Continue» takes you to your last save (if there was room, the game saved right before this fight)."
+  "batalla.pausa_aviso": "If you quit, this fight is lost: «Continue» takes you to your last save (if there was room, the game saved right before this fight).",
+  "equipo.mochila_vacia_titulo": "Your bag is empty"
 }

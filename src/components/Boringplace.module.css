@@ -29,3 +29,18 @@
 .descripcion { margin: 0.3rem 0; color: #d6d6dc; font-size: 0.9rem; line-height: 1.5; }
 .boton { margin-top: 0.4rem; padding: 0.7rem; border: none; border-radius: 0.6rem; background: #2f6bff; color: #fff; font: inherit; font-weight: 600; }
 .boton:active { filter: brightness(0.9); }
+
+/* La tienda: cada objeto con su dibujo, su descripción y el botón (comprar o vender), y las monedas arriba. */
+.monedas { margin-left: auto; color: #9a9aa6; font-size: 0.85rem; }
+.monedas b { color: #ffd76a; font-family: 'Press Start 2P', monospace; font-size: 0.72rem; }
+.lista { display: grid; gap: 0.5rem; padding: 0.6rem; }
+.objeto { display: grid; grid-template-columns: 3rem 1fr auto; align-items: center; gap: 0.6rem; padding: 0.5rem 0.6rem; border-radius: 0.6rem; background: #17171c; color: #f1f1f4; }
+.objeto img { width: 3rem; height: 3rem; object-fit: contain; }
+.objetoTexto { display: grid; gap: 0.15rem; min-width: 0; }
+.objetoTexto b { font-size: 0.9rem; }
+.objetoTexto small { color: #9a9aa6; font-size: 0.72rem; line-height: 1.35; }
+.objetoTexto .tienes { color: #8fe6da; }
+.botonChico { padding: 0.45rem 0.7rem; border: none; border-radius: 0.5rem; background: #2f6bff; color: #fff; font: inherit; font-size: 0.8rem; font-weight: 600; white-space: nowrap; }
+.botonChico:disabled { opacity: 0.4; }
+.subtitulo { margin: 0.8rem 0.8rem 0; color: #9a9aa6; font-size: 0.8rem; font-weight: 600; }
+.mochilaVacia { padding: 1.6rem 1rem; color: #d6d6dc; text-align: center; font-size: 1.15rem; font-weight: 800; }

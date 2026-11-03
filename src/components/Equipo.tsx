@@ -113,7 +113,7 @@ export function EquipoPanel({ onClose, soloVer = false, grupo }: { onClose: () =
         </div>
       ) : (
         <div className="equipo-mochila">
-          {mochila.length === 0 && <p className="muted">{t('equipo.mochila_vacia')}</p>}
+          {mochila.length === 0 && <p className="equipo-mochila-vacia">{t('equipo.mochila_vacia_titulo')}</p>}
           {mochila.map(([k, n]) => {
             const o = OBJETOS.get(k)!;
             return (

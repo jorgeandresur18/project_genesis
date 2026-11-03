@@ -319,15 +319,13 @@ cosas raras; los chistes van en las descripciones.
 - **Qué es de cada partida y qué no:** el dinero, la mochila, el equipo y los niveles son de cada partida (una
   partida nueva empieza vacía; no se pasa nada de una a otra). Lo desbloqueado en Boringram (fotos, pensamientos,
   historias, mensajes, notificaciones), la galería, los finales y el 100 % son de todo el juego y quedan siempre.
-- **Boringplace abierto:** una vez que se llega al Capítulo 2 en cualquier partida, se puede **mirar** siempre. Pero
-  **comprar y vender** solo para partidas que ya llegaron al Capítulo 2; una partida en el Capítulo 1 ve los precios
-  con el aviso «Todavía no tienes con qué comprar: sigue la historia» (así no se rompe la dificultad del Capítulo 1).
+- **Boringplace abierto** (decisión del autor, 2026-11-02; reemplaza lo de «desde el Capítulo 2»): antes de ganar la pelea del Bastión dice que todavía nadie vende nada; al ganarla (`cap01_n06`) baja en la novela el aviso «Hay nuevos productos en Boringplace» y desde ahí se compra y se vende. **Hecho:** la pestaña «Tienda» (los objetos de las peleas con su dibujo, su precio en monedas y «Comprar»; precios en `src/data/boringplace.json`, «tienda»: propuesta de Claude) y, en «Tus artículos», lo de la mochila se vende a la mitad. Se compra dentro de una partida; desde el título, por ahora solo se mira (comprar para una partida guardada: pendiente).
 - **Saltar con el mapa de escenas** conserva el dinero, la mochila, el equipo y los niveles de ahora (no los de la
   primera vez que se pasó por ahí).
 - **Stock limitado:** lo permanente (caramelos, suplementos) se vende de a poco por capítulo (p. ej. un caramelo
   rancio por capítulo) y es caro. Vender a la mitad impide ganar plata comprando y vendiendo.
 - **Orden de construcción:** 1) tipos de objeto y estados nuevos (**hecho**); 2) monedas (**hecho**); 3) comprar y vender en Boringplace
-  (en el juego y desde el título); 4) el panel de Equipo.
+  (en el juego: **hecho**; desde el título: pendiente); 4) el panel de Equipo.
 
 ## 15. Repertorio, estados nuevos, colores y los objetos del autor (decisiones del 2026-11-02; por construir)
 

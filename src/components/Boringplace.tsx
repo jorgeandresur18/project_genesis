@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { playSelect } from '../engine/sound';
 import { assetUrl } from '../engine/assets';
-import { useBoringplace, type Articulo } from '../engine/boringplace';
+import { OBJETOS_TIENDA, precioVenta, useBoringplace, type Articulo } from '../engine/boringplace';
+import { useStore } from '../engine/store';
 import s from './Boringplace.module.css';
 import sb from './Boringram.module.css';
 
@@ -10,10 +11,14 @@ import sb from './Boringram.module.css';
  * estafa); «Tus artículos», lo que vende Jair para que el sueldo le llegue a fin de mes. En el Capítulo 1 todavía no
  * hay nadie vendiendo nada. Por ahora solo se mira: comprar llega con las monedas.
  */
-export function Boringplace({ onArticulo }: { onArticulo: (id: string) => void }) {
+export function Boringplace({ onArticulo, onToast }: { onArticulo: (id: string) => void; onToast?: (texto: string) => void }) {
   const p = useBoringplace();
   const tx = p.data.textos;
-  const [pestana, setPestana] = useState<'para_ti' | 'tuyos'>('para_ti');
+  const [pestana, setPestana] = useState<'tienda' | 'para_ti' | 'tuyos'>('tienda');
+  const vars = useStore((st) => st.game?.vars);
+  const monedas = (vars?.monedas as number | undefined) ?? 0;
+  const tengo = (k: string) => ((vars?.[`mochila_${k}`] as number | undefined) ?? 0);
+  const aviso = (texto: string) => onToast?.(texto);
   if (!p.abierto) {
     return (
       <div className={s.vacio}>
@@ -24,13 +29,45 @@ export function Boringplace({ onArticulo }: { onArticulo: (id: string) => void }
     );
   }
   const lista = pestana === 'para_ti' ? p.ajenos : p.deJair;
+  /** Una fila de la tienda (comprar) o de la mochila (vender a la mitad). */
+  const fila = (objeto: string, precio: number, vender: boolean) => {
+    const o = OBJETOS_TIENDA.get(objeto)!;
+    return (
+      <div key={objeto} className={s.objeto}>
+        {o.icono ? <img src={assetUrl(`${o.icono}.webp`)} alt="" draggable={false} /> : <span />}
+        <span className={s.objetoTexto}>
+          <b>{o.nombre}</b>
+          <small>{p.data.tienda.find((x) => x.objeto === objeto)?.descripcion}</small>
+          {tengo(objeto) > 0 && <small className={s.tienes}>{tx.tienes.replace('{n}', String(tengo(objeto)))}</small>}
+        </span>
+        <button
+          className={s.botonChico}
+          disabled={!vars}
+          onClick={() => {
+            const ok = vender ? useStore.getState().venderObjeto(objeto, precio) : useStore.getState().comprarObjeto(objeto, precio);
+            playSelect();
+            if (vender) aviso(tx.vendido_ok.replace('{objeto}', o.nombre).replace('{n}', String(precio)));
+            else aviso(ok ? tx.comprado.replace('{objeto}', o.nombre) : tx.sin_monedas.replace('{n}', String(precio - monedas)));
+          }}
+        >
+          {vender ? tx.vender : tx.comprar} · {precio}
+        </button>
+      </div>
+    );
+  };
+  const enMochila = p.data.tienda.filter((x) => tengo(x.objeto) > 0);
   return (
     <div className={sb.feed}>
       <div className={sb.topBar}>
         <img className={s.logo} src={assetUrl('marca/boringplace.webp')} alt={tx.titulo} draggable={false} />
+        {vars && (
+          <span className={s.monedas}>
+            {tx.monedas} <b>{monedas}</b>
+          </span>
+        )}
       </div>
       <div className={s.pestanas} role="tablist">
-        {(['para_ti', 'tuyos'] as const).map((k) => (
+        {(['tienda', 'para_ti', 'tuyos'] as const).map((k) => (
           <button
             key={k}
             role="tab"
@@ -41,11 +78,34 @@ export function Boringplace({ onArticulo }: { onArticulo: (id: string) => void }
               setPestana(k);
             }}
           >
-            {k === 'para_ti' ? tx.para_ti : tx.tus_articulos}
+            {k === 'tienda' ? tx.tienda : k === 'para_ti' ? tx.para_ti : tx.tus_articulos}
           </button>
         ))}
       </div>
-      {lista.length === 0 ? (
+      {!vars && pestana !== 'para_ti' && <p className={s.sinTuyos}>{tx.sin_partida}</p>}
+      {pestana === 'tienda' ? (
+        <div className={s.lista}>{p.tienda.map((x) => fila(x.objeto, x.precio, false))}</div>
+      ) : pestana === 'tuyos' ? (
+        <>
+          <h4 className={s.subtitulo}>{tx.tus_objetos}</h4>
+          {enMochila.length ? (
+            <div className={s.lista}>{enMochila.map((x) => fila(x.objeto, precioVenta(x.precio), true))}</div>
+          ) : (
+            <p className={s.mochilaVacia}>{tx.mochila_vacia}</p>
+          )}
+          {p.deJair.length > 0 && <h4 className={s.subtitulo}>{tx.tus_publicaciones}</h4>}
+          <div className={s.grilla}>
+            {p.deJair.map((a) => (
+              <button key={a.id} className={s.tarjeta} onClick={() => onArticulo(a.id)}>
+                <Foto a={a} />
+                <b className={s.precio}>{a.precio}</b>
+                <span className={s.titulo}>{a.titulo}</span>
+                <small className={s.lugar}>{a.lugar}</small>
+              </button>
+            ))}
+          </div>
+        </>
+      ) : lista.length === 0 ? (
         <p className={s.sinTuyos}>{tx.sin_tuyos}</p>
       ) : (
         <div className={s.grilla}>
