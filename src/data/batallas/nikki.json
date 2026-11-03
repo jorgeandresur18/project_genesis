@@ -416,5 +416,6 @@
   "descripciones": {
     "hablar": "Le hablas a Nikki. Está furiosa: con una sola disculpa no alcanza. Quizás, si insistes sin hacer otra cosa…"
   },
-  "musica": "audio/musica/combate_arcade.mp3"
+  "musica": "audio/musica/combate_arcade.mp3",
+  "vida_real": true
 }

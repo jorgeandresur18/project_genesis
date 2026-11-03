@@ -236,6 +236,9 @@ function Pelea({
   arena?: [string, number][];
 }) {
   const t = useT();
+  // En la vida real (el bar) no cuentan los niveles ni la mochila del juego: Jair todavía no entró a GENESIS.
+  const guardado = progreso;
+  progreso = d.vida_real ? undefined : progreso;
   // El estado de la pelea vive en un ref (lo cambian las acciones, en orden) y se redibuja con `forzar`.
   const b = useRef({
     heroes: d.heroes.map((k) =>
@@ -755,7 +758,10 @@ function Pelea({
   };
   const azar = <T,>(lista: T[]) => lista[Math.floor(Math.random() * lista.length)];
   const varsFinales = () =>
-    varsDeProgreso(
+    // En la vida real no se guarda nada de la pelea (ni niveles ni mochila), salvo el premio (más abajo).
+    d.vida_real
+      ? Object.fromEntries(Object.entries(d.premio?.objetos ?? {}).filter(([k]) => (b.current.mochila[k] ?? 0) > 0).map(([k]) => [`mochila_${k}`, (guardado?.mochila[k] ?? 0) + b.current.mochila[k]]))
+      : varsDeProgreso(
       { heroes: Object.fromEntries(b.current.heroes.map((h) => [h.clave, { nivel: h.nivel, xp: h.xp }])), mochila: b.current.mochila, monedas: b.current.monedas },
       Object.keys(d.objetos),
     );
@@ -1929,7 +1935,7 @@ function Pelea({
     if (menu.paso === 'comando') {
       if (i === 3 && !enMochila.length) {
         playChip('vacio');
-        return setMensaje({ texto: t('batalla.mochila_vacia'), n: Math.random() });
+        return setMensaje({ texto: t(d.vida_real ? 'batalla.mochila_vida_real' : 'batalla.mochila_vacia'), n: Math.random() });
       }
       playSelect();
       if (i === 0) return setMenu({ paso: 'ataque', i: 0 });
