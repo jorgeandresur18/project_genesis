@@ -4,7 +4,7 @@
 //   principio, así no corta de golpe aunque el archivo termine abrupto. Los archivos no se modifican.
 // - Se ignora el silencio del principio y del final de cada archivo.
 import { useStore } from './store';
-import { audibleRange, context, load } from './sound';
+import { audibleRange, context, load, salidaFinal } from './sound';
 
 export const SILENCE = 'silencio';
 const CHANGE_FADE = 2; // s: transición entre temas
@@ -37,7 +37,7 @@ function out(): GainNode {
   if (!master) {
     master = c.createGain();
     master.gain.value = level(useStore.getState().settings);
-    master.connect(c.destination);
+    master.connect(salidaFinal());
     // El volumen de Opciones y el botón de silencio se aplican al momento.
     useStore.subscribe((s, prev) => {
       if (master && level(s.settings) !== level(prev.settings)) {

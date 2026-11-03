@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 
 import { assetUrl } from '../engine/assets';
 import { useT } from '../engine/i18n';
 import { musicaMudaPorTv } from '../engine/music';
-import { playEstatica, playTvClic, playTvEncendido } from '../engine/sound';
+import { cablesDeAudio, playEstatica, playTvClic, playTvEncendido } from '../engine/sound';
 import { useStore } from '../engine/store';
 import { TitleBackground } from './TitleBackground';
 
@@ -34,6 +34,10 @@ export function TvViejo({ activo, children }: { activo: boolean; children: React
   const volumen = useStore((s) => (s.settings.muted ? 0 : s.settings.musicVolume));
   const efecto = useStore((s) => s.settings.tvEfecto !== false);
   const fondo = useStore((s) => s.settings.tvFondo ?? 'cuarto');
+  // Los cables de las entradas: se desenchufan con un clic (y se vuelven a enchufar). Video: sin imagen (queda el
+  // rótulo AUX). Audio izquierdo (blanco) y derecho (rojo): sin ese lado.
+  const [cables, setCables] = useState({ video: true, izq: true, der: true });
+  const [brilla, setBrilla] = useState(0);
 
   // El juego está pensado para la ventana entera: dentro del televisor se achica en proporción a la pantalla
   // (la letra base y el zoom de los sprites; los efectos se ubican igual que siempre).
@@ -74,6 +78,7 @@ export function TvViejo({ activo, children }: { activo: boolean; children: React
     setEncendida(true);
     setCanal(0);
     setOsd(null);
+    setCables({ video: true, izq: true, der: true });
     devolverSonido();
   }, [activo]);
   useEffect(() => devolverSonido, []);
@@ -84,6 +89,17 @@ export function TvViejo({ activo, children }: { activo: boolean; children: React
     const id = setTimeout(() => setOsd(null), OSD_MS);
     return () => clearTimeout(id);
   }, [osd]);
+
+  // Sin un cable de audio, ese lado no suena (al apagar el filtro, todo vuelve a sonar).
+  useEffect(() => {
+    cablesDeAudio(!activo || cables.izq, !activo || cables.der);
+  }, [activo, cables.izq, cables.der]);
+  useEffect(() => () => cablesDeAudio(true, true), []);
+  const tirar = (k: 'video' | 'izq' | 'der') => {
+    playTvClic();
+    setCables((c) => ({ ...c, [k]: !c[k] }));
+  };
+  const sinVideo = !cables.video && canal === 0;
 
   // En un canal sin señal suena la nieve y no la música del juego.
   const nieve = activo && encendida && canal > 0;
@@ -176,8 +192,11 @@ export function TvViejo({ activo, children }: { activo: boolean; children: React
           ref={pantalla}
         >
           <div className="tv-imagen">{children}</div>
+          {/* Sin el cable de video: la pantalla en negro (el juego sigue y se oye) y el rótulo AUX fijo. */}
+          {encendida && sinVideo && <span className="tv-sin-video" aria-hidden />}
           {/* Un canal sin señal: nieve encima del juego (que sigue ahí, en AUX). */}
           {encendida && canal > 0 && <span className="nodata tv-estatica" aria-hidden />}
+          {encendida && sinVideo && !transicion && !osd && <b className="tv-osd tv-osd-fijo">AUX</b>}
           {osd && (
             <div className="tv-osd" aria-live="polite">
               {osd.tipo === 'canal' ? (
@@ -197,18 +216,18 @@ export function TvViejo({ activo, children }: { activo: boolean; children: React
           <div className="tv-crt" aria-hidden />
         </div>
         <div className="tv-panel">
-          <span className="tv-izquierda" aria-hidden>
+          <span className="tv-izquierda">
             <span className="tv-parlante" />
             {/* Las entradas de video y audio, con sus cables enchufados (por ahí entra el juego), y los audífonos. */}
             <span className="tv-entradas">
               <span className="tv-jack">
-                <i className="tv-rca amarillo" />
+                <button type="button" className={`tv-rca amarillo ${cables.video ? '' : 'suelto'}`} aria-label="VIDEO" aria-pressed={cables.video} onClick={() => tirar('video')} />
                 <small>VIDEO</small>
               </span>
               <span className="tv-jack">
                 <span className="tv-par">
-                  <i className="tv-rca blanco" />
-                  <i className="tv-rca rojo" />
+                  <button type="button" className={`tv-rca blanco ${cables.izq ? '' : 'suelto'}`} aria-label="AUDIO L" aria-pressed={cables.izq} onClick={() => tirar('izq')} />
+                  <button type="button" className={`tv-rca rojo ${cables.der ? '' : 'suelto'}`} aria-label="AUDIO R" aria-pressed={cables.der} onClick={() => tirar('der')} />
                 </span>
                 <small>L-AUDIO-R</small>
               </span>
@@ -218,7 +237,11 @@ export function TvViejo({ activo, children }: { activo: boolean; children: React
               </span>
             </span>
           </span>
-          <img className="tv-logo" src={assetUrl('marca/logo_tv.webp')} alt="" draggable={false} />
+          {/* El emblema: al tocarlo brilla como una chapa de metal. */}
+          <button type="button" className="tv-emblema" aria-label="PROJECT GENESIS" onClick={() => setBrilla((n) => n + 1)}>
+            <img className="tv-logo" src={assetUrl('marca/logo_tv.webp')} alt="" draggable={false} />
+            {brilla > 0 && <i key={brilla} className="tv-emblema-brillo" />}
+          </button>
           <span className="tv-botones">
             <span className="tv-control">
               <span className="tv-par">

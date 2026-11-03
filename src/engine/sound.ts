@@ -17,6 +17,42 @@ let sfxBus: AudioNode | null = null;
 const buffers = new Map<string, Promise<AudioBuffer>>();
 const ranges = new WeakMap<AudioBuffer, { start: number; end: number }>();
 
+/**
+ * La salida final: todo el audio del juego (música y efectos) pasa por aquí, separado en izquierda y derecha, para
+ * que el televisor del filtro TV CRT pueda cortar un lado (se desenchufó un cable de audio).
+ */
+let salida: AudioNode | null = null;
+let ladoIzq: GainNode | null = null;
+let ladoDer: GainNode | null = null;
+export function salidaFinal(): AudioNode {
+  const c = context();
+  if (!salida) {
+    const separar = c.createChannelSplitter(2);
+    const juntar = c.createChannelMerger(2);
+    ladoIzq = c.createGain();
+    ladoDer = c.createGain();
+    // Lo mono sale por los dos lados.
+    const entrada = c.createGain();
+    entrada.channelCountMode = 'explicit';
+    entrada.channelCount = 2;
+    entrada.connect(separar);
+    separar.connect(ladoIzq, 0);
+    separar.connect(ladoDer, 1);
+    ladoIzq.connect(juntar, 0, 0);
+    ladoDer.connect(juntar, 0, 1);
+    juntar.connect(c.destination);
+    salida = entrada;
+  }
+  return salida;
+}
+/** Cables de audio del televisor: si falta el izquierdo (blanco) o el derecho (rojo), ese lado no suena. */
+export function cablesDeAudio(izq: boolean, der: boolean): void {
+  salidaFinal();
+  const t = context().currentTime;
+  ladoIzq!.gain.setTargetAtTime(izq ? 1 : 0, t, 0.02);
+  ladoDer!.gain.setTargetAtTime(der ? 1 : 0, t, 0.02);
+}
+
 export function context(): AudioContext {
   if (!ctx) {
     ctx = new AudioContext();
@@ -42,7 +78,7 @@ function sfxOut(): AudioNode {
     limiter.ratio.value = 20;
     limiter.attack.value = 0.002;
     limiter.release.value = 0.08;
-    limiter.connect(c.destination);
+    limiter.connect(salidaFinal());
     sfxBus = limiter;
   }
   return sfxBus;

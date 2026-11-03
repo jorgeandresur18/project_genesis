@@ -3437,3 +3437,19 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 @media (prefers-reduced-motion: reduce) { .tv-barra-logo, .tv-brillo { animation: none; } }
 /* En el celular (o en una pantalla 4:3) no hay mueble: el fondo del cuarto no se ofrece. */
 @media (max-width: 760px), (max-height: 520px), (max-aspect-ratio: 4 / 3) { .tv-fondo-opcion.opcion-cuarto { display: none; } }
+
+/* Los cables del televisor se sacan con un clic: el enchufe sale de su aro y el cable cuelga más abajo. */
+button.tv-rca { padding: 0; border: none; cursor: pointer; }
+.tv-rca::before, .tv-rca::after { transition: translate 0.25s cubic-bezier(0.3, 1.4, 0.5, 1); }
+.tv-rca.suelto { background: radial-gradient(circle, #050506 0 30%, #2a2a2e 34% 62%, #c9c9cf 64% 78%, #6c6c72 80%); }
+.tv-rca.suelto::before, .tv-rca.suelto::after { translate: -50% 2.6vmin; }
+.tv-rca:focus-visible { outline: 0.25vmin solid #8fd3ff; outline-offset: 0.3vmin; }
+/* Sin el cable de video: negro (encima del juego, debajo del rótulo). */
+.tv-sin-video { position: absolute; inset: 0; z-index: 2; background: #000; }
+.tv-osd-fijo { font-size: inherit; }
+/* El emblema: un botón sin forma; al tocarlo un brillo metálico lo recorre. */
+.tv-emblema { position: relative; padding: 0; border: none; background: none; cursor: pointer; }
+.tv-emblema-brillo { position: absolute; inset: 0; pointer-events: none; -webkit-mask: url('/marca/logo_tv.webp') center / contain no-repeat; mask: url('/marca/logo_tv.webp') center / contain no-repeat; background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, 0.95) 50%, transparent 65%) 0 0 / 250% 100% no-repeat; mix-blend-mode: screen; animation: tv-chapa 0.9s ease-out forwards; }
+@keyframes tv-chapa { from { background-position: 150% 0; filter: brightness(1.4); } to { background-position: -60% 0; filter: brightness(1); } }
+.tv-emblema:active .tv-logo { filter: drop-shadow(0 0.25vmin 0 #000) brightness(1.25); }
+@media (prefers-reduced-motion: reduce) { .tv-emblema-brillo { animation-duration: 0.01s; } }
