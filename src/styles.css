@@ -3287,3 +3287,20 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 /* Filtro apagado: el televisor sigue montado pero no existe a la vista (sus cajas no ocupan lugar ni filtran). */
 .tv.apagado, .tv.apagado .tv-caja, .tv.apagado .tv-pantalla, .tv.apagado .tv-imagen { display: contents; }
 .tv.apagado .tv-crt, .tv.apagado .tv-panel, .tv.apagado .tv-barra { display: none; }
+
+/* Opciones › Modo de pantalla: dos tarjetas con su miniatura (panorámico 16:9; retro CRT, un televisor de tubo en 4:3). */
+.modo-pantalla { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem; margin-top: 0.5rem; }
+.modo-tarjeta { display: grid; justify-items: center; gap: 0.3rem; padding: 0.8rem 0.6rem 0.7rem; text-align: center; }
+.modo-tarjeta b { font-size: 0.95rem; }
+.modo-tarjeta small { color: var(--muted, #9a9aa6); font-size: 0.72rem; line-height: 1.35; }
+.modo-tarjeta.active { border-color: #ff6fa5; box-shadow: 0 0 0 1px #ff6fa5, 0 0 1rem rgba(255, 111, 165, 0.25); }
+.modo-mini { display: grid; place-items: center; height: 6.4rem; width: 100%; }
+.modo-mini-pantalla { position: relative; display: block; overflow: hidden; background: url('/fondos/bar_noche.webp') center / cover; }
+/* La caja de diálogo en chiquito. */
+.modo-mini-pantalla i { position: absolute; left: 8%; right: 8%; bottom: 7%; height: 22%; border-radius: 0.15rem; background: rgba(12, 12, 16, 0.82); border: 1px solid rgba(255, 255, 255, 0.18); }
+.modo-mini.panoramico .modo-mini-pantalla { width: 100%; max-width: 10rem; aspect-ratio: 16 / 9; border-radius: 0.3rem; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15); }
+/* El televisor en chiquito: el mueble gris, la pantalla 4:3 curva con líneas de barrido y el logo abajo. */
+.modo-mini.crt { grid-template-rows: auto auto; gap: 0.2rem; width: auto; height: 6.4rem; padding: 0.35rem 0.4rem 0.25rem; border-radius: 0.5rem; background: linear-gradient(180deg, #3a3a3f, #1f1f23); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 0 0 1px #121214; }
+.modo-mini.crt .modo-mini-pantalla { height: 4.6rem; aspect-ratio: 4 / 3; border-radius: 0.45rem / 0.35rem; filter: blur(0.3px) saturate(1.2); box-shadow: 0 0 0 2px #0c0c0e; }
+.modo-mini.crt .modo-mini-pantalla::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.55)), repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.35) 0 1px, transparent 1px 2px); }
+.modo-mini-logo { display: block; width: 3.4rem; height: 0.9rem; background: url('/marca/logo_tv.webp') center / contain no-repeat; }

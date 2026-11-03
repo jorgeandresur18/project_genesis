@@ -797,6 +797,30 @@ export function OptionsPanel({ onClose, enJuego = false }: { onClose: () => void
       </label>
 
       <h3 className="options-section">{t('opciones.pantalla')}</h3>
+      {/* Modo de pantalla: cada uno con su miniatura de cómo se ve la partida. */}
+      <div className="option">
+        {t('opciones.modo_pantalla')}
+        <div className="modo-pantalla" role="radiogroup" aria-label={t('opciones.modo_pantalla')}>
+          {([false, true] as const).map((crt) => (
+            <button
+              key={String(crt)}
+              role="radio"
+              aria-checked={!!settings.filtroTv === crt}
+              className={`modo-tarjeta ${!!settings.filtroTv === crt ? 'active' : ''}`}
+              onClick={() => setSettings({ filtroTv: crt })}
+            >
+              <span className={`modo-mini ${crt ? 'crt' : 'panoramico'}`} aria-hidden>
+                <span className="modo-mini-pantalla">
+                  <i />
+                </span>
+                {crt && <span className="modo-mini-logo" />}
+              </span>
+              <b>{t(crt ? 'opciones.modo_crt' : 'opciones.modo_panoramico')}</b>
+              <small>{t(crt ? 'opciones.modo_crt_desc' : 'opciones.modo_panoramico_desc')}</small>
+            </button>
+          ))}
+        </div>
+      </div>
       <label className="option">
         <input
           type="checkbox"
@@ -804,10 +828,6 @@ export function OptionsPanel({ onClose, enJuego = false }: { onClose: () => void
           onChange={(e) => setSettings({ reduceEffects: e.target.checked })}
         />
         {t('opciones.reducir')}
-      </label>
-      <label className="option">
-        <input type="checkbox" checked={!!settings.filtroTv} onChange={(e) => setSettings({ filtroTv: e.target.checked })} />
-        {t('opciones.filtro_tv')}
       </label>
 
       <DangerZone glitch={enJuego} />

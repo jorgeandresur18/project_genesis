@@ -361,6 +361,10 @@
   "batalla.a_medias": "¡A medias!",
   "batalla.quejidos_envenenado": "¡Arg!|¡Ugh!|*cof, cof*|¡Agh!",
   "batalla.quejidos_quemado": "¡Ay!|¡Ay, ay, ay!|¡Quema!|¡Fsss!",
-  "opciones.filtro_tv": "Activar filtro TV CRT (la partida se ve en un televisor de tubo, en 4:3; el menú no cambia)",
-  "tv.modo": "MODO TV VIEJO"
+  "tv.modo": "MODO TV VIEJO",
+  "opciones.modo_pantalla": "Modo de pantalla",
+  "opciones.modo_panoramico": "Panorámico",
+  "opciones.modo_panoramico_desc": "Toda la pantalla, 16:9. El de siempre.",
+  "opciones.modo_crt": "Retro CRT",
+  "opciones.modo_crt_desc": "Un televisor de tubo, en 4:3. Solo en la partida; el menú no cambia."
 }
