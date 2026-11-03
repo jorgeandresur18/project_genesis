@@ -47,6 +47,8 @@ import { choiceText, sceneDialogue } from './engine/storyText';
 const TITLE_FADE_MS = 800;
 // Después, el mismo negro se disuelve encima del título.
 const TITLE_REVEAL_MS = 1200;
+/** Cuánto se queda en negro entre salir del juego y que aparezca el menú. */
+const TITLE_HOLD_MS = 350;
 
 /** De dónde se llega al título: cambia cómo sale del negro. */
 type Intro = 'advertencia' | 'juego' | null;
@@ -92,8 +94,14 @@ export default function App() {
       () => {
         setIntro('juego');
         useStore.getState().quitToTitle();
-        setToTitle('in');
-        setTimeout(() => setToTitle(null), still ? 150 : TITLE_REVEAL_MS);
+        // Un instante en negro antes de que aparezca el menú.
+        setTimeout(
+          () => {
+            setToTitle('in');
+            setTimeout(() => setToTitle(null), still ? 150 : TITLE_REVEAL_MS);
+          },
+          still ? 0 : TITLE_HOLD_MS,
+        );
       },
       still ? 150 : TITLE_FADE_MS,
     );
@@ -1036,7 +1044,7 @@ function Game({ open, paused, onTitle }: { open: (o: Overlay) => void; paused: b
             volverDeBatalla();
             useStore.getState().loseLevel();
           }}
-          onSalir={() => useStore.getState().quitToTitle()}
+          onSalir={onTitle}
           onPerdonar={
             shown.batalla_perdon
               ? (vars) => {
