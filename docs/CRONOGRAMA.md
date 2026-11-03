@@ -43,6 +43,7 @@ El RPG, Boringram y el arte se hacen **para el capítulo que toca**, no por adel
 - [ ] **Robustez** (medio día; protege a los jugadores de verdad): ErrorBoundary, guardado que nunca rompe el juego, CI y ESLint.
 - [ ] **Resincronizar el guion del Capítulo 1** (necesita el permiso del autor para `guion:exportar -- --forzar`).
 - [ ] **Pulir los diálogos del Capítulo 1:** el autor lee el guion y marca; Claude corrige con `docs/TONO.md`.
+- [ ] Título del Capítulo 2: «El viaje del héroe*», que al terminar pasa a «El viaje del antihéroe» (portada y pantalla de fin).
 - [ ] **Terminar el Capítulo 2:** partes que falten del autor, revisión contra el canon y enlazarlo al final del Capítulo 1.
 - [ ] *Liviana:* arte del Capítulo 2 que falte (`docs/guion/cap02_arte.md`): Rikka con traje rojo y espada, etc.
 

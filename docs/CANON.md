@@ -180,7 +180,9 @@ Sashi y Aylin **no existen** en la línea original.
 ### Estructura de capítulos del juego base `[CANON]`
 
 1. Una vida en bucle: hasta conocer a Rikka (1 h 30 min).
-2. El viaje del héroe (1 h 30 min).
+2. El viaje del héroe* (1 h 30 min).
+
+**Los títulos son chistes de programación que también se leen como frase** (regla del autor, 2026-11-02). «Una vida en bucle» juega con los bucles (`while`, `for`). «El viaje del héroe*» lleva el asterisco del puntero de C: `héroe*` no es un héroe, es algo que apunta a uno. Es de la misma familia que las expansiones Génesis++ (C++) y Génesis# (C#). **Al terminar el Capítulo 2 el título pasa a ser «El viaje del antihéroe»** `[CANON]`; cómo se ve en pantalla: `[PENDIENTE]`. Los títulos de los Capítulos 3 a 7: `[PENDIENTE]` (propuestas en discusión).
 3. La batalla final contra el Rey Malvado (2 h 30 min a 3 h).
 4. El choque con la realidad: el despertar, la restauración, la convención y buscar trabajo; termina cuando Cami consigue trabajo «en el centro» (2 h). (Ellas ya aparecen en el cuarto al final del Capítulo 3.)
 5. La rivalidad: Cami en Dulce Frío, el beso, Nikki y Rikka en el bar y lo que sigue; termina con el descubrimiento de quiénes son realmente (1 h 30 min). Se mantienen 7 capítulos (decidido por el autor el 2026-11-02): así Génesis++ sigue siendo la versión alternativa del Capítulo 5.
