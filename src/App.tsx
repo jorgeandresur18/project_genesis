@@ -237,32 +237,72 @@ function urlStart(): { scene: string; chapter?: number } | null {
  * paneles (Opciones, Boringram…) se abren por encima, fuera del televisor, y el menú del título no cambia.
  */
 function TvViejo({ activo, children }: { activo: boolean; children: ReactNode }) {
-  const t = useT();
+  const pantalla = useRef<HTMLDivElement>(null);
+  const [escala, setEscala] = useState(1);
+  // El juego está pensado para la ventana entera: dentro del televisor se achica en proporción a la pantalla
+  // (la letra base y el zoom de los sprites; los efectos se ubican igual que siempre).
+  useEffect(() => {
+    const raiz = document.documentElement;
+    const el = pantalla.current;
+    if (!activo || !el) {
+      raiz.style.removeProperty('font-size');
+      setEscala(1);
+      return;
+    }
+    const medir = () => {
+      const s = Math.min(1, Math.max(0.55, el.getBoundingClientRect().height / window.innerHeight));
+      setEscala(s);
+      raiz.style.fontSize = `${s * 100}%`;
+    };
+    medir();
+    const ro = new ResizeObserver(medir);
+    ro.observe(el);
+    window.addEventListener('resize', medir);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener('resize', medir);
+      raiz.style.removeProperty('font-size');
+    };
+  }, [activo]);
   const barra = (
     <div className="tv-barra" aria-hidden>
       <img src={assetUrl('marca/logo_tv.webp')} alt="" draggable={false} />
     </div>
   );
   return (
-    <div className={`tv ${activo ? '' : 'apagado'}`}>
+    <div className={`tv ${activo ? '' : 'apagado'}`} style={{ '--tv-escala': escala } as CSSProperties}>
       {barra}
       <div className="tv-caja">
-        <div className="tv-pantalla">
+        <div className="tv-pantalla" ref={pantalla}>
           <div className="tv-imagen">{children}</div>
           <div className="tv-crt" aria-hidden />
         </div>
         <div className="tv-panel" aria-hidden>
           <span className="tv-parlante" />
-          <span className="tv-logo">
-            <img src={assetUrl('marca/logo_tv.webp')} alt="PROJECT GENESIS" draggable={false} />
-            <small>{t('tv.modo')}</small>
-          </span>
+          <img className="tv-logo" src={assetUrl('marca/logo_tv.webp')} alt="" draggable={false} />
           <span className="tv-botones">
-            <i className="tv-perilla" />
-            <i className="tv-perilla" />
-            <i className="tv-boton" />
-            <i className="tv-boton" />
-            <i className="tv-encendido" />
+            <span className="tv-control">
+              <i className="tv-perilla" />
+              <small>VOL</small>
+            </span>
+            <span className="tv-control">
+              <i className="tv-perilla tv-perilla-girada" />
+              <small>CH</small>
+            </span>
+            <span className="tv-control">
+              <span className="tv-par">
+                <i className="tv-boton" />
+                <i className="tv-boton" />
+              </span>
+              <small>MENU</small>
+            </span>
+            <span className="tv-control">
+              <span className="tv-par">
+                <i className="tv-encendido" />
+                <i className="tv-led" />
+              </span>
+              <small>POWER</small>
+            </span>
           </span>
         </div>
       </div>
@@ -767,6 +807,17 @@ function TitleScreen({ open, intro, onEgg }: TitleProps) {
 }
 
 function Game({ open, paused, onTitle }: { open: (o: Overlay) => void; paused: boolean; onTitle: () => void }) {
+  // La caja de diálogo se apoya encima de la barra según su altura real (en pantallas angostas o en el televisor la
+  // barra baja a dos filas y la pisaba).
+  const medidorBarra = useRef<ResizeObserver | null>(null);
+  const refBarra = useCallback((el: HTMLDivElement | null) => {
+    medidorBarra.current?.disconnect();
+    if (!el) return;
+    medidorBarra.current = new ResizeObserver(() => {
+      if (el.offsetHeight) (el.closest('.stage') as HTMLElement | null)?.style.setProperty('--toolbar-h', `${el.offsetHeight}px`);
+    });
+    medidorBarra.current.observe(el);
+  }, []);
   // Al volver de una pelea a la novela, la escena aparece desde negro (ver .batalla-vuelta).
   const [deBatalla, setDeBatalla] = useState(0);
   const volverDeBatalla = () => {
@@ -1097,7 +1148,7 @@ function Game({ open, paused, onTitle }: { open: (o: Overlay) => void; paused: b
       />
       {/* Evita que los botones queden enfocados y Espacio los vuelva a pulsar en vez de avanzar. */}
       {card && <ChapterIntro chapter={card.chapter} leaving={card.leaving} onLeave={leaveCard} />}
-      <div className={`toolbar ${uiHidden ? 'ui-hidden' : ''}`} onMouseDown={(e) => e.preventDefault()}>
+      <div ref={refBarra} className={`toolbar ${uiHidden ? 'ui-hidden' : ''}`} onMouseDown={(e) => e.preventDefault()}>
         {buttons}
       </div>
       {/* Pantallas chicas: los mismos botones dentro de un menú ☰. */}

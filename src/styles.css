@@ -196,7 +196,8 @@ input, textarea { -webkit-user-select: text; user-select: text; }
 .dialog {
   position: absolute;
   left: 50%;
-  bottom: 3.6rem;
+  /* Encima de la barra, según su altura real (--toolbar-h la mide App; una fila son ~1.9rem). */
+  bottom: calc(var(--toolbar-h, 1.9rem) + 1.7rem);
   cursor: default !important;
   transform: translateX(-50%);
   width: min(58rem, calc(100% - 2rem));
@@ -255,11 +256,14 @@ input, textarea { -webkit-user-select: text; user-select: text; }
 }
 .decisions {
   position: absolute;
-  top: 40%;
+  /* Centradas en el espacio que queda encima de la caja de diálogo (que se apoya sobre la barra). */
+  top: 1rem;
+  bottom: calc(var(--toolbar-h, 1.9rem) + 1.7rem + 9.5rem);
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
+  justify-content: safe center;
   gap: 0.8rem;
   width: min(44rem, calc(100% - 2rem));
   z-index: 3;
@@ -791,7 +795,7 @@ input, textarea { -webkit-user-select: text; user-select: text; }
   .dialog-speaker { font-size: calc(0.82rem * var(--text-scale, 1)); left: 0.8rem; padding: 0.18rem 0.75rem; }
   .dialog-text { font-size: calc(0.9rem * var(--text-scale, 1)); line-height: 1.45; }
 
-  .decisions { top: 42%; gap: 0.45rem; width: min(34rem, calc(100% - 5rem)); max-height: calc(100% - 7rem); overflow-y: auto; }
+  .decisions { top: 42%; bottom: auto; transform: translate(-50%, -50%); justify-content: flex-start; gap: 0.45rem; width: min(34rem, calc(100% - 5rem)); max-height: calc(100% - 7rem); overflow-y: auto; }
   .decisions-label { font-size: 0.7rem; margin: 0.2rem 0 0.45rem; line-height: 1; }
   .decision { padding: 0.6rem 0.9rem; font-size: 0.95rem; gap: 0.7rem; }
   .decision-key { width: 1.6rem; height: 1.6rem; font-size: 0.8rem; }
@@ -3236,12 +3240,13 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 .batalla-dialogo p.habla-congelado { color: #9fdcff; letter-spacing: 0.3em; }
 @media (prefers-reduced-motion: reduce) { .habla-confuso span, .habla-envenenado, .habla-quemado { animation: none; } }
 
-/* ---------- Filtro TV CRT (Opciones): la partida en un televisor de tubo de los 90 ---------- */
-.tv { position: absolute; inset: 0; display: grid; place-items: center; padding: 0.8rem; background: radial-gradient(ellipse at 50% 40%, #1b1a1f, #070708 70%); }
-/* El mueble: gris carbón con un filo plateado, como los televisores de tubo grises de los 90. */
-.tv-caja { display: flex; flex-direction: column; gap: 0.6rem; padding: clamp(0.8rem, 2.2vmin, 1.6rem) clamp(0.8rem, 2.2vmin, 1.6rem) clamp(0.5rem, 1.4vmin, 0.9rem); border-radius: 1.6rem; background: linear-gradient(180deg, #3a3a3f 0%, #2a2a2e 45%, #1f1f23 100%); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), inset 0 -2px 0 rgba(0, 0, 0, 0.5), 0 0 0 2px #121214, 0 1.6rem 3rem rgba(0, 0, 0, 0.7); }
-/* La pantalla en 4:3, tan grande como entre en la ventana. Un poco curva: esquinas redondeadas y sombra hacia adentro. */
-.tv-pantalla { position: relative; aspect-ratio: 4 / 3; height: min(calc(100dvh - 1.6rem - 2 * clamp(0.8rem, 2.2vmin, 1.6rem) - 3.9rem), calc((100vw - 1.6rem - 2 * clamp(0.8rem, 2.2vmin, 1.6rem)) * 3 / 4)); overflow: hidden; border-radius: 1.4rem / 1.1rem; background: #000; box-shadow: 0 0 0 0.5rem #0c0c0e, 0 0 0 0.6rem #4a4a50; }
+/* ---------- Filtro TV CRT (Opciones): la partida en un televisor de tubo de los 90 ----------
+   Las medidas del televisor van en vmin: la letra base la achica el televisor para escalar el juego. */
+.tv { position: absolute; inset: 0; display: grid; place-items: center; padding: 1.2vmin; background: radial-gradient(ellipse at 50% 40%, #1b1a1f, #070708 70%); }
+/* El mueble: gris carbón, gordo a los costados, con un filo plateado. */
+.tv-caja { display: flex; flex-direction: column; gap: 1vmin; padding: 3.2vmin 6vmin 1.4vmin; border-radius: 3.6vmin; background: linear-gradient(90deg, rgba(0, 0, 0, 0.35), transparent 6%, transparent 94%, rgba(0, 0, 0, 0.35)), linear-gradient(180deg, #3c3c41 0%, #2b2b2f 45%, #1f1f23 100%); box-shadow: inset 0 0.15vmin 0 rgba(255, 255, 255, 0.2), inset 0 -0.3vmin 0 rgba(0, 0, 0, 0.5), 0 0 0 0.25vmin #121214, 0 3vmin 5vmin rgba(0, 0, 0, 0.7); }
+/* La pantalla en 4:3, tan grande como entre. Un poco curva: esquinas redondeadas, marco hundido y sombra hacia adentro. */
+.tv-pantalla { position: relative; aspect-ratio: 4 / 3; height: min(calc(100dvh - 2.4vmin - 4.6vmin - 1vmin - 9vmin), calc((100vw - 2.4vmin - 12vmin) * 3 / 4)); overflow: hidden; border-radius: 3vmin / 2.4vmin; background: #000; box-shadow: 0 0 0 0.8vmin #0b0b0d, 0 0 0 1vmin #46464c, 0 0 0 1.25vmin #18181b; }
 /* La imagen: un poco borrosa y saturada. El filtro también la vuelve el marco de lo que se fija a la pantalla. */
 .tv-imagen { position: absolute; inset: 0; overflow: hidden; filter: blur(0.6px) saturate(1.18) contrast(1.06) brightness(1.04); }
 /* Encima: líneas de barrido, la rejilla de colores, la viñeta de los bordes, un reflejo y un parpadeo leve. */
@@ -3251,26 +3256,36 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
     radial-gradient(ellipse at center, transparent 58%, rgba(0, 0, 0, 0.55) 100%),
     repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.28) 0 1px, transparent 1px 3px),
     repeating-linear-gradient(90deg, rgba(255, 0, 60, 0.05) 0 1px, rgba(0, 255, 120, 0.04) 1px 2px, rgba(40, 90, 255, 0.05) 2px 3px);
-  box-shadow: inset 0 0 2.5rem rgba(0, 0, 0, 0.75), inset 0 0 0.4rem rgba(0, 0, 0, 0.9);
+  box-shadow: inset 0 0 4vmin rgba(0, 0, 0, 0.75), inset 0 0 0.6vmin rgba(0, 0, 0, 0.9);
   animation: tv-parpadeo 0.12s steps(2) infinite; }
 @keyframes tv-parpadeo { 50% { opacity: 0.93; } }
-/* Abajo: el parlante, el logo al medio y los botones a la derecha. */
-.tv-panel { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 3.3rem; padding: 0 0.4rem; }
-.tv-parlante { justify-self: start; width: clamp(4rem, 12vw, 8rem); height: 1.3rem; background: repeating-linear-gradient(90deg, #141416 0 2px, transparent 2px 5px); border-radius: 0.3rem; opacity: 0.9; }
-.tv-logo { display: grid; justify-items: center; line-height: 1.1; }
+/* Abajo: el parlante, el logo grande al medio y los controles a la derecha. */
+.tv-panel { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 9vmin; }
+.tv-parlante { justify-self: start; width: 20vmin; height: 5vmin; border-radius: 1.2vmin; background: radial-gradient(circle, #0a0a0c 0.35vmin, transparent 0.45vmin) 0 0 / 1.1vmin 1.1vmin, linear-gradient(180deg, #232327, #2c2c31); box-shadow: inset 0 0.2vmin 0.4vmin rgba(0, 0, 0, 0.7), 0 0.1vmin 0 rgba(255, 255, 255, 0.08); }
+.tv-logo { display: block; height: 6vmin; width: auto; filter: drop-shadow(0 0.2vmin 0 #000); }
 .tv-barra { display: none; }
-.tv-logo img { display: block; height: clamp(1.3rem, 3.8vmin, 2.1rem); width: auto; filter: drop-shadow(0 1px 0 #000); }
-.tv-logo b { color: #d9d9de; font-family: 'Press Start 2P', monospace; font-size: clamp(0.5rem, 1.3vmin, 0.72rem); letter-spacing: 0.18em; white-space: nowrap; filter: drop-shadow(0 1px 0 #000); background: linear-gradient(180deg, #f3f3f6, #8d8d95); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-.tv-logo small { margin-top: 0.2rem; color: #8d8d95; font-family: 'Press Start 2P', monospace; font-size: clamp(0.36rem, 0.9vmin, 0.5rem); letter-spacing: 0.3em; }
-.tv-botones { justify-self: end; display: flex; align-items: center; gap: 0.45rem; }
-.tv-botones i { display: block; }
-.tv-perilla { width: 1.15rem; height: 1.15rem; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #6a6a72, #26262a 70%); box-shadow: 0 0 0 2px #151517, inset 0 -2px 2px rgba(0, 0, 0, 0.5); }
-.tv-boton { width: 1.3rem; height: 0.55rem; border-radius: 0.15rem; background: linear-gradient(180deg, #4b4b52, #232327); box-shadow: 0 0 0 1px #121214; }
-.tv-encendido { position: relative; width: 1.7rem; height: 0.7rem; border-radius: 0.2rem; background: linear-gradient(180deg, #55555c, #2a2a2f); box-shadow: 0 0 0 1px #121214; }
-.tv-encendido::after { content: ''; position: absolute; right: -0.6rem; top: 50%; width: 0.32rem; height: 0.32rem; translate: 0 -50%; border-radius: 50%; background: #ff3b30; box-shadow: 0 0 0.35rem #ff3b30; }
+.tv-botones { justify-self: end; display: flex; align-items: flex-end; gap: 1.6vmin; }
+.tv-control { display: grid; justify-items: center; gap: 0.5vmin; }
+.tv-control small { color: #8b8b93; font-family: system-ui, sans-serif; font-size: 1.15vmin; font-weight: 700; letter-spacing: 0.15em; text-shadow: 0 0.1vmin 0 #000; }
+.tv-control i { display: block; }
+.tv-par { display: flex; align-items: center; gap: 0.6vmin; }
+/* Perillas: estriadas por fuera, lisas al centro, con su marca, sombra y brillo. */
+.tv-perilla { position: relative; width: 5.2vmin; height: 5.2vmin; border-radius: 50%; background: radial-gradient(circle at 42% 35%, #5c5c63 0, #36363b 34%, transparent 35%), repeating-conic-gradient(#25252a 0 7deg, #4a4a51 7deg 14deg); box-shadow: 0 0 0 0.3vmin #141416, 0 0.5vmin 0.8vmin rgba(0, 0, 0, 0.65), inset 0 0.2vmin 0.2vmin rgba(255, 255, 255, 0.2); }
+.tv-perilla::after { content: ''; position: absolute; left: 50%; top: 12%; width: 0.45vmin; height: 1.5vmin; translate: -50% 0; border-radius: 0.3vmin; background: #e4e4e8; box-shadow: 0 0 0.2vmin rgba(255, 255, 255, 0.4); }
+.tv-perilla-girada { rotate: 55deg; }
+/* Botones que se hunden: luz arriba, borde oscuro abajo. */
+.tv-boton { width: 3.4vmin; height: 1.9vmin; border-radius: 0.45vmin; background: linear-gradient(180deg, #5d5d64, #2e2e33 60%, #202024); box-shadow: inset 0 0.15vmin 0 rgba(255, 255, 255, 0.28), 0 0.3vmin 0 #0c0c0e, 0 0.5vmin 0.6vmin rgba(0, 0, 0, 0.5); }
+.tv-encendido { width: 5.6vmin; height: 2.4vmin; border-radius: 0.5vmin; background: linear-gradient(180deg, #66666d, #333338 55%, #222226); box-shadow: inset 0 0.15vmin 0 rgba(255, 255, 255, 0.3), 0 0.35vmin 0 #0c0c0e, 0 0.6vmin 0.7vmin rgba(0, 0, 0, 0.55); }
+.tv-led { width: 0.9vmin; height: 0.9vmin; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #ff9b94, #ff2d20 60%, #8a0f08); box-shadow: 0 0 0.8vmin #ff3b30, 0 0 0.2vmin #ff3b30; }
+/* Los sprites de la pelea, en proporción a la pantalla (en computadora; en el celular la pantalla ya es la ventana). */
+@media (min-width: 761px) and (min-height: 521px) {
+  .tv:not(.apagado) .batalla-figura .batalla-sprite, .tv:not(.apagado) .batalla-figura img { zoom: calc(1.75 * var(--e, 1) * var(--tv-escala, 1)); }
+  .tv:not(.apagado) .batalla.n3 .batalla-figura .batalla-sprite, .tv:not(.apagado) .batalla.e3 .batalla-figura .batalla-sprite { zoom: calc(1.3 * var(--e, 1) * var(--tv-escala, 1)); }
+}
 /* En el celular no hay televisor: la pantalla en 4:3 con el efecto CRT y dos barras a los costados (arriba y abajo
-   si está de pie) con el logo del modo TV. */
-@media (max-width: 760px), (max-height: 520px) {
+   si está de pie) con el logo del modo TV. Igual si la ventana ya es 4:3 o más angosta (un televisor viejo de
+   verdad): no se dibuja un televisor dentro de otro. */
+@media (max-width: 760px), (max-height: 520px), (max-aspect-ratio: 4 / 3) {
   .tv { grid-template-columns: 1fr auto 1fr; gap: 0; padding: 0; background: #000; }
   .tv-caja { display: contents; }
   .tv-pantalla { height: min(100dvh, 100vw * 3 / 4); border-radius: 0.6rem / 0.45rem; box-shadow: none; }
