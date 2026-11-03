@@ -24,6 +24,22 @@ Para lo que viene, ver `docs/CRONOGRAMA.md`.
 
 **Total:** ~285 commits (235 en `main` y el detalle del 31 y el 1 en el respaldo).
 
+### Horas por día (calculadas con los commits)
+Cada tramo va del primer al último commit, más 30 minutos de trabajo antes del primero; una pausa de más de 1 h 15 min corta el tramo. Lo que pasa antes de las 6:00 cuenta para el día anterior (es la misma noche). Es una estimación: no registra lo que se conversó o probó sin commit, ni el 24 de octubre (el primer commit es del 25).
+
+| Día | Horas | Commits | Tramos |
+|---|---|---|---|
+| 25 oct | 3,0 | 19 | 22:43–1:13 |
+| 26 oct | 2,7 | 8 | 20:24–21:16 · 23:11–0:00 |
+| 27 oct | 6,3 | 38 | 13:46–13:58 · 16:27–21:34 |
+| 28 oct | 14,6 | 66 | 12:15–14:26 · 16:56–4:18 |
+| 29 oct | 10,3 | 77 | 13:03–14:41 · 20:19–0:28 · 2:10–5:10 |
+| 30 oct | 5,1 | 34 | 13:38–18:16 |
+| 31 oct | 3,5 | 14 | 14:51–15:48 · 23:03–0:39 |
+| 1 nov | 12,5 | 63 | 9:47–12:57 · 15:19–16:07 · 21:07–3:38 |
+| 2 nov | 13,3 | 70 | 11:27–18:21 · 20:01–1:26 |
+| **Total** | **~71** | **389** | promedio ~7,9 h por día |
+
 ---
 
 ## 24–25 de octubre — Nace la novela
@@ -105,7 +121,7 @@ Para lo que viene, ver `docs/CRONOGRAMA.md`.
 - **Pendiente:** ver «Decisiones pendientes» en `docs/CRONOGRAMA.md`.
 
 ## 2 y 3 de noviembre (noche) — Capítulos 4 y 5, y el modo Retro CRT · cierre: 3 de noviembre, 1:25
-- **Horas del 2 de noviembre (según los commits):** 0:19–3:38, 11:27–18:21 y 20:01–1:25. Unas 15 h 40 min con commits; contando el trabajo antes del primer commit de cada tramo, entre 16 y 17 horas, en 96 commits.
+- **Horas del 2 de noviembre (según los commits):** 11:27–18:21 y 20:01–1:26, unas 13 h 20 min (el tramo de 0:19 a 3:38 era la continuación de la noche del 1).
 - **Canon del autor:**
   - La compañera de tesis es **Lady** (`lady.compila` de Boringram) y **Jordan** aparece en el Capítulo 4.
   - Se mantienen **7 capítulos**. El borrador se reparte: Capítulo 4 = escenas 1 a 9 (hasta «conseguí trabajo en el centro»); Capítulo 5 = desde Dulce Frío hasta el descubrimiento (falta el medio).
