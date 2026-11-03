@@ -4,6 +4,7 @@ import styles from './TitleBackground.module.css';
 import coffeeEs from '../data/codigo_coffee.json';
 import coffeeEn from '../data/en/codigo_coffee.json';
 import { localized, useLang } from '../engine/i18n';
+import { assetUrl } from '../engine/assets';
 
 // Generador pseudoaleatorio con semilla fija: las estrellas quedan siempre en el mismo lugar.
 function seeded(seed: number) {
@@ -22,8 +23,25 @@ const COMETS = [
   { axis: 'y', at: 78, color: 'plata', delay: 7 },
 ] as const;
 
-/** Fondo del título: espacio negro con estrellas, nebulosas, cuadrícula, cometas y código Coffee flotando. */
-export function TitleBackground() {
+/**
+ * Logos que suben despacio en lugar del código (el fondo detrás del televisor del filtro TV CRT): pocos, repartidos a
+ * lo ancho y espaciados en el tiempo, para que nunca se amontonen.
+ */
+const LOGOS = [
+  { left: 6, delay: 0 },
+  { left: 72, delay: -6 },
+  { left: 38, delay: -12 },
+  { left: 88, delay: -18 },
+  { left: 20, delay: -24 },
+  { left: 56, delay: -30 },
+];
+const LOGOS_SEG = 36;
+
+/**
+ * Fondo del título: espacio negro con estrellas, nebulosas, cuadrícula, cometas y código Coffee flotando. Con
+ * `logos`, en vez del código suben logos de PROJECT GENESIS.
+ */
+export function TitleBackground({ logos = false }: { logos?: boolean } = {}) {
   const still = useStore((s) => s.settings.reduceEffects);
   const lang = useLang();
   const { stars, code } = useMemo(() => {
@@ -54,7 +72,18 @@ export function TitleBackground() {
       <div className={`${styles.nebula} ${styles.nebulaPlata}`} />
       <div className={`${styles.nebula} ${styles.nebulaAcero}`} />
       <div className={styles.vignette} />
-      {code.map((c, i) => (
+      {logos &&
+        LOGOS.map((l, i) => (
+          <img
+            key={`l${i}`}
+            className={styles.logo}
+            src={assetUrl('marca/logo_blanco.webp')}
+            alt=""
+            draggable={false}
+            style={{ left: `${l.left}%`, animationDelay: `${l.delay}s`, animationDuration: `${LOGOS_SEG}s` }}
+          />
+        ))}
+      {!logos && code.map((c, i) => (
         <pre
           key={`c${i}`}
           className={styles.code}

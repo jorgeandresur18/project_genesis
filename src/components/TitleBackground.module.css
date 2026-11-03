@@ -101,3 +101,12 @@
   .bg *, .bg { animation: none !important; }
   .comet, .code, .glitchBar { display: none; }
 }
+/* Los logos que suben (fondo del televisor): chicos, casi transparentes, del mismo modo que el código. */
+.logo { position: absolute; bottom: -12%; width: clamp(5rem, 9vw, 9rem); height: auto; opacity: 0; translate: -50% 0; filter: drop-shadow(0 0 0.6rem rgba(255, 255, 255, 0.15)); animation: logo-rise linear infinite; }
+@keyframes logo-rise {
+  0% { transform: translateY(0); opacity: 0; }
+  15% { opacity: 0.13; }
+  80% { opacity: 0.13; }
+  100% { transform: translateY(-125vh); opacity: 0; }
+}
+.still .logo { animation: none; opacity: 0.08; }

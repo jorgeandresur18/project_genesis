@@ -2862,13 +2862,17 @@ function Versus({ d }: { d: DatosBatalla }) {
   const r = d.enemigos[d.jefe.enemigo];
   return (
     <div className="batalla-versus" aria-hidden>
-      <div className="versus-lado rival" style={{ '--c': r.especial?.color ?? '#c46a6a' } as CSSProperties}>
+      {/* Los fondos van recortados en diagonal; las figuras, encima y enteras (en una pantalla angosta el pie de
+          quien está a la izquierda cruzaba la diagonal y se cortaba). */}
+      <div className="versus-lado rival" style={{ '--c': r.especial?.color ?? '#c46a6a' } as CSSProperties} />
+      <div className="versus-lado heroe" style={{ '--c': h.especial?.color ?? '#e8e2d4' } as CSSProperties} />
+      <div className="versus-figura rival">
         <span className="versus-sprite">
           <SpriteHoja src={r.sprite} anim="idle" />
         </span>
         <b>{r.nombre}</b>
       </div>
-      <div className="versus-lado heroe" style={{ '--c': h.especial?.color ?? '#e8e2d4' } as CSSProperties}>
+      <div className="versus-figura heroe">
         <span className="versus-sprite">
           <SpriteHoja src={h.sprite} anim="idle" />
         </span>

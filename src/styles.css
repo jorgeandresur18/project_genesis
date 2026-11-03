@@ -2777,15 +2777,21 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 .batalla-versus { position: absolute; inset: 0; z-index: 40; overflow: hidden; background: #000; animation: versus-sale 2.7s ease-in forwards; }
 .versus-lado { position: absolute; inset: 0; display: flex; align-items: center; background: repeating-linear-gradient(180deg, color-mix(in srgb, var(--c) 85%, #000) 0 0.35rem, color-mix(in srgb, var(--c) 55%, #000) 0.35rem 0.5rem, var(--c) 0.5rem 1.1rem); background-size: 100% 200%; }
 .versus-lado::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, transparent 0 3rem, rgba(255, 255, 255, 0.55) 3rem 3.15rem, transparent 3.15rem 7rem); animation: versus-lineas 0.35s linear infinite; }
-.versus-lado.rival { clip-path: polygon(0 0, 60% 0, 40% 100%, 0 100%); justify-content: flex-start; padding-left: 8%; animation: versus-entra-izq 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.1) 0.45s both; }
-.versus-lado.heroe { clip-path: polygon(60% 0, 100% 0, 100% 100%, 40% 100%); justify-content: flex-end; padding-right: 8%; animation: versus-entra-der 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.1) 0.45s both; }
+.versus-figura { position: absolute; inset: 0; display: flex; align-items: center; }
+.versus-lado.rival { clip-path: polygon(0 0, 60% 0, 40% 100%, 0 100%); }
+.versus-lado.heroe { clip-path: polygon(60% 0, 100% 0, 100% 100%, 40% 100%); }
+.versus-lado.rival, .versus-figura.rival { justify-content: flex-start; padding-left: 8%; animation: versus-entra-izq 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.1) 0.45s both; }
+.versus-lado.heroe, .versus-figura.heroe { justify-content: flex-end; padding-right: 8%; animation: versus-entra-der 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.1) 0.45s both; }
 .versus-lado.heroe::before { animation-direction: reverse; }
 .versus-sprite { position: relative; filter: drop-shadow(0 0 2px #000) drop-shadow(0 0 1.2rem rgba(0, 0, 0, 0.55)); }
 .versus-sprite .batalla-sprite { zoom: 3.2; }
-.versus-lado.heroe .versus-sprite { transform: scaleX(-1); }
-.versus-lado b { position: absolute; bottom: 12%; font-family: 'Press Start 2P', monospace; font-size: clamp(1rem, 3vw, 2rem); color: #fff; text-shadow: 0.2rem 0.2rem 0 #000; }
-.versus-lado.rival b { left: 8%; }
-.versus-lado.heroe b { right: 8%; }
+/* Cada figura, centrada en su mitad (al 25 % y al 75 % del ancho): así nunca cruza la diagonal hacia el otro lado. */
+.versus-figura.rival { right: 50%; justify-content: center; padding-left: 0; }
+.versus-figura.heroe { left: 50%; justify-content: center; padding-right: 0; }
+.versus-figura.heroe .versus-sprite { transform: scaleX(-1); }
+.versus-figura b { position: absolute; bottom: 12%; font-family: 'Press Start 2P', monospace; font-size: clamp(1rem, 3vw, 2rem); color: #fff; text-shadow: 0.2rem 0.2rem 0 #000; }
+.versus-figura.rival b { left: 16%; }
+.versus-figura.heroe b { right: 16%; }
 .versus-vs { position: absolute; left: 50%; top: 50%; translate: -50% -50%; font-family: 'Press Start 2P', monospace; font-size: clamp(2.6rem, 9vw, 6rem); color: #ffe36e; -webkit-text-stroke: 0.25rem #000; text-shadow: 0 0 1.5rem rgba(255, 210, 80, 0.9), 0.4rem 0.4rem 0 #000; animation: versus-vs 0.45s cubic-bezier(0.3, 1.6, 0.5, 1) 0.95s both; }
 .versus-destello { position: absolute; inset: 0; background: #fff; pointer-events: none; animation: versus-destello 0.45s steps(1) both; }
 @keyframes versus-destello { 0% { opacity: 1; } 22% { opacity: 0; } 44% { opacity: 1; } 66%, 100% { opacity: 0; } }
@@ -2795,7 +2801,7 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 @keyframes versus-vs { from { scale: 4; opacity: 0; } to { scale: 1; opacity: 1; } }
 @keyframes versus-sale { 0%, 78% { scale: 1; opacity: 1; filter: none; } 100% { scale: 1.9; opacity: 0; filter: brightness(2.2); } }
 @media (max-height: 500px), (max-width: 700px) { .versus-sprite .batalla-sprite { zoom: 2; } }
-@media (prefers-reduced-motion: reduce) { .batalla-versus, .versus-lado, .versus-lado::before, .versus-vs { animation-duration: 0.01s; } }
+@media (prefers-reduced-motion: reduce) { .batalla-versus, .versus-lado, .versus-figura, .versus-lado::before, .versus-vs { animation-duration: 0.01s; } }
 
 /* Al lado del menú: qué hace la opción elegida (a su derecha, sobre el piso). */
 .batalla-menu { position: relative; }

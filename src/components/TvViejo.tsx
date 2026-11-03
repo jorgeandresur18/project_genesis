@@ -157,7 +157,7 @@ export function TvViejo({ activo, children }: { activo: boolean; children: React
         {activo && (fondo === 'espacio' || fondo === 'cosmico') && (
           <>
             <div className="tv-fondo-titulo">
-              <TitleBackground />
+              <TitleBackground logos />
             </div>
             <i className="tv-fondo-tinte" />
           </>
