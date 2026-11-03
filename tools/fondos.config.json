@@ -18,7 +18,8 @@
     "jair_nikki_beso_cerca": "cg_beso_nikki_cerca",
     "cg_jorge_carga_cami": "cg_jair_carga_cami_bosque",
     "nalgada": "cg_rikka_nalgada",
-    "desbloqueable_nikki": "cg_nikki_cachetadas"
+    "desbloqueable_nikki": "cg_nikki_cachetadas",
+    "Cozy Retro Gaming Anime Room": "tv_cuarto"
   },
   "omitir": [
     "caída amorosa entre mundos flotantes",
@@ -28,7 +29,8 @@
     "desbloqueable nikki",
     "bar_rpg",
     "pasillo rpg",
-    "ruined space cathedral battle hall"
+    "ruined space cathedral battle hall",
+    "Anime Gaming Wall with Empty TV Space"
   ],
   "externos": [
     "cg_rikka_secreto"

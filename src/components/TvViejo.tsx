@@ -140,7 +140,10 @@ export function TvViejo({ activo, children }: { activo: boolean; children: React
     <button type="button" className={clase} aria-label={texto} title={texto} onClick={accion} />
   );
   return (
-    <div className={`tv ${activo ? '' : 'apagado'}`} style={{ '--tv-escala': escala } as CSSProperties}>
+    <div
+      className={`tv ${activo ? '' : 'apagado'} ${!encendida || transicion === 'apagando' ? 'tv-sin-luz' : canal > 0 ? 'tv-nieve' : ''}`}
+      style={{ '--tv-escala': escala } as CSSProperties}
+    >
       {barra}
       <div className="tv-caja">
         <div

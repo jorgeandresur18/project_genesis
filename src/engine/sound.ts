@@ -18,8 +18,17 @@ const buffers = new Map<string, Promise<AudioBuffer>>();
 const ranges = new WeakMap<AudioBuffer, { start: number; end: number }>();
 
 export function context(): AudioContext {
-  ctx ??= new AudioContext();
-  if (ctx.state === 'suspended') void ctx.resume();
+  if (!ctx) {
+    ctx = new AudioContext();
+    // Con la pestaña en segundo plano el texto se congela (se escribe cuadro a cuadro), pero el sonido de tecleo es
+    // un bucle: seguía sonando hasta volver. Ahí todo el audio del juego se pausa, y sigue al volver.
+    document.addEventListener('visibilitychange', () => {
+      if (!ctx) return;
+      if (document.hidden) void ctx.suspend();
+      else void ctx.resume();
+    });
+  }
+  if (ctx.state === 'suspended' && !document.hidden) void ctx.resume();
   return ctx;
 }
 

@@ -3242,11 +3242,20 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 
 /* ---------- Filtro TV CRT (Opciones): la partida en un televisor de tubo de los 90 ----------
    Las medidas del televisor van en vmin: la letra base la achica el televisor para escalar el juego. */
-.tv { position: absolute; inset: 0; display: grid; place-items: center; padding: 1.2vmin; background: radial-gradient(ellipse at 50% 40%, #1b1a1f, #070708 70%); }
+.tv { position: absolute; inset: 0; display: grid; place-items: end center; padding: 1.2vmin 1.2vmin var(--mesa); background: url('/fondos/tv_cuarto.webp') center bottom / cover no-repeat, #0b0b10;
+  /* El cuarto de Jair: el televisor se apoya sobre el mueble, que en la imagen está al 92,5 % del alto (con «cover»
+     la imagen mide lo que sea más grande: el alto de la ventana o el ancho en 16:9). */
+  --mesa: calc(max(100dvh, 56.25vw) * 0.075); }
+/* La luz del televisor sobre la pared: fría con la imagen, más blanca con la nieve, nada con la pantalla apagada. */
+.tv::before { content: ''; position: absolute; left: 50%; bottom: var(--mesa); width: 120vmin; height: 95vmin; translate: -50% 8%; border-radius: 50%; background: radial-gradient(ellipse, rgba(120, 160, 255, 0.22), rgba(120, 160, 255, 0.08) 45%, transparent 70%); pointer-events: none; transition: opacity 0.6s, filter 0.6s; animation: tv-luz-pared 3s ease-in-out infinite; }
+.tv.tv-nieve::before { filter: saturate(0) brightness(1.4); }
+.tv.tv-sin-luz::before { opacity: 0; animation: none; }
+@keyframes tv-luz-pared { 50% { opacity: 0.8; } }
+.tv-caja { position: relative; z-index: 1; }
 /* El mueble: gris carbón, gordo a los costados, con un filo plateado. */
 .tv-caja { display: flex; flex-direction: column; gap: 1vmin; padding: 3.2vmin 6vmin 1.4vmin; border-radius: 3.6vmin; background: linear-gradient(90deg, rgba(0, 0, 0, 0.35), transparent 6%, transparent 94%, rgba(0, 0, 0, 0.35)), linear-gradient(180deg, #3c3c41 0%, #2b2b2f 45%, #1f1f23 100%); box-shadow: inset 0 0.15vmin 0 rgba(255, 255, 255, 0.2), inset 0 -0.3vmin 0 rgba(0, 0, 0, 0.5), 0 0 0 0.25vmin #121214, 0 3vmin 5vmin rgba(0, 0, 0, 0.7); }
 /* La pantalla en 4:3, tan grande como entre. Un poco curva: esquinas redondeadas, marco hundido y sombra hacia adentro. */
-.tv-pantalla { position: relative; aspect-ratio: 4 / 3; height: min(calc(100dvh - 2.4vmin - 4.6vmin - 1vmin - 10vmin), calc((100vw - 2.4vmin - 12vmin) * 3 / 4)); overflow: hidden; border-radius: 3vmin / 2.4vmin; background: #000; box-shadow: 0 0 0 0.8vmin #0b0b0d, 0 0 0 1vmin #46464c, 0 0 0 1.25vmin #18181b; }
+.tv-pantalla { position: relative; aspect-ratio: 4 / 3; height: min(calc(100dvh - 1.2vmin - var(--mesa) - 4.6vmin - 1vmin - 10vmin), calc((100vw - 2.4vmin - 12vmin) * 3 / 4)); overflow: hidden; border-radius: 3vmin / 2.4vmin; background: #000; box-shadow: 0 0 0 0.8vmin #0b0b0d, 0 0 0 1vmin #46464c, 0 0 0 1.25vmin #18181b; }
 /* La imagen: un poco borrosa y saturada. El filtro también la vuelve el marco de lo que se fija a la pantalla. */
 .tv-imagen { position: absolute; inset: 0; overflow: hidden; filter: blur(0.6px) saturate(1.18) contrast(1.06) brightness(1.04); }
 /* Encima: líneas de barrido, la rejilla de colores, la viñeta de los bordes, un reflejo y un parpadeo leve. */
@@ -3317,7 +3326,8 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
    si está de pie) con el logo del modo TV. Igual si la ventana ya es 4:3 o más angosta (un televisor viejo de
    verdad): no se dibuja un televisor dentro de otro. */
 @media (max-width: 760px), (max-height: 520px), (max-aspect-ratio: 4 / 3) {
-  .tv { grid-template-columns: 1fr auto 1fr; gap: 0; padding: 0; background: #000; }
+  .tv { grid-template-columns: 1fr auto 1fr; place-items: center; gap: 0; padding: 0; background: #000; }
+  .tv::before { content: none; }
   .tv-caja { display: contents; }
   .tv-pantalla { height: min(100dvh, 100vw * 3 / 4); border-radius: 0.6rem / 0.45rem; box-shadow: none; }
   .tv-panel { display: none; }
@@ -3332,6 +3342,7 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 
 /* Filtro apagado: el televisor sigue montado pero no existe a la vista (sus cajas no ocupan lugar ni filtran). */
 .tv.apagado, .tv.apagado .tv-caja, .tv.apagado .tv-pantalla, .tv.apagado .tv-imagen { display: contents; }
+.tv.apagado::before { content: none; }
 .tv.apagado .tv-crt, .tv.apagado .tv-panel, .tv.apagado .tv-barra { display: none; }
 
 /* Opciones › Modo de pantalla: dos tarjetas con su miniatura (panorámico 16:9; retro CRT, un televisor de tubo en 4:3). */

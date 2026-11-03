@@ -51,9 +51,13 @@ export function useStoryEngine() {
       const t = setTimeout(advance, SKIP_DELAY_MS);
       return () => clearTimeout(t);
     }
-    // Auto: espera a que el texto termine de escribirse y después hace una pausa.
+    // Auto: espera a que el texto termine de escribirse y después hace una pausa. Con la pestaña en segundo plano no
+    // avanza: espera a que vuelvas.
     if (!textDone || waitingChoice) return;
-    const t = setTimeout(advance, settings.autoDelayMs);
+    let t = setTimeout(function seguir() {
+      if (document.hidden) t = setTimeout(seguir, 500);
+      else advance();
+    }, settings.autoDelayMs);
     return () => clearTimeout(t);
   }, [scene, game?.finished, waitingChoice, mode, speed, readScenes, textDone, settings.autoDelayMs, advance, back, setMode, setTextDone]);
 
