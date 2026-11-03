@@ -358,5 +358,7 @@
   "equipo.mochila_vacia_titulo": "La mochila está vacía",
   "batalla.mochila_vida_real": "No tienes nada. Esto es la vida real: acá no hay mochila.",
   "batalla.pausa_espera": "Se puede pausar cuando te toca elegir.",
-  "batalla.a_medias": "¡A medias!"
+  "batalla.a_medias": "¡A medias!",
+  "batalla.quejidos_envenenado": "¡Arg!|¡Ugh!|*cof, cof*|¡Agh!",
+  "batalla.quejidos_quemado": "¡Ay!|¡Ay, ay, ay!|¡Quema!|¡Fsss!"
 }

@@ -65,6 +65,11 @@
             "usos": 5
           }
         }
+      ],
+      "hablar_confundido": [
+        "Oigan, ¿a ustedes les pagan horas extra por… ¿por qué el piso está en el techo?",
+        "Si me dejan ir, les hago una página web. Responsive. Como mis rodillas. Que ya no responden.",
+        "Yo también odio mi trabajo. ¿Cuál era mi trabajo? ¿Ustedes saben? ¿Me pagan ustedes?"
       ]
     },
     "cami": {
@@ -119,7 +124,12 @@
         "termina": "{quien} ya puede pararse."
       },
       "sonido": "disparo",
-      "escala": 1.01
+      "escala": 1.01,
+      "hablar_confundido": [
+        "Baja eso antes de que te lo… ¿siempre fueron tres? Qué falta de respeto.",
+        "Tienes la postura de alguien que… qué lindo brilla tu casco. No me mires así. Tú, el del medio.",
+        "¿Te mandaron solo? ¿Y por qué son cuatro? Contesten de a uno."
+      ]
     }
   },
   "enemigos": {

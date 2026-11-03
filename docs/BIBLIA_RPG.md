@@ -65,7 +65,7 @@ Al elegir a quién atacar, el elegido brilla, tiene un anillo dorado a los pies 
 | Comando | Qué hace |
 |---|---|
 | Atacar | Un ataque y a quién; o el especial, si la barra está llena (★). |
-| Hablar | El héroe le dice algo al rival. Un soldado puede distraerse (40 %) y perder su próximo ataque; al jefe no se lo distrae. Excepción: Nikki (ver 12). |
+| Hablar | El héroe le dice algo al rival. Un soldado puede distraerse (40 %) y perder su próximo ataque; al jefe no se lo distrae. Excepción: Nikki (ver 12). Según su estado, la frase sale distinta (solo cambia cómo se ve; funciona igual): **confundido**, incoherente y graciosa (`hablar_confundido` del personaje y `perdon.pide_confundido`; si no tiene, se le revuelven las palabras), con las letras chuecas pero legibles; **envenenado** o **quemado**, la misma frase cortada con quejidos (¡Arg!, ¡Ay!); **congelado**, solo «…». Quemado y congelado, cuando existan. |
 | Esquivar | Ese turno cada golpe normal que le tiren puede fallar (50 % de base; los especiales le hacen la mitad, según el nivel y el estado: ver 3). El menú muestra la probabilidad real contra el rival de más nivel. |
 | Objetos | Algo de la mochila, en él o en un compañero (revivir: en un caído). |
 | Huir | Termina la pelea, si la pelea lo permite (`huir`). En el Bastión y en el bar, no. No gasta el turno. |

@@ -358,5 +358,7 @@
   "equipo.mochila_vacia_titulo": "Your bag is empty",
   "batalla.mochila_vida_real": "You have nothing. This is real life: there's no bag here.",
   "batalla.pausa_espera": "You can pause when it is your turn to choose.",
-  "batalla.a_medias": "Half dodge!"
+  "batalla.a_medias": "Half dodge!",
+  "batalla.quejidos_envenenado": "Argh!|Ugh!|*cough, cough*|Agh!",
+  "batalla.quejidos_quemado": "Ow!|Ow, ow, ow!|It burns!|Hsss!"
 }

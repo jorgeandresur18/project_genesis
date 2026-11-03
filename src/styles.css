@@ -3226,3 +3226,12 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 @keyframes borrado-lineas { 0% { translate: 0 0; opacity: 1; } 100% { translate: 0 30px; opacity: 0; } }
 @keyframes borrado-cortes { 0% { translate: 0 0; } 15% { translate: -24px 12%; } 30% { translate: 30px -20%; } 45% { translate: -10px 35%; } 60%, 100% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .deleting-fade.glitch, .deleting-fade.glitch::before, .deleting-fade.glitch::after { animation: deleting-fade 0.8s ease-in forwards; } .deleting-fade.glitch { background: #000; } .deleting-fade.glitch::after { content: none; } }
+
+/* Hablar con un estado: confundido, letras chuecas (cada una inclinada y corrida, pero legibles) que se mecen;
+   con dolor, la frase un poco temblorosa; congelado, «…» en azul hielo. */
+.habla-confuso span { display: inline-block; white-space: pre; rotate: var(--r); translate: 0 var(--y); animation: letra-mece 1.6s ease-in-out infinite; }
+@keyframes letra-mece { 50% { rotate: calc(var(--r) * -1); } }
+.habla-envenenado, .habla-quemado { animation: habla-tiembla 0.25s steps(2) infinite; }
+@keyframes habla-tiembla { 50% { translate: 0.5px 0; } }
+.batalla-dialogo p.habla-congelado { color: #9fdcff; letter-spacing: 0.3em; }
+@media (prefers-reduced-motion: reduce) { .habla-confuso span, .habla-envenenado, .habla-quemado { animation: none; } }

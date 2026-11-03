@@ -97,6 +97,8 @@ export interface Heroe {
   escala?: number;
   /** Lo que le dice a un enemigo con «Hablar» ({objetivo}: su nombre). */
   hablar: string[];
+  /** Lo que dice con «Hablar» si está confundido (incoherente). Sin esto, se le revuelven las palabras. */
+  hablar_confundido?: string[];
   /** Ataques que aprende al llegar a un nivel (Jair: el Cebo, en el 6). */
   aprende?: { nivel: number; ataque: Ataque }[];
   /** El sonido de sus golpes (ataque y especial). */
@@ -120,7 +122,7 @@ export interface Enemigo {
    * veces). Cada vez el héroe dice `pide[i]` y él contesta `responde[i]`; si en el medio el héroe hace otra cosa,
    * se vuelve a empezar (y dice `corta`, si está).
    */
-  perdon?: { veces: number; quien: string; pide: string[]; responde: string[]; corta?: string };
+  perdon?: { veces: number; quien: string; pide: string[]; responde: string[]; corta?: string; pide_confundido?: string[] };
   /** Animación (de su hoja) cuando se retira (Nikki, llorando) y cuando gana la pelea. */
   al_retirarse?: string;
   al_ganar?: string;
@@ -266,6 +268,33 @@ export interface DatosBatalla {
    * golpes tienen `critico` más de probabilidad de ser críticos.
    */
   ayuda?: { umbral: number; cae: number; objeto: string; critico: number };
+}
+
+/**
+ * Cómo habla alguien según su estado (solo cambia cómo se ve la frase; «Hablar» funciona igual):
+ * congelado, solo «…»; confundido, incoherente; envenenado o quemado, la frase cortada con quejidos.
+ * Si tiene varios, manda el primero de esa lista. TODO: congelado y quemado, cuando existan esos estados.
+ */
+export type EstadoHabla = 'congelado' | 'confundido' | 'quemado' | 'envenenado' | null;
+export const estadoHabla = (l: Luchador): EstadoHabla => (l.confundido > 0 ? 'confundido' : l.envenenado ? 'envenenado' : null);
+/** Revuelve las palabras de una frase (el confundido sin frases propias). La primera va con mayúscula. */
+export function revolver(texto: string, azar: () => number = Math.random) {
+  const p = texto.replace(/[.,;:!?¡¿…]+/g, '').toLowerCase().split(/\s+/).filter(Boolean);
+  for (let i = p.length - 1; i > 0; i--) {
+    const j = Math.floor(azar() * (i + 1));
+    [p[i], p[j]] = [p[j], p[i]];
+  }
+  const r = p.join(' ');
+  return r ? `${r[0].toUpperCase()}${r.slice(1)}… ¿no?` : texto;
+}
+/** La frase cortada en dos o tres pedazos, con un quejido entre cada uno («Nikki… ¡Arg!… perdón»). */
+export function conQuejidos(texto: string, quejidos: string[], azar: () => number = Math.random) {
+  const p = texto.split(/\s+/).filter(Boolean);
+  if (p.length < 3 || !quejidos.length) return `${texto} ${quejidos[0] ?? ''}`.trim();
+  const cortes = p.length >= 8 ? 2 : 1;
+  const tam = Math.ceil(p.length / (cortes + 1));
+  const trozos = Array.from({ length: cortes + 1 }, (_, i) => p.slice(i * tam, (i + 1) * tam).join(' ')).filter(Boolean);
+  return trozos.reduce((acc, t) => `${acc}… ${quejidos[Math.floor(azar() * quejidos.length)]}… ${t}`);
 }
 
 /** Probabilidad base de que un ataque normal falle, de los dos lados (el especial no falla). */

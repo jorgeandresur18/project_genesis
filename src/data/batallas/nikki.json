@@ -64,6 +64,11 @@
             "usos": 5
           }
         }
+      ],
+      "hablar_confundido": [
+        "Te invito otro trago. A ti no. A la que está a tu lado. Hola, señorita.",
+        "Estás borracha, Nikki. ¿O el que da vueltas es el bar? Que alguien lo pare.",
+        "Ocho años, Nikki. ¿O eran ocho Nikkis? ¿Cuál es la que me odia? Ah. Todas."
       ]
     }
   },
@@ -140,7 +145,12 @@
           "Sigue. A ver si te lo creo.",
           "…Ya. Ya. Para. Te escuché."
         ],
-        "corta": "Ah, ¿ya se te acabaron las disculpas? Ya decía yo."
+        "corta": "Ah, ¿ya se te acabaron las disculpas? Ya decía yo.",
+        "pide_confundido": [
+          "Nikki, perdón. Perdón al bar también. Y a ese banco. Sobre todo al banco, él no hizo nada.",
+          "En serio. Perdón. Perdón a las tres. A la del medio, más. Fue a la que le dije la cosa.",
+          "Perdóname. Por favor. Y dile a tu gemela que también. La que flota."
+        ]
       },
       "sonido": "cachetada",
       "remata": {

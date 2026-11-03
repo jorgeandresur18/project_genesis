@@ -31,6 +31,10 @@ import {
   eligeEspecial,
   vanPerdiendo,
   falla,
+  conQuejidos,
+  estadoHabla,
+  revolver,
+  type EstadoHabla,
   esquiva,
   probEsquiva,
   cargar,
@@ -321,7 +325,7 @@ function Pelea({
   const figuras = useRef(new Map<string, HTMLDivElement>());
   const [numeros, setNumeros] = useState<{ key: number; id: string; texto: string; tipo: 'dano' | 'cura' | 'critico' | 'falla' }[]>([]);
   /** El mensaje: la narración arriba; lo que dice alguien, abajo con su retrato. Se escribe letra por letra. */
-  const [mensaje, setMensaje] = useState<{ texto: string; quien?: string; turno?: string; n: number } | null>(null);
+  const [mensaje, setMensaje] = useState<{ texto: string; quien?: string; turno?: string; n: number; estado?: EstadoHabla } | null>(null);
   const [letras, setLetras] = useState(0);
   const saltar = useRef<(() => void) | null>(null);
   /** El héroe que está eligiendo. */
@@ -725,11 +729,11 @@ function Pelea({
    * Muestra un mensaje: se escribe letra por letra (a la velocidad de texto de Opciones; si habla alguien, con el
    * sonido de escritura) y queda el tiempo justo para leerlo. Un clic o Enter completa el texto y otro sigue.
    */
-  const decir = (texto: string, quien?: string) =>
+  const decir = (texto: string, quien?: string, estado?: EstadoHabla) =>
     new Promise<void>((resolve) => {
       const cps = useStore.getState().settings.textSpeed;
       const instante = cps >= TEXT_SPEED_INSTANT;
-      setMensaje({ texto, quien, n: Math.random() });
+      setMensaje({ texto, quien, n: Math.random(), estado });
       let n = instante ? texto.length : 0;
       setLetras(n);
       let leyendo: ReturnType<typeof setTimeout> | undefined;
@@ -1301,18 +1305,27 @@ function Pelea({
       }
       const yo = quienEs(d.personajes[h.clave].sprite);
       const charla = CHARLAS[yo]?.[quienEs(en.sprite)];
+      // Según su estado, la frase sale distinta (congelado, confundido, con dolor); «Hablar» funciona igual.
+      const estado = estadoHabla(h);
+      const dicho = (normal: string, confusas?: string[]) => {
+        if (estado === 'congelado') return '…';
+        if (estado === 'confundido') return confusas?.length ? azar(confusas) : revolver(normal);
+        if (estado === 'envenenado' || estado === 'quemado') return conQuejidos(normal, t(`batalla.quejidos_${estado}`).split('|'));
+        return normal;
+      };
       // Pedirle perdón (Nikki): tantos turnos seguidos y termina la pelea. Es cosa de Jair: los demás le hablan a su
       // manera (las charlas).
       const p = yo === 'jair' ? en.perdon : undefined;
       if (p) {
         const i = Math.min(b.current.racha, p.veces - 1);
         b.current.racha++;
-        await decir(fmt(p.pide[i] ?? azar(d.personajes[h.clave].hablar), { objetivo: e.nombre }), h.nombre);
+        const confusa = p.pide_confundido?.[i];
+        await decir(fmt(dicho(p.pide[i] ?? azar(d.personajes[h.clave].hablar), confusa ? [confusa] : undefined), { objetivo: e.nombre }), h.nombre, estado);
         await decir(p.responde[i], p.quien);
         if (b.current.racha >= p.veces) b.current.perdona = true;
         return;
       }
-      await decir(fmt(azar(charla?.dice ?? d.personajes[h.clave].hablar), { objetivo: e.nombre }), h.nombre);
+      await decir(fmt(dicho(azar(charla?.dice ?? d.personajes[h.clave].hablar), d.personajes[h.clave].hablar_confundido), { objetivo: e.nombre }), h.nombre, estado);
       // Al jefe no se lo distrae.
       const funciona = !en.jefe && Math.random() < d.hablar;
       const contesta = charla?.[funciona ? 'ok' : 'no'];
@@ -2389,7 +2402,18 @@ function Pelea({
             {d.retratos[habla] && <img src={`${BASE}${d.retratos[habla]}.png`} alt="" draggable={false} />}
             <div>
               <b>{habla}</b>
-              <p>{conNumeros(texto)}</p>
+              {/* Confundido: las letras chuecas, cada una por su lado, pero legibles. */}
+              {mensaje?.estado === 'confundido' ? (
+                <p className="habla-confuso">
+                  {[...texto].map((c, i) => (
+                    <span key={i} style={{ '--r': `${((i * 37) % 11) - 5}deg`, '--y': `${((i * 53) % 7) - 3}px` } as CSSProperties}>
+                      {c}
+                    </span>
+                  ))}
+                </p>
+              ) : (
+                <p className={mensaje?.estado ? `habla-${mensaje.estado}` : undefined}>{conNumeros(texto)}</p>
+              )}
             </div>
           </div>
         )}
