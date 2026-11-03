@@ -413,6 +413,8 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
 | Congelado | azul hielo | cristales |
 | Especial | el color de cada personaje | fogonazo y franja |
 
+**En la tienda de Boringplace** (pedido del autor, 2026-11-03), la foto de cada objeto tiene el color de su tipo: curación, verde menta; mejora, dorado; para el rival, rojo; para un aliado (como el condón), plateado. Propuesta, sin aprobar: permanente (el caramelo), lila; equipo, azul; colección, gris.
+
 **Equipo (aprobado):**
 - Cuatro espacios: **cabeza, traje, amuleto y pies** (se suma pies a los tres de la sección 14).
 - El equipo es **único**: no se compra (por ahora) y le pertenece a su personaje, aunque cualquiera puede ponérselo.

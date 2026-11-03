@@ -7,7 +7,7 @@ import { useStore } from './store';
 import { useLang } from './i18n';
 import dataEs from '../data/boringplace.json';
 import dataEn from '../data/en/boringplace.json';
-import type { DatosBatalla, Objeto } from './batalla';
+import { tipoDe, type DatosBatalla, type Objeto } from './batalla';
 
 export interface Articulo {
   id: string;
@@ -36,7 +36,7 @@ export interface Articulo {
 export interface BoringplaceData {
   desbloqueo: string | null;
   /** Lo que se compra con monedas: la clave del objeto de las peleas y su precio (se vende a la mitad). */
-  tienda: { objeto: string; precio: number; descripcion: string; /** El color del objeto, para el fondo de su foto. */ color?: string }[];
+  tienda: { objeto: string; precio: number; descripcion: string }[];
   vacio: { titulo: string; texto: string };
   textos: Record<string, string>;
   articulos: Articulo[];
@@ -65,6 +65,20 @@ export const unlockScenesBoringplace = (): string[] =>
 const BATALLAS = import.meta.glob<DatosBatalla>('../data/batallas/*.json', { eager: true, import: 'default' });
 export const OBJETOS_TIENDA = new Map<string, Objeto>();
 for (const d of Object.values(BATALLAS)) for (const [k, o] of Object.entries(d.objetos)) if (!OBJETOS_TIENDA.has(k)) OBJETOS_TIENDA.set(k, o);
+/**
+ * El color de la foto de un objeto en la tienda, según su tipo (los colores aprobados de la biblia del RPG, sección 15):
+ * curación verde menta, mejora dorado, para el rival rojo, para un aliado plateado. Los que la biblia no tiene
+ * (permanente, equipo, colección) son propuesta.
+ */
+export function colorDeObjeto(o: Objeto): string {
+  const tipo = tipoDe(o);
+  if (tipo === 'curacion') return '#5fe3b0';
+  if (tipo === 'mejora') return '#e6b84a';
+  if (tipo === 'tactico') return o.objetivo === 'rival' || o.objetivo === 'rivales' ? '#e0524f' : '#c9d3e0';
+  if (tipo === 'permanente') return '#a07bff';
+  if (tipo === 'equipo') return '#4f8cff';
+  return '#8d8d99';
+}
 /** Lo que se paga al vender: la mitad de lo que cuesta. */
 export const precioVenta = (precio: number) => Math.floor(precio / 2);
 

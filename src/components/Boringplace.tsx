@@ -1,14 +1,14 @@
 import { useState, type CSSProperties, type ReactNode } from 'react';
 import { playSelect } from '../engine/sound';
 import { assetUrl } from '../engine/assets';
-import { OBJETOS_TIENDA, precioVenta, useBoringplace, type Articulo } from '../engine/boringplace';
+import { OBJETOS_TIENDA, colorDeObjeto, precioVenta, useBoringplace, type Articulo } from '../engine/boringplace';
 import { useStore } from '../engine/store';
 import s from './Boringplace.module.css';
 import sb from './Boringram.module.css';
 
 /**
  * Boringplace (dentro de Boringram): el marketplace. En la «Tienda», los objetos de las peleas están publicados como en
- * un marketplace (foto con el color del objeto, nombre y precio en tokens, la moneda del juego); adentro, su descripción
+ * un marketplace (foto con el color de su tipo: curación, mejora, para el rival…; nombre y precio en tokens, la moneda del juego); adentro, su descripción
  * y cuántos comprar. «Tus artículos»: lo que vende Jair y lo de la mochila. En el Capítulo 1 todavía no hay nadie
  * vendiendo nada. (Las publicaciones de la gente siguen en el JSON, pero no salen en la tienda: eran de relleno.)
  */
@@ -88,7 +88,7 @@ export function Boringplace({ onArticulo, onToast }: { onArticulo: (id: string) 
             const o = OBJETOS_TIENDA.get(x.objeto)!;
             return (
               <button key={x.objeto} className={s.tarjeta} onClick={() => onArticulo(`${ID_TIENDA}${x.objeto}`)}>
-                <FotoObjeto icono={o.icono} color={x.color} />
+                <FotoObjeto icono={o.icono} color={colorDeObjeto(o)} />
                 <span className={s.nombre}>{o.nombre}</span>
                 <b className={s.precio}>{tx.precio_monedas.replace('{n}', String(x.precio))}</b>
               </button>
@@ -215,7 +215,7 @@ function ObjetoVista({ objeto, onBack, onToast }: { objeto: string; onBack: () =
         )}
       </div>
       <Flotante>
-        <FotoObjeto icono={o.icono} color={x.color} grande />
+        <FotoObjeto icono={o.icono} color={colorDeObjeto(o)} grande />
       </Flotante>
       <div className={s.detalle}>
         <h3>{o.nombre}</h3>
@@ -247,7 +247,7 @@ function ObjetoVista({ objeto, onBack, onToast }: { objeto: string; onBack: () =
   );
 }
 
-/** La foto de un objeto de la tienda: su dibujo sobre un resplandor sutil de su color (como el fondo de Boringram). */
+/** La foto de un objeto de la tienda: su dibujo sobre un resplandor sutil del color de su tipo (como el fondo de Boringram). */
 function FotoObjeto({ icono, color, grande = false }: { icono?: string; color?: string; grande?: boolean }) {
   return (
     <span className={`${s.fotoObjeto} ${grande ? s.fotoGrande : ''}`} style={{ '--c': color ?? '#2a1724' } as CSSProperties} aria-hidden>
