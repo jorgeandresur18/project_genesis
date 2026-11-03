@@ -154,3 +154,4 @@ Cada tramo va del primer al último commit, más 30 minutos de trabajo antes del
   - Sin enlaces directos inventados: esas canciones abren la búsqueda de Spotify. `Panels.tsx` tipa la canción con `spotify` y `nota` opcionales.
 - **Pendiente:** si el autor quiere enlaces directos de Spotify para estas canciones, pasarlos.
 - **Cambio del autor (misma sesión):** no quiso secciones aparte. Bad Bunny quedó al final de «La influencia latinoamericana» y Mac Miller al final de «Notas del autor», como bloques `anexos` (párrafos, canciones y cierre) que se muestran después del cierre de la sección. `Panels.tsx` los dibuja con el mismo componente (`BloqueConoce`).
+- **Título del Capítulo 5 (decisión del autor):** pasa de «Conflicto de fusión» / «Merge Conflict» a **«Conflicto de dependencias» / «Dependency Hell»** («fusión» no se entendía en español). Actualizados el canon y el cronograma; los capítulos 3 a 7 todavía no tienen JSON, así que no hay más que cambiar.
