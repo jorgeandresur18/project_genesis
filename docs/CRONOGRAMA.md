@@ -1,0 +1,102 @@
+# CRONOGRAMA — PROJECT GENESIS
+
+Plan de trabajo por semanas. Es una guía, no un contrato: se ajusta cuando el autor cambia prioridades. Lo hecho
+se marca con [x] y se anota en `docs/BITACORA.md`.
+
+## Cómo se organiza
+
+**La historia manda.** El juego base se juega en orden: un capítulo sin terminar frena todo lo que viene después.
+El RPG, Boringram y el arte se hacen **para el capítulo que toca**, no por adelantado.
+
+**Cada semana tiene un foco y tareas livianas alrededor.** Según el costo:
+
+| Tipo | Costo | Quién | Ejemplos |
+|---|---|---|---|
+| Liviana | Bajo | El autor (Gemini, Photoshop, Upscayl) y Claude solo la integra | Sprites de la novela, fondos, CG |
+| Media | Medio | Claude con revisión del autor | Escribir y enlazar escenas, Boringram, pulir diálogos |
+| Pesada | Alto (muchos tokens) | Claude | Sprites del RPG (hojas, animaciones, efectos), mecánicas nuevas |
+
+**Reglas para gastar menos:**
+1. **Los sprites del RPG se hacen en tanda,** todos los de una pelea en la misma sesión, y solo cuando la historia necesita esa pelea.
+2. **El RPG queda congelado en mecánicas.** Mientras no llegue una pelea que lo pida, no se agregan estados, objetos ni sistemas: solo arreglos y lo que cada pelea nueva necesita.
+3. **Los diálogos se pulen por capítulo,** cuando el capítulo ya está enlazado y se juega de corrido.
+4. **Cada sesión cierra con una entrada en la bitácora** y commits chicos (nada de otro «cap1»).
+
+---
+
+## Dónde estamos (2 de noviembre)
+
+| Parte | Estado |
+|---|---|
+| Capítulo 1 | Completo y jugable; tiene el RPG (bar, Bastión, hangar). Diálogos sin pulir. Guion `docs/guion/cap01.md` desactualizado. |
+| Capítulo 2 | Borrador avanzado en `cap02.json`, **sin enlazar** al Capítulo 1. Faltan sus peleas y arte. |
+| Capítulo 3 | Canon escrito en `docs/CANON.md`; **no hay guion**. |
+| Capítulo 4 | Borrador del autor (17 escenas) en `docs/CANON.md`; sin guion. |
+| Capítulos 5 a 7 | Esquema en el canon. |
+| RPG | 4 peleas, sistema completo. Faltan equiparse de verdad, quemado y congelado, olvidar ataques y la regla anti-farmeo. |
+| Boringram y Boringplace | Completos para los Capítulos 1 y 2. |
+| Robustez | Aprobada el 29 de octubre y nunca hecha: ErrorBoundary, guardado seguro, CI, ESLint. |
+
+---
+
+## Semana 1 (3–9 de noviembre): cerrar los Capítulos 1 y 2
+- [ ] **Robustez** (medio día; protege a los jugadores de verdad): ErrorBoundary, guardado que nunca rompe el juego, CI y ESLint.
+- [ ] **Resincronizar el guion del Capítulo 1** (necesita el permiso del autor para `guion:exportar -- --forzar`).
+- [ ] **Pulir los diálogos del Capítulo 1:** el autor lee el guion y marca; Claude corrige con `docs/TONO.md`.
+- [ ] **Terminar el Capítulo 2:** partes que falten del autor, revisión contra el canon y enlazarlo al final del Capítulo 1.
+- [ ] *Liviana:* arte del Capítulo 2 que falte (`docs/guion/cap02_arte.md`): Rikka con traje rojo y espada, etc.
+
+## Semana 2 (10–16 de noviembre): las peleas del Capítulo 2
+- [ ] **Ordenar el RPG antes de sumar peleas:** una sola ficha por personaje (`personajes.json`), partir `Batalla.tsx` en piezas y simular el balance de todas las peleas.
+- [ ] **Decidir y hacer las peleas del Capítulo 2:** la muralla (Rikka sola), el campamento, el molino con el cassette y Cami acorazada. El plan simplificado de la cuenta regresiva espera la confirmación del autor.
+- [ ] *Pesada:* sprites del RPG de esas peleas, en tanda.
+- [ ] **Pulir los diálogos del Capítulo 2.**
+- [ ] *Media:* Boringram del Capítulo 2 completo (Jordan, Lady, las fotos del viaje).
+
+## Semanas 3 y 4 (17–30 de noviembre): el Capítulo 3
+- [ ] **Escribir el guion del Capítulo 3** desde el canon: la torre del Oráculo, el Rey Malvado, la espada DELETE, el DELETE sin WHERE, el regreso (`alt_1`: volver solo) y el despertar con Cami y Rikka en el cuarto.
+- [ ] **Resolver antes de escribir:** las decisiones pendientes del Capítulo 3 (ver abajo).
+- [ ] **La pelea final contra el Rey Malvado:** la más grande del juego. *Pesada:* sus sprites y su especial.
+- [ ] *Liviana:* fondos y CG del Capítulo 3.
+- [ ] *Media:* la notificación de la migración en el celular de Jair.
+
+## Semanas 5 y 6 (1–14 de diciembre): el Capítulo 4
+- [ ] **Escribir el guion del Capítulo 4** desde el borrador del autor (17 escenas) y lo que él agregue después.
+- [ ] **Pelea RPG con los otakus en la convención** (Cami). *Pesada:* sprites de los otakus. Es la primera pelea en el mundo real después del bar: ¿«vida real» como la de Nikki?
+- [ ] *Liviana:* fondos del mundo real (departamento de día, convención, Dulce Frío por dentro, el parque, el centro).
+- [ ] *Liviana:* sprites nuevos: la compañera de tesis, Jordan, amigos de Jair y de Nikki, Cami con uniforme de Dulce Frío.
+- [ ] *Media:* Boringram del Capítulo 4 (las fotos de la convención, Cami y Nikki en la heladería, lo que ve Nikki).
+- [ ] **Pendientes del RPG que el Capítulo 4 pide:** la tienda desde el título y equiparse de verdad, si la historia lo necesita.
+
+## Después (desde el 15 de diciembre)
+- Capítulo 5 (rivalidad Cami y Nikki; el descubrimiento) y, si el autor quiere, Génesis++.
+- Capítulo 6 (la bifurcación y la cara del Rey) y los epílogos 7A y 7B.
+- Pendientes del RPG sin fecha: quemado y congelado, olvidar un ataque, regla anti-farmeo, `npm run escalar` con Upscayl.
+
+---
+
+## Decisiones pendientes del autor
+Se responden cuando toque su semana; mientras, no se inventan.
+
+**Capítulo 2**
+- El plan de las peleas (la cuenta regresiva simplificada).
+- Qué espiaba entre los arbustos en la escena secreta.
+- El nombre del plato de la resaca.
+
+**Capítulo 3**
+- Qué pasa con la espada DELETE cuando la guardia se los lleva (final del Capítulo 2).
+- Cómo es la pelea final.
+
+**Capítulo 4**
+- El nombre de la compañera de tesis y de los amigos nuevos.
+- Cuál es el adelanto en la primera convención.
+- Por qué Cami besa a Jair a propósito.
+- Cómo sigue después de la cuenta del bar.
+- Cómo se reparte entre los Capítulos 4 y 5.
+
+**General**
+- Las preguntas abiertas de Blueberries y Nikki.
+- El clon del lado de los héroes.
+- Cuánto tardó GENESIS en terminar el juego.
+- `AnothergIrl`: si las mayúsculas forman «AI» a propósito.
+- Las frases de confusión del RPG, para aprobar o corregir.
