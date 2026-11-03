@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { assetUrl } from '../engine/assets';
 import { useT } from '../engine/i18n';
+import { musicaMudaPorTv } from '../engine/music';
 import { playEstatica, playTvClic, playTvEncendido } from '../engine/sound';
 import { useStore } from '../engine/store';
 
@@ -81,9 +82,13 @@ export function TvViejo({ activo, children }: { activo: boolean; children: React
     return () => clearTimeout(id);
   }, [osd]);
 
-  // La nieve suena mientras se ve.
+  // En un canal sin señal suena la nieve y no la música del juego.
   const nieve = activo && encendida && canal > 0;
   useEffect(() => (nieve ? playEstatica() : undefined), [nieve]);
+  useEffect(() => {
+    musicaMudaPorTv(activo && canal > 0);
+    return () => musicaMudaPorTv(false);
+  }, [activo, canal]);
 
   const power = () => {
     if (transicion) return;

@@ -3300,8 +3300,8 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 .tv-estatica::before { opacity: 0.95; }
 /* El tubo: al apagar, la imagen se aplasta en una línea, después en un punto, y queda un brillo que se apaga; al
    prender, al revés. Apagado: negro. */
-.tv-pantalla.apagando .tv-imagen { animation: tv-apagar 0.55s ease-in forwards; }
-.tv-pantalla.encendiendo .tv-imagen { animation: tv-prender 0.65s ease-out both; }
+.tv-pantalla.apagando .tv-imagen, .tv-pantalla.apagando .tv-estatica { animation: tv-apagar 0.55s ease-in forwards; }
+.tv-pantalla.encendiendo .tv-imagen, .tv-pantalla.encendiendo .tv-estatica { animation: tv-prender 0.65s ease-out both; }
 .tv-pantalla.sin-imagen .tv-imagen { visibility: hidden; }
 .tv-pantalla.sin-imagen::before { content: ''; position: absolute; inset: 0; z-index: 1; background: #000; }
 .tv-pantalla.apagando::after { content: ''; position: absolute; left: 50%; top: 50%; z-index: 2; width: 2vmin; height: 2vmin; translate: -50% -50%; border-radius: 50%; background: radial-gradient(circle, #fff, rgba(200, 220, 255, 0.6) 40%, transparent 70%); animation: tv-punto 1s ease-out 0.45s both; pointer-events: none; }

@@ -19,8 +19,17 @@ let token = 0; // Invalida los bucles programados de un tema que ya se cambió.
 let voices: { source: AudioBufferSourceNode; gain: GainNode }[] = [];
 let timer: ReturnType<typeof setTimeout> | null = null;
 
+/** El televisor del filtro TV CRT en un canal sin señal: la música del juego no se oye (la nieve sí). */
+let mudaPorTv = false;
+
 function level(settings: { musicVolume: number; muted: boolean }): number {
-  return settings.muted ? 0 : settings.musicVolume * MUSIC_LEVEL;
+  return settings.muted || mudaPorTv ? 0 : settings.musicVolume * MUSIC_LEVEL;
+}
+
+/** Calla o devuelve la música del juego mientras el televisor está en un canal sin señal. */
+export function musicaMudaPorTv(muda: boolean): void {
+  mudaPorTv = muda;
+  if (master) master.gain.setTargetAtTime(level(useStore.getState().settings), context().currentTime, 0.05);
 }
 
 function out(): GainNode {
