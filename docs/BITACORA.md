@@ -145,3 +145,11 @@ Cada tramo va del primer al último commit, más 30 minutos de trabajo antes del
   - Idea sin aprobar: canales del televisor que en ciertos capítulos muestran algo (un comercial de Noodle, la Voz).
   - El plan de la Semana 1 del cronograma no empezó: esta sesión fue al modo Retro CRT.
 
+
+## 3 de noviembre — Conoce más: Bad Bunny y Mac Miller
+
+- **Hecho:** dos secciones nuevas en la parte del autor, después de «La influencia latinoamericana» (español e inglés):
+  - **«Manejar de noche»:** Bad Bunny y la fantasía de manejar de noche por la ciudad; lista de nueve canciones (DÁKITI, YONAGUNI, DOS MIL 16, MOJABI GHOST, LO SIENTO BB:/, Después de la Playa, AMORFODA, NI BIEN NI MAL, un x100to) y, al cierre, la historia personal de «un x100to».
+  - **«Un poco de Mac Miller»:** la influencia puntual de The Divine Feminine en las chicas, sus discos favoritos y lo que escuchaba a los 16; botones a los tres discos.
+  - Sin enlaces directos inventados: esas canciones abren la búsqueda de Spotify. `Panels.tsx` tipa la canción con `spotify` y `nota` opcionales.
+- **Pendiente:** si el autor quiere enlaces directos de Spotify para estas canciones, pasarlos.

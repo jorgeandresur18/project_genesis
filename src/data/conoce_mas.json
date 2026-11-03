@@ -209,6 +209,44 @@
       ]
     },
     {
+      "titulo": "Manejar de noche",
+      "parte": "autor",
+      "parrafos": [
+        "Aunque buena parte de mis influencias musicales vienen del rock de los 80, los 90 y principios de los 2000, también escucho bastante Bad Bunny.",
+        "Hay algo en algunas de estas canciones que me transporta a una escena muy particular: salir a conducir de noche sin rumbo fijo, recorrer una ciudad llena de edificios altos, luces, restaurantes y bares, detenerme en el minimarket de alguna gasolinera, comprar unas bebidas y seguir escuchando música. Me gusta imaginar esos recorridos por zonas donde la ciudad parece no dormir nunca, con los edificios iluminados y el movimiento de la gente todavía presente.",
+        "Quizás sea una fantasía bastante sencilla, pero me transmite una sensación de libertad: la posibilidad de salir cuando quiera, recorrer la ciudad, detenerme donde me apetezca y permitirme pequeños gustos sin tener que preocuparme demasiado por el dinero. Supongo que también hay algo de aspiración en eso: sentir que puedo disfrutar de cosas que antes quizás no estaban a mi alcance.",
+        "Estas son las que más me gustan:"
+      ],
+      "canciones": [
+        { "personaje": "", "cancion": "DÁKITI", "banda": "Bad Bunny y Jhayco" },
+        { "personaje": "", "cancion": "YONAGUNI", "banda": "Bad Bunny" },
+        { "personaje": "", "cancion": "DOS MIL 16", "banda": "Bad Bunny" },
+        { "personaje": "", "cancion": "MOJABI GHOST", "banda": "Tainy y Bad Bunny" },
+        { "personaje": "", "cancion": "LO SIENTO BB:/", "banda": "Tainy, Bad Bunny y Julieta Venegas" },
+        { "personaje": "", "cancion": "Después de la Playa", "banda": "Bad Bunny" },
+        { "personaje": "", "cancion": "AMORFODA", "banda": "Bad Bunny" },
+        { "personaje": "", "cancion": "NI BIEN NI MAL", "banda": "Bad Bunny" },
+        { "personaje": "", "cancion": "un x100to", "banda": "Grupo Frontera y Bad Bunny" }
+      ],
+      "cierre": [
+        "Y hay una historia personal detrás de «un x100to»: es una canción que solía escuchar junto a alguien mientras bebíamos. No sé si es por la canción, por aquellas noches o por la compañía, pero terminó quedándose asociada a ese recuerdo. Hay canciones que, cuando vuelves a escucharlas, te transportan directamente a un momento de tu vida. Esta es una de ellas."
+      ]
+    },
+    {
+      "titulo": "Un poco de Mac Miller",
+      "parte": "autor",
+      "parrafos": [
+        "También encuentro una influencia puntual en The Divine Feminine, de Mac Miller. No diría que es un álbum que haya tomado como referencia en su totalidad, y sería un descaro afirmar que lo escuché completo y que me inspiré en todo su concepto. Sin embargo, algunas de sus ideas y sensibilidades sobre el amor, la sensualidad, la feminidad y las relaciones influyeron en la forma en que concibo a los personajes femeninos de PROJECT GENESIS.",
+        "De hecho, mis álbumes favoritos de Mac Miller son Watching Movies with the Sound Off y Swimming, dos trabajos cuya sensibilidad introspectiva y atmósfera emocional conectan mucho más directamente con mis gustos musicales.",
+        "Por otro lado, cuando tenía alrededor de 16 años solía escuchar Blue Slide Park y sus mixtapes K.I.D.S. y Best Day Ever. Quizá, sin darme cuenta, algo de aquella etapa también terminó filtrándose en PROJECT GENESIS. Hay influencias que uno reconoce conscientemente y otras que probablemente permanecen en algún lugar de la memoria hasta que aparecen, transformadas, en algo que uno crea años después."
+      ],
+      "canciones": [
+        { "personaje": "", "cancion": "The Divine Feminine", "banda": "Mac Miller", "nota": "La influencia puntual (2016)." },
+        { "personaje": "", "cancion": "Watching Movies with the Sound Off", "banda": "Mac Miller", "nota": "Uno de mis favoritos (2013)." },
+        { "personaje": "", "cancion": "Swimming", "banda": "Mac Miller", "nota": "El otro (2018)." }
+      ]
+    },
+    {
       "titulo": "Una nota personal",
       "parte": "autor",
       "parrafos": [

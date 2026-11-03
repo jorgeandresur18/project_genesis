@@ -416,6 +416,9 @@ function CompletionMeter() {
 /** La parte de «Conoce más» a la que va una sección (el juego o el autor); la advertencia no tiene. */
 const parteDe = (s: object) => ('parte' in s ? (s.parte as string) : undefined);
 
+/** Una canción (o disco) de «Conoce más». Sin `spotify`, el botón busca la canción en Spotify. */
+type CancionConoce = { personaje?: string; cancion: string; banda: string; nota?: string; spotify?: string };
+
 /** «Conoce más del proyecto»: qué es el juego, de qué trata, sus temas, cómo nació y enlaces del autor. */
 export function AboutPanel({ onClose }: { onClose: () => void }) {
   const t = useT();
@@ -459,7 +462,7 @@ export function AboutPanel({ onClose }: { onClose: () => void }) {
             ))}
             {/* Notas del autor: una canción por personaje, con su botón para escucharla en Spotify. */}
             {'canciones' in s &&
-              s.canciones?.map((c) => (
+              (s.canciones as CancionConoce[] | undefined)?.map((c) => (
                 <div key={c.cancion} className="about-cancion">
                   <p>
                     {c.personaje && <b>{c.personaje}:</b>} «{c.cancion}», {c.banda}. {c.nota}
