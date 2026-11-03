@@ -102,7 +102,7 @@ Se responden cuando toque su semana; mientras, no se inventan.
 - ¿Canales del televisor que muestran algo en ciertos capítulos? (idea de Claude, sin aprobar).
 
 **Títulos de los capítulos 3 a 7**
-- Elegidos: Capítulo 4, «Hola, mundo real» / «Hello, Real World»; Capítulo 5, «Conflicto de fusión» / «Merge Conflict»; Capítulo 6, «Dios ha muerto;» / «God Is Dead;». Faltan el 3, el 7A y el 7B (con el chiste también en inglés).
+- Elegidos: Capítulo 4, «"Hola, mundo real"» / «"Hello, Real World"» (con las comillas); Capítulo 5, «Conflicto de fusión» / «Merge Conflict»; Capítulo 6, «Dios ha muerto;» / «God Is Dead;». Faltan el 3, el 7A y el 7B (con el chiste también en inglés).
 - Propuestas en `docs/BITACORA.md` (sesión del 2 y 3 de noviembre); el 3 iba hacia «return 0;» o «Proceso terminado*».
 
 **General**
