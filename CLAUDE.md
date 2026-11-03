@@ -8,7 +8,7 @@ Novela visual indie en código (React + Vite). Género: ciencia ficción psicol�
 2. Al escribir diálogos o textos, lee `docs/TONO.md`.
 3. Al tocar finales o rutas, lee `docs/FINALES.md`.
 4. Al programar, lee `docs/SPEC.md`.
-5. Al tocar las batallas por turnos (RPG), lee `docs/BIBLIA_RPG.md`: las reglas de todas las peleas y las excepciones de cada una.
+5. Al tocar las batallas por turnos (RPG), lee `docs/BIBLIA_RPG.md`: las reglas de todas las peleas y las excepciones de cada una. Para el Rey Malvado y la batalla final, `docs/BATALLA_FINAL.md`.
 6. Para saber en qué se está y qué sigue, lee `docs/CRONOGRAMA.md`. **Al terminar cada sesión, agrega una entrada en `docs/BITACORA.md`** (qué se hizo, qué decidió el autor, qué quedó pendiente) y marca lo hecho en el cronograma.
 7. Al escribir los orígenes de las chicas, la relación con Nikki o los capítulos 4 en adelante, lee `docs/DIRECCION_PSICOLOGICA.md` (si contradice el canon, pregunta). Para Cami, lee también `docs/CAMI.md`; para Rikka, `docs/RIKKA.md`.
 

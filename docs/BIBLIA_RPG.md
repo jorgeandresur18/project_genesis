@@ -454,3 +454,19 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
 | Retratos y sprite de batalla definitivos (hoy algunos son placeholders) | Esperando el arte del autor. |
 | El Bastión, jugador atento: gana ~99 % (con la ayuda del juego). ¿Más difícil? | A decidir por el autor. |
 | **Nueva partida+**: al terminar el juego, empezar de nuevo con los niveles y el equipo de la partida terminada, con los enemigos de más nivel para que siga habiendo desafío | Idea aprobada para más adelante (cuando el juego esté completo). |
+
+---
+
+## La batalla final y el Rey Malvado (decidido por el autor el 2026-11-03)
+
+Detalle completo en `docs/BATALLA_FINAL.md`.
+
+- **Capítulo 3:** pelea contra el Rey solo en su forma **THE KING** (en un momento crece y se vuelve gigante, sin ser
+  otra fase), **con la cara oculta**. Termina con el DELETE sin WHERE.
+- **Capítulo 7A, la batalla final del juego:** **cinco fases**, cada una con su sprite y su forma de pelear:
+  THE KING → THE WATCHER → THE TRIAD → THE CATACLYSM → THE VOID.
+- **Capítulo 7B:** THE KING, más fuerte que en el Capítulo 3; no se transforma.
+- **Por hacer:** las mecánicas de cada fase (ataques, especiales, cómo se pasa de una a otra, en qué fase entra
+  AnothergIrl) `[PENDIENTE]`. Sprites: el autor pasa los borradores de las transformaciones; el de THE KING todavía
+  no existe.
+
