@@ -102,7 +102,7 @@ Se responden cuando toque su semana; mientras, no se inventan.
 - ¿Canales del televisor que muestran algo en ciertos capítulos? (idea de Claude, sin aprobar).
 
 **Títulos de los capítulos 3 a 7**
-- «Dios ha muerto» / «God Is Dead;» es el del Capítulo 6. Faltan el 3, el 4, el 5, el 7A y el 7B (con el chiste también en inglés).
+- «Dios ha muerto;» / «God Is Dead;» es el del Capítulo 6. Faltan el 3, el 4, el 5, el 7A y el 7B (con el chiste también en inglés).
 - Propuestas en `docs/BITACORA.md` (sesión del 2 y 3 de noviembre); el 3 iba hacia «return 0;» o «Proceso terminado*».
 
 **General**

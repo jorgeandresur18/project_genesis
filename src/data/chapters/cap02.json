@@ -2,9 +2,9 @@
   "ruta": "base",
   "chapter": 2,
   "title": "El viaje del héroe*",
-  "title_en": "The Hero's Journey*",
+  "title_en": "The Journey of the Hero*",
   "title_glitch": "El viaje del antihéroe",
-  "title_glitch_en": "The Antihero's Journey",
+  "title_glitch_en": "The Journey of the Antihero",
   "estado": "borrador",
   "nota": "Inicio del capítulo escrito por Claude a partir del plan del autor (docs/guion/cap02_plan.md). Todavía no está enlazado al final del Capítulo 1: para probarlo, abrir el juego con ?escena=cap02_001. No es canon hasta que el autor lo apruebe.",
   "scenes": [
