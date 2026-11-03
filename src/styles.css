@@ -2778,6 +2778,8 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 .versus-lado { position: absolute; inset: 0; display: flex; align-items: center; background: repeating-linear-gradient(180deg, color-mix(in srgb, var(--c) 85%, #000) 0 0.35rem, color-mix(in srgb, var(--c) 55%, #000) 0.35rem 0.5rem, var(--c) 0.5rem 1.1rem); background-size: 100% 200%; }
 .versus-lado::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, transparent 0 3rem, rgba(255, 255, 255, 0.55) 3rem 3.15rem, transparent 3.15rem 7rem); animation: versus-lineas 0.35s linear infinite; }
 .versus-figura { position: absolute; inset: 0; display: flex; align-items: center; }
+/* Los fondos, un poco más anchos que la pantalla: al entrar rebotan y, si no, asomaba el negro en los costados. */
+.versus-lado.rival, .versus-lado.heroe { left: -6%; right: -6%; }
 .versus-lado.rival { clip-path: polygon(0 0, 60% 0, 40% 100%, 0 100%); }
 .versus-lado.heroe { clip-path: polygon(60% 0, 100% 0, 100% 100%, 40% 100%); }
 .versus-lado.rival, .versus-figura.rival { justify-content: flex-start; padding-left: 8%; animation: versus-entra-izq 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.1) 0.45s both; }
@@ -3091,9 +3093,9 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 .batalla-nebulosa { position: absolute; aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; pointer-events: none; mix-blend-mode: screen;
   background: radial-gradient(circle, rgba(255, 120, 225, 0.9), rgba(200, 70, 255, 0.45) 40%, transparent 70%); animation: nebulosa 6s ease-in-out infinite; }
 @keyframes nebulosa { 0%, 100% { opacity: 0.45; scale: 0.9; } 50% { opacity: 1; scale: 1.08; } }
-.batalla-brillo { position: absolute; width: 0.4rem; aspect-ratio: 1; translate: -50% -50%; pointer-events: none; background: #fff; opacity: 0;
+.batalla-brillo { position: absolute; width: clamp(2px, 0.25vw, 0.4rem); aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; pointer-events: none; background: #fff; opacity: 0;
   box-shadow: 0 0 5px #fff, 0 0 12px #ff8ae6, 0 0 20px #ff5fd8; animation: brillo 3s ease-in-out infinite; }
-.batalla-brillo.grande { width: 0.9rem; clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%); box-shadow: none; background: #ffe6fb; }
+.batalla-brillo.grande { width: clamp(6px, 0.6vw, 0.9rem); border-radius: 0; clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%); box-shadow: none; background: #ffe6fb; }
 @keyframes brillo { 0%, 100% { opacity: 0; scale: 0.4; } 45% { opacity: 1; scale: 1.25; } 60% { opacity: 0.6; scale: 0.9; } }
 /* Las luces de un lugar (el bar): un resplandor que late suave, como un foco viejo; morado en los reflectores. */
 .batalla-luz { position: absolute; aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; pointer-events: none; mix-blend-mode: screen; animation: luz-late 3s ease-in-out infinite; }
