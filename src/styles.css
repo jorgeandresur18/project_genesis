@@ -3283,3 +3283,7 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
   }
 }
 @media (prefers-reduced-motion: reduce) { .tv-crt { animation: none; } }
+
+/* Filtro apagado: el televisor sigue montado pero no existe a la vista (sus cajas no ocupan lugar ni filtran). */
+.tv.apagado, .tv.apagado .tv-caja, .tv.apagado .tv-pantalla, .tv.apagado .tv-imagen { display: contents; }
+.tv.apagado .tv-crt, .tv.apagado .tv-panel, .tv.apagado .tv-barra { display: none; }

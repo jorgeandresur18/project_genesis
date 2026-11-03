@@ -157,13 +157,11 @@ export default function App() {
   return (
     <div className="app">
       {hasGame ? (
-        filtroTv ? (
-          <TvViejo>
-            <Game open={setOverlay} paused={overlay !== null} onTitle={goToTitle} />
-          </TvViejo>
-        ) : (
+        // Siempre dentro del televisor (apagado, no se nota): así prenderlo o apagarlo en plena partida no
+        // vuelve a montar el juego (una pelea no empieza de nuevo).
+        <TvViejo activo={!!filtroTv}>
           <Game open={setOverlay} paused={overlay !== null} onTitle={goToTitle} />
-        )
+        </TvViejo>
       ) : (
         <TitleScreen
           open={setOverlay}
@@ -238,7 +236,7 @@ function urlStart(): { scene: string; chapter?: number } | null {
  * no hay televisor: la pantalla en 4:3 con el efecto CRT y dos barras a los costados con el logo del modo TV. Los
  * paneles (Opciones, Boringram…) se abren por encima, fuera del televisor, y el menú del título no cambia.
  */
-function TvViejo({ children }: { children: ReactNode }) {
+function TvViejo({ activo, children }: { activo: boolean; children: ReactNode }) {
   const t = useT();
   const barra = (
     <div className="tv-barra" aria-hidden>
@@ -246,7 +244,7 @@ function TvViejo({ children }: { children: ReactNode }) {
     </div>
   );
   return (
-    <div className="tv">
+    <div className={`tv ${activo ? '' : 'apagado'}`}>
       {barra}
       <div className="tv-caja">
         <div className="tv-pantalla">
