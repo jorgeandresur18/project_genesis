@@ -42,6 +42,16 @@
   },
   "publicaciones": [
     {
+      "id": "jair_tokens",
+      "autor": "jair",
+      "tipo": "texto",
+      "texto": "Pagué el plan PlusUltra++ de Claody. Le hice UNA pregunta: cómo centrar un div. Se me acabaron los tokens. Nos vemos el mes que viene, Misanthropic. Ojalá a ti también te centren algo.",
+      "likes": 0,
+      "comentarios": [],
+      "desbloqueo": "cap01_118",
+      "cuando": "0 01:04"
+    },
+    {
       "id": "nikki_vainilla",
       "autor": "nikki",
       "tipo": "texto",
@@ -91,6 +101,16 @@
       "comentarios": [],
       "desbloqueo": "cap01_115n2",
       "cuando": "-4 23:50"
+    },
+    {
+      "id": "jair_cloudy_nombre",
+      "autor": "jair",
+      "tipo": "texto",
+      "texto": "Misanthropic le puso «Cloudy» a su IA. Todos sabemos de dónde sacaron el nombre: del rubio del juego por turnos, el de la espada más grande que su autoestima. Por eso yo le digo Claody. Que me demanden, igual no tengo nada.",
+      "likes": 3,
+      "comentarios": [],
+      "desbloqueo": "cap01_115n2",
+      "cuando": "-6 22:40"
     },
     {
       "id": "nikki_repost_3am",
