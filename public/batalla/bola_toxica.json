@@ -1,0 +1,30 @@
+{
+  "frameWidth": 112,
+  "frameHeight": 112,
+  "animations": {
+    "idle": {
+      "row": 0,
+      "frames": 16,
+      "fps": 12,
+      "loop": true
+    },
+    "aparecer": {
+      "row": 1,
+      "frames": 8,
+      "fps": 14,
+      "loop": false
+    },
+    "explotar": {
+      "row": 2,
+      "frames": 10,
+      "fps": 14,
+      "loop": false
+    }
+  },
+  "cuerpo": [
+    7,
+    10,
+    105,
+    104
+  ]
+}

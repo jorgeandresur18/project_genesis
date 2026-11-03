@@ -345,5 +345,7 @@
   "galeria.pixel_art": "Pixel art",
   "galeria.pixel_vacio": "You haven't fought anyone yet.",
   "galeria.accion_bloqueada": "Unlocks when you see it in a fight.",
-  "galeria.accion.clon": "Shadow clone"
+  "galeria.accion.clon": "Shadow clone",
+  "batalla.bola_envenena": "The toxic cloud splashes everyone. Except {quien}.",
+  "galeria.accion.aura": "Mega Toxic Ball"
 }

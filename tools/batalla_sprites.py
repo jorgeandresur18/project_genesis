@@ -9,7 +9,7 @@
 #   hasta su objetivo y la traiga de vuelta mientras es un vórtice («viaje» en el .json).
 # - la media luna de la tajada de la sombra sale de su hoja y queda como proyectil aparte (sombra_tajada.png, de
 #   «ataque de la sombra.png», junto al HTML): el juego la lanza en horizontal hasta salir de la pantalla.
-# Uso: python -I tools/batalla_sprites.py "docs/sprites de prueba/ULTIMOOOOS_SPRITES_Nikki.html"
+# Uso: python -I tools/batalla_sprites.py "docs/sprites de prueba/sprites rpg.html"
 import base64
 import io
 import json
@@ -34,6 +34,8 @@ HOJAS = {
     'kimono': ('rikka', {'idle': 'idle', 'cabello': 'cabello', 'salto': 'salto', 'ataque': 'ataque', 'daño': 'daño', 'pestaneo': 'pestaneo', 'especial': 'especial'}),
     'ninja': ('soldado', {'idle': 'idle', 'correr': 'mover', 'salto': 'salto', 'ataque': 'ataque', 'daño': 'daño', 'pestaneo': 'pestaneo'}),
     'sombra': ('sombra', {'idle': 'idle', 'tajada': 'ataque', 'desgarro': 'especial', 'daño': 'daño'}),
+    # La Mega Bola Tóxica de Nikki (un proyectil con su propia hoja: aparecer, flamas y explotar).
+    'bola': ('bola_toxica', {'idle': 'idle', 'aparecer': 'aparecer', 'explotar': 'explotar'}),
 }
 
 
@@ -84,6 +86,9 @@ BESO_DESDE = 46
 BESO_CORAZON = {'x': 104, 'y': 39, 'ancho': 21, 'alto': 20}
 # El cuadro en que el corazón aparece en la mano (chico, y crece).
 BESO_APARECE = 52
+# La Mega Bola Tóxica: Nikki levanta la mano en el cuadro 65 del aura (ahí aparece la bola) y la baja en el 120.
+BOLA_APARECE = 65
+BOLA_SUELTA = 120
 
 
 def hoja_beso(c: dict, html: Path):
@@ -343,7 +348,7 @@ def repartir(im: np.ndarray, fw: int, fh: int, meta: dict) -> np.ndarray:
 
 
 def main():
-    ruta = Path(sys.argv[1]) if len(sys.argv) > 1 else RAIZ / 'docs' / 'sprites de prueba' / 'ULTIMOOOOS_SPRITES_Nikki.html'
+    ruta = Path(sys.argv[1]) if len(sys.argv) > 1 else RAIZ / 'docs' / 'sprites de prueba' / 'sprites rpg.html'
     for c in leer_html(ruta):
         if c['id'] == 'soldado':
             im, meta = hoja_capitan(c)
@@ -382,6 +387,19 @@ def main():
                 'especial': {f: [[x, y, apuntar(y)] for x, y in ps] for f, ps in destellos(im, fw, fh, es['row'], es['frames']).items()},
             }
             print('cami: disparos', {k: len(v) for k, v in meta['disparos'].items()})
+        if nombre == 'nikki' and 'aura' in c.get('sheets', {}):
+            # El aura (la Mega Bola Tóxica): carga, levanta la mano (la bola aparece en la palma y crece) y la baja.
+            sh, an = c['sheets']['aura'], c['anims']['aura']
+            hoja = np.array(Image.open(io.BytesIO(base64.b64decode(sh['src'].split('base64,')[1]))).convert('RGBA'))
+            fila = np.zeros((fh, an['frames'] * fw, 4), im.dtype)
+            for f in range(an['frames']):
+                x, y = (f % an['cols']) * sh['fw'], (f // an['cols']) * sh['fh']
+                fila[:, f * fw:(f + 1) * fw] = hoja[y:y + fh, x:x + fw]
+            meta['animations']['aura'] = {'row': im.shape[0] // fh, 'frames': an['frames'], 'fps': an['fps'], 'loop': False}
+            ancho = max(im.shape[1], fila.shape[1])
+            im = np.concatenate([np.pad(im, ((0, 0), (0, ancho - im.shape[1]), (0, 0))), np.pad(fila, ((0, 0), (0, ancho - fila.shape[1]), (0, 0)))])
+            # Dónde y cuándo va la bola: aparece sobre la palma levantada y sale al bajar la mano.
+            meta['bola'] = {'hoja': 'batalla/bola_toxica', 'aparece': BOLA_APARECE, 'suelta': BOLA_SUELTA, 'x': 104, 'y': 18}
         if nombre == 'nikki' and 'beso' in c.get('sheets', {}):
             fila, anim, proy = hoja_beso(c, ruta)
             meta['animations']['beso'] = {'row': im.shape[0] // fh, **anim}

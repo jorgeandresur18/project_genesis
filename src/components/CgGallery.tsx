@@ -435,7 +435,6 @@ function Characters() {
   const flat: { id: string; expr: string; rpg?: SpriteRpg }[] = shown.flatMap((c) => [
     ...seenOf(c.id).map((sp) => ({ id: c.id, expr: sp.expr })),
     ...g.secretSprites(c.id).map((expr) => ({ id: c.id, expr })),
-    ...g.rpgSprites(c.id).map((r) => ({ id: c.id, expr: r.hoja, rpg: r })),
   ]);
   // La acción que se ve del sprite del combate abierto (se elige en la ficha).
   const [accion, setAccion] = useState('idle');
@@ -498,22 +497,7 @@ function Characters() {
         </button>
       ))}
       {/* Los del combate: pixel art animado. */}
-      {g.rpgSprites(c.id).map((r) => (
-        <button
-          key={r.hoja}
-          className="sprite-item sprite-item-rpg"
-          onClick={() => setOpen(flat.findIndex((f) => f.id === c.id && f.expr === r.hoja))}
-        >
-          <span className="sprite-cell">
-            <span className="sprite-rpg-mini">
-              <Centrado hoja={r.hoja}>
-                <SpriteHoja src={r.hoja} anim="idle" />
-              </Centrado>
-            </span>
-          </span>
-          <span className="sprite-name">{rpgNombre(r.hoja)}</span>
-        </button>
-      ))}
+      {/* Los del combate (pixel art) van en su propia pestaña, «Pixel art». */}
     </div>
   );
 
@@ -941,7 +925,7 @@ function PixelArt() {
             <button key={r.hoja} className="sprite-item sprite-item-rpg" onClick={() => setOpen(i)}>
               <span className="sprite-cell">
                 <span className="sprite-rpg-mini">
-                  <Centrado hoja={r.hoja}>
+                  <Centrado hoja={r.hoja} alto={88}>
                     <SpriteHoja src={r.hoja} anim="idle" />
                   </Centrado>
                 </span>
@@ -975,25 +959,28 @@ function PixelArt() {
  * Centra un sprite del combate: sus cuadros traen el personaje corrido a un costado (el aire para el arma o el
  * especial), así que se corre según dónde está su cuerpo en reposo (`centro_x` de la hoja).
  */
-function Centrado({ hoja, children }: { hoja: string; children: ReactNode }) {
+function Centrado({ hoja, children, alto }: { hoja: string; children: ReactNode; alto?: number }) {
   const [corre, setCorre] = useState<[number, number]>([0, 0]);
+  const [zoom, setZoom] = useState<number | undefined>(undefined);
   useEffect(() => {
     void fetch(`${import.meta.env.BASE_URL}${hoja}.json`)
       .then((x) => x.json())
       .then((j: Hoja & { cuerpo?: [number, number, number, number] }) => {
         const c = j.cuerpo;
         if (c) setCorre([(j.frameWidth / 2 - (c[0] + c[2]) / 2) / j.frameWidth, (j.frameHeight / 2 - (c[1] + c[3]) / 2) / j.frameHeight]);
+        // `alto`: el cuerpo ocupa esos px (la miniatura), sea cual sea el tamaño de su cuadro.
+        if (c && alto) setZoom(alto / (c[3] - c[1]));
       });
-  }, [hoja]);
+  }, [hoja, alto]);
   return (
-    <span className="rpg-centrado" style={{ '--cx': `${corre[0] * 100}%`, '--cy': `${corre[1] * 100}%` } as CSSProperties}>
+    <span className="rpg-centrado" style={{ '--cx': `${corre[0] * 100}%`, '--cy': `${corre[1] * 100}%`, ...(zoom ? { '--zmini': zoom } : {}) } as CSSProperties}>
       {children}
     </span>
   );
 }
 
 /** Las acciones que se muestran en la ficha, en este orden: la pose base, los ataques, el especial, el golpe y la caída. */
-const ACCIONES_FICHA = ['idle', 'ataque', 'beso', 'especial', 'clon', 'daño', 'derrotado'];
+const ACCIONES_FICHA = ['idle', 'ataque', 'beso', 'especial', 'aura', 'clon', 'daño', 'derrotado'];
 /** Las hojas que tienen el Clon de sombra (Nikki): no es una fila de la hoja, es un especial del combate. */
 const CON_CLON = new Set(
   Object.values(import.meta.glob<DatosBatalla>('../data/batallas/*.json', { eager: true, import: 'default' })).flatMap((d) =>

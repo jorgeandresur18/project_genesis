@@ -84,7 +84,7 @@ const espera = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
 /** Lo que tarda en deslizarse hasta el objetivo (igual que en styles.css, .batalla-figura). */
 const DESLIZ_MS = 380;
 
-type Anim = 'idle' | 'mover' | 'salto' | 'ataque' | 'daño' | 'ko' | 'victoria' | 'especial' | 'agachada' | 'llorando' | 'paralizado' | 'golpeado';
+type Anim = 'idle' | 'mover' | 'salto' | 'ataque' | 'daño' | 'ko' | 'victoria' | 'especial' | 'agachada' | 'llorando' | 'paralizado' | 'golpeado' | 'aura';
 /** Lo que dura la salida de la pelea (un destello y a negro) antes de volver a la novela. */
 const SALIDA_MS = 1000;
 /** Lo que dura la caída lenta del último héroe (y lo que espera a que el rival termine su ataque). */
@@ -250,6 +250,8 @@ function Pelea({
     /** Cuántos turnos seguidos se le habló al rival que perdona (Nikki), y si ya perdonó. */
     racha: 0,
     perdona: false,
+    /** Quién le pidió perdón a Nikki y después la atacó (la Mega Bola Tóxica va contra él). */
+    traicion: null as string | null,
     /** Los que quedaron paralizados (o confundidos) en este turno (empiezan a descontar en el siguiente). */
     paralizadoRecien: [] as string[],
     confundidoRecien: [] as string[],
@@ -1168,6 +1170,8 @@ function Pelea({
     const enemigos = b.current.enemigos.filter(vivo);
     // Pedir perdón tiene que ser seguido: si hace otra cosa, se vuelve a empezar.
     if (c.tipo !== 'hablar' && b.current.racha) {
+      // Le pidieron perdón y ahora la atacan: no se lo perdona (la Mega Bola Tóxica, en su próximo turno).
+      if ((c.tipo === 'atacar' || c.tipo === 'especial') && !arena) b.current.traicion = h.id;
       b.current.racha = 0;
       const p = enemigos.map((e) => d.enemigos[e.clave].perdon).find(Boolean);
       if (p?.corta) await decir(p.corta, p.quien);
@@ -1365,6 +1369,83 @@ function Pelea({
    * esos 5 segundos entre los objetivos; los de un enemigo se pueden esquivar golpe a golpe. Cami dispara balas
    * desde sus pistolas en cada destello.
    */
+  /** La Mega Bola Tóxica en la pantalla: dónde está, qué tan grande y qué hace (crece, vuela o explota). */
+  const [bolaT, setBolaT] = useState<{ key: number; x: number; y: number; lado: number; anim: 'aparecer' | 'idle' | 'explotar'; ms: number } | null>(null);
+  const [tiembla, setTiembla] = useState(0);
+  /**
+   * La Mega Bola Tóxica (Nikki): el aviso, el aura (levanta la mano), la bola aparece en la palma y crece de más; al
+   * bajar la mano sale disparada, explota sobre los rivales con un fogonazo y un temblor, les pega a todos y los
+   * envenena a todos (también a sus aliados, salpicados; a ella no). Con `traidor` (le pidieron perdón y la atacaron):
+   * a ese lo deja con pocos PS y un veneno leve.
+   */
+  const megaBola = async (e: Luchador, traidor?: Luchador) => {
+    const bt = d.enemigos[e.clave].bola_toxica!;
+    e.carga = 0;
+    forzar();
+    await avisar({ nombre: bt.nombre, color: bt.color, ojos: bt.ojos, texto: bt.texto, poder: bt.poder, golpes: 1, objetivo: 'todos', posicion: 'objetivo' }, d.enemigos[e.clave].sprite, e.lado === 'heroe');
+    await decir(fmt(traidor ? bt.traicion!.texto : bt.texto, { quien: e.nombre, objetivo: traidor?.nombre ?? '' }));
+    const hoja = (await cargarHoja(d.enemigos[e.clave].sprite)) as Hoja & { bola?: { aparece: number; suelta: number; x: number; y: number } };
+    const fila = hoja.animations.aura;
+    const info = hoja.bola;
+    if (!fila || !info) return;
+    const msPaso = 1000 / fila.fps;
+    playChip('carga');
+    void animar(e.id, 'aura' as Anim, fila.frames * msPaso);
+    // En la palma: aparece chica y crece de más hasta poco antes de bajar la mano.
+    await espera(info.aparece * msPaso);
+    const s = rectSprite(figuras.current.get(e.id)?.querySelector('.batalla-sprite'));
+    const base = raiz.current?.getBoundingClientRect();
+    if (!s || !base) return;
+    const k = s.width / hoja.frameWidth;
+    const espejo = e.lado === 'heroe';
+    const mano = { x: (espejo ? s.right - info.x * k : s.left + info.x * k) - base.left, y: s.top + info.y * k - base.top };
+    const crece = (info.suelta - info.aparece - 6) * msPaso;
+    const grande = base.height * 0.55;
+    setBolaT({ key: Math.random(), x: mano.x, y: mano.y - 20 * k, lado: 14 * k, anim: 'aparecer', ms: 0 });
+    await espera(80);
+    setBolaT((x) => x && { ...x, lado: grande, y: mano.y - grande * 0.5, anim: 'idle', ms: crece });
+    playChip('vortice');
+    await espera(info.suelta * msPaso - info.aparece * msPaso - 80);
+    // Baja la mano: sale disparada al centro de los rivales y explota.
+    const rivales = e.lado === 'enemigo' ? b.current.heroes.filter(vivo) : b.current.enemigos.filter(vivo);
+    const centros = rivales.map(centroDe).filter(Boolean) as { x: number; y: number }[];
+    const destino = centros.length
+      ? { x: centros.reduce((n, c) => n + c.x, 0) / centros.length, y: centros.reduce((n, c) => n + c.y, 0) / centros.length }
+      : { x: base.width * (espejo ? 0.25 : 0.75), y: base.height * 0.55 };
+    setBolaT((x) => x && { ...x, x: destino.x, y: destino.y, ms: 320 });
+    await espera(320);
+    playChip('impacto');
+    setBolaT((x) => x && { ...x, anim: 'explotar', lado: grande * 1.6, ms: 200 });
+    setFogonazo({ key: Math.random(), color: '#e2a6ff' });
+    setTiembla(Math.random());
+    // A todos sus rivales: el golpe y el veneno.
+    for (const x of rivales) {
+      bajoEspecial.current.add(x.id);
+      if (traidor && x === traidor) {
+        const antes = x.ps;
+        x.ps = Math.min(x.ps, bt.traicion!.ps);
+        numero(x.id, `-${antes - x.ps}`, 'critico');
+        void animar(x.id, 'golpeado');
+        luz(x.id, bt.color, true);
+        x.envenenado = { danio: bt.traicion!.veneno, turnos: 9 };
+      } else {
+        await golpear(e, x, bt.poder, bt.color);
+        if (vivo(x) && !x.envenenado) x.envenenado = { ...bt.veneno };
+      }
+    }
+    // Salpica a los suyos (no a ella).
+    for (const x of (e.lado === 'enemigo' ? b.current.enemigos : b.current.heroes).filter((y) => vivo(y) && y !== e && !y.cebo)) {
+      if (!x.envenenado) x.envenenado = { ...bt.veneno };
+      luz(x.id, bt.color);
+    }
+    forzar();
+    await espera(900);
+    setBolaT(null);
+    soltar(rivales);
+    await decir(fmt(t('batalla.bola_envenena'), { quien: e.nombre }));
+    await limpiarCebos();
+    for (const x of rivales) if (!vivo(x) && !x.cebo) await decir(fmt(t('batalla.cae'), { quien: x.nombre }));
+  };
   /** El rayo del especial del Capitán que sigue más allá de su cuadro, hasta el borde de la pantalla. */
   const [rayoSigue, setRayoSigue] = useState<{ id: string; x: number; y: number; largo: number; ang: number; grosor: number } | null>(null);
   /** El rayo grueso del cañón (de dónde a dónde, y de qué color). */
@@ -1650,8 +1731,16 @@ function Pelea({
     }
     const hs = b.current.heroes.filter(vivo);
     const esp = d.enemigos[e.clave].especial;
-    const elige = eligeEspecial(e, d.enemigos[e.clave], b.current.heroes, b.current.enemigos);
+    const bola = d.enemigos[e.clave].bola_toxica;
+    const traidor = bola && b.current.traicion ? b.current.heroes.find((x) => x.id === b.current.traicion && vivo(x)) : undefined;
+    if (traidor) {
+      b.current.traicion = null;
+      return megaBola(e, traidor);
+    }
+    // En la arena es una pelea normal: la Mega Bola sale al azar.
+    const elige = eligeEspecial(e, d.enemigos[e.clave], b.current.heroes, b.current.enemigos, Math.random, !bola?.solo_traicion || !!arena);
     if (elige?.tipo === 'clon') return clonar(e);
+    if (elige?.tipo === 'bola') return megaBola(e);
     if (elige && esp) {
       const blanco = desviar([elige.blanco ?? azar(hs)], e)[0];
       if (esp.canon) await canonazo(e, esp, blanco);
@@ -1660,7 +1749,10 @@ function Pelea({
     }
     // La parálisis solo va contra los que todavía se mueven (si nadie se mueve, ataca de otra forma).
     // Si no le queda ningún ataque posible (solo de efecto y ya todos lo tienen), espera.
-    const elegido = eligeAtaque(d.enemigos[e.clave].ataques.filter((a) => quedan(e, a) > 0), hs);
+    const elegido = eligeAtaque(
+      d.enemigos[e.clave].ataques.filter((a) => quedan(e, a) > 0 && !(hs.some((x) => x.envenenado && x.ps <= 2) && (a.confunde || a.paraliza))),
+      hs,
+    );
     if (!elegido) return;
     const { ataque: a } = elegido;
     // Las ráfagas (la sombra) se reparten: una a cada uno y las que sobran al azar.
@@ -1939,6 +2031,7 @@ function Pelea({
 
   return (
     <div
+      data-tiembla={tiembla || undefined}
       className={`batalla n${b.current.heroes.length} e${Math.min(3, b.current.enemigos.length)} ${oscuro ? 'oscuro' : ''} ${saliendo ? 'saliendo' : ''}`}
       ref={raiz}
       role="dialog"
@@ -2068,6 +2161,17 @@ function Pelea({
       {/* La entrada (si no hay presentación): la pantalla se arma desde negro en bloques de píxel. */}
       {!d.intro && <Pixelado />}
       {/* Las balas de energía (Cami): salen de las pistolas y vuelan hasta su objetivo. */}
+      {bolaT && (
+        <span
+          key={bolaT.key}
+          className="batalla-bola-toxica"
+          style={{ left: bolaT.x, top: bolaT.y, scale: String(bolaT.lado / 112), transitionDuration: `${bolaT.ms}ms` } as CSSProperties}
+          aria-hidden
+        >
+          <SpriteHoja key={bolaT.anim} src="batalla/bola_toxica" anim={bolaT.anim} bucle={bolaT.anim === 'idle'} />
+        </span>
+      )}
+      {tiembla > 0 && <span key={tiembla} className="batalla-temblor" aria-hidden />}
       {rayoSigue && (
         <span
           className="batalla-rayo sigue"

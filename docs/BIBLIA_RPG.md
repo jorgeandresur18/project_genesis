@@ -337,6 +337,10 @@ más: subiendo de nivel o **comprándolos en Boringplace** (pocos). Si ya tiene 
 aprender X, pero ya sabe 3 ataques. ¿Olvida uno?» y el jugador elige cuál olvidar (o no aprenderlo). Los enemigos se
 diseñan ya con 5 o menos.
 
+**Caramelo premium (aprobado, por construir):** objeto mítico, ultra raro; también se vende en Boringplace por una cantidad enorme de monedas. Al comerlo, el personaje gana **un espacio más de especial**: su repertorio pasa a 6 (3 ataques y 3 especiales). Nikki, como jefa, ya tiene los 6: Cachetada, Cachetada de revés y Beso confusión; Ráfaga de cachetadas, Clon de sombra y Mega Bola Tóxica.
+
+**Mega Bola Tóxica (hecho, `bola_toxica` de Nikki):** su tercer especial. Animación «aura» de su hoja (levanta la mano en el cuadro 65 y la baja en el 120) y el sprite aparte `bola_toxica` (aparecer, flamas, explotar). La bola nace chica en la palma, crece de más y, al bajar la mano, sale disparada y explota sobre los rivales con fogonazo y temblor: les pega a todos y **envenena a todos**, también a sus aliados (salpicados), menos a ella. **En la pelea del bar** solo la usa si le pidieron perdón y después la atacaron: al que la atacó lo deja con 2 PS y un veneno de 1 por turno, y después lo remata con una cachetada (no con el beso). **En una pelea normal** (la arena) sale al azar con la barra llena (peso 0,3) y pega fuerte (26 a cada uno, veneno de 6 por 3 turnos). Se ve igual en el probador y en la galería.
+
 **Curación de Rikka (aprobado):** un **ataque básico** (no un especial) con el que **solo se cura a sí misma**: carga
 y la rodea un aura del color de la curación. Cura el 35 % de su vida (propuesta). Animación: su hoja no tiene una
 fila de curación; mientras tanto, su pose base con el aura.

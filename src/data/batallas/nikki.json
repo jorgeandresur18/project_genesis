@@ -169,7 +169,30 @@
         "probabilidad": 0.08
       },
       "cae_en_cebo": 0.1,
-      "escala": 0.97
+      "escala": 0.97,
+      "bola_toxica": {
+        "nombre": "Mega Bola Tóxica",
+        "poder": 26,
+        "color": "#c35cff",
+        "ojos": [
+          62,
+          38,
+          26,
+          13
+        ],
+        "texto": "A {quien} se le prende un aura morada. Levanta la mano y en la palma le nace una bola de humo tóxico que no para de crecer.",
+        "veneno": {
+          "danio": 6,
+          "turnos": 3
+        },
+        "peso": 0.3,
+        "solo_traicion": true,
+        "traicion": {
+          "ps": 2,
+          "veneno": 1,
+          "texto": "¿Me pides perdón y después me pegas? A {quien} se le prende un aura morada. Levanta la mano y en la palma le nace una bola de humo tóxico, enorme, hecha de ocho años."
+        }
+      }
     }
   },
   "horda": {

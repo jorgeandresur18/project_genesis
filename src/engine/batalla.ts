@@ -145,6 +145,23 @@ export interface Enemigo {
   clon?: { nombre: string; nombre_clon: string; costo: number; fuerza: number; turnos: number; color: string; texto: string; reacciones?: Linea[]; carga?: number; probabilidad?: number };
   /** El sonido de sus golpes (ataque y especial). */
   sonido?: string;
+  /**
+   * Mega Bola Tóxica (Nikki): con la barra llena, a veces (`peso`) en vez de su especial. Levanta la mano, la bola
+   * crece y explota sobre los rivales: golpe de `poder` a todos y los envenena a todos (también a sus aliados, por las
+   * salpicaduras; a ella no). Con `solo_traicion`, en su pelea solo la usa si le pidieron perdón y después la atacaron:
+   * ahí deja al que la atacó con `traicion.ps` PS y un veneno de `traicion.veneno` por turno.
+   */
+  bola_toxica?: {
+    nombre: string;
+    poder: number;
+    color: string;
+    ojos: [number, number, number, number];
+    texto: string;
+    veneno: { danio: number; turnos: number };
+    peso?: number;
+    solo_traicion?: boolean;
+    traicion?: { ps: number; veneno: number; texto: string };
+  };
   /** Ataca de lejos (el Capitán): no se acerca; de su blaster sale un rayo de `color_disparo` hacia cada blanco. */
   distancia?: boolean;
   color_disparo?: string;
@@ -478,7 +495,14 @@ export function crearClon(o: Luchador, c: NonNullable<Enemigo['clon']>, id: stri
  * tiene `remata`, su especial contra ese héroe. Con la barra llena: el clon de sombra (si no hay otro y gastar esa
  * vida no lo deja al borde de retirarse) la mitad de las veces; si no, su especial.
  */
-export function eligeEspecial(e: Luchador, en: Enemigo, heroes: Luchador[], enemigos: Luchador[], azar: () => number = Math.random): { tipo: 'especial' | 'clon'; blanco?: Luchador } | null {
+export function eligeEspecial(
+  e: Luchador,
+  en: Enemigo,
+  heroes: Luchador[],
+  enemigos: Luchador[],
+  azar: () => number = Math.random,
+  conBola = !en.bola_toxica?.solo_traicion,
+): { tipo: 'especial' | 'clon' | 'bola'; blanco?: Luchador } | null {
   if (e.clon !== undefined) return null;
   const bajo = en.remata ? heroes.find((h) => h.ps > 0 && h.ps <= h.psMax * en.remata!.vida) : undefined;
   if (en.especial && bajo && e.carga >= en.remata!.carga) return { tipo: 'especial', blanco: bajo };
@@ -489,6 +513,8 @@ export function eligeEspecial(e: Luchador, en: Enemigo, heroes: Luchador[], enem
     e.ps - e.psMax * en.clon.costo > e.psMax * ((en.huye_a ?? 0) + 0.1);
   if (puedeClonar && (!en.especial || azar() < (en.clon!.probabilidad ?? 0.5))) return { tipo: 'clon' };
   if (!especialListo(e)) return null;
+  // Con la barra llena, al azar: la Mega Bola Tóxica (si la tiene) o su especial.
+  if (en.bola_toxica && conBola && (!en.especial || azar() < (en.bola_toxica.peso ?? 0.35))) return { tipo: 'bola' };
   return en.especial ? { tipo: 'especial' } : null;
 }
 

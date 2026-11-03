@@ -106,8 +106,14 @@
         15
       ]
     },
-    "beso": {
+    "aura": {
       "row": 8,
+      "frames": 177,
+      "fps": 12,
+      "loop": false
+    },
+    "beso": {
+      "row": 17,
       "frames": 110,
       "fps": 24,
       "loop": false,
@@ -178,6 +184,13 @@
         109
       ]
     }
+  },
+  "bola": {
+    "hoja": "batalla/bola_toxica",
+    "aparece": 65,
+    "suelta": 120,
+    "x": 104,
+    "y": 18
   },
   "proyectiles": {
     "beso": {

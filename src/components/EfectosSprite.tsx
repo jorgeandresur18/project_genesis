@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type CSSProperties, type RefObject } from 'react';
-import { anguloDisparo, rectSprite, type Hoja } from './Batalla';
+import { anguloDisparo, rectSprite, SpriteHoja, type Hoja } from './Batalla';
 
 /**
  * Los efectos de un sprite del combate fuera de la pelea (el probador y la galería), igual que en la pelea: las balas
@@ -68,8 +68,25 @@ export function useEfectosSprite({
   };
   const [rayo, setRayo] = useState<{ x: number; y: number; largo: number; ang: number; grosor: number } | null>(null);
   const [enMano, setEnMano] = useState<{ src: string; x: number; y: number; w: number; h: number } | null>(null);
+  /** La Mega Bola Tóxica (el aura de Nikki): crece en la palma y sale hacia adelante a explotar. */
+  const [bola, setBola] = useState<{ x: number; y: number; s: number; anim: string; ms: number } | null>(null);
   /** Para `alCuadro` del SpriteHoja. */
   const alCuadro = (fila: string, columna: number, h: Hoja) => {
+    const hb = (h as Hoja & { bola?: { aparece: number; suelta: number; x: number; y: number } }).bola;
+    if (hb && fila === 'aura') {
+      const d = donde();
+      if (d && columna >= hb.aparece && columna < hb.suelta) {
+        const k = d.s.width / h.frameWidth;
+        const x = (volteado ? d.s.right - hb.x * k : d.s.left + hb.x * k) - d.base.left;
+        const t = (columna - hb.aparece) / (hb.suelta - 6 - hb.aparece);
+        const s = Math.min(1, t) * (d.base.height * 0.5) / 112 + 0.12;
+        setBola({ x, y: d.s.top + hb.y * k - d.base.top - s * 50, s, anim: columna < hb.aparece + 8 ? 'aparecer' : 'idle', ms: 90 });
+      } else if (d && columna === hb.suelta) {
+        setBola((b) => b && { ...b, x: volteado ? d.base.width * 0.15 : d.base.width * 0.85, y: d.base.height * 0.55, ms: 320 });
+        setTimeout(() => setBola((b) => b && { ...b, anim: 'explotar', s: b.s * 1.5, ms: 200 }), 330);
+        setTimeout(() => setBola(null), 1100);
+      }
+    }
     // Lo que sostiene en la mano antes de lanzarlo (el corazón): la imagen, siguiendo a la mano.
     const pm = h.proyectiles?.[fila];
     if (pm?.pista) {
@@ -109,6 +126,7 @@ export function useEfectosSprite({
     puntas.current = [];
     setRayo(null);
     setEnMano(null);
+    setBola(null);
     if (!balasActivas || anim !== 'especial' || pausa) return;
     const t = setInterval(() => puntas.current.forEach((p) => disparo.current(p, true)), 55);
     return () => clearInterval(t);
@@ -122,6 +140,11 @@ export function useEfectosSprite({
           aria-hidden
           style={{ left: rayo.x, top: rayo.y, width: rayo.largo, height: Math.max(6, rayo.grosor), rotate: `${rayo.ang}rad`, '--c': '#ff2a2a' } as CSSProperties}
         />
+      )}
+      {bola && (
+        <span className="batalla-bola-toxica" style={{ left: bola.x, top: bola.y, scale: String(bola.s), transitionDuration: `${bola.ms}ms` } as CSSProperties} aria-hidden>
+          <SpriteHoja key={bola.anim} src="batalla/bola_toxica" anim={bola.anim} bucle={bola.anim === 'idle'} />
+        </span>
       )}
       {enMano && (
         <img

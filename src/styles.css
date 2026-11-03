@@ -3127,3 +3127,17 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 /* Galería: el Clon de sombra (la copia, atrás y a un costado). */
 .rpg-con-clon { position: relative; display: inline-block; }
 .rpg-con-clon > .batalla-figura.clon { position: absolute; left: -38%; top: -4%; display: block; translate: none; }
+
+/* La Mega Bola Tóxica: crece en la palma de Nikki, sale disparada y explota (un cuadro de 112 px, escalado). */
+.batalla-bola-toxica { position: absolute; z-index: 7; width: 112px; height: 112px; margin: -56px 0 0 -56px; pointer-events: none;
+  transition-property: left, top, scale; transition-timing-function: cubic-bezier(0.45, 0, 0.7, 0.55); image-rendering: pixelated;
+  filter: drop-shadow(0 0 6px #c35cff) drop-shadow(0 0 18px rgba(195, 92, 255, 0.6)); }
+/* El temblor de la explosión. */
+.batalla[data-tiembla] .batalla-escena { animation: temblor 0.55s steps(8) both; }
+@keyframes temblor { 0%, 100% { translate: 0 0; } 15% { translate: -10px 6px; } 30% { translate: 9px -7px; } 45% { translate: -7px -5px; } 60% { translate: 6px 7px; } 75% { translate: -4px 3px; } 90% { translate: 3px -2px; } }
+@media (prefers-reduced-motion: reduce) { .batalla[data-tiembla] .batalla-escena { animation: none; } }
+
+/* Miniaturas del pixel art: todos con el cuerpo de la misma altura y centrados en la tarjeta. */
+.sprite-rpg-mini { place-items: center; overflow: hidden; }
+.sprite-rpg-mini .rpg-centrado .batalla-sprite { zoom: var(--zmini, 0.95); }
+.viewer-rpg .batalla-bola-toxica .batalla-sprite, .probador-escena .batalla-bola-toxica .batalla-sprite { zoom: 1; }

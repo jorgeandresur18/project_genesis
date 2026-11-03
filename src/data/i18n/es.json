@@ -345,5 +345,7 @@
   "galeria.pixel_art": "Pixel art",
   "galeria.pixel_vacio": "Todavía no peleaste con nadie.",
   "galeria.accion_bloqueada": "Se desbloquea al verla en una pelea.",
-  "galeria.accion.clon": "Clon de sombra"
+  "galeria.accion.clon": "Clon de sombra",
+  "batalla.bola_envenena": "La nube tóxica salpica a todos. Menos a {quien}.",
+  "galeria.accion.aura": "Mega Bola Tóxica"
 }
