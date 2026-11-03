@@ -44,3 +44,25 @@
 .botonChico:disabled { opacity: 0.4; }
 .subtitulo { margin: 0.8rem 0.8rem 0; color: #9a9aa6; font-size: 0.8rem; font-weight: 600; }
 .mochilaVacia { padding: 1.6rem 1rem; color: #d6d6dc; text-align: center; font-size: 1.15rem; font-weight: 800; }
+
+/* Los objetos de la tienda publicados como un artículo: su dibujo centrado sobre el fondo de las fotos. */
+.fotoObjeto { place-items: center; }
+.fotoObjeto img { width: 62%; height: 62%; object-fit: contain; filter: drop-shadow(0 0.5rem 0.6rem rgba(0, 0, 0, 0.55)); }
+.detalle .tienes { color: #8fe6da; font-size: 0.8rem; }
+
+/* El artículo abierto: la foto flota un poco de arriba abajo y gira apenas, como un objeto en 3D. */
+.escena { padding: 0.8rem 0.9rem 0.2rem; perspective: 700px; }
+.flota { transform-style: preserve-3d; animation: flotar 4.2s ease-in-out infinite; }
+.flota > * { display: grid; border-radius: 0.7rem; box-shadow: 0 1.2rem 1.6rem -0.8rem rgba(0, 0, 0, 0.7); }
+@keyframes flotar {
+  0%, 100% { transform: translateY(0) rotateX(4deg) rotateY(-6deg); }
+  50% { transform: translateY(-0.55rem) rotateX(-3deg) rotateY(6deg); }
+}
+@media (prefers-reduced-motion: reduce) { .flota { animation: none; } }
+
+/* Cuántos comprar. */
+.cantidad { display: flex; align-items: center; gap: 0.6rem; margin-top: 0.2rem; color: #d6d6dc; font-size: 0.86rem; }
+.cantidad span { min-width: 5.5rem; color: #8d8d99; }
+.cantidad button { width: 2rem; height: 2rem; border: 1px solid #34343d; border-radius: 0.5rem; background: #17171c; color: #f1f1f4; font: inherit; font-size: 1.1rem; line-height: 1; }
+.cantidad button:disabled { opacity: 0.35; }
+.cantidad b { min-width: 1.6rem; text-align: center; font-size: 1rem; }

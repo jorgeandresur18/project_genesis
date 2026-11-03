@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import { playSelect } from '../engine/sound';
 import { assetUrl } from '../engine/assets';
 import { OBJETOS_TIENDA, precioVenta, useBoringplace, type Articulo } from '../engine/boringplace';
@@ -7,14 +7,15 @@ import s from './Boringplace.module.css';
 import sb from './Boringram.module.css';
 
 /**
- * Boringplace (dentro de Boringram): el marketplace. «Para ti» son las cosas que vende la gente (su basura y alguna
- * estafa); «Tus artículos», lo que vende Jair para que el sueldo le llegue a fin de mes. En el Capítulo 1 todavía no
- * hay nadie vendiendo nada. Por ahora solo se mira: comprar llega con las monedas.
+ * Boringplace (dentro de Boringram): el marketplace. En la «Tienda» todo está publicado como en un marketplace (foto,
+ * precio afuera y nombre): primero los objetos de las peleas, que se compran con monedas desde su publicación (los que
+ * alcancen), y después lo que vende la gente (su basura y alguna estafa). «Tus artículos»: lo que vende Jair y lo de
+ * la mochila. En el Capítulo 1 todavía no hay nadie vendiendo nada.
  */
 export function Boringplace({ onArticulo, onToast }: { onArticulo: (id: string) => void; onToast?: (texto: string) => void }) {
   const p = useBoringplace();
   const tx = p.data.textos;
-  const [pestana, setPestana] = useState<'tienda' | 'para_ti' | 'tuyos'>('tienda');
+  const [pestana, setPestana] = useState<'tienda' | 'tuyos'>('tienda');
   const vars = useStore((st) => st.game?.vars);
   const monedas = (vars?.monedas as number | undefined) ?? 0;
   const tengo = (k: string) => ((vars?.[`mochila_${k}`] as number | undefined) ?? 0);
@@ -28,9 +29,8 @@ export function Boringplace({ onArticulo, onToast }: { onArticulo: (id: string) 
       </div>
     );
   }
-  const lista = pestana === 'para_ti' ? p.ajenos : p.deJair;
-  /** Una fila de la tienda (comprar) o de la mochila (vender a la mitad). */
-  const fila = (objeto: string, precio: number, vender: boolean) => {
+  /** Una fila de la mochila (vender a la mitad). */
+  const fila = (objeto: string, precio: number) => {
     const o = OBJETOS_TIENDA.get(objeto)!;
     return (
       <div key={objeto} className={s.objeto}>
@@ -44,13 +44,12 @@ export function Boringplace({ onArticulo, onToast }: { onArticulo: (id: string) 
           className={s.botonChico}
           disabled={!vars}
           onClick={() => {
-            const ok = vender ? useStore.getState().venderObjeto(objeto, precio) : useStore.getState().comprarObjeto(objeto, precio);
+            useStore.getState().venderObjeto(objeto, precio);
             playSelect();
-            if (vender) aviso(tx.vendido_ok.replace('{objeto}', o.nombre).replace('{n}', String(precio)));
-            else aviso(ok ? tx.comprado.replace('{objeto}', o.nombre) : tx.sin_monedas.replace('{n}', String(precio - monedas)));
+            aviso(tx.vendido_ok.replace('{objeto}', o.nombre).replace('{n}', String(precio)));
           }}
         >
-          {vender ? tx.vender : tx.comprar} · {precio}
+          {tx.vender} · {precio}
         </button>
       </div>
     );
@@ -67,7 +66,7 @@ export function Boringplace({ onArticulo, onToast }: { onArticulo: (id: string) 
         )}
       </div>
       <div className={s.pestanas} role="tablist">
-        {(['tienda', 'para_ti', 'tuyos'] as const).map((k) => (
+        {(['tienda', 'tuyos'] as const).map((k) => (
           <button
             key={k}
             role="tab"
@@ -78,18 +77,38 @@ export function Boringplace({ onArticulo, onToast }: { onArticulo: (id: string) 
               setPestana(k);
             }}
           >
-            {k === 'tienda' ? tx.tienda : k === 'para_ti' ? tx.para_ti : tx.tus_articulos}
+            {k === 'tienda' ? tx.tienda : tx.tus_articulos}
           </button>
         ))}
       </div>
-      {!vars && pestana !== 'para_ti' && <p className={s.sinTuyos}>{tx.sin_partida}</p>}
+      {!vars && <p className={s.sinTuyos}>{tx.sin_partida}</p>}
       {pestana === 'tienda' ? (
-        <div className={s.lista}>{p.tienda.map((x) => fila(x.objeto, x.precio, false))}</div>
-      ) : pestana === 'tuyos' ? (
+        <div className={s.grilla}>
+          {p.tienda.map((x) => {
+            const o = OBJETOS_TIENDA.get(x.objeto)!;
+            return (
+              <button key={x.objeto} className={s.tarjeta} onClick={() => onArticulo(`${ID_TIENDA}${x.objeto}`)}>
+                <FotoObjeto icono={o.icono} />
+                <b className={s.precio}>{tx.precio_monedas.replace('{n}', String(x.precio))}</b>
+                <span className={s.titulo}>{o.nombre}</span>
+                <small className={s.lugar}>{tx.lugar_tienda}</small>
+              </button>
+            );
+          })}
+          {p.ajenos.map((a) => (
+            <button key={a.id} className={s.tarjeta} onClick={() => onArticulo(a.id)}>
+              <Foto a={a} />
+              <b className={s.precio}>{a.precio}</b>
+              <span className={s.titulo}>{a.titulo}</span>
+              <small className={s.lugar}>{a.lugar}</small>
+            </button>
+          ))}
+        </div>
+      ) : (
         <>
           <h4 className={s.subtitulo}>{tx.tus_objetos}</h4>
           {enMochila.length ? (
-            <div className={s.lista}>{enMochila.map((x) => fila(x.objeto, precioVenta(x.precio), true))}</div>
+            <div className={s.lista}>{enMochila.map((x) => fila(x.objeto, precioVenta(x.precio)))}</div>
           ) : (
             <p className={s.mochilaVacia}>{tx.mochila_vacia}</p>
           )}
@@ -104,20 +123,8 @@ export function Boringplace({ onArticulo, onToast }: { onArticulo: (id: string) 
               </button>
             ))}
           </div>
+          {!enMochila.length && !p.deJair.length && <p className={s.sinTuyos}>{tx.sin_tuyos}</p>}
         </>
-      ) : lista.length === 0 ? (
-        <p className={s.sinTuyos}>{tx.sin_tuyos}</p>
-      ) : (
-        <div className={s.grilla}>
-          {lista.map((a) => (
-            <button key={a.id} className={s.tarjeta} onClick={() => onArticulo(a.id)}>
-              <Foto a={a} />
-              <b className={s.precio}>{a.precio}</b>
-              <span className={s.titulo}>{a.titulo}</span>
-              <small className={s.lugar}>{a.lugar}</small>
-            </button>
-          ))}
-        </div>
       )}
     </div>
   );
@@ -128,6 +135,7 @@ export function ArticuloVista({ id, onBack, onToast }: { id: string; onBack: () 
   const p = useBoringplace();
   const tx = p.data.textos;
   const a = [...p.ajenos, ...p.deJair].find((x) => x.id === id);
+  if (id.startsWith(ID_TIENDA)) return <ObjetoVista objeto={id.slice(ID_TIENDA.length)} onBack={onBack} onToast={onToast} />;
   if (!a) return null;
   return (
     <div className={sb.feed}>
@@ -137,7 +145,9 @@ export function ArticuloVista({ id, onBack, onToast }: { id: string; onBack: () 
         </button>
         <b>{tx.titulo}</b>
       </div>
-      <Foto a={a} grande />
+      <Flotante>
+        <Foto a={a} grande />
+      </Flotante>
       <div className={s.detalle}>
         <b className={s.precioGrande}>{a.precio}</b>
         <h3>{a.titulo}</h3>
@@ -163,6 +173,95 @@ export function ArticuloVista({ id, onBack, onToast }: { id: string; onBack: () 
         </button>
       </div>
     </div>
+  );
+}
+
+/** Los objetos de la tienda se abren como un artículo más: `tienda:<objeto>`. */
+const ID_TIENDA = 'tienda:';
+
+/** La foto del artículo abierto: flota un poco, de arriba abajo, girando apenas en 3D. */
+function Flotante({ children }: { children: ReactNode }) {
+  return (
+    <div className={s.escena}>
+      <div className={s.flota}>{children}</div>
+    </div>
+  );
+}
+
+/** La publicación de un objeto de las peleas: foto, precio, descripción, cuántos tienes y cuántos comprar. */
+function ObjetoVista({ objeto, onBack, onToast }: { objeto: string; onBack: () => void; onToast: (texto: string) => void }) {
+  const p = useBoringplace();
+  const tx = p.data.textos;
+  const vars = useStore((st) => st.game?.vars);
+  const [n, setN] = useState(1);
+  const x = p.tienda.find((t) => t.objeto === objeto);
+  const o = OBJETOS_TIENDA.get(objeto);
+  if (!x || !o) return null;
+  const monedas = (vars?.monedas as number | undefined) ?? 0;
+  const tengo = (vars?.[`mochila_${objeto}`] as number | undefined) ?? 0;
+  const total = n * x.precio;
+  const comprar = () => {
+    playSelect();
+    if (monedas < total) {
+      onToast(tx.sin_monedas.replace('{n}', String(total - monedas)));
+      return;
+    }
+    for (let i = 0; i < n; i++) useStore.getState().comprarObjeto(objeto, x.precio);
+    onToast(n === 1 ? tx.comprado.replace('{objeto}', o.nombre) : tx.comprados.replace('{n}', String(n)).replace('{objeto}', o.nombre));
+    setN(1);
+  };
+  return (
+    <div className={sb.feed}>
+      <div className={sb.topBar}>
+        <button className={sb.backBtn} onClick={onBack} aria-label={tx.atras}>
+          ‹
+        </button>
+        <b>{tx.titulo}</b>
+        {vars && (
+          <span className={s.monedas}>
+            {tx.monedas} <b>{monedas}</b>
+          </span>
+        )}
+      </div>
+      <Flotante>
+        <FotoObjeto icono={o.icono} grande />
+      </Flotante>
+      <div className={s.detalle}>
+        <b className={s.precioGrande}>{tx.precio_monedas.replace('{n}', String(x.precio))}</b>
+        <h3>{o.nombre}</h3>
+        <small className={s.lugar}>{tx.lugar_tienda}</small>
+        <p className={s.descripcion}>{x.descripcion}</p>
+        {tengo > 0 && <small className={s.tienes}>{tx.tienes.replace('{n}', String(tengo))}</small>}
+        {vars ? (
+          <>
+            <div className={s.cantidad}>
+              <span>{tx.cantidad}</span>
+              <button aria-label={tx.menos} disabled={n <= 1} onClick={() => setN(n - 1)}>
+                −
+              </button>
+              <b>{n}</b>
+              <button aria-label={tx.mas} onClick={() => setN(n + 1)}>
+                +
+              </button>
+            </div>
+            <button className={s.boton} onClick={comprar}>
+              {tx.comprar_n.replace('{n}', String(n)).replace('{total}', String(total))}
+            </button>
+          </>
+        ) : (
+          <p className={s.sinTuyos}>{tx.sin_partida}</p>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/** La foto de un objeto de la tienda: su dibujo sobre el fondo de las fotos. */
+function FotoObjeto({ icono, grande = false }: { icono?: string; grande?: boolean }) {
+  return (
+    <span className={`${s.foto} ${s.fotoObjeto} ${grande ? s.fotoGrande : ''}`} aria-hidden>
+      {icono && <img src={assetUrl(`${icono}.webp`)} alt="" draggable={false} />}
+    </span>
   );
 }
 

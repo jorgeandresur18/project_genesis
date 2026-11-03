@@ -4,7 +4,13 @@
     "texto": "Nobody is selling their junk or their trinkets yet. Come back later: people always end up needing money."
   },
   "textos": {
-    "para_ti": "For you",
+    "precio_monedas": "{n} coins",
+    "cantidad": "Quantity",
+    "comprar_n": "Buy {n} · {total} coins",
+    "comprados": "You bought {n} × {objeto}. It goes to your bag.",
+    "menos": "One less",
+    "mas": "One more",
+    "lugar_tienda": "Ships to your bag",
     "tus_articulos": "Your listings",
     "disponible": "Is this still available?",
     "vendido": "Mark as sold",
