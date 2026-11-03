@@ -153,3 +153,4 @@ Cada tramo va del primer al último commit, más 30 minutos de trabajo antes del
   - **«Un poco de Mac Miller»:** la influencia puntual de The Divine Feminine en las chicas, sus discos favoritos y lo que escuchaba a los 16; botones a los tres discos.
   - Sin enlaces directos inventados: esas canciones abren la búsqueda de Spotify. `Panels.tsx` tipa la canción con `spotify` y `nota` opcionales.
 - **Pendiente:** si el autor quiere enlaces directos de Spotify para estas canciones, pasarlos.
+- **Cambio del autor (misma sesión):** no quiso secciones aparte. Bad Bunny quedó al final de «La influencia latinoamericana» y Mac Miller al final de «Notas del autor», como bloques `anexos` (párrafos, canciones y cierre) que se muestran después del cierre de la sección. `Panels.tsx` los dibuja con el mismo componente (`BloqueConoce`).

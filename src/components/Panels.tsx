@@ -419,6 +419,40 @@ const parteDe = (s: object) => ('parte' in s ? (s.parte as string) : undefined);
 /** Una canción (o disco) de «Conoce más». Sin `spotify`, el botón busca la canción en Spotify. */
 type CancionConoce = { personaje?: string; cancion: string; banda: string; nota?: string; spotify?: string };
 
+/** Un bloque de texto de «Conoce más»: párrafos, una lista de canciones y su cierre. */
+type BloqueConoceData = { parrafos: string[]; canciones?: CancionConoce[]; cierre?: string[] };
+
+function BloqueConoce({ b }: { b: object }) {
+  const t = useT();
+  const { parrafos, canciones, cierre } = b as BloqueConoceData;
+  return (
+    <>
+      {parrafos.map((p, i) => (
+        <p key={i}>{p}</p>
+      ))}
+      {/* Cada canción con su botón para escucharla en Spotify. */}
+      {canciones?.map((c) => (
+        <div key={c.cancion} className="about-cancion">
+          <p>
+            {c.personaje && <b>{c.personaje}:</b>} «{c.cancion}», {c.banda}. {c.nota}
+          </p>
+          <a
+            className="about-spotify"
+            href={c.spotify ?? `https://open.spotify.com/search/${encodeURIComponent(`${c.cancion} ${c.banda}`)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            ▶ {t('conoce.escuchar')}
+          </a>
+        </div>
+      ))}
+      {cierre?.map((p, i) => (
+        <p key={`c${i}`}>{p}</p>
+      ))}
+    </>
+  );
+}
+
 /** «Conoce más del proyecto»: qué es el juego, de qué trata, sus temas, cómo nació y enlaces del autor. */
 export function AboutPanel({ onClose }: { onClose: () => void }) {
   const t = useT();
@@ -457,30 +491,9 @@ export function AboutPanel({ onClose }: { onClose: () => void }) {
               <h2 className="about-parte">{t(`conoce.parte_${parteDe(s)}`)}</h2>
             )}
             <h3>{s.titulo}</h3>
-            {s.parrafos.map((p, i) => (
-              <p key={i}>{p}</p>
-            ))}
-            {/* Notas del autor: una canción por personaje, con su botón para escucharla en Spotify. */}
-            {'canciones' in s &&
-              (s.canciones as CancionConoce[] | undefined)?.map((c) => (
-                <div key={c.cancion} className="about-cancion">
-                  <p>
-                    {c.personaje && <b>{c.personaje}:</b>} «{c.cancion}», {c.banda}. {c.nota}
-                  </p>
-                  <a
-                    className="about-spotify"
-                    href={c.spotify ?? `https://open.spotify.com/search/${encodeURIComponent(`${c.cancion} ${c.banda}`)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    ▶ {t('conoce.escuchar')}
-                  </a>
-                </div>
-              ))}
-            {'cierre' in s &&
-              s.cierre?.map((p, i) => (
-                <p key={`c${i}`}>{p}</p>
-              ))}
+            <BloqueConoce b={s} />
+            {/* Más de lo mismo dentro de la sección, después de su cierre (Bad Bunny, Mac Miller). */}
+            {'anexos' in s && (s.anexos as BloqueConoceData[] | undefined)?.map((b, k) => <BloqueConoce key={k} b={b} />)}
             <button type="button" className="about-arriba" onClick={() => document.getElementById('about-indice')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>
               ↑ {t('conoce.indice')}
             </button>

@@ -157,6 +157,35 @@
       "cierre": [
         "If you listen to these five songs again after finishing the game, they might sound different. That is the idea.",
         "The battle music is \"Battle Arcade\", by Panda Beats, compressed to sound 16-bit."
+      ],
+      "anexos": [
+        {
+          "parrafos": [
+            "I also find a specific influence in Mac Miller's The Divine Feminine. I wouldn't say I took the album as a reference as a whole, and it would be shameless to claim I listened to all of it and drew on its entire concept. Still, some of its ideas and sensibilities about love, sensuality, femininity and relationships shaped the way I conceive the female characters of PROJECT GENESIS.",
+            "In fact, my favorite Mac Miller albums are Watching Movies with the Sound Off and Swimming, two records whose introspective sensibility and emotional atmosphere connect much more directly with my musical taste.",
+            "On the other hand, when I was around 16 I used to listen to Blue Slide Park and his mixtapes K.I.D.S. and Best Day Ever. Maybe, without realizing it, something from that time also seeped into PROJECT GENESIS. There are influences you recognize consciously and others that probably stay somewhere in your memory until they show up, transformed, in something you make years later."
+          ],
+          "canciones": [
+            {
+              "personaje": "",
+              "cancion": "The Divine Feminine",
+              "banda": "Mac Miller",
+              "nota": "The specific influence (2016)."
+            },
+            {
+              "personaje": "",
+              "cancion": "Watching Movies with the Sound Off",
+              "banda": "Mac Miller",
+              "nota": "One of my favorites (2013)."
+            },
+            {
+              "personaje": "",
+              "cancion": "Swimming",
+              "banda": "Mac Miller",
+              "nota": "The other one (2018)."
+            }
+          ]
+        }
       ]
     },
     {
@@ -206,44 +235,66 @@
           "nota": "It reminds me of his nature: a strange, threatening and seemingly absurd reality, where the rules aren't what they seem and something much darker hides behind the images.",
           "spotify": "https://open.spotify.com/track/519WGo9DQCtYP72a7Lmprj"
         }
-      ]
-    },
-    {
-      "titulo": "Driving at night",
-      "parte": "autor",
-      "parrafos": [
-        "Even though a good part of my musical influences come from 80s, 90s and early-2000s rock, I also listen to a lot of Bad Bunny.",
-        "There's something in some of these songs that takes me to a very particular scene: going out for a drive at night with nowhere to be, crossing a city full of tall buildings, lights, restaurants and bars, stopping at some gas station minimarket, buying a few drinks and driving on with the music playing. I like to picture those drives through parts of the city that never seem to sleep, with the buildings lit up and people still out and about.",
-        "Maybe it's a pretty simple fantasy, but it gives me a sense of freedom: being able to go out whenever I want, wander the city, stop wherever I feel like it and allow myself small pleasures without worrying too much about money. I guess there's some aspiration in it too: feeling that I can enjoy things that maybe weren't within my reach before.",
-        "These are the ones I like most:"
       ],
-      "canciones": [
-        { "personaje": "", "cancion": "DÁKITI", "banda": "Bad Bunny & Jhayco" },
-        { "personaje": "", "cancion": "YONAGUNI", "banda": "Bad Bunny" },
-        { "personaje": "", "cancion": "DOS MIL 16", "banda": "Bad Bunny" },
-        { "personaje": "", "cancion": "MOJABI GHOST", "banda": "Tainy & Bad Bunny" },
-        { "personaje": "", "cancion": "LO SIENTO BB:/", "banda": "Tainy, Bad Bunny & Julieta Venegas" },
-        { "personaje": "", "cancion": "Después de la Playa", "banda": "Bad Bunny" },
-        { "personaje": "", "cancion": "AMORFODA", "banda": "Bad Bunny" },
-        { "personaje": "", "cancion": "NI BIEN NI MAL", "banda": "Bad Bunny" },
-        { "personaje": "", "cancion": "un x100to", "banda": "Grupo Frontera & Bad Bunny" }
-      ],
-      "cierre": [
-        "And there's a personal story behind «un x100to»: it's a song I used to listen to with someone while we drank. I don't know if it's the song, those nights or the company, but it ended up tied to that memory. Some songs, when you hear them again, take you straight back to a moment in your life. This is one of them."
-      ]
-    },
-    {
-      "titulo": "A bit of Mac Miller",
-      "parte": "autor",
-      "parrafos": [
-        "I also find a specific influence in Mac Miller's The Divine Feminine. I wouldn't say I took the album as a reference as a whole, and it would be shameless to claim I listened to all of it and drew on its entire concept. Still, some of its ideas and sensibilities about love, sensuality, femininity and relationships shaped the way I conceive the female characters of PROJECT GENESIS.",
-        "In fact, my favorite Mac Miller albums are Watching Movies with the Sound Off and Swimming, two records whose introspective sensibility and emotional atmosphere connect much more directly with my musical taste.",
-        "On the other hand, when I was around 16 I used to listen to Blue Slide Park and his mixtapes K.I.D.S. and Best Day Ever. Maybe, without realizing it, something from that time also seeped into PROJECT GENESIS. There are influences you recognize consciously and others that probably stay somewhere in your memory until they show up, transformed, in something you make years later."
-      ],
-      "canciones": [
-        { "personaje": "", "cancion": "The Divine Feminine", "banda": "Mac Miller", "nota": "The specific influence (2016)." },
-        { "personaje": "", "cancion": "Watching Movies with the Sound Off", "banda": "Mac Miller", "nota": "One of my favorites (2013)." },
-        { "personaje": "", "cancion": "Swimming", "banda": "Mac Miller", "nota": "The other one (2018)." }
+      "anexos": [
+        {
+          "parrafos": [
+            "Even though a good part of my musical influences come from 80s, 90s and early-2000s rock, I also listen to a lot of Bad Bunny.",
+            "There's something in some of these songs that takes me to a very particular scene: going out for a drive at night with nowhere to be, crossing a city full of tall buildings, lights, restaurants and bars, stopping at some gas station minimarket, buying a few drinks and driving on with the music playing. I like to picture those drives through parts of the city that never seem to sleep, with the buildings lit up and people still out and about.",
+            "Maybe it's a pretty simple fantasy, but it gives me a sense of freedom: being able to go out whenever I want, wander the city, stop wherever I feel like it and allow myself small pleasures without worrying too much about money. I guess there's some aspiration in it too: feeling that I can enjoy things that maybe weren't within my reach before.",
+            "These are the ones I like most:"
+          ],
+          "canciones": [
+            {
+              "personaje": "",
+              "cancion": "DÁKITI",
+              "banda": "Bad Bunny & Jhayco"
+            },
+            {
+              "personaje": "",
+              "cancion": "YONAGUNI",
+              "banda": "Bad Bunny"
+            },
+            {
+              "personaje": "",
+              "cancion": "DOS MIL 16",
+              "banda": "Bad Bunny"
+            },
+            {
+              "personaje": "",
+              "cancion": "MOJABI GHOST",
+              "banda": "Tainy & Bad Bunny"
+            },
+            {
+              "personaje": "",
+              "cancion": "LO SIENTO BB:/",
+              "banda": "Tainy, Bad Bunny & Julieta Venegas"
+            },
+            {
+              "personaje": "",
+              "cancion": "Después de la Playa",
+              "banda": "Bad Bunny"
+            },
+            {
+              "personaje": "",
+              "cancion": "AMORFODA",
+              "banda": "Bad Bunny"
+            },
+            {
+              "personaje": "",
+              "cancion": "NI BIEN NI MAL",
+              "banda": "Bad Bunny"
+            },
+            {
+              "personaje": "",
+              "cancion": "un x100to",
+              "banda": "Grupo Frontera & Bad Bunny"
+            }
+          ],
+          "cierre": [
+            "And there's a personal story behind «un x100to»: it's a song I used to listen to with someone while we drank. I don't know if it's the song, those nights or the company, but it ended up tied to that memory. Some songs, when you hear them again, take you straight back to a moment in your life. This is one of them."
+          ]
+        }
       ]
     },
     {
