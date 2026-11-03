@@ -36,10 +36,10 @@
         "lineas": [
           "INSTRUCTOR'S NOTES",
           "",
-          "blend Name { ... }              -> defines a class (in JavaScript: class).",
+          "blend Name { ... }              -> defines a class (in other languages: class).",
           "sip constructor(x) { ... }      -> runs when the object is created.",
-          "cup                             -> “this object” (in JavaScript: this).",
-          "refill Name(...)                -> creates a new object (in JavaScript: new).",
+          "cup                             -> “this object” (in other languages: this).",
+          "refill Name(...)                -> creates a new object (in other languages: new).",
           "object.method(...)              -> calls a method.",
           "(Spanish names in the code: Empleado = Employee, trabajar = work, horas = hours.)",
           "",

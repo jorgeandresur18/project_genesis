@@ -58,7 +58,7 @@
           "texto": "If the object were Rikka, empleado.butt wouldn't fit on screen. You'd have to scroll.",
           "respuesta": { "texto": "And if the object were you, cami.mouth would never finish loading." }
         },
-        "true, false… I'm both at the same time, prof. In JavaScript that's called a bug. In me, it's charm."
+        "true, false… I'm both at the same time, prof. In programming that's called a bug. In me, it's charm."
       ],
       "Rikka": ["Taking off ten percent is multiplying by zero point nine. I did it with my coins.", "To read the name: dot and nombre. Not name: we're in Coffee.", { "texto": "My object: { sword: 'sharp', honor: true, patience: 3 }.", "respuesta": { "texto": "Patience 3 and dropping. And you left out the biggest property, but that one doesn't fit on one line." } }],
       "Jair": ["The object can change even if it's brew. It's a classic interview trap.", "name is from other languages. Here the property is called what they wrote: nombre."]

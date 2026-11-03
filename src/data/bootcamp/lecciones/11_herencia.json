@@ -49,9 +49,9 @@
         "lineas": [
           "NOTAS DEL INSTRUCTOR",
           "",
-          "blend Hija extra Padre { ... }  -> Hija hereda todo de Padre (en JavaScript: extends).",
+          "blend Hija extra Padre { ... }  -> Hija hereda todo de Padre (en otros lenguajes: extends).",
           "super(...)                      -> llama al constructor del padre. Va PRIMERO.",
-          "decaf                           -> nada (en JavaScript: null).",
+          "decaf                           -> nada (en otros lenguajes: null).",
           "",
           "La clase Practicante hereda trabajar() sin escribirlo. Es la magia de la herencia: el trabajo se hereda solo."
         ]
@@ -78,7 +78,7 @@
         },
         "Herencia… yo heredé de mi mamá el carácter y de mi papá el gusto por las chicas. Y por los chicos lo desarrollé sola."
       ],
-      "Jair": ["Sin super, Coffee no te deja tocar cup. Error clásico de entrevista.", "extends es de JavaScript. Aquí es extra."]
+      "Jair": ["Sin super, Coffee no te deja tocar cup. Error clásico de entrevista.", "extends es de otros lenguajes. Aquí es extra."]
     },
     "al_abrir": [
       { "quien": "Jair", "texto": "La clase Empleado está en el otro archivo. Practicante hereda de ella: extra, super y el sueldo." },

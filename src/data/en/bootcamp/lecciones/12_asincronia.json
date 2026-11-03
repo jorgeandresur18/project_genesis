@@ -43,7 +43,7 @@
         "lineas": [
           "INSTRUCTOR'S NOTES",
           "",
-          "espresso sip f() { ... }   -> asynchronous function (in JavaScript: async function).",
+          "espresso sip f() { ... }   -> asynchronous function (in other languages: async function).",
           "await something()          -> waits for something to finish. Only inside an espresso.",
           "decaf                      -> nothing. If an answer can be decaf, check for it.",
           "f().then(g)                -> when f finishes, it passes the result to g.",

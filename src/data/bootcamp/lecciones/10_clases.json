@@ -93,10 +93,10 @@
         "lineas": [
           "NOTAS DEL INSTRUCTOR",
           "",
-          "blend Nombre { ... }            -> define una clase (en JavaScript: class).",
+          "blend Nombre { ... }            -> define una clase (en otros lenguajes: class).",
           "sip constructor(x) { ... }      -> se ejecuta al crear el objeto.",
-          "cup                             -> «este objeto» (en JavaScript: this).",
-          "refill Nombre(...)              -> crea un objeto nuevo (en JavaScript: new).",
+          "cup                             -> «este objeto» (en otros lenguajes: this).",
+          "refill Nombre(...)              -> crea un objeto nuevo (en otros lenguajes: new).",
           "objeto.metodo(...)              -> llama a un método.",
           "",
           "Esto es lo que usa el código de GENESIS. Si algún día ven código raro escrito en un lugar raro, va a ser esto."

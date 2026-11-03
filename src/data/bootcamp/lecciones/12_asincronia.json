@@ -99,7 +99,7 @@
         "lineas": [
           "NOTAS DEL INSTRUCTOR",
           "",
-          "espresso sip f() { ... }   -> función asíncrona (en JavaScript: async function).",
+          "espresso sip f() { ... }   -> función asíncrona (en otros lenguajes: async function).",
           "await algo()               -> espera a que algo termine. Solo dentro de un espresso.",
           "decaf                      -> nada. Si una respuesta puede ser decaf, revísenlo.",
           "f().then(g)                -> cuando f termina, le pasa el resultado a g.",

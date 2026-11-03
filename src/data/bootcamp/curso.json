@@ -222,7 +222,7 @@
       "Compilando…",
       "Moliendo granos…",
       "Calentando la cafetera…",
-      "Preguntándole a Stack Overflow…",
+      "Preguntándole a Stack Underflow…",
       "Esperando que el linter se calme…"
     ],
     "chistes_fallo": [
@@ -301,7 +301,7 @@
     {
       "quien": "Jair",
       "sprite": "sprites/jair/sabelotodo.webp",
-      "texto": "Aquí van a aprender Coffee, el lenguaje de GENESIS. Se parece a JavaScript, pero con más café y menos dignidad."
+      "texto": "Aquí van a aprender Coffee, el lenguaje de GENESIS. Se parece a los demás lenguajes, pero con más café y menos dignidad."
     },
     {
       "quien": "Jair",

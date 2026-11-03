@@ -44,9 +44,9 @@
         "lineas": [
           "INSTRUCTOR'S NOTES",
           "",
-          "blend Child extra Parent { ... }  -> Child inherits everything from Parent (in JavaScript: extends).",
+          "blend Child extra Parent { ... }  -> Child inherits everything from Parent (in other languages: extends).",
           "super(...)                       -> calls the parent's constructor. It goes FIRST.",
-          "decaf                            -> nothing (in JavaScript: null).",
+          "decaf                            -> nothing (in other languages: null).",
           "(Practicante = Intern, Empleado = Employee, sueldo = salary.)",
           "",
           "The Practicante class inherits trabajar() without writing it. That's the magic of inheritance: the work passes down on its own."
@@ -72,7 +72,7 @@
         },
         "Inheritance… I got my temper from my mom and my taste for girls from my dad. The taste for guys I developed on my own."
       ],
-      "Jair": ["Without super, Coffee won't let you touch cup. Classic interview mistake.", "extends is from JavaScript. Here it's extra."]
+      "Jair": ["Without super, Coffee won't let you touch cup. Classic interview mistake.", "extends is from other languages. Here it's extra."]
     },
     "al_abrir": [
       { "texto": "The Empleado class is in the other file. Practicante inherits from it: extra, super and the salary." },

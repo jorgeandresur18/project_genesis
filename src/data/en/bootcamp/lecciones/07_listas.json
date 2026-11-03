@@ -41,7 +41,7 @@
     ],
     "huecos": {
       "1": { "error": "backlog.{valor} doesn't add to the end. To add one more task you use push." },
-      "2": { "error": "Position {valor} isn't the first one. In Coffee (and in JavaScript) you count from 0." },
+      "2": { "error": "Position {valor} isn't the first one. In Coffee (and in almost every language) you count from 0." },
       "3": { "error": "backlog.{valor} doesn't exist. To count the items in a list: length." }
     },
     "exito": ["First: fix the login", "Pending: 4", "✔ Compiled. The backlog grew. As always."],

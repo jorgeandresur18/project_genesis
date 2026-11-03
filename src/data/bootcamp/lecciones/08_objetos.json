@@ -63,7 +63,7 @@
           "sprite": "sprites/cami/burla.webp",
           "respuesta": { "quien": "Rikka", "sprite": "sprites/rikka/celosa.webp", "texto": "Y si el objeto fueras tú, cami.boca nunca terminaría de cargar." }
         },
-        "true, false… yo soy las dos cosas a la vez, profe. Eso en JavaScript se llama bug. En mí, encanto."
+        "true, false… yo soy las dos cosas a la vez, profe. Eso en programación se llama bug. En mí, encanto."
       ],
       "Rikka": ["Quitar el diez por ciento es multiplicar por cero punto nueve. Lo hice con mis monedas.", "Para leer el nombre: punto y nombre. No name: estamos en Coffee.", { "texto": "Mi objeto: { espada: 'afilada', honor: true, paciencia: 3 }.", "sprite": "sprites/rikka/orgullosa.webp", "respuesta": { "quien": "Cami", "texto": "Paciencia 3 y bajando. Y te faltó la propiedad más grande, pero esa no cabe en una línea.", "sprite": "sprites/cami/burlona.webp" } }],
       "Jair": ["El objeto puede cambiar aunque sea brew. Es una trampa clásica de entrevista.", "name es de otros lenguajes. Aquí la propiedad se llama como la escribieron: nombre."]

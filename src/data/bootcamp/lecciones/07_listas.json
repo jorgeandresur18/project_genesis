@@ -104,7 +104,7 @@
       },
       "2": {
         "respuesta": "0",
-        "error": "La posición {valor} no es la primera. En Coffee (y en JavaScript) se cuenta desde 0."
+        "error": "La posición {valor} no es la primera. En Coffee (y en casi todos los lenguajes) se cuenta desde 0."
       },
       "3": {
         "respuesta": "length",

@@ -152,7 +152,7 @@
   "ide": {
     "vacio": "Something's missing here. The compiler doesn't guess; that's what GENESIS is for, and look how that turned out.",
     "fallo": "Doesn't compile.",
-    "compilando": ["Compiling…", "Grinding beans…", "Heating up the coffee maker…", "Asking Stack Overflow…", "Waiting for the linter to calm down…"],
+    "compilando": ["Compiling…", "Grinding beans…", "Heating up the coffee maker…", "Asking Stack Underflow…", "Waiting for the linter to calm down…"],
     "chistes_fallo": [
       "Instructor's hint: read the notes file. That's why I wrote it at three in the morning.",
       "The code isn't wrong: it's in development. Like the instructor.",
@@ -192,7 +192,7 @@
   },
   "introduccion": [
     { "texto": "Welcome to Bootcamp Genesis. I'm Jair: software engineer, thirty years old, late salary. And from today, your instructor." },
-    { "texto": "Here you'll learn Coffee, the language of GENESIS. It looks like JavaScript, but with more coffee and less dignity." },
+    { "texto": "Here you'll learn Coffee, the language of GENESIS. It looks like other languages, but with more coffee and less dignity." },
     { "texto": "The bootcamp's promise: from zero to developer in a few weeks. The actual result: burned-out developer, overweight and prone to type 2 diabetes. It's in the fine print." },
     { "texto": "I'll be helping the instructor. A warrior must master every art. Even the ones that come with coffee." },
     { "texto": "And I'm here to watch. The code, Jair, Rikka… especially Rikka when she bends over to plug in her laptop." },
