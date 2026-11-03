@@ -180,10 +180,14 @@ Sashi y Aylin **no existen** en la línea original.
 
 ### Estructura de capítulos del juego base `[CANON]`
 
-1. Una vida en bucle: hasta conocer a Rikka (1 h 30 min).
-2. El viaje del héroe* (1 h 30 min).
+1. Una vida en bucle («A Life on Loop»): hasta conocer a Rikka (1 h 30 min).
+2. El viaje del héroe* («The Hero's Journey*»; al terminar, «El viaje del antihéroe») (1 h 30 min).
 
-**Los títulos son chistes de programación que también se leen como frase** (regla del autor, 2026-11-02). «Una vida en bucle» juega con los bucles (`while`, `for`). «El viaje del héroe*» lleva el asterisco del puntero de C: `héroe*` no es un héroe, es algo que apunta a uno. Es de la misma familia que las expansiones Génesis++ (C++) y Génesis# (C#). **Al terminar el Capítulo 2 el título pasa a ser «El viaje del antihéroe»** `[CANON]`; cómo se ve en pantalla: `[PENDIENTE]`. **«Dios ha muerto»** (en inglés **«God Is Dead;»**, con el punto y coma de una sentencia de código) es un título elegido por el autor (2026-11-03); de qué capítulo: `[PENDIENTE]` (Claude recomienda el 6: ahí Cami y Rikka descubren que su creador es solo un hombre y lo dejan a oscuras, y el Rey, con la cara de Jair, se materializa; el 3 es la otra opción, por el punto y coma de la sentencia DELETE). Los demás títulos de los Capítulos 3 a 7: `[PENDIENTE]`.
+**Los títulos son chistes de programación que también se leen como frase, y el chiste tiene que entenderse también en inglés** (regla del autor, 2026-11-02 y 2026-11-03): `[CANON]`
+- **Capítulo 1: «Una vida en bucle»** (en inglés **«A Life on Loop»**): los bucles de la programación (`while`, `for`) y la vida de Jair, que se repite.
+- **Capítulo 2: «El viaje del héroe*»** (en inglés **«The Hero's Journey*»**): `héroe*` es un puntero de C, algo que no es un héroe sino que apunta a uno; de la misma familia que Génesis++ (C++) y Génesis# (C#). **El puntero apunta a «antihéroe»:** al terminar el capítulo, el título pasa con un glitch a **«El viaje del antihéroe»** («The Antihero's Journey»; `title_glitch` en `cap02.json`, en la pantalla de fin).
+- **Capítulo 6: «Dios ha muerto»** (en inglés **«God Is Dead;»**, con el punto y coma de una sentencia de código): ahí Cami y Rikka descubren que su creador es solo un hombre y el Rey, con la cara de Jair, se materializa. (Asignado al 6 el 2026-11-03.)
+- **Capítulos 3, 4, 5, 7A y 7B:** `[PENDIENTE]`.
 3. La batalla contra el Rey Malvado (2 h 30 min a 3 h): solo en su forma THE KING, con la cara oculta, hasta el DELETE sin WHERE.
 4. El choque con la realidad: el despertar, la restauración, la convención y buscar trabajo; termina cuando Cami consigue trabajo «en el centro» (2 h). (Ellas ya aparecen en el cuarto al final del Capítulo 3.)
 5. La rivalidad: Cami en Dulce Frío, el beso, Nikki y Rikka en el bar y lo que sigue; termina con el descubrimiento de quiénes son realmente (1 h 30 min). Se mantienen 7 capítulos (decidido por el autor el 2026-11-02): así Génesis++ sigue siendo la versión alternativa del Capítulo 5.
