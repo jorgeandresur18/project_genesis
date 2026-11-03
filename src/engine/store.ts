@@ -75,10 +75,12 @@ export interface Settings {
   filtroTv: boolean;
   /** Con el filtro TV: el efecto de tubo (líneas de barrido, desenfoque y parpadeo). Sin él, 4:3 nítido. */
   tvEfecto: boolean;
+  /** Con el filtro TV: lo que se ve detrás del televisor. */
+  tvFondo: 'ninguno' | 'espacio' | 'cosmico' | 'cuarto';
 }
 
 export const TEXT_SPEED_INSTANT = 130;
-const DEFAULT_SETTINGS: Settings = { reduceEffects: false, autoDelayMs: 1500, textSpeed: 45, sfxVolume: 0.6, typingSound: true, musicVolume: 0.5, muted: false, textScale: 1, boxOpacity: 0.88, language: 'auto', filtroTv: false, tvEfecto: true };
+const DEFAULT_SETTINGS: Settings = { reduceEffects: false, autoDelayMs: 1500, textSpeed: 45, sfxVolume: 0.6, typingSound: true, musicVolume: 0.5, muted: false, textScale: 1, boxOpacity: 0.88, language: 'auto', filtroTv: false, tvEfecto: true, tvFondo: 'cuarto' };
 
 /** auto y skip, más adelantar (ff) y retroceder (rew) a velocidad `speed`. */
 export type Mode = 'normal' | 'auto' | 'skip' | 'ff' | 'rew';

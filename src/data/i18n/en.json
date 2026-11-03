@@ -369,5 +369,10 @@
   "tv.volumen": "VOLUME",
   "tv.canal": "Channel",
   "opciones.tv_efecto": "Tube effect (scanlines, blur and flicker)",
-  "opciones.tv_efecto_nota": "Uncheck it to play in 4:3 with a sharp picture."
+  "opciones.tv_efecto_nota": "Uncheck it to play in 4:3 with a sharp picture.",
+  "opciones.tv_fondo": "Background",
+  "opciones.tv_fondo_ninguno": "None",
+  "opciones.tv_fondo_espacio": "Space blue",
+  "opciones.tv_fondo_cosmico": "Cosmic purple",
+  "opciones.tv_fondo_cuarto": "Jair's room"
 }

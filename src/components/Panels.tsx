@@ -821,6 +821,23 @@ export function OptionsPanel({ onClose, enJuego = false }: { onClose: () => void
           ))}
         </div>
         {settings.filtroTv && (
+          <div className="tv-fondos" role="radiogroup" aria-label={t('opciones.tv_fondo')}>
+            <span>{t('opciones.tv_fondo')}</span>
+            {(['ninguno', 'espacio', 'cosmico', 'cuarto'] as const).map((f) => (
+              <button
+                key={f}
+                role="radio"
+                aria-checked={(settings.tvFondo ?? 'cuarto') === f}
+                className={`tv-fondo-opcion opcion-${f} ${(settings.tvFondo ?? 'cuarto') === f ? 'active' : ''}`}
+                onClick={() => setSettings({ tvFondo: f })}
+              >
+                <i className={`tv-fondo-muestra fondo-${f}`} aria-hidden />
+                {t(`opciones.tv_fondo_${f}`)}
+              </button>
+            ))}
+          </div>
+        )}
+        {settings.filtroTv && (
           <label className="option modo-efecto">
             <input type="checkbox" checked={settings.tvEfecto !== false} onChange={(e) => setSettings({ tvEfecto: e.target.checked })} />
             <span>

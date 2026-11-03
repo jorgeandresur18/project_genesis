@@ -369,5 +369,10 @@
   "tv.volumen": "VOLUMEN",
   "tv.canal": "Canal",
   "opciones.tv_efecto": "Efecto de tubo (líneas de barrido, desenfoque y parpadeo)",
-  "opciones.tv_efecto_nota": "Desmárcalo para jugar en 4:3 con la imagen nítida."
+  "opciones.tv_efecto_nota": "Desmárcalo para jugar en 4:3 con la imagen nítida.",
+  "opciones.tv_fondo": "Fondo",
+  "opciones.tv_fondo_ninguno": "Sin fondo",
+  "opciones.tv_fondo_espacio": "Azul espacial",
+  "opciones.tv_fondo_cosmico": "Morado cósmico",
+  "opciones.tv_fondo_cuarto": "El cuarto de Jair"
 }

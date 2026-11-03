@@ -32,6 +32,7 @@ export function TvViejo({ activo, children }: { activo: boolean; children: React
   const [osd, setOsd] = useState<null | { tipo: 'canal' | 'volumen'; n: number }>(null);
   const volumen = useStore((s) => (s.settings.muted ? 0 : s.settings.musicVolume));
   const efecto = useStore((s) => s.settings.tvEfecto !== false);
+  const fondo = useStore((s) => s.settings.tvFondo ?? 'cuarto');
 
   // El juego está pensado para la ventana entera: dentro del televisor se achica en proporción a la pantalla
   // (la letra base y el zoom de los sprites; los efectos se ubican igual que siempre).
@@ -134,7 +135,11 @@ export function TvViejo({ activo, children }: { activo: boolean; children: React
 
   const barra = (
     <div className="tv-barra" aria-hidden>
-      <img src={assetUrl('marca/logo_tv.webp')} alt="" draggable={false} />
+      {/* El logo flota despacio y un brillo metálico lo recorre. */}
+      <span className="tv-barra-logo">
+        <img src={assetUrl('marca/logo_tv.webp')} alt="" draggable={false} />
+        <i className="tv-brillo" />
+      </span>
     </div>
   );
   const boton = (texto: string, accion: () => void, clase = 'tv-boton') => (
@@ -142,9 +147,18 @@ export function TvViejo({ activo, children }: { activo: boolean; children: React
   );
   return (
     <div
-      className={`tv ${activo ? '' : 'apagado'} ${efecto ? '' : 'nitido'} ${!encendida || transicion === 'apagando' ? 'tv-sin-luz' : canal > 0 ? 'tv-nieve' : ''}`}
+      className={`tv fondo-${fondo} ${activo ? '' : 'apagado'} ${efecto ? '' : 'nitido'} ${!encendida || transicion === 'apagando' ? 'tv-sin-luz' : canal > 0 ? 'tv-nieve' : ''}`}
       style={{ '--tv-escala': escala } as CSSProperties}
     >
+      {/* Detrás: un color con estrellas o el cuarto de Jair (oscurecido, con la lámpara y el cielo que respiran). */}
+      <div className="tv-fondo" aria-hidden>
+        {fondo === 'cuarto' && (
+          <div className="tv-cuarto">
+            <i className="tv-cuarto-cielo" />
+            <i className="tv-cuarto-lampara" />
+          </div>
+        )}
+      </div>
       {barra}
       <div className="tv-caja">
         <div
