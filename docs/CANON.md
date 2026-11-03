@@ -182,8 +182,8 @@ Sashi y Aylin **no existen** en la línea original.
 1. Una vida en bucle: hasta conocer a Rikka (1 h 30 min).
 2. El viaje del héroe (1 h 30 min).
 3. La batalla final contra el Rey Malvado (2 h 30 min a 3 h).
-4. El despertar en el mundo real, la restauración y la convivencia con Jair (2 h). (Ellas ya aparecen en el cuarto al final del Capítulo 3.)
-5. Rivalidad entre Cami y Nikki; termina con el descubrimiento de quiénes son realmente (1 h 30 min).
+4. El choque con la realidad: el despertar, la restauración, la convención y buscar trabajo; termina cuando Cami consigue trabajo «en el centro» (2 h). (Ellas ya aparecen en el cuarto al final del Capítulo 3.)
+5. La rivalidad: Cami en Dulce Frío, el beso, Nikki y Rikka en el bar y lo que sigue; termina con el descubrimiento de quiénes son realmente (1 h 30 min). Se mantienen 7 capítulos (decidido por el autor el 2026-11-02): así Génesis++ sigue siendo la versión alternativa del Capítulo 5.
 6. Consecuencias del descubrimiento; decide la versión del Capítulo 7. Se revela la cara del Rey Malvado.
 7. Los dos epílogos (A o B, según el Capítulo 6). Detalle: «Capítulos 4 a 7» más abajo.
 7A. Colapso del mundo real con el de la IA y fusión de Rikka y Cami en The AnothergIrl (`final_canon_2`). El nombre se escribe así, **AnothergIrl**: con la A y la I en mayúscula. `[CANON]` `TODO(canon)`: confirmar si las mayúsculas forman «AI» a propósito (como la regla de las vocales).
@@ -254,9 +254,9 @@ Sashi y Aylin **no existen** en la línea original.
 - **Por qué tenía el celular y por qué no le afecta la dilatación** `[CANON]` (2026-11-02): es un aparato electrónico **vinculado al mundo real**. Noodle manda a la gente al mundo digital con sus equipos de trabajo, para que puedan trabajar desde allá; por eso el celular viaja con él, sigue la hora real y sirve de **conexión entre el mundo digital y el real** (la notificación de la migración llega por ahí).
 - **Fin del Capítulo 3** `[CANON]` (corregido por el autor el 2026-11-02): Jair despierta frente a la computadora. Cree que se quedó dormido, que tal vez todo fue un sueño, y ve que ya es tarde: va a llegar tarde al trabajo. Al voltearse, **Cami y Rikka están en su cuarto**. Así termina el Capítulo 3. (El asombro de ellas por el departamento y la restauración pasan al Capítulo 4.) Que Rikka entienda que Jair es **el Gran Ingeniero**, el creador de su universo, sigue siendo canon; ahora pasa en el Capítulo 4, al ver el mundo real.
 
-### Capítulo 4: el despertar y la vida real (borrador del autor, 2026-11-02)
+### Capítulos 4 y 5: el despertar, la vida real y la rivalidad (borrador del autor, 2026-11-02)
 
-Todo es canon dicho por el autor, en borrador (puede cambiar). El orden de las escenas es el que contó; cómo se reparten entre el Capítulo 4 y el 5: `[PENDIENTE]`.
+Todo es canon dicho por el autor, en borrador (puede cambiar). El orden de las escenas es el que contó. **Reparto** (aprobado por el autor el 2026-11-02): el **Capítulo 4** va de la escena 1 a la 9 y termina con el gancho de Cami («conseguí trabajo en el centro… no te voy a decir dónde»); el **Capítulo 5** empieza en la escena 10. Entre el bar (escena 17) y el descubrimiento falta el medio del Capítulo 5: `[PENDIENTE]`.
 
 1. **El departamento.** Cami ve dónde vive Jair: «Así que este es tu hogar. Es muy pequeño». Rikka pensaba que estaban en alguna celda del calabozo del Rey Malvado.
 2. **La computadora:** todo fue borrado porque Jair no usó el WHERE, y el tiempo que tarda restaurar el mundo digital compactado (6 meses; ver Capítulo 3, «La restauración»).
@@ -267,6 +267,8 @@ Todo es canon dicho por el autor, en borrador (puede cambiar). El orden de las e
 7. **Buscar trabajo.** Jair acompaña a Cami a buscar trabajo porque es la más propensa a hacer destrozos (a Cami le molesta). Rikka busca por su cuenta y siente celos: piensa que Jair prefiere a Cami. En algunas partes Nikki se topa con Cami. Un día Jair tiene que ir a trabajar y sabe que dejar a Cami sola es mala idea: no le queda otra; si hay destrozos en las noticias, sabrá que fue ella.
 8. **Cami en Dulce Frío.** Por casualidad llega a Dulce Frío, le dan el trabajo y queda de compañera de Nikki. Nikki la reconoce como la chica que vio con Jair el otro día; Cami sabe que Nikki es la chica que le interesa a Jair. Disputa en el trabajo y rivalidad entre las dos.
 9. **Jair y Rikka.** Un momento íntimo: Jair le agradece que lo ayude con todo; ella dice que no es nada, además todavía no consiguió trabajo. Llega Cami: consiguió trabajo «en un lugar del centro». No dice dónde: no quiere que Jair la vaya a ver haciendo cosas de humanos.
+**— Capítulo 5 —**
+
 10. **Cami aprende.** Al principio es enojona y trata mal a los clientes; viendo a Nikki aprende y empieza a hacer mejor las cosas.
 11. **El beso.** Jair, al salir del trabajo, decide ir a verla al centro y se da cuenta de que está cerca de Dulce Frío. Sale Cami: «Gracias por venir a verme», lo agarra del brazo y, mirando a Nikki de reojo, le planta un beso. Nikki lo ve de lejos; Jair queda helado. **Cami lo hizo a propósito** (`[PENDIENTE]`: por qué).
 12. **Nikki en el parque.** Se va triste a un parque, sollozando: pensó que Jair venía por ella y ahora está con la de su trabajo.
@@ -274,7 +276,7 @@ Todo es canon dicho por el autor, en borrador (puede cambiar). El orden de las e
 14. **El bar del Capítulo 1.** Nikki la lleva «a un bar muy bueno». Hablan hasta que Nikki se emborracha y dice todo lo que siente por Jair y lo que piensa de «la tal Cami». A Rikka las bebidas de este mundo no le hacen efecto («es raro, ni siquiera he tenido hambre», piensa).
 15. **«¡ESPERAAAA!».** Nikki, de mala copa: «Seguramente tú también saliste con Jair y tuvieron un trío con la zorra de Cami». Rikka: «¡¿Queeé?!». Nikki: «Prepárate para pelear». Empieza la intro de **Nikki contra Rikka**, se pone en pausa y Rikka grita «¡ESPERAAAA! No voy a pelear contigo aquí». No hay pelea.
 16. **Nikki sentimental.** Ve a Rikka como amiga; le dice que le parece muy linda (su piel, su cabello, sus ojos): «A veces me siento confundida… si realmente solo me gustan los chicos». Intenta besarla, pero antes cae dormida. Sugerido, nunca explícito.
-17. **La cuenta.** El bar pregunta si van a ordenar más; Rikka dice que no y le pasan la cuenta. No tiene dinero; intenta despertar a Nikki para que pague, pero está dormida. «Cielos… ¿y ahora qué hago?». **Hasta aquí llega el borrador del autor.** `[PENDIENTE]`: cómo sigue.
+17. **La cuenta.** El bar pregunta si van a ordenar más; Rikka dice que no y le pasan la cuenta. No tiene dinero; intenta despertar a Nikki para que pague, pero está dormida. «Cielos… ¿y ahora qué hago?». **Hasta aquí llega el borrador del autor.** `[PENDIENTE]`: cómo sigue, hasta el final del Capítulo 5 (el descubrimiento, que el autor ya tiene).
 
 ### Capítulo 4: la convivencia en el departamento (añadido del autor)
 

@@ -61,15 +61,15 @@ El RPG, Boringram y el arte se hacen **para el capítulo que toca**, no por adel
 - [ ] *Media:* la notificación de la migración en el celular de Jair.
 
 ## Semanas 5 y 6 (1–14 de diciembre): el Capítulo 4
-- [ ] **Escribir el guion del Capítulo 4** desde el borrador del autor (17 escenas) y lo que él agregue después.
+- [ ] **Escribir el guion del Capítulo 4** desde el borrador del autor (escenas 1 a 9: del despertar a «conseguí trabajo en el centro»).
 - [ ] **Pelea RPG con los otakus en la convención** (Cami). *Pesada:* sprites de los otakus. Es la primera pelea en el mundo real después del bar: ¿«vida real» como la de Nikki?
-- [ ] *Liviana:* fondos del mundo real (departamento de día, convención, Dulce Frío por dentro, el parque, el centro).
+- [ ] *Liviana:* fondos del mundo real del Capítulo 4 (departamento de día, la convención, las calles donde buscan trabajo).
 - [ ] *Liviana:* sprites nuevos: Lady (la compañera de tesis), Jordan, amigos de Jair y de Nikki, Cami con uniforme de Dulce Frío.
-- [ ] *Media:* Boringram del Capítulo 4 (las fotos de la convención, Cami y Nikki en la heladería, lo que ve Nikki).
+- [ ] *Media:* Boringram del Capítulo 4 (las fotos de la convención, lo que ven Lady, Jordan y Nikki).
 - [ ] **Pendientes del RPG que el Capítulo 4 pide:** la tienda desde el título y equiparse de verdad, si la historia lo necesita.
 
 ## Después (desde el 15 de diciembre)
-- Capítulo 5 (rivalidad Cami y Nikki; el descubrimiento) y, si el autor quiere, Génesis++.
+- Capítulo 5 (escenas 10 a 17 del borrador: Dulce Frío, el beso, el parque y el bar; el medio que falta; el descubrimiento). Fondos: Dulce Frío por dentro, el parque, el centro. Después, si el autor quiere, Génesis++.
 - Capítulo 6 (la bifurcación y la cara del Rey) y los epílogos 7A y 7B.
 - Pendientes del RPG sin fecha: quemado y congelado, olvidar un ataque, regla anti-farmeo, `npm run escalar` con Upscayl.
 
@@ -90,9 +90,10 @@ Se responden cuando toque su semana; mientras, no se inventan.
 **Capítulo 4**
 - Los demás amigos nuevos (Lady y Jordan ya están).
 - Cuál es el adelanto en la primera convención.
+
+**Capítulo 5**
 - Por qué Cami besa a Jair a propósito.
-- Cómo sigue después de la cuenta del bar.
-- Cómo se reparte entre los Capítulos 4 y 5.
+- Cómo sigue después de la cuenta del bar, y el medio hasta el descubrimiento.
 
 **General**
 - Las preguntas abiertas de Blueberries y Nikki.
