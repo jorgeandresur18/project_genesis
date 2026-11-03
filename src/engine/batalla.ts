@@ -301,7 +301,7 @@ export interface Luchador {
   /** Si es un clon de sombra: los turnos que le quedan antes de evaporarse. */
   clon?: number;
   /** Envenenado: pierde `danio` PS al final de cada turno, `turnos` turnos más. */
-  envenenado: { danio: number; turnos: number } | null;
+  envenenado: { danio: number; turnos: number; noMata?: boolean } | null;
   /** Protegido: tantos golpes que no le hacen daño. */
   protegido: number;
   /** Cuántas veces usó cada ataque con usos limitados en esta pelea (por nombre). */
@@ -459,7 +459,8 @@ export const objetivoDe = (o: Objeto): ObjetivoObjeto => o.objetivo ?? 'aliado';
 /** El veneno al final del turno: cuánto pierde (un jefe nunca baja de 1: se retira). Descuenta un turno. */
 export function tickVeneno(l: Luchador, jefe: boolean): number {
   if (!l.envenenado || l.ps <= 0) return 0;
-  const n = Math.min(l.envenenado.danio, jefe ? l.ps - 1 : l.ps);
+  // El jefe (y el veneno que no mata: la traición en el bar) nunca bajan de 1.
+  const n = Math.min(l.envenenado.danio, jefe || l.envenenado.noMata ? l.ps - 1 : l.ps);
   l.ps -= Math.max(0, n);
   if (--l.envenenado.turnos <= 0) l.envenenado = null;
   return Math.max(0, n);

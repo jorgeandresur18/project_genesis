@@ -2,6 +2,9 @@
 import type { Condition, EndingInfo, GameConfig, Scene, StoryFile, VarDecl, Vars } from './types';
 import { UI_EFFECTS, VAPORES } from './types';
 import { applyChoice, checkAll, effectsOf, enterScene, resolveNext } from './logic';
+
+/** Cuántas opciones puede ofrecer una decisión de la novela a la vez (decisión del autor, 2026-11-02). */
+export const MAX_OPCIONES = 4;
 import { isKnownScreen, isPlaceholder, screenOf } from './assets';
 import reinos from '../data/reinos.json';
 
@@ -204,6 +207,10 @@ export function validateStory(
       }
     }
     const visible = scene.choices.filter((c) => checkAll(c.conditions, vars));
+    // Regla de la novela: a lo sumo 4 opciones a la vez (contando las secretas que se pueden destapar).
+    const conSecretas = scene.choices.filter((c) => checkAll(c.conditions, { ...vars, ...SECRETOS }));
+    if (Math.max(visible.length, conSecretas.length) > MAX_OPCIONES)
+      errors.push(`${scene.scene_id}: ${Math.max(visible.length, conSecretas.length)} opciones a la vez (el máximo es ${MAX_OPCIONES})`);
     if (visible.length > 0) {
       const open = visible.filter((c) => !c.locked);
       if (open.length === 0) errors.push(`${scene.scene_id}: todas las opciones visibles están tachadas (bloqueo)`);

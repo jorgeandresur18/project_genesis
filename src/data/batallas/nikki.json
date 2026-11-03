@@ -180,7 +180,7 @@
           26,
           13
         ],
-        "texto": "A {quien} se le prende un aura morada. Levanta la mano y en la palma le nace una bola de humo tóxico que no para de crecer.",
+        "texto": "A {quien} se le prende un aura morada. Levanta la mano y en la palma le nace una bola de energía tóxica que no para de crecer.",
         "veneno": {
           "danio": 6,
           "turnos": 3
@@ -190,7 +190,7 @@
         "traicion": {
           "ps": 2,
           "veneno": 1,
-          "texto": "¿Me pides perdón y después me pegas? A {quien} se le prende un aura morada. Levanta la mano y en la palma le nace una bola de humo tóxico, enorme, hecha de ocho años."
+          "texto": "¿Me pides perdón y después me pegas? A {quien} se le prende un aura morada. Levanta la mano y en la palma le nace una bola de energía tóxica, enorme, hecha de ocho años."
         }
       }
     }

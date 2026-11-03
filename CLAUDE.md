@@ -19,6 +19,7 @@ Novela visual indie en código (React + Vite). Género: ciencia ficción psicol�
 - **Sin contenido sexual explícito.** La sexualidad es sugerida. Las escenas +18 (desbloqueables) van con censura y nunca muestran nada explícito.
 - **La historia vive en JSON**, nunca dentro de los componentes de React.
 - **Greyboxing:** sin sprites, imágenes ni audio finales hasta la fase de arte. Usa placeholders (`PLACEHOLDER:nombre`).
+- **Decisiones: máximo 4 opciones a la vez** en la novela (la prueba de rutas lo revisa; varias opciones con condiciones distintas pueden sumar más en el JSON si nunca se ven más de 4 juntas).
 - **No agregues mecánicas** (inventario, minijuegos, combate) sin que el autor lo pida.
 - **Commits pequeños.** Antes de cada commit corre la prueba automática de rutas (`npm run test:routes`).
 - Si el autor corrige algo del canon, actualiza `docs/CANON.md` en el mismo cambio.

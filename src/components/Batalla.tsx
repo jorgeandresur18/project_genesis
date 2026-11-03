@@ -252,6 +252,8 @@ function Pelea({
     perdona: false,
     /** Quién le pidió perdón a Nikki y después la atacó (la Mega Bola Tóxica va contra él). */
     traicion: null as string | null,
+    /** A quién remata Nikki después de la Mega Bola (su próxima cachetada no falla, aunque esquive). */
+    remate: null as string | null,
     /** Los que quedaron paralizados (o confundidos) en este turno (empiezan a descontar en el siguiente). */
     paralizadoRecien: [] as string[],
     confundidoRecien: [] as string[],
@@ -1372,6 +1374,9 @@ function Pelea({
   /** La Mega Bola Tóxica en la pantalla: dónde está, qué tan grande y qué hace (crece, vuela o explota). */
   const [bolaT, setBolaT] = useState<{ key: number; x: number; y: number; lado: number; anim: 'aparecer' | 'idle' | 'explotar'; ms: number } | null>(null);
   const [tiembla, setTiembla] = useState(0);
+  /** El escenario morado mientras Nikki carga la bola, y la onda de luz del impacto. */
+  const [tinte, setTinte] = useState(false);
+  const [onda, setOnda] = useState<{ key: number; x: number; y: number } | null>(null);
   /**
    * La Mega Bola Tóxica (Nikki): el aviso, el aura (levanta la mano), la bola aparece en la palma y crece de más; al
    * bajar la mano sale disparada, explota sobre los rivales con un fogonazo y un temblor, les pega a todos y los
@@ -1390,6 +1395,8 @@ function Pelea({
     if (!fila || !info) return;
     const msPaso = 1000 / fila.fps;
     playChip('carga');
+    // Mientras carga, el escenario se va poniendo morado.
+    setTinte(true);
     void animar(e.id, 'aura' as Anim, fila.frames * msPaso);
     // En la palma: aparece chica y crece de más hasta poco antes de bajar la mano.
     await espera(info.aparece * msPaso);
@@ -1400,7 +1407,7 @@ function Pelea({
     const espejo = e.lado === 'heroe';
     const mano = { x: (espejo ? s.right - info.x * k : s.left + info.x * k) - base.left, y: s.top + info.y * k - base.top };
     const crece = (info.suelta - info.aparece - 6) * msPaso;
-    const grande = base.height * 0.55;
+    const grande = base.height * 0.85;
     setBolaT({ key: Math.random(), x: mano.x, y: mano.y - 20 * k, lado: 14 * k, anim: 'aparecer', ms: 0 });
     await espera(80);
     setBolaT((x) => x && { ...x, lado: grande, y: mano.y - grande * 0.5, anim: 'idle', ms: crece });
@@ -1415,8 +1422,10 @@ function Pelea({
     setBolaT((x) => x && { ...x, x: destino.x, y: destino.y, ms: 320 });
     await espera(320);
     playChip('impacto');
-    setBolaT((x) => x && { ...x, anim: 'explotar', lado: grande * 1.6, ms: 200 });
-    setFogonazo({ key: Math.random(), color: '#e2a6ff' });
+    setBolaT((x) => x && { ...x, anim: 'explotar', lado: grande * 1.7, ms: 200 });
+    // El impacto: un destello blanco, una onda de luz morada que se abre desde la explosión y el temblor.
+    setFogonazo({ key: Math.random(), color: '#ffffff' });
+    setOnda({ key: Math.random(), x: destino.x, y: destino.y });
     setTiembla(Math.random());
     // A todos sus rivales: el golpe y el veneno.
     for (const x of rivales) {
@@ -1427,7 +1436,9 @@ function Pelea({
         numero(x.id, `-${antes - x.ps}`, 'critico');
         void animar(x.id, 'golpeado');
         luz(x.id, bt.color, true);
-        x.envenenado = { danio: bt.traicion!.veneno, turnos: 9 };
+        // En esta pelea el veneno no lo mata: lo deja en 1 y el remate es de Nikki.
+        x.envenenado = { danio: bt.traicion!.veneno, turnos: 9, noMata: true };
+        b.current.remate = x.id;
       } else {
         await golpear(e, x, bt.poder, bt.color);
         if (vivo(x) && !x.envenenado) x.envenenado = { ...bt.veneno };
@@ -1438,10 +1449,22 @@ function Pelea({
       if (!x.envenenado) x.envenenado = { ...bt.veneno };
       luz(x.id, bt.color);
     }
+    // Los golpeados quedan tirados y después se levantan.
+    for (const x of rivales) if (vivo(x)) void animar(x.id, 'ko');
     forzar();
     await espera(900);
     setBolaT(null);
-    soltar(rivales);
+    setTinte(false);
+    await espera(700);
+    for (const x of rivales) {
+      if (!vivo(x)) continue;
+      bajoEspecial.current.delete(x.id);
+      setAnims((m) => ({ ...m, [x.id]: 'idle' }));
+      efecto(x.id, 'se-levanta', 800);
+    }
+    playChip('salto');
+    await espera(500);
+    setOnda(null);
     await decir(fmt(t('batalla.bola_envenena'), { quien: e.nombre }));
     await limpiarCebos();
     for (const x of rivales) if (!vivo(x) && !x.cebo) await decir(fmt(t('batalla.cae'), { quien: x.nombre }));
@@ -1732,6 +1755,24 @@ function Pelea({
     const hs = b.current.heroes.filter(vivo);
     const esp = d.enemigos[e.clave].especial;
     const bola = d.enemigos[e.clave].bola_toxica;
+    // Después de la Mega Bola de la traición: la cachetada que remata, que no falla aunque esquive.
+    const rematado = bola && b.current.remate ? b.current.heroes.find((x) => x.id === b.current.remate && vivo(x)) : undefined;
+    if (rematado) {
+      b.current.remate = null;
+      const golpe = d.enemigos[e.clave].ataques.find((x) => !x.confunde && !x.paraliza && !x.cebo)!;
+      await decir(fmt(golpe.texto, { quien: e.nombre, objetivo: rematado.nombre }));
+      await deslizar(e.id, rematado.id);
+      void animar(e.id, 'ataque', 800);
+      playChip(sonidoDe(e));
+      await espera(380);
+      bajoEspecial.current.add(rematado.id);
+      const { n } = await golpear(e, rematado, Math.max(golpe.poder, rematado.ps * 50));
+      await deslizar(e.id, null);
+      soltar([rematado]);
+      await decir(fmt(t('batalla.recibe'), { quien: rematado.nombre, n }));
+      if (!vivo(rematado)) await decir(fmt(t('batalla.cae'), { quien: rematado.nombre }));
+      return;
+    }
     const traidor = bola && b.current.traicion ? b.current.heroes.find((x) => x.id === b.current.traicion && vivo(x)) : undefined;
     if (traidor) {
       b.current.traicion = null;
@@ -2172,6 +2213,8 @@ function Pelea({
         </span>
       )}
       {tiembla > 0 && <span key={tiembla} className="batalla-temblor" aria-hidden />}
+      <span className={`batalla-tinte-toxico ${tinte ? 'activo' : ''}`} aria-hidden />
+      {onda && <span key={onda.key} className="batalla-onda-toxica" style={{ left: onda.x, top: onda.y }} aria-hidden />}
       {rayoSigue && (
         <span
           className="batalla-rayo sigue"
