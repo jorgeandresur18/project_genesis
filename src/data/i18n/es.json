@@ -360,5 +360,7 @@
   "batalla.pausa_espera": "Se puede pausar cuando te toca elegir.",
   "batalla.a_medias": "¡A medias!",
   "batalla.quejidos_envenenado": "¡Arg!|¡Ugh!|*cof, cof*|¡Agh!",
-  "batalla.quejidos_quemado": "¡Ay!|¡Ay, ay, ay!|¡Quema!|¡Fsss!"
+  "batalla.quejidos_quemado": "¡Ay!|¡Ay, ay, ay!|¡Quema!|¡Fsss!",
+  "opciones.filtro_tv": "Activar filtro TV CRT (la partida se ve en un televisor de tubo, en 4:3; el menú no cambia)",
+  "tv.modo": "MODO TV VIEJO"
 }

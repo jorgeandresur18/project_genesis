@@ -99,5 +99,7 @@ Para lo que viene, ver `docs/CRONOGRAMA.md`.
     - Despierta y ve a Cami y Rikka en su cuarto.
     - La restauración pasa al Capítulo 4.
     - La convención con los otakus, Cami en Dulce Frío, el beso a propósito, Nikki y Rikka en el bar.
+- **Filtro TV CRT** (Opciones, pedido del autor): la partida en un televisor de tubo gris de los 90, en 4:3, con líneas de barrido, desenfoque y el logo del modo TV (`public/marca/logo_tv.webp`, del autor). En el celular no hay televisor: 4:3 con dos barras a los costados con el logo. El menú no cambia.
+- Títulos de los capítulos: «Una vida en bucle», «El viaje del héroe*» (al terminar, «antihéroe»); los del 3 al 7, en discusión. Se mantienen 7 capítulos.
 - «Conoce más» en dos partes (el juego y el autor). El repositorio pasa a llamarse `project_genesis`.
 - **Pendiente:** ver «Decisiones pendientes» en `docs/CRONOGRAMA.md`.

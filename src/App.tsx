@@ -72,6 +72,7 @@ export default function App() {
   // Easter egg del título: Nikki bloquea el menú hasta que el jugador le responda.
   const [egg, setEgg] = useState<EggPhase>('off');
   const hasGame = useStore((s) => !!s.game);
+  const filtroTv = useStore((s) => s.settings.filtroTv);
   // Entrada elegante del título: al llegar desde la advertencia y al volver de una partida.
   const [intro, setIntro] = useState<Intro>('advertencia');
   useEffect(() => {
@@ -156,7 +157,13 @@ export default function App() {
   return (
     <div className="app">
       {hasGame ? (
-        <Game open={setOverlay} paused={overlay !== null} onTitle={goToTitle} />
+        filtroTv ? (
+          <TvViejo>
+            <Game open={setOverlay} paused={overlay !== null} onTitle={goToTitle} />
+          </TvViejo>
+        ) : (
+          <Game open={setOverlay} paused={overlay !== null} onTitle={goToTitle} />
+        )
       ) : (
         <TitleScreen
           open={setOverlay}
@@ -223,6 +230,47 @@ function urlStart(): { scene: string; chapter?: number } | null {
   const chapter = Number(m[1]);
   const first = [...CHAPTER_STARTS].find(([, n]) => n === chapter);
   return first ? { scene: first[0], chapter } : null;
+}
+
+/**
+ * Filtro TV CRT (Opciones): la partida dentro de un televisor de tubo de los 90, gris oscuro, con la pantalla en
+ * 4:3 un poco curva, líneas de barrido, un leve desenfoque y parpadeo; abajo, el logo y los botones. En el celular
+ * no hay televisor: la pantalla en 4:3 con el efecto CRT y dos barras a los costados con el logo del modo TV. Los
+ * paneles (Opciones, Boringram…) se abren por encima, fuera del televisor, y el menú del título no cambia.
+ */
+function TvViejo({ children }: { children: ReactNode }) {
+  const t = useT();
+  const barra = (
+    <div className="tv-barra" aria-hidden>
+      <img src={assetUrl('marca/logo_tv.webp')} alt="" draggable={false} />
+    </div>
+  );
+  return (
+    <div className="tv">
+      {barra}
+      <div className="tv-caja">
+        <div className="tv-pantalla">
+          <div className="tv-imagen">{children}</div>
+          <div className="tv-crt" aria-hidden />
+        </div>
+        <div className="tv-panel" aria-hidden>
+          <span className="tv-parlante" />
+          <span className="tv-logo">
+            <img src={assetUrl('marca/logo_tv.webp')} alt="PROJECT GENESIS" draggable={false} />
+            <small>{t('tv.modo')}</small>
+          </span>
+          <span className="tv-botones">
+            <i className="tv-perilla" />
+            <i className="tv-perilla" />
+            <i className="tv-boton" />
+            <i className="tv-boton" />
+            <i className="tv-encendido" />
+          </span>
+        </div>
+      </div>
+      {barra}
+    </div>
+  );
 }
 
 /** Triángulos de adelantar/retroceder: uno más por cada velocidad (x2 = 2 … x16 = 5). */

@@ -360,5 +360,7 @@
   "batalla.pausa_espera": "You can pause when it is your turn to choose.",
   "batalla.a_medias": "Half dodge!",
   "batalla.quejidos_envenenado": "Argh!|Ugh!|*cough, cough*|Agh!",
-  "batalla.quejidos_quemado": "Ow!|Ow, ow, ow!|It burns!|Hsss!"
+  "batalla.quejidos_quemado": "Ow!|Ow, ow, ow!|It burns!|Hsss!",
+  "opciones.filtro_tv": "CRT TV filter (the game is shown on an old tube TV, in 4:3; the menu stays the same)",
+  "tv.modo": "OLD TV MODE"
 }

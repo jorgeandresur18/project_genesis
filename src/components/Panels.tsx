@@ -805,6 +805,10 @@ export function OptionsPanel({ onClose, enJuego = false }: { onClose: () => void
         />
         {t('opciones.reducir')}
       </label>
+      <label className="option">
+        <input type="checkbox" checked={!!settings.filtroTv} onChange={(e) => setSettings({ filtroTv: e.target.checked })} />
+        {t('opciones.filtro_tv')}
+      </label>
 
       <DangerZone glitch={enJuego} />
     </Panel>
