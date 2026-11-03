@@ -64,7 +64,7 @@ El RPG, Boringram y el arte se hacen **para el capítulo que toca**, no por adel
 - [ ] **Escribir el guion del Capítulo 4** desde el borrador del autor (17 escenas) y lo que él agregue después.
 - [ ] **Pelea RPG con los otakus en la convención** (Cami). *Pesada:* sprites de los otakus. Es la primera pelea en el mundo real después del bar: ¿«vida real» como la de Nikki?
 - [ ] *Liviana:* fondos del mundo real (departamento de día, convención, Dulce Frío por dentro, el parque, el centro).
-- [ ] *Liviana:* sprites nuevos: la compañera de tesis, Jordan, amigos de Jair y de Nikki, Cami con uniforme de Dulce Frío.
+- [ ] *Liviana:* sprites nuevos: Lady (la compañera de tesis), Jordan, amigos de Jair y de Nikki, Cami con uniforme de Dulce Frío.
 - [ ] *Media:* Boringram del Capítulo 4 (las fotos de la convención, Cami y Nikki en la heladería, lo que ve Nikki).
 - [ ] **Pendientes del RPG que el Capítulo 4 pide:** la tienda desde el título y equiparse de verdad, si la historia lo necesita.
 
@@ -88,7 +88,7 @@ Se responden cuando toque su semana; mientras, no se inventan.
 - Cómo es la pelea final.
 
 **Capítulo 4**
-- El nombre de la compañera de tesis y de los amigos nuevos.
+- Los demás amigos nuevos (Lady y Jordan ya están).
 - Cuál es el adelanto en la primera convención.
 - Por qué Cami besa a Jair a propósito.
 - Cómo sigue después de la cuenta del bar.
