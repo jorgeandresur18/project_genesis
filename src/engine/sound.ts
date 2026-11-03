@@ -358,27 +358,34 @@ export function playTvEncendido(prender: boolean): void {
   silbido.stop(t + 0.92);
 }
 
-/** Televisor viejo: el ruido de un canal sin señal. Devuelve cómo pararlo. */
+/** Televisor viejo: el ruido de un canal sin señal (la pista del autor, en bucle). Devuelve cómo pararlo. */
+const ESTATICA_LEVEL = 0.9;
 export function playEstatica(): () => void {
   const { sfxVolume, muted } = useStore.getState().settings;
   if (muted || sfxVolume <= 0) return () => {};
-  const c = context();
-  const buf = c.createBuffer(1, c.sampleRate, c.sampleRate);
-  const datos = buf.getChannelData(0);
-  for (let i = 0; i < datos.length; i++) datos[i] = Math.random() * 2 - 1;
-  const fuente = c.createBufferSource();
-  fuente.buffer = buf;
-  fuente.loop = true;
-  const filtro = c.createBiquadFilter();
-  filtro.type = 'bandpass';
-  filtro.frequency.value = 3000;
-  filtro.Q.value = 0.6;
-  const g = c.createGain();
-  g.gain.value = sfxVolume * 0.07;
-  fuente.connect(filtro).connect(g).connect(sfxOut());
-  fuente.start();
-  return () => {
-    g.gain.setTargetAtTime(0, c.currentTime, 0.03);
-    fuente.stop(c.currentTime + 0.15);
+  let parado = false;
+  let parar = () => {
+    parado = true;
   };
+  load('tv_estatica.mp3')
+    .then((buf) => {
+      if (parado) return;
+      const c = context();
+      const { start, end } = audibleRange(buf);
+      const fuente = c.createBufferSource();
+      fuente.buffer = buf;
+      fuente.loop = true;
+      fuente.loopStart = start;
+      fuente.loopEnd = end;
+      const g = c.createGain();
+      g.gain.value = sfxVolume * ESTATICA_LEVEL;
+      fuente.connect(g).connect(sfxOut());
+      fuente.start(0, start);
+      parar = () => {
+        g.gain.setTargetAtTime(0, c.currentTime, 0.03);
+        fuente.stop(c.currentTime + 0.15);
+      };
+    })
+    .catch(() => {});
+  return () => parar();
 }

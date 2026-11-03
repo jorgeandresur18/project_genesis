@@ -90,10 +90,12 @@ export function TvViejo({ activo, children }: { activo: boolean; children: React
     return () => clearTimeout(id);
   }, [osd]);
 
-  // Sin un cable de audio, ese lado no suena (al apagar el filtro, todo vuelve a sonar).
+  // Sin un cable de audio, ese lado no suena. Los cables son la entrada AUX: en un canal no cuentan (la nieve suena
+  // por los dos lados). Al apagar el filtro, todo vuelve a sonar.
   useEffect(() => {
-    cablesDeAudio(!activo || cables.izq, !activo || cables.der);
-  }, [activo, cables.izq, cables.der]);
+    const aux = activo && canal === 0;
+    cablesDeAudio(!aux || cables.izq, !aux || cables.der);
+  }, [activo, canal, cables.izq, cables.der]);
   useEffect(() => () => cablesDeAudio(true, true), []);
   const tirar = (k: 'video' | 'izq' | 'der') => {
     playTvClic();
@@ -192,11 +194,10 @@ export function TvViejo({ activo, children }: { activo: boolean; children: React
           ref={pantalla}
         >
           <div className="tv-imagen">{children}</div>
-          {/* Sin el cable de video: la pantalla en negro (el juego sigue y se oye) y el rótulo AUX fijo. */}
+          {/* Sin el cable de video: la pantalla en negro (el juego sigue y se oye). */}
           {encendida && sinVideo && <span className="tv-sin-video" aria-hidden />}
           {/* Un canal sin señal: nieve encima del juego (que sigue ahí, en AUX). */}
           {encendida && canal > 0 && <span className="nodata tv-estatica" aria-hidden />}
-          {encendida && sinVideo && !transicion && !osd && <b className="tv-osd tv-osd-fijo">AUX</b>}
           {osd && (
             <div className="tv-osd" aria-live="polite">
               {osd.tipo === 'canal' ? (

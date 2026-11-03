@@ -3446,7 +3446,6 @@ button.tv-rca { padding: 0; border: none; cursor: pointer; }
 .tv-rca:focus-visible { outline: 0.25vmin solid #8fd3ff; outline-offset: 0.3vmin; }
 /* Sin el cable de video: negro (encima del juego, debajo del rótulo). */
 .tv-sin-video { position: absolute; inset: 0; z-index: 2; background: #000; }
-.tv-osd-fijo { font-size: inherit; }
 /* El emblema: un botón sin forma; al tocarlo un brillo metálico lo recorre. */
 .tv-emblema { position: relative; padding: 0; border: none; background: none; cursor: pointer; }
 .tv-emblema-brillo { position: absolute; inset: 0; pointer-events: none; -webkit-mask: url('/marca/logo_tv.webp') center / contain no-repeat; mask: url('/marca/logo_tv.webp') center / contain no-repeat; background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, 0.95) 50%, transparent 65%) 0 0 / 250% 100% no-repeat; mix-blend-mode: screen; animation: tv-chapa 0.9s ease-out forwards; }
