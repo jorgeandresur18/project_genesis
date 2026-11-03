@@ -160,6 +160,55 @@
       ]
     },
     {
+      "titulo": "La influencia latinoamericana",
+      "parte": "autor",
+      "parrafos": [
+        "También hay una influencia latinoamericana importante en PROJECT GENESIS. Me inspiran la sensibilidad descarada y la honestidad emocional de Andrés Calamaro; el descontrol, las adicciones y la fragilidad humana que atraviesan la música de Intoxicados; y la etapa más experimental de Luis Alberto Spinetta, especialmente en Almendra e Invisible.",
+        "De Charly García, su poesía convertida en rock: esa capacidad de decir cosas profundas, incómodas y absurdas con una naturalidad extraordinaria. De Los Prisioneros, Los Redondos y Soda Stereo, esa atmósfera ochentera que te transporta a otra época, junto con la fuerza de sus letras, su identidad musical y el impacto que dejaron en la cultura latinoamericana.",
+        "Y, por supuesto, El Cuarteto de Nos, por su irreverencia, su humor negro y su capacidad para convertir la sátira cínica en canciones que, detrás de la ironía, suelen esconder reflexiones bastante incómodas.",
+        "Notarán que buena parte de estas referencias son argentinas, y no es casualidad: Argentina tiene una tradición musical extraordinaria y algunos de sus artistas son referentes fundamentales para mí.",
+        "Todas estas influencias forman parte de la sensibilidad con la que fui construyendo PROJECT GENESIS: personajes imperfectos, emociones contradictorias, humor incómodo y una mirada bastante poco solemne sobre la vida.",
+        "Además de las bandas ficticias que aparecen en el juego y de las canciones que conté más arriba, hay canciones latinoamericanas que asocio con cada personaje. No describen sus historias de manera literal: son interpretaciones personales de su personalidad, sus contradicciones y el lugar que ocupan en la narrativa."
+      ],
+      "canciones": [
+        {
+          "personaje": "Jair",
+          "cancion": "El anillo del Capitán Beto",
+          "banda": "Invisible",
+          "nota": "Una canción sobre un personaje que viaja, pero que también parece estar perdido. Me gusta como reflejo de alguien que intenta escapar de su propia realidad, aunque no necesariamente sabe hacia dónde va.",
+          "spotify": "https://open.spotify.com/track/4Cp4t8kN9GuSUfuZlPtloK"
+        },
+        {
+          "personaje": "Nikki",
+          "cancion": "Nunca quise",
+          "banda": "Intoxicados",
+          "nota": "Por esa mezcla de fragilidad, contradicción y desorden emocional. Encaja con alguien que puede reconocer el daño que existe en una relación, pero que no siempre encuentra la manera de salir de ella.",
+          "spotify": "https://open.spotify.com/track/0ZAJ660VP57lLK4U7NlGOy"
+        },
+        {
+          "personaje": "Cami",
+          "cancion": "La rubia tarada",
+          "banda": "Sumo",
+          "nota": "Por su irreverencia, su actitud provocadora y esa energía que parece no pedir permiso. Es una asociación más ligada a su personalidad y a su manera de irrumpir en la historia que a su trasfondo.",
+          "spotify": "https://open.spotify.com/track/2mSVDEByTebOq0HI6H1TEb"
+        },
+        {
+          "personaje": "Rikka",
+          "cancion": "Seguir viviendo sin tu amor",
+          "banda": "Luis Alberto Spinetta",
+          "nota": "Por la sensibilidad de la canción y su manera de expresar el amor sin convertirlo necesariamente en una posesión. Me parece una buena contraparte para los vínculos más complicados de la historia.",
+          "spotify": "https://open.spotify.com/track/2qBirMakpTdz9ymxrZEyzg"
+        },
+        {
+          "personaje": "El Rey Malvado",
+          "cancion": "Canción de Alicia en el país",
+          "banda": "Serú Girán",
+          "nota": "Me recuerda a su naturaleza: una realidad extraña, amenazante y aparentemente absurda, donde las reglas no son lo que parecen y detrás de las imágenes se esconde algo mucho más oscuro.",
+          "spotify": "https://open.spotify.com/track/519WGo9DQCtYP72a7Lmprj"
+        }
+      ]
+    },
+    {
       "titulo": "Una nota personal",
       "parte": "autor",
       "parrafos": [
@@ -210,5 +259,6 @@
       "url": "https://paypal.me/jorgeandresur",
       "destacado": true
     }
-  ]
+  ],
+  "aviso": "Antes de empezar: esta sección no es obligatoria, pero ayuda a entender mejor la obra. Es larga; si tienes tiempo, léela con calma. Puedes saltar a cualquier parte desde el índice."
 }

@@ -160,6 +160,55 @@
       ]
     },
     {
+      "titulo": "The Latin American influence",
+      "parte": "autor",
+      "parrafos": [
+        "There's also an important Latin American influence in PROJECT GENESIS. I'm inspired by the shameless sensitivity and emotional honesty of Andrés Calamaro; the chaos, the addictions and the human fragility running through the music of Intoxicados; and the most experimental period of Luis Alberto Spinetta, especially in Almendra and Invisible.",
+        "From Charly García, his poetry turned into rock: that ability to say deep, uncomfortable and absurd things with extraordinary naturalness. From Los Prisioneros, Los Redondos and Soda Stereo, that 80s atmosphere that takes you to another time, along with the strength of their lyrics, their musical identity and the mark they left on Latin American culture.",
+        "And, of course, El Cuarteto de Nos, for their irreverence, their dark humor and their knack for turning cynical satire into songs that, behind the irony, often hide rather uncomfortable reflections.",
+        "You'll notice many of these references are Argentine, and that's no accident: Argentina has an extraordinary musical tradition, and some of its artists are fundamental references for me.",
+        "All these influences are part of the sensibility I built PROJECT GENESIS with: flawed characters, contradictory emotions, uncomfortable humor and a rather unsolemn look at life.",
+        "Besides the fictional bands in the game and the songs I mentioned above, there are Latin American songs I associate with each character. They don't describe their stories literally: they're personal readings of their personality, their contradictions and the place they hold in the story."
+      ],
+      "canciones": [
+        {
+          "personaje": "Jair",
+          "cancion": "El anillo del Capitán Beto",
+          "banda": "Invisible",
+          "nota": "A song about a character who travels but also seems to be lost. I like it as a reflection of someone trying to escape his own reality without necessarily knowing where he's going.",
+          "spotify": "https://open.spotify.com/track/4Cp4t8kN9GuSUfuZlPtloK"
+        },
+        {
+          "personaje": "Nikki",
+          "cancion": "Nunca quise",
+          "banda": "Intoxicados",
+          "nota": "For its mix of fragility, contradiction and emotional mess. It fits someone who can recognize the harm in a relationship but doesn't always find the way out of it.",
+          "spotify": "https://open.spotify.com/track/0ZAJ660VP57lLK4U7NlGOy"
+        },
+        {
+          "personaje": "Cami",
+          "cancion": "La rubia tarada",
+          "banda": "Sumo",
+          "nota": "For its irreverence, its provocative attitude and that energy that never seems to ask for permission. It's tied more to her personality and the way she bursts into the story than to her background.",
+          "spotify": "https://open.spotify.com/track/2mSVDEByTebOq0HI6H1TEb"
+        },
+        {
+          "personaje": "Rikka",
+          "cancion": "Seguir viviendo sin tu amor",
+          "banda": "Luis Alberto Spinetta",
+          "nota": "For the song's sensitivity and its way of expressing love without necessarily turning it into possession. A good counterpart to the more complicated bonds in the story.",
+          "spotify": "https://open.spotify.com/track/2qBirMakpTdz9ymxrZEyzg"
+        },
+        {
+          "personaje": "The Evil King",
+          "cancion": "Canción de Alicia en el país",
+          "banda": "Serú Girán",
+          "nota": "It reminds me of his nature: a strange, threatening and seemingly absurd reality, where the rules aren't what they seem and something much darker hides behind the images.",
+          "spotify": "https://open.spotify.com/track/519WGo9DQCtYP72a7Lmprj"
+        }
+      ]
+    },
+    {
       "titulo": "A personal note",
       "parte": "autor",
       "parrafos": [
@@ -210,5 +259,6 @@
       "url": "https://paypal.me/jorgeandresur",
       "destacado": true
     }
-  ]
+  ],
+  "aviso": "Before you start: this section isn't required, but it helps you understand the work better. It's long; if you have time, read it calmly. You can jump to any part from the index."
 }

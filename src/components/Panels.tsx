@@ -424,6 +424,8 @@ export function AboutPanel({ onClose }: { onClose: () => void }) {
     <Panel title={conoceMas.titulo} onClose={onClose}>
       <div className="about">
         <img className="about-logo" src={`${import.meta.env.BASE_URL}marca/logo.webp`} alt="PROJECT GENESIS" />
+        {/* Antes del índice: que no es obligatoria, pero ayuda a entender la obra. */}
+        {'aviso' in conoceMas && conoceMas.aviso && <p className="about-aviso">{conoceMas.aviso}</p>}
         {/* Índice: cada sección a un toque (la página es larga). */}
         <nav className="about-indice" id="about-indice" aria-label={t('conoce.indice')}>
           <b>{t('conoce.indice')}</b>

@@ -3452,3 +3452,6 @@ button.tv-rca { padding: 0; border: none; cursor: pointer; }
 @keyframes tv-chapa { from { background-position: 150% 0; filter: brightness(1.4); } to { background-position: -60% 0; filter: brightness(1); } }
 .tv-emblema:active .tv-logo { filter: drop-shadow(0 0.25vmin 0 #000) brightness(1.25); }
 @media (prefers-reduced-motion: reduce) { .tv-emblema-brillo { animation-duration: 0.01s; } }
+
+/* Conoce más: el aviso de arriba (no es obligatoria, pero ayuda a entender la obra). */
+.about-aviso { margin: 0 0 1.2rem; padding: 0.75rem 1rem; border: 1px solid rgba(214, 218, 226, 0.25); border-left: 3px solid #d6dae2; border-radius: 0.4rem; background: rgba(255, 255, 255, 0.04); color: #cfd3db; font-size: 0.92rem; line-height: 1.55; }
