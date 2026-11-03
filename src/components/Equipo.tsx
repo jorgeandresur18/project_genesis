@@ -21,18 +21,21 @@ for (const k of Object.keys(BATALLAS).sort((a, b) => (a.includes('bastion') ? -1
   for (const [id, o] of Object.entries(d.objetos)) if (!OBJETOS.has(id)) OBJETOS.set(id, o);
 }
 /** Los espacios de equipo de cada personaje (traje sirve para un vestido, una armadura o lo que lleve). */
-export const ESPACIOS = ['cabeza', 'traje', 'amuleto'] as const;
+export const ESPACIOS = ['cabeza', 'traje', 'pies', 'amuleto'] as const;
+/** Cuántos van en el grupo (las fichas vacías son los lugares que todavía no se ocupan). */
+const GRUPO = 3;
 
-export function EquipoPanel({ onClose }: { onClose: () => void }) {
+export function EquipoPanel({ onClose, soloVer = false, grupo }: { onClose: () => void; soloVer?: boolean; grupo?: string[] }) {
   const t = useT();
   const vars = useStore((s) => s.game?.vars ?? {});
   const progreso = progresoDeVars(vars);
   const [pestana, setPestana] = useState<'personajes' | 'mochila'>('personajes');
   // El equipo: Jair siempre; los demás, desde que pelearon con él.
-  const equipo = [...HEROES.keys()].filter((k) => k === 'jair' || progreso.heroes[k]);
+  // En una pelea, los que están peleando (aunque sea su primera).
+  const equipo = [...HEROES.keys()].filter((k) => k === 'jair' || progreso.heroes[k] || grupo?.includes(k));
   const mochila = Object.entries(progreso.mochila).filter(([k, n]) => n > 0 && OBJETOS.has(k));
   return (
-    <Panel title={t('equipo.titulo')} onClose={onClose} wide>
+    <Panel title={t('equipo.titulo')} onClose={onClose}>
       <p className="equipo-monedas">
         {t('equipo.monedas')} <b>{progreso.monedas ?? 0}</b>
       </p>
@@ -54,7 +57,15 @@ export function EquipoPanel({ onClose }: { onClose: () => void }) {
       </div>
       {pestana === 'personajes' ? (
         <div className="equipo-personajes">
-          {equipo.map((k) => {
+          {[...equipo, ...Array.from({ length: Math.max(0, GRUPO - equipo.length) }, () => '')].map((k, i) => {
+            // Un lugar del grupo que todavía nadie ocupa.
+            if (!k)
+              return (
+                <article key={`vacio-${i}`} className="equipo-ficha vacia">
+                  <div className="equipo-sprite">?</div>
+                  <h3>???</h3>
+                </article>
+              );
             const h = HEROES.get(k)!;
             const nivel = progreso.heroes[k]?.nivel || h.nivel;
             const xp = progreso.heroes[k]?.xp ?? 0;
@@ -98,7 +109,7 @@ export function EquipoPanel({ onClose }: { onClose: () => void }) {
               </article>
             );
           })}
-          <p className="muted equipo-nota">{t('equipo.nota')}</p>
+          <p className="muted equipo-nota">{t(soloVer ? 'equipo.nota_pelea' : 'equipo.nota')}</p>
         </div>
       ) : (
         <div className="equipo-mochila">

@@ -310,7 +310,7 @@
   "equipo.traje": "Traje",
   "equipo.amuleto": "Amuleto",
   "equipo.vacio": "— nada —",
-  "equipo.nota": "El equipo (gorros, trajes, armaduras, amuletos y cosas raras) se compra en Boringplace. Cuando lo tengas, se equipa acá.",
+  "equipo.nota": "El equipo (gorros, trajes, amuletos, calzado y cosas raras) se consigue en las peleas y en Boringplace. Cuando lo tengas, se equipa acá (fuera de las peleas).",
   "equipo.mochila_vacia": "La mochila está vacía. Los objetos se consiguen en las peleas (y, más adelante, en Boringplace).",
   "equipo.alguien": "alguien",
   "equipo.tipo_curacion": "Curación",
@@ -347,5 +347,12 @@
   "galeria.accion_bloqueada": "Se desbloquea al verla en una pelea.",
   "galeria.accion.clon": "Clon de sombra",
   "batalla.bola_envenena": "La energía tóxica salpica a todos. Menos a {quien}.",
-  "galeria.accion.aura": "Mega Bola Tóxica"
+  "galeria.accion.aura": "Mega Bola Tóxica",
+  "equipo.pies": "Pies",
+  "equipo.nota_pelea": "En una pelea se puede mirar el equipo, pero no cambiarlo.",
+  "batalla.pausa": "Pausa",
+  "batalla.pausa_seguir": "Seguir",
+  "batalla.pausa_salir": "Salir al título",
+  "batalla.pausa_volver": "Volver",
+  "batalla.pausa_aviso": "Si sales, la pelea se pierde: «Continuar» te lleva a tu último guardado (si había lugar, el juego guardó solo justo antes de esta pelea)."
 }

@@ -310,7 +310,7 @@
   "equipo.traje": "Outfit",
   "equipo.amuleto": "Charm",
   "equipo.vacio": "— nothing —",
-  "equipo.nota": "Gear (hats, outfits, armor, charms and weird stuff) is bought on Boringplace. Once you have it, you equip it here.",
+  "equipo.nota": "Gear (hats, outfits, amulets, shoes and weird stuff) comes from fights and Boringplace. Once you have it, you equip it here (outside fights).",
   "equipo.mochila_vacia": "The backpack is empty. Items come from fights (and, later, from Boringplace).",
   "equipo.alguien": "someone",
   "equipo.tipo_curacion": "Healing",
@@ -347,5 +347,12 @@
   "galeria.accion_bloqueada": "Unlocks when you see it in a fight.",
   "galeria.accion.clon": "Shadow clone",
   "batalla.bola_envenena": "The toxic energy splashes everyone. Except {quien}.",
-  "galeria.accion.aura": "Mega Toxic Ball"
+  "galeria.accion.aura": "Mega Toxic Ball",
+  "equipo.pies": "Feet",
+  "equipo.nota_pelea": "During a fight you can look at your gear, but not change it.",
+  "batalla.pausa": "Pause",
+  "batalla.pausa_seguir": "Resume",
+  "batalla.pausa_salir": "Quit to title",
+  "batalla.pausa_volver": "Back",
+  "batalla.pausa_aviso": "If you quit, this fight is lost: «Continue» takes you to your last save (if there was room, the game saved right before this fight)."
 }

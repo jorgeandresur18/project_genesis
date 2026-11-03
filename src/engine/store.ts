@@ -5,6 +5,8 @@ import { config, scenes, variables } from './story';
 import { applyChoice, enterScene, resolveNext, visibleChoices } from './logic';
 
 export const SAVE_SLOTS = 6;
+/** El nombre del guardado automático antes de una pelea. */
+export const AUTO_NOMBRE = 'Antes de la pelea';
 const HISTORY_LIMIT = 300;
 const TRAIL_LIMIT = 300;
 
@@ -45,6 +47,8 @@ export interface SaveSlot {
   finished?: string | null;
   /** Nombre que le puso el jugador (se pide al guardar y se puede cambiar después). */
   nombre?: string;
+  /** Lo guardó el juego solo, antes de una pelea (el mismo espacio se reusa en la próxima). */
+  auto?: boolean;
 }
 
 export interface Settings {
@@ -210,6 +214,8 @@ interface Store {
   quitToTitle: () => void;
   save: (slot: number, nombre?: string) => void;
   /** Cambia el nombre de una partida guardada (vacío: vuelve a «Espacio N»). */
+  /** Antes de una pelea: guarda solo, si hay un espacio vacío (o el del guardado automático anterior). */
+  autoguardarPelea: () => void;
   renameSave: (slot: number, nombre: string) => void;
   load: (slot: number) => void;
   deleteSave: (slot: number) => void;
@@ -525,6 +531,16 @@ export const useStore = create<Store>()(
             ...(nombre?.trim() ? { nombre: nombre.trim() } : {}),
           };
           set({ saves: next });
+        },
+
+        autoguardarPelea: () => {
+          // Antes de una pelea, si hay lugar: en el espacio del guardado automático anterior o en el primero vacío.
+          // Si todos los espacios son del jugador, no se pisa ninguno.
+          const { saves } = get();
+          const slot = saves.findIndex((x) => x?.auto) >= 0 ? saves.findIndex((x) => x?.auto) : saves.findIndex((x) => !x);
+          if (slot < 0) return;
+          get().save(slot, AUTO_NOMBRE);
+          set({ saves: get().saves.map((x, i) => (i === slot && x ? { ...x, auto: true } : x)) });
         },
 
         renameSave: (slot, nombre) => {

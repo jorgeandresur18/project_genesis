@@ -726,6 +726,11 @@ function Game({ open, paused, onTitle }: { open: (o: Overlay) => void; paused: b
   };
   const { game, scene, choices, waitingChoice, mode, textDone } = useStoryEngine();
   const { next, choose, setMode, back, toNextChoice, toPrevChoice } = useStore.getState();
+  // Al llegar a una pelea, el juego guarda solo (si hay un espacio libre): así, si sales o pierdes, se vuelve acá.
+  const escenaPelea = scene?.batalla ? scene.scene_id : null;
+  useEffect(() => {
+    if (escenaPelea) useStore.getState().autoguardarPelea();
+  }, [escenaPelea]);
   const speed = useStore((s) => s.speed);
   const canGoBack = useStore((s) => (s.game?.trail?.length ?? 0) > 0);
   const error = useStore((s) => s.error);
@@ -1010,6 +1015,7 @@ function Game({ open, paused, onTitle }: { open: (o: Overlay) => void; paused: b
             volverDeBatalla();
             useStore.getState().loseLevel();
           }}
+          onSalir={() => useStore.getState().quitToTitle()}
           onPerdonar={
             shown.batalla_perdon
               ? (vars) => {

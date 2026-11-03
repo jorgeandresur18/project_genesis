@@ -54,6 +54,8 @@ import {
 import charlasJson from '../data/charlas_batalla.json';
 import fondosJson from '../data/fondos_batalla.json';
 import { EnergiasHacia } from './EfectosSprite';
+import { EquipoPanel } from './Equipo';
+import { OptionsPanel } from './Panels';
 
 /**
  * Batalla por turnos (RPG estilo EarthBound / Final Fantasy) dentro de la historia (ver `batalla` en la escena;
@@ -195,8 +197,11 @@ export function Batalla({
   onPerdonar,
   datos,
   arena,
+  onSalir,
 }: {
   id: string;
+  /** Salir de la pelea desde la pausa (al título, en la historia). Sin esto, la pausa no ofrece salir. */
+  onSalir?: () => void;
   /** Los datos de la pelea armados a mano (la arena del probador); si no, los de src/data/batallas/<id>.json. */
   datos?: DatosBatalla;
   /** Arena de prueba: los enemigos que salen (clave y nivel). Nadie gana: los caídos se levantan al final del turno. */
@@ -210,7 +215,7 @@ export function Batalla({
   onPerdonar?: (vars: Vars) => void;
 }) {
   const d = datos ?? BATALLAS[`../data/batallas/${id}.json`];
-  return d ? <Pelea d={d} progreso={progreso} onGanar={onGanar} onPerder={onPerder} onPerdonar={onPerdonar} arena={arena} /> : null;
+  return d ? <Pelea d={d} progreso={progreso} onGanar={onGanar} onPerder={onPerder} onPerdonar={onPerdonar} arena={arena} onSalir={onSalir} /> : null;
 }
 
 function Pelea({
@@ -220,7 +225,9 @@ function Pelea({
   onPerder,
   onPerdonar,
   arena,
+  onSalir,
 }: {
+  onSalir?: () => void;
   d: DatosBatalla;
   progreso?: Progreso;
   onGanar: (vars: Vars) => void;
@@ -1375,6 +1382,8 @@ function Pelea({
   /** La Mega Bola Tóxica en la pantalla: dónde está, qué tan grande y qué hace (crece, vuela o explota). */
   const [bolaT, setBolaT] = useState<{ key: number; x: number; y: number; lado: number; anim: 'aparecer' | 'idle' | 'explotar'; ms: number } | null>(null);
   const [tiembla, setTiembla] = useState(0);
+  /** La pausa (el menú de ☰ y lo que se abre desde ahí). */
+  const [pausa, setPausa] = useState<null | 'menu' | 'equipo' | 'opciones' | 'salir'>(null);
   /** El escenario morado mientras Nikki carga la bola, y la onda de luz del impacto. */
   const [tinte, setTinte] = useState(false);
   const [onda, setOnda] = useState<{ key: number; x: number; y: number } | null>(null);
@@ -2207,6 +2216,36 @@ function Pelea({
         </CajaCasillas>
       </div>
       {versus && <Versus d={d} />}
+      {/* La pausa: seguir, mirar el equipo (sin cambiarlo), las opciones o salir al título. */}
+      <button type="button" className="batalla-pausa-btn" onClick={() => setPausa('menu')} aria-label={t('batalla.pausa')}>
+        ☰
+      </button>
+      {pausa === 'menu' && (
+        <div className="batalla-pausa" role="dialog" aria-label={t('batalla.pausa')}>
+          <div className="batalla-pausa-caja">
+            <b>{t('batalla.pausa')}</b>
+            <button type="button" onClick={() => setPausa(null)}>{t('batalla.pausa_seguir')}</button>
+            <button type="button" onClick={() => setPausa('equipo')}>{t('equipo.titulo')}</button>
+            <button type="button" onClick={() => setPausa('opciones')}>{t('titulo.opciones')}</button>
+            {onSalir && (
+              <button type="button" className="peligro" onClick={() => setPausa('salir')}>
+                {t('batalla.pausa_salir')}
+              </button>
+            )}
+          </div>
+        </div>
+      )}
+      {pausa === 'salir' && (
+        <div className="batalla-pausa" role="dialog">
+          <div className="batalla-pausa-caja">
+            <p>{t('batalla.pausa_aviso')}</p>
+            <button type="button" className="peligro" onClick={() => onSalir?.()}>{t('batalla.pausa_salir')}</button>
+            <button type="button" onClick={() => setPausa('menu')}>{t('batalla.pausa_volver')}</button>
+          </div>
+        </div>
+      )}
+      {pausa === 'equipo' && <EquipoPanel soloVer grupo={d.heroes} onClose={() => setPausa('menu')} />}
+      {pausa === 'opciones' && <OptionsPanel onClose={() => setPausa('menu')} />}
       {/* La entrada (si no hay presentación): la pantalla se arma desde negro en bloques de píxel. */}
       {!d.intro && <Pixelado />}
       {/* Las balas de energía (Cami): salen de las pistolas y vuelan hasta su objetivo. */}
