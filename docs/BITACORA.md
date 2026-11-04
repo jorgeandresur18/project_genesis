@@ -266,5 +266,5 @@ fuera de la computadora principal. **Al volver a la principal: `git checkout des
     en la rama del 7A, qué choca entre ellas en la del 7B y si Jair ejecuta el comando.
   - **Aclaración del autor sobre los epílogos:** el 7A y el 7B pasan después de la batalla, no dentro del Capítulo 6. En
     `CANON.md` y `FINALES.md` quedó marcado qué parte es el epílogo: en el 7B, Cami se queda con Jair y pregunta si es su
-    mayor creación; en el 7A, Jair consigue un trabajo mejor y arregla las cosas con Nikki, como amigos. Para confirmar:
-    si el 7A sigue terminando en una nueva relación con Nikki, como dice el canon, o se quedan solo como amigos.
+    mayor creación; en el 7A, Jair consigue un trabajo mejor y arregla las cosas con Nikki. Confirmado después: primero
+    amigos y luego el inicio de una relación. «Solo amigos» es verdad en el 7A y autoengaño en el 7B (Nikki embarazada).
