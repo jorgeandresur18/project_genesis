@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proyección de Project Genesis</title>
+<style>
+  :root {
+    --fondo: #f6f5f1; --tarjeta: #ffffff; --texto: #22212a; --suave: #66636f; --linea: #dedbd3;
+    --logica: #4f6fd8; --version: #c9792b; --expansion: #2f9c7a; --atras: #8d8a96;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --fondo: #15141a; --tarjeta: #201f28; --texto: #ecebf1; --suave: #a3a0ad; --linea: #36343f;
+      --logica: #7f9bf0; --version: #e6a15c; --expansion: #5cc9a6; --atras: #6e6b78; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--fondo); color: var(--texto); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 900px; margin: 0 auto; padding: 32px 16px 64px; }
+  h1 { margin: 0 0 4px; font-size: 1.8rem; line-height: 1.2; }
+  h2 { margin: 36px 0 10px; font-size: 1.2rem; }
+  p { margin: 0 0 10px; }
+  .suave { color: var(--suave); }
+  .chico { font-size: .875rem; }
+  .cifras { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin: 22px 0 0; }
+  .cifra { background: var(--tarjeta); border: 1px solid var(--linea); border-radius: 10px; padding: 14px 16px; }
+  .cifra b { display: block; font-size: 1.45rem; line-height: 1.2; margin-bottom: 2px; }
+  .panel { background: var(--tarjeta); border: 1px solid var(--linea); border-radius: 10px; padding: 16px; }
+  .eje, .barra { position: relative; }
+  .eje { height: 20px; margin-left: 118px; font-size: .75rem; color: var(--suave); }
+  .eje span { position: absolute; top: 0; }
+  .fila { display: flex; align-items: center; margin: 7px 0; }
+  .fila > b { flex: 0 0 118px; font-size: .875rem; font-weight: 600; padding-right: 8px; }
+  .barra { flex: 1; height: 26px; background: repeating-linear-gradient(90deg, transparent 0 calc(100% / 9 - 1px), var(--linea) calc(100% / 9 - 1px) calc(100% / 9)); border-radius: 4px; }
+  .tramo { position: absolute; top: 3px; bottom: 3px; border-radius: 3px; }
+  .logica { background: var(--logica); } .version { background: var(--version); } .expansion { background: var(--expansion); }
+  .leyenda { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 12px; font-size: .875rem; }
+  .leyenda i { display: inline-block; width: 12px; height: 12px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+  .tabla { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: .9375rem; min-width: 500px; }
+  th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--linea); vertical-align: top; }
+  th { font-size: .8125rem; color: var(--suave); font-weight: 600; }
+  td.n, th.n { text-align: right; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  tr.total td { font-weight: 700; }
+  ul { margin: 0; padding-left: 20px; } li { margin-bottom: 7px; }
+  @media (max-width: 560px) {
+    .fila { display: block; } .fila > b { display: block; margin-bottom: 3px; }
+    .eje { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Proyección de Project Genesis</h1>
+  <p class="suave">Con 44 horas por semana: 6 de lunes a viernes y 7 los sábados y domingos. Hecha el 4 de noviembre de 2026.</p>
+
+  <div class="cifras">
+    <div class="cifra"><b>~1.165 horas</b><span class="suave chico">lo que falta para el 100 %</span></div>
+    <div class="cifra"><b>Mayo de 2027</b><span class="suave chico">si se cumple el ritmo (~6 meses)</span></div>
+    <div class="cifra"><b>Julio de 2027</b><span class="suave chico">con atrasos, al 70 % del ritmo (~8 meses y medio)</span></div>
+  </div>
+
+  <h2>Calendario</h2>
+  <div class="panel">
+    <div class="eje" aria-hidden="true">
+      <span style="left:0">nov</span><span style="left:9.7%">dic</span><span style="left:21.3%">ene</span><span style="left:32.8%">feb</span><span style="left:43.3%">mar</span><span style="left:54.9%">abr</span><span style="left:66%">may</span><span style="left:77.6%">jun</span><span style="left:88.8%">jul</span>
+    </div>
+    <div class="fila"><b>A 44 h/semana</b>
+      <div class="barra">
+        <div class="tramo logica" style="left:0;width:21.6%" title="Lógica: hasta principios de enero"></div>
+        <div class="tramo version" style="left:21.6%;width:25.4%" title="2.0: hasta mediados de marzo"></div>
+        <div class="tramo expansion" style="left:47%;width:22%" title="Expansiones: hasta mediados de mayo"></div>
+      </div>
+    </div>
+    <div class="fila"><b>Con atrasos</b>
+      <div class="barra">
+        <div class="tramo logica" style="left:0;width:30.6%" title="Lógica: hasta fines de enero"></div>
+        <div class="tramo version" style="left:30.6%;width:35.4%" title="2.0: hasta principios de mayo"></div>
+        <div class="tramo expansion" style="left:66%;width:32.1%" title="Expansiones: hasta fines de julio"></div>
+      </div>
+    </div>
+    <div class="leyenda">
+      <span><i class="logica"></i>Lógica del juego base</span>
+      <span><i class="version"></i>Versión 2.0</span>
+      <span><i class="expansion"></i>Expansiones</span>
+    </div>
+  </div>
+
+  <h2>Las tres etapas</h2>
+  <div class="panel tabla">
+    <table>
+      <thead><tr><th>Etapa</th><th class="n">Horas</th><th>A 44 h/semana</th><th>Con atrasos</th></tr></thead>
+      <tbody>
+        <tr><td><b>Lógica del juego base</b><br><span class="suave chico">Capítulos 2 a 7, finales alternativos y RPG</span></td><td class="n">~365</td><td>principios de enero de 2027</td><td>fines de enero de 2027</td></tr>
+        <tr><td><b>Versión 2.0</b><br><span class="suave chico">Diálogos, arte, sprites, inglés, sonido y pruebas completas</span></td><td class="n">~425</td><td>mediados de marzo de 2027</td><td>principios de mayo de 2027</td></tr>
+        <tr><td><b>Las tres expansiones</b><br><span class="suave chico">Génesis++, RikkaQuest y Génesis#</span></td><td class="n">~375</td><td>mediados de mayo de 2027</td><td>fines de julio de 2027</td></tr>
+        <tr class="total"><td>Total</td><td class="n">~1.165</td><td>~6 meses</td><td>~8 meses y medio</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="suave chico" style="margin-top:8px">Las horas ya incluyen un 25 % para arreglos y cambios de idea.</p>
+
+  <h2>Lo que sigue: la lógica, capítulo por capítulo</h2>
+  <div class="panel tabla">
+    <table>
+      <thead><tr><th>Qué</th><th class="n">Horas</th><th>Terminaría (a 44 h/semana)</th></tr></thead>
+      <tbody>
+        <tr><td>Probar lo del 4 de noviembre, las peleas del Capítulo 2 y lo que falta del RPG</td><td class="n">~56</td><td>14 de noviembre</td></tr>
+        <tr><td>Capítulo 3, con la pelea de THE KING</td><td class="n">~69</td><td>25 de noviembre</td></tr>
+        <tr><td>Capítulo 4, con los otakus y Boringram</td><td class="n">~54</td><td>3 de diciembre</td></tr>
+        <tr><td>Capítulo 5</td><td class="n">~38</td><td>9 de diciembre</td></tr>
+        <tr><td>Capítulo 6, con la batalla de las cinco manifestaciones</td><td class="n">~81</td><td>22 de diciembre</td></tr>
+        <tr><td>Epílogos 7A y 7B y finales alternativos</td><td class="n">~66</td><td>2 de enero de 2027</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Lo que más puede mover las fechas</h2>
+  <div class="panel">
+    <ul>
+      <li><b>Tus decisiones de historia.</b> Cada capítulo espera tus respuestas antes de escribirse, empezando por las preguntas de <code>docs/guion/cap03_plan.md</code>.</li>
+      <li><b>El arte.</b> Es lo más incierto de la 2.0, y buena parte la haces tú. Calculé ~125 horas de novela y ~70 de sprites del RPG.</li>
+      <li><b>La duración del Capítulo 3.</b> Calculé con las 2 h 30 min a 3 h del canon. Si baja a 1 h 30 min, son unas 25 horas menos.</li>
+      <li><b>Diciembre.</b> Las fechas no descuentan feriados.</li>
+    </ul>
+  </div>
+
+  <h2>Qué tan confiable es</h2>
+  <div class="panel">
+    <p>Es una estimación mía, con un margen de <b>±30 %</b>: mide con solo dos capítulos escritos. Sale de ~83 horas hasta hoy, calculadas con los commits, que dieron dos capítulos con ~2.580 escenas, además del RPG y los sistemas. La medida que usé es ~15 horas por cada hora de lectura de historia.</p>
+    <p style="margin:0">Respecto de la proyección del 3 de noviembre (fines de marzo, fines de julio de 2027 y fines de enero de 2028), esta adelanta las fechas porque usa tu ritmo de 44 horas por semana.</p>
+  </div>
+</main>
+</body>
+</html>

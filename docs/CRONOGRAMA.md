@@ -41,6 +41,8 @@ El RPG, Boringram y el arte se hacen **para el capítulo que toca**, no por adel
 
 ## Proyección con 44 horas por semana (hecha el 4 de noviembre de 2026)
 
+La misma proyección, para mirarla en el navegador: `docs/proyeccion.html`.
+
 **Ritmo que dio el autor:** 6 horas de lunes a viernes (3 en el trabajo y 3 en casa) y 7 los sábados y domingos: **44 horas por semana**. Es una estimación de Claude, con un margen de ±30 %: mide con solo dos capítulos escritos. **Reemplaza a las fechas por semana de abajo**, que suponían menos horas; esas listas siguen valiendo como lista de tareas.
 
 **De dónde salen los números:** ~83 horas hasta hoy (calculadas con los commits, que no cuentan lo que se conversó o probó sin commit) dieron dos capítulos con ~2.580 escenas, además del RPG y los sistemas. Medida usada: ~15 horas por cada hora de lectura de historia.
