@@ -654,6 +654,39 @@ export const ataquesDe = (h: { nivel: number }, d: Heroe): Ataque[] => [
 export const MAX_ESPECIALES = 2;
 /** Los especiales equipados de un héroe, en orden (comparten la barra): `especiales` o, si no tiene, su `especial`. */
 export const especialesDe = (d: Heroe): Especial[] => (d.especiales?.length ? d.especiales : d.especial ? [d.especial] : []);
+/** Cuántos ataques se equipan (docs/BIBLIA_RPG.md, sección 18). */
+export const MAX_ATAQUES = 3;
+/** Cómo se guarda lo equipado en la partida: los nombres separados por «|» («» = lo de por defecto). */
+export const leerEquipo = (v: string): string[] => v.split('|').filter(Boolean);
+export const escribirEquipo = (nombres: string[]): string => nombres.join('|');
+
+/** Lo que un héroe conoce en su nivel: sus ataques (los de siempre y los aprendidos) y sus especiales. */
+export const conocidos = (d: Heroe, nivel: number) => ({ ataques: ataquesDe({ nivel }, d), especiales: especialesDe(d) });
+
+/**
+ * Lo equipado: los elegidos (por nombre, en ese orden, si los conoce) o, sin elección, los primeros que conoce, hasta
+ * el máximo. Lo que conoce y no está equipado queda en la mochila de ataques (ver `enMochila`).
+ */
+export function equipados(d: Heroe, nivel: number, elegidos?: { ataques?: string[]; especiales?: string[] }) {
+  const c = conocidos(d, nivel);
+  const elegir = <T extends { nombre: string }>(todos: T[], nombres: string[] | undefined, max: number): T[] => {
+    if (!nombres) return todos.slice(0, max);
+    const out = nombres.map((n) => todos.find((x) => x.nombre === n)).filter((x): x is T => !!x);
+    return out.slice(0, max);
+  };
+  return { ataques: elegir(c.ataques, elegidos?.ataques, MAX_ATAQUES), especiales: elegir(c.especiales, elegidos?.especiales, MAX_ESPECIALES) };
+}
+
+/** Lo que conoce y no tiene equipado: va a la mochila de ataques (sus cassettes). */
+export function enMochila(d: Heroe, nivel: number, elegidos?: { ataques?: string[]; especiales?: string[] }) {
+  const c = conocidos(d, nivel);
+  const e = equipados(d, nivel, elegidos);
+  return {
+    ataques: c.ataques.filter((a) => !e.ataques.includes(a)),
+    especiales: c.especiales.filter((a) => !e.especiales.includes(a)),
+  };
+}
+
 /** Lo que aprende justo al llegar a ese nivel. */
 export const aprendeEn = (d: Heroe, nivel: number): Ataque[] => (d.aprende ?? []).filter((x) => x.nivel === nivel).map((x) => x.ataque);
 
@@ -675,6 +708,11 @@ export const vivo = (l: Luchador) => l.ps > 0;
 export interface Progreso {
   heroes: Record<string, { nivel: number; xp: number }>;
   mochila: Record<string, number>;
+  /**
+   * Lo que cada héroe tiene equipado (docs/BIBLIA_RPG.md, sección 18), por nombre: `ataques_<héroe>` y
+   * `especiales_<héroe>` en la partida. Sin elección guardada, se equipan los primeros (ver `equipados`).
+   */
+  equipo?: Record<string, { ataques?: string[]; especiales?: string[] }>;
   /** Las monedas de la partida (para Boringplace); sin ninguna, no está. */
   monedas?: number;
 }
@@ -690,6 +728,11 @@ export const monedasJefe = (nivel: number) => nivel * 5;
 export function progresoDeVars(vars: Vars): Progreso {
   const p: Progreso = { heroes: {}, mochila: {} };
   for (const [k, v] of Object.entries(vars)) {
+    const eq = k.match(/^(ataques|especiales)_(.+)$/);
+    if (eq && typeof v === 'string' && v) {
+      const e = ((p.equipo ??= {})[eq[2]] ??= {});
+      e[eq[1] as 'ataques' | 'especiales'] = leerEquipo(v);
+    }
     if (typeof v !== 'number') continue;
     const nivel = k.match(/^nivel_(.+)$/);
     if (nivel && v > 0) p.heroes[nivel[1]] = { nivel: v, xp: typeof vars[`xp_${nivel[1]}`] === 'number' ? (vars[`xp_${nivel[1]}`] as number) : 0 };

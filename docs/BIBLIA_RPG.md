@@ -533,8 +533,15 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
 - **Hecho en el motor (2026-11-03):** cada héroe puede tener `especiales` (lista, hasta `MAX_ESPECIALES` = 2) además
   de su `especial` principal (el de su color y sus ojos); en el menú salen todos con la misma barra y se elige cuál.
   Para probarlo: la pelea demo (`?batalla=demo`), donde Jair tiene un segundo especial de relleno («Hotfix en
-  producción»). Falta: el equipamiento (elegir los 3 ataques y los 2 especiales desde el panel de Equipo, la mochila de
-  ataques y venderlos).
+  producción»).
+- **Hecho: el equipamiento (2026-11-03).** En el panel de Equipo, cada personaje muestra sus cassettes: los equipados
+  (3 ataques y 2 especiales, con huecos libres) y los de la mochila (lo que conoce y no tiene equipado). Tocar uno lo
+  equipa o lo guarda; siempre queda al menos un ataque; en una pelea solo se mira. Se guarda en la partida
+  (`ataques_<héroe>` y `especiales_<héroe>`, los nombres separados por «|»; vacío: los primeros que conoce). La pelea
+  usa lo equipado. Motor: `equipados` y `enMochila` en `src/engine/batalla.ts`; pruebas en `tests/equipo.test.ts`.
+  **Los cassettes se ven** con un aura suave de su color; los de especiales, más brillo y un reflejo que los cruza
+  (lujo); los de la mochila, más apagados (`src/components/Cassette.tsx`). Falta: comprar y vender los sueltos en
+  Boringplace.
 - **Ataques sin sprites nuevos (propuesta de Claude, placeholder):** usan la animación de ataque que ya tiene cada uno y
   los efectos que el motor ya sabe hacer. Jair: Ctrl+Z (se cura), Reunión que pudo ser un correo (paraliza 1 turno),
   Excusa elaborada (confunde), Commit a medianoche (golpe fuerte, 3 usos). Cami: Tiro certero, Barrido de cobertura

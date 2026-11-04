@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { almacenSeguro, sanear } from './guardado';
+import { escribirEquipo } from './batalla';
 import type { Vars } from './types';
 import { config, scenes, variables } from './story';
 import { applyChoice, enterScene, resolveNext, visibleChoices } from './logic';
@@ -226,6 +227,11 @@ interface Store {
   comprarObjeto: (objeto: string, precio: number) => boolean;
   /** PayFoe: la billetera del jugador, fuera de las partidas (ver src/engine/payfoe.ts). */
   payfoe: PayFoe;
+  /**
+   * Equipa lo elegido de un héroe (`ataques` o `especiales`, por nombre y en orden) en la partida en curso
+   * (docs/BIBLIA_RPG.md, sección 18). Solo fuera de las peleas: el panel de Equipo no lo ofrece en una pelea.
+   */
+  equipar: (heroe: string, tipo: 'ataques' | 'especiales', nombres: string[]) => void;
   /** Pasa tokens de la partida en curso a PayFoe (nunca al revés). Devuelve cuántos pasaron. */
   transferirAPayfoe: (n: number) => number;
   venderObjeto: (objeto: string, precio: number) => boolean;
@@ -573,6 +579,12 @@ export const useStore = create<Store>()(
           if (!game || !((game.vars[k] as number) > 0)) return false;
           set({ game: { ...game, vars: conGanados(game.vars, { ...game.vars, monedas: ((game.vars.monedas as number) ?? 0) + precio, [k]: (game.vars[k] as number) - 1 }) } });
           return true;
+        },
+
+        equipar: (heroe, tipo, nombres) => {
+          const { game } = get();
+          if (!game) return;
+          set({ game: { ...game, vars: { ...game.vars, [`${tipo}_${heroe}`]: escribirEquipo(nombres) } } });
         },
 
         payfoe: PAYFOE_INICIAL,

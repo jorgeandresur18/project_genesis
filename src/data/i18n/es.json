@@ -382,5 +382,12 @@
   "error.menu": "Volver al menú",
   "error.recargar": "Recargar el juego",
   "guardado.fallo_titulo": "No se pudo guardar",
-  "guardado.fallo_texto": "El navegador no tiene espacio o no deja guardar (¿modo privado?). El juego sigue, pero lo que hagas podría perderse al cerrarlo."
+  "guardado.fallo_texto": "El navegador no tiene espacio o no deja guardar (¿modo privado?). El juego sigue, pero lo que hagas podría perderse al cerrarlo.",
+  "equipo.especiales": "Especiales:",
+  "equipo.en_mochila": "En la mochila",
+  "equipo.vacio_hueco": "Libre",
+  "equipo.toca": "Toca un cassette para equiparlo o guardarlo en la mochila.",
+  "equipo.sin_espacio": "No hay espacio: guarda uno en la mochila primero.",
+  "equipo.minimo": "Tiene que quedar al menos un ataque equipado.",
+  "equipo.cassette_especial": "Especial"
 }

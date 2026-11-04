@@ -33,5 +33,11 @@
   "monedas": 0,
   "partida_id": "",
   "tokens_ganados": 0,
+  "ataques_jair": "",
+  "especiales_jair": "",
+  "ataques_cami": "",
+  "especiales_cami": "",
+  "ataques_rikka": "",
+  "especiales_rikka": "",
   "hangar_pelea": false
 }

@@ -18,7 +18,6 @@ import {
   CEBO,
   crearCebo,
   aprendeEn,
-  ataquesDe,
   CONFUSION,
   seConfunde,
   quedan,
@@ -41,7 +40,7 @@ import {
   dano,
   disponibles,
   especialListo,
-  especialesDe,
+  equipados,
   golpesEspecial,
   ganarXp,
   seRetira,
@@ -1221,7 +1220,7 @@ function Pelea({
       const { n } = await golpear(h, h, CONFUSION.poder);
       return decir(fmt(t('batalla.recibe'), { quien: h.nombre, n }));
     }
-    if (c.tipo === 'especial') return usarEspecial(h, especialesDe(d.personajes[h.clave])[c.cual] ?? d.personajes[h.clave].especial!, d.personajes[h.clave].sprite, enemigos, objetivo(c.objetivo));
+    if (c.tipo === 'especial') return usarEspecial(h, equipados(d.personajes[h.clave], h.nivel, progreso?.equipo?.[h.clave]).especiales[c.cual] ?? d.personajes[h.clave].especial!, d.personajes[h.clave].sprite, enemigos, objetivo(c.objetivo));
     if (c.tipo === 'hablar') {
       cargar(h, CARGA.hablar);
       const e = objetivo(c.objetivo);
@@ -1262,7 +1261,7 @@ function Pelea({
       return lineas(funciona ? 'hablar_ok' : 'hablar_no', { objetivo: e.nombre });
     }
     if (c.tipo !== 'atacar') return;
-    const ataque = ataquesDe(h, d.personajes[h.clave])[c.ataque];
+    const ataque = equipados(d.personajes[h.clave], h.nivel, progreso?.equipo?.[h.clave]).ataques[c.ataque];
     gastarUso(h, ataque);
     if (ataque.cebo) return dejarCebo(h, ataque);
     if (ataque.cura) {
@@ -1858,9 +1857,11 @@ function Pelea({
 
   // El menú: qué hace, qué ataque, qué objeto y a quién.
   const heroe = b.current.heroes.find((h) => h.id === eligiendo);
-  const ataques = heroe ? ataquesDe(heroe, d.personajes[heroe.clave]) : [];
-  // Los especiales equipados: comparten la barra; cuando está llena, se elige cuál.
-  const especiales = heroe ? especialesDe(d.personajes[heroe.clave]) : [];
+  // Lo equipado (docs/BIBLIA_RPG.md, sección 18): hasta 3 ataques y 2 especiales; los especiales comparten la barra y,
+  // cuando está llena, se elige cuál.
+  const equipo = heroe ? equipados(d.personajes[heroe.clave], heroe.nivel, progreso?.equipo?.[heroe.clave]) : undefined;
+  const ataques = equipo?.ataques ?? [];
+  const especiales = equipo?.especiales ?? [];
   const comandos = [t('batalla.atacar'), t('batalla.hablar'), t('batalla.esquivar'), t('batalla.objetos'), t('batalla.huir')];
   const enMochila = Object.keys(d.objetos).filter((k) => (b.current.mochila[k] ?? 0) > 0 && usableEnPelea(d.objetos[k]));
   const vivosDe = (lado: 'enemigo' | 'heroe') => (lado === 'enemigo' ? b.current.enemigos : b.current.heroes).filter(vivo);

@@ -382,5 +382,12 @@
   "error.menu": "Back to menu",
   "error.recargar": "Reload the game",
   "guardado.fallo_titulo": "Couldn't save",
-  "guardado.fallo_texto": "The browser is out of space or won't allow saving (private mode?). The game keeps going, but what you do may be lost when you close it."
+  "guardado.fallo_texto": "The browser is out of space or won't allow saving (private mode?). The game keeps going, but what you do may be lost when you close it.",
+  "equipo.especiales": "Specials:",
+  "equipo.en_mochila": "In the bag",
+  "equipo.vacio_hueco": "Empty",
+  "equipo.toca": "Tap a cassette to equip it or put it in the bag.",
+  "equipo.sin_espacio": "No room: put one in the bag first.",
+  "equipo.minimo": "At least one move has to stay equipped.",
+  "equipo.cassette_especial": "Special"
 }
