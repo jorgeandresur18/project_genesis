@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { createJSONStorage, persist } from 'zustand/middleware';
+import { almacenSeguro, sanear } from './guardado';
 import type { Vars } from './types';
 import { config, scenes, variables } from './story';
 import { applyChoice, enterScene, resolveNext, visibleChoices } from './logic';
@@ -653,8 +654,11 @@ export const useStore = create<Store>()(
       name: 'genesis-vn',
       version: 1,
       // Las opciones guardadas antes de agregar una opción nueva toman su valor por defecto.
+      // El guardado seguro (src/engine/guardado.ts): nunca lanza errores y se recupera de un guardado corrupto.
+      storage: createJSONStorage(() => almacenSeguro),
       merge: (persisted, current) => {
-        const p = persisted as Partial<Store>;
+        // Lo cargado, limpio: lo que no tiene la forma esperada vuelve a su valor por defecto.
+        const p = sanear(persisted, current as unknown as Record<string, unknown>, SAVE_SLOTS) as Partial<Store>;
         // El juego siempre abre en el título: la partida en curso no se restaura (se sigue con «Continuar»,
         // que carga el último guardado). Las versiones anteriores sí la guardaban: se ignora.
         return { ...current, ...p, game: null, settings: { ...current.settings, ...p.settings } };
