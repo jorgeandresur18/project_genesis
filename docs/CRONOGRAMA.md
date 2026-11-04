@@ -24,7 +24,7 @@ El RPG, Boringram y el arte se hacen **para el capítulo que toca**, no por adel
 
 ---
 
-## Dónde estamos (2 de noviembre)
+## Dónde estamos (3 de noviembre, noche)
 
 | Parte | Estado |
 |---|---|
@@ -33,7 +33,7 @@ El RPG, Boringram y el arte se hacen **para el capítulo que toca**, no por adel
 | Capítulo 3 | Canon escrito en `docs/CANON.md`; **no hay guion**. |
 | Capítulo 4 | Borrador del autor (17 escenas) en `docs/CANON.md`; sin guion. |
 | Capítulos 5 a 7 | Esquema en el canon. |
-| RPG | 4 peleas, sistema completo. Faltan equiparse de verdad, quemado y congelado, olvidar ataques y la regla anti-farmeo. |
+| RPG | Ficha única por personaje, varios especiales, ataques intercambiables con cassettes, ataques nuevos y sueltos, Torneo Genesis y PayFoe (de relleno). Faltan: quemado y congelado, olvidar ataques, la regla anti-farmeo y partir la lógica de turnos de `Batalla.tsx`. |
 | Boringram y Boringplace | Completos para los Capítulos 1 y 2. |
 | Robustez | Hecha el 3 de noviembre: pantalla de error, guardado seguro, ESLint y CI. |
 
@@ -45,18 +45,18 @@ El RPG, Boringram y el arte se hacen **para el capítulo que toca**, no por adel
 - [x] **Cerrar la lógica del Capítulo 1** (2026-11-03): revisión de coherencia contra el canon, regla en `CLAUDE.md` y etiqueta `cap01-logica-cerrada`.
 - [ ] **Pulir los diálogos del Capítulo 1:** el autor lee el guion y marca; Claude corrige con `docs/TONO.md`. *Pasa al final* (decisión del autor del 2026-11-03: diálogos y arte después de la lógica).
 - [x] Título del Capítulo 2: «El viaje del héroe*», que al terminar pasa a «El viaje del antihéroe» (portada y pantalla de fin).
-- [ ] **Terminar el Capítulo 2:** partes que falten del autor, revisión contra el canon y enlazarlo al final del Capítulo 1.
+- [x] **Terminar el Capítulo 2 (lo que no depende del autor):** revisión de coherencia contra el canon y enlazado al Capítulo 1 (2026-11-03). Falta del autor: la historia de las peleas de la muralla y el campamento y sus bad ends.
 - [ ] *Liviana:* arte del Capítulo 2 que falte (`docs/guion/cap02_arte.md`): Rikka con traje rojo y espada, etc.
 
 ## Semana 2 (10–16 de noviembre): las peleas del Capítulo 2
-- [ ] **Ordenar el RPG antes de sumar peleas:** ~~una sola ficha por personaje~~ (hecho el 2026-11-03: `src/data/rpg/personajes.json` y `src/engine/batallas.ts`), partir `Batalla.tsx` en piezas y simular el balance de todas las peleas.
+- [x] **Ordenar el RPG antes de sumar peleas** (2026-11-03): una sola ficha por personaje, `Batalla.tsx` partido (etapa 1: el dibujo), varios especiales y balance simulado del Bastión, el bar, el hangar y el torneo. Queda para después: sacar la lógica de turnos de `Batalla.tsx`.
 - [ ] **Decidir y hacer las peleas del Capítulo 2:** la muralla (Rikka sola), el campamento, el molino con el cassette y Cami acorazada. **Plantillas de relleno ya enganchadas** (2026-11-03; ver `BIBLIA_RPG.md`, sección 12): falta la historia de cada una. El plan simplificado de la cuenta regresiva espera la confirmación del autor.
 - [ ] *Pesada:* sprites del RPG de esas peleas, en tanda.
 - [ ] **Pulir los diálogos del Capítulo 2.**
 - [ ] *Media:* Boringram del Capítulo 2 completo (Jordan, Lady, las fotos del viaje).
 
-- [ ] **Ataques intercambiables** (pedido del autor el 2026-11-03; diseño en `BIBLIA_RPG.md`, sección 18): 3 ataques y 2 especiales equipados, el resto en la mochila; los originales vinculados a su personaje; los sueltos se compran, se venden y se ganan en el torneo. Necesita antes partir `Batalla.tsx` (el menú de ataques y varios especiales).
-- [ ] **PayFoe y el Torneo Genesis** (pedido del autor el 2026-11-03; diseño en `BIBLIA_RPG.md`, sección 17), en partes: (1) ~~PayFoe y la transferencia con el arreglo contra la duplicación~~ **hecho el 2026-11-03**; (2) el torneo y sus copas; (3) Nikki campeona; (4) desbloqueables a la venta y la versión sin censura de 1.000.000.
+- [x] **Ataques intercambiables** (hecho el 2026-11-03; diseño en `BIBLIA_RPG.md`, sección 18): 3 ataques y 2 especiales equipados, el resto en la mochila; los originales vinculados a su personaje; los sueltos se compran, se venden y se ganan en el torneo. Necesita antes partir `Batalla.tsx` (el menú de ataques y varios especiales).
+- [ ] **PayFoe y el Torneo Genesis** (pedido del autor el 2026-11-03; diseño en `BIBLIA_RPG.md`, sección 17), en partes: (1) ~~PayFoe y la transferencia~~, (2) ~~el torneo y sus copas~~ y (3) ~~Nikki campeona~~ **hechos el 2026-11-03 (de relleno)**; falta (4): los desbloqueables a la venta y la versión sin censura de 1.000.000, y los seis ataques de Nikki.
 
 ## Semanas 3 y 4 (17–30 de noviembre): el Capítulo 3
 - [ ] **Escribir el guion del Capítulo 3** desde el canon: la torre del Oráculo, el Rey Malvado, la espada DELETE, el DELETE sin WHERE, el regreso (`alt_1`: volver solo) y el despertar con Cami y Rikka en el cuarto.
