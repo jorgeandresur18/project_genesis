@@ -58,6 +58,45 @@
             "texto": "{quien} se queda quieto un segundo y deja ahí una copia de sí mismo, en blanco y negro. Es lo primero que aprende cualquier peleador. Y lo único que Jair usa, en la oficina.",
             "usos": 5
           }
+        },
+        {
+          "nivel": 7,
+          "ataque": {
+            "nombre": "Ctrl+Z",
+            "poder": 0,
+            "cura": 0.25,
+            "usos": 3,
+            "texto": "{quien} aprieta Ctrl+Z en el aire. No deshace el golpe, pero se siente mejor. [Relleno: ataque de prueba, sin sprites nuevos]"
+          }
+        },
+        {
+          "nivel": 8,
+          "ataque": {
+            "nombre": "Reunión que pudo ser un correo",
+            "poder": 0,
+            "paraliza": 1,
+            "usos": 3,
+            "texto": "{quien} convoca a {objetivo} a una reunión de una hora. {objetivo} no se puede mover de aburrimiento. [Relleno: ataque de prueba, sin sprites nuevos]"
+          }
+        },
+        {
+          "nivel": 9,
+          "ataque": {
+            "nombre": "Excusa elaborada",
+            "poder": 0,
+            "confunde": 2,
+            "usos": 3,
+            "texto": "{quien} le explica a {objetivo} por qué no es su culpa. Con diagramas. {objetivo} ya no sabe de qué lado está. [Relleno: ataque de prueba, sin sprites nuevos]"
+          }
+        },
+        {
+          "nivel": 10,
+          "ataque": {
+            "nombre": "Commit a medianoche",
+            "poder": 26,
+            "usos": 3,
+            "texto": "{quien} sube un cambio sin probarlo a las doce de la noche. Le pega a {objetivo} con toda la fuerza de la irresponsabilidad. [Relleno: ataque de prueba, sin sprites nuevos]"
+          }
         }
       ],
       "hablar_confundido": [
@@ -122,6 +161,27 @@
         "Baja eso antes de que te lo… ¿siempre fueron tres? Qué falta de respeto.",
         "Tienes la postura de alguien que… qué lindo brilla tu casco. No me mires así. Tú, el del medio.",
         "¿Te mandaron solo? ¿Y por qué son cuatro? Contesten de a uno."
+      ],
+      "aprende": [
+        {
+          "nivel": 16,
+          "ataque": {
+            "nombre": "Tiro certero",
+            "poder": 24,
+            "usos": 6,
+            "texto": "{quien} respira, apunta y dispara una sola vez. No hace falta más. [Relleno: ataque de prueba, sin sprites nuevos]"
+          }
+        },
+        {
+          "nivel": 18,
+          "ataque": {
+            "nombre": "Barrido de cobertura",
+            "poder": 9,
+            "objetivo": "todos",
+            "usos": 5,
+            "texto": "{quien} barre el frente con disparos cortos. A todos un poco. [Relleno: ataque de prueba, sin sprites nuevos]"
+          }
+        }
       ]
     },
     "rikka": {
@@ -175,7 +235,32 @@
         "posicion": "objetivo"
       },
       "sonido": "espada",
-      "escala": 1.05
+      "escala": 1.05,
+      "aprende": [
+        {
+          "nivel": 11,
+          "ataque": {
+            "nombre": "Pétalos al viento",
+            "poder": 8,
+            "objetivo": "todos",
+            "usos": 5,
+            "texto": "{quien} gira y una lluvia de pétalos corta a todos los que están enfrente. [Relleno: ataque de prueba, sin sprites nuevos]"
+          }
+        },
+        {
+          "nivel": 13,
+          "ataque": {
+            "nombre": "Postura de la guardiana",
+            "poder": 0,
+            "alMismo": true,
+            "aplica": {
+              "protege": 1
+            },
+            "usos": 3,
+            "texto": "{quien} se planta como en su puente. Nada pasa. [Relleno: ataque de prueba, sin sprites nuevos]"
+          }
+        }
+      ]
     }
   },
   "enemigos": {

@@ -542,6 +542,13 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
   **Los cassettes se ven** con un aura suave de su color; los de especiales, más brillo y un reflejo que los cruza
   (lujo); los de la mochila, más apagados (`src/components/Cassette.tsx`). Falta: comprar y vender los sueltos en
   Boringplace.
+- **Hecho: los ataques nuevos (placeholder, 2026-11-03)** se aprenden al subir de nivel, por encima de lo que se alcanza
+  en el Capítulo 1 (salvo con el caramelo rancio): Jair 7 Ctrl+Z (se cura 25 %), 8 Reunión que pudo ser un correo
+  (paraliza 1 turno), 9 Excusa elaborada (confunde 2), 10 Commit a medianoche (26 de poder); Cami 16 Tiro certero
+  (24), 18 Barrido de cobertura (9 a todos); Rikka 11 Pétalos al viento (8 a todos), 13 Postura de la guardiana (se
+  protege). Todos con 3 a 6 usos. El motor de los héroes ahora sabe: golpear a todos (`objetivo: "todos"`, desde su
+  lugar), aplicar un efecto como un objeto (`aplica`: veneno al blanco; con `alMismo`, protegerse o potenciarse) y
+  confundir o paralizar. Los sueltos (Piedra, Grito de guerra, Botella rota) esperan la tienda de cassettes.
 - **Ataques sin sprites nuevos (propuesta de Claude, placeholder):** usan la animación de ataque que ya tiene cada uno y
   los efectos que el motor ya sabe hacer. Jair: Ctrl+Z (se cura), Reunión que pudo ser un correo (paraliza 1 turno),
   Excusa elaborada (confunde), Commit a medianoche (golpe fuerte, 3 usos). Cami: Tiro certero, Barrido de cobertura

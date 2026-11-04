@@ -331,7 +331,7 @@
   "batalla.arena_revive": "Arena! They get back up at full health: {quien}.",
   "batalla.sin_usos": "{quien} has no uses of {ataque} left in this fight.",
   "batalla.se_cura": "{quien} recovers {n} HP.",
-  "batalla.desc.cura": "Heals herself: {n}% of her health. No target needed.",
+  "batalla.desc.cura": "Recovers {n}% of their health. No target needed.",
   "batalla.desc.usos": "Uses: {q}/{u} (restored after the fight).",
   "batalla.estado_paralizado": "paralyzed (or recovering)",
   "batalla.estado_confundido": "confused",
@@ -389,5 +389,13 @@
   "equipo.toca": "Tap a cassette to equip it or put it in the bag.",
   "equipo.sin_espacio": "No room: put one in the bag first.",
   "equipo.minimo": "At least one move has to stay equipped.",
-  "equipo.cassette_especial": "Special"
+  "equipo.cassette_especial": "Special",
+  "batalla.se_potencia": "{quien} powers up: attack +{n} until the end of the fight.",
+  "batalla.se_protege": "{quien} takes cover: the next hit won't do a thing.",
+  "batalla.envenena": "{quien} is poisoned.",
+  "batalla.desc.se_protege": "Takes cover: the next hit does nothing. No target needed.",
+  "batalla.desc.se_potencia": "Powers up: attack +{n} until the end of the fight. No target needed.",
+  "batalla.desc.paraliza": "Paralyzes one enemy for {n} turn(s). No damage.",
+  "batalla.desc.confunde": "Confuses one enemy for {n} turns: sometimes it hits itself or its allies. No damage.",
+  "batalla.desc.envenena": "It also poisons it for {n} turns."
 }

@@ -1265,7 +1265,7 @@ function Pelea({
     gastarUso(h, ataque);
     if (ataque.cebo) return dejarCebo(h, ataque);
     if (ataque.cura) {
-      // Se cura a sí misma: carga y la rodea el aura verde de la curación.
+      // Se cura (Rikka, Ctrl+Z de Jair): carga y lo rodea el aura verde de la curación.
       cargar(h, CARGA.atacar);
       await decir(fmt(ataque.texto, { quien: h.nombre }));
       playChip('vida');
@@ -1277,6 +1277,41 @@ function Pelea({
       numero(h.id, `+${h.ps - antes}`, 'cura');
       forzar();
       return decir(fmt(t('batalla.se_cura'), { quien: h.nombre, n: h.ps - antes }));
+    }
+    // Sobre sí mismo (potenciarse, protegerse): no se elige a quién; brilla dorado y aplica el efecto como un objeto.
+    if (ataque.alMismo && ataque.aplica) {
+      cargar(h, CARGA.atacar);
+      await decir(fmt(ataque.texto, { quien: h.nombre }));
+      void animar(h.id, 'ataque', 750);
+      playChip('vida');
+      luz(h.id, ataque.aplica.protege ? '#dfe7f2' : '#ffd76a', true);
+      await espera(600);
+      usarObjeto(ataque.aplica as unknown as Objeto, h);
+      forzar();
+      const n = ataque.aplica.atq ?? ataque.aplica.def ?? 0;
+      return decir(fmt(t(ataque.aplica.protege ? 'batalla.se_protege' : 'batalla.se_potencia'), { quien: h.nombre, n }));
+    }
+    // A todos los rivales: ataca desde su lugar y cada golpe puede fallar.
+    if (ataque.objetivo === 'todos') {
+      const blancos = b.current.enemigos.filter(vivo);
+      await decir(fmt(ataque.texto, { quien: h.nombre, objetivo: blancos.map((x) => x.nombre).join(', ') }));
+      cargar(h, CARGA.atacar);
+      void animar(h.id, 'ataque', 750);
+      playChip(sonidoDe(h));
+      await espera(320);
+      for (const x of blancos) {
+        if (!vivo(x)) continue;
+        if (falla(d, h, x)) {
+          numero(x.id, 'MISS', 'falla');
+          continue;
+        }
+        bajoEspecial.current.add(x.id);
+        await golpear(h, x, ataque.poder);
+      }
+      await espera(450);
+      soltar(blancos);
+      for (const x of blancos) if (!vivo(x)) await alCaer(x);
+      return;
     }
     const e = objetivo(c.objetivo);
     await decir(fmt(ataque.texto, { quien: h.nombre, objetivo: e.nombre }));
@@ -1332,6 +1367,13 @@ function Pelea({
     if (!deLejos) await deslizar(h.id, null);
     soltar([e]);
     await decir(fmt(t(bloqueado ? 'batalla.protegido_bloquea' : critico ? 'batalla.critico' : 'batalla.ataca'), { objetivo: e.nombre, quien: e.nombre, n }));
+    // El efecto extra sobre el blanco (la botella rota envenena).
+    if (ataque.aplica?.veneno && vivo(e) && !bloqueado) {
+      usarObjeto(ataque.aplica as unknown as Objeto, e);
+      luz(e.id, '#a07bff', true);
+      forzar();
+      await decir(fmt(t('batalla.envenena'), { quien: e.nombre }));
+    }
     if (!vivo(e)) await alCaer(e);
   };
 
@@ -1906,7 +1948,9 @@ function Pelea({
         playChip('vacio');
         return setMensaje({ texto: fmt(t('batalla.sin_usos'), { quien: heroe.nombre, ataque: ataques[i].nombre }), n: Math.random() });
       }
-      if (ataques[i]?.cura) return listo({ tipo: 'atacar', ataque: i, objetivo: heroe.id });
+      if (ataques[i]?.cura || ataques[i]?.alMismo) return listo({ tipo: 'atacar', ataque: i, objetivo: heroe.id });
+      // A todos: no hace falta elegir.
+      if (ataques[i]?.objetivo === 'todos') return listo({ tipo: 'atacar', ataque: i, objetivo: vivosDe('enemigo')[0]?.id ?? '' });
       if (ataques[i]?.cebo) {
         // Uno a la vez: con un cebo en pie, no se puede poner otro.
         if (tieneCebo(heroe)) {
@@ -2010,7 +2054,16 @@ function Pelea({
                   ? t('batalla.desc.cebo')
                   : a.cura
                     ? fmt(t('batalla.desc.cura'), { n: Math.round(a.cura * 100) })
-                    : fmt(t('batalla.desc.ataque'), { poder: a.poder, n: aprox(a.poder), a: t(a.objetivo === 'todos' ? 'batalla.desc.a_todos' : 'batalla.desc.a_uno') })) +
+                    : a.alMismo && a.aplica
+                      ? a.aplica.protege
+                        ? t('batalla.desc.se_protege')
+                        : fmt(t('batalla.desc.se_potencia'), { n: a.aplica.atq ?? a.aplica.def ?? 0 })
+                      : a.paraliza
+                        ? fmt(t('batalla.desc.paraliza'), { n: a.paraliza })
+                        : a.confunde
+                          ? fmt(t('batalla.desc.confunde'), { n: a.confunde })
+                          : fmt(t('batalla.desc.ataque'), { poder: a.poder, n: aprox(a.poder), a: t(a.objetivo === 'todos' ? 'batalla.desc.a_todos' : 'batalla.desc.a_uno') }) +
+                            (a.aplica?.veneno ? ' ' + fmt(t('batalla.desc.envenena'), { n: a.aplica.veneno.turnos }) : '')) +
                 (a.usos !== undefined ? ' ' + fmt(t('batalla.desc.usos'), { q: quedan(heroe!, a), u: a.usos }) : ''),
             })),
             ...(heroe

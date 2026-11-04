@@ -26,6 +26,13 @@ export interface Ataque {
   /** Se cura a sí mismo esta parte de su vida máxima (la curación de Rikka); no se elige a quién. */
   cura?: number;
   /**
+   * Un efecto extra, como el de un objeto (docs/BIBLIA_RPG.md, sección 18): envenenar al blanco o, con `alMismo`,
+   * protegerse o potenciarse. Si `poder` es 0, no pega: solo aplica el efecto.
+   */
+  aplica?: { veneno?: { danio: number; turnos: number }; protege?: number; atq?: number; def?: number };
+  /** El efecto es sobre quien lo usa (no se elige a quién). */
+  alMismo?: boolean;
+  /**
    * Ráfaga (el Capitán): dispara entre `balas[0]` y `balas[1]` balas, una por fogonazo de su ataque (si son más que
    * los fogonazos, repite la animación). Cada bala es un golpe de `poder` que puede fallar o esquivarse.
    */

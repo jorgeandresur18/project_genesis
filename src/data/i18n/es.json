@@ -331,7 +331,7 @@
   "batalla.arena_revive": "¡Arena! Se levantan con la vida llena: {quien}.",
   "batalla.sin_usos": "A {quien} ya no le quedan usos de {ataque} en esta pelea.",
   "batalla.se_cura": "{quien} recupera {n} PS.",
-  "batalla.desc.cura": "Se cura a sí misma: el {n} % de su vida. No se elige a quién.",
+  "batalla.desc.cura": "Recupera el {n} % de su vida. No se elige a quién.",
   "batalla.desc.usos": "Usos: {q}/{u} (se recuperan al terminar la pelea).",
   "batalla.estado_paralizado": "paralizado (o se está recuperando)",
   "batalla.estado_confundido": "confundido",
@@ -389,5 +389,13 @@
   "equipo.toca": "Toca un cassette para equiparlo o guardarlo en la mochila.",
   "equipo.sin_espacio": "No hay espacio: guarda uno en la mochila primero.",
   "equipo.minimo": "Tiene que quedar al menos un ataque equipado.",
-  "equipo.cassette_especial": "Especial"
+  "equipo.cassette_especial": "Especial",
+  "batalla.se_potencia": "{quien} se potencia: ataque +{n} hasta el final de la pelea.",
+  "batalla.se_protege": "{quien} se cubre: el próximo golpe no le va a hacer nada.",
+  "batalla.envenena": "{quien} queda envenenado.",
+  "batalla.desc.se_protege": "Se cubre: el próximo golpe que reciba no le hace nada. No se elige a quién.",
+  "batalla.desc.se_potencia": "Se potencia: ataque +{n} hasta el final de la pelea. No se elige a quién.",
+  "batalla.desc.paraliza": "Paraliza a un rival {n} turno(s). No hace daño.",
+  "batalla.desc.confunde": "Confunde a un rival {n} turnos: a veces se pega a sí mismo o a los suyos. No hace daño.",
+  "batalla.desc.envenena": "Además lo envenena {n} turnos."
 }
