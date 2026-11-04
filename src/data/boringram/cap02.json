@@ -10,6 +10,11 @@
       "cuando": "0 03:02"
     },
     {
+      "desbloqueo": "cap02_p2_005",
+      "cuando": "0 03:05",
+      "bateria": 9
+    },
+    {
       "desbloqueo": "cap02_p2_010",
       "cuando": "0 03:12",
       "bateria": 5,
