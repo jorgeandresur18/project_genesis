@@ -580,6 +580,34 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
 
 ---
 
+## 19. Mecánicas nuevas (pedidas por el autor el 2026-11-04; por construir)
+
+**Estado nuevo: dormido.** Se suma a quemado y congelado (sección 15), que tampoco están hechos y hacen falta para estos
+cebos. Cómo funciona: `[PENDIENTE]`.
+
+**Ataques nuevos: los cebos con efecto.** Funcionan como el Cebo, pero **al golpearlos le causan el estado a quien los
+golpeó**. El sprite del cebo toma el color de ese estado (los colores de la sección 15):
+
+| Cebo | Estado que causa | Color |
+|---|---|---|
+| Cebo paralizante | Paralizado | Amarillo eléctrico |
+| Cebo tóxico | Envenenado | Morado |
+| Cebo confuso | Confundido | Rosa |
+| Cebo caliente | Quemado | Naranja |
+| Cebo frío | Congelado | Azul hielo |
+| Cebo sueño | Dormido | `[PENDIENTE]` |
+
+**Cebo explosivo.** Cuando lo atacan, lastima al usuario del cebo y al que lo atacó.
+
+**Autodestrucción.** Un ataque que afecta a todos los personajes del campo.
+
+**Bomba del día del juicio (especial).** El usuario pone una bomba en medio del escenario. Pasan 5 turnos y explota,
+con un gran daño a todos los personajes. Si mueren todos, es un **empate**.
+
+**El empate (dinámica nueva).** Hoy una pelea solo se gana o se pierde. Hay que agregar el tercer resultado.
+
+**Falta definir** `[PENDIENTE]`: quién aprende cada uno, el daño, qué pasa en la historia con un empate.
+
 ## 16. Pendientes e ideas
 
 | Tema | Estado |
