@@ -466,6 +466,10 @@
           "nombre": "Hangar",
           "info": "Ships, soldiers in black and the budget that never reaches the Resistance."
         },
+        "hangar_destruido": {
+          "nombre": "Hangar in flames",
+          "info": "One missed shot, a ship that shut down and then exploded, and a whole fleet falling like dominoes. Cami watched her hope burn. Jair watched the set dressing burn."
+        },
         "pozo_central": {
           "nombre": "Central shaft",
           "info": "A spiral staircase around a shaft of blue light. Jair counted the steps. He lost count. And the will."
