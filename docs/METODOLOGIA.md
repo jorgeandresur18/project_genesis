@@ -40,6 +40,26 @@ qué trae cada una está en `docs/VERSIONES.md`.
    `docs/VERSIONES.md`, en la versión en curso.
 4. Push de `desarrollo` a GitHub.
 
+## Trabajar desde varias computadoras
+
+El autor trabaja desde más de una computadora. **GitHub es el único punto de encuentro:** lo que no se subió no existe
+para las otras.
+
+| Computadora | Dónde está el proyecto | Desde |
+|---|---|---|
+| **Principal** (la de casa) | La carpeta original del proyecto | 24 de octubre de 2026 |
+| **Segunda** (`MARKETING1ICSH`, clon) | `C:\Users\Diseño\Documents\jorge\PROJECT_GENESIS` | 4 de noviembre de 2026 |
+
+- **Al empezar, en cualquier computadora:** `git checkout desarrollo` y `git pull`. Así llega lo que se hizo en la otra.
+- **Al terminar:** commit y `git push` de `desarrollo`, siempre, aunque la sesión quede a medias. Lo que no se sube se
+  queda atrapado en esa computadora (pasó el 3 de noviembre: se buscaron cambios de las 23:00 que nunca se subieron).
+- **Cada entrada de la bitácora dice en qué computadora se hizo** («Computadora: principal» o «Computadora: segunda»).
+- Los commits se firman siempre como `jorgeandresur18 <jorgeurgiles18@gmail.com>`. En la segunda computadora está
+  configurado solo para este repositorio (`git config` local), porque esa computadora tiene otra cuenta.
+- La rama local `respaldo-historial-2026-11-02` existe solo en la computadora principal (no está en GitHub).
+- Si las dos computadoras tocaron lo mismo sin `pull` de por medio, `git pull` avisa del conflicto: se resuelve a mano
+  y nunca con `push --force`.
+
 ## Publicar una versión (solo con orden del autor)
 
 1. En `desarrollo`: sacar el `-dev` de la versión (`1.1.0-dev` → `1.1.0`) en `juego.json` y `package.json`, y cerrar

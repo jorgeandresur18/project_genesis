@@ -55,7 +55,7 @@ El RPG, Boringram y el arte se hacen **para el capítulo que toca**, no por adel
 - [ ] **Pulir los diálogos del Capítulo 2.**
 - [ ] *Media:* Boringram del Capítulo 2 completo (Jordan, Lady, las fotos del viaje).
 
-- [x] **Ataques intercambiables** (hecho el 2026-11-03; diseño en `BIBLIA_RPG.md`, sección 18): 3 ataques y 2 especiales equipados, el resto en la mochila; los originales vinculados a su personaje; los sueltos se compran, se venden y se ganan en el torneo. Necesita antes partir `Batalla.tsx` (el menú de ataques y varios especiales).
+- [x] **Ataques intercambiables** (hecho el 2026-11-03; diseño en `BIBLIA_RPG.md`, sección 18): 3 ataques y 2 especiales equipados, el resto en la mochila; los originales vinculados a su personaje; los sueltos se compran, se venden y se ganan en el torneo. Falta probarlos en el navegador y los ataques del torneo.
 - [ ] **PayFoe y el Torneo Genesis** (pedido del autor el 2026-11-03; diseño en `BIBLIA_RPG.md`, sección 17), en partes: (1) ~~PayFoe y la transferencia~~, (2) ~~el torneo y sus copas~~ y (3) ~~Nikki campeona~~ **hechos el 2026-11-03 (de relleno)**; falta (4): los desbloqueables a la venta y la versión sin censura de 1.000.000, y los seis ataques de Nikki.
 
 ## Semanas 3 y 4 (17–30 de noviembre): el Capítulo 3
@@ -105,9 +105,8 @@ Se responden cuando toque su semana; mientras, no se inventan.
 - Retocar el fondo del cuarto (el robot parecido a Gundam y el control con forma de Super Nintendo).
 - ¿Canales del televisor que muestran algo en ciertos capítulos? (idea de Claude, sin aprobar).
 
-**Títulos de los capítulos 3 a 7**
-- Elegidos: Capítulo 3, «Sin DÓNDE ir» / «NoWHERE»; Capítulo 4, «"Hola, mundo real"» / «"Hello, Real World"» (con las comillas); Capítulo 5, «Conflicto de dependencias» / «Dependency Hell»; Capítulo 6, «Dios ha muerto;» / «God Is Dead;». Epílogo 7B, «Mientras sea verdad» / «While It Holds True». Epílogo 7A, «Rompiendo lo escrito» / «Breaking from the Script». Ya están todos.
-- Propuestas en `docs/BITACORA.md` (sesión del 2 y 3 de noviembre); el 3 iba hacia «return 0;» o «Proceso terminado*».
+**Títulos de los capítulos 3 a 7 (resuelto el 2026-11-03; ya no está pendiente)**
+- Elegidos: Capítulo 3, «Sin DÓNDE ir» / «NoWHERE»; Capítulo 4, «"Hola, mundo real"» / «"Hello, Real World"» (con las comillas); Capítulo 5, «Conflicto de dependencias» / «Dependency Hell»; Capítulo 6, «Dios ha muerto;» / «God Is Dead;». Epílogo 7B, «Mientras sea verdad» / «While It Holds True». Epílogo 7A, «Rompiendo lo escrito» / «Breaking from the Script». Están todos en `docs/CANON.md`.
 
 **General**
 - Las preguntas abiertas de Blueberries y Nikki.
