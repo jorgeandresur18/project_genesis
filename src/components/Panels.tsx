@@ -1,8 +1,9 @@
-import { useEffect, useState, type CSSProperties, type ReactNode } from 'react';
+import { leerPartida, nombreArchivo, textoExportado } from '../engine/partidaArchivo';
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
-import { CHAPTER_END, SAVE_SLOTS, TEXT_SPEED_INSTANT, canSaveGame, useStore } from '../engine/store';
+import { CHAPTER_END, SAVE_SLOTS, TEXT_SPEED_INSTANT, canSaveGame, useStore, type SaveSlot } from '../engine/store';
 import { choiceText, lineText, speakerName } from '../engine/storyText';
-import { BAD_END, endingName, endings, scenes } from '../engine/story';
+import { BAD_END, config, endingName, endings, scenes } from '../engine/story';
 import { detectLanguage, localized, useLang, useT } from '../engine/i18n';
 import conoceMasEs from '../data/conoce_mas.json';
 import borradoEs from '../data/borrado.json';
@@ -107,6 +108,39 @@ export function SaveLoadPanel({ mode, onClose }: { mode: 'save' | 'load'; onClos
   const lang = useLang();
   const [naming, setNaming] = useState<{ slot: number; kind: 'save' | 'rename'; text: string } | null>(null);
   const [deleting, setDeleting] = useState<number | null>(null);
+  // Exportar e importar: el juego es web y las partidas viven en este navegador (engine/partidaArchivo.ts).
+  const archivo = useRef<HTMLInputElement>(null);
+  const [destino, setDestino] = useState(0);
+  const [aviso, setAviso] = useState('');
+  /** Lo leído de un archivo, esperando confirmar porque ese espacio ya tiene una partida. */
+  const [reemplazar, setReemplazar] = useState<SaveSlot | null>(null);
+  const exportar = (i: number) => {
+    const p = saves[i];
+    if (!p) return;
+    playSelect();
+    const url = URL.createObjectURL(new Blob([textoExportado(p, config.version ?? '')], { type: 'application/json' }));
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = nombreArchivo(p);
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    setAviso(t('guardar.exportado'));
+  };
+  const elegirArchivo = (i: number) => {
+    playSelect();
+    setDestino(i);
+    setAviso('');
+    archivo.current?.click();
+  };
+  const leerArchivo = async (f: File | undefined) => {
+    if (!f) return;
+    // Sin leer los enormes: no son partidas.
+    const r = f.size > 5_000_000 ? ({ error: 'grande' } as const) : leerPartida(await f.text(), (id) => scenes.has(id));
+    if ('error' in r) return setAviso(t(`guardar.importar_${r.error}`));
+    if (saves[destino]) return setReemplazar(r.partida);
+    useStore.getState().importarPartida(destino, r.partida);
+    setAviso(t('guardar.importado'));
+  };
   const slotName = (i: number) => saves[i]?.nombre || t('guardar.espacio', { n: i + 1 });
   const suggested = () => t('guardar.nombre_defecto', { n: (game && scenes.get(game.sceneId)?.chapter) ?? 1 });
   const commit = () => {
@@ -123,6 +157,22 @@ export function SaveLoadPanel({ mode, onClose }: { mode: 'save' | 'load'; onClos
   };
   return (
     <Panel title={mode === 'save' ? t('guardar.titulo') : t('cargar.titulo')} onClose={onClose}>
+      <input
+        ref={archivo}
+        type="file"
+        accept=".json,application/json"
+        hidden
+        onChange={(e) => {
+          void leerArchivo(e.target.files?.[0]);
+          // Para poder elegir el mismo archivo otra vez.
+          e.target.value = '';
+        }}
+      />
+      {aviso && (
+        <p className="slot-aviso" role="status">
+          {aviso}
+        </p>
+      )}
       {Array.from({ length: SAVE_SLOTS }, (_, i) => {
         const slot = saves[i];
         const editing = naming?.slot === i ? naming : null;
@@ -229,11 +279,27 @@ export function SaveLoadPanel({ mode, onClose }: { mode: 'save' | 'load'; onClos
                 >
                   {t('guardar.borrar')}
                 </button>
+                {slot && <button onClick={() => exportar(i)}>{t('guardar.exportar')}</button>}
+                <button onClick={() => elegirArchivo(i)}>{t('guardar.importar')}</button>
               </div>
             )}
           </div>
         );
       })}
+      {reemplazar && (
+        <ConfirmDialog
+          title={t('guardar.importar_titulo')}
+          text={t('guardar.importar_texto', { nombre: slotName(destino) })}
+          confirm={t('guardar.importar')}
+          cancel={t('guardar.cancelar')}
+          onCancel={() => setReemplazar(null)}
+          onConfirm={() => {
+            useStore.getState().importarPartida(destino, reemplazar);
+            setReemplazar(null);
+            setAviso(t('guardar.importado'));
+          }}
+        />
+      )}
       {deleting !== null && saves[deleting] && (
         <ConfirmDialog
           title={t('guardar.borrar_titulo')}

@@ -113,8 +113,8 @@
     <div class="problema bajo"><h3><code>Batalla.tsx</code> volvió a crecer</h3>
       <p>Bajó a 2.337 líneas y las mecánicas nuevas lo subieron a 2.456. Sigue siendo el archivo más grande y delicado.</p>
       <p class="hacer"><b>Qué hacer:</b> sacar los turnos de los héroes, después de probar.</p></div>
-    <div class="problema bajo"><h3>Código que parece sin uso: Phaser</h3>
-      <p>Ninguna escena de los Capítulos 1 y 2 usa ya el nivel de acción, pero su librería de ~1,5 MB sigue en la compilación. No la borré sin revisarlo contigo.</p>
+    <div class="problema bajo"><h3>Código sin uso: Phaser</h3>
+      <p>Ninguna escena usa ya el nivel de acción. Su librería de ~1,5 MB se compila, pero los jugadores no la descargan: solo cargaría si una escena la pidiera. No afecta al juego; solo ocupa espacio en el proyecto. No la borré sin tu visto bueno.</p>
       <p class="hacer"><b>Qué hacer:</b> confirmar que no se va a usar y sacarla.</p></div>
     <div class="problema bajo"><h3>El repositorio pesa mucho</h3>
       <p>La historia de git pesa ~407 MB y la carpeta <code>docs</code> ~307 MB. Hace lentas las descargas en cada computadora nueva.</p>
@@ -142,8 +142,8 @@
       <p>Ya pasó hoy: la parálisis cambió y afectó al Bastión, del Capítulo 1 cerrado. Cuantas más peleas haya, más caro será cambiar una regla.</p>
       <p class="hacer"><b>Cómo enfrentarla:</b> cerrar las reglas del RPG antes de la pelea del Capítulo 3.</p></div>
     <div class="problema medio"><h3>Las partidas guardadas</h3>
-      <p>Se guardan solo en el navegador de cada jugador, y sus datos cambian con cada versión. Un cambio descuidado podría arruinar partidas de quienes ya juegan.</p>
-      <p class="hacer"><b>Cómo enfrentarla:</b> probar con una partida vieja antes de cada publicación.</p></div>
+      <p>Se guardan en el navegador de cada jugador, y sus datos cambian con cada versión. Ya hay una prueba automática con una partida de la demo 1.0 y se pueden exportar a un archivo, pero la galería, los finales y PayFoe no viajan con ese archivo.</p>
+      <p class="hacer"><b>Cómo enfrentarla:</b> mantener esa prueba al día, y sumar partidas de cada versión que se publique.</p></div>
     <div class="problema bajo"><h3>Trabajar desde dos computadoras</h3>
       <p>Lo que no se sube queda atrapado, como puede haber pasado el 3 de noviembre. Además, en la computadora del trabajo quedó guardada tu sesión de GitHub.</p>
       <p class="hacer"><b>Cómo enfrentarla:</b> <code>git pull</code> al empezar y <code>git push</code> al terminar, siempre.</p></div>

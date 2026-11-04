@@ -17,6 +17,7 @@
 - Elecciones que modifican variables y desbloquean escenas.
 - Historial de diálogo.
 - Retroceder · Parar · Adelantar en la barra del juego: cada toque sube la velocidad (x2, x4, x8, x16; un triángulo más por velocidad). Retroceder deshace también las decisiones (`game.trail`); adelantar se detiene en la próxima decisión.
+- **Exportar e importar partidas** (`src/engine/partidaArchivo.ts`): cada espacio se puede bajar como `.json` y subir en otro navegador o computadora. Lo importado se valida y se limpia. Solo viaja la partida: la galería, los finales y PayFoe son de todo el juego y no.
 - Guardado y carga (`localStorage`); varios espacios de guardado. Al guardar se pide un nombre para la partida (sugerido: «Capítulo N»; `nombre` en el guardado) que después se cambia con «Renombrar»; borrar una partida y volver al menú desde el juego o desde el fin de capítulo piden confirmación. El juego siempre abre en el título: la partida en curso no se restaura al recargar. Si hay partidas guardadas, el título muestra «Continuar», que carga la más reciente.
 - Saltar texto ya leído.
 - Condiciones para mostrar escenas, opciones y finales.

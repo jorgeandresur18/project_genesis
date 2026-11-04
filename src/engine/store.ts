@@ -266,6 +266,8 @@ interface Store {
   renameSave: (slot: number, nombre: string) => void;
   load: (slot: number) => void;
   deleteSave: (slot: number) => void;
+  /** Pone en ese espacio una partida leída de un archivo (ver engine/partidaArchivo.ts). */
+  importarPartida: (slot: number, partida: SaveSlot) => void;
   setMode: (mode: Mode, speed?: Speed) => void;
   /** Borra todo: partidas, desbloqueables, lo leído y las opciones (Opciones › Zona de peligro). */
   resetAll: () => void;
@@ -700,6 +702,8 @@ export const useStore = create<Store>()(
             game: { sceneId: data.sceneId, vars: { ...variables, ...data.vars }, history: data.history, finished: data.finished ?? null },
           });
         },
+
+        importarPartida: (slot, partida) => set({ saves: get().saves.map((x, i) => (i === slot ? partida : x)) }),
 
         deleteSave: (slot) => {
           const next = [...get().saves];

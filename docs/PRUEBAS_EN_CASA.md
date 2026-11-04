@@ -73,6 +73,16 @@ Hay que jugar la historia (o usar `/all`) hasta ganar el Bastión, porque ahí s
 - [ ] **Desde el título** (Extras › Boringram › Boringplace): arriba dice «Comprando para:» con la partida más reciente; se puede elegir otra; al cargar esa partida, lo comprado está ahí y los tokens bajaron. Sin partidas guardadas, solo se mira.
 - [ ] **En inglés:** nombres y descripciones de objetos y cassettes, en Boringplace y en Equipo. Cambiar de idioma no desequipa nada. En las peleas todavía sale en español (ver la bitácora).
 
+## 5c. Exportar e importar partidas (nuevo)
+
+En Guardar y en Cargar, cada espacio tiene «Exportar» e «Importar».
+
+- [ ] «Exportar» baja un archivo `.json` a descargas, también en el celular.
+- [ ] «Importar» en un espacio vacío la pone ahí; en uno ocupado, pregunta antes de reemplazar.
+- [ ] **La prueba importante:** exportar en un navegador, importar en otro y seguir jugando. Comprobar nivel, mochila, ropa y tokens.
+- [ ] Importar un archivo cualquiera (una foto, un `.txt`) da un aviso y no rompe nada.
+- [ ] Los botones caben en el celular (ahora son cinco por espacio y se acomodan en dos filas).
+
 ## 6. Limpieza (revisar que no se rompió nada)
 
 - [ ] Se partieron `Boringram.tsx` y `App.tsx` en archivos más chicos. Boringram tiene que verse y andar igual: inicio,
