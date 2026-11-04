@@ -662,5 +662,44 @@
     "Soldado": "batalla/retratos/soldado",
     "Nikki": "batalla/retratos/nikki",
     "Capitán de la Federación": "batalla/retratos/soldado"
+  },
+  "sueltos": {
+    "piedra": {
+      "precio": 40,
+      "ataque": {
+        "nombre": "Piedra",
+        "poder": 9,
+        "usos": 10,
+        "texto": "{quien} levanta una piedra del piso y se la tira a {objetivo}. Tecnología de punta. [Relleno: cassette suelto de prueba]"
+      }
+    },
+    "grito": {
+      "precio": 60,
+      "ataque": {
+        "nombre": "Grito de guerra",
+        "poder": 0,
+        "alMismo": true,
+        "aplica": {
+          "atq": 3
+        },
+        "usos": 2,
+        "texto": "{quien} grita algo que no se entiende. Se siente invencible. No lo es. [Relleno: cassette suelto de prueba]"
+      }
+    },
+    "botella": {
+      "precio": 70,
+      "ataque": {
+        "nombre": "Botella rota",
+        "poder": 6,
+        "aplica": {
+          "veneno": {
+            "danio": 4,
+            "turnos": 3
+          }
+        },
+        "usos": 3,
+        "texto": "{quien} le pega a {objetivo} con una botella rota. No pregunten de qué bar salió. [Relleno: cassette suelto de prueba]"
+      }
+    }
   }
 }

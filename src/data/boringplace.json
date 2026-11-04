@@ -8,6 +8,11 @@
   "textos": {
     "titulo": "Boringplace",
     "precio_monedas": "{n} tokens",
+    "cassette_suelto": "Cassette suelto: lo puede usar cualquiera. Se equipa en el panel de Equipo.",
+    "cassette_quien": "Quien lo use",
+    "cassette_objetivo": "el rival",
+    "tus_cassettes": "Tus cassettes (se venden a la mitad)",
+    "cassette_equipado": "Lo tiene equipado alguien: guárdalo primero desde Equipo.",
     "payfoe": "PayFoe",
     "payfoe_saldo": "{n} tokens",
     "billetera_partida": "En esta partida: {n} tokens",

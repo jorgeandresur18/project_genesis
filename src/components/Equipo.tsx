@@ -6,7 +6,7 @@ import { useStore } from '../engine/store';
 import { playSelect } from '../engine/sound';
 import { MAX_ATAQUES, MAX_ESPECIALES, enMochila, equipados, progresoDeVars, statsEn, tipoDe, xpParaSubir, type Heroe, type Objeto } from '../engine/batalla';
 import { Cassette } from './Cassette';
-import { BATALLAS } from '../engine/batallas';
+import { BATALLAS, FICHAS, copiasLibres, sueltosQueTengo } from '../engine/batallas';
 
 /**
  * Equipo (botón de la barra del juego): las estadísticas de cada personaje del equipo con su sprite, lo que tiene
@@ -30,11 +30,32 @@ const GRUPO = 3;
  * Los ataques de un héroe como cassettes (docs/BIBLIA_RPG.md, sección 18): los equipados (hasta 3 ataques y 2
  * especiales) y, abajo, los que están en la mochila. Tocar uno lo equipa o lo guarda (solo fuera de las peleas).
  */
-function Cassettes({ heroe, h, nivel, elegidos, soloVer }: { heroe: string; h: Heroe; nivel: number; elegidos?: { ataques?: string[]; especiales?: string[] }; soloVer: boolean }) {
+function Cassettes({
+  heroe,
+  h,
+  nivel,
+  elegidos,
+  soloVer,
+  cassettes,
+  equipoTodos,
+}: {
+  heroe: string;
+  h: Heroe;
+  nivel: number;
+  elegidos?: { ataques?: string[]; especiales?: string[] };
+  soloVer: boolean;
+  /** Los cassettes sueltos que se tienen y lo que tiene equipado cada uno (para no equipar más copias de las que hay). */
+  cassettes?: Record<string, number>;
+  equipoTodos?: Record<string, { ataques?: string[] }>;
+}) {
   const t = useT();
   const [aviso, setAviso] = useState('');
-  const eq = equipados(h, nivel, elegidos);
-  const mochila = enMochila(h, nivel, elegidos);
+  const sueltos = sueltosQueTengo(cassettes);
+  const eq = equipados(h, nivel, elegidos, sueltos);
+  const mochila = enMochila(h, nivel, elegidos, sueltos);
+  /** El id del suelto de un ataque (si es suelto): son grises y se equipan si queda una copia libre. */
+  const idSuelto = (nombre: string) => Object.entries(FICHAS.sueltos).find(([, x]) => x.ataque.nombre === nombre)?.[0];
+  const de = (nombre: string) => (idSuelto(nombre) ? undefined : heroe);
   const nombres = (l: { nombre: string }[]) => l.map((x) => x.nombre);
   const cambiar = (tipo: 'ataques' | 'especiales', nombre: string) => {
     if (soloVer) return;
@@ -47,6 +68,8 @@ function Cassettes({ heroe, h, nivel, elegidos, soloVer }: { heroe: string; h: H
       nuevos = actuales.filter((n) => n !== nombre);
     } else {
       if (actuales.length >= max) return setAviso(t('equipo.sin_espacio'));
+      const id = idSuelto(nombre);
+      if (id && copiasLibres(id, cassettes, equipoTodos) <= 0) return setAviso(t('equipo.sin_copias'));
       nuevos = [...actuales, nombre];
     }
     playSelect();
@@ -59,7 +82,7 @@ function Cassettes({ heroe, h, nivel, elegidos, soloVer }: { heroe: string; h: H
       <span className="equipo-cassettes-titulo">{t('equipo.ataques')}</span>
       <div className="equipo-cassettes-fila">
         {eq.ataques.map((a) => (
-          <Cassette key={a.nombre} de={heroe} nombre={a.nombre} onClick={soloVer ? undefined : () => cambiar('ataques', a.nombre)} titulo={a.texto.replace(/\{quien\}/g, h.nombre)} />
+          <Cassette key={a.nombre} de={de(a.nombre)} nombre={a.nombre} onClick={soloVer ? undefined : () => cambiar('ataques', a.nombre)} titulo={a.texto.replace(/\{quien\}/g, h.nombre)} />
         ))}
         {huecos(eq.ataques.length, MAX_ATAQUES)}
       </div>
@@ -75,7 +98,7 @@ function Cassettes({ heroe, h, nivel, elegidos, soloVer }: { heroe: string; h: H
           <span className="equipo-cassettes-titulo">{t('equipo.en_mochila')}</span>
           <div className="equipo-cassettes-fila">
             {mochila.ataques.map((a) => (
-              <Cassette key={a.nombre} de={heroe} nombre={a.nombre} apagado onClick={soloVer ? undefined : () => cambiar('ataques', a.nombre)} />
+              <Cassette key={a.nombre} de={de(a.nombre)} nombre={a.nombre} apagado onClick={soloVer ? undefined : () => cambiar('ataques', a.nombre)} />
             ))}
             {mochila.especiales.map((e) => (
               <Cassette key={e.nombre} de={heroe} nombre={e.nombre} especial apagado onClick={soloVer ? undefined : () => cambiar('especiales', e.nombre)} />
@@ -156,7 +179,7 @@ export function EquipoPanel({ onClose, soloVer = false, grupo }: { onClose: () =
                       {xp} / {xpParaSubir(nivel)}
                     </dd>
                   </dl>
-                  <Cassettes heroe={k} h={h} nivel={nivel} elegidos={progreso.equipo?.[k]} soloVer={soloVer || !useStore.getState().game} />
+                  <Cassettes heroe={k} h={h} nivel={nivel} elegidos={progreso.equipo?.[k]} soloVer={soloVer || !useStore.getState().game} cassettes={progreso.cassettes} equipoTodos={progreso.equipo} />
                   <ul className="equipo-espacios">
                     {ESPACIOS.map((e) => (
                       <li key={e}>

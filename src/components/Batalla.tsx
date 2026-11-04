@@ -60,7 +60,7 @@ import fondosJson from '../data/fondos_batalla.json';
 import { EnergiasHacia } from './EfectosSprite';
 import { EquipoPanel } from './Equipo';
 import { OptionsPanel } from './Panels';
-import { BATALLAS } from '../engine/batallas';
+import { BATALLAS, sueltosQueTengo } from '../engine/batallas';
 import { BASE, PausaContexto, SpriteHoja, anguloDisparo, cargarHoja, rectSprite, type Anim, type Hoja } from './batalla/sprites';
 import { AvisoEspecial, CajaCasillas, Figura, Tarjeta, conNumeros, type Casillas } from './batalla/escena';
 import { Pixelado, Versus } from './batalla/presentacion';
@@ -1220,7 +1220,7 @@ function Pelea({
       const { n } = await golpear(h, h, CONFUSION.poder);
       return decir(fmt(t('batalla.recibe'), { quien: h.nombre, n }));
     }
-    if (c.tipo === 'especial') return usarEspecial(h, equipados(d.personajes[h.clave], h.nivel, progreso?.equipo?.[h.clave]).especiales[c.cual] ?? d.personajes[h.clave].especial!, d.personajes[h.clave].sprite, enemigos, objetivo(c.objetivo));
+    if (c.tipo === 'especial') return usarEspecial(h, equipados(d.personajes[h.clave], h.nivel, progreso?.equipo?.[h.clave], sueltosQueTengo(progreso?.cassettes)).especiales[c.cual] ?? d.personajes[h.clave].especial!, d.personajes[h.clave].sprite, enemigos, objetivo(c.objetivo));
     if (c.tipo === 'hablar') {
       cargar(h, CARGA.hablar);
       const e = objetivo(c.objetivo);
@@ -1261,7 +1261,7 @@ function Pelea({
       return lineas(funciona ? 'hablar_ok' : 'hablar_no', { objetivo: e.nombre });
     }
     if (c.tipo !== 'atacar') return;
-    const ataque = equipados(d.personajes[h.clave], h.nivel, progreso?.equipo?.[h.clave]).ataques[c.ataque];
+    const ataque = equipados(d.personajes[h.clave], h.nivel, progreso?.equipo?.[h.clave], sueltosQueTengo(progreso?.cassettes)).ataques[c.ataque];
     gastarUso(h, ataque);
     if (ataque.cebo) return dejarCebo(h, ataque);
     if (ataque.cura) {
@@ -1901,7 +1901,7 @@ function Pelea({
   const heroe = b.current.heroes.find((h) => h.id === eligiendo);
   // Lo equipado (docs/BIBLIA_RPG.md, sección 18): hasta 3 ataques y 2 especiales; los especiales comparten la barra y,
   // cuando está llena, se elige cuál.
-  const equipo = heroe ? equipados(d.personajes[heroe.clave], heroe.nivel, progreso?.equipo?.[heroe.clave]) : undefined;
+  const equipo = heroe ? equipados(d.personajes[heroe.clave], heroe.nivel, progreso?.equipo?.[heroe.clave], sueltosQueTengo(progreso?.cassettes)) : undefined;
   const ataques = equipo?.ataques ?? [];
   const especiales = equipo?.especiales ?? [];
   const comandos = [t('batalla.atacar'), t('batalla.hablar'), t('batalla.esquivar'), t('batalla.objetos'), t('batalla.huir')];

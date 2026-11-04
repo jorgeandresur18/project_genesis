@@ -397,5 +397,6 @@
   "batalla.desc.se_potencia": "Se potencia: ataque +{n} hasta el final de la pelea. No se elige a quién.",
   "batalla.desc.paraliza": "Paraliza a un rival {n} turno(s). No hace daño.",
   "batalla.desc.confunde": "Confunde a un rival {n} turnos: a veces se pega a sí mismo o a los suyos. No hace daño.",
-  "batalla.desc.envenena": "Además lo envenena {n} turnos."
+  "batalla.desc.envenena": "Además lo envenena {n} turnos.",
+  "equipo.sin_copias": "No te quedan copias libres de ese cassette: lo tiene equipado otro. Compra otra en Boringplace."
 }

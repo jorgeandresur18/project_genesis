@@ -31,3 +31,33 @@ describe('equipamiento de ataques', () => {
     expect(p.equipo?.jair?.especiales).toBeUndefined();
   });
 });
+
+describe('cassettes sueltos', () => {
+  it('no se equipan solos; se pueden elegir; sin copias, no están', async () => {
+    const { sueltosQueTengo } = await import('../src/engine/batallas');
+    const sueltos = sueltosQueTengo({ piedra: 1 });
+    expect(sueltos.map((a) => a.nombre)).toEqual(['Piedra']);
+    expect(equipados(jair, 5, undefined, sueltos).ataques.map((a) => a.nombre)).not.toContain('Piedra');
+    expect(enMochila(jair, 5, undefined, sueltos).ataques.map((a) => a.nombre)).toContain('Piedra');
+    expect(equipados(jair, 5, { ataques: ['Piedra', 'Puñetazo'] }, sueltos).ataques.map((a) => a.nombre)).toEqual(['Piedra', 'Puñetazo']);
+    // Vendido: aunque siga elegido, ya no está.
+    expect(equipados(jair, 5, { ataques: ['Piedra', 'Puñetazo'] }, sueltosQueTengo({})).ataques.map((a) => a.nombre)).toEqual(['Puñetazo']);
+  });
+
+  it('las copias limitan cuántos lo llevan a la vez', async () => {
+    const { copiasLibres } = await import('../src/engine/batallas');
+    expect(copiasLibres('piedra', { piedra: 1 }, {})).toBe(1);
+    expect(copiasLibres('piedra', { piedra: 1 }, { jair: { ataques: ['Piedra'] } })).toBe(0);
+    expect(copiasLibres('piedra', { piedra: 2 }, { jair: { ataques: ['Piedra'] } })).toBe(1);
+    expect(progresoDeVars({ cassette_piedra: 2 }).cassettes).toEqual({ piedra: 2 });
+  });
+
+  it('cada suelto tiene precio, usos limitados y su variable declarada en la partida', async () => {
+    const variables = (await import('../src/data/variables.json')).default as Record<string, unknown>;
+    for (const [id, c] of Object.entries(FICHAS.sueltos)) {
+      expect(c.precio, id).toBeGreaterThan(0);
+      expect(c.ataque.usos, id).toBeGreaterThan(0);
+      expect(variables, id).toHaveProperty(`cassette_${id}`);
+    }
+  });
+});

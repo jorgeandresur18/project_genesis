@@ -232,6 +232,9 @@ interface Store {
    * (docs/BIBLIA_RPG.md, sección 18). Solo fuera de las peleas: el panel de Equipo no lo ofrece en una pelea.
    */
   equipar: (heroe: string, tipo: 'ataques' | 'especiales', nombres: string[]) => void;
+  /** Boringplace: comprar (si alcanzan los tokens) y vender un cassette suelto (`cassette_<id>`). Devuelven si se pudo. */
+  comprarCassette: (id: string, precio: number) => boolean;
+  venderCassette: (id: string, precio: number) => boolean;
   /** Pasa tokens de la partida en curso a PayFoe (nunca al revés). Devuelve cuántos pasaron. */
   transferirAPayfoe: (n: number) => number;
   venderObjeto: (objeto: string, precio: number) => boolean;
@@ -585,6 +588,24 @@ export const useStore = create<Store>()(
           const { game } = get();
           if (!game) return;
           set({ game: { ...game, vars: { ...game.vars, [`${tipo}_${heroe}`]: escribirEquipo(nombres) } } });
+        },
+
+        comprarCassette: (id, precio) => {
+          const { game } = get();
+          if (!game) return false;
+          const monedas = (game.vars.monedas as number) ?? 0;
+          if (monedas < precio) return false;
+          const k = `cassette_${id}`;
+          set({ game: { ...game, vars: { ...game.vars, monedas: monedas - precio, [k]: ((game.vars[k] as number) ?? 0) + 1 } } });
+          return true;
+        },
+        venderCassette: (id, precio) => {
+          const { game } = get();
+          const k = `cassette_${id}`;
+          if (!game || !((game.vars[k] as number) > 0)) return false;
+          const vars = { ...game.vars, monedas: ((game.vars.monedas as number) ?? 0) + precio, [k]: (game.vars[k] as number) - 1 };
+          set({ game: { ...game, vars: conGanados(game.vars, vars) } });
+          return true;
         },
 
         payfoe: PAYFOE_INICIAL,

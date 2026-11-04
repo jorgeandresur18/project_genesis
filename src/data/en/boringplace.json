@@ -5,6 +5,11 @@
   },
   "textos": {
     "precio_monedas": "{n} tokens",
+    "cassette_suelto": "Loose cassette: anyone can use it. Equip it from the Gear panel.",
+    "cassette_quien": "Whoever uses it",
+    "cassette_objetivo": "the enemy",
+    "tus_cassettes": "Your cassettes (sold at half price)",
+    "cassette_equipado": "Someone has it equipped: put it back from Gear first.",
     "payfoe": "PayFoe",
     "payfoe_saldo": "{n} tokens",
     "billetera_partida": "In this game: {n} tokens",

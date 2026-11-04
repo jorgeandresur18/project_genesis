@@ -548,7 +548,13 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
   (24), 18 Barrido de cobertura (9 a todos); Rikka 11 Pétalos al viento (8 a todos), 13 Postura de la guardiana (se
   protege). Todos con 3 a 6 usos. El motor de los héroes ahora sabe: golpear a todos (`objetivo: "todos"`, desde su
   lugar), aplicar un efecto como un objeto (`aplica`: veneno al blanco; con `alMismo`, protegerse o potenciarse) y
-  confundir o paralizar. Los sueltos (Piedra, Grito de guerra, Botella rota) esperan la tienda de cassettes.
+  confundir o paralizar.
+- **Hecho: los cassettes sueltos (2026-11-03, placeholder).** En `sueltos` de `src/data/rpg/personajes.json`, con
+  precio: Piedra (40 tokens; 9 de poder, 10 usos), Grito de guerra (60; ataque +3 a sí mismo, 2 usos), Botella rota
+  (70; 6 de poder y envenena, 3 usos). Se compran en la tienda de Boringplace (grises, con su publicación y cuántos
+  comprar) y se venden a la mitad en «Tus artículos» (los equipados no: primero se guardan); se pueden volver a
+  comprar. Cuántos se tienen: `cassette_<id>` en la partida. Cualquier héroe se los equipa desde el panel de Equipo
+  (aparecen en su mochila), pero **tantos a la vez como copias se tengan**. No se equipan solos: hay que elegirlos.
 - **Ataques sin sprites nuevos (propuesta de Claude, placeholder):** usan la animación de ataque que ya tiene cada uno y
   los efectos que el motor ya sabe hacer. Jair: Ctrl+Z (se cura), Reunión que pudo ser un correo (paraliza 1 turno),
   Excusa elaborada (confunde), Commit a medianoche (golpe fuerte, 3 usos). Cami: Tiro certero, Barrido de cobertura

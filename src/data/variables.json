@@ -39,5 +39,8 @@
   "especiales_cami": "",
   "ataques_rikka": "",
   "especiales_rikka": "",
+  "cassette_piedra": 0,
+  "cassette_grito": 0,
+  "cassette_botella": 0,
   "hangar_pelea": false
 }

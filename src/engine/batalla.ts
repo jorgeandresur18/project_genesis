@@ -667,17 +667,21 @@ export const MAX_ATAQUES = 3;
 export const leerEquipo = (v: string): string[] => v.split('|').filter(Boolean);
 export const escribirEquipo = (nombres: string[]): string => nombres.join('|');
 
-/** Lo que un héroe conoce en su nivel: sus ataques (los de siempre y los aprendidos) y sus especiales. */
-export const conocidos = (d: Heroe, nivel: number) => ({ ataques: ataquesDe({ nivel }, d), especiales: especialesDe(d) });
+/**
+ * Lo que un héroe puede equiparse en su nivel: sus ataques (los de siempre y los aprendidos), sus especiales y los
+ * cassettes sueltos que se tienen (`sueltos`: los ataques, que puede usar cualquiera).
+ */
+export const conocidos = (d: Heroe, nivel: number, sueltos: Ataque[] = []) => ({ ataques: [...ataquesDe({ nivel }, d), ...sueltos], especiales: especialesDe(d) });
 
 /**
  * Lo equipado: los elegidos (por nombre, en ese orden, si los conoce) o, sin elección, los primeros que conoce, hasta
  * el máximo. Lo que conoce y no está equipado queda en la mochila de ataques (ver `enMochila`).
  */
-export function equipados(d: Heroe, nivel: number, elegidos?: { ataques?: string[]; especiales?: string[] }) {
-  const c = conocidos(d, nivel);
+export function equipados(d: Heroe, nivel: number, elegidos?: { ataques?: string[]; especiales?: string[] }, sueltos: Ataque[] = []) {
+  const c = conocidos(d, nivel, sueltos);
   const elegir = <T extends { nombre: string }>(todos: T[], nombres: string[] | undefined, max: number): T[] => {
-    if (!nombres) return todos.slice(0, max);
+    // Sin elección: los suyos (los sueltos solo si se eligen).
+    if (!nombres) return todos.filter((x) => !sueltos.includes(x as unknown as Ataque)).slice(0, max);
     const out = nombres.map((n) => todos.find((x) => x.nombre === n)).filter((x): x is T => !!x);
     return out.slice(0, max);
   };
@@ -685,9 +689,9 @@ export function equipados(d: Heroe, nivel: number, elegidos?: { ataques?: string
 }
 
 /** Lo que conoce y no tiene equipado: va a la mochila de ataques (sus cassettes). */
-export function enMochila(d: Heroe, nivel: number, elegidos?: { ataques?: string[]; especiales?: string[] }) {
-  const c = conocidos(d, nivel);
-  const e = equipados(d, nivel, elegidos);
+export function enMochila(d: Heroe, nivel: number, elegidos?: { ataques?: string[]; especiales?: string[] }, sueltos: Ataque[] = []) {
+  const c = conocidos(d, nivel, sueltos);
+  const e = equipados(d, nivel, elegidos, sueltos);
   return {
     ataques: c.ataques.filter((a) => !e.ataques.includes(a)),
     especiales: c.especiales.filter((a) => !e.especiales.includes(a)),
@@ -720,6 +724,8 @@ export interface Progreso {
    * `especiales_<héroe>` en la partida. Sin elección guardada, se equipan los primeros (ver `equipados`).
    */
   equipo?: Record<string, { ataques?: string[]; especiales?: string[] }>;
+  /** Los cassettes sueltos que se tienen (`cassette_<id>` en la partida): los puede equipar cualquiera. */
+  cassettes?: Record<string, number>;
   /** Las monedas de la partida (para Boringplace); sin ninguna, no está. */
   monedas?: number;
 }
@@ -743,6 +749,8 @@ export function progresoDeVars(vars: Vars): Progreso {
     if (typeof v !== 'number') continue;
     const nivel = k.match(/^nivel_(.+)$/);
     if (nivel && v > 0) p.heroes[nivel[1]] = { nivel: v, xp: typeof vars[`xp_${nivel[1]}`] === 'number' ? (vars[`xp_${nivel[1]}`] as number) : 0 };
+    const cas = k.match(/^cassette_(.+)$/);
+    if (cas && v > 0) (p.cassettes ??= {})[cas[1]] = v;
     const obj = k.match(/^mochila_(.+)$/);
     if (obj && v > 0) p.mochila[obj[1]] = v;
     if (k === 'monedas' && v > 0) p.monedas = v;

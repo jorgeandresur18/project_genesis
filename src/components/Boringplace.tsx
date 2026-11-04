@@ -5,6 +5,8 @@ import { OBJETOS_TIENDA, colorDeObjeto, precioVenta, useBoringplace, type Articu
 import { useStore } from '../engine/store';
 import { useLang } from '../engine/i18n';
 import { config } from '../engine/story';
+import { FICHAS, copiasLibres, precioVentaCassette } from '../engine/batallas';
+import { progresoDeVars } from '../engine/batalla';
 import { TOPE_PAYFOE, transferible, type Movimiento } from '../engine/payfoe';
 import s from './Boringplace.module.css';
 import sb from './Boringram.module.css';
@@ -100,6 +102,14 @@ export function Boringplace({ onArticulo, onToast }: { onArticulo: (id: string) 
               </button>
             );
           })}
+          {/* Los cassettes sueltos (docs/BIBLIA_RPG.md, sección 18): grises, los puede usar cualquiera. */}
+          {Object.entries(FICHAS.sueltos).map(([id, c]) => (
+            <button key={`c-${id}`} className={s.tarjeta} onClick={() => onArticulo(`${ID_CASSETTE}${id}`)}>
+              <FotoObjeto icono="objetos/cassette_generico" color={GRIS_CASSETTE} />
+              <span className={s.nombre}>{c.ataque.nombre}</span>
+              <Precio n={c.precio} />
+            </button>
+          ))}
         </div>
       ) : (
         <>
@@ -109,6 +119,7 @@ export function Boringplace({ onArticulo, onToast }: { onArticulo: (id: string) 
           ) : (
             <p className={s.mochilaVacia}>{tx.mochila_vacia}</p>
           )}
+          <CassettesParaVender onToast={aviso} />
         </>
       )}
     </div>
@@ -122,6 +133,7 @@ export function ArticuloVista({ id, onBack, onToast }: { id: string; onBack: () 
   const a = [...p.ajenos, ...p.deJair].find((x) => x.id === id);
   if (id === ID_PAYFOE && config.payfoe_activo) return <BilleteraVista onBack={onBack} onToast={onToast} />;
   if (id.startsWith(ID_TIENDA)) return <ObjetoVista objeto={id.slice(ID_TIENDA.length)} onBack={onBack} onToast={onToast} />;
+  if (id.startsWith(ID_CASSETTE)) return <CassetteVista id={id.slice(ID_CASSETTE.length)} onBack={onBack} onToast={onToast} />;
   if (!a) return null;
   return (
     <div className={sb.feed}>
@@ -347,6 +359,113 @@ function BilleteraVista({ onBack, onToast }: { onBack: () => void; onToast: (tex
 
 /** La billetera se abre como un artículo más. */
 const ID_PAYFOE = 'payfoe';
+
+/** Los cassettes sueltos se abren como un artículo más: `cassette:<id>`. Son grises (no son de un protagonista). */
+const ID_CASSETTE = 'cassette:';
+const GRIS_CASSETTE = '#c9ced6';
+
+/** Lo que hace un cassette, contado sin nombres (lo puede usar cualquiera). */
+const textoCassette = (texto: string, quien: string, objetivo: string) => texto.replace(/\{quien\}/g, quien).replace(/\{objetivo\}/g, objetivo);
+
+/** La publicación de un cassette suelto: foto, precio, qué hace, cuántos tienes y cuántos comprar. */
+function CassetteVista({ id, onBack, onToast }: { id: string; onBack: () => void; onToast: (texto: string) => void }) {
+  const tx = useBoringplace().data.textos;
+  const vars = useStore((st) => st.game?.vars);
+  const [n, setN] = useState(1);
+  const c = FICHAS.sueltos[id];
+  if (!c) return null;
+  const monedas = (vars?.monedas as number | undefined) ?? 0;
+  const tengo = (vars?.[`cassette_${id}`] as number | undefined) ?? 0;
+  const total = n * c.precio;
+  const comprar = () => {
+    playSelect();
+    if (monedas < total) return onToast(tx.sin_monedas.replace('{n}', String(total - monedas)));
+    for (let i = 0; i < n; i++) useStore.getState().comprarCassette(id, c.precio);
+    onToast(n === 1 ? tx.comprado.replace('{objeto}', c.ataque.nombre) : tx.comprados.replace('{n}', String(n)).replace('{objeto}', c.ataque.nombre));
+    setN(1);
+  };
+  return (
+    <div className={sb.feed}>
+      <div className={sb.topBar}>
+        <button className={sb.backBtn} onClick={onBack} aria-label={tx.atras}>
+          ‹
+        </button>
+        <b>{tx.titulo}</b>
+      </div>
+      <div className={s.escena}>
+        <FotoObjeto icono="objetos/cassette_generico" color={GRIS_CASSETTE} grande />
+      </div>
+      <div className={s.detalle}>
+        <h3>{c.ataque.nombre}</h3>
+        <Precio n={c.precio} grande />
+        <small className={s.lugar}>{tx.cassette_suelto}</small>
+        <p className={s.descripcion}>{textoCassette(c.ataque.texto, tx.cassette_quien, tx.cassette_objetivo)}</p>
+        {tengo > 0 && <small className={s.tienes}>{tx.tienes.replace('{n}', String(tengo))}</small>}
+        {vars ? (
+          <>
+            <div className={s.cantidad}>
+              <span>{tx.cantidad}</span>
+              <button aria-label={tx.menos} disabled={n <= 1} onClick={() => setN(n - 1)}>
+                −
+              </button>
+              <b>{n}</b>
+              <button aria-label={tx.mas} onClick={() => setN(n + 1)}>
+                +
+              </button>
+            </div>
+            <button className={s.boton} onClick={comprar}>
+              {tx.comprar_n.replace('{n}', String(n)).replace('{total}', String(total))}
+            </button>
+          </>
+        ) : (
+          <p className={s.sinTuyos}>{tx.sin_partida}</p>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/** «Tus artículos»: los cassettes sueltos que se tienen, para vender a la mitad (los equipados, no: primero se guardan). */
+function CassettesParaVender({ onToast }: { onToast: (texto: string) => void }) {
+  const tx = useBoringplace().data.textos;
+  const vars = useStore((st) => st.game?.vars);
+  if (!vars) return null;
+  const progreso = progresoDeVars(vars);
+  const mios = Object.entries(FICHAS.sueltos).filter(([id]) => (progreso.cassettes?.[id] ?? 0) > 0);
+  if (!mios.length) return null;
+  return (
+    <>
+      <h4 className={s.subtitulo}>{tx.tus_cassettes}</h4>
+      <div className={s.lista}>
+        {mios.map(([id, c]) => {
+          const libres = copiasLibres(id, progreso.cassettes, progreso.equipo);
+          const precio = precioVentaCassette(c.precio);
+          return (
+            <div key={id} className={s.objeto}>
+              <img src={assetUrl('objetos/cassette_generico.webp')} alt="" draggable={false} />
+              <span className={s.objetoTexto}>
+                <b>{c.ataque.nombre}</b>
+                <small className={s.tienes}>{tx.tienes.replace('{n}', String(progreso.cassettes?.[id] ?? 0))}</small>
+                {libres <= 0 && <small>{tx.cassette_equipado}</small>}
+              </span>
+              <button
+                className={s.botonChico}
+                disabled={libres <= 0}
+                onClick={() => {
+                  useStore.getState().venderCassette(id, precio);
+                  playSelect();
+                  onToast(tx.vendido_ok.replace('{objeto}', c.ataque.nombre).replace('{n}', String(precio)));
+                }}
+              >
+                {tx.vender} · {precio}
+              </button>
+            </div>
+          );
+        })}
+      </div>
+    </>
+  );
+}
 
 /** Los objetos de la tienda se abren como un artículo más: `tienda:<objeto>`. */
 const ID_TIENDA = 'tienda:';

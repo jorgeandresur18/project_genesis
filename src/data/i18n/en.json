@@ -397,5 +397,6 @@
   "batalla.desc.se_potencia": "Powers up: attack +{n} until the end of the fight. No target needed.",
   "batalla.desc.paraliza": "Paralyzes one enemy for {n} turn(s). No damage.",
   "batalla.desc.confunde": "Confuses one enemy for {n} turns: sometimes it hits itself or its allies. No damage.",
-  "batalla.desc.envenena": "It also poisons it for {n} turns."
+  "batalla.desc.envenena": "It also poisons it for {n} turns.",
+  "equipo.sin_copias": "No free copies of that cassette left: someone else has it equipped. Buy another on Boringplace."
 }
