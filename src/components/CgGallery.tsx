@@ -26,7 +26,7 @@ import { Panel } from './Panels';
 import { playCancel, playChip, playSelect, startTyping, stopTyping } from '../engine/sound';
 import { NoData } from './NoData';
 import { CapasFondo, capaDeFondo, capaDeSprite } from './SceneStage';
-import { SpriteHoja, type Hoja } from './Batalla';
+import { SpriteHoja, type Hoja } from './batalla/sprites';
 import { colorBalas, useEfectosSprite } from './EfectosSprite';
 import { BATALLAS } from '../engine/batallas';
 

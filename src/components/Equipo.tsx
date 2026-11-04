@@ -1,6 +1,6 @@
 import { useState, type CSSProperties } from 'react';
 import { Panel } from './Panels';
-import { SpriteHoja } from './Batalla';
+import { SpriteHoja } from './batalla/sprites';
 import { useT } from '../engine/i18n';
 import { useStore } from '../engine/store';
 import { playSelect } from '../engine/sound';

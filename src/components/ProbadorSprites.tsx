@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { createPortal } from 'react-dom';
-import { Batalla, SpriteHoja, type Hoja } from './Batalla';
+import { Batalla } from './Batalla';
+import { SpriteHoja, type Hoja } from './batalla/sprites';
 import type { DatosBatalla, Enemigo, Heroe } from '../engine/batalla';
 import probador from '../data/probador_sprites.json';
 import { colorBalas, useEfectosSprite } from './EfectosSprite';

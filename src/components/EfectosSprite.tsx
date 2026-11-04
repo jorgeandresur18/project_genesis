@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type CSSProperties, type RefObject } from 'react';
-import { anguloDisparo, rectSprite, SpriteHoja, type Hoja } from './Batalla';
+import { anguloDisparo, rectSprite, SpriteHoja, type Hoja } from './batalla/sprites';
 
 /**
  * Los efectos de un sprite del combate fuera de la pelea (el probador y la galería), igual que en la pelea: las balas
