@@ -513,6 +513,10 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
 - **Cuántos se equipan:** **3 ataques y 2 especiales** por personaje (el autor todavía lo está pensando; propuesta
   inicial). El **caramelo premium** sube los especiales a **3**: es el premio más caro del juego, por ganarle a Nikki en
   la dificultad más alta del Torneo Genesis.
+- **Los especiales comparten una sola barra** (decidido por el autor el 2026-11-03): cuando se llena, se elige cuál de
+  los equipados usar.
+- **Todo ataque tiene usos limitados por pelea** («5/5» en el menú; se recuperan al terminar), **menos los especiales**,
+  que dependen solo de la barra.
 - **Equiparse y desequiparse:** los ataques se pueden desequipar; si no hay espacio libre, van a la **mochila**. Solo
   **fuera de las peleas** (desde el panel de Equipo), nunca en medio de un combate.
 - **Ataques propios y ataques sueltos:** los **originales** de cada personaje (los suyos de siempre: la Ráfaga de puños de
@@ -521,6 +525,16 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
   los puede usar cualquiera, se guardan en la mochila y se venden.
 - **De dónde salen:** se aprenden al **subir de nivel**; se compran en **Boringplace** o se ganan en el **Torneo Genesis**.
 - **Vender:** los sueltos se venden en Boringplace y **se pueden volver a comprar**.
+- **Hecho en el motor (2026-11-03):** cada héroe puede tener `especiales` (lista, hasta `MAX_ESPECIALES` = 2) además
+  de su `especial` principal (el de su color y sus ojos); en el menú salen todos con la misma barra y se elige cuál.
+  Para probarlo: la pelea demo (`?batalla=demo`), donde Jair tiene un segundo especial de relleno («Hotfix en
+  producción»). Falta: el equipamiento (elegir los 3 ataques y los 2 especiales desde el panel de Equipo, la mochila de
+  ataques y venderlos).
+- **Ataques sin sprites nuevos (propuesta de Claude, placeholder):** usan la animación de ataque que ya tiene cada uno y
+  los efectos que el motor ya sabe hacer. Jair: Ctrl+Z (se cura), Reunión que pudo ser un correo (paraliza 1 turno),
+  Excusa elaborada (confunde), Commit a medianoche (golpe fuerte, 3 usos). Cami: Tiro certero, Barrido de cobertura
+  (ráfaga a todos). Rikka: Pétalos al viento (a todos), Postura de la guardiana (se protege). Sueltos: Piedra, Grito de
+  guerra (sube el ataque), Botella rota (envenena).
 - `TODO(canon)`: la lista de ataques sueltos y de cada personaje, en qué nivel se aprende cada uno, sus precios, y si los
   especiales también pueden ser sueltos.
 

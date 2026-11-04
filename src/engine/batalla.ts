@@ -86,7 +86,13 @@ export interface Heroe {
   base: Stats;
   crece: Stats;
   ataques: Ataque[];
+  /** Su especial principal (el de su color y sus ojos en el aviso). */
   especial?: Especial;
+  /**
+   * Los especiales equipados (ver `especialesDe`; docs/BIBLIA_RPG.md, sección 18): comparten una sola barra y, cuando
+   * se llena, se elige cuál usar. Sin esto, tiene solo `especial`.
+   */
+  especiales?: Especial[];
   /** Animación (de su hoja) cuando no puede actuar ese turno: Cami, agachada por el tobillo. */
   descanso?: string;
   /** Lo que se dice cuando se queda descansando (apenas actúa) y cuando ya puede volver ({quien}: su nombre). */
@@ -644,6 +650,10 @@ export const ataquesDe = (h: { nivel: number }, d: Heroe): Ataque[] => [
   ...d.ataques,
   ...(d.aprende ?? []).filter((x) => x.nivel <= h.nivel).map((x) => x.ataque),
 ];
+/** Cuántos especiales se equipan (docs/BIBLIA_RPG.md, sección 18); el caramelo premium sube a 3. */
+export const MAX_ESPECIALES = 2;
+/** Los especiales equipados de un héroe, en orden (comparten la barra): `especiales` o, si no tiene, su `especial`. */
+export const especialesDe = (d: Heroe): Especial[] => (d.especiales?.length ? d.especiales : d.especial ? [d.especial] : []);
 /** Lo que aprende justo al llegar a ese nivel. */
 export const aprendeEn = (d: Heroe, nivel: number): Ataque[] => (d.aprende ?? []).filter((x) => x.nivel === nivel).map((x) => x.ataque);
 

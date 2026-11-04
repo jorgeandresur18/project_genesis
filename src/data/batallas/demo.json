@@ -8,7 +8,39 @@
   ],
   "personajes": {
     "jair": {
-      "nivel": 5
+      "nivel": 5,
+      "especiales": [
+        {
+          "nombre": "Ráfaga de puños",
+          "poder": 7,
+          "golpes": 6,
+          "objetivo": "uno",
+          "color": "#ff8a1f",
+          "ojos": [
+            50,
+            37,
+            27,
+            13
+          ],
+          "texto": "{quien} grita algo que aprendió en un anime y suelta una ráfaga de puños. Ninguno con técnica. Todos con fe.",
+          "posicion": "objetivo"
+        },
+        {
+          "nombre": "Hotfix en producción",
+          "poder": 12,
+          "golpes": 3,
+          "objetivo": "uno",
+          "color": "#ff3b3b",
+          "ojos": [
+            50,
+            37,
+            27,
+            13
+          ],
+          "texto": "{quien} sube un arreglo un viernes a las seis de la tarde. Funciona. Nadie sabe por qué. [Relleno: segundo especial de prueba]",
+          "posicion": "objetivo"
+        }
+      ]
     },
     "cami": {
       "nivel": 15,

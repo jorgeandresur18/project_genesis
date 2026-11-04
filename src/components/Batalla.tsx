@@ -41,6 +41,7 @@ import {
   dano,
   disponibles,
   especialListo,
+  especialesDe,
   golpesEspecial,
   ganarXp,
   seRetira,
@@ -114,7 +115,7 @@ type Comando =
   | { tipo: 'hablar'; objetivo: string }
   | { tipo: 'esquivar' }
   | { tipo: 'objeto'; clave: string; objetivo: string }
-  | { tipo: 'especial'; objetivo: string }
+  | { tipo: 'especial'; objetivo: string; cual: number }
   | { tipo: 'huir' };
 type Menu =
   | { paso: 'comando'; i: number }
@@ -1220,7 +1221,7 @@ function Pelea({
       const { n } = await golpear(h, h, CONFUSION.poder);
       return decir(fmt(t('batalla.recibe'), { quien: h.nombre, n }));
     }
-    if (c.tipo === 'especial') return usarEspecial(h, d.personajes[h.clave].especial!, d.personajes[h.clave].sprite, enemigos, objetivo(c.objetivo));
+    if (c.tipo === 'especial') return usarEspecial(h, especialesDe(d.personajes[h.clave])[c.cual] ?? d.personajes[h.clave].especial!, d.personajes[h.clave].sprite, enemigos, objetivo(c.objetivo));
     if (c.tipo === 'hablar') {
       cargar(h, CARGA.hablar);
       const e = objetivo(c.objetivo);
@@ -1858,7 +1859,8 @@ function Pelea({
   // El menú: qué hace, qué ataque, qué objeto y a quién.
   const heroe = b.current.heroes.find((h) => h.id === eligiendo);
   const ataques = heroe ? ataquesDe(heroe, d.personajes[heroe.clave]) : [];
-  const especial = heroe ? d.personajes[heroe.clave].especial : undefined;
+  // Los especiales equipados: comparten la barra; cuando está llena, se elige cuál.
+  const especiales = heroe ? especialesDe(d.personajes[heroe.clave]) : [];
   const comandos = [t('batalla.atacar'), t('batalla.hablar'), t('batalla.esquivar'), t('batalla.objetos'), t('batalla.huir')];
   const enMochila = Object.keys(d.objetos).filter((k) => (b.current.mochila[k] ?? 0) > 0 && usableEnPelea(d.objetos[k]));
   const vivosDe = (lado: 'enemigo' | 'heroe') => (lado === 'enemigo' ? b.current.enemigos : b.current.heroes).filter(vivo);
@@ -1866,7 +1868,7 @@ function Pelea({
   const candidatos = () =>
     menu.paso === 'objetivo' ? (menu.caidos ? b.current.heroes.filter((x) => !vivo(x)) : vivosDe(menu.lado)) : [];
   const base = (): number =>
-    menu.paso === 'comando' ? comandos.length : menu.paso === 'ataque' ? ataques.length + (especial ? 1 : 0) : menu.paso === 'objeto' ? enMochila.length : candidatos().length;
+    menu.paso === 'comando' ? comandos.length : menu.paso === 'ataque' ? ataques.length + especiales.length : menu.paso === 'objeto' ? enMochila.length : candidatos().length;
   // «Volver» va al final de cada lista: desde un submenú, a los comandos; desde los comandos, al héroe anterior.
   const conVolver = menu.paso !== 'comando' || puedeVolver;
   const opciones = (): number => base() + (conVolver ? 1 : 0);
@@ -1888,14 +1890,16 @@ function Pelea({
     }
     playSelect();
     if (menu.paso === 'ataque') {
-      if (i === ataques.length && especial) {
+      const especial = especiales[i - ataques.length];
+      if (i >= ataques.length && especial) {
+        const cual = i - ataques.length;
         if (!especialListo(heroe)) {
           playChip('vacio');
           return setMensaje({ texto: fmt(t('batalla.especial_no'), { n: Math.floor(heroe.carga) }), n: Math.random() });
         }
         // A todos: no hace falta elegir.
-        if (especial.objetivo === 'todos') return listo({ tipo: 'especial', objetivo: vivosDe('enemigo')[0]?.id ?? '' });
-        return setMenu({ paso: 'objetivo', i: 0, lado: 'enemigo', luego: (o) => ({ tipo: 'especial', objetivo: o }) });
+        if (especial.objetivo === 'todos') return listo({ tipo: 'especial', objetivo: vivosDe('enemigo')[0]?.id ?? '', cual });
+        return setMenu({ paso: 'objetivo', i: 0, lado: 'enemigo', luego: (o) => ({ tipo: 'especial', objetivo: o, cual }) });
       }
       if (ataques[i] && quedan(heroe, ataques[i]) <= 0) {
         playChip('vacio');
@@ -2008,9 +2012,8 @@ function Pelea({
                     : fmt(t('batalla.desc.ataque'), { poder: a.poder, n: aprox(a.poder), a: t(a.objetivo === 'todos' ? 'batalla.desc.a_todos' : 'batalla.desc.a_uno') })) +
                 (a.usos !== undefined ? ' ' + fmt(t('batalla.desc.usos'), { q: quedan(heroe!, a), u: a.usos }) : ''),
             })),
-            ...(especial && heroe
-              ? [
-                  {
+            ...(heroe
+              ? especiales.map((especial) => ({
                     texto: `★ ${especial.nombre}`,
                     extra: especialListo(heroe) ? t('batalla.especial_listo') : `${Math.floor(heroe.carga)}%`,
                     clase: especialListo(heroe) ? 'especial listo' : 'especial',
@@ -2021,8 +2024,7 @@ function Pelea({
                       a: t(especial.objetivo === 'todos' ? 'batalla.desc.a_todos' : 'batalla.desc.a_uno'),
                       estado: especialListo(heroe) ? t('batalla.desc.especial_listo') : fmt(t('batalla.desc.especial_carga'), { n: Math.floor(heroe.carga) }),
                     }),
-                  },
-                ]
+                  }))
               : []),
           ]
         : menu.paso === 'objeto'
