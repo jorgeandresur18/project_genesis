@@ -22,7 +22,6 @@ import {
   quedan,
   gastarUso,
   yaTiene,
-  crearClon,
   vanPerdiendo,
   falla,
   conQuejidos,
@@ -32,8 +31,6 @@ import {
   esquiva,
   probEsquiva,
   cargar,
-  crearLuchador,
-  dano,
   disponibles,
   especialListo,
   equipados,
@@ -57,7 +54,22 @@ import { EnergiasHacia } from './EfectosSprite';
 import { EquipoPanel } from './Equipo';
 import { OptionsPanel } from './Panels';
 import { BATALLAS, sueltosQueTengo } from '../engine/batallas';
-import { decidirEnemigo, estadoInicial, finDeTurno, type EstadoPelea } from '../engine/turnos';
+import {
+  confundirA,
+  decidirEnemigo,
+  envenenarConBola,
+  estadoInicial,
+  evaporarClones,
+  finDeTurno,
+  golpesDelCanon,
+  hacerClon,
+  llegaRefuerzo,
+  paralizarA,
+  poderBarrido,
+  resolverGolpe,
+  sumarEnemigo,
+  type EstadoPelea,
+} from '../engine/turnos';
 import { BASE, PausaContexto, SpriteHoja, anguloDisparo, cargarHoja, rectSprite, type Anim, type Hoja } from './batalla/sprites';
 import { AvisoEspecial, CajaCasillas, Figura, Tarjeta, conNumeros, type Casillas } from './batalla/escena';
 import { Pixelado, Versus } from './batalla/presentacion';
@@ -453,11 +465,8 @@ function Pelea({
     setFogonazo({ key: Math.random(), color: c.color });
     playChip('destello');
     await espera(180);
-    const costo = Math.round(e.psMax * c.costo);
-    e.ps = Math.max(1, e.ps - costo);
+    const { clon: k, costo } = hacerClon(b.current, c, e, `${e.clave}-clon-${Date.now()}`);
     numero(e.id, `-${costo}`, 'dano');
-    const k = crearClon(e, c, `${e.clave}-clon-${Date.now()}`);
-    b.current.enemigos = [...b.current.enemigos.filter(vivo), k];
     efecto(k.id, 'aparece', 900);
     playChip('vortice');
     forzar();
@@ -467,10 +476,7 @@ function Pelea({
   };
   /** Al final de cada turno, los clones pierden un turno; el que llega a cero se evapora. */
   const evaporar = async () => {
-    for (const k of b.current.enemigos.filter((x) => vivo(x) && x.clon !== undefined)) {
-      k.clon!--;
-      if (k.clon! > 0) continue;
-      k.ps = 0;
+    for (const k of evaporarClones(b.current)) {
       void animar(k.id, 'ko');
       playChip('vortice');
       forzar();
@@ -517,8 +523,7 @@ function Pelea({
     }
   };
   const confundir = async (x: Luchador, n: number) => {
-    x.confundido = n;
-    b.current.confundidoRecien.push(x.id);
+    confundirA(b.current, x, n);
     luz(x.id, '#ff6fae', true);
     playChip('boing');
     forzar();
@@ -579,10 +584,7 @@ function Pelea({
     }
   };
   const paralizar = async (x: Luchador, n: number) => {
-    x.paralizado = n;
-    b.current.paralizadoRecien.push(x.id);
-    b.current.actuaron = b.current.actuaron.filter((id) => id !== x.id);
-    b.current.cansados.delete(x.id);
+    paralizarA(b.current, x, n);
     luz(x.id, '#a64dff', true);
     forzar();
     await decir(fmt(t('batalla.paralizado'), { quien: x.nombre, n }));
@@ -685,11 +687,9 @@ function Pelea({
   const sacar = (clave: string, nivel: number) => {
     useStore.getState().marcarRpg([d.enemigos[clave].sprite]);
     if (clave === d.jefe.enemigo && d.musica_jefe) useStore.getState().setMusicaBatalla(d.musica_jefe);
-    const e = crearLuchador(`${clave}-${b.current.enemigos.length}-${Date.now()}`, clave, 'enemigo', d.enemigos[clave], nivel);
-    e.carga = Math.floor(Math.random() * 40);
+    const e = sumarEnemigo(b.current, d, clave, nivel);
     efecto(e.id, 'aparece', 900);
     playChip('enemigo');
-    b.current.enemigos = [...b.current.enemigos.filter(vivo), e];
     forzar();
     return e;
   };
@@ -993,30 +993,22 @@ function Pelea({
    * `aMedias`: un especial al que eligió esquivar (no se esquiva, pero le hace la mitad).
    */
   const golpear = async (atacante: Luchador, defensor: Luchador, poder: number, color = '#fff6d0', aMedias = false) => {
-    // Si van perdiendo, el juego ayuda: los golpes de los héroes son críticos más seguido.
-    const extra = d.ayuda && atacante.lado === 'heroe' && vanPerdiendo(b.current.heroes, d.ayuda.umbral) ? d.ayuda.critico : 0;
+    // Las cuentas: engine/turnos.ts (`resolverGolpe`). Aquí, cómo se ve.
+    const golpe = resolverGolpe(b.current, d, atacante, defensor, poder, aMedias);
     // Protegido: este golpe no le hace nada (y se gasta la protección).
-    if (defensor.protegido > 0 && atacante !== defensor) {
-      defensor.protegido--;
+    if (golpe.bloqueado) {
       numero(defensor.id, t('batalla.bloquea'), 'falla');
       luz(defensor.id, '#8fd3ff', true);
       playChip('cambio');
       forzar();
-      return { n: 0, critico: false, bloqueado: true };
+      return golpe;
     }
-    const golpe = dano(atacante, defensor, poder, Math.random, extra);
-    const critico = golpe.critico;
-    const n = aMedias ? Math.max(1, Math.round(golpe.n / 2)) : golpe.n;
+    const { n, critico } = golpe;
     if (aMedias) {
       numero(defensor.id, t('batalla.a_medias'), 'falla');
       void animar(defensor.id, 'salto', 600);
     }
     luz(defensor.id, color, critico);
-    cargar(defensor, CARGA.recibir);
-    const jefe = defensor.lado === 'enemigo' ? d.enemigos[defensor.clave] : null;
-    // El clon no se retira (aunque copie al jefe): cae como cualquiera.
-    defensor.ps = Math.max(jefe?.huye_a && defensor.clon === undefined ? 1 : 0, defensor.ps - n);
-    if (defensor.ps === 0) defensor.confundido = 0;
     playChip(critico ? 'golpe' : 'impacto');
     numero(defensor.id, critico ? `${n}!` : String(n), critico ? 'critico' : 'dano');
     forzar();
@@ -1066,7 +1058,7 @@ function Pelea({
     }
     // Refuerzos: cada vez que cae uno de la horda, llega el siguiente.
     const { horda } = d;
-    if (e.clave === horda.enemigo && b.current.salieron < horda.niveles.length) {
+    if (llegaRefuerzo(b.current, d, e)) {
       await espera(450);
       if (!b.current.avisoRefuerzos) {
         b.current.avisoRefuerzos = true;
@@ -1411,7 +1403,7 @@ function Pelea({
       } else {
         await golpear(e, x, bt.poder, bt.color, x.esquivando);
         // Al que eligió esquivar, el veneno le dura un turno menos.
-        if (vivo(x) && !x.envenenado) x.envenenado = { ...bt.veneno, turnos: Math.max(1, bt.veneno.turnos - (x.esquivando ? 1 : 0)) };
+        envenenarConBola(x, bt.veneno, x.esquivando);
       }
     }
     // Salpica a los suyos (no a ella).
@@ -1488,16 +1480,8 @@ function Pelea({
   const canonConHoja = async (l: Luchador, e: Especial, blanco: Luchador, hoja: Hoja, fila: Required<Hoja['animations'][string]>) => {
     const msPaso = 1000 / fila.fps;
     const total = fila.seq.length * msPaso;
-    const grupo = (c: number) => (!hoja.rayo?.[String(c)] ? '' : hoja.rayo[String(c)][2] === 0 ? 'h' : hoja.rayo[String(c)][2] < 0 ? 'arriba' : 'abajo');
     // Cuándo golpea: el primer rayo horizontal (fuerte, a su blanco) y cada barrido arriba o abajo (a cualquiera).
-    const golpes: { ms: number; fuerte: boolean }[] = [];
-    let horizontales = 0;
-    fila.seq.forEach((c, i) => {
-      const g = grupo(c);
-      if (!g || g === grupo(fila.seq[i - 1] ?? -1)) return;
-      if (g === 'h') golpes.push({ ms: i * msPaso, fuerte: horizontales++ === 0 });
-      else golpes.push({ ms: i * msPaso, fuerte: false });
-    });
+    const golpes = golpesDelCanon(fila.seq, hoja.rayo ?? {}, msPaso);
     playChip('carga');
     void animar(l.id, 'especial', total);
     const desde = Date.now();
@@ -1510,7 +1494,7 @@ function Pelea({
       playChip(g.fuerte ? 'impacto' : 'disparo');
       if (g.fuerte) setFogonazo({ key: Math.random(), color: e.color });
       bajoEspecial.current.add(x.id);
-      await golpear(l, x, g.fuerte ? e.poder : Math.max(3, Math.round(e.poder / 6)), e.color, x.esquivando);
+      await golpear(l, x, g.fuerte ? e.poder : poderBarrido(e.poder), e.color, x.esquivando);
     }
     await espera(Math.max(0, total - (Date.now() - desde)));
     setRayoSigue(null);

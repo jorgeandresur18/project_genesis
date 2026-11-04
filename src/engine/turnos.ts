@@ -10,16 +10,20 @@ import {
   CARGA,
   CEBO,
   cargar,
+  crearClon,
   crearLuchador,
+  dano,
   eligeAtaque,
   eligeEspecial,
   gastarUso,
   quedan,
   repartirRafagas,
   seConfunde,
+  vanPerdiendo,
   vivo,
   type Ataque,
   type DatosBatalla,
+  type Enemigo,
   type Especial,
   type Luchador,
   type Progreso,
@@ -209,3 +213,100 @@ export function finDeTurno(estado: EstadoPelea) {
   estado.paralizadoRecien = [];
   estado.confundidoRecien = [];
 }
+
+/** Un enemigo entra a la pelea (con algo de barra cargada); los caídos dejan de estar en la lista. */
+export function sumarEnemigo(estado: EstadoPelea, d: DatosBatalla, clave: string, nivel: number, azar: () => number = Math.random): Luchador {
+  const e = crearLuchador(`${clave}-${estado.enemigos.length}-${Date.now()}`, clave, 'enemigo', d.enemigos[clave], nivel);
+  e.carga = Math.floor(azar() * 40);
+  estado.enemigos = [...estado.enemigos.filter(vivo), e];
+  return e;
+}
+
+/** Si al caer `e` llega otro de la horda: solo los de la horda, y mientras queden. */
+export const llegaRefuerzo = (estado: EstadoPelea, d: DatosBatalla, e: Luchador) => e.clave === d.horda.enemigo && estado.salieron < d.horda.niveles.length;
+
+/**
+ * Un golpe, sin dibujo: la protección lo bloquea (y se gasta); si no, resta PS y carga la barra de quien lo recibe.
+ * Si los héroes van perdiendo, los suyos son críticos más seguido. El jefe que se retira nunca llega a 0 (su clon, sí).
+ * `aMedias`: un especial al que eligió esquivar (no se esquiva, pero le hace la mitad).
+ */
+export function resolverGolpe(
+  estado: EstadoPelea,
+  d: DatosBatalla,
+  atacante: Luchador,
+  defensor: Luchador,
+  poder: number,
+  aMedias = false,
+  azar: () => number = Math.random,
+): { n: number; critico: boolean; bloqueado?: boolean } {
+  const extra = d.ayuda && atacante.lado === 'heroe' && vanPerdiendo(estado.heroes, d.ayuda.umbral) ? d.ayuda.critico : 0;
+  if (defensor.protegido > 0 && atacante !== defensor) {
+    defensor.protegido--;
+    return { n: 0, critico: false, bloqueado: true };
+  }
+  const golpe = dano(atacante, defensor, poder, azar, extra);
+  const n = aMedias ? Math.max(1, Math.round(golpe.n / 2)) : golpe.n;
+  cargar(defensor, CARGA.recibir);
+  const jefe = defensor.lado === 'enemigo' ? d.enemigos[defensor.clave] : null;
+  defensor.ps = Math.max(jefe?.huye_a && defensor.clon === undefined ? 1 : 0, defensor.ps - n);
+  if (defensor.ps === 0) defensor.confundido = 0;
+  return { n, critico: golpe.critico };
+}
+
+/** Paraliza: empieza a descontar desde el turno siguiente y reemplaza el descanso (no se suma). */
+export function paralizarA(estado: EstadoPelea, x: Luchador, n: number) {
+  x.paralizado = n;
+  estado.paralizadoRecien.push(x.id);
+  estado.actuaron = estado.actuaron.filter((id) => id !== x.id);
+  estado.cansados.delete(x.id);
+}
+
+/** Confunde: empieza a descontar desde el turno siguiente. */
+export function confundirA(estado: EstadoPelea, x: Luchador, n: number) {
+  x.confundido = n;
+  estado.confundidoRecien.push(x.id);
+}
+
+/** El clon de sombra: le cuesta vida a quien lo hace y entra a la pelea. Devuelve el clon y lo que costó. */
+export function hacerClon(estado: EstadoPelea, c: NonNullable<Enemigo['clon']>, e: Luchador, id: string) {
+  const costo = Math.round(e.psMax * c.costo);
+  e.ps = Math.max(1, e.ps - costo);
+  const clon = crearClon(e, c, id);
+  estado.enemigos = [...estado.enemigos.filter(vivo), clon];
+  return { clon, costo };
+}
+
+/** Al final del turno los clones pierden un turno. Devuelve los que se evaporaron. */
+export function evaporarClones(estado: EstadoPelea): Luchador[] {
+  const idos: Luchador[] = [];
+  for (const k of estado.enemigos.filter((x) => vivo(x) && x.clon !== undefined)) {
+    k.clon!--;
+    if (k.clon! > 0) continue;
+    k.ps = 0;
+    idos.push(k);
+  }
+  return idos;
+}
+
+/** El veneno que deja la Mega Bola: al que eligió esquivar le dura un turno menos. No se acumula. */
+export function envenenarConBola(x: Luchador, veneno: NonNullable<Enemigo['bola_toxica']>['veneno'], esquivando = false) {
+  if (vivo(x) && !x.envenenado) x.envenenado = { ...veneno, turnos: Math.max(1, veneno.turnos - (esquivando ? 1 : 0)) };
+}
+
+/**
+ * Los golpes del cañón del Capitán, según su hoja: el primer rayo horizontal es el fuerte (a su blanco) y cada barrido
+ * nuevo, arriba o abajo u otra vez horizontal, es uno flojo a cualquiera. `ms`: en qué paso de la animación.
+ */
+export function golpesDelCanon(seq: number[], rayo: Record<string, number[]>, msPaso = 1): { ms: number; fuerte: boolean }[] {
+  const grupo = (c: number) => (!rayo[String(c)] ? '' : rayo[String(c)][2] === 0 ? 'h' : rayo[String(c)][2] < 0 ? 'arriba' : 'abajo');
+  const golpes: { ms: number; fuerte: boolean }[] = [];
+  let horizontales = 0;
+  seq.forEach((c, i) => {
+    const g = grupo(c);
+    if (!g || g === grupo(seq[i - 1] ?? -1)) return;
+    golpes.push({ ms: i * msPaso, fuerte: g === 'h' && horizontales++ === 0 });
+  });
+  return golpes;
+}
+/** Lo que pega un barrido flojo del cañón. */
+export const poderBarrido = (poder: number) => Math.max(3, Math.round(poder / 6));
