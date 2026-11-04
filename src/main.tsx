@@ -1,6 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
+import { AvisoGuardado, ErrorBoundary } from './components/Robustez';
 import './styles.css';
 
 // El texto del juego no se puede seleccionar, copiar ni arrastrar (los campos de texto sí funcionan).
@@ -13,6 +14,10 @@ for (const type of ['copy', 'cut', 'selectstart', 'dragstart', 'contextmenu'] as
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    {/* Si algo falla al dibujarse, un aviso dentro del juego en vez de la pantalla en blanco. */}
+    <ErrorBoundary>
+      <App />
+    </ErrorBoundary>
+    <AvisoGuardado />
   </StrictMode>,
 );

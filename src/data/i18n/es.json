@@ -374,5 +374,13 @@
   "opciones.tv_fondo_ninguno": "Sin fondo",
   "opciones.tv_fondo_espacio": "Azul espacial",
   "opciones.tv_fondo_cosmico": "Morado cósmico",
-  "opciones.tv_fondo_cuarto": "El cuarto de Jair"
+  "opciones.tv_fondo_cuarto": "El cuarto de Jair",
+  "error.voz": "Voz: excepción no controlada.",
+  "error.titulo": "GENESIS encontró un error",
+  "error.texto": "Algo del juego falló y se detuvo. No es tu culpa. Esta vez.",
+  "error.partidas": "Tus partidas guardadas, tu galería y PayFoe están a salvo.",
+  "error.menu": "Volver al menú",
+  "error.recargar": "Recargar el juego",
+  "guardado.fallo_titulo": "No se pudo guardar",
+  "guardado.fallo_texto": "El navegador no tiene espacio o no deja guardar (¿modo privado?). El juego sigue, pero lo que hagas podría perderse al cerrarlo."
 }

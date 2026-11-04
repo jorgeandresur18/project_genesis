@@ -374,5 +374,13 @@
   "opciones.tv_fondo_ninguno": "None",
   "opciones.tv_fondo_espacio": "Space blue",
   "opciones.tv_fondo_cosmico": "Cosmic purple",
-  "opciones.tv_fondo_cuarto": "Jair's room"
+  "opciones.tv_fondo_cuarto": "Jair's room",
+  "error.voz": "Voice: unhandled exception.",
+  "error.titulo": "GENESIS ran into an error",
+  "error.texto": "Something in the game failed and stopped. It's not your fault. This time.",
+  "error.partidas": "Your saved games, your gallery and PayFoe are safe.",
+  "error.menu": "Back to menu",
+  "error.recargar": "Reload the game",
+  "guardado.fallo_titulo": "Couldn't save",
+  "guardado.fallo_texto": "The browser is out of space or won't allow saving (private mode?). The game keeps going, but what you do may be lost when you close it."
 }
