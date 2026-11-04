@@ -183,13 +183,15 @@ export function SpriteHoja({
   useEffect(() => {
     if (hoja && 'animations' in hoja && a) avisar.current?.(nombre, col, hoja);
   }, [col, nombre, hoja, a, vez]);
-  // La victoria de Nikki: en el cuadro en que suelta el corazón del beso, sale un corazoncito rojo con brillos que
-  // avanza unos pasos y se disuelve (no cruza la pantalla como en el ataque).
+  // La victoria de Nikki: al empezar cada beso sale, desde la boca y la palma (el primer punto de la pista del corazón
+  // del ataque), un corazoncito rojo con brillos que avanza unos pasos y se disuelve (no cruza la pantalla). La fila
+  // de la victoria no tiene los cuadros con el corazón grande dibujado.
   const corazonVictoria = nombre === 'victoria' && hoja && 'animations' in hoja ? hoja.proyectiles?.beso : undefined;
   const [corazon, setCorazon] = useState(0);
   useEffect(() => {
-    if (corazonVictoria && col === corazonVictoria.cuadro) setCorazon((n) => n + 1);
-  }, [col, corazonVictoria]);
+    if (corazonVictoria && paso === 0) setCorazon((n) => n + 1);
+  }, [paso, corazonVictoria]);
+  const origenCorazon = corazonVictoria?.pista ? Object.values(corazonVictoria.pista)[0] : undefined;
   if (!hoja) return <span className="batalla-sprite" />;
   if (!('animations' in hoja)) {
     const [w, h] = hoja.cuadro;
@@ -215,8 +217,9 @@ export function SpriteHoja({
           className="corazon-victoria"
           style={
             {
-              left: corazonVictoria.x,
-              top: corazonVictoria.y,
+              // Centrado en la boca y la palma.
+              left: (origenCorazon?.[0] ?? corazonVictoria.x + corazonVictoria.ancho / 2) - corazonVictoria.ancho / 2,
+              top: (origenCorazon?.[1] ?? corazonVictoria.y + corazonVictoria.alto / 2) - corazonVictoria.alto / 2,
               width: corazonVictoria.ancho,
               height: corazonVictoria.alto,
               backgroundImage: `url(${BASE}${corazonVictoria.imagen}.png)`,
