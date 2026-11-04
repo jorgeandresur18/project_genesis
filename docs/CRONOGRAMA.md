@@ -62,7 +62,7 @@ El RPG, Boringram y el arte se hacen **para el capítulo que toca**, no por adel
 - [ ] **PayFoe y el Torneo Genesis** (pedido del autor el 2026-11-03; diseño en `BIBLIA_RPG.md`, sección 17), en partes: (1) ~~PayFoe y la transferencia~~, (2) ~~el torneo y sus copas~~ y (3) ~~Nikki campeona~~ **hechos el 2026-11-03 (de relleno)**; falta (4): los desbloqueables a la venta y la versión sin censura de 1.000.000, y los seis ataques de Nikki.
 
 ## Semanas 3 y 4 (17–30 de noviembre): el Capítulo 3
-- [ ] **Escribir el guion del Capítulo 3** desde el canon: la torre del Oráculo, el Rey Malvado, la espada DELETE, el DELETE sin WHERE, el regreso (`alt_1`: volver solo) y el despertar con Cami y Rikka en el cuarto.
+- [ ] **Escribir el guion del Capítulo 3** desde el canon (`docs/guion/cap03_plan.md`: lo decidido y las 13 preguntas): el Rey Malvado, la espada DELETE, el DELETE sin WHERE, el regreso (`alt_1`: volver solo) y el despertar con Cami y Rikka en el cuarto.
 - [ ] **Resolver antes de escribir:** las decisiones pendientes del Capítulo 3 (ver abajo).
 - [ ] **La pelea contra el Rey Malvado del Capítulo 3:** solo THE KING (y su forma gigante), con la cara oculta, hasta el DELETE sin WHERE. *Pesada:* su sprite (el autor todavía no lo hizo). La batalla de las cinco manifestaciones es del Capítulo 6, rama del 7A (`docs/BATALLA_FINAL.md`).
 - [ ] *Liviana:* fondos y CG del Capítulo 3.

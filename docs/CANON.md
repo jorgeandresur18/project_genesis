@@ -101,6 +101,7 @@ Género y tono por etapas `[CANON]`: el Capítulo 1 es un isekai adulto (humor n
 - 30 años, pelo negro. Amiga con derecho de Jair desde hace 8 años. **No viven juntos.** Nunca han logrado una relación estable aunque él se lo ha pedido. `[CANON]`
 - Le dice que se consiga novia, pero borracha le pide que al final termine con ella, que esté para ella y la bese. `[CANON]`
 - Lidia con el alcoholismo. `[CANON]` Mostrar consecuencias, no diagnosticarla con una escena ni reducirla a un chiste de alcohol.
+- **Por qué Nikki tiene un ataque especial más** `[CANON]` (dicho por el autor el 2026-11-04): hasta ahora es el único personaje con 6 ataques (3 ataques y 3 especiales; lo normal son 5: 3 y 2). En una borrachera en el bar encontró un **caramelo dorado** muy bonito y se lo comió; eso le dio un espacio más de especial.
 - La relación con Jair es codependiente y asfixiante; los dos obtienen algo de ella y por eso no la rompen. `[CANON]`
 - En el chat de Jair con Nikki hay un solo mensaje destacado, el único que él marcó con estrella: «nunca te vayas de mi vida», que ella le envió hace un año y medio. Jair suele leerlo y mirar su foto de perfil (una foto de fiesta de su Boringram, `public/fotos/nikki_boringram.webp`). Lo hace la noche del bar, cuando ella se va en el taxi. `[CANON]`
 - En el epílogo están separados y Nikki está embarazada de cuatro meses (el bebé es de Jair). No es un castigo moral: es una responsabilidad real que Jair no puede programar ni abandonar. `[CANON]`
