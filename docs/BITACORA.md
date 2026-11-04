@@ -245,3 +245,13 @@ fuera de la computadora principal. **Al volver a la principal: `git checkout des
   usuario (`https://jorgeandresur18@github.com/...`) y el autor inició sesión como `jorgeandresur18` con el código del
   dispositivo y GitHub Mobile. Desde ahí sube sin pedir nada.
 - **Pendiente:** probar jugando la etapa 2 de `Batalla.tsx`. Lo demás, igual que el 3 de noviembre.
+- **Canon nuevo del autor (Capítulo 6 y Promptmetheus):**
+  - **THE GREAT MERGE:** así se llama lo que Promptmetheus quiere hacer, consumirlo todo para que todo forme parte de
+    él. Anotado en `CANON.md` («El Rey Malvado es Promptmetheus») y `BATALLA_FINAL.md`. Pendiente: si en español se
+    deja igual o se traduce.
+  - **El conflicto de fusión (rama que lleva al 7B):** Rikka y Cami no logran fusionarse en AnothergIrl por un
+    conflicto de fusión entre las dos. Cambia lo que decía el canon («en esta rama no hay fusión»): ahora la fusión
+    **falla**. Actualizados `CANON.md`, `BATALLA_FINAL.md`, `FINALES.md` y `BIBLIA_RPG.md`. Pendiente: cuándo lo
+    intentan, qué choca entre ellas y si Jair ejecuta el comando (Claude sugirió la respuesta de git «CONFLICT…
+    Automatic merge failed»). Así el MERGE queda en las dos ramas: en el 7A sale, en el 7B choca, y THE GREAT MERGE es
+    el de Promptmetheus.

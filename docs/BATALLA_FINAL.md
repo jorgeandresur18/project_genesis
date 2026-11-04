@@ -16,7 +16,11 @@ análisis», que son paralelismos, no influencias confirmadas).
     cinco manifestaciones**: THE KING → THE WATCHER → THE TRIAD → THE CATACLYSM → THE VOID. Encaja con el canon: lo derrotan con la superllave (AnothergIrl, la fusión de
     Rikka y Cami) y Jair borra todo lo generado por GENESIS, **esta vez con el WHERE**. En qué fase entra AnothergIrl
     y cómo se gana: `[PENDIENTE]`.
-  - **Capítulo 6, rama que lleva al 7B:** **no se transforma**: es THE KING, más fuerte que en el Capítulo 3. No hay fusión.
+  - **Capítulo 6, rama que lleva al 7B:** **no se transforma**: es THE KING, más fuerte que en el Capítulo 3. **La
+    fusión falla:** Rikka y Cami no logran fusionarse en AnothergIrl por un **conflicto de fusión** entre las dos
+    (2026-11-04; ver `docs/CANON.md`, «Hacia el 7B»).
+- **THE GREAT MERGE** `[CANON]` (2026-11-04): el nombre de lo que Promptmetheus quiere hacer, consumirlo todo para que
+  todo forme parte de él (ver «9. Objetivo de PROMPTMETHEUS» en el texto del autor y THE VOID, su culminación).
 - **THE WATCHER y el gatopulpo** `[CANON]` (2026-11-03): al ver la segunda transformación, Jair dice que es una fusión de un ojo con un pulpo y hace un chiste sobre un **gatopulpo** (el guiño a la mascota de la página de repositorios que Geekdump parodia; en el juego no se nombra la marca). Borrador de Claude, para corregir (quién le contesta depende de en qué fase entra AnothergIrl: `TODO(canon)`):
   - Jair: «Es un ojo. Con tentáculos. Una fusión de un ojo con un pulpo».
   - Jair: «Hoy todo el mundo se está fusionando, por lo visto». (Guiño al MERGE.)
