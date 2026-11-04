@@ -24,7 +24,7 @@ El RPG, Boringram y el arte se hacen **para el capítulo que toca**, no por adel
 
 ---
 
-## Dónde estamos (3 de noviembre, noche)
+## Dónde estamos (4 de noviembre, mediodía)
 
 | Parte | Estado |
 |---|---|
@@ -33,7 +33,7 @@ El RPG, Boringram y el arte se hacen **para el capítulo que toca**, no por adel
 | Capítulo 3 | Canon escrito en `docs/CANON.md`; **no hay guion**. |
 | Capítulo 4 | Borrador del autor (17 escenas) en `docs/CANON.md`; sin guion. |
 | Capítulos 5 a 7 | Esquema en el canon. |
-| RPG | Ficha única por personaje, varios especiales, ataques intercambiables con cassettes, ataques nuevos y sueltos, Torneo Genesis y PayFoe (de relleno). Faltan: quemado y congelado, olvidar ataques, la regla anti-farmeo y partir la lógica de turnos de `Batalla.tsx`. |
+| RPG | Ficha única por personaje, varios especiales, ataques intercambiables con cassettes, ataques nuevos y sueltos, Torneo Genesis y PayFoe (de relleno). Faltan: quemado y congelado, olvidar ataques, la regla anti-farmeo y sacar de `Batalla.tsx` los turnos de los héroes (los de los enemigos ya están en `engine/turnos.ts`). |
 | Boringram y Boringplace | Completos para los Capítulos 1 y 2. |
 | Robustez | Hecha el 3 de noviembre: pantalla de error, guardado seguro, ESLint y CI. |
 
@@ -49,7 +49,7 @@ El RPG, Boringram y el arte se hacen **para el capítulo que toca**, no por adel
 - [ ] *Liviana:* arte del Capítulo 2 que falte (`docs/guion/cap02_arte.md`): Rikka con traje rojo y espada, etc.
 
 ## Semana 2 (10–16 de noviembre): las peleas del Capítulo 2
-- [x] **Ordenar el RPG antes de sumar peleas** (2026-11-03): una sola ficha por personaje, `Batalla.tsx` partido (etapa 1: el dibujo), varios especiales y balance simulado del Bastión, el bar, el hangar y el torneo. Queda para después: sacar la lógica de turnos de `Batalla.tsx`.
+- [x] **Ordenar el RPG antes de sumar peleas** (2026-11-03): una sola ficha por personaje, `Batalla.tsx` partido (etapa 1: el dibujo), varios especiales y balance simulado del Bastión, el bar, el hangar y el torneo. Etapa 2 (2026-11-04, segunda computadora): la lógica de turnos sin dibujo en `src/engine/turnos.ts` (estado inicial, decisión de los enemigos, cebos, fin del turno). Queda para después: los turnos de los héroes y el bucle de la pelea, y que la simulación del balance use `turnos.ts`.
 - [ ] **Decidir y hacer las peleas del Capítulo 2:** la muralla (Rikka sola), el campamento, el molino con el cassette y Cami acorazada. **Plantillas de relleno ya enganchadas** (2026-11-03; ver `BIBLIA_RPG.md`, sección 12): falta la historia de cada una. El plan simplificado de la cuenta regresiva espera la confirmación del autor.
 - [ ] *Pesada:* sprites del RPG de esas peleas, en tanda.
 - [ ] **Pulir los diálogos del Capítulo 2.**

@@ -211,3 +211,34 @@ Cada tramo va del primer al último commit, más 30 minutos de trabajo antes del
   - **Lo que decidió el autor:** el arte y los diálogos van al final; los cassettes de color solo para los protagonistas (Jair, Cami, Rikka y Nikki); el armored es un especial normal; el tope de PayFoe nunca se muestra; el torneo pelea con niveles alineados; la cachetada de Nikki vuelve a su sprite original.
   - **Del autor, para más adelante (fase de arte):** ya tiene el sprite de novela de **la sacerdotisa del Verano**. Lo va a usar en la imagen de recuerdo de Rikka en la playa (`cg_recuerdo_verano`, Capítulo 2; hoy placeholder), muy sutil. No se integra hasta la fase de arte. Pendiente también: el «derrotado» de Rikka, Cami armored y el berserk.
   - **Pendiente:** la historia de las peleas de la muralla y el campamento (y sus bad ends); las decisiones del Capítulo 3 antes de escribir su guion; los seis ataques de Nikki y las copas de verdad del torneo; los desbloqueables a la venta en PayFoe.
+
+## 4 de noviembre (mediodía) — Segunda computadora: clon, orden de los documentos y lógica de turnos fuera de `Batalla.tsx`
+
+**Computadora: segunda** (`MARKETING1ICSH`, clon en `C:\Users\Diseño\Documents\jorge\PROJECT_GENESIS`). Primera sesión
+fuera de la computadora principal. **Al volver a la principal: `git checkout desarrollo` y `git pull`** (ver
+`docs/METODOLOGIA.md`, «Trabajar desde varias computadoras»).
+
+- **Clon y comprobación:** se clonó el repositorio en la rama `desarrollo` (último commit: el cierre del 3 de noviembre,
+  22:44). Se buscaron cambios de cerca de las 23:00 del 3 de noviembre: **en GitHub no hay ninguno**; si existieron,
+  quedaron sin subir en la computadora principal (revisar allá con `git status` y `git log --branches --not --remotes`).
+  `npm ci`, las 111 pruebas, las rutas y ESLint pasaron igual que en la principal.
+- **Identidad de git:** esta computadora tiene otra cuenta («Clinica Ser Humano»); para este repositorio se configuró
+  `jorgeandresur18 <jorgeurgiles18@gmail.com>` (`git config` local, decisión del autor).
+- **Documentos al día:** en el cronograma, los títulos de los capítulos 3 a 7 figuran como resueltos (quedaba una línea
+  vieja de propuestas) y los ataques intercambiables ya no dicen que esperan partir `Batalla.tsx`. El nombre del plato de
+  la resaca **sigue pendiente** (el canon lo marca `TODO(canon)`). Metodología nueva: cómo trabajar desde varias
+  computadoras.
+- **Partir `Batalla.tsx` (etapa 2):** la lógica de turnos que no espera animaciones pasó a `src/engine/turnos.ts`:
+  `estadoInicial` (con qué empieza la pelea), `decidirEnemigo` (qué hace cada enemigo: paralizado, confundido,
+  distraído, el remate y la Mega Bola de Nikki, el clon, su especial o un ataque), `desviarACebo` y `finDeTurno` (bajan
+  la parálisis y la confusión). Mismas comprobaciones en el mismo orden; `Batalla.tsx` solo muestra lo que se decidió y
+  bajó a ~2.340 líneas. 12 pruebas nuevas en `tests/turnos.test.ts` (123 en total). **Hay que probarlo jugando** (el
+  Bastión, el bar con Nikki —la traición y el remate— y el hangar) para confirmar que se juega igual.
+  - Queda para otra etapa: los turnos de los héroes (`actuarHeroe`) y el bucle de la pelea están muy unidos a las
+    animaciones; sacarlos pide otra forma de armar la pelea (que el motor diga qué pasó y la pantalla lo muestre).
+  - Hallazgo: la simulación del balance (`tests/balance.test.ts`) tiene su propia copia de la lógica de turnos y no
+    cuenta el turno de respiro después de la parálisis. Ahora podría usar `finDeTurno` y `decidirEnemigo`, pero eso
+    cambia un poco los números del balance: queda para decidir.
+- **Esta computadora no tiene Python:** `npm run sprites` y las herramientas de `tools/*.py` solo andan en la principal.
+- **Pendiente:** subir estos commits a GitHub. El push desde esta computadora fue rechazado (403): está guardada la
+  cuenta de GitHub `clinicaserhumano`, que no tiene permiso en el repositorio. Lo demás, igual que el 3 de noviembre.
