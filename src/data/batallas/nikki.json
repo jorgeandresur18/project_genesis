@@ -6,64 +6,12 @@
   ],
   "personajes": {
     "jair": {
-      "nombre": "Jair",
-      "sprite": "batalla/jair",
       "nivel": 5,
-      "seguido": true,
-      "base": {
-        "ps": 30,
-        "atq": 5,
-        "def": 3,
-        "vel": 8
-      },
-      "crece": {
-        "ps": 6,
-        "atq": 1,
-        "def": 0.6,
-        "vel": 0.5
-      },
-      "ataques": [
-        {
-          "nombre": "Puñetazo",
-          "poder": 14,
-          "texto": "{quien} cierra los ojos y lanza un puñetazo. Por estadística, alguno tenía que entrar.",
-          "usos": 20
-        }
-      ],
       "hablar": [
         "Nikki, perdón. Fue sin pensar.",
         "Ocho años, Nikki. Ocho años.",
         "Te invito otro trago. ¿Sí? Uno. El que quieras.",
         "Estás borracha, Nikki. Cálmate."
-      ],
-      "especial": {
-        "nombre": "Ráfaga de puños",
-        "poder": 7,
-        "golpes": 6,
-        "objetivo": "uno",
-        "color": "#ff8a1f",
-        "ojos": [
-          50,
-          37,
-          27,
-          13
-        ],
-        "texto": "{quien} grita algo que aprendió en un anime y suelta una ráfaga de puños. Ninguno con técnica. Todos con fe.",
-        "posicion": "objetivo"
-      },
-      "escala": 1.08,
-      "sonido": "puno",
-      "aprende": [
-        {
-          "nivel": 6,
-          "ataque": {
-            "nombre": "Cebo",
-            "poder": 0,
-            "cebo": true,
-            "texto": "{quien} se queda quieto un segundo y deja ahí una copia de sí mismo, en blanco y negro. Es lo primero que aprende cualquier peleador. Y lo único que Jair usa, en la oficina.",
-            "usos": 5
-          }
-        }
       ],
       "hablar_confundido": [
         "Te invito otro trago. A ti no. A la que está a tu lado. Hola, señorita.",
@@ -72,139 +20,9 @@
       ]
     }
   },
-  "enemigos": {
-    "nikki": {
-      "nombre": "Nikki",
-      "sprite": "batalla/nikki",
-      "jefe": true,
-      "huye_a": 0.5,
-      "base": {
-        "ps": 30,
-        "atq": 5,
-        "def": 2,
-        "vel": 9
-      },
-      "crece": {
-        "ps": 3.8,
-        "atq": 0.62,
-        "def": 0.1,
-        "vel": 0.3
-      },
-      "ataques": [
-        {
-          "nombre": "Cachetada",
-          "poder": 10,
-          "texto": "{quien} le da una cachetada a {objetivo} que suelta una onda azul. Suena como un portazo.",
-          "peso": 3,
-          "usos": 20
-        },
-        {
-          "nombre": "Cachetada de revés",
-          "poder": 12,
-          "texto": "{quien} le da una cachetada de revés a {objetivo}. Con el anillo. A propósito.",
-          "peso": 2,
-          "usos": 15
-        },
-        {
-          "nombre": "Beso confusión",
-          "poder": 0,
-          "confunde": 3,
-          "anim": "beso",
-          "peso": 3,
-          "texto": "{quien} cambia de cara de golpe: ojitos, labios y un beso al aire. Un corazón sale volando derecho hacia {objetivo}.",
-          "usos": 5
-        }
-      ],
-      "especial": {
-        "nombre": "Ráfaga de cachetadas infinitas",
-        "poder": 6,
-        "golpes": 10,
-        "objetivo": "uno",
-        "posicion": "objetivo",
-        "color": "#ff4f9a",
-        "ojos": [
-          62,
-          38,
-          26,
-          13
-        ],
-        "texto": "A {quien} le arden los ojos. Agarra a {objetivo} de la ropa y empieza: derecha, izquierda, derecha, izquierda. Con fuego. No hay final a la vista."
-      },
-      "al_retirarse": "llorando",
-      "al_ganar": "llorando",
-      "perdon": {
-        "veces": 3,
-        "quien": "Nikki",
-        "pide": [
-          "Nikki, perdón. Me pasé. Fue sin pensar.",
-          "En serio. Perdón. Ocho años, Nikki, y lo arruiné en un segundo.",
-          "No tengo excusa. Perdóname. Por favor."
-        ],
-        "responde": [
-          "¿Perdón? ¿Ahora sí sabes decir perdón?",
-          "Sigue. A ver si te lo creo.",
-          "…Ya. Ya. Para. Te escuché."
-        ],
-        "corta": "Ah, ¿ya se te acabaron las disculpas? Ya decía yo.",
-        "pide_confundido": [
-          "Nikki, perdón. Perdón al bar también. Y a ese banco. Sobre todo al banco, él no hizo nada.",
-          "En serio. Perdón. Perdón a las tres. A la del medio, más. Fue a la que le dije la cosa.",
-          "Perdóname. Por favor. Y dile a tu gemela que también. La que flota."
-        ]
-      },
-      "sonido": "cachetada",
-      "remata": {
-        "vida": 0.3,
-        "carga": 60
-      },
-      "clon": {
-        "nombre": "Clon de sombra",
-        "nombre_clon": "Sombra de Nikki",
-        "costo": 0.25,
-        "fuerza": 0.5,
-        "turnos": 3,
-        "color": "#6b4cff",
-        "texto": "Nikki junta las manos, cierra los ojos y se parte en dos. Lo que sale de ella es igual, pero hecho de sombra: más débil, más callado y con la misma mala cara.",
-        "reacciones": [
-          {
-            "quien": "Jair",
-            "texto": "¡Eso es de un anime! Lo vi. Lo vi entero. Eso es plagio, Nikki."
-          },
-          {
-            "quien": "Jair",
-            "texto": "Lo sabía. Lo sabía. Ocho años negándolo y eres otaku de clóset."
-          }
-        ],
-        "carga": 50,
-        "probabilidad": 0.08
-      },
-      "cae_en_cebo": 0.1,
-      "escala": 0.97,
-      "bola_toxica": {
-        "nombre": "Mega Bola Tóxica",
-        "poder": 26,
-        "color": "#c35cff",
-        "ojos": [
-          62,
-          38,
-          26,
-          13
-        ],
-        "texto": "A {quien} se le prende un aura morada. Levanta la mano y en la palma le nace una bola de energía tóxica que no para de crecer.",
-        "veneno": {
-          "danio": 6,
-          "turnos": 3
-        },
-        "peso": 0.3,
-        "solo_traicion": true,
-        "traicion": {
-          "ps": 2,
-          "veneno": 1,
-          "texto": "¿Me pides perdón y después me pegas? A {quien} se le prende un aura morada. Levanta la mano y en la palma le nace una bola de energía tóxica, enorme, hecha de ocho años."
-        }
-      }
-    }
-  },
+  "enemigos": [
+    "nikki"
+  ],
   "horda": {
     "enemigo": "nikki",
     "al_inicio": 0,
@@ -214,69 +32,16 @@
     "enemigo": "nikki",
     "nivel": 20
   },
-  "objetos": {
-    "atq": {
-      "nombre": "Furia Roja",
-      "atq": 3,
-      "texto": "{quien} se toma la Furia Roja de un trago. Bebida deportiva; nadie sabe de qué deporte. Ataque +{n} hasta el final de la pelea.",
-      "tipo": "mejora",
-      "icono": "objetos/furia_roja"
-    },
-    "def": {
-      "nombre": "Pastillas azules",
-      "def": 3,
-      "texto": "{quien} se toma una pastilla azul. No es lo que piensas. Bueno, un poco. Defensa +{n} hasta el final de la pelea.",
-      "tipo": "mejora",
-      "icono": "objetos/pastillas_azules"
-    },
-    "vida": {
-      "nombre": "Agua sin gas",
-      "ps": 30,
-      "texto": "{quien} se toma el agua sin gas: +{n} PS. Lo más barato del menú y lo único que no te miente.",
-      "tipo": "curacion",
-      "icono": "objetos/agua"
-    },
-    "carga": {
-      "nombre": "4Low-Co",
-      "carga": 100,
-      "texto": "{quien} se toma una 4Low-Co. La barra del especial se llena. El hígado, al revés.",
-      "tipo": "mejora",
-      "icono": "objetos/4low_co"
-    },
-    "caramelo_rancio": {
-      "nombre": "Caramelo rancio",
-      "niveles": 10,
-      "texto": "{quien} se come el caramelo rancio. Sabe a bar cerrado y a malas decisiones. Sube {n} niveles de golpe.",
-      "tipo": "permanente",
-      "icono": "objetos/caramelo_rancio"
-    },
-    "revivir": {
-      "nombre": "Elixit",
-      "revive": 0.5,
-      "texto": "{quien} se toma el Elixit y vuelve a pararse: +{n} PS. Suero rosado para después de una mala noche, o de morir.",
-      "tipo": "curacion",
-      "icono": "objetos/elixit"
-    },
-    "veneno_ratas": {
-      "nombre": "Veneno para ratas",
-      "tipo": "tactico",
-      "objetivo": "rival",
-      "veneno": {
-        "danio": 6,
-        "turnos": 3
-      },
-      "texto": "Le echan veneno para ratas a {quien}. Pierde vida cada turno. La etiqueta dice «no apto para humanos». Nadie lee las etiquetas.",
-      "icono": "objetos/veneno_ratas"
-    },
-    "condon": {
-      "nombre": "Condón barato",
-      "tipo": "tactico",
-      "objetivo": "aliado",
-      "protege": 1,
-      "texto": "Le dan a {quien} un condón barato, sin marca. Es protección: el próximo golpe no le hace nada.",
-      "icono": "objetos/condon_barato"
-    }
-  },
+  "objetos": [
+    "atq",
+    "def",
+    "vida",
+    "carga",
+    "caramelo_rancio",
+    "revivir",
+    "veneno_ratas",
+    "condon"
+  ],
   "botin": {
     "probabilidad": 0.6,
     "objetos": [
@@ -290,10 +55,6 @@
   "esquivar": 0.5,
   "hablar": 0.4,
   "huir": false,
-  "retratos": {
-    "Jair": "batalla/retratos/jair",
-    "Nikki": "batalla/retratos/nikki"
-  },
   "dialogos": {
     "inicio": [
       {

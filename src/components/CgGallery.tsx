@@ -28,7 +28,7 @@ import { NoData } from './NoData';
 import { CapasFondo, capaDeFondo, capaDeSprite } from './SceneStage';
 import { SpriteHoja, type Hoja } from './Batalla';
 import { colorBalas, useEfectosSprite } from './EfectosSprite';
-import type { DatosBatalla } from '../engine/batalla';
+import { BATALLAS } from '../engine/batallas';
 
 interface Texts {
   titulos: Record<string, string>;
@@ -900,7 +900,7 @@ function SpriteRpgVista({ r, accion }: { r: SpriteRpg; accion: string }) {
 /** La guía de estaturas (cm): el tamaño de cada uno en el visor del pixel art. */
 const ESTATURAS = estaturasJson.personajes as Record<string, number>;
 const ESTATURA_MAX = Math.max(...Object.keys(galeriaEs.rpg).map((h) => ESTATURAS[(galeriaEs.rpg as Record<string, { personaje: string }>)[h].personaje] ?? 165));
-const COLOR_BALAS = colorBalas(Object.values(import.meta.glob<DatosBatalla>('../data/batallas/*.json', { eager: true, import: 'default' })));
+const COLOR_BALAS = colorBalas(Object.values(BATALLAS));
 
 /** «Pixel art»: los personajes del combate que ya aparecieron en una pelea; sus acciones se desbloquean al verlas. */
 function PixelArt() {
@@ -983,14 +983,14 @@ function Centrado({ hoja, children, alto }: { hoja: string; children: ReactNode;
 const ACCIONES_FICHA = ['idle', 'ataque', 'beso', 'especial', 'aura', 'clon', 'daño', 'derrotado'];
 /** Las hojas que tienen el Clon de sombra (Nikki): no es una fila de la hoja, es un especial del combate. */
 const CON_CLON = new Set(
-  Object.values(import.meta.glob<DatosBatalla>('../data/batallas/*.json', { eager: true, import: 'default' })).flatMap((d) =>
+  Object.values(BATALLAS).flatMap((d) =>
     Object.values(d.enemigos).flatMap((e) => (e.clon ? [e.sprite] : [])),
   ),
 );
 
 /** El nombre del especial de cada hoja (de las peleas: «Ráfaga de puños», «Lluvia de plasma»…), para su botón. */
 const NOMBRE_ESPECIAL = new Map<string, string>();
-for (const d of Object.values(import.meta.glob<DatosBatalla>('../data/batallas/*.json', { eager: true, import: 'default' }))) {
+for (const d of Object.values(BATALLAS)) {
   for (const x of [...Object.values(d.personajes), ...Object.values(d.enemigos)]) {
     if (x.especial && !NOMBRE_ESPECIAL.has(x.sprite)) NOMBRE_ESPECIAL.set(x.sprite, x.especial.nombre);
   }

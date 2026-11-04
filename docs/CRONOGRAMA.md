@@ -49,7 +49,7 @@ El RPG, Boringram y el arte se hacen **para el capítulo que toca**, no por adel
 - [ ] *Liviana:* arte del Capítulo 2 que falte (`docs/guion/cap02_arte.md`): Rikka con traje rojo y espada, etc.
 
 ## Semana 2 (10–16 de noviembre): las peleas del Capítulo 2
-- [ ] **Ordenar el RPG antes de sumar peleas:** una sola ficha por personaje (`personajes.json`), partir `Batalla.tsx` en piezas y simular el balance de todas las peleas.
+- [ ] **Ordenar el RPG antes de sumar peleas:** ~~una sola ficha por personaje~~ (hecho el 2026-11-03: `src/data/rpg/personajes.json` y `src/engine/batallas.ts`), partir `Batalla.tsx` en piezas y simular el balance de todas las peleas.
 - [ ] **Decidir y hacer las peleas del Capítulo 2:** la muralla (Rikka sola), el campamento, el molino con el cassette y Cami acorazada. **Plantillas de relleno ya enganchadas** (2026-11-03; ver `BIBLIA_RPG.md`, sección 12): falta la historia de cada una. El plan simplificado de la cuenta regresiva espera la confirmación del autor.
 - [ ] *Pesada:* sprites del RPG de esas peleas, en tanda.
 - [ ] **Pulir los diálogos del Capítulo 2.**

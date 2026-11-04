@@ -6,8 +6,8 @@
 // pero llegando justo. Si cambias números en src/data/batallas/bastion.json y esto falla, la pelea quedó muy fácil
 // o muy difícil.
 import { describe, expect, it } from 'vitest';
-import { readFileSync } from 'node:fs';
 import { CARGA, CONFUSION, cargar, crearClon, crearLuchador, dano, eligeAtaque, eligeEspecial, seConfunde, disponibles, especialListo, falla, ganarXp, golpesEspecial, seRetira, usarObjeto, vanPerdiendo, vivo, xpDe, type DatosBatalla, type Luchador } from '../src/engine/batalla';
+import { BATALLAS } from '../src/engine/batallas';
 function sim(D: DatosBatalla, listo: boolean, N = 2000) {
   let gana = 0, hpFin = 0;
   for (let s = 0; s < N; s++) {
@@ -115,7 +115,7 @@ export function informe(D: DatosBatalla) {
 }
 
 describe('balance del Bastión', () => {
-  const D = JSON.parse(readFileSync('src/data/batallas/bastion.json', 'utf8')) as DatosBatalla;
+  const D = BATALLAS.bastion;
   it('el jugador descuidado gana pocas veces (entre 10 % y 55 %)', () => {
     const r = sim(D, false);
     console.log('balance', JSON.stringify(informe(D)));
@@ -130,7 +130,7 @@ describe('balance del Bastión', () => {
 });
 
 describe('balance de Nikki en el bar (escena secreta del Capítulo 1)', () => {
-  const D = JSON.parse(readFileSync('src/data/batallas/nikki.json', 'utf8')) as DatosBatalla;
+  const D = BATALLAS.nikki;
   it('es muy, muy difícil ganarle: el jugador que solo ataca gana muy pocas veces (entre 2 % y 15 %; la salida es pedirle perdón)', () => {
     const r = sim(D, false);
     console.log('nikki', JSON.stringify(r));

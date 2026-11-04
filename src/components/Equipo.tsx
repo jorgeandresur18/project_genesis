@@ -4,14 +4,14 @@ import { SpriteHoja } from './Batalla';
 import { useT } from '../engine/i18n';
 import { useStore } from '../engine/store';
 import { playSelect } from '../engine/sound';
-import { ataquesDe, progresoDeVars, statsEn, tipoDe, xpParaSubir, type DatosBatalla, type Heroe, type Objeto } from '../engine/batalla';
+import { ataquesDe, progresoDeVars, statsEn, tipoDe, xpParaSubir, type Heroe, type Objeto } from '../engine/batalla';
+import { BATALLAS } from '../engine/batallas';
 
 /**
  * Equipo (botón de la barra del juego): las estadísticas de cada personaje del equipo con su sprite, lo que tiene
  * equipado (cabeza, traje y amuleto) y la mochila. Todo es de la partida en curso. El equipo se compra en
  * Boringplace (por construir: por ahora los espacios están vacíos).
  */
-const BATALLAS = import.meta.glob<DatosBatalla>('../data/batallas/*.json', { eager: true, import: 'default' });
 /** Cada héroe y cada objeto como aparecen por primera vez en las peleas (el Bastión primero). */
 const HEROES = new Map<string, Heroe>();
 const OBJETOS = new Map<string, Objeto>();

@@ -4,6 +4,7 @@ import { Batalla, SpriteHoja, type Hoja } from './Batalla';
 import type { DatosBatalla, Enemigo, Heroe } from '../engine/batalla';
 import probador from '../data/probador_sprites.json';
 import { colorBalas, useEfectosSprite } from './EfectosSprite';
+import { BATALLAS } from '../engine/batallas';
 
 /**
  * Probador de sprites (?sprites en la dirección): cada hoja del combate (y las de «varios» en
@@ -11,7 +12,6 @@ import { colorBalas, useEfectosSprite } from './EfectosSprite';
  * cuadro a cuadro, voltear, fondo del combate y las marcas de dónde salen las balas. Es una herramienta del autor:
  * no es parte de la historia.
  */
-const BATALLAS = import.meta.glob<DatosBatalla>('../data/batallas/*.json', { eager: true, import: 'default' });
 const BASE = import.meta.env.BASE_URL;
 
 interface Entrada {

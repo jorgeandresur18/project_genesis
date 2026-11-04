@@ -7,7 +7,8 @@ import { useStore } from './store';
 import { useLang } from './i18n';
 import dataEs from '../data/boringplace.json';
 import dataEn from '../data/en/boringplace.json';
-import { tipoDe, type DatosBatalla, type Objeto } from './batalla';
+import { tipoDe, type Objeto } from './batalla';
+import { BATALLAS } from './batallas';
 
 export interface Articulo {
   id: string;
@@ -64,7 +65,6 @@ export const unlockScenesBoringplace = (): string[] =>
   [ES.desbloqueo, ...ES.articulos.map((a) => a.desbloqueo)].filter((x): x is string => !!x);
 
 /** Los objetos de las peleas (el primero que aparece con cada clave), para la tienda. */
-const BATALLAS = import.meta.glob<DatosBatalla>('../data/batallas/*.json', { eager: true, import: 'default' });
 export const OBJETOS_TIENDA = new Map<string, Objeto>();
 for (const d of Object.values(BATALLAS)) for (const [k, o] of Object.entries(d.objetos)) if (!OBJETOS_TIENDA.has(k)) OBJETOS_TIENDA.set(k, o);
 /**

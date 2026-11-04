@@ -62,6 +62,7 @@ import fondosJson from '../data/fondos_batalla.json';
 import { EnergiasHacia } from './EfectosSprite';
 import { EquipoPanel } from './Equipo';
 import { OptionsPanel } from './Panels';
+import { BATALLAS } from '../engine/batallas';
 
 /**
  * Batalla por turnos (RPG estilo EarthBound / Final Fantasy) dentro de la historia (ver `batalla` en la escena;
@@ -75,7 +76,6 @@ import { OptionsPanel } from './Panels';
  * final sale el jefe, que se retira cuando está débil: ahí se gana. Los que hablan salen abajo, con su retrato, y
  * el texto se escribe con su sonido. Datos: src/data/batallas/<id>.json; cuentas: engine/batalla.ts.
  */
-const BATALLAS = import.meta.glob<DatosBatalla>('../data/batallas/*.json', { eager: true, import: 'default' });
 /** Lo que se dicen con «Hablar», según quién le habla a quién (src/data/charlas_batalla.json). */
 type Charla = { dice: string[]; ok?: string[]; no?: string[]; narra?: boolean };
 const CHARLAS = charlasJson as unknown as Record<string, Record<string, Charla>>;
@@ -223,7 +223,7 @@ export function Batalla({
   /** Si el rival perdona y la pelea termina hablando (Nikki). Si no está, cuenta como ganar. */
   onPerdonar?: (vars: Vars) => void;
 }) {
-  const d = datos ?? BATALLAS[`../data/batallas/${id}.json`];
+  const d = datos ?? BATALLAS[id];
   return d ? <Pelea d={d} progreso={progreso} onGanar={onGanar} onPerder={onPerder} onPerdonar={onPerdonar} arena={arena} onSalir={onSalir} /> : null;
 }
 

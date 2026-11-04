@@ -295,19 +295,28 @@ Están enganchadas para probar el flujo; **todo es provisorio** (niveles, enemig
 
 ## 13. Cómo armar una pelea nueva
 
+**Una sola ficha por personaje** (desde el 2026-11-03): cada héroe, cada enemigo, cada objeto y cada retrato está una
+sola vez en `src/data/rpg/personajes.json`. Cada pelea (`src/data/batallas/<id>.json`) dice solo quién pelea, en qué
+nivel y lo que cambia en esa pelea; `src/engine/batallas.ts` las junta (todo el juego y las pruebas leen de ahí).
+Cambiar el especial de Cami, por ejemplo, se hace una vez en la ficha y vale para todas las peleas.
+
 1. Copiar una pelea parecida en `src/data/batallas/<id>.json`.
-2. **Obligatorio:** `titulo`, `fondo`, `heroes`, `personajes`, `enemigos`, `horda`, `jefe`, `objetos`, `botin`,
-   `esquivar`, `hablar`, `huir`, `retratos` y los `dialogos` de cada momento (inicio, refuerzos, jefe, jefe_huye,
-   victoria, derrota, huir_no, huir, descanso, cae_jair, hablar_ok, hablar_no, esquiva_ok, botin).
-3. **Opcional:** música, ayuda, mochila inicial, premio, presentación «VS», descripciones propias, `enemigos_atras`,
-   y en los enemigos `remata`, `clon`, `perdon`, `al_retirarse`, `sale_atras`, `sonido`.
-4. En la escena de la historia: `"batalla": "<id>"`, `"batalla_derrota": "<escena>"` y, si hay perdón,
+2. **Los personajes:** `"personajes": { "jair": { "nivel": 5 }, "cami": { "nivel": 15, "seguido": false } }`. El nivel
+   va siempre; lo demás, solo si cambia en esa pelea (en el ejemplo, la Cami del tobillo del Capítulo 1).
+3. **Los enemigos y los objetos, por nombre:** `"enemigos": ["soldado", "capitan"]`, `"objetos": ["vida", "atq", …]`.
+   Un personaje, enemigo u objeto nuevo se agrega primero a la ficha.
+4. **Obligatorio en la pelea:** `titulo`, `fondo`, `heroes`, `horda`, `jefe`, `botin`, `esquivar`, `hablar`, `huir` y
+   los `dialogos` de cada momento (inicio, refuerzos, jefe, jefe_huye, victoria, derrota, huir_no, huir, descanso,
+   cae_jair, hablar_ok, hablar_no, esquiva_ok, botin). Los retratos salen de la ficha (`retratos` en la pelea solo
+   para agregar uno propio).
+5. **Opcional:** música, ayuda, mochila inicial, premio, presentación «VS», descripciones propias, `enemigos_atras`.
+6. En la escena de la historia: `"batalla": "<id>"`, `"batalla_derrota": "<escena>"` y, si hay perdón,
    `"batalla_perdon": "<escena>"`.
-5. Los sprites van en `public/batalla/<personaje>.png` y `.json`, exportados con
+7. Los sprites van en `public/batalla/<personaje>.png` y `.json`, exportados con
    `python -I tools/batalla_sprites.py "<html del autor>"`.
-6. Correr `npm run test:routes` y `npx vitest run`. Si es una pelea importante, agregarla a `tests/balance.test.ts`
-   con su meta.
-7. Si la pelea cambia alguna regla, anotarla en la sección 12 de esta biblia.
+8. Correr `npm run test:routes` y `npm test`. Si es una pelea importante, agregarla a `tests/balance.test.ts` con su
+   meta.
+9. Si la pelea cambia alguna regla, anotarla en la sección 12 de esta biblia.
 
 ---
 

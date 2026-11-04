@@ -15,9 +15,8 @@ import galeria from '../data/galeria.json';
 import spriteConfig from '../../tools/sprites.config.json';
 import emblemas from '../data/emblemas_18.json';
 import { GALERIA_COMPLETA } from './modo';
-import type { DatosBatalla } from './batalla';
+import { BATALLAS } from './batallas';
 
-const BATALLAS = import.meta.glob<DatosBatalla>('../data/batallas/*.json', { eager: true, import: 'default' });
 
 const cgsDe = (secretas: boolean): string[] => {
   const ids: string[] = [];
@@ -99,7 +98,7 @@ const HOJAS_EN_HISTORIA: string[] = (() => {
   const hojas: string[] = [];
   for (const file of storyFiles) {
     for (const scene of file.scenes) {
-      const d = scene.batalla ? BATALLAS[`../data/batallas/${scene.batalla}.json`] : undefined;
+      const d = scene.batalla ? BATALLAS[scene.batalla] : undefined;
       if (!d) continue;
       const sprites = [...d.heroes.map((k) => d.personajes[k]?.sprite), d.enemigos[d.horda.enemigo]?.sprite, d.enemigos[d.jefe.enemigo]?.sprite];
       for (const h of sprites) if (h && h in rpg && !hojas.includes(h)) hojas.push(h);

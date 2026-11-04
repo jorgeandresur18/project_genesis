@@ -1,10 +1,10 @@
 // Batallas por turnos (src/data/batallas/*.json): que los datos estén completos y que las cuentas sean razonables.
 import { existsSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { crearClon, crearLuchador, eligeEspecial, dano, disponibles, ganarXp, progresoDeVars, seRetira, statsEn, usarObjeto, varsDeProgreso, xpParaSubir, type DatosBatalla, type Especial } from '../src/engine/batalla';
+import { crearClon, crearLuchador, eligeEspecial, dano, disponibles, ganarXp, progresoDeVars, seRetira, statsEn, usarObjeto, varsDeProgreso, xpParaSubir, type Especial } from '../src/engine/batalla';
 import variables from '../src/data/variables.json';
+import { BATALLAS } from '../src/engine/batallas';
 
-const BATALLAS = import.meta.glob<DatosBatalla>('../src/data/batallas/*.json', { eager: true, import: 'default' });
 const CLAVES_DIALOGO = ['inicio', 'refuerzos', 'jefe', 'jefe_huye', 'victoria', 'derrota', 'huir_no', 'huir', 'descanso', 'cae_jair', 'hablar_ok', 'hablar_no', 'esquiva_ok', 'botin'];
 
 /** La hoja tiene su .png y su .json, y el .json no pide filas ni cuadros que la imagen no tiene (`extra`: especial o dolor, sin reposo). */
@@ -97,7 +97,7 @@ describe('batallas por turnos', () => {
   }
 
   it('el Bastión: Jair nivel 5, Cami 15 (no repite), 6 soldados y no se puede huir', () => {
-    const d = BATALLAS['../src/data/batallas/bastion.json'];
+    const d = BATALLAS.bastion;
     expect(d.personajes.jair).toMatchObject({ nivel: 5, seguido: true });
     expect(d.personajes.cami).toMatchObject({ nivel: 15, seguido: false });
     expect(d.horda.niveles).toHaveLength(6);
@@ -106,7 +106,7 @@ describe('batallas por turnos', () => {
   });
 
   it('actúan los dos por turno, pero Cami descansa el turno siguiente al que actuó (si queda sola, uno sí y uno no)', () => {
-    const d = BATALLAS['../src/data/batallas/bastion.json'];
+    const d = BATALLAS.bastion;
     const jair = crearLuchador('jair', 'jair', 'heroe', d.personajes.jair, 5);
     const cami = crearLuchador('cami', 'cami', 'heroe', d.personajes.cami, 15);
     expect(disponibles([jair, cami], d.personajes, []).map((h) => h.id)).toEqual(['jair', 'cami']);
@@ -118,7 +118,7 @@ describe('batallas por turnos', () => {
   });
 
   it('los objetos: potenciadores de ataque y defensa hasta el final de la pelea, y la vida no pasa del máximo', () => {
-    const d = BATALLAS['../src/data/batallas/bastion.json'];
+    const d = BATALLAS.bastion;
     const jair = crearLuchador('jair', 'jair', 'heroe', d.personajes.jair, 5);
     expect(usarObjeto(d.objetos.atq, jair)).toBe(d.objetos.atq.atq);
     expect(jair.extra).toBe(d.objetos.atq.atq);
@@ -130,7 +130,7 @@ describe('batallas por turnos', () => {
   });
 
   it('la experiencia sube de nivel: más PS y ataque, y sobra lo que pasa', () => {
-    const d = BATALLAS['../src/data/batallas/bastion.json'];
+    const d = BATALLAS.bastion;
     const jair = crearLuchador('jair', 'jair', 'heroe', d.personajes.jair, 5);
     const antes = { ...jair };
     expect(ganarXp(jair, d.personajes.jair, xpParaSubir(5) + 3)).toEqual([6]);
@@ -162,7 +162,7 @@ describe('batallas por turnos', () => {
   });
 
   it('el jefe se retira al 30 % de sus PS', () => {
-    const d = BATALLAS['../src/data/batallas/bastion.json'];
+    const d = BATALLAS.bastion;
     const e = d.enemigos[d.jefe.enemigo];
     const jefe = crearLuchador('s', d.jefe.enemigo, 'enemigo', e, d.jefe.nivel);
     expect(seRetira(jefe, e)).toBe(false);
@@ -171,7 +171,7 @@ describe('batallas por turnos', () => {
   });
 
   it('Nikki remata con su especial al que está por caer y a veces hace un clon de sombra (más débil, sin especiales, se evapora)', () => {
-    const d = BATALLAS['../src/data/batallas/nikki.json'];
+    const d = BATALLAS.nikki;
     const en = d.enemigos.nikki;
     const nikki = crearLuchador('n', 'nikki', 'enemigo', en, d.jefe.nivel);
     const jair = crearLuchador('j', 'jair', 'heroe', d.personajes.jair, d.personajes.jair.nivel);
