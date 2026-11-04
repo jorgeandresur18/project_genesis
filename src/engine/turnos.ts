@@ -286,9 +286,12 @@ export function resolverGolpe(
   return { n, critico: golpe.critico };
 }
 
+/** Sin un compañero de pie que lo pueda sacar: el héroe que pelea solo (no los rivales). */
+const estaSolo = (estado: EstadoPelea, x: Luchador) => x.lado === 'heroe' && estado.heroes.filter(vivo).length <= 1;
+
 /** Paraliza: empieza a descontar desde el turno siguiente y reemplaza el descanso (no se suma). */
-export function paralizarA(estado: EstadoPelea, x: Luchador, n: number) {
-  x.paralizado = n;
+export function paralizarA(estado: EstadoPelea, x: Luchador, azar: () => number = Math.random) {
+  x.paralizado = turnosDormido(azar, estaSolo(estado, x));
   estado.paralizadoRecien.push(x.id);
   estado.actuaron = estado.actuaron.filter((id) => id !== x.id);
   estado.cansados.delete(x.id);
@@ -367,7 +370,7 @@ function limpiarEstados(x: Luchador) {
 export function aplicarEstado(estado: EstadoPelea, x: Luchador, cual: 'quemado' | 'congelado' | 'dormido', azar: () => number = Math.random): boolean {
   if (x[cual] > 0) return false;
   if (cual === 'quemado') x.quemado = QUEMADO.turnos;
-  if (cual !== 'quemado') x[cual] = turnosDormido(azar);
+  if (cual !== 'quemado') x[cual] = turnosDormido(azar, estaSolo(estado, x));
   if (cual !== 'quemado') estado.estadoRecien.push(`${x.id}/${cual}`);
   return true;
 }
@@ -408,7 +411,7 @@ export function reaccionCebo(estado: EstadoPelea, d: DatosBatalla, cebo: Luchado
   }
   if (efecto === 'paraliza') {
     if (yaTiene(atacante, { paraliza: 1 })) return null;
-    paralizarA(estado, atacante, 2);
+    paralizarA(estado, atacante, azar);
     return { tipo: 'estado', estado: 'paralizado' };
   }
   if (efecto === 'veneno') {

@@ -1,11 +1,11 @@
 // Las mecánicas nuevas (docs/BIBLIA_RPG.md, sección 19): dormido, quemado y congelado, los cebos con efecto, el cebo
 // explosivo, la autodestrucción, la bomba del día del juicio y el empate.
 import { describe, expect, it } from 'vitest';
-import { crearCebo, crearLuchador, dano, enMochila, equipados, tickQuemado, turnosDormido, usarObjeto, type DatosBatalla, type Heroe, type Luchador } from '../src/engine/batalla';
+import { crearCebo, crearLuchador, dano, disponibles, enMochila, noActua, equipados, tickQuemado, turnosDormido, usarObjeto, type DatosBatalla, type Heroe, type Luchador } from '../src/engine/batalla';
 import { conBomba, ganaBomba } from '../src/engine/torneo';
 import type { Vars } from '../src/engine/types';
 import { BATALLAS, FICHAS, SUELTOS_EN_VENTA, copiasLibres, sueltosQueTengo } from '../src/engine/batallas';
-import { EXPLOSION_CEBO, aplicarEstado, autodestruir, decidirEnemigo, estadoInicial, finDeTurno, ponerBomba, reaccionCebo, resolverGolpe, resultado, tickBomba, type EstadoPelea } from '../src/engine/turnos';
+import { EXPLOSION_CEBO, aplicarEstado, autodestruir, decidirEnemigo, estadoInicial, finDeTurno, paralizarA, ponerBomba, reaccionCebo, resolverGolpe, resultado, tickBomba, type EstadoPelea } from '../src/engine/turnos';
 
 const D = BATALLAS.bastion as DatosBatalla;
 const fijo = (n: number) => () => n;
@@ -32,19 +32,6 @@ describe('dormido', () => {
     expect(h.dormido).toBe(0);
   });
 
-  it('un objeto lo despierta; uno que se usa contra un rival, no; un golpe tampoco', () => {
-    const s = estadoInicial(D);
-    const [h] = s.heroes;
-    const e = soldado();
-    h.dormido = 3;
-    resolverGolpe(s, D, e, h, 1);
-    expect(h.dormido).toBe(3);
-    usarObjeto(FICHAS.objetos.veneno_ratas, h);
-    expect(h.dormido).toBe(3);
-    usarObjeto(FICHAS.objetos.vida, h);
-    expect(h.dormido).toBe(0);
-  });
-
   it('un rival dormido o congelado no actúa', () => {
     const s = estadoInicial(D);
     const e = soldado();
@@ -53,6 +40,51 @@ describe('dormido', () => {
     e.dormido = 0;
     e.congelado = 2;
     expect(decidirEnemigo(s, D, e).tipo).toBe('congelado');
+  });
+});
+
+describe('dormido, congelado y paralizado: la misma mecánica', () => {
+  const aplicar = (s: EstadoPelea, x: Luchador, cual: 'dormido' | 'congelado' | 'paralizado', azar: () => number) =>
+    cual === 'paralizado' ? paralizarA(s, x, azar) : aplicarEstado(s, x, cual, azar);
+
+  it.each(['dormido', 'congelado', 'paralizado'] as const)('%s: pierde el turno; un compañero con un objeto lo saca; un golpe, no', (cual) => {
+    const s = estadoInicial(D);
+    const [h, compa] = s.heroes;
+    aplicar(s, h, cual, fijo(0.999));
+    expect(h[cual]).toBe(4);
+    expect(noActua(h)).toBe(true);
+    expect(disponibles(s.heroes, D.personajes, [])).toEqual([compa]);
+    resolverGolpe(s, D, soldado(), h, 1);
+    expect(h[cual]).toBe(4);
+    usarObjeto(FICHAS.objetos.veneno_ratas, h);
+    expect(h[cual]).toBe(4);
+    usarObjeto(FICHAS.objetos.vida, h);
+    expect(h[cual]).toBe(0);
+    expect(noActua(h)).toBe(false);
+  });
+
+  it.each(['dormido', 'congelado', 'paralizado'] as const)('%s, sin compañero de pie (1 vs 1): dura de 1 a 2 turnos y se pasa solo', (cual) => {
+    const s = estadoInicial(D);
+    const [h, compa] = s.heroes;
+    compa.ps = 0;
+    aplicar(s, h, cual, fijo(0));
+    expect(h[cual]).toBe(1);
+    h[cual] = 0;
+    aplicar(s, h, cual, fijo(0.999));
+    expect(h[cual]).toBe(2);
+    finDeTurno(s);
+    finDeTurno(s);
+    expect(h[cual]).toBe(1);
+    finDeTurno(s);
+    expect(noActua(h)).toBe(false);
+  });
+
+  it('al rival le dura siempre de 2 a 4, aunque esté solo', () => {
+    const s = estadoInicial(D);
+    const e = soldado();
+    s.enemigos = [e];
+    aplicarEstado(s, e, 'dormido', fijo(0));
+    expect(e.dormido).toBe(2);
   });
 });
 
@@ -73,24 +105,6 @@ describe('quemado y congelado', () => {
     expect(e.ps).toBe(1);
   });
 
-  it('congelado funciona igual que dormido: de 2 a 4 turnos; un objeto lo descongela; un golpe no, ni hace más daño', () => {
-    const s = estadoInicial(D);
-    const [h] = s.heroes;
-    const e = soldado();
-    aplicarEstado(s, h, 'congelado', fijo(0.999));
-    expect(h.congelado).toBe(4);
-    const normal = dano(e, h, 20, fijo(0.5)).n;
-    expect(resolverGolpe(s, D, e, h, 20, false, fijo(0.5)).n).toBe(normal);
-    expect(h.congelado).toBe(4);
-    usarObjeto(FICHAS.objetos.vida, h);
-    expect(h.congelado).toBe(0);
-    aplicarEstado(s, h, 'congelado', fijo(0));
-    finDeTurno(s);
-    expect(h.congelado).toBe(2);
-    finDeTurno(s);
-    finDeTurno(s);
-    expect(h.congelado).toBe(0);
-  });
 });
 
 describe('los cebos con efecto', () => {

@@ -389,8 +389,6 @@
   "batalla.empate": "¡Empate! No queda nadie en pie.",
   "batalla.sigue_congelado": "{quien} sigue congelado.",
   "batalla.sigue_dormido": "{quien} sigue dormido.",
-  "batalla.congelado_no": "{quien} está congelado: solo puede usar un objeto.",
-  "batalla.dormido_no": "{quien} está dormido: solo puede usar un objeto.",
   "batalla.quemadura": "{quien} pierde {n} por la quemadura.",
   "batalla.tag_quemado": "quemado",
   "batalla.tag_congelado": "congelado",

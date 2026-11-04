@@ -125,7 +125,7 @@ Al elegir a quién atacar, el elegido brilla, tiene un anillo dorado a los pies 
 | Estado | Qué pasa | Cómo se ve |
 |---|---|---|
 | **Descanso** (Cami, por el tobillo; **solo en el Capítulo 1**: después se recupera) | Después de **atacar** (ataque o especial) no actúa el turno siguiente. Hablar, esquivar o usar un objeto no la cansan. | Se agacha apenas ataca («Cami necesita recuperarse de su dolor») y se para al terminar el turno en que descansó («Cami ya puede pararse»). |
-| **Paralizado** | No actúa durante esos turnos. **No se suma al descanso**: si Cami atacó y después la paralizan, al liberarse ya puede atacar. | Quieto en la pose de golpeado, temblando, con un brillo morado. |
+| **Paralizado** | Pierde su turno, de 2 a 4 turnos (ver sección 19). **No se suma al descanso**: si Cami atacó y después la paralizan, al liberarse ya puede atacar. | Quieto en la pose de golpeado, temblando, con un brillo morado. |
 | **En el aire** | Mientras dura el especial que lo levantó. | Arriba, en la pose de golpeado; al terminar cae con su sprite de derrotado y, si sigue vivo, se levanta. |
 | **Caído** | 0 PS. No actúa. Se puede revivir. | Su fila «derrotado» (tirado, respirando) o, si no la tiene, la pose de golpeado. |
 | **Confundido** (el beso de Nikki) | Durante 3 turnos, al atacar (ataque o especial) puede pegarse a sí mismo: 40 % el primer turno, 30 % el segundo y 20 % el tercero (`CONFUSION`). Hablar, esquivar y los objetos funcionan normal. Se le va al caer. | Tres corazones chicos que dan vueltas alrededor de la cabeza como un carrusel (delante, más grandes y nítidos; detrás, más chicos y tenues; desaparecen al caer); «confusión» en su tarjeta. |
@@ -235,7 +235,7 @@ falla.
 
 | Pelea | Jugador | Meta | Hoy |
 |---|---|---|---|
-| Bastión | Descuidado (solo ataca, nunca usa la mochila) | Gana entre 10 % y 55 % | ~26 % |
+| Bastión | Descuidado (solo ataca, nunca usa la mochila) | Gana entre 10 % y 55 % | ~33 % |
 | Bastión | Atento (cura al que baja del 40 %, usa potenciadores) | Gana 75 % o más, terminando con menos de la mitad de la vida | ~98 %, con ~35 % de vida |
 | Hangar | Descuidado | Gana menos de 45 % | ~32 % |
 | Hangar | Atento | Gana entre 55 % y 90 % | ~73 % (con Jair en nivel 5, el de su ficha) |
@@ -409,7 +409,7 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
 | Estado | Qué pasa | Cómo se ve |
 |---|---|---|
 | **Quemado** | Pierde un poco de vida cada turno y pega a la mitad, 3 turnos. | Llamitas naranjas; el sprite, un poco rojizo. |
-| **Congelado** | Igual que dormido (decisión del autor, 2026-11-04; reemplaza lo de romper el hielo con un golpe): ver sección 19. | Azulado y quieto, con cristales. |
+| **Congelado** | Igual que dormido y paralizado (decisión del autor, 2026-11-04; reemplaza lo de romper el hielo con un golpe): ver sección 19. | Azulado y quieto, con cristales. |
 
 **Colores de cada acción y estado (aprobado):** cada cosa tiene su color, para que no se confundan.
 
@@ -585,7 +585,9 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
 Código: `src/engine/turnos.ts` y `src/engine/batalla.ts`; pruebas: `tests/mecanicas.test.ts`. La simulación del balance
 no las usa (ni los cebos), porque ningún jugador simulado las elige.
 
-**Dormido y congelado** (la misma mecánica, decisión del autor; solo cambian el nombre y el color): dura de 2 a 4 turnos, al azar. **No puede hacer nada: solo usar un objeto.** Lo despierta cualquier objeto que no sea para un rival, o que se le acabe el tiempo; un golpe no lo despierta. Sin ningún objeto que pueda usar, pasa el turno solo. Con objetos en la mochila no puede pasar: tiene que usar uno.
+**Dormido, congelado y paralizado** (la misma mecánica, decisión del autor; solo cambian el nombre y el color): **pierde su turno.** Dura de 2 a 4 turnos, al azar. Solo sale antes si **un compañero usa un objeto en él** (cualquiera que no sea para un rival); un golpe no lo saca. Al salir de una parálisis queda un turno de respiro, para que nadie quede bloqueado toda la pelea. El número de `paraliza` en los datos ya no decide cuánto dura.
+
+**En el 1 vs 1** (propuesta de Claude, a pedido del autor): sin un compañero de pie que lo saque, al héroe le dura de 1 a 2 turnos y se le pasa solo. Vale también si sus compañeros cayeron. A los rivales les dura siempre de 2 a 4.
 
 **Quemado** (el de la sección 15, ya hecho): pierde el 5 % de su vida máxima cada turno y pega a la mitad, 3 turnos.
 
@@ -595,7 +597,7 @@ del estado (provisional, con filtros):
 
 | Cebo | Causa | Color | Precio (propuesta) |
 |---|---|---|---|
-| Cebo paralizante | Paralizado, 2 turnos | Amarillo eléctrico | 80 |
+| Cebo paralizante | Paralizado | Amarillo eléctrico | 80 |
 | Cebo tóxico | Envenenado (6 PS, 3 turnos) | Morado | 80 |
 | Cebo confuso | Confundido, 3 turnos | Rosa | 80 |
 | Cebo caliente | Quemado | Naranja | 90 |

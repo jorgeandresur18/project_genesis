@@ -197,7 +197,7 @@ describe('reglas compartidas con el simulador', () => {
     const [h] = s.heroes;
     s.actuaron = [h.id];
     s.cansados.add(h.id);
-    paralizarA(s, h, 2);
+    paralizarA(s, h, fijo(0));
     expect([h.paralizado, s.actuaron.length, s.cansados.size, s.paralizadoRecien[0]]).toEqual([2, 0, 0, h.id]);
     const soldado = enemigo(D(), D().horda.enemigo);
     expect(llegaRefuerzo(s, D(), soldado)).toBe(true);

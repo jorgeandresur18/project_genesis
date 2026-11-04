@@ -389,8 +389,6 @@
   "batalla.empate": "It's a draw! Nobody's left standing.",
   "batalla.sigue_congelado": "{quien} is still frozen.",
   "batalla.sigue_dormido": "{quien} is still asleep.",
-  "batalla.congelado_no": "{quien} is frozen: all they can do is use an item.",
-  "batalla.dormido_no": "{quien} is asleep: all they can do is use an item.",
   "batalla.quemadura": "{quien} loses {n} from the burn.",
   "batalla.tag_quemado": "burned",
   "batalla.tag_congelado": "frozen",

@@ -79,9 +79,9 @@ Lo que más hay que mirar: **que la pelea no se trabe** después de cada efecto.
 - [ ] Cada cebo se ve del color de su estado (¿se distinguen?, ¿el filtro se ve bien?).
 - [ ] Cuando un enemigo golpea un cebo con efecto, al terminar su ataque sale «¡Era una trampa!» y le aparece el estado en su
       tarjeta. Probarlo con el Capitán también, porque sus balas llegan a destiempo.
-- [ ] **Dormido** (cebo sueño): el enemigo no actúa de 2 a 4 turnos.
-- [ ] **Dormido en un héroe** (si hace falta, pedirle a Claude que lo fuerce): el menú solo deja Objetos; un objeto lo despierta; un golpe, no; sin objetos, pasa el turno solo. Con dos héroes: si el compañero gasta el último objeto, el dormido pasa su turno; y «Volver» no se traba.
-- [ ] **Quemado:** pierde vida cada turno y pega a la mitad. **Congelado** (cebo frío): igual que dormido, de 2 a 4 turnos; solo un objeto lo descongela; un golpe, no.
+- [ ] **Dormido, congelado y paralizado** (cebos sueño, frío y paralizante): el enemigo pierde su turno de 2 a 4 turnos.
+- [ ] **En un héroe** (la sombra del Bastión paraliza; para los otros dos, pedirle a Claude que los fuerce): dice que sigue así y salta su turno, sin menú; un compañero con un objeto lo saca; un golpe, no. Peleando solo, dura 1 o 2 turnos.
+- [ ] **Quemado:** pierde vida cada turno y pega a la mitad.
 - [ ] **Cebo explosivo:** le quita vida al que lo atacó y a su dueño. ¿Es justo lo que quita (25 % y 10 %)?
 - [ ] **Autodestrucción:** cae el que la usa y a todos los demás les quita vida, también a los compañeros.
 - [ ] **Bomba:** se gana con un 2 % por enemigo. Para probarla sin esperar, pedirle a Claude que suba `BOMBA_BOTIN` (solo para

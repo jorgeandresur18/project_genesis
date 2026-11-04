@@ -155,7 +155,7 @@ function pelea(D: DatosBatalla, listo: boolean) {
         for (const h of r.blancos) {
           if (esquiva(D, h, e)) continue;
           if (a.confunde) confundirA(s, h, a.confunde);
-          else paralizarA(s, h, a.paraliza!);
+          else paralizarA(s, h);
         }
         return;
       }

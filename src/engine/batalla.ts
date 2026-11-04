@@ -408,9 +408,9 @@ export interface Luchador {
   envenenado: { danio: number; turnos: number; noMata?: boolean } | null;
   /** Turnos que le quedan quemado: pierde vida cada turno y pega a la mitad. */
   quemado: number;
-  /** Turnos que le quedan congelado: igual que dormido (no ataca ni huye; solo un objeto lo descongela). */
+  /** Turnos que le quedan congelado: igual que dormido (pierde su turno; lo saca un compañero con un objeto). */
   congelado: number;
-  /** Turnos que le quedan dormido: no ataca ni huye; solo un objeto lo despierta. */
+  /** Turnos que le quedan dormido: pierde su turno; lo saca un compañero con un objeto, o se le pasa solo. */
   dormido: number;
   /** Si es un cebo con efecto: lo que le hace a quien lo golpea. */
   ceboEfecto?: EfectoCebo;
@@ -509,8 +509,10 @@ export function dano(atacante: Luchador, defensor: Luchador, poder: number, azar
  * Quiénes actúan este turno: los héroes de pie, menos los que actuaron el turno anterior y no pueden repetir
  * (`seguido: false`). Así Cami actúa un turno sí y uno no; Jair, siempre.
  */
+/** Dormido, congelado o paralizado: pierde su turno. */
+export const noActua = (l: Luchador) => l.dormido > 0 || l.congelado > 0 || l.paralizado > 0;
 export function disponibles(heroes: Luchador[], datos: Record<string, Heroe>, actuaron: string[]): Luchador[] {
-  return heroes.filter((h) => h.ps > 0 && !h.paralizado && (datos[h.clave].seguido || !actuaron.includes(h.id)));
+  return heroes.filter((h) => h.ps > 0 && !noActua(h) && (datos[h.clave].seguido || !actuaron.includes(h.id)));
 }
 
 /** Sube `n` niveles de golpe (el caramelo rancio): las estadísticas pasan a las del nivel nuevo. */
@@ -527,10 +529,13 @@ export function subirNiveles(l: Luchador, d: { base: Stats; crece: Stats }, n: n
 
 /** Usa un objeto en un héroe: devuelve cuánto hizo (lo que subió o curó). `d`: sus datos (para subir niveles). */
 export function usarObjeto(o: Objeto, h: Luchador, d?: { base: Stats; crece: Stats }): number {
-  // Dormido o congelado: solo un objeto lo despierta o lo descongela (los que se usan contra un rival, no).
+  // Dormido, congelado o paralizado: pierde su turno, así que el objeto se lo da un compañero (los que van contra un rival, no lo sacan).
   if (!o.veneno && !o.confunde && !o.paraliza) {
     h.dormido = 0;
     h.congelado = 0;
+    // Al salir de una parálisis, un turno de respiro (nadie queda bloqueado toda la pelea).
+    if (h.paralizado) h.inmuneParalisis = 1;
+    h.paralizado = 0;
   }
   // Los tácticos: estados (sobre un rival o un compañero).
   if (o.cura_estados) {
@@ -601,8 +606,11 @@ export function tickQuemado(l: Luchador, jefe: boolean): number {
   l.quemado--;
   return n;
 }
-/** Dormido y congelado (la misma mecánica): duran de 2 a 4 turnos, al azar. */
-export const turnosDormido = (azar: () => number = Math.random) => 2 + Math.floor(azar() * 3);
+/**
+ * Dormido, congelado y paralizado (la misma mecánica, docs/BIBLIA_RPG.md, sección 19): duran de 2 a 4 turnos, al azar.
+ * Al que no tiene un compañero de pie que lo saque (el 1 vs 1), de 1 a 2.
+ */
+export const turnosDormido = (azar: () => number = Math.random, solo = false) => (solo ? 1 + Math.floor(azar() * 2) : 2 + Math.floor(azar() * 3));
 
 /** Crea el clon de sombra de un enemigo: más débil (`fuerza`), con la vida que le costó, sin especiales. */
 export function crearClon(o: Luchador, c: NonNullable<Enemigo['clon']>, id: string): Luchador {
