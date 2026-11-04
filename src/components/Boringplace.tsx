@@ -4,14 +4,15 @@ import { assetUrl } from '../engine/assets';
 import { OBJETOS_TIENDA, colorDeObjeto, precioVenta, useBoringplace, type Articulo } from '../engine/boringplace';
 import { useStore } from '../engine/store';
 import { useLang } from '../engine/i18n';
-import { TOPE_PAYFOE, transferible } from '../engine/payfoe';
+import { TOPE_PAYFOE, transferible, type Movimiento } from '../engine/payfoe';
 import s from './Boringplace.module.css';
 import sb from './Boringram.module.css';
 
 /**
  * Boringplace (dentro de Boringram): el marketplace. En la «Tienda», los objetos de las peleas están publicados como en
  * un marketplace (foto con el color de su tipo: curación, mejora, para el rival…; nombre y precio en tokens, la moneda del juego); adentro, su descripción
- * y cuántos comprar. «Tus artículos»: lo que vende Jair y lo de la mochila. En el Capítulo 1 todavía no hay nadie
+ * y cuántos comprar. «Tus artículos»: lo de la mochila, para venderlo. Arriba, PayFoe (la billetera del jugador), que
+ * abre su propia pantalla (`payfoe`). En el Capítulo 1 todavía no hay nadie
  * vendiendo nada. (Las publicaciones de la gente y las de Jair siguen en el JSON, pero no se muestran: eran de relleno.)
  */
 export function Boringplace({ onArticulo, onToast }: { onArticulo: (id: string) => void; onToast?: (texto: string) => void }) {
@@ -22,6 +23,7 @@ export function Boringplace({ onArticulo, onToast }: { onArticulo: (id: string) 
   const monedas = (vars?.monedas as number | undefined) ?? 0;
   const tengo = (k: string) => ((vars?.[`mochila_${k}`] as number | undefined) ?? 0);
   const aviso = (texto: string) => onToast?.(texto);
+  const f = useFormato();
   if (!p.abierto) {
     return (
       <div className={s.vacio}>
@@ -62,8 +64,8 @@ export function Boringplace({ onArticulo, onToast }: { onArticulo: (id: string) 
       <div className={sb.topBar}>
         <img className={s.logo} src={assetUrl('marca/boringplace.webp')} alt={tx.titulo} draggable={false} />
         {vars && (
-          <span className={s.monedas}>
-            {tx.monedas} <b>{monedas}</b>
+          <span className={s.monedas} title={tx.monedas}>
+            <Token chico /> <b>{f(monedas)}</b>
           </span>
         )}
       </div>
@@ -83,7 +85,7 @@ export function Boringplace({ onArticulo, onToast }: { onArticulo: (id: string) 
           </button>
         ))}
       </div>
-      <TarjetaPayfoe onToast={aviso} />
+      <TarjetaPayfoe onAbrir={() => onArticulo(ID_PAYFOE)} />
       {!vars && <p className={s.sinTuyos}>{tx.sin_partida}</p>}
       {pestana === 'tienda' ? (
         <div className={s.grilla}>
@@ -93,7 +95,7 @@ export function Boringplace({ onArticulo, onToast }: { onArticulo: (id: string) 
               <button key={x.objeto} className={s.tarjeta} onClick={() => onArticulo(`${ID_TIENDA}${x.objeto}`)}>
                 <FotoObjeto icono={o.icono} color={colorDeObjeto(o)} />
                 <span className={s.nombre}>{o.nombre}</span>
-                <b className={s.precio}>{tx.precio_monedas.replace('{n}', String(x.precio))}</b>
+                <Precio n={x.precio} />
               </button>
             );
           })}
@@ -117,6 +119,7 @@ export function ArticuloVista({ id, onBack, onToast }: { id: string; onBack: () 
   const p = useBoringplace();
   const tx = p.data.textos;
   const a = [...p.ajenos, ...p.deJair].find((x) => x.id === id);
+  if (id === ID_PAYFOE) return <BilleteraVista onBack={onBack} onToast={onToast} />;
   if (id.startsWith(ID_TIENDA)) return <ObjetoVista objeto={id.slice(ID_TIENDA.length)} onBack={onBack} onToast={onToast} />;
   if (!a) return null;
   return (
@@ -158,41 +161,167 @@ export function ArticuloVista({ id, onBack, onToast }: { id: string; onBack: () 
   );
 }
 
-/**
- * PayFoe, la billetera del jugador: su saldo (se ve también desde el menú) y, dentro de una partida, cuánto hay en la
- * billetera de la partida y el botón para pasar a PayFoe lo ganado que todavía no se transfirió (nunca al revés).
- */
-function TarjetaPayfoe({ onToast }: { onToast: (texto: string) => void }) {
+/** Los números con separador de miles siempre (999.999 / 999,999); es-ES no separa los de cuatro cifras. */
+function useFormato() {
+  const sep = useLang() === 'en' ? ',' : '.';
+  return (x: number) => String(x).replace(/\B(?=(\d{3})+(?!\d))/g, sep);
+}
+
+/** La moneda del juego (el token), con un brillo sutil de moneda nueva que la cruza de vez en cuando. */
+function Token({ chico = false, grande = false }: { chico?: boolean; grande?: boolean }) {
+  return (
+    <span
+      className={`${s.token} ${chico ? s.tokenChico : ''} ${grande ? s.tokenGrande : ''}`}
+      style={{ '--mascara': `url(${assetUrl('objetos/token.webp')})` } as CSSProperties}
+      aria-hidden
+    >
+      <img src={assetUrl('objetos/token.webp')} alt="" draggable={false} />
+    </span>
+  );
+}
+
+/** Un precio: la moneda y el número. */
+function Precio({ n, grande = false }: { n: number; grande?: boolean }) {
+  const f = useFormato();
+  return (
+    <b className={`${s.precio} ${grande ? s.precioGrande : ''}`}>
+      <Token chico={!grande} /> {f(n)}
+    </b>
+  );
+}
+
+/** PayFoe, arriba de la tienda: la moneda, el nombre y el saldo. Se toca y abre la billetera. */
+function TarjetaPayfoe({ onAbrir }: { onAbrir: () => void }) {
   const tx = useBoringplace().data.textos;
+  const f = useFormato();
+  const saldo = useStore((st) => st.payfoe.saldo);
+  return (
+    <button
+      className={s.payfoe}
+      onClick={() => {
+        playSelect();
+        onAbrir();
+      }}
+    >
+      <Token />
+      <span className={s.payfoeTexto}>
+        <span className={s.payfoeMarca} translate="no">
+          {tx.payfoe}
+        </span>
+        <b className={s.payfoeSaldo}>{f(saldo)}</b>
+      </span>
+      <span className={s.payfoeVer}>{tx.ver_billetera} ›</span>
+    </button>
+  );
+}
+
+/**
+ * La billetera: el saldo de PayFoe (y su tope), la billetera de la partida con la transferencia (cuánto pasar; nunca
+ * al revés), para qué sirve cada una y los últimos movimientos.
+ */
+function BilleteraVista({ onBack, onToast }: { onBack: () => void; onToast: (texto: string) => void }) {
+  const tx = useBoringplace().data.textos;
+  const f = useFormato();
   const lang = useLang();
   const payfoe = useStore((st) => st.payfoe);
   const vars = useStore((st) => st.game?.vars);
-  // Con separador de miles siempre (999.999 / 999,999); es-ES no separa los de cuatro cifras.
-  const n = (x: number) => String(x).replace(/\B(?=(\d{3})+(?!\d))/g, lang === 'en' ? ',' : '.');
   const puede = vars ? transferible(vars, payfoe) : 0;
+  const [cuanto, setCuanto] = useState<number | null>(null);
+  // Lo elegido no puede pasar de lo que se puede transferir (al transferir, baja).
+  const n = Math.min(cuanto ?? puede, puede);
+  const paso = Math.max(1, 10 ** Math.max(0, String(puede).length - 2));
+  const fecha = (m: Movimiento) => new Date(m.fecha).toLocaleDateString(lang === 'en' ? 'en-US' : 'es-ES', { day: 'numeric', month: 'short' });
   return (
-    <div className={s.payfoe}>
-      <span className={s.payfoeMarca} translate="no">{tx.payfoe}</span>
-      <b className={s.payfoeSaldo}>{tx.payfoe_saldo.replace('{n}', n(payfoe.saldo))}</b>
-      {vars && (
-        <>
-          <small className={s.payfoePartida}>{tx.billetera_partida.replace('{n}', n((vars.monedas as number | undefined) ?? 0))}</small>
-          <button
-            className={s.botonChico}
-            onClick={() => {
-              playSelect();
-              if (payfoe.saldo >= TOPE_PAYFOE) return onToast(tx.payfoe_tope);
-              const t = useStore.getState().transferirAPayfoe(puede);
-              onToast(t > 0 ? tx.transferido.replace('{n}', n(t)) : tx.nada_transferible);
-            }}
-          >
-            {tx.transferir.replace('{n}', n(puede))}
-          </button>
-        </>
-      )}
+    <div className={sb.feed}>
+      <div className={sb.topBar}>
+        <button className={sb.backBtn} onClick={onBack} aria-label={tx.atras}>
+          ‹
+        </button>
+        <b className={s.payfoeMarca} translate="no">
+          {tx.payfoe}
+        </b>
+      </div>
+      <div className={s.billetera}>
+        <div className={s.saldoGrande}>
+          <Token grande />
+          <b>{f(payfoe.saldo)}</b>
+          <small>{tx.payfoe_tope_de.replace('{n}', f(TOPE_PAYFOE))}</small>
+        </div>
+
+        {vars ? (
+          <section className={s.bloque}>
+            <h4>{tx.billetera_partida_titulo}</h4>
+            <p className={s.filaSaldo}>
+              <Token chico /> <b>{f((vars.monedas as number | undefined) ?? 0)}</b>
+              <small>{tx.transferible.replace('{n}', f(puede))}</small>
+            </p>
+            {puede > 0 && (
+              <div className={s.cantidad}>
+                <span>{tx.cantidad}</span>
+                <button aria-label={tx.menos} disabled={n <= 1} onClick={() => setCuanto(Math.max(1, n - paso))}>
+                  −
+                </button>
+                <b>{f(n)}</b>
+                <button aria-label={tx.mas} disabled={n >= puede} onClick={() => setCuanto(Math.min(puede, n + paso))}>
+                  +
+                </button>
+                <button className={s.todo} disabled={n >= puede} onClick={() => setCuanto(puede)}>
+                  {tx.todo}
+                </button>
+              </div>
+            )}
+            <button
+              className={s.boton}
+              onClick={() => {
+                playSelect();
+                if (payfoe.saldo >= TOPE_PAYFOE) return onToast(tx.payfoe_tope);
+                const t = useStore.getState().transferirAPayfoe(n);
+                setCuanto(null);
+                onToast(t > 0 ? tx.transferido.replace('{n}', f(t)) : tx.nada_transferible);
+              }}
+            >
+              {tx.transferir.replace('{n}', f(n))}
+            </button>
+          </section>
+        ) : (
+          <p className={s.nota}>{tx.billetera_sin_partida}</p>
+        )}
+
+        <section className={s.bloque}>
+          <h4>{tx.uso_titulo}</h4>
+          <ul className={s.usos}>
+            <li>{tx.uso_partida}</li>
+            <li>{tx.uso_payfoe}</li>
+            <li>{tx.uso_sentido}</li>
+          </ul>
+        </section>
+
+        <section className={s.bloque}>
+          <h4>{tx.movimientos}</h4>
+          {payfoe.movimientos?.length ? (
+            <ul className={s.movimientos}>
+              {payfoe.movimientos.map((m, i) => (
+                <li key={i}>
+                  <span>{tx[`mov_${m.tipo}`]}</span>
+                  <small>{fecha(m)}</small>
+                  <b className={m.tipo === 'compra' ? s.sale : s.entra}>
+                    {m.tipo === 'compra' ? '−' : '+'}
+                    {f(m.n)}
+                  </b>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className={s.nota}>{tx.sin_movimientos}</p>
+          )}
+        </section>
+      </div>
     </div>
   );
 }
+
+/** La billetera se abre como un artículo más. */
+const ID_PAYFOE = 'payfoe';
 
 /** Los objetos de la tienda se abren como un artículo más: `tienda:<objeto>`. */
 const ID_TIENDA = 'tienda:';
@@ -237,7 +366,7 @@ function ObjetoVista({ objeto, onBack, onToast }: { objeto: string; onBack: () =
       </div>
       <div className={s.detalle}>
         <h3>{o.nombre}</h3>
-        <b className={s.precioGrande}>{tx.precio_monedas.replace('{n}', String(x.precio))}</b>
+        <Precio n={x.precio} grande />
         <small className={s.lugar}>{tx.lugar_tienda}</small>
         <p className={s.descripcion}>{x.descripcion}</p>
         {tengo > 0 && <small className={s.tienes}>{tx.tienes.replace('{n}', String(tengo))}</small>}

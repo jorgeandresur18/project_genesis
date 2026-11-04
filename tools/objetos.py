@@ -38,6 +38,7 @@ ARCHIVOS = {
     'traje de sacerdotiza': 'prendas_sacerdotisa',
     'zapatillas buenas': 'zapatillas_buenas',
     'zapatos plataforma': 'zapatos_plataforma',
+    'token': 'token',
 }
 
 

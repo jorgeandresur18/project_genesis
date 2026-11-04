@@ -78,10 +78,42 @@
 .cantidad button:disabled { opacity: 0.35; }
 .cantidad b { min-width: 1.6rem; text-align: center; font-size: 1rem; }
 
-/* PayFoe: la billetera del jugador, arriba de la tienda. */
-.payfoe { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 0.2rem 0.6rem; margin: 0.6rem 0.6rem 0; padding: 0.6rem 0.75rem; border: 1px solid #23232b; border-radius: 0.7rem; background: linear-gradient(135deg, #17171d, #121217); color: #f1f1f4; }
+/* La moneda (el token): un brillo sutil de moneda nueva la cruza de vez en cuando, recortado a su forma. */
+.token { position: relative; display: inline-block; flex: none; width: 2.2rem; height: 2.2rem; vertical-align: middle; -webkit-mask: var(--mascara) center / contain no-repeat; mask: var(--mascara) center / contain no-repeat; }
+.token img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.token::after { content: ''; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 35%, rgba(255, 250, 220, 0.75) 50%, transparent 65%); background-size: 250% 100%; background-position: 130% 0; animation: tokenBrillo 5s ease-in-out infinite; pointer-events: none; }
+@keyframes tokenBrillo { 0%, 70% { background-position: 130% 0; } 100% { background-position: -30% 0; } }
+@media (prefers-reduced-motion: reduce) { .token::after { animation: none; opacity: 0; } }
+.tokenChico { width: 1.05em; height: 1.05em; margin-top: -0.12em; }
+.tokenGrande { width: 4.2rem; height: 4.2rem; }
+.precio { display: inline-flex; align-items: center; gap: 0.3em; }
+
+/* PayFoe, arriba de la tienda: la moneda, el nombre y el saldo en una fila; se toca y abre la billetera. */
+.payfoe { display: flex; align-items: center; gap: 0.65rem; width: calc(100% - 1.2rem); margin: 0.6rem 0.6rem 0; padding: 0.55rem 0.75rem; border: 1px solid #23232b; border-radius: 0.75rem; background: linear-gradient(135deg, #1a1a21, #121217); color: #f1f1f4; font: inherit; text-align: left; }
+.payfoe:active { filter: brightness(1.15); }
+.payfoeTexto { display: grid; flex: 1; gap: 0.15rem; min-width: 0; }
 /* El nombre, en blanco, con letra gruesa e inclinada al estilo de la marca que parodia (sin copiar su logo). */
-.payfoeMarca { color: #fff; font-family: Verdana, 'DejaVu Sans', Geneva, sans-serif; font-size: 1.05rem; font-style: italic; font-weight: 800; letter-spacing: -0.02em; }
-.payfoeSaldo { grid-column: 1; font-family: 'Press Start 2P', monospace; font-size: 0.78rem; color: #ffd76a; }
-.payfoePartida { grid-column: 1; color: #9a9aa6; font-size: 0.74rem; }
-.payfoe .botonChico { grid-column: 2; grid-row: 2 / span 2; }
+.payfoeMarca { color: #fff; font-family: Verdana, 'DejaVu Sans', Geneva, sans-serif; font-size: 1rem; font-style: italic; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
+.payfoeSaldo { font-family: 'Press Start 2P', monospace; font-size: 0.8rem; color: #ffd76a; }
+.payfoeVer { color: #9a9aa6; font-size: 0.78rem; white-space: nowrap; }
+
+/* La billetera. */
+.billetera { display: grid; gap: 0.9rem; padding: 0.9rem 0.8rem 1.6rem; color: #f1f1f4; }
+.saldoGrande { display: grid; justify-items: center; gap: 0.35rem; padding: 0.9rem 0 0.4rem; }
+.saldoGrande b { font-family: 'Press Start 2P', monospace; font-size: 1.15rem; color: #ffd76a; }
+.saldoGrande small { color: #7d7d89; font-size: 0.74rem; }
+.bloque { display: grid; gap: 0.5rem; padding: 0.75rem; border: 1px solid #1f1f26; border-radius: 0.75rem; background: #141419; }
+.bloque h4 { margin: 0; color: #9a9aa6; font-size: 0.78rem; font-weight: 700; }
+.filaSaldo { display: flex; align-items: center; gap: 0.4rem; margin: 0; }
+.filaSaldo b { font-family: 'Press Start 2P', monospace; font-size: 0.8rem; color: #ffd76a; }
+.filaSaldo small { margin-left: auto; color: #8fe6da; font-size: 0.74rem; }
+.cantidad .todo { width: auto; padding: 0 0.6rem; font-size: 0.78rem; }
+.nota { margin: 0; color: #9a9aa6; font-size: 0.82rem; line-height: 1.45; text-align: center; }
+.usos { display: grid; gap: 0.4rem; margin: 0; padding-left: 1.1rem; color: #d6d6dc; font-size: 0.82rem; line-height: 1.45; }
+.movimientos { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+.movimientos li { display: grid; grid-template-columns: 1fr auto; gap: 0 0.6rem; padding: 0.45rem 0; border-bottom: 1px solid #1f1f26; font-size: 0.82rem; }
+.movimientos li:last-child { border-bottom: none; }
+.movimientos small { grid-column: 1; color: #7d7d89; font-size: 0.7rem; }
+.movimientos b { grid-column: 2; grid-row: 1 / span 2; align-self: center; font-family: 'Press Start 2P', monospace; font-size: 0.7rem; }
+.entra { color: #8fe6da; }
+.sale { color: #ff8a8a; }

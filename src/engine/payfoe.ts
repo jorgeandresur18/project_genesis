@@ -9,11 +9,24 @@ import type { Vars } from './types';
 /** El máximo que puede tener PayFoe. Lo más caro cuesta 1.000.000: nunca se compra (es el chiste). */
 export const TOPE_PAYFOE = 999_999;
 
+/** Un movimiento de la billetera (lo que se ve en «Movimientos»). `fecha`: milisegundos (la hora real). */
+export interface Movimiento {
+  tipo: 'transferencia' | 'premio' | 'compra';
+  n: number;
+  fecha: number;
+}
+
 export interface PayFoe {
   saldo: number;
   /** Cuánto recibió de cada partida (`partida_id` → tokens). */
   recibido: Record<string, number>;
+  /** Los últimos movimientos, del más nuevo al más viejo. */
+  movimientos?: Movimiento[];
 }
+
+/** Cuántos movimientos se guardan. */
+export const MOVIMIENTOS_MAX = 30;
+const conMovimiento = (p: PayFoe, m: Movimiento): Movimiento[] => [m, ...(p.movimientos ?? [])].slice(0, MOVIMIENTOS_MAX);
 
 export const PAYFOE_INICIAL: PayFoe = { saldo: 0, recibido: {} };
 
@@ -43,7 +56,10 @@ export function transferir(vars: Vars, p: PayFoe, n: number): { vars: Vars; payf
   const t = Math.max(0, Math.min(Math.floor(n), transferible(conId, p)));
   return {
     vars: { ...conId, monedas: num(vars.monedas) - t },
-    payfoe: { saldo: p.saldo + t, recibido: { ...p.recibido, [id]: num(p.recibido[id]) + t } },
+    payfoe:
+      t > 0
+        ? { saldo: p.saldo + t, recibido: { ...p.recibido, [id]: num(p.recibido[id]) + t }, movimientos: conMovimiento(p, { tipo: 'transferencia', n: t, fecha: Date.now() }) }
+        : p,
     transferido: t,
   };
 }
@@ -51,5 +67,6 @@ export function transferir(vars: Vars, p: PayFoe, n: number): { vars: Vars; payf
 /** Suma a PayFoe (premios del torneo): lo que pase del tope se pierde. Devuelve también lo perdido. */
 export function acreditar(p: PayFoe, n: number): { payfoe: PayFoe; perdido: number } {
   const entra = Math.max(0, Math.min(Math.floor(n), TOPE_PAYFOE - p.saldo));
-  return { payfoe: { ...p, saldo: p.saldo + entra }, perdido: Math.max(0, Math.floor(n) - entra) };
+  const payfoe = entra > 0 ? { ...p, saldo: p.saldo + entra, movimientos: conMovimiento(p, { tipo: 'premio', n: entra, fecha: Date.now() }) } : p;
+  return { payfoe, perdido: Math.max(0, Math.floor(n) - entra) };
 }

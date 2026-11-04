@@ -16,6 +16,7 @@ describe('PayFoe', () => {
     expect(r.vars.monedas).toBe(0);
     expect(r.payfoe.saldo).toBe(500);
     expect(r.payfoe.recibido.p1).toBe(500);
+    expect(r.payfoe.movimientos?.[0]).toMatchObject({ tipo: 'transferencia', n: 500 });
   });
 
   it('cargar el guardado de antes de transferir no deja transferir otra vez', () => {
@@ -34,7 +35,10 @@ describe('PayFoe', () => {
     const r = transferir(partida, casiLleno, 500);
     expect(r.payfoe.saldo).toBe(TOPE_PAYFOE);
     expect(r.vars.monedas).toBe(400);
-    expect(acreditar(casiLleno, 300)).toEqual({ payfoe: { saldo: TOPE_PAYFOE, recibido: {} }, perdido: 200 });
+    const premio = acreditar(casiLleno, 300);
+    expect(premio.payfoe.saldo).toBe(TOPE_PAYFOE);
+    expect(premio.perdido).toBe(200);
+    expect(premio.payfoe.movimientos?.[0]).toMatchObject({ tipo: 'premio', n: 100 });
   });
 
   it('una partida sin número (guardada antes de PayFoe) recibe uno al transferir', () => {
