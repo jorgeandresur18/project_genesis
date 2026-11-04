@@ -5,7 +5,7 @@ import { escribirEquipo } from './batalla';
 import type { Vars } from './types';
 import { config, scenes, variables } from './story';
 import { applyChoice, enterScene, resolveNext, visibleChoices } from './logic';
-import { PAYFOE_INICIAL, conGanados, nuevoIdPartida, transferir, type PayFoe } from './payfoe';
+import { PAYFOE_INICIAL, acreditar, conGanados, nuevoIdPartida, transferir, type PayFoe } from './payfoe';
 
 export const SAVE_SLOTS = 6;
 /** El nombre del guardado automático antes de una pelea. */
@@ -235,6 +235,15 @@ interface Store {
   /** Boringplace: comprar (si alcanzan los tokens) y vender un cassette suelto (`cassette_<id>`). Devuelven si se pudo. */
   comprarCassette: (id: string, precio: number) => boolean;
   venderCassette: (id: string, precio: number) => boolean;
+  /**
+   * El Torneo Genesis (fuera de las partidas): cuántas veces se ganó cada copa y cuántas defensas del título lleva
+   * Nikki (cada vez que se le gana, la campeona sube). Ver src/engine/torneo.ts.
+   */
+  torneo: { ganadas: Record<string, number>; defensas: number };
+  /** Un premio del torneo a PayFoe (lo que pase del tope se pierde). Devuelve lo que entró. */
+  premioTorneo: (n: number) => number;
+  /** Se ganó una copa (la final contra Nikki): suma la copa y una defensa del título. */
+  ganarCopa: (id: string) => void;
   /** Pasa tokens de la partida en curso a PayFoe (nunca al revés). Devuelve cuántos pasaron. */
   transferirAPayfoe: (n: number) => number;
   venderObjeto: (objeto: string, precio: number) => boolean;
@@ -608,6 +617,17 @@ export const useStore = create<Store>()(
           return true;
         },
 
+        torneo: { ganadas: {}, defensas: 0 },
+        premioTorneo: (n) => {
+          const r = acreditar(get().payfoe, n);
+          set({ payfoe: r.payfoe });
+          return n - r.perdido;
+        },
+        ganarCopa: (id) => {
+          const t = get().torneo;
+          set({ torneo: { ganadas: { ...t.ganadas, [id]: (t.ganadas[id] ?? 0) + 1 }, defensas: t.defensas + 1 } });
+        },
+
         payfoe: PAYFOE_INICIAL,
         transferirAPayfoe: (n) => {
           const { game, payfoe } = get();
@@ -673,6 +693,7 @@ export const useStore = create<Store>()(
             bootcampCalificacion: 0,
             bootcampResena: null,
             payfoe: PAYFOE_INICIAL,
+            torneo: { ganadas: {}, defensas: 0 },
             choicesTaken: {},
             juegoCompleto: false,
         cap01Completo: false,
@@ -717,6 +738,7 @@ export const useStore = create<Store>()(
         bootcampCalificacion: s.bootcampCalificacion,
         bootcampResena: s.bootcampResena,
         payfoe: s.payfoe,
+        torneo: s.torneo,
         choicesTaken: s.choicesTaken,
         juegoCompleto: s.juegoCompleto,
         cap01Completo: s.cap01Completo,

@@ -1,0 +1,187 @@
+{
+  "_nota": "El Torneo Genesis (docs/BIBLIA_RPG.md, sección 17). TODO PLACEHOLDER: los nombres de las copas, sus niveles, cuándo se abre cada una (hoy: Bronce al terminar el Capítulo 1 y cada una al ganar la anterior), los rivales de cada ronda, los premios y los diálogos son de relleno (Claude). En cada copa todos pelean al mismo nivel (como el competitivo de Pokémon). Nikki es la campeona: la final de todas las copas.",
+  "copas": [
+    {
+      "id": "bronce",
+      "nombre": "Copa Bronce",
+      "nivel": 10,
+      "desbloqueo": "cap01_g8_072",
+      "premios": [
+        60,
+        120,
+        240,
+        600
+      ]
+    },
+    {
+      "id": "plata",
+      "nombre": "Copa Plata",
+      "nivel": 20,
+      "requiere": "bronce",
+      "premios": [
+        150,
+        300,
+        600,
+        1500
+      ]
+    },
+    {
+      "id": "oro",
+      "nombre": "Copa Oro",
+      "nivel": 35,
+      "requiere": "plata",
+      "premios": [
+        400,
+        800,
+        1600,
+        4000
+      ]
+    },
+    {
+      "id": "leyenda",
+      "nombre": "Copa Leyenda",
+      "nivel": 50,
+      "requiere": "oro",
+      "premios": [
+        1000,
+        2000,
+        4000,
+        10000
+      ]
+    }
+  ],
+  "modalidades": [
+    {
+      "id": "simple",
+      "nombre": "Simple",
+      "peleadores": 1,
+      "rivales": 0,
+      "multiplicador": 1,
+      "nivel_rivales": 0
+    },
+    {
+      "id": "doble",
+      "nombre": "Doble",
+      "peleadores": 2,
+      "rivales": 1,
+      "multiplicador": 0.8,
+      "nivel_rivales": 0.1
+    },
+    {
+      "id": "triple",
+      "nombre": "Triple",
+      "peleadores": 3,
+      "rivales": 2,
+      "multiplicador": 0.6,
+      "nivel_rivales": 0.2
+    }
+  ],
+  "rondas": [
+    {
+      "nombre": "Cuartos de final",
+      "horda": "soldado",
+      "extra": 0,
+      "jefe": "soldado_veterano"
+    },
+    {
+      "nombre": "Semifinal",
+      "horda": "soldado",
+      "extra": 1,
+      "jefe": "soldado_veterano"
+    },
+    {
+      "nombre": "Final de llave",
+      "horda": "soldado",
+      "extra": 0,
+      "jefe": "capitan"
+    },
+    {
+      "nombre": "Gran final: la campeona",
+      "horda": "soldado",
+      "extra": 1,
+      "jefe": "nikki"
+    }
+  ],
+  "nikki": {
+    "_nota": "La campeona vigente: nivel_extra es cuánto más nivel tiene que los rivales de la copa (0,7 = 70 % más), huye_a: se rinde recién con el 10 % de su vida (en el bar, a la mitad), y sube por_defensa niveles con cada defensa del título. En la final llega con escoltas (soldados) según la modalidad. Balance medido el 2026-11-03 (tests/torneo.test.ts). TODO(canon): sus seis ataques (tres normales y tres especiales) y que recargue sus especiales muy rápido.",
+    "nivel_extra": 0.7,
+    "por_defensa": 2,
+    "huye_a": 0.1
+  },
+  "mochila": {
+    "vida": 2,
+    "revivir": 1
+  },
+  "dialogos": {
+    "inicio": [
+      {
+        "quien": "Voz",
+        "texto": "[Relleno] Torneo Genesis. {ronda}. Inscripción gratuita. Seguro médico: no incluido."
+      }
+    ],
+    "refuerzos": [
+      {
+        "quien": "Voz",
+        "texto": "[Relleno] Entra otro competidor."
+      }
+    ],
+    "jefe": [
+      {
+        "quien": "Voz",
+        "texto": "[Relleno] Llega el último rival de la ronda."
+      }
+    ],
+    "jefe_huye": [
+      {
+        "quien": "Voz",
+        "texto": "[Relleno] Se rinde. El público aplaude por compromiso."
+      }
+    ],
+    "victoria": [
+      {
+        "quien": "Voz",
+        "texto": "[Relleno] Ronda ganada."
+      }
+    ],
+    "derrota": [
+      {
+        "quien": "Voz",
+        "texto": "[Relleno] Eliminados. Los tokens ganados se quedan."
+      }
+    ],
+    "huir_no": [
+      {
+        "quien": "Voz",
+        "texto": "[Relleno] En el torneo no se huye: se pierde con dignidad."
+      }
+    ],
+    "huir": [
+      {
+        "quien": "Voz",
+        "texto": "[Relleno] Huyen."
+      }
+    ],
+    "descanso": [
+      {
+        "quien": "Voz",
+        "texto": "[Relleno] Necesita un segundo."
+      }
+    ],
+    "cae_jair": [
+      {
+        "quien": "Voz",
+        "texto": "[Relleno] Jair cae. El público finge sorpresa."
+      }
+    ],
+    "inicio_final": [
+      {
+        "quien": "Voz",
+        "texto": "[Relleno] La gran final. La campeona vigente, invicta. Defensa del título número {defensa}."
+      },
+      {
+        "quien": "Nikki",
+        "texto": "[Relleno] ¿Otra vez tú? Ocho años perdiendo conmigo y no aprendes."
+      }
+    ]
+  }
+}

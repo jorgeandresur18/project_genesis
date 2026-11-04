@@ -1,0 +1,157 @@
+// El Torneo Genesis (docs/BIBLIA_RPG.md, sección 17; datos de relleno en src/data/rpg/torneo.json): se elige la copa,
+// la modalidad (simple, doble o triple) y los peleadores; después, cuatro rondas seguidas hasta la final contra Nikki.
+// Cada ronda ganada paga tokens a PayFoe; si se pierde, se queda eliminado pero lo ganado se queda.
+import { useState } from 'react';
+import { Panel } from './Panels';
+import { Batalla } from './Batalla';
+import { useT } from '../engine/i18n';
+import { useStore } from '../engine/store';
+import { playSelect } from '../engine/sound';
+import { FICHAS } from '../engine/batallas';
+import { HEROES_TORNEO, TORNEO, armarRonda, copaAbierta, premioDe, type Copa, type Modalidad } from '../engine/torneo';
+import { GALERIA_COMPLETA } from '../engine/modo';
+
+type Fase = { paso: 'menu' } | { paso: 'pelea'; ronda: number } | { paso: 'ronda'; ronda: number; premio: number } | { paso: 'fin'; gano: boolean };
+
+export function TorneoPantalla({ onClose }: { onClose: () => void }) {
+  const t = useT();
+  const visitadas = useStore((s) => s.snapshots);
+  const vistos = useStore((s) => s.rpgVistos);
+  const torneo = useStore((s) => s.torneo);
+  const [copa, setCopa] = useState<Copa | null>(null);
+  const [modalidad, setModalidad] = useState<Modalidad>(TORNEO.modalidades[0]);
+  const [elegidos, setElegidos] = useState<string[]>(['jair']);
+  const [fase, setFase] = useState<Fase>({ paso: 'menu' });
+  const [ganado, setGanado] = useState(0);
+  // Los peleadores: los que la historia ya desbloqueó (Jair siempre; los demás, desde que pelearon en alguna partida).
+  const disponibles = HEROES_TORNEO.filter((k) => k === 'jair' || GALERIA_COMPLETA || vistos[FICHAS.heroes[k]?.sprite]);
+  const abierta = (c: Copa) => GALERIA_COMPLETA || copaAbierta(c, visitadas, torneo.ganadas);
+  const listos = elegidos.length === modalidad.peleadores;
+
+  if (fase.paso === 'pelea' && copa) {
+    const final = fase.ronda === TORNEO.rondas.length - 1;
+    return (
+      <Batalla
+        key={`${copa.id}-${fase.ronda}`}
+        id="torneo"
+        datos={armarRonda(copa, fase.ronda, modalidad, elegidos, torneo.defensas)}
+        onGanar={() => {
+          const entro = useStore.getState().premioTorneo(premioDe(copa, fase.ronda, modalidad));
+          setGanado((g) => g + entro);
+          if (final) useStore.getState().ganarCopa(copa.id);
+          setFase({ paso: 'ronda', ronda: fase.ronda, premio: entro });
+        }}
+        onPerder={() => setFase({ paso: 'fin', gano: false })}
+      />
+    );
+  }
+
+  return (
+    <Panel title={t('torneo.titulo')} onClose={onClose}>
+      <div className="torneo">
+        {fase.paso === 'menu' && (
+          <>
+            <p className="muted">{t('torneo.intro')}</p>
+            <h4>{t('torneo.copa')}</h4>
+            <div className="torneo-opciones">
+              {TORNEO.copas.map((c) => (
+                <button
+                  key={c.id}
+                  className={copa?.id === c.id ? 'active' : ''}
+                  disabled={!abierta(c)}
+                  onClick={() => {
+                    playSelect();
+                    setCopa(c);
+                  }}
+                >
+                  <b>{abierta(c) ? c.nombre : '???'}</b>
+                  <small>{abierta(c) ? t('torneo.nivel', { n: c.nivel }) : t('torneo.cerrada')}</small>
+                  {(torneo.ganadas[c.id] ?? 0) > 0 && <small className="torneo-ganada">{t('torneo.ganada', { n: torneo.ganadas[c.id] })}</small>}
+                </button>
+              ))}
+            </div>
+            <h4>{t('torneo.modalidad')}</h4>
+            <div className="torneo-opciones">
+              {TORNEO.modalidades.map((m) => (
+                <button
+                  key={m.id}
+                  className={modalidad.id === m.id ? 'active' : ''}
+                  disabled={m.peleadores > disponibles.length}
+                  onClick={() => {
+                    playSelect();
+                    setModalidad(m);
+                    setElegidos((e) => e.slice(0, m.peleadores));
+                  }}
+                >
+                  <b>{m.nombre}</b>
+                  <small>{t('torneo.peleadores', { n: m.peleadores })}</small>
+                </button>
+              ))}
+            </div>
+            <h4>{t('torneo.equipo', { n: modalidad.peleadores })}</h4>
+            <div className="torneo-opciones">
+              {disponibles.map((k) => {
+                const dentro = elegidos.includes(k);
+                return (
+                  <button
+                    key={k}
+                    className={dentro ? 'active' : ''}
+                    onClick={() => {
+                      playSelect();
+                      setElegidos((e) => (dentro ? e.filter((x) => x !== k) : e.length < modalidad.peleadores ? [...e, k] : e));
+                    }}
+                  >
+                    <b>{FICHAS.heroes[k].nombre}</b>
+                  </button>
+                );
+              })}
+            </div>
+            {copa && (
+              <p className="muted">
+                {t('torneo.premios', { lista: copa.premios.map((_, i) => premioDe(copa, i, modalidad)).join(' · ') })}
+              </p>
+            )}
+            <button
+              className="torneo-empezar"
+              disabled={!copa || !listos}
+              onClick={() => {
+                playSelect();
+                setGanado(0);
+                setFase({ paso: 'pelea', ronda: 0 });
+              }}
+            >
+              {t('torneo.empezar')}
+            </button>
+          </>
+        )}
+        {fase.paso === 'ronda' && copa && (
+          <>
+            <h3>{TORNEO.rondas[fase.ronda].nombre}: {t('torneo.ronda_ganada')}</h3>
+            <p>{t('torneo.premio', { n: fase.premio })}</p>
+            {fase.ronda < TORNEO.rondas.length - 1 ? (
+              <>
+                <p className="muted">{t('torneo.siguiente', { ronda: TORNEO.rondas[fase.ronda + 1].nombre })}</p>
+                <button className="torneo-empezar" onClick={() => setFase({ paso: 'pelea', ronda: fase.ronda + 1 })}>
+                  {t('torneo.seguir')}
+                </button>
+              </>
+            ) : (
+              <button className="torneo-empezar" onClick={() => setFase({ paso: 'fin', gano: true })}>
+                {t('torneo.terminar')}
+              </button>
+            )}
+          </>
+        )}
+        {fase.paso === 'fin' && (
+          <>
+            <h3>{t(fase.gano ? 'torneo.campeon' : 'torneo.eliminado')}</h3>
+            <p>{t('torneo.total', { n: ganado })}</p>
+            <button className="torneo-empezar" onClick={() => setFase({ paso: 'menu' })}>
+              {t('torneo.otra')}
+            </button>
+          </>
+        )}
+      </div>
+    </Panel>
+  );
+}

@@ -503,6 +503,15 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
 - **Nikki es la campeona vigente** y está muy fuerte («chetada»): es la única con **seis ataques, tres normales y tres
   especiales**, y recarga sus especiales muy rápido. Cada vez que le ganas defiende el título más fuerte (más nivel,
   más objetos). En las copas siguientes van saliendo más personajes.
+- **Hecho (2026-11-03, de relleno):** Extras › Torneo Genesis (`src/components/Torneo.tsx`, `src/engine/torneo.ts`,
+  datos en `src/data/rpg/torneo.json`). Copas Bronce (nivel 10; se abre al terminar el Capítulo 1), Plata (20), Oro (35)
+  y Leyenda (50), cada una al ganar la anterior. Cuatro rondas: cuartos (un «Soldado veterano» que se rinde), semifinal,
+  final de llave (el Capitán) y la gran final contra **Nikki, la campeona** (sin el perdón del bar, se rinde recién con
+  el 10 % de su vida, 70 % más de nivel que la copa, con escoltas según la modalidad, y +2 niveles por cada defensa del
+  título). En doble y triple hay más rivales y de más nivel. Mochila fija (2 aguas y un Elixit). Los premios van a
+  PayFoe (que se prendió con el torneo). **Balance (jugador atento, Copa Bronce):** la final, ~11 % en simple, ~72 % en
+  doble y ~93 % en triple; las rondas anteriores, fáciles. Entre rondas la vida se recupera entera (pendiente: solo
+  una parte).
 - `TODO(canon)`: nombres de las copas, cuándo abre cada una, qué personajes salen en cada copa, los tres especiales de
   Nikki, los premios exactos.
 

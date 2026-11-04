@@ -19,7 +19,9 @@ Qué trae cada versión. La que está en curso lleva `-dev` y todavía no se pub
   nombre de cada especial en el pixel art, el Capitán y la sombra centrados.
 - **Canon:** el Capítulo 5 se llama «Conflicto de dependencias» («Dependency Hell»).
 - **Conoce más:** Bad Bunny en «La influencia latinoamericana» y Mac Miller en «Notas del autor».
-- **Diseño (sin construir):** el Torneo Genesis (`docs/BIBLIA_RPG.md`, sección 17).
+- **Torneo Genesis (de relleno):** cuatro copas, simple/doble/triple, cuatro rondas hasta Nikki campeona; premios a PayFoe (que se prende con el torneo).
+- **Ataques intercambiables:** 3 ataques y 2 especiales equipados con cassettes, ataques nuevos sin sprites, cassettes sueltos en Boringplace.
+- **RPG ordenado:** una sola ficha por personaje, `Batalla.tsx` partido, varios especiales con una barra.
 
 ## 1.0.0 — Demo 1.0 (publicada el 3 de noviembre de 2026; etiqueta `v1.0.0`)
 

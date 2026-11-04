@@ -1,5 +1,6 @@
 import { Suspense, lazy, useCallback, useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { EquipoPanel } from './components/Equipo';
+import { TorneoPantalla } from './components/Torneo';
 import { TvViejo } from './components/TvViejo';
 import { CHAPTER_END, useStore, SPEEDS } from './engine/store';
 import { BAD_END, endingName, getEnding, scenes } from './engine/story';
@@ -61,6 +62,7 @@ type Overlay =
   | 'extras'
   | 'endings'
   | 'gallery'
+  | 'torneo'
   | 'boringram'
   | 'options'
   | 'about'
@@ -184,6 +186,7 @@ export default function App() {
       {(overlay === 'save' || overlay === 'load') && <SaveLoadPanel mode={overlay} onClose={close} />}
       {overlay === 'map' && <SceneMap onClose={close} />}
       {overlay === 'endings' && <EndingsGallery onClose={close} />}
+      {overlay === 'torneo' && <TorneoPantalla onClose={close} />}
       {overlay === 'gallery' && <CgGallery onClose={close} />}
       {overlay === 'boringram' && (
         <Suspense fallback={null}>

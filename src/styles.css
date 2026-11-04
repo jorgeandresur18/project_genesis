@@ -3511,3 +3511,12 @@ button.cassette:hover .cassette-imagen { transform: translateY(-2px) rotate(-3de
 @media (prefers-reduced-motion: reduce) { .cassette-especial .cassette-imagen::after { animation: none; opacity: 0; } }
 .cassette-apagado .cassette-imagen { opacity: 0.6; filter: grayscale(0.35) drop-shadow(0 0 0.15rem color-mix(in srgb, var(--c) 35%, transparent)); }
 .cassette-hueco { display: grid; place-items: center; width: 4.6rem; height: 3.6rem; border: 1px dashed #3a3a42; border-radius: 0.4rem; color: #55555c; font-size: 0.66rem; }
+
+/* El Torneo Genesis (src/components/Torneo.tsx): elegir copa, modalidad y equipo. */
+.torneo { display: grid; gap: 0.6rem; }
+.torneo h4 { margin: 0.4rem 0 0; color: var(--muted); font-size: 0.82rem; }
+.torneo-opciones { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.torneo-opciones button { display: grid; gap: 0.15rem; min-width: 7.5rem; text-align: left; }
+.torneo-opciones small { color: var(--muted); font-size: 0.72rem; }
+.torneo-opciones .torneo-ganada { color: #ffd76a; }
+.torneo-empezar { justify-self: start; margin-top: 0.4rem; padding: 0.6rem 1.4rem; border-color: var(--accent); color: var(--accent); font-weight: 700; }

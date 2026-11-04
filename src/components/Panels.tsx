@@ -344,13 +344,14 @@ export function ExtrasPanel({
   onOpen,
 }: {
   onClose: () => void;
-  onOpen: (o: 'gallery' | 'endings') => void;
+  onOpen: (o: 'gallery' | 'endings' | 'torneo') => void;
 }) {
   const t = useT();
   const galleryNew = useGalleryState().hasNew;
   const entries = [
     { id: 'gallery' as const, cmd: 'galeria', label: t('extras.galeria'), desc: t('extras.galeria_desc') },
     { id: 'endings' as const, cmd: 'finales', label: t('extras.finales'), desc: t('extras.finales_desc') },
+    { id: 'torneo' as const, cmd: 'torneo', label: t('extras.torneo'), desc: t('extras.torneo_desc') },
   ];
   return (
     <Panel title={t('extras.titulo')} onClose={onClose}>
