@@ -114,5 +114,4 @@ Se responden cuando toque su semana; mientras, no se inventan.
 - Cuánto tardó GENESIS en terminar el juego.
 - `AnothergIrl`: si las mayúsculas forman «AI» a propósito.
 - El conflicto de fusión del 7B (en la pelea final del Capítulo 6): qué choca entre Rikka y Cami y si Jair ejecuta el comando.
-- El balance del hangar: el atento gana ~32 % y la meta es 55-90 % (opciones en `docs/BITACORA.md`, 4 de noviembre).
 - Las frases de confusión del RPG, para aprobar o corregir.

@@ -26,10 +26,9 @@ describe('balance del hangar (camino alternativo del Capítulo 1)', () => {
   const D = BATALLAS.hangar;
   // Más difícil que el Bastión (es el camino alternativo), pero ganable con cuidado. Jair llega del Bastión casi en el
   // mismo nivel (5,7 en promedio).
-  // META INCUMPLIDA HOY (2026-11-04), a la espera de la decisión del autor: el Capitán en nivel 12 se eligió con la
-  // simulación vieja, que contaba un solo golpe del cañón (~71 %). Son 9 (el fuerte y 8 barridos): el atento gana ~32 %.
-  // `it.fails` avisa en cuanto la pelea vuelva a cumplir la meta: ahí se cambia por `it`.
-  it.fails('el descuidado pierde casi siempre (menos de 45 %) y el atento gana la mayoría (entre 55 % y 90 %)', () => {
+  // El cañón del Capitán da 9 golpes (el fuerte y 8 barridos): en nivel 12 el atento ganaba ~32 %; en 10, ~73 %
+  // (decisión del autor, 2026-11-04).
+  it('el descuidado pierde casi siempre (menos de 45 %) y el atento gana la mayoría (entre 55 % y 90 %)', () => {
     const r = informe(D);
     console.log('hangar', JSON.stringify(r));
     expect(r.descuidado.gana).toBeLessThan(0.45);

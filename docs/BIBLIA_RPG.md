@@ -237,8 +237,8 @@ falla.
 |---|---|---|---|
 | Bastión | Descuidado (solo ataca, nunca usa la mochila) | Gana entre 10 % y 55 % | ~26 % |
 | Bastión | Atento (cura al que baja del 40 %, usa potenciadores) | Gana 75 % o más, terminando con menos de la mitad de la vida | ~98 %, con ~35 % de vida |
-| Hangar | Descuidado | Gana menos de 45 % | ~5 % |
-| Hangar | Atento | Gana entre 55 % y 90 % | **~32 %: no cumple** (por decidir; medido con Jair en nivel 5, el de su ficha) |
+| Hangar | Descuidado | Gana menos de 45 % | ~32 % |
+| Hangar | Atento | Gana entre 55 % y 90 % | ~73 % (con Jair en nivel 5, el de su ficha) |
 | Bar (Nikki) | Solo ataca | Gana entre 2 % y 15 % | ~5 % |
 | Bar (Nikki) | Pide perdón desde el primer turno | (no tiene meta en la prueba) | ~99,7 % |
 
@@ -275,7 +275,7 @@ necesitar nada de esto.
 ### El hangar (Capítulo 1, camino alternativo, `hangar`)
 
 - Se llega con «Probar la nave grande» en el hangar (enciende la alarma). Jair y Cami (con el tobillo: descansa como en el Bastión).
-- Horda: empiezan 2 soldados y llegan otros hasta ser 4 (niveles 6, 6, 8, 8); después sale el **Capitán de la Federación** (nivel 12; era 14, bajado el 2026-11-03 porque con sus ráfagas el jugador atento ganaba solo ~34 %), que se retira al 35 % de su vida. No se puede huir. Perder: bad end `bad_cap01_hangar`.
+- Horda: empiezan 2 soldados y llegan otros hasta ser 4 (niveles 6, 6, 8, 8); después sale el **Capitán de la Federación** (nivel 10; era 14 y después 12: el 2026-11-04, ya contando los 9 golpes del cañón, en nivel 12 el jugador atento ganaba solo ~32 %), que se retira al 35 % de su vida. No se puede huir. Perder: bad end `bad_cap01_hangar`.
 - **El Capitán de la Federación:** ataca de lejos: cada ataque es una **ráfaga de 3 a 5 balas rojas** que salen de la punta del fusil, una por fogonazo de su animación (si son más de 3, la repite), hacia su blanco («Ráfaga de blaster», 4 por bala, 20 usos) o repartidas entre todos («Barrido rojo», 3 por bala, 10 usos); cada bala puede fallar o esquivarse. Su especial, el **Cañón de blaster**, se juega tal cual su sprite: hinca una rodilla y carga, suelta un rayo horizontal que sigue, ondulado, hasta el borde de la pantalla (golpe fuerte, 24, a su blanco) y después se vuelve loco y lo agita arriba y abajo (cada barrido le puede dar a cualquiera, 4). Cae poco en el cebo (0,3). Sprite: `public/batalla/capitan` (del HTML del autor; en el ataque se borran los rayos dibujados y el juego dispara balas desde la punta; en el especial, `rayo` dice dónde sale el rayo del cuadro para seguirlo).
 - Fondo: el pasillo de instalación (`batalla/fondos/bastion`, con la ventana al hangar).
 
