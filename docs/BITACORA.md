@@ -258,3 +258,6 @@ fuera de la computadora principal. **Al volver a la principal: `git checkout des
   - **Respuestas del autor:** en español se dice **LA GRAN FUSIÓN** (en inglés, THE GREAT MERGE). La fusión pasa **en el
     Capítulo 6**, dentro del capítulo: en la rama que lleva al 7A se logra (AnothergIrl) y en la que lleva al 7B no
     (el conflicto de fusión). Sigue pendiente qué choca entre ellas y si Jair ejecuta el comando.
+  - **Confirmado por el autor:** la fusión de Cami y Rikka ocurre en la rama del Capítulo 6 que lleva al 7A; en la otra
+    rama no ocurre porque hay un conflicto de fusión, y eso desemboca en el 7B. Pendiente: en qué punto de la rama lo
+    intentan (antes o después de que Rikka rompa la computadora).
