@@ -12,7 +12,7 @@ import sb from './Boringram.module.css';
  * Boringplace (dentro de Boringram): el marketplace. En la «Tienda», los objetos de las peleas están publicados como en
  * un marketplace (foto con el color de su tipo: curación, mejora, para el rival…; nombre y precio en tokens, la moneda del juego); adentro, su descripción
  * y cuántos comprar. «Tus artículos»: lo que vende Jair y lo de la mochila. En el Capítulo 1 todavía no hay nadie
- * vendiendo nada. (Las publicaciones de la gente siguen en el JSON, pero no salen en la tienda: eran de relleno.)
+ * vendiendo nada. (Las publicaciones de la gente y las de Jair siguen en el JSON, pero no se muestran: eran de relleno.)
  */
 export function Boringplace({ onArticulo, onToast }: { onArticulo: (id: string) => void; onToast?: (texto: string) => void }) {
   const p = useBoringplace();
@@ -106,18 +106,6 @@ export function Boringplace({ onArticulo, onToast }: { onArticulo: (id: string) 
           ) : (
             <p className={s.mochilaVacia}>{tx.mochila_vacia}</p>
           )}
-          {p.deJair.length > 0 && <h4 className={s.subtitulo}>{tx.tus_publicaciones}</h4>}
-          <div className={s.grilla}>
-            {p.deJair.map((a) => (
-              <button key={a.id} className={s.tarjeta} onClick={() => onArticulo(a.id)}>
-                <Foto a={a} />
-                <b className={s.precio}>{a.precio}</b>
-                <span className={s.titulo}>{a.titulo}</span>
-                <small className={s.lugar}>{a.lugar}</small>
-              </button>
-            ))}
-          </div>
-          {!enMochila.length && !p.deJair.length && <p className={s.sinTuyos}>{tx.sin_tuyos}</p>}
         </>
       )}
     </div>
@@ -184,7 +172,7 @@ function TarjetaPayfoe({ onToast }: { onToast: (texto: string) => void }) {
   const puede = vars ? transferible(vars, payfoe) : 0;
   return (
     <div className={s.payfoe}>
-      <span className={s.payfoeMarca}>{tx.payfoe}</span>
+      <span className={s.payfoeMarca} translate="no">{tx.payfoe}</span>
       <b className={s.payfoeSaldo}>{tx.payfoe_saldo.replace('{n}', n(payfoe.saldo))}</b>
       {vars && (
         <>
