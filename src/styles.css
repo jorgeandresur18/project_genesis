@@ -662,7 +662,7 @@ input, textarea { -webkit-user-select: text; user-select: text; }
 .viewer-stage { position: relative; }
 /* Los desbloqueables especiales (imágenes y sprites secretos): borde magenta, un resplandor suave y fijo, y adentro
    un reflejo metálico muy sutil que cruza la imagen despacio, como una chapa que agarra la luz. */
-.gallery-secreta .gallery-thumb, .sprite-item-secreto .sprite-cell { border-color: #ff7ac0; box-shadow: 0 0 0.55rem rgba(255, 90, 170, 0.22); }
+.gallery-secreta .gallery-thumb, .sprite-item-secreto .sprite-cell { border-color: #ff7ac0; box-shadow: 0 0 1.1rem rgba(255, 90, 170, 0.4), 0 0 0.3rem rgba(255, 190, 225, 0.35), inset 0 0 0.5rem rgba(255, 122, 192, 0.2); }
 .gallery-secreta .gallery-thumb::after, .sprite-item-secreto .sprite-cell::after {
   content: '';
   position: absolute;
