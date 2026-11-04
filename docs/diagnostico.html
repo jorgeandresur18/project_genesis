@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diagnóstico de Project Genesis</title>
+<style>
+  :root {
+    --fondo: #f6f5f1; --tarjeta: #ffffff; --texto: #22212a; --suave: #66636f; --linea: #dedbd3; --pista: #e9e7e0;
+    --barra: #4f6fd8; --alto: #c23f3f; --medio: #b9791f; --bajo: #55708f; --bien: #2f8f6c;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --fondo: #15141a; --tarjeta: #201f28; --texto: #ecebf1; --suave: #a3a0ad; --linea: #36343f; --pista: #2f2d38;
+      --barra: #7f9bf0; --alto: #ee7b7b; --medio: #e6ac5c; --bajo: #94aecb; --bien: #5cc9a6; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--fondo); color: var(--texto); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 860px; margin: 0 auto; padding: 32px 16px 64px; }
+  h1 { margin: 0 0 4px; font-size: 1.8rem; line-height: 1.2; }
+  h2 { margin: 38px 0 6px; font-size: 1.25rem; }
+  h3 { margin: 0 0 3px; font-size: 1rem; }
+  p { margin: 0 0 10px; }
+  .suave { color: var(--suave); }
+  .chico { font-size: .875rem; }
+  .panel { background: var(--tarjeta); border: 1px solid var(--linea); border-radius: 10px; padding: 16px; margin-top: 10px; }
+  .total b.num { font-size: 2.6rem; line-height: 1; display: block; margin-bottom: 8px; }
+  .pista { height: 12px; background: var(--pista); border-radius: 6px; overflow: hidden; }
+  .pista i { display: block; height: 100%; background: var(--barra); border-radius: 6px; min-width: 2px; }
+  .total .pista { height: 20px; border-radius: 10px; }
+  .fila { padding: 11px 0; border-bottom: 1px solid var(--linea); }
+  .fila:first-child { padding-top: 0; } .fila:last-child { border-bottom: 0; padding-bottom: 0; }
+  .cab { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 5px; font-weight: 600; }
+  .cab span { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .fila p { margin: 5px 0 0; font-size: .875rem; color: var(--suave); }
+  .problema { padding: 13px 0 13px 13px; border-bottom: 1px solid var(--linea); border-left: 4px solid var(--c); margin-left: -2px; }
+  .problema:last-child { border-bottom: 0; }
+  .problema p { margin: 0 0 4px; font-size: .9375rem; }
+  .problema p:last-child { margin: 0; }
+  .alto { --c: var(--alto); } .medio { --c: var(--medio); } .bajo { --c: var(--bajo); }
+  .hacer { font-size: .875rem !important; color: var(--suave); }
+  ul { margin: 0; padding-left: 20px; } li { margin-bottom: 6px; }
+  .bien li::marker { color: var(--bien); }
+  code { font-size: .875em; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Diagnóstico de Project Genesis</h1>
+  <p class="suave">Estado al 4 de noviembre de 2026, rama <code>desarrollo</code> (commit <code>bbe64e6</code>).</p>
+
+  <div class="panel total">
+    <b class="num">7 %</b>
+    <div class="pista"><i style="width:7%"></i></div>
+    <p style="margin:10px 0 0">del proyecto completo, medido en horas: ~83 hechas de ~1.248 (<b>juego base, arte, inglés y las tres expansiones</b>). Parece poco porque la mayor parte de lo que falta es arte, diálogos e historia por escribir. La base técnica va mucho más adelantada.</p>
+  </div>
+
+  <h2>Cuánto llevamos, por parte</h2>
+  <p class="suave chico">Los porcentajes son <b>estimaciones mías</b>, salvo donde se indica la cuenta. Sirven para comparar, no como cifra exacta.</p>
+  <div class="panel">
+    <div class="fila"><div class="cab">Sistemas del RPG<span>~65 %</span></div><div class="pista"><i style="width:65%"></i></div>
+      <p>Motor, estados, cebos, equipo, tienda y torneo de relleno. Falta: velocidad, olvidar ataques, anti-farmeo, copas de verdad y lo visual.</p></div>
+    <div class="fila"><div class="cab">Celular y tienda (Boringram, Boringplace, PayFoe)<span>~40 %</span></div><div class="pista"><i style="width:40%"></i></div>
+      <p>El sistema está. Completos para los Capítulos 1 y 2; falta el contenido de los capítulos siguientes.</p></div>
+    <div class="fila"><div class="cab">Peleas de la historia<span>~27 %</span></div><div class="pista"><i style="width:27%"></i></div>
+      <p>Cuenta: 3 de ~11 hechas (bar, Bastión y hangar). Las 4 del Capítulo 2 son plantillas de relleno.</p></div>
+    <div class="fila"><div class="cab">Historia del juego base (lógica)<span>~20 %</span></div><div class="pista"><i style="width:20%"></i></div>
+      <p>Cuenta: 2 de 7 capítulos en juego, ~3 h de ~13 h 30 min de lectura. Capítulo 1 cerrado; Capítulo 2 en borrador avanzado; del 3 al 7 no hay guion.</p></div>
+    <div class="fila"><div class="cab">Arte<span>~10 %</span></div><div class="pista"><i style="width:10%"></i></div>
+      <p>Capítulo 1: sus 37 fondos ya son imágenes. Capítulo 2: 31 de sus 36 fondos todavía son cuadros grises.</p></div>
+    <div class="fila"><div class="cab">Inglés<span>~10 %</span></div><div class="pista"><i style="width:10%"></i></div>
+      <p>Solo el Capítulo 1 tiene traducción. El Capítulo 2 no, y ya está enlazado; las peleas siguen en español.</p></div>
+    <div class="fila"><div class="cab">Finales canon y alternativos<span>0 %</span></div><div class="pista"><i style="width:0"></i></div>
+      <p>Cuenta: 0 de 8 (2 canon y 6 alternativos). Los 18 bad ends y finales cortos de los Capítulos 1 y 2 sí están.</p></div>
+    <div class="fila"><div class="cab">Pasada final de diálogos<span>0 %</span></div><div class="pista"><i style="width:0"></i></div>
+      <p>Decidido así: diálogos y arte van al final.</p></div>
+    <div class="fila"><div class="cab">Expansiones (Génesis++, RikkaQuest, Génesis#)<span>0 %</span></div><div class="pista"><i style="width:0"></i></div>
+      <p>Solo hay esquema en el canon.</p></div>
+  </div>
+
+  <h2>Lo que está sano</h2>
+  <div class="panel bien">
+    <ul>
+      <li><b>Las pruebas automáticas:</b> 186 de 186, y la revisión de GitHub (tipos, lint, pruebas y compilación) dio bien en el último commit.</li>
+      <li><b>Sin errores de lint</b> (2 avisos menores) y sin vulnerabilidades conocidas en las dependencias.</li>
+      <li><b>Las rutas de la historia</b> se revisan solas en cada cambio.</li>
+      <li><b>La documentación</b> está al día: canon, biblia, bitácora y cronograma.</li>
+    </ul>
+  </div>
+
+  <h2>Problemas de ahora</h2>
+  <div class="panel">
+    <div class="problema alto"><h3>Nadie jugó las peleas después de los cambios de hoy</h3>
+      <p>Hoy cambió bastante <code>Batalla.tsx</code> y las pruebas automáticas no miran la pantalla. Una pelea trabada en la historia sería grave.</p>
+      <p class="hacer"><b>Qué hacer:</b> seguir <code>docs/PRUEBAS_EN_CASA.md</code> antes de sumar más código.</p></div>
+    <div class="problema alto"><h3>Puede haber trabajo sin subir en la computadora de casa</h3>
+      <p>Recordabas cambios de cerca de las 23:00 del 3 de noviembre, y en GitHub lo último es de las 22:44.</p>
+      <p class="hacer"><b>Qué hacer:</b> revisarlo antes de hacer <code>git pull</code> (sección 1 de la lista).</p></div>
+    <div class="problema alto"><h3>Falta decidir mucho de la historia</h3>
+      <p>Medido: 52 marcas de pendiente en los documentos (<code>[PENDIENTE]</code> y <code>TODO(canon)</code>), 30 de ellas en el canon. El Capítulo 3 no puede empezar sin sus respuestas.</p>
+      <p class="hacer"><b>Qué hacer:</b> responder <code>docs/guion/cap03_plan.md</code>, empezando por la primera pregunta.</p></div>
+    <div class="problema medio"><h3>El Capítulo 3 no tiene contenido para su duración</h3>
+      <p>Debe durar de 2 h 30 min a 3 h, y lo decidido es casi solo una pelea y sus consecuencias.</p>
+      <p class="hacer"><b>Qué hacer:</b> decidir si se agrega camino antes del Rey o se baja la duración.</p></div>
+    <div class="problema medio"><h3>La demo publicada va muy atrás</h3>
+      <p><code>desarrollo</code> lleva 89 commits que <code>main</code> no tiene. La gente sigue jugando el hangar difícil (Capitán en nivel 12).</p>
+      <p class="hacer"><b>Qué hacer:</b> publicar la 1.1 cuando pasen las pruebas de casa.</p></div>
+    <div class="problema medio"><h3>Publicar hoy mezclaría idiomas</h3>
+      <p>El Capítulo 2 está enlazado y no tiene inglés, y las peleas tampoco: quien juegue en inglés lo vería en español.</p>
+      <p class="hacer"><b>Qué hacer:</b> traducirlo, o poner <code>capitulo_maximo: 1</code> en la versión publicada.</p></div>
+    <div class="problema medio"><h3>Lo que falta revisar de derechos, antes de publicar más</h3>
+      <p>La condición de la música «Battle Arcade» sigue sin revisar. El modo Retro CRT imita el logo de una consola real, y su fondo tiene un robot parecido a Gundam y un control con forma de Super Nintendo.</p>
+      <p class="hacer"><b>Qué hacer:</b> revisar la licencia y rehacer esos tres dibujos.</p></div>
+    <div class="problema bajo"><h3><code>Batalla.tsx</code> volvió a crecer</h3>
+      <p>Bajó a 2.337 líneas y las mecánicas nuevas lo subieron a 2.456. Sigue siendo el archivo más grande y delicado.</p>
+      <p class="hacer"><b>Qué hacer:</b> sacar los turnos de los héroes, después de probar.</p></div>
+    <div class="problema bajo"><h3>Código que parece sin uso: Phaser</h3>
+      <p>Ninguna escena de los Capítulos 1 y 2 usa ya el nivel de acción, pero su librería de ~1,5 MB sigue en la compilación. No la borré sin revisarlo contigo.</p>
+      <p class="hacer"><b>Qué hacer:</b> confirmar que no se va a usar y sacarla.</p></div>
+    <div class="problema bajo"><h3>El repositorio pesa mucho</h3>
+      <p>La historia de git pesa ~407 MB y la carpeta <code>docs</code> ~307 MB. Hace lentas las descargas en cada computadora nueva.</p>
+      <p class="hacer"><b>Qué hacer:</b> mover los originales de arte fuera del repositorio, sin borrar nada todavía.</p></div>
+  </div>
+
+  <h2>Dificultades que vienen</h2>
+  <div class="panel">
+    <div class="problema alto"><h3>El ritmo: 44 horas por semana, durante 6 a 8 meses</h3>
+      <p>Es casi otro trabajo completo además del tuyo, y es la mayor apuesta de la proyección. Si baja el ritmo, se mueven todas las fechas.</p>
+      <p class="hacer"><b>Cómo enfrentarla:</b> tomar el escenario de 31 horas (julio de 2027) como el realista y publicar por versiones.</p></div>
+    <div class="problema alto"><h3>La batalla de las cinco manifestaciones (Capítulo 6)</h3>
+      <p>Es lo más grande del RPG: cinco jefes con sprites y mecánicas propias, una fusión a mitad de pelea, y aún sin definir cómo se gana.</p>
+      <p class="hacer"><b>Cómo enfrentarla:</b> definirla por fases y hacer primero THE KING, que el Capítulo 3 ya necesita.</p></div>
+    <div class="problema alto"><h3>Los Capítulos 4 a 6 son los más difíciles de escribir</h3>
+      <p>Pasan de la comedia de aventura a la codependencia, el alcoholismo y la verdad sobre Cami y Rikka. El tono es más delicado, y un error ahí pesa más que un error de código.</p>
+      <p class="hacer"><b>Cómo enfrentarla:</b> escribir con <code>docs/DIRECCION_PSICOLOGICA.md</code> a mano y revisar tú cada capítulo.</p></div>
+    <div class="problema medio"><h3>El arte: mucho volumen y que se vea parejo</h3>
+      <p>Calculé ~195 horas, buena parte tuyas, y es lo más incierto. Mantener el mismo estilo en tantas imágenes es difícil, y las tiendas pueden pedir que declares el uso de IA.</p>
+      <p class="hacer"><b>Cómo enfrentarla:</b> hacer el arte en tandas por capítulo y revisar las reglas de la tienda donde vayas a venderlo.</p></div>
+    <div class="problema medio"><h3>Las mecánicas nuevas pueden romper el balance</h3>
+      <p>Las peleas del simulador no usan cebos, bomba ni autodestrucción, así que sus números no miden esas opciones. La velocidad, además, cambiaría todas las peleas.</p>
+      <p class="hacer"><b>Cómo enfrentarla:</b> agregar un jugador simulado que las use y hacer la velocidad antes de armar más peleas.</p></div>
+    <div class="problema medio"><h3>Un cambio de reglas toca lo ya escrito</h3>
+      <p>Ya pasó hoy: la parálisis cambió y afectó al Bastión, del Capítulo 1 cerrado. Cuantas más peleas haya, más caro será cambiar una regla.</p>
+      <p class="hacer"><b>Cómo enfrentarla:</b> cerrar las reglas del RPG antes de la pelea del Capítulo 3.</p></div>
+    <div class="problema medio"><h3>Las partidas guardadas</h3>
+      <p>Se guardan solo en el navegador de cada jugador, y sus datos cambian con cada versión. Un cambio descuidado podría arruinar partidas de quienes ya juegan.</p>
+      <p class="hacer"><b>Cómo enfrentarla:</b> probar con una partida vieja antes de cada publicación.</p></div>
+    <div class="problema bajo"><h3>Trabajar desde dos computadoras</h3>
+      <p>Lo que no se sube queda atrapado, como puede haber pasado el 3 de noviembre. Además, en la computadora del trabajo quedó guardada tu sesión de GitHub.</p>
+      <p class="hacer"><b>Cómo enfrentarla:</b> <code>git pull</code> al empezar y <code>git push</code> al terminar, siempre.</p></div>
+  </div>
+
+  <h2>Por dónde seguir</h2>
+  <div class="panel">
+    <ol style="margin:0;padding-left:22px">
+      <li>En casa: juntar las dos computadoras y hacer las pruebas de <code>docs/PRUEBAS_EN_CASA.md</code>.</li>
+      <li>Responder las preguntas del Capítulo 3.</li>
+      <li>Publicar la versión 1.1, con el Capítulo 2 en inglés o con <code>capitulo_maximo: 1</code>.</li>
+      <li>Cerrar las reglas del RPG (velocidad incluida) y escribir el Capítulo 3.</li>
+    </ol>
+  </div>
+</main>
+</body>
+</html>
