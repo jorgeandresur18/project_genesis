@@ -51,10 +51,10 @@ La misma proyección, para mirarla en el navegador: `docs/proyeccion.html`.
 |---|---|---|---|
 | **Lógica del juego base** (Capítulos 2 a 7, finales alternativos y RPG) | ~365 | principios de enero de 2027 | fines de enero de 2027 |
 | **Versión 2.0** (diálogos, arte, sprites, inglés, sonido y pruebas completas) | ~425 | mediados de marzo de 2027 | principios de mayo de 2027 |
-| **Las tres expansiones** (Génesis++, RikkaQuest y Génesis#) | ~375 | mediados de mayo de 2027 | fines de julio de 2027 |
-| **Total** | **~1.165** | **~6 meses** | **~8 meses y medio** |
+| **Total hasta el lanzamiento** | **~790** | **~4 meses** | **~6 meses** |
+| *Después del lanzamiento:* las tres expansiones (Génesis++, RikkaQuest y Génesis#) | ~375 | sin fecha | sin fecha |
 
-Las horas ya incluyen un 25 % para arreglos y cambios de idea. La columna «con atrasos» supone que se cumple el 70 % del ritmo.
+**Las expansiones quedan para después del lanzamiento** (decisión del autor, 2026-11-04): el proyecto es el juego base. Las horas ya incluyen un 25 % para arreglos y cambios de idea. La columna «con atrasos» supone que se cumple el 70 % del ritmo.
 
 **Detalle de la lógica del juego base (con ese 25 %):**
 
@@ -113,7 +113,7 @@ Las horas ya incluyen un 25 % para arreglos y cambios de idea. La columna «con 
 - [ ] **Pendientes del RPG que el Capítulo 4 pide:** la tienda desde el título y equiparse de verdad, si la historia lo necesita.
 
 ## Después (desde el 15 de diciembre)
-- Capítulo 5 (escenas 10 a 17 del borrador: Dulce Frío, el beso, el parque y el bar; el medio que falta; el descubrimiento). Fondos: Dulce Frío por dentro, el parque, el centro. Después, si el autor quiere, Génesis++.
+- Capítulo 5 (escenas 10 a 17 del borrador: Dulce Frío, el beso, el parque y el bar; el medio que falta; el descubrimiento). Fondos: Dulce Frío por dentro, el parque, el centro. (Génesis++ y las demás expansiones, después del lanzamiento.)
 - Capítulo 6 (la bifurcación y sus dos ramas: la cara del Rey; en la rama A, la fusión en AnothergIrl y la batalla de las cinco manifestaciones) y los epílogos 7A y 7B.
 - Pendientes del RPG sin fecha: olvidar un ataque, regla anti-farmeo, `npm run escalar` con Upscayl.
 
