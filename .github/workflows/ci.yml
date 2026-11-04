@@ -1,10 +1,10 @@
-# CI (docs/CRONOGRAMA.md, «Robustez»): en cada push y pull request a main, revisa tipos, estilo y todas las pruebas
+# CI (docs/CRONOGRAMA.md, «Robustez»): en cada push a main o a desarrollo (y en los pull request a main), revisa tipos, estilo y todas las pruebas
 # (también la de rutas). Si algo falla, GitHub lo marca en rojo antes de que llegue al juego publicado.
 name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, desarrollo]
   pull_request:
     branches: [main]
 

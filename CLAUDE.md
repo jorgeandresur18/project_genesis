@@ -9,7 +9,7 @@ Novela visual indie en código (React + Vite). Género: ciencia ficción psicol�
 3. Al tocar finales o rutas, lee `docs/FINALES.md`.
 4. Al programar, lee `docs/SPEC.md`.
 5. Al tocar las batallas por turnos (RPG), lee `docs/BIBLIA_RPG.md`: las reglas de todas las peleas y las excepciones de cada una. Para el Rey Malvado y la batalla final, `docs/BATALLA_FINAL.md`.
-6. Para saber en qué se está y qué sigue, lee `docs/CRONOGRAMA.md`. **Al terminar cada sesión, agrega una entrada en `docs/BITACORA.md`** (qué se hizo, qué decidió el autor, qué quedó pendiente) y marca lo hecho en el cronograma.
+6. Para saber en qué se está y qué sigue, lee `docs/CRONOGRAMA.md`. Cómo se trabaja (ramas, versiones, publicar): `docs/METODOLOGIA.md`. **Al terminar cada sesión, agrega una entrada en `docs/BITACORA.md`** (qué se hizo, qué decidió el autor, qué quedó pendiente) y marca lo hecho en el cronograma.
 7. Al escribir los orígenes de las chicas, la relación con Nikki o los capítulos 4 en adelante, lee `docs/DIRECCION_PSICOLOGICA.md` (si contradice el canon, pregunta). Para Cami, lee también `docs/CAMI.md`; para Rikka, `docs/RIKKA.md`.
 
 ## Reglas duras
@@ -23,6 +23,7 @@ Novela visual indie en código (React + Vite). Género: ciencia ficción psicol�
 - **Decisiones: máximo 4 opciones a la vez** en la novela (la prueba de rutas lo revisa; varias opciones con condiciones distintas pueden sumar más en el JSON si nunca se ven más de 4 juntas).
 - **No agregues mecánicas** (inventario, minijuegos, combate) sin que el autor lo pida.
 - **Commits pequeños.** Antes de cada commit corre la prueba automática de rutas (`npm run test:routes`).
+- **Ramas y versiones** (`docs/METODOLOGIA.md`): se trabaja en `desarrollo` (va a GitHub, Vercel no la publica). **Nunca hagas push a `main` sin una orden explícita del autor**: `main` es la demo publicada en Vercel y cada push gasta su límite gratis. La versión en curso lleva `-dev` (`src/data/juego.json` y `package.json`, siempre iguales) y lo nuevo se anota en `docs/VERSIONES.md`.
 - Si el autor corrige algo del canon, actualiza `docs/CANON.md` en el mismo cambio.
 
 ## Stack
