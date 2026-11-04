@@ -3173,7 +3173,9 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 @media (prefers-reduced-motion: reduce) { .batalla[data-tiembla] .batalla-escena { animation: none; } }
 
 /* Miniaturas del pixel art: todos con el cuerpo de la misma altura y centrados en la tarjeta. */
-.sprite-rpg-mini { place-items: center; overflow: hidden; }
+/* La grilla queda del ancho de la celda (minmax 0): las hojas de cuadros anchos (el Capitán y la sombra, 192 px)
+   estiraban la columna hacia la derecha y salían corridas; así sobresalen parejo por los dos lados y se centran. */
+.sprite-rpg-mini { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); place-items: center; overflow: hidden; }
 .sprite-rpg-mini .rpg-centrado .batalla-sprite { zoom: var(--zmini, 0.95); }
 .viewer-rpg .batalla-bola-toxica .batalla-sprite, .probador-escena .batalla-bola-toxica .batalla-sprite { zoom: 1; }
 
