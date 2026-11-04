@@ -1,3 +1,4 @@
+import { conBomba, ganaBomba } from './torneo';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { almacenSeguro, sanear } from './guardado';
@@ -244,7 +245,9 @@ interface Store {
    * El Torneo Genesis (fuera de las partidas): cuántas veces se ganó cada copa y cuántas defensas del título lleva
    * Nikki (cada vez que se le gana, la campeona sube). Ver src/engine/torneo.ts.
    */
-  torneo: { ganadas: Record<string, number>; defensas: number };
+  torneo: { ganadas: Record<string, number>; defensas: number; /** Bombas ganadas que todavía no se le dieron a una partida. */ bombas?: number };
+  /** Le da a una partida guardada una bomba ganada en el torneo. */
+  darBombaAPartida: (slot: number) => void;
   /** Un premio del torneo a PayFoe (lo que pase del tope se pierde). Devuelve lo que entró. */
   premioTorneo: (n: number) => number;
   /** Se ganó una copa (la final contra Nikki): suma la copa y una defensa del título. */
@@ -637,7 +640,13 @@ export const useStore = create<Store>()(
         },
         ganarCopa: (id) => {
           const t = get().torneo;
-          set({ torneo: { ganadas: { ...t.ganadas, [id]: (t.ganadas[id] ?? 0) + 1 }, defensas: t.defensas + 1 } });
+          set({ torneo: { ...t, ganadas: { ...t.ganadas, [id]: (t.ganadas[id] ?? 0) + 1 }, defensas: t.defensas + 1, bombas: (t.bombas ?? 0) + (ganaBomba(t.ganadas, id) ? 1 : 0) } });
+        },
+        darBombaAPartida: (slot) => {
+          const { saves, torneo } = get();
+          const partida = saves[slot];
+          if (!partida || !torneo.bombas) return;
+          set({ saves: saves.map((x, i) => (i === slot ? conBomba(partida) : x)), torneo: { ...torneo, bombas: torneo.bombas - 1 } });
         },
 
         payfoe: PAYFOE_INICIAL,

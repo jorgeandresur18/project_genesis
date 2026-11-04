@@ -1,7 +1,9 @@
 // Las mecánicas nuevas (docs/BIBLIA_RPG.md, sección 19): dormido, quemado y congelado, los cebos con efecto, el cebo
 // explosivo, la autodestrucción, la bomba del día del juicio y el empate.
 import { describe, expect, it } from 'vitest';
-import { crearCebo, crearLuchador, dano, disponibles, enMochila, equipados, tickQuemado, turnosDormido, usarObjeto, type DatosBatalla, type Heroe, type Luchador } from '../src/engine/batalla';
+import { crearCebo, crearLuchador, dano, enMochila, equipados, tickQuemado, turnosDormido, usarObjeto, type DatosBatalla, type Heroe, type Luchador } from '../src/engine/batalla';
+import { conBomba, ganaBomba } from '../src/engine/torneo';
+import type { Vars } from '../src/engine/types';
 import { BATALLAS, FICHAS, SUELTOS_EN_VENTA, copiasLibres, sueltosQueTengo } from '../src/engine/batallas';
 import { EXPLOSION_CEBO, aplicarEstado, autodestruir, decidirEnemigo, estadoInicial, finDeTurno, ponerBomba, reaccionCebo, resolverGolpe, resultado, tickBomba, type EstadoPelea } from '../src/engine/turnos';
 
@@ -71,24 +73,22 @@ describe('quemado y congelado', () => {
     expect(e.ps).toBe(1);
   });
 
-  it('congelado: no actúa, y el primer golpe rompe el hielo con más daño', () => {
+  it('congelado funciona igual que dormido: de 2 a 4 turnos; un objeto lo descongela; un golpe no, ni hace más daño', () => {
     const s = estadoInicial(D);
     const [h] = s.heroes;
     const e = soldado();
+    aplicarEstado(s, h, 'congelado', fijo(0.999));
+    expect(h.congelado).toBe(4);
     const normal = dano(e, h, 20, fijo(0.5)).n;
-    h.congelado = 3;
-    expect(disponibles(s.heroes, D.personajes, [])).not.toContain(h);
-    const r = resolverGolpe(s, D, e, h, 20, false, fijo(0.5));
-    expect(r.rompeHielo).toBe(true);
-    expect(r.n).toBe(Math.round(normal * 1.5));
+    expect(resolverGolpe(s, D, e, h, 20, false, fijo(0.5)).n).toBe(normal);
+    expect(h.congelado).toBe(4);
+    usarObjeto(FICHAS.objetos.vida, h);
     expect(h.congelado).toBe(0);
-  });
-
-  it('se descongela solo a los 3 turnos', () => {
-    const s = estadoInicial(D);
-    const [h] = s.heroes;
-    aplicarEstado(s, h, 'congelado');
-    for (let i = 0; i < 4; i++) finDeTurno(s);
+    aplicarEstado(s, h, 'congelado', fijo(0));
+    finDeTurno(s);
+    expect(h.congelado).toBe(2);
+    finDeTurno(s);
+    finDeTurno(s);
     expect(h.congelado).toBe(0);
   });
 });
@@ -181,18 +181,36 @@ describe('la bomba del día del juicio', () => {
     expect(ponerBomba(s, otro, bomba)).toBe(false);
   });
 
-  it('el jefe que se retira queda en 1: si quedan héroes, se gana', () => {
+  it('no hace retirar sola al jefe: queda justo por encima y falta el último golpe', () => {
     const d = BATALLAS.nikki as DatosBatalla;
     const s = estadoInicial(d);
     const nikki = crearLuchador('n', 'nikki', 'enemigo', d.enemigos.nikki, 20);
-    nikki.ps = 3;
     s.enemigos = [nikki];
     s.heroes[0].psMax = 1000;
     s.heroes[0].ps = 1000;
     ponerBomba(s, s.heroes[0], { turnos: 1, vida: 0.9 });
     tickBomba(s, d);
-    expect(nikki.ps).toBe(1);
-    expect(resultado(s, d)).toBe('gana');
+    expect(nikki.ps).toBe(Math.floor(nikki.psMax * d.enemigos.nikki.huye_a!) + 1);
+    expect(resultado(s, d)).toBeNull();
+  });
+
+  it('si la bomba se lleva a todos los héroes con el jefe en el campo, es empate', () => {
+    const d = BATALLAS.nikki as DatosBatalla;
+    const s = estadoInicial(d);
+    s.enemigos = [crearLuchador('n', 'nikki', 'enemigo', d.enemigos.nikki, 20)];
+    s.heroes[0].ps = 1;
+    ponerBomba(s, s.heroes[0], { turnos: 1, vida: 0.9 });
+    tickBomba(s, d);
+    expect(s.heroes[0].ps).toBe(0);
+    expect(resultado(s, d)).toBe('empate');
+  });
+
+  it('en el torneo: se gana la primera vez de cada copa y queda en la partida elegida', () => {
+    expect(ganaBomba({}, 'bronce')).toBe(true);
+    expect(ganaBomba({ bronce: 1 }, 'bronce')).toBe(false);
+    expect(ganaBomba({ bronce: 1 }, 'plata')).toBe(true);
+    const p = conBomba(conBomba({ vars: {} as Vars }));
+    expect(p.vars.cassette_bomba_juicio).toBe(2);
   });
 
   it('es un especial genérico, se equipa como especial, no se vende y se cuentan sus copias', () => {

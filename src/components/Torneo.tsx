@@ -18,6 +18,7 @@ export function TorneoPantalla({ onClose }: { onClose: () => void }) {
   const visitadas = useStore((s) => s.snapshots);
   const vistos = useStore((s) => s.rpgVistos);
   const torneo = useStore((s) => s.torneo);
+  const saves = useStore((s) => s.saves);
   const [copa, setCopa] = useState<Copa | null>(null);
   const [modalidad, setModalidad] = useState<Modalidad>(TORNEO.modalidades[0]);
   const [elegidos, setElegidos] = useState<string[]>(['jair']);
@@ -46,9 +47,32 @@ export function TorneoPantalla({ onClose }: { onClose: () => void }) {
     );
   }
 
+  // La bomba ganada espera hasta que se elija a qué partida va (el torneo está fuera de las partidas).
+  const bombas = torneo.bombas ?? 0;
+  const premioBomba =
+    bombas > 0 && fase.paso !== 'ronda' ? (
+      <div className="torneo-bomba">
+        <h4>{t('torneo.bomba', { n: bombas })}</h4>
+        {saves.some(Boolean) ? (
+          <div className="torneo-opciones">
+            {saves.map((p, i) =>
+              p ? (
+                <button key={i} onClick={() => useStore.getState().darBombaAPartida(i)}>
+                  {p.nombre ?? p.date}
+                </button>
+              ) : null,
+            )}
+          </div>
+        ) : (
+          <p className="muted">{t('torneo.bomba_sin_partida')}</p>
+        )}
+      </div>
+    ) : null;
+
   return (
     <Panel title={t('torneo.titulo')} onClose={onClose}>
       <div className="torneo">
+        {premioBomba}
         {fase.paso === 'menu' && (
           <>
             <p className="muted">{t('torneo.intro')}</p>

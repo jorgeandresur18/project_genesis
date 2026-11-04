@@ -716,26 +716,30 @@ function Pelea({
 
   /** Un turno: eligen los héroes que pueden actuar, actúan en ese orden y después atacan los enemigos. */
   const turno = async (): Promise<'sigue' | 'gana' | 'huye' | 'pierde' | 'perdona' | 'empate'> => {
-    // Dormido: solo puede usar un objeto; sin objetos, sigue durmiendo.
-    const hayObjetos = Object.keys(d.objetos).some((k) => (b.current.mochila[k] ?? 0) > 0 && usableEnPelea(d.objetos[k]));
-    const opciones = disponibles(b.current.heroes, d.personajes, b.current.actuaron).filter((h) => !h.dormido || hayObjetos);
+    const opciones = disponibles(b.current.heroes, d.personajes, b.current.actuaron);
+    // Dormido o congelado: no puede hacer nada más que usar un objeto. Sin ninguno que pueda usar (un revivir, sin caídos, no sirve), sigue durmiendo.
+    const hayObjetos = () =>
+      Object.keys(d.objetos).some((k) => (b.current.mochila[k] ?? 0) > 0 && usableEnPelea(d.objetos[k]) && (!d.objetos[k].revive || b.current.heroes.some((x) => !vivo(x))));
     b.current.descansan = b.current.heroes.filter((h) => vivo(h) && !opciones.includes(h)).map((h) => h.id);
     forzar();
     for (const h of b.current.heroes.filter((x) => vivo(x) && x.paralizado)) await decir(fmt(t('batalla.sigue_paralizado'), { quien: h.nombre, n: h.paralizado }));
-    for (const h of b.current.heroes.filter((x) => vivo(x) && x.congelado)) await decir(fmt(t('batalla.sigue_congelado'), { quien: h.nombre }));
-    if (!hayObjetos) for (const h of b.current.heroes.filter((x) => vivo(x) && x.dormido)) await decir(fmt(t('batalla.sigue_dormido'), { quien: h.nombre }));
     if (!opciones.length) {
       await lineas('descanso');
       b.current.actuaron = [];
     } else {
       const elecciones: [Luchador, Comando][] = [];
       for (let k = 0; k < opciones.length; k++) {
+        // Sin objetos (el compañero pudo gastar el último): pasa su turno.
+        if ((opciones[k].dormido || opciones[k].congelado) && !hayObjetos()) {
+          await decir(fmt(t(opciones[k].congelado ? 'batalla.sigue_congelado' : 'batalla.sigue_dormido'), { quien: opciones[k].nombre }));
+          continue;
+        }
         const c = await pedirComando(opciones[k], k === 0);
         if (!c) {
           // Volver al héroe anterior (deshace su elección; si era un objeto, vuelve a la mochila).
-          const [, antes] = elecciones.pop() ?? [];
+          const [quien, antes] = elecciones.pop() ?? [];
           if (antes?.tipo === 'objeto') b.current.mochila[antes.clave]++;
-          k = Math.max(-1, k - 2);
+          k = quien ? opciones.indexOf(quien) - 1 : -1;
           continue;
         }
         if (c.tipo === 'huir') {
@@ -1110,7 +1114,6 @@ function Pelea({
       return golpe;
     }
     const { n, critico } = golpe;
-    if (golpe.rompeHielo) luz(defensor.id, '#8fd3ff', true);
     if (aMedias) {
       numero(defensor.id, t('batalla.a_medias'), 'falla');
       void animar(defensor.id, 'salto', 600);
@@ -1196,8 +1199,6 @@ function Pelea({
     }
     // Si su objetivo ya cayó, va contra el primero que quede.
     const objetivo = (oid: string) => enemigos.find((e) => e.id === oid) ?? enemigos[0];
-    // Dormido: esquivar es seguir durmiendo (ver el menú).
-    if (c.tipo === 'esquivar' && h.dormido) return decir(fmt(t('batalla.sigue_dormido'), { quien: h.nombre }));
     if (c.tipo === 'esquivar') {
       h.esquivando = true;
       cargar(h, CARGA.esquivar);
@@ -1960,10 +1961,10 @@ function Pelea({
     if (conVolver && i === base()) return volver();
     const listo = elegido.current;
     if (menu.paso === 'comando') {
-      // Dormido: solo un objeto lo despierta; «Esquivar» es seguir durmiendo.
-      if (heroe.dormido > 0 && i !== 2 && i !== 3) {
+      // Dormido o congelado: solo puede usar un objeto.
+      if ((heroe.dormido > 0 || heroe.congelado > 0) && i !== 3) {
         playChip('vacio');
-        return setMensaje({ texto: fmt(t('batalla.dormido_no'), { quien: heroe.nombre }), n: Math.random() });
+        return setMensaje({ texto: fmt(t(heroe.congelado ? 'batalla.congelado_no' : 'batalla.dormido_no'), { quien: heroe.nombre }), n: Math.random() });
       }
       if (i === 3 && !enMochila.length) {
         playChip('vacio');

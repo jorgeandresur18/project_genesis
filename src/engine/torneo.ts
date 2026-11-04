@@ -1,3 +1,4 @@
+import type { Vars } from './types';
 // El Torneo Genesis (docs/BIBLIA_RPG.md, sección 17): copas de dificultad creciente, simple/doble/triple, cuatro
 // rondas hasta la final contra Nikki (la campeona), premios en tokens que van a PayFoe. En cada copa todos pelean al
 // mismo nivel. Los datos (de relleno por ahora) están en src/data/rpg/torneo.json; aquí se arma cada ronda como una
@@ -110,4 +111,12 @@ export function armarRonda(c: Copa, ronda: number, m: Modalidad, heroes: string[
     vida_real: undefined,
     dialogos,
   } as DatosBatalla;
+}
+
+/** La primera vez que se gana cada copa se gana también la bomba del día del juicio (docs/BIBLIA_RPG.md, sección 19). */
+export const ganaBomba = (ganadas: Record<string, number>, copa: string) => !ganadas[copa];
+/** El torneo está fuera de las partidas: el jugador elige en cuál guardada queda el cassette. */
+export function conBomba<T extends { vars: Vars }>(partida: T): T {
+  const n = typeof partida.vars.cassette_bomba_juicio === 'number' ? partida.vars.cassette_bomba_juicio : 0;
+  return { ...partida, vars: { ...partida.vars, cassette_bomba_juicio: n + 1 } };
 }

@@ -117,6 +117,5 @@ Se responden cuando toque su semana; mientras, no se inventan.
 - Cuánto tardó GENESIS en terminar el juego.
 - `AnothergIrl`: si las mayúsculas forman «AI» a propósito.
 - El conflicto de fusión del 7B (en la pelea final del Capítulo 6): qué choca entre Rikka y Cami y si Jair ejecuta el comando.
-- Cómo se gana la bomba del día del juicio en el torneo, y confirmar las reglas de dormido (`docs/BIBLIA_RPG.md`, sección 19).
 - Cómo se consiguen las prendas que no se compran (trajes, flor, chaqueta de cuero, zapatos): `docs/BIBLIA_RPG.md`, sección 15.
 - Las frases de confusión del RPG, para aprobar o corregir.

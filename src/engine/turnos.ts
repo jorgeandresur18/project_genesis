@@ -9,7 +9,6 @@
 import {
   CARGA,
   CEBO,
-  CONGELADO,
   QUEMADO,
   cargar,
   crearClon,
@@ -271,7 +270,7 @@ export function resolverGolpe(
   poder: number,
   aMedias = false,
   azar: () => number = Math.random,
-): { n: number; critico: boolean; bloqueado?: boolean; rompeHielo?: boolean } {
+): { n: number; critico: boolean; bloqueado?: boolean } {
   const ayuda = d.ayuda && atacante.lado === 'heroe' && vanPerdiendo(estado.heroes, d.ayuda.umbral) ? d.ayuda.critico : 0;
   const extra = ayuda + (atacante.equipo?.critico ?? 0);
   if (defensor.protegido > 0 && atacante !== defensor) {
@@ -279,16 +278,12 @@ export function resolverGolpe(
     return { n: 0, critico: false, bloqueado: true };
   }
   const golpe = dano(atacante, defensor, poder, azar, extra);
-  // El golpe que rompe el hielo hace más daño.
-  const rompeHielo = defensor.congelado > 0;
-  const conHielo = rompeHielo ? Math.round(golpe.n * CONGELADO.golpe) : golpe.n;
-  if (rompeHielo) defensor.congelado = 0;
-  const n = aMedias ? Math.max(1, Math.round(conHielo / 2)) : conHielo;
+  const n = aMedias ? Math.max(1, Math.round(golpe.n / 2)) : golpe.n;
   cargar(defensor, CARGA.recibir);
   const jefe = defensor.lado === 'enemigo' ? d.enemigos[defensor.clave] : null;
   defensor.ps = Math.max(jefe?.huye_a && defensor.clon === undefined ? 1 : 0, defensor.ps - n);
   if (defensor.ps === 0) limpiarEstados(defensor);
-  return { n, critico: golpe.critico, rompeHielo };
+  return { n, critico: golpe.critico };
 }
 
 /** Paraliza: empieza a descontar desde el turno siguiente y reemplaza el descanso (no se suma). */
@@ -372,19 +367,28 @@ function limpiarEstados(x: Luchador) {
 export function aplicarEstado(estado: EstadoPelea, x: Luchador, cual: 'quemado' | 'congelado' | 'dormido', azar: () => number = Math.random): boolean {
   if (x[cual] > 0) return false;
   if (cual === 'quemado') x.quemado = QUEMADO.turnos;
-  if (cual === 'congelado') x.congelado = CONGELADO.turnos;
-  if (cual === 'dormido') x.dormido = turnosDormido(azar);
+  if (cual !== 'quemado') x[cual] = turnosDormido(azar);
   if (cual !== 'quemado') estado.estadoRecien.push(`${x.id}/${cual}`);
   return true;
 }
 
-/** Lo que quita una explosión: una parte de la vida máxima (no depende del nivel). El jefe que se retira queda en 1. */
+/**
+ * Lo que quita una explosión: una parte de la vida máxima (no depende del nivel). Al jefe no lo hace retirarse: queda
+ * justo por encima de su límite y hay que darle el último golpe (decisión de Claude, por encargo del autor: si no, la
+ * bomba y la autodestrucción ganaban la pelea solas).
+ */
 function explosionA(d: DatosBatalla, x: Luchador, vida: number): number {
-  const jefe = x.lado === 'enemigo' ? d.enemigos[x.clave] : null;
+  const jefe = x.lado === 'enemigo' && x.clon === undefined ? d.enemigos[x.clave] : null;
+  const piso = jefe?.huye_a ? Math.min(x.ps, Math.floor(x.psMax * jefe.huye_a) + 1) : 0;
   const antes = x.ps;
-  x.ps = Math.max(jefe?.huye_a && x.clon === undefined ? 1 : 0, x.ps - Math.max(1, Math.round(x.psMax * vida)));
+  x.ps = Math.max(piso, x.ps - Math.max(1, Math.round(x.psMax * vida)));
   if (x.ps === 0) limpiarEstados(x);
   return antes - x.ps;
+}
+/** Si la explosión se llevó a todos los héroes, el jefe también queda: «mueren todos», es empate (ver `resultado`). */
+function siCayeronTodos(estado: EstadoPelea, d: DatosBatalla) {
+  if (estado.heroes.some(vivo)) return;
+  for (const e of estado.enemigos) if (vivo(e) && e.clon === undefined && d.enemigos[e.clave].huye_a) e.ps = 1;
 }
 
 /** El cebo explosivo: parte de la vida máxima que le quita a quien lo atacó y a su dueño. */
@@ -429,7 +433,9 @@ export function autodestruir(estado: EstadoPelea, d: DatosBatalla, h: Luchador, 
   const otros = enElCampo(estado).filter((x) => x !== h);
   h.ps = 0;
   limpiarEstados(h);
-  return otros.map((l) => ({ l, n: explosionA(d, l, vida) }));
+  const golpes = otros.map((l) => ({ l, n: explosionA(d, l, vida) }));
+  siCayeronTodos(estado, d);
+  return golpes;
 }
 
 /** Pone la bomba (una a la vez). Devuelve si se pudo. */
@@ -444,7 +450,9 @@ export function tickBomba(estado: EstadoPelea, d: DatosBatalla): { l: Luchador; 
   if (!estado.bomba || --estado.bomba.turnos > 0) return null;
   const { vida } = estado.bomba;
   estado.bomba = null;
-  return enElCampo(estado).map((l) => ({ l, n: explosionA(d, l, vida) }));
+  const golpes = enElCampo(estado).map((l) => ({ l, n: explosionA(d, l, vida) }));
+  siCayeronTodos(estado, d);
+  return golpes;
 }
 
 /** Probabilidad de que un enemigo que cae suelte la bomba del día del juicio. */

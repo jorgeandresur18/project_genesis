@@ -409,7 +409,7 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
 | Estado | Qué pasa | Cómo se ve |
 |---|---|---|
 | **Quemado** | Pierde un poco de vida cada turno y pega a la mitad, 3 turnos. | Llamitas naranjas; el sprite, un poco rojizo. |
-| **Congelado** | No actúa hasta que lo golpean: el primer golpe rompe el hielo (y hace más daño). Si nadie le pega, se descongela solo a los 3 turnos. | Azulado y quieto, con cristales; al romperse, esquirlas. |
+| **Congelado** | Igual que dormido (decisión del autor, 2026-11-04; reemplaza lo de romper el hielo con un golpe): ver sección 19. | Azulado y quieto, con cristales. |
 
 **Colores de cada acción y estado (aprobado):** cada cosa tiene su color, para que no se confundan.
 
@@ -585,14 +585,9 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
 Código: `src/engine/turnos.ts` y `src/engine/batalla.ts`; pruebas: `tests/mecanicas.test.ts`. La simulación del balance
 no las usa (ni los cebos), porque ningún jugador simulado las elige.
 
-**Dormido** (decisión del autor): dura de 2 a 4 turnos, al azar. No puede atacar, hablar ni huir; **solo se cura usando un
-objeto** o cuando se le acaba. Interpretación de Claude, para confirmar: lo despierta cualquier objeto que no sea para
-un rival; un golpe no lo despierta; en el menú, «Esquivar» es seguir durmiendo (si no, con objetos en la mochila no
-podría pasar el turno); sin objetos, se saltea su turno.
+**Dormido y congelado** (la misma mecánica, decisión del autor; solo cambian el nombre y el color): dura de 2 a 4 turnos, al azar. **No puede hacer nada: solo usar un objeto.** Lo despierta cualquier objeto que no sea para un rival, o que se le acabe el tiempo; un golpe no lo despierta. Sin ningún objeto que pueda usar, pasa el turno solo. Con objetos en la mochila no puede pasar: tiene que usar uno.
 
-**Quemado y congelado** (los de la sección 15, ya hechos): quemado pierde el 5 % de su vida máxima cada turno y pega a la
-mitad, 3 turnos. Congelado no actúa; el primer golpe rompe el hielo y hace 1,5 veces el daño; si no, se descongela a
-los 3 turnos.
+**Quemado** (el de la sección 15, ya hecho): pierde el 5 % de su vida máxima cada turno y pega a la mitad, 3 turnos.
 
 **Los cebos con efecto** (genéricos: cassettes grises en Boringplace, 5 usos). Funcionan como el Cebo, pero **al golpearlos
 le causan el estado a quien los golpeó** (al terminar el ataque; si ya lo tiene, no se acumula). El sprite toma el color
@@ -614,14 +609,13 @@ rivales y cebos) pierden el 50 % de su vida máxima (propuesta).
 **Bomba del día del juicio** (especial genérico; cuesta la barra llena; no se vende): queda en medio del campo con la cuenta
 regresiva y a los 5 turnos explota: todos los del campo pierden el 90 % de su vida máxima (propuesta). **No se desactiva.**
 Una a la vez. Se gana en las peleas: cada enemigo que cae tiene un 2 % de soltarla (propuesta; no en la vida real ni en
-la arena). `TODO(canon)`: **en el torneo**, falta decidir para qué partida (el torneo está fuera de las partidas).
+la arena). **En el torneo** (decisión del autor): la primera vez que se gana cada copa; como el torneo está fuera de las partidas, el jugador elige a qué partida guardada va, y si no tiene ninguna, lo espera.
 
 **El empate** (`resultado` en `turnos.ts`): si no queda ningún héroe y tampoco queda rival en pie, o el jefe, que nunca
 cae, quedó por retirarse. **En la historia es perder:** lleva a la misma escena que la derrota, su bad end (decisión del
 autor). En el torneo también cuenta como perder; en la arena, los caídos se levantan.
 
-**Una consecuencia, para mirar:** como el jefe que se retira queda en 1 PS, la bomba y la autodestrucción lo dejan casi siempre
-listo para retirarse: si queda un héroe en pie, se gana. Puede ser demasiado fuerte.
+**Los jefes** (el autor lo dejó a criterio de Claude): la bomba y la autodestrucción no hacen retirar a un jefe por sí solas: lo dejan justo por encima de su límite y hay que darle el último golpe. Si la explosión se lleva a todos los héroes con el jefe en el campo, es empate.
 
 ## 16. Pendientes e ideas
 

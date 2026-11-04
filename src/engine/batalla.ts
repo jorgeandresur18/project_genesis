@@ -408,7 +408,7 @@ export interface Luchador {
   envenenado: { danio: number; turnos: number; noMata?: boolean } | null;
   /** Turnos que le quedan quemado: pierde vida cada turno y pega a la mitad. */
   quemado: number;
-  /** Turnos que le quedan congelado: no actúa; el primer golpe rompe el hielo y hace más daño. */
+  /** Turnos que le quedan congelado: igual que dormido (no ataca ni huye; solo un objeto lo descongela). */
   congelado: number;
   /** Turnos que le quedan dormido: no ataca ni huye; solo un objeto lo despierta. */
   dormido: number;
@@ -510,7 +510,7 @@ export function dano(atacante: Luchador, defensor: Luchador, poder: number, azar
  * (`seguido: false`). Así Cami actúa un turno sí y uno no; Jair, siempre.
  */
 export function disponibles(heroes: Luchador[], datos: Record<string, Heroe>, actuaron: string[]): Luchador[] {
-  return heroes.filter((h) => h.ps > 0 && !h.paralizado && !h.congelado && (datos[h.clave].seguido || !actuaron.includes(h.id)));
+  return heroes.filter((h) => h.ps > 0 && !h.paralizado && (datos[h.clave].seguido || !actuaron.includes(h.id)));
 }
 
 /** Sube `n` niveles de golpe (el caramelo rancio): las estadísticas pasan a las del nivel nuevo. */
@@ -527,8 +527,11 @@ export function subirNiveles(l: Luchador, d: { base: Stats; crece: Stats }, n: n
 
 /** Usa un objeto en un héroe: devuelve cuánto hizo (lo que subió o curó). `d`: sus datos (para subir niveles). */
 export function usarObjeto(o: Objeto, h: Luchador, d?: { base: Stats; crece: Stats }): number {
-  // Dormido: solo un objeto lo despierta (los que se usan contra un rival, no).
-  if (!o.veneno && !o.confunde && !o.paraliza) h.dormido = 0;
+  // Dormido o congelado: solo un objeto lo despierta o lo descongela (los que se usan contra un rival, no).
+  if (!o.veneno && !o.confunde && !o.paraliza) {
+    h.dormido = 0;
+    h.congelado = 0;
+  }
   // Los tácticos: estados (sobre un rival o un compañero).
   if (o.cura_estados) {
     h.envenenado = null;
@@ -598,9 +601,7 @@ export function tickQuemado(l: Luchador, jefe: boolean): number {
   l.quemado--;
   return n;
 }
-/** Congelado: se descongela solo a estos turnos; el golpe que rompe el hielo hace `golpe` veces el daño. */
-export const CONGELADO = { turnos: 3, golpe: 1.5 } as const;
-/** Dormido: duerme de 2 a 4 turnos, al azar. */
+/** Dormido y congelado (la misma mecánica): duran de 2 a 4 turnos, al azar. */
 export const turnosDormido = (azar: () => number = Math.random) => 2 + Math.floor(azar() * 3);
 
 /** Crea el clon de sombra de un enemigo: más débil (`fuerza`), con la vida que le costó, sin especiales. */
