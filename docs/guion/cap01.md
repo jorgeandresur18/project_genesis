@@ -513,7 +513,7 @@
 - `102#0` Besarla ⟶ va a `103a` · beso_nikki = true
 - `102#1` Apartarla con cuidado ⟶ va a `103b`
 - `102#2` Hacer un chiste ⟶ va a `103c`
-- `102#3` Propasarte ⟶ va a `nk01` · solo si cap01_completo == true
+- `102#3` Propasarte ⟶ va a `nk01`
 
 
 ### fondos/cg_beso_nikki_cerca.webp
@@ -609,38 +609,59 @@
 
 `nk06` — Nikki se levanta. El banco se cae. El cantinero, por puro instinto profesional, guarda los vasos buenos.
 
-`nk10` — Nikki se detiene con la mano en el aire. Le tiembla. Después se sienta en el piso del bar, entre los vidrios, y llora.
+> ⤷ continúa en `nk10`
 
-`nk11` **Nikki:** Estoy borracha, Jair. Estoy borracha y tú lo sabías. Por eso lo hiciste.
+`nkp01` — Nikki se sienta otra vez en el banco, que alguien levantó por ella. Se arregla el pelo. Tarda en hablar.
 
-`nk12` **Nikki:** Ocho años. Ocho años, y me lo haces justo la noche que no me puedo ni parar.
+`nkp02` **Nikki:** Te perdono. Pero no gratis.
 
-`nk13` **Nikki:** Me voy. Me voy y no me vuelves a ver. Te lo juro.
+`nkp03` **Nikki:** Otra ronda. Y nada de esa cerveza aguada de promoción: una stout imperial, de las negras que se mastican. Y después una doble IPA.
 
-`nk14` **Jair:** (Si se va, no vuelve. Y si no vuelve, no queda nadie.)
+`nkp04` **Jair:** (Las dos más caras de la pizarra. Claro que sí.)
 
-`nk15` **Jair:** Espera. Una más. Te invito otra ronda. La que quieras.
+`nkp05` **Nikki:** Y me las pides tú. Con «por favor». Al cantinero también le debes una disculpa.
 
-`nk16` — Es lo peor que podría decir. Funciona. Siempre funciona. Por eso es lo peor.
+`nkp06` — Jair pide las dos. Con «por favor». El cantinero las sirve sin mirarlo, que es su manera de aceptar disculpas.
 
-`nk17` **Nikki:** …La de la sombrilla. Y no me hables.
-
-`nk18` — Toman la ronda en silencio. Mañana nadie va a hablar de esto. Ese también es el plan de siempre.
+`nkp07` **Nikki:** Esto no pasó. ¿Oíste? Mañana no pasó.
 
 > ⤷ continúa en `104`
 
-`nk_bad01` — La ráfaga de cachetadas no termina. Jair deja de contar en la cuarenta. En la cincuenta deja de escuchar.
+`nk10` — El bar queda en silencio. El cantinero no dice nada: hace una seña con la cabeza. Dos tipos enormes que Jair no había visto en toda la noche aparecen de la nada.
 
-`nk_bad02` — Cuando por fin se detiene, Jair está en el piso. Y no se mueve.
+`nk11` **Cantinero:** Afuera. A una mujer no se le pega. Y no vuelvas.
 
-`nk_bad03` **Nikki:** ¿Jair? …Jair, levántate. No es gracioso. Levántate.
 
-`nk_bad04` — No se levanta. Nikki se sienta a su lado, entre los vidrios, y llora hasta que llega la policía. Nadie le cree que solo eran cachetadas.
+### fondos/calle_noche.webp
+
+`nk12` — Lo sacan por los brazos y lo dejan en la vereda. La puerta se cierra. Adentro, alguien sube la música.
+
+`nk13` **Jair:** (Ella empezó. …No. Yo empecé.)
+
+`nk14` — Vuelve a casa caminando. No saca el celular. Esta noche no hay mensaje destacado que pueda leer sin que le duela.
+
+> ⤷ continúa en `116`
+
+
+### fondos/bar_noche.webp
+
+`nk_bad01` — La última cachetada suena distinta. Jair cae entre los vidrios. Y no se levanta.
+
+
+### fondos/cg_nikki_cachetadas.webp
+
+`nk_bad02` **Nikki:** ¿Jair? …Jair, levántate. No es gracioso. Levántate.
+
+`nk_bad03` **Nikki:** Lo maté. Lo maté a cachetadas. ¿Quién se muere de cachetadas, Jair? ¿Quién?
+
+`nk_bad04` **Nikki:** ¡Eres un idiota! ¡Un idiota! Te dije que nunca te fueras de mi vida… ¡y te mueres! ¡Así te vas!
+
+`nk_bad05` — Se queda en el piso, abrazada a él, hasta que llega la policía. Nadie le cree que solo eran cachetadas.
 
 
 ### PANTALLA:negro
 
-`nk_bad05` — Cachetadas infinitas.
+`nk_bad06` — Cachetadas infinitas.
 
 > **BAD END: Cachetadas infinitas**
 
@@ -769,7 +790,7 @@
 
 `126` **Jair:** Seguro es un virus.
 
-> ⤷ si noche == "sin_bar" → `bad_sinbar_001` · si noche == "rechazo" → `bad_rechazo_001` · si no → `126c`
+> ⤷ si noche == "anormal" → `bad_anormal_001` · si noche == "sin_bar" → `bad_sinbar_001` · si noche == "rechazo" → `bad_rechazo_001` · si no → `126c`
 
 `126c` — El cursor flota entre dos botones: «Descargar» y «Eliminar».
 
@@ -827,6 +848,28 @@
 `bad_sinbar_006` — Una noche normal.
 
 > **FIN: Una noche normal**
+
+---
+
+### PANTALLA:pc_correo
+
+`bad_anormal_001` — No lo abre. Ni mira el remitente. Lo selecciona y lo borra, como quien se saca una astilla. Esta noche no quiere nada nuevo.
+
+
+### fondos/departamento_noche.webp
+
+`bad_anormal_002` — Se acuesta vestido. No duerme. Mira el techo hasta que el techo se aclara.
+
+`bad_anormal_003` — El sábado no pasa nada. El domingo tampoco. Nikki no escribe. Él tampoco.
+
+`bad_anormal_004` — Jair nunca escribe un mundo. Nadie despierta en él. Nadie lo carga, nadie lo espera en un puente. La historia que estabas por jugar nunca ocurrió.
+
+
+### PANTALLA:negro
+
+`bad_anormal_005` — Una noche normal.
+
+> **FIN: Una noche anormal**
 
 ---
 
@@ -1940,7 +1983,7 @@
 
 `bad_bastion_001` — Jair cae de rodillas. Cami cae a su lado: el tobillo dijo basta antes que ella.
 
-`bad_bastion_002` **Soldado enmascarado:** Entidad no registrada. Origen desconocido. Procedimiento: archivar.
+`bad_bastion_002` **Soldado de la Federación:** Entidad no registrada. Origen desconocido. Procedimiento: archivar.
 
 `bad_bastion_003` **Cami:** ¡Suéltenlo! ¡Es un civil! ¡Ni siquiera sabe pegar!
 
@@ -2062,6 +2105,11 @@
 
 `g5h_049` **Cami:** ¿Jair? ¿Qué pasa? ¿Por qué pones esa cara?
 
+
+> **DECISIÓN**
+- `g5h_049#0` Irse a la Grieta ⟶ va a `g5h_050`
+- `g5h_049#1` Probar la nave grande ⟶ va a `hg_001` · hangar_pelea = true
+
 `g5h_050` **Jair:** No funciona. Hay que ir a la Grieta.
 
 `g5h_051` **Cami:** Pero...
@@ -2071,6 +2119,80 @@
 `g5h_053` — Ella no insiste. Sale de la cabina despacio, apoyándose en él, y mira el hangar entero una última vez: las decenas de naves dormidas, el polvo plateado, la flota que tal vez nunca existió.
 
 `g5h_054` **Cami:** Vamos.
+
+> ⤷ continúa en `g5m_001`
+
+`hg_001` **Jair:** Espera. Todavía no. Si alguna de estas tiene motor de verdad, es la grande.
+
+`hg_002` — Jair sube a la nave grande, la de la puerta gris. Adentro, el tablero es igual al del caza, solo que más grande y con más botones que nadie va a usar.
+
+`hg_003` — Desconecta el cable. Cuenta hasta diez. Lo vuelve a conectar.
+
+`hg_004` — El tablero no se enciende. Se enciende todo lo demás: las luces del hangar, una por una, y una sirena que suena como alguien muy decepcionado.
+
+`hg_005` **Voz:** Alarma del hangar: activa. Acceso no autorizado a recurso decorativo.
+
+`hg_006` **Cami:** ¿Qué tocaste?
+
+`hg_007` **Jair:** Lo mismo de siempre. Esta vez funcionó demasiado.
+
+`hg_008` — Las dos puertas del hangar se abren a la vez. Soldados enmascarados, en fila, sin apuro.
+
+`hg_009` **Cami:** Bájame. Con un pie también se dispara.
+
+`hg_010` — El capitán retrocede entre las naves. No corre: camina hacia atrás, apuntando, y la punta del blaster sigue blanca, cargada hasta el borde.
+
+`hg_011` **Capitán de la Federación:** Guerrera. La próxima vez no fallo.
+
+`hg_012` — Dispara igual. El rayo pasa entre Jair y Cami, tan cerca que les quema el aire, y se clava en la nave grande.
+
+
+### fondos/hangar_destruido.webp
+
+`hg_013` — La nave grande no explota: se apaga. Después explota. Y la de al lado. Y la de al lado. Las naves caen como fichas de dominó, una sobre otra, hasta que el hangar entero es humo, chispas y metal retorcido.
+
+`hg_014` — Cuando el humo baja un poco, el capitán ya no está.
+
+`hg_015` **Cami:** La flota…
+
+`hg_016` **Jair:** (Eran decorado. Nunca iban a volar. Pero ella no lo sabe. Y ahora ni siquiera le queda el decorado.)
+
+`hg_017` **Cami:** …Vamos. Antes de que vuelva.
+
+> ♪ silencio
+`hg_018` — Al salir de lo que queda del hangar, algo vibra en el bolsillo de Jair.
+
+`hg_019` — El celular.
+
+`hg_020` — Doce por ciento de batería. Y una barra. Una sola barra de señal, parpadeando, imposible.
+
+`hg_021` **Jair:** (No. No puede ser.)
+
+> ⤷ continúa en `g5m_005`
+
+
+### fondos/hangar.webp
+
+`bad_hangar_001` — El último disparo del capitán no es un rayo: es el cañón entero. Jair alcanza a ponerse delante de Cami. No alcanza a nada más.
+
+`bad_hangar_002` **Capitán de la Federación:** Entidad no registrada. Procedimiento: archivar.
+
+`bad_hangar_003` **Cami:** Jair… Te dije que no tocaras nada.
+
+`bad_hangar_004` **Jair:** (No me lo dijo. Pero era obvio.)
+
+
+### PANTALLA:negro
+
+`bad_hangar_005` **Voz:** Usuario: incapacitado. Recurso decorativo: intacto.
+
+`bad_hangar_006` — Recurso decorativo.
+
+> **BAD END: Recurso decorativo**
+
+---
+
+### fondos/hangar.webp
 
 > ♪ silencio
 `g5m_001` — Al salir del hangar, algo vibra en el bolsillo de Jair.
@@ -2239,7 +2361,7 @@
 
 `g5_023c4` — Jair rueda dos metros y queda otra vez detrás de la columna, sentado, con los puños todavía en alto.
 
-`g5_023c5` **Soldado enmascarado:** Mueble fuera de lugar. Ignorar.
+`g5_023c5` **Soldado de la Federación:** Mueble fuera de lugar. Ignorar.
 
 `g5_023c6` **Cami:** (Susurrando) ¿Qué. Fue. Eso.
 
@@ -2278,7 +2400,7 @@
 `g5_024b4` **Jair:** (Ahí está. El precio de no seguir el protocolo.)
 
 > ♪ música: adventure1
-`g5_024b5` **Soldado enmascarado:** ¡INTRUSO!
+`g5_024b5` **Soldado de la Federación:** ¡INTRUSO!
 
 `g5_024b6` **Cami:** ¡CORRE!
 
@@ -2294,7 +2416,7 @@
 
 `g5_024b12` — Los soldados los rodean. Las máscaras lisas los miran sin ojos.
 
-`g5_024b13` **Soldado enmascarado:** Entidad no registrada. Origen desconocido. Procedimiento: archivar.
+`g5_024b13` **Soldado de la Federación:** Entidad no registrada. Origen desconocido. Procedimiento: archivar.
 
 `g5_024b14` **Jair:** ¿Archivar? ¿Cómo que archivar?
 
@@ -2394,23 +2516,35 @@
 
 `g6_022` — Y en la pasarela que cruza sobre la Grieta, una figura más alta que las demás. Armadura gris oscuro, de placas gruesas y gastadas, con los bordes color cobre. Un casco cerrado con un visor rojo en forma de V que brilla como una brasa. Un rifle de asalto con mira, sostenido con la calma de alguien que nunca ha tenido que bajarlo.
 
-`g6_023` **Capitán enmascarado:** Guerrera. Te dimos por muerta.
+> solo si hangar_pelea == true
+`g6_023h` **Capitán de la Federación:** Otra vez ustedes. Esta vez no hay flota que se ponga en medio.
 
+> solo si hangar_pelea == true
+`g6_024h` **Cami:** La flota la quemaste tú.
+
+> solo si hangar_pelea == true
+`g6_025h` **Capitán de la Federación:** Y otra vez el civil.
+
+> solo si hangar_pelea == false
+`g6_023` **Capitán de la Federación:** Guerrera. Te dimos por muerta.
+
+> solo si hangar_pelea == false
 `g6_024` **Cami:** Me han dado por muerta muchas veces. Soy difícil de convencer.
 
-`g6_025` **Capitán enmascarado:** ¿Y ese?
+> solo si hangar_pelea == false
+`g6_025` **Capitán de la Federación:** ¿Y ese?
 
 `g6_026` — El visor rojo gira hacia Jair. Jair siente esa mirada sin ojos en la nuca, en el estómago, en el saldo de la cuenta.
 
-`g6_027` **Capitán enmascarado:** Ese no está en los registros.
+`g6_027` **Capitán de la Federación:** Ese no está en los registros.
 
 `g6_028` **Jair:** (Por lo visto, tampoco en los registros de nómina de mi empresa.)
 
-`g6_029` **Capitán enmascarado:** Entidad no registrada. Origen desconocido. Procedimiento: eliminar.
+`g6_029` **Capitán de la Federación:** Entidad no registrada. Origen desconocido. Procedimiento: eliminar.
 
 `g6_030` **Jair:** ¡Espera, espera! ¡Soy un civil! ¡Tengo derechos! ¡Tengo un contrato!
 
-`g6_031` **Capitán enmascarado:** ¿Qué es un contrato?
+`g6_031` **Capitán de la Federación:** ¿Qué es un contrato?
 
 `g6_032` **Jair:** ...Es una pregunta que yo también me hago.
 
@@ -2455,7 +2589,7 @@
 
 `g6_052` — El capitán salta desde la pasarela. Cae entre Jair y la Grieta con un golpe que hace temblar el piso, y le apunta con el rifle directo a la cara.
 
-`g6_053` **Capitán enmascarado:** Nadie cruza.
+`g6_053` **Capitán de la Federación:** Nadie cruza.
 
 
 > **DECISIÓN**
@@ -2467,7 +2601,7 @@
 
 `g6_053c2` — Jair corre hacia el capitán. No hacia la Grieta, no hacia Cami: hacia el rifle. Es la decisión más valiente de su vida y dura un segundo y medio.
 
-`g6_053c3` **Capitán enmascarado:** Objetivo hostil.
+`g6_053c3` **Capitán de la Federación:** Objetivo hostil.
 
 `g6_053c4` — El visor rojo se enciende. El disparo no hace ruido: solo una luz roja, muy limpia, que lo atraviesa a la altura del pecho.
 

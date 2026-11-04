@@ -28,7 +28,7 @@ El RPG, Boringram y el arte se hacen **para el capítulo que toca**, no por adel
 
 | Parte | Estado |
 |---|---|
-| Capítulo 1 | Completo y jugable; tiene el RPG (bar, Bastión, hangar). Diálogos sin pulir. Guion `docs/guion/cap01.md` desactualizado. |
+| Capítulo 1 | **Lógica cerrada** (2026-11-03). Completo y jugable; tiene el RPG (bar, Bastión, hangar). Diálogos y arte, al final. |
 | Capítulo 2 | Borrador avanzado en `cap02.json`, **sin enlazar** al Capítulo 1. Faltan sus peleas y arte. |
 | Capítulo 3 | Canon escrito en `docs/CANON.md`; **no hay guion**. |
 | Capítulo 4 | Borrador del autor (17 escenas) en `docs/CANON.md`; sin guion. |
@@ -41,8 +41,9 @@ El RPG, Boringram y el arte se hacen **para el capítulo que toca**, no por adel
 
 ## Semana 1 (3–9 de noviembre): cerrar los Capítulos 1 y 2
 - [x] **Robustez** (hecha el 2026-11-03): pantalla de error dentro del juego (`src/components/Robustez.tsx`), guardado seguro (`src/engine/guardado.ts`), ESLint (`npm run lint`) y CI en GitHub Actions (`.github/workflows/ci.yml`).
-- [ ] **Resincronizar el guion del Capítulo 1** (necesita el permiso del autor para `guion:exportar -- --forzar`).
-- [ ] **Pulir los diálogos del Capítulo 1:** el autor lee el guion y marca; Claude corrige con `docs/TONO.md`.
+- [x] **Resincronizar el guion del Capítulo 1** (hecho el 2026-11-03; también el del Capítulo 2).
+- [x] **Cerrar la lógica del Capítulo 1** (2026-11-03): revisión de coherencia contra el canon, regla en `CLAUDE.md` y etiqueta `cap01-logica-cerrada`.
+- [ ] **Pulir los diálogos del Capítulo 1:** el autor lee el guion y marca; Claude corrige con `docs/TONO.md`. *Pasa al final* (decisión del autor del 2026-11-03: diálogos y arte después de la lógica).
 - [x] Título del Capítulo 2: «El viaje del héroe*», que al terminar pasa a «El viaje del antihéroe» (portada y pantalla de fin).
 - [ ] **Terminar el Capítulo 2:** partes que falten del autor, revisión contra el canon y enlazarlo al final del Capítulo 1.
 - [ ] *Liviana:* arte del Capítulo 2 que falte (`docs/guion/cap02_arte.md`): Rikka con traje rojo y espada, etc.

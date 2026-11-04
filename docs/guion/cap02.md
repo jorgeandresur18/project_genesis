@@ -1,5 +1,5 @@
 <!-- guion:cap02.json -->
-# Capítulo 2 — El viaje del héroe
+# Capítulo 2 — El viaje del héroe*
 
 > **Estado:** borrador. Inicio del capítulo escrito por Claude a partir del plan del autor (docs/guion/cap02_plan.md). Todavía no está enlazado al final del Capítulo 1: para probarlo, abrir el juego con ?escena=cap02_001. No es canon hasta que el autor lo apruebe.
 >
@@ -302,7 +302,7 @@
 
 `063` **Jair:** (Y no estaba en el puente. Estaba con nosotros.)
 
-`064` **Soldado enmascarado:** Buscamos a una fugitiva de la dimensión espacial. Rubia. Traje azul. Peligrosa. Sabemos que está aquí.
+`064` **Soldado de la Federación:** Buscamos a una fugitiva de la dimensión espacial. Rubia. Traje azul. Peligrosa. Sabemos que está aquí.
 
 `065` **Rikka:** Mike. Nora. A casa. Ahora.
 
@@ -420,11 +420,11 @@
 
 `107` **Caballero estacional:** ¿Con qué permiso entran seres de otra dimensión a la ciudadela de la Primavera? ¿Quién les abrió las puertas de este reino?
 
-`108` **Soldado enmascarado:** Buscamos a una fugitiva. No es asunto del reino.
+`108` **Soldado de la Federación:** Buscamos a una fugitiva. No es asunto del reino.
 
 `109` **Caballero estacional:** Todo lo que pisa este suelo es asunto del reino.
 
-`110` **Soldado enmascarado:** La fugitiva. Entréguenla y nos vamos.
+`110` **Soldado de la Federación:** La fugitiva. Entréguenla y nos vamos.
 
 `111` — Los caballeros no se mueven. Los soldados tampoco. Es el tipo de silencio que siempre termina igual.
 
@@ -535,6 +535,12 @@
 
 `143` **Rikka:** Escondidos. A salvo. Los caballeros me dieron tiempo para salir por la muralla. No mucho más.
 
+> ⤷ continúa en `144`
+
+`pelea_muralla_derrota` **Voz:** [Relleno] Perdieron la pelea. Vuelven a intentarlo.
+
+> ⤷ continúa en `143`
+
 `144` **Cami:** Te dije que te íbamos a meter en problemas.
 
 `145` **Rikka:** No. Tú me dijiste «nadie te lo pidió». Es distinto.
@@ -614,6 +620,12 @@
 `182` **Cami:** Yo hago la primera guardia.
 
 `183` — Las dos se quedan despiertas toda la noche, cada una de un lado del fuego, sin hablarse. Jair duerme como un bebé. Es lo más descansado que va a estar en toda la semana.
+
+> ⤷ continúa en `p2_001`
+
+`pelea_campamento_derrota` **Voz:** [Relleno] Perdieron la pelea. Vuelven a intentarlo.
+
+> ⤷ continúa en `183`
 
 
 ### camino_estaciones
@@ -869,9 +881,9 @@
 
 `p2_046` — En la curva del camino la esperan tres soldados de negro.
 
-`p2_047` **Soldado enmascarado:** Esas prendas. Kimono rojo. Bordado de la Primavera. Son de la sacerdotisa que viaja con la fugitiva.
+`p2_047` **Soldado de la Federación:** Esas prendas. Kimono rojo. Bordado de la Primavera. Son de la sacerdotisa que viaja con la fugitiva.
 
-`p2_048` **Soldado enmascarado:** Llévensela. Y la ropa también. Va a servir de cebo.
+`p2_048` **Soldado de la Federación:** Llévensela. Y la ropa también. Va a servir de cebo.
 
 
 ### ciudadela_otono
@@ -914,7 +926,7 @@
 
 `p2_063` — Cuando se van, el vendedor se quita el delantal. Debajo lleva una armadura negra. Se para junto a una piedra tallada y levanta una mano. Desde un tejado, alguien le responde con la misma seña.
 
-`p2_064` **Soldado enmascarado:** Van a la trampa.
+`p2_064` **Soldado de la Federación:** Van a la trampa.
 
 
 ### almacen_molino
@@ -962,7 +974,7 @@
 
 `p2_068` — Las puertas se cierran detrás de ellos. De los techos bajan soldados de negro, uno detrás de otro, demasiados para contarlos.
 
-`p2_069` **Soldado enmascarado:** La fugitiva. El forastero. Y la sacerdotisa. Los tres. El rey va a estar contento.
+`p2_069` **Soldado de la Federación:** La fugitiva. El forastero. Y la sacerdotisa. Los tres. El rey va a estar contento.
 
 `p2_070` **Rikka:** ¿Los tres? ¿Ahora también me quieren a mí?
 
@@ -993,7 +1005,7 @@
 
 `bad_mirada_04` — Se da vuelta para reclamarle. Les da la espalda a los soldados. A todos los soldados.
 
-`bad_mirada_05` **Soldado enmascarado:** Gracias, forastero. Muy amable.
+`bad_mirada_05` **Soldado de la Federación:** Gracias, forastero. Muy amable.
 
 `bad_mirada_06` — Caen los dos. Rikka primero. Jair después, todavía con la cabeza ladeada.
 
@@ -1013,6 +1025,12 @@
 ### almacen_molino
 
 `p2_071r07` **Jair:** (Me está cuidando a mí. No al kimono. A mí.)
+
+> ⤷ continúa en `p2_071r08`
+
+`pelea_molino_derrota` **Voz:** [Relleno] Perdieron la pelea. Vuelven a intentarlo.
+
+> ⤷ continúa en `p2_071r07`
 
 `p2_071r08` **Rikka:** ¡No te muevas de detrás mío! …Y no mires. El traje se sube.
 
@@ -1043,6 +1061,12 @@
 `p2_081` **Cami:** …¿Qué es esto?
 
 `p2_082` **Jair:** (Un level up. Le acaban de dar un level up.)
+
+> ⤷ continúa en `p2_082b`
+
+`pelea_molino_armored_derrota` **Voz:** [Relleno] Perdieron la pelea. Vuelven a intentarlo.
+
+> ⤷ continúa en `p2_082`
 
 `p2_082b` — Los soldados no retroceden. Siguen bajando del techo. Cami derriba a dos, a tres, y la fila vuelve a cerrarse.
 
