@@ -737,6 +737,8 @@ function Pelea({
       let n = instante ? texto.length : 0;
       setLetras(n);
       let leyendo: ReturnType<typeof setTimeout> | undefined;
+      // Se asigna más abajo, después de `listo`, que lo necesita para cortarlo.
+      // eslint-disable-next-line prefer-const
       let intervalo: ReturnType<typeof setInterval> | undefined;
       const listo = () => {
         clearInterval(intervalo);

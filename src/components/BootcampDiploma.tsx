@@ -204,10 +204,10 @@ async function dibujar(tx: Curso['textos'], d: { nombre: string; titulo: string;
   espaciado(g, tx.por.toUpperCase(), W / 2, 470, 6);
   g.fillStyle = '#2b2620';
   g.font = '700 54px Georgia, "Times New Roman", serif';
-  let y = parrafo(g, d.titulo, W / 2, 545, W - 360, 62);
+  const y = parrafo(g, d.titulo, W / 2, 545, W - 360, 62);
   g.font = '28px Georgia, serif';
   g.fillStyle = '#3d362c';
-  y = parrafo(g, d.texto, W / 2, y + 40, W - 420, 40);
+  parrafo(g, d.texto, W / 2, y + 40, W - 420, 40);
 
   // Firmas
   g.font = '22px system-ui, sans-serif';

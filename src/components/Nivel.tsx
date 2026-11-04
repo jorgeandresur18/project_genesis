@@ -99,7 +99,7 @@ export function Nivel({ id, onGanar, onPerder }: { id: string; onGanar: () => vo
       window.removeEventListener('keydown', onKey, true);
       document.removeEventListener('visibilitychange', onOculta);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, []);
   useEffect(() => () => control.current?.destruir(), []);
 
