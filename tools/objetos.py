@@ -39,6 +39,11 @@ ARCHIVOS = {
     'zapatillas buenas': 'zapatillas_buenas',
     'zapatos plataforma': 'zapatos_plataforma',
     'token': 'token',
+    'cassette_jair': 'cassette_jair',
+    'cassette_cami': 'cassette_cami',
+    'cassette_rikka': 'cassette_rikka',
+    'cassette_nikki': 'cassette_nikki',
+    'cassette_generico': 'cassette_generico',
 }
 
 
