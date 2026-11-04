@@ -146,7 +146,7 @@ Cada tramo va del primer al último commit, más 30 minutos de trabajo antes del
   - El plan de la Semana 1 del cronograma no empezó: esta sesión fue al modo Retro CRT.
 
 
-## 3 de noviembre — Conoce más: Bad Bunny y Mac Miller
+## 3 de noviembre (tarde y noche) — Conoce más, títulos, peleas del Capítulo 2, Boringplace y PayFoe, galería y robustez
 
 - **Hecho:** dos secciones nuevas en la parte del autor, después de «La influencia latinoamericana» (español e inglés):
   - **«Manejar de noche»:** Bad Bunny y la fantasía de manejar de noche por la ciudad; lista de nueve canciones (DÁKITI, YONAGUNI, DOS MIL 16, MOJABI GHOST, LO SIENTO BB:/, Después de la Playa, AMORFODA, NI BIEN NI MAL, un x100to) y, al cierre, la historia personal de «un x100to».
@@ -170,3 +170,10 @@ Cada tramo va del primer al último commit, más 30 minutos de trabajo antes del
 - **Regla de los desbloqueables (del autor):** en la galería, todo lo que la historia ya usa sale como casilla vacía hasta descubrirlo, en el orden en que aparece. Lugares se ordenan por la primera escena con ese fondo; Pixel art muestra solo los sprites de las peleas de la historia, por la primera pelea que los usa (la demo no cuenta). Anotado en `SPEC.md`.
 - **Pixel art (pedido del autor):** en el visor, el botón «Especial» se llama como el especial de ese personaje en las peleas («Ráfaga de puños», «Lluvia de plasma», «Tajo de primavera», «Desgarro sombrío», «Embestida de acero», «Cañón de blaster», «Ráfaga de cachetadas infinitas»).
 - **PayFoe (pedido del autor):** el tope nunca se muestra (se sacó «de 999.999 posibles» y el número del aviso de límite). «Para qué sirve» pasó a un botón «?» en la barra de la billetera, con chistes (`ayuda_payfoe` en `boringplace.json`; borrador de Claude).
+- **Robustez (cronograma, Semana 1):**
+  - **Guardado seguro** (`src/engine/guardado.ts`): leer o escribir nunca lanza un error (modo privado, sin espacio). Si lo guardado está corrupto, se aparta en `genesis-vn:corrupto` y se usa `genesis-vn:respaldo` (se toma al abrir el juego). `sanear` limpia lo cargado: lo que no tiene la forma esperada vuelve a su valor por defecto. Si el navegador no deja guardar, sale un aviso. Pruebas en `tests/guardado.test.ts`.
+  - **Pantalla de error** (`src/components/Robustez.tsx`): si algo falla al dibujarse, en vez de la pantalla en blanco sale «GENESIS encontró un error» con «Volver al menú» y «Recargar» (las partidas, la galería y PayFoe no se tocan).
+  - **ESLint** (`npm run lint`; `eslint.config.js`): reglas recomendadas de JS, TypeScript y hooks de React. Arreglados 2 errores; quedan 2 avisos de dependencias de efectos (`App.tsx:421`, `useSceneTransition.ts:95`) que no se tocaron porque cambiarlos puede alterar cuándo se disparan; hay que probarlo jugando.
+  - **CI** (`.github/workflows/ci.yml`): tipos, ESLint, todas las pruebas y la compilación en cada push a `main`. Se activa al subir los commits a GitHub.
+  - `npm install` de ESLint subió vitest y el plugin de React dentro de sus rangos; las 92 pruebas pasan.
+- **Pendiente al cerrar la sesión:** subir los commits a GitHub (no se hizo push); las decisiones del Capítulo 2 (muralla, campamento, cassette, bad ends de las peleas, cuenta regresiva, qué espiaba en los arbustos, el plato de la resaca); el Torneo Genesis (copas, rivales, los tres especiales de Nikki); enlazar el Capítulo 2 al final del Capítulo 1.

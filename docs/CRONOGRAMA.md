@@ -35,12 +35,12 @@ El RPG, Boringram y el arte se hacen **para el capítulo que toca**, no por adel
 | Capítulos 5 a 7 | Esquema en el canon. |
 | RPG | 4 peleas, sistema completo. Faltan equiparse de verdad, quemado y congelado, olvidar ataques y la regla anti-farmeo. |
 | Boringram y Boringplace | Completos para los Capítulos 1 y 2. |
-| Robustez | Aprobada el 29 de octubre y nunca hecha: ErrorBoundary, guardado seguro, CI, ESLint. |
+| Robustez | Hecha el 3 de noviembre: pantalla de error, guardado seguro, ESLint y CI. |
 
 ---
 
 ## Semana 1 (3–9 de noviembre): cerrar los Capítulos 1 y 2
-- [ ] **Robustez** (medio día; protege a los jugadores de verdad): ErrorBoundary, guardado que nunca rompe el juego, CI y ESLint.
+- [x] **Robustez** (hecha el 2026-11-03): pantalla de error dentro del juego (`src/components/Robustez.tsx`), guardado seguro (`src/engine/guardado.ts`), ESLint (`npm run lint`) y CI en GitHub Actions (`.github/workflows/ci.yml`).
 - [ ] **Resincronizar el guion del Capítulo 1** (necesita el permiso del autor para `guion:exportar -- --forzar`).
 - [ ] **Pulir los diálogos del Capítulo 1:** el autor lee el guion y marca; Claude corrige con `docs/TONO.md`.
 - [x] Título del Capítulo 2: «El viaje del héroe*», que al terminar pasa a «El viaje del antihéroe» (portada y pantalla de fin).
