@@ -14,17 +14,14 @@
     "transferir": "Transferir {n} a PayFoe",
     "transferido": "Transferiste {n} tokens a PayFoe.",
     "nada_transferible": "No hay tokens nuevos para transferir. PayFoe ya recibió lo que ganaste en esta partida.",
-    "payfoe_tope": "Límite de cuenta alcanzado. PayFoe no acepta más de 999.999 tokens.",
+    "payfoe_tope": "Límite de cuenta alcanzado. PayFoe lamenta tu éxito.",
     "ver_billetera": "Billetera",
-    "payfoe_tope_de": "de {n} posibles",
     "billetera_partida_titulo": "Billetera de esta partida",
     "transferible": "Puedes pasar {n} a PayFoe",
     "todo": "Todo",
     "billetera_sin_partida": "Para transferir tokens de una partida, entra a esa partida.",
-    "uso_titulo": "Para qué sirven",
-    "uso_partida": "Los tokens de cada partida compran objetos para las peleas de esa partida.",
-    "uso_payfoe": "PayFoe junta lo que transfieres de tus partidas y lo que ganas en el Torneo Genesis. Con PayFoe se compran los desbloqueables.",
-    "uso_sentido": "Se transfiere de la partida a PayFoe, nunca al revés.",
+    "uso_titulo": "¿Para qué sirve PayFoe?",
+    "entendido": "Entendido",
     "movimientos": "Movimientos",
     "sin_movimientos": "Todavía no hay movimientos.",
     "mov_transferencia": "Transferencia desde una partida",
@@ -217,6 +214,14 @@
       "respuesta": "Lo marcas como vendido y te arrepientes al instante. Lo vuelves a publicar. Es el ciclo de la vida.",
       "desbloqueo": null
     }
+  ],
+  "ayuda_payfoe": [
+    "Los tokens de cada partida compran objetos para las peleas de esa partida. No se mezclan: cada Jair es pobre a su manera.",
+    "PayFoe junta lo que transfieres de tus partidas y lo que ganas en el Torneo Genesis. Con PayFoe se compran los desbloqueables.",
+    "Se transfiere de la partida a PayFoe, nunca al revés. Como un sueldo: entra, se va y no vuelve.",
+    "PayFoe no cobra comisión. Cobra otras cosas. Están en los términos y condiciones, que nadie leyó.",
+    "¿Reembolsos? PayFoe no conoce esa palabra. Tampoco quiere conocerla.",
+    "Atención al cliente: de lunes a viernes, de 9:00 a 9:01."
   ],
   "tienda": [
     {

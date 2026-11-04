@@ -216,8 +216,8 @@ function TarjetaPayfoe({ onAbrir }: { onAbrir: () => void }) {
 }
 
 /**
- * La billetera: el saldo de PayFoe (y su tope), la billetera de la partida con la transferencia (cuánto pasar; nunca
- * al revés), para qué sirve cada una y los últimos movimientos.
+ * La billetera: el saldo de PayFoe, la billetera de la partida con la transferencia (cuánto pasar; nunca al revés) y
+ * los últimos movimientos. El «?» de arriba explica para qué sirve, con chistes. El tope (999.999) nunca se muestra.
  */
 function BilleteraVista({ onBack, onToast }: { onBack: () => void; onToast: (texto: string) => void }) {
   const tx = useBoringplace().data.textos;
@@ -227,12 +227,14 @@ function BilleteraVista({ onBack, onToast }: { onBack: () => void; onToast: (tex
   const vars = useStore((st) => st.game?.vars);
   const puede = vars ? transferible(vars, payfoe) : 0;
   const [cuanto, setCuanto] = useState<number | null>(null);
+  const [ayuda, setAyuda] = useState(false);
+  const ayudaTextos = useBoringplace().data.ayuda_payfoe;
   // Lo elegido no puede pasar de lo que se puede transferir (al transferir, baja).
   const n = Math.min(cuanto ?? puede, puede);
   const paso = Math.max(1, 10 ** Math.max(0, String(puede).length - 2));
   const fecha = (m: Movimiento) => new Date(m.fecha).toLocaleDateString(lang === 'en' ? 'en-US' : 'es-ES', { day: 'numeric', month: 'short' });
   return (
-    <div className={sb.feed}>
+    <div className={`${sb.feed} ${s.conAyuda}`}>
       <div className={sb.topBar}>
         <button className={sb.backBtn} onClick={onBack} aria-label={tx.atras}>
           ‹
@@ -240,12 +242,43 @@ function BilleteraVista({ onBack, onToast }: { onBack: () => void; onToast: (tex
         <b className={s.payfoeMarca} translate="no">
           {tx.payfoe}
         </b>
+        <button
+          className={s.ayudaBoton}
+          aria-label={tx.uso_titulo}
+          onClick={() => {
+            playSelect();
+            setAyuda(true);
+          }}
+        >
+          ?
+        </button>
       </div>
+      {/* El «?»: para qué sirve PayFoe, con chistes. (El tope nunca se dice.) */}
+      {ayuda && (
+        <div className={s.ayuda} role="dialog" aria-label={tx.uso_titulo}>
+          <div className={s.ayudaCaja}>
+            <h4>{tx.uso_titulo}</h4>
+            <ul className={s.usos}>
+              {ayudaTextos.map((x, i) => (
+                <li key={i}>{x}</li>
+              ))}
+            </ul>
+            <button
+              className={s.boton}
+              onClick={() => {
+                playSelect();
+                setAyuda(false);
+              }}
+            >
+              {tx.entendido}
+            </button>
+          </div>
+        </div>
+      )}
       <div className={s.billetera}>
         <div className={s.saldoGrande}>
           <Token grande />
           <b>{f(payfoe.saldo)}</b>
-          <small>{tx.payfoe_tope_de.replace('{n}', f(TOPE_PAYFOE))}</small>
         </div>
 
         {vars ? (
@@ -286,15 +319,6 @@ function BilleteraVista({ onBack, onToast }: { onBack: () => void; onToast: (tex
         ) : (
           <p className={s.nota}>{tx.billetera_sin_partida}</p>
         )}
-
-        <section className={s.bloque}>
-          <h4>{tx.uso_titulo}</h4>
-          <ul className={s.usos}>
-            <li>{tx.uso_partida}</li>
-            <li>{tx.uso_payfoe}</li>
-            <li>{tx.uso_sentido}</li>
-          </ul>
-        </section>
 
         <section className={s.bloque}>
           <h4>{tx.movimientos}</h4>

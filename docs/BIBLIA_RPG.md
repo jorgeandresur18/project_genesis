@@ -473,7 +473,7 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
 - **Contra la duplicación** (guardar, transferir, cargar el guardado viejo y volver a transferir): cada partida tiene un
   número (`partida_id`, al empezar) y un contador que solo sube, `tokens_ganados`. PayFoe anota cuánto recibió de cada
   partida y solo deja transferir lo ganado que no se transfirió todavía (y lo que haya en la billetera).
-- **El tope y el chiste:** PayFoe no pasa de 999.999 («Límite de cuenta alcanzado»; lo que sobra se pierde). La
+- **El tope y el chiste:** PayFoe no pasa de 999.999, pero **el jugador nunca lo sabe** (decidido por el autor el 2026-11-03): el número no aparece en ningún lado; al llegar sale solo «Límite de cuenta alcanzado. PayFoe lamenta tu éxito» y lo que sobra se pierde. La
   **legendaria versión sin censura** cuesta **1.000.000**: nunca se puede comprar y nunca muestra nada (al intentarlo:
   «Fondos insuficientes. Te falta 1 token»). Es solo un chiste; no hay contenido sin censura.
 

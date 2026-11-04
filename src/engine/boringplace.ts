@@ -40,6 +40,8 @@ export interface BoringplaceData {
   vacio: { titulo: string; texto: string };
   textos: Record<string, string>;
   articulos: Articulo[];
+  /** El «?» de la billetera: para qué sirve PayFoe (con chistes). */
+  ayuda_payfoe: string[];
 }
 
 /** Mezcla los textos en inglés sobre los datos en español (objetos por clave, listas por posición). */

@@ -11,17 +11,14 @@
     "transferir": "Transfer {n} to PayFoe",
     "transferido": "You transferred {n} tokens to PayFoe.",
     "nada_transferible": "No new tokens to transfer. PayFoe already received what you earned in this game.",
-    "payfoe_tope": "Account limit reached. PayFoe does not accept more than 999,999 tokens.",
+    "payfoe_tope": "Account limit reached. PayFoe regrets your success.",
     "ver_billetera": "Wallet",
-    "payfoe_tope_de": "out of {n}",
     "billetera_partida_titulo": "This game's wallet",
     "transferible": "You can move {n} to PayFoe",
     "todo": "All",
     "billetera_sin_partida": "To transfer tokens from a game, load that game.",
-    "uso_titulo": "What they're for",
-    "uso_partida": "Each game's tokens buy items for that game's battles.",
-    "uso_payfoe": "PayFoe collects what you transfer from your games and what you win in the Genesis Tournament. PayFoe buys the unlockables.",
-    "uso_sentido": "Tokens go from a game to PayFoe, never the other way around.",
+    "uso_titulo": "What is PayFoe for?",
+    "entendido": "Got it",
     "movimientos": "Activity",
     "sin_movimientos": "No activity yet.",
     "mov_transferencia": "Transfer from a game",
@@ -137,6 +134,14 @@
       "lugar": "0 km away",
       "respuesta": "You mark it as sold and regret it instantly. You list it again. It is the circle of life."
     }
+  ],
+  "ayuda_payfoe": [
+    "Each game's tokens buy items for that game's battles. They don't mix: every Jair is broke in his own way.",
+    "PayFoe collects what you transfer from your games and what you win in the Genesis Tournament. PayFoe buys the unlockables.",
+    "Tokens go from a game to PayFoe, never the other way around. Like a paycheck: it comes in, it leaves, it never comes back.",
+    "PayFoe charges no fees. It charges other things. They're in the terms and conditions, which nobody read.",
+    "Refunds? PayFoe doesn't know that word. It doesn't want to.",
+    "Customer support: Monday to Friday, 9:00 to 9:01."
   ],
   "tienda": [
     {
