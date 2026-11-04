@@ -39,6 +39,40 @@ El RPG, Boringram y el arte se hacen **para el capítulo que toca**, no por adel
 
 ---
 
+## Proyección con 44 horas por semana (hecha el 4 de noviembre de 2026)
+
+**Ritmo que dio el autor:** 6 horas de lunes a viernes (3 en el trabajo y 3 en casa) y 7 los sábados y domingos: **44 horas por semana**. Es una estimación de Claude, con un margen de ±30 %: mide con solo dos capítulos escritos. **Reemplaza a las fechas por semana de abajo**, que suponían menos horas; esas listas siguen valiendo como lista de tareas.
+
+**De dónde salen los números:** ~83 horas hasta hoy (calculadas con los commits, que no cuentan lo que se conversó o probó sin commit) dieron dos capítulos con ~2.580 escenas, además del RPG y los sistemas. Medida usada: ~15 horas por cada hora de lectura de historia.
+
+| Etapa | Horas | Con 44 h/semana | Con atrasos (~31 h/semana) |
+|---|---|---|---|
+| **Lógica del juego base** (Capítulos 2 a 7, finales alternativos y RPG) | ~365 | principios de enero de 2027 | fines de enero de 2027 |
+| **Versión 2.0** (diálogos, arte, sprites, inglés, sonido y pruebas completas) | ~425 | mediados de marzo de 2027 | principios de mayo de 2027 |
+| **Las tres expansiones** (Génesis++, RikkaQuest y Génesis#) | ~375 | mediados de mayo de 2027 | fines de julio de 2027 |
+| **Total** | **~1.165** | **~6 meses** | **~8 meses y medio** |
+
+Las horas ya incluyen un 25 % para arreglos y cambios de idea. La columna «con atrasos» supone que se cumple el 70 % del ritmo.
+
+**Detalle de la lógica del juego base (con ese 25 %):**
+
+| Qué | Horas | Terminaría, con 44 h/semana |
+|---|---|---|
+| Probar lo del 4 de noviembre, las peleas del Capítulo 2 y lo que falta del RPG | ~56 | 14 de noviembre |
+| Capítulo 3 (con la pelea de THE KING) | ~69 | 25 de noviembre |
+| Capítulo 4 (con los otakus y Boringram) | ~54 | 3 de diciembre |
+| Capítulo 5 | ~38 | 9 de diciembre |
+| Capítulo 6 (con la batalla de las cinco manifestaciones) | ~81 | 22 de diciembre |
+| Epílogos 7A y 7B y finales alternativos | ~66 | 2 de enero de 2027 |
+
+**Lo que más puede mover estas fechas:**
+- **Las decisiones del autor:** cada capítulo espera sus respuestas antes de escribirse (empezando por `docs/guion/cap03_plan.md`).
+- **El arte:** es lo más incierto de la 2.0, y buena parte la hace el autor (se estimaron ~125 horas de novela y ~70 de sprites del RPG).
+- **La duración del Capítulo 3:** se calculó con las 2 h 30 min a 3 h del canon; si baja a 1 h 30 min, son unas 25 horas menos.
+- **Diciembre:** las fechas no descuentan feriados.
+
+---
+
 ## Semana 1 (3–9 de noviembre): cerrar los Capítulos 1 y 2
 - [x] **Robustez** (hecha el 2026-11-03): pantalla de error dentro del juego (`src/components/Robustez.tsx`), guardado seguro (`src/engine/guardado.ts`), ESLint (`npm run lint`) y CI en GitHub Actions (`.github/workflows/ci.yml`).
 - [x] **Resincronizar el guion del Capítulo 1** (hecho el 2026-11-03; también el del Capítulo 2).
