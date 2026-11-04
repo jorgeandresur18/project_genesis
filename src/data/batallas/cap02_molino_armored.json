@@ -14,7 +14,39 @@
         "def": 6,
         "vel": 12
       },
-      "_nota": "TODO(canon): sprite batalla/cami_armored, ataques y especial del armored."
+      "_nota": "TODO(canon): sprite batalla/cami_armored, ataques y especial del armored.",
+      "especiales": [
+        {
+          "nombre": "Armored",
+          "poder": 9,
+          "golpes": 8,
+          "objetivo": "todos",
+          "color": "#5ea8ff",
+          "ojos": [
+            44,
+            39,
+            26,
+            14
+          ],
+          "texto": "{quien} se cubre de placas de metal. Los ojos del casco se encienden. Lo que sigue no es una pelea: es un trámite. [Relleno: falta el sprite de Cami armored y el berserk]",
+          "posicion": "centro"
+        },
+        {
+          "nombre": "Lluvia de plasma",
+          "poder": 5,
+          "golpes": 8,
+          "objetivo": "todos",
+          "color": "#2f8cff",
+          "ojos": [
+            44,
+            39,
+            26,
+            14
+          ],
+          "texto": "{quien} se planta en el medio, saca la segunda pistola y dispara sin parar. Arriba, al medio, abajo. A todos.",
+          "posicion": "centro"
+        }
+      ]
     }
   },
   "enemigos": [
@@ -159,5 +191,11 @@
   },
   "musica_jefe": "audio/musica/combate_arcade.mp3",
   "musica": "audio/musica/combate_arcade.mp3",
-  "_nota": "Pelea de relleno (pedida por el autor el 2026-11-03 como plantilla): niveles, enemigos, diálogos y fondo son provisorios. TODO(canon)."
+  "_nota": "Pelea de relleno (pedida por el autor el 2026-11-03 como plantilla): niveles, enemigos, diálogos y fondo son provisorios. TODO(canon).",
+  "premio": {
+    "objetos": {},
+    "vars": {
+      "especial_cami_armored": true
+    }
+  }
 }

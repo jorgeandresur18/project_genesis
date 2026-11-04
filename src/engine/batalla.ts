@@ -100,6 +100,11 @@ export interface Heroe {
    * se llena, se elige cuál usar. Sin esto, tiene solo `especial`.
    */
   especiales?: Especial[];
+  /**
+   * Especiales que se ganan en la historia (docs/BIBLIA_RPG.md, sección 18): cada uno se desbloquea con una variable de
+   * la partida (`desbloqueo`, p. ej. el Armored de Cami al ganar la pelea del molino) y aparece como su cassette.
+   */
+  especiales_extra?: { especial: Especial; desbloqueo: string }[];
   /** Animación (de su hoja) cuando no puede actuar ese turno: Cami, agachada por el tobillo. */
   descanso?: string;
   /** Lo que se dice cuando se queda descansando (apenas actúa) y cuando ya puede volver ({quien}: su nombre). */
@@ -671,14 +676,17 @@ export const escribirEquipo = (nombres: string[]): string => nombres.join('|');
  * Lo que un héroe puede equiparse en su nivel: sus ataques (los de siempre y los aprendidos), sus especiales y los
  * cassettes sueltos que se tienen (`sueltos`: los ataques, que puede usar cualquiera).
  */
-export const conocidos = (d: Heroe, nivel: number, sueltos: Ataque[] = []) => ({ ataques: [...ataquesDe({ nivel }, d), ...sueltos], especiales: especialesDe(d) });
+export const conocidos = (d: Heroe, nivel: number, sueltos: Ataque[] = [], ganados: string[] = []) => ({
+  ataques: [...ataquesDe({ nivel }, d), ...sueltos],
+  especiales: [...especialesDe(d), ...(d.especiales_extra ?? []).filter((x) => ganados.includes(x.desbloqueo)).map((x) => x.especial)],
+});
 
 /**
  * Lo equipado: los elegidos (por nombre, en ese orden, si los conoce) o, sin elección, los primeros que conoce, hasta
  * el máximo. Lo que conoce y no está equipado queda en la mochila de ataques (ver `enMochila`).
  */
-export function equipados(d: Heroe, nivel: number, elegidos?: { ataques?: string[]; especiales?: string[] }, sueltos: Ataque[] = []) {
-  const c = conocidos(d, nivel, sueltos);
+export function equipados(d: Heroe, nivel: number, elegidos?: { ataques?: string[]; especiales?: string[] }, sueltos: Ataque[] = [], ganados: string[] = []) {
+  const c = conocidos(d, nivel, sueltos, ganados);
   const elegir = <T extends { nombre: string }>(todos: T[], nombres: string[] | undefined, max: number): T[] => {
     // Sin elección: los suyos (los sueltos solo si se eligen).
     if (!nombres) return todos.filter((x) => !sueltos.includes(x as unknown as Ataque)).slice(0, max);
@@ -689,9 +697,9 @@ export function equipados(d: Heroe, nivel: number, elegidos?: { ataques?: string
 }
 
 /** Lo que conoce y no tiene equipado: va a la mochila de ataques (sus cassettes). */
-export function enMochila(d: Heroe, nivel: number, elegidos?: { ataques?: string[]; especiales?: string[] }, sueltos: Ataque[] = []) {
-  const c = conocidos(d, nivel, sueltos);
-  const e = equipados(d, nivel, elegidos, sueltos);
+export function enMochila(d: Heroe, nivel: number, elegidos?: { ataques?: string[]; especiales?: string[] }, sueltos: Ataque[] = [], ganados: string[] = []) {
+  const c = conocidos(d, nivel, sueltos, ganados);
+  const e = equipados(d, nivel, elegidos, sueltos, ganados);
   return {
     ataques: c.ataques.filter((a) => !e.ataques.includes(a)),
     especiales: c.especiales.filter((a) => !e.especiales.includes(a)),
@@ -726,6 +734,8 @@ export interface Progreso {
   equipo?: Record<string, { ataques?: string[]; especiales?: string[] }>;
   /** Los cassettes sueltos que se tienen (`cassette_<id>` en la partida): los puede equipar cualquiera. */
   cassettes?: Record<string, number>;
+  /** Los especiales ganados en la historia (las variables `especial_<…>` en true). */
+  especialesGanados?: string[];
   /** Las monedas de la partida (para Boringplace); sin ninguna, no está. */
   monedas?: number;
 }
@@ -741,6 +751,7 @@ export const monedasJefe = (nivel: number) => nivel * 5;
 export function progresoDeVars(vars: Vars): Progreso {
   const p: Progreso = { heroes: {}, mochila: {} };
   for (const [k, v] of Object.entries(vars)) {
+    if (/^especial_/.test(k) && v === true) (p.especialesGanados ??= []).push(k);
     const eq = k.match(/^(ataques|especiales)_(.+)$/);
     if (eq && typeof v === 'string' && v) {
       const e = ((p.equipo ??= {})[eq[2]] ??= {});

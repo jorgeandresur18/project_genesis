@@ -61,3 +61,22 @@ describe('cassettes sueltos', () => {
     }
   });
 });
+
+describe('especiales que se ganan en la historia (el Armored de Cami)', () => {
+  it('no aparece hasta ganarlo; después se equipa solo (hay dos huecos)', () => {
+    const cami = FICHAS.heroes.cami as Heroe;
+    expect(equipados(cami, 16).especiales.map((e) => e.nombre)).toEqual(['Lluvia de plasma']);
+    const ganados = progresoDeVars({ especial_cami_armored: true }).especialesGanados;
+    expect(ganados).toEqual(['especial_cami_armored']);
+    expect(equipados(cami, 16, undefined, [], ganados).especiales.map((e) => e.nombre)).toEqual(['Lluvia de plasma', 'Armored']);
+  });
+
+  it('la pelea del molino (Cami armored) lo da como premio y ya lo tiene en esa pelea', async () => {
+    const { BATALLAS } = await import('../src/engine/batallas');
+    const d = BATALLAS.cap02_molino_armored;
+    expect(d.premio?.vars?.especial_cami_armored).toBe(true);
+    expect(d.personajes.cami.especiales?.map((e) => e.nombre)).toContain('Armored');
+    const variables = (await import('../src/data/variables.json')).default as Record<string, unknown>;
+    expect(variables).toHaveProperty('especial_cami_armored');
+  });
+});

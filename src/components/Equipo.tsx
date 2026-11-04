@@ -38,6 +38,7 @@ function Cassettes({
   soloVer,
   cassettes,
   equipoTodos,
+  ganados,
 }: {
   heroe: string;
   h: Heroe;
@@ -47,12 +48,14 @@ function Cassettes({
   /** Los cassettes sueltos que se tienen y lo que tiene equipado cada uno (para no equipar más copias de las que hay). */
   cassettes?: Record<string, number>;
   equipoTodos?: Record<string, { ataques?: string[] }>;
+  /** Los especiales ganados en la historia (p. ej. el Armored de Cami). */
+  ganados?: string[];
 }) {
   const t = useT();
   const [aviso, setAviso] = useState('');
   const sueltos = sueltosQueTengo(cassettes);
-  const eq = equipados(h, nivel, elegidos, sueltos);
-  const mochila = enMochila(h, nivel, elegidos, sueltos);
+  const eq = equipados(h, nivel, elegidos, sueltos, ganados);
+  const mochila = enMochila(h, nivel, elegidos, sueltos, ganados);
   /** El id del suelto de un ataque (si es suelto): son grises y se equipan si queda una copia libre. */
   const idSuelto = (nombre: string) => Object.entries(FICHAS.sueltos).find(([, x]) => x.ataque.nombre === nombre)?.[0];
   const de = (nombre: string) => (idSuelto(nombre) ? undefined : heroe);
@@ -179,7 +182,7 @@ export function EquipoPanel({ onClose, soloVer = false, grupo }: { onClose: () =
                       {xp} / {xpParaSubir(nivel)}
                     </dd>
                   </dl>
-                  <Cassettes heroe={k} h={h} nivel={nivel} elegidos={progreso.equipo?.[k]} soloVer={soloVer || !useStore.getState().game} cassettes={progreso.cassettes} equipoTodos={progreso.equipo} />
+                  <Cassettes heroe={k} h={h} nivel={nivel} elegidos={progreso.equipo?.[k]} soloVer={soloVer || !useStore.getState().game} cassettes={progreso.cassettes} equipoTodos={progreso.equipo} ganados={progreso.especialesGanados} />
                   <ul className="equipo-espacios">
                     {ESPACIOS.map((e) => (
                       <li key={e}>

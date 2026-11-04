@@ -13979,6 +13979,23 @@
       "conditions": [],
       "audio": null,
       "ui_effect": null,
+      "next": "cap02_p2_084v"
+    },
+    {
+      "scene_id": "cap02_p2_084v",
+      "chapter": 2,
+      "background": "PLACEHOLDER:bosque_otono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "Entidad 01: modo armored guardado. Recarga: necesaria. Nuevo cassette disponible: Armored. [Relleno: se equipa desde Equipo como un especial de Cami]"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
       "next": "cap02_p2_085"
     },
     {

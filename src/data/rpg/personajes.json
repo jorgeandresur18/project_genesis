@@ -182,6 +182,26 @@
             "texto": "{quien} barre el frente con disparos cortos. A todos un poco. [Relleno: ataque de prueba, sin sprites nuevos]"
           }
         }
+      ],
+      "especiales_extra": [
+        {
+          "especial": {
+            "nombre": "Armored",
+            "poder": 9,
+            "golpes": 8,
+            "objetivo": "todos",
+            "color": "#5ea8ff",
+            "ojos": [
+              44,
+              39,
+              26,
+              14
+            ],
+            "texto": "{quien} se cubre de placas de metal. Los ojos del casco se encienden. Lo que sigue no es una pelea: es un trámite. [Relleno: falta el sprite de Cami armored y el berserk]",
+            "posicion": "centro"
+          },
+          "desbloqueo": "especial_cami_armored"
+        }
       ]
     },
     "rikka": {

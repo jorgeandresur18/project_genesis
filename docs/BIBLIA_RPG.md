@@ -284,8 +284,9 @@ Están enganchadas para probar el flujo; **todo es provisorio** (niveles, enemig
 | `cap02_muralla` | `cap02_143` (Rikka cuenta que salió por la muralla) | Rikka sola (12) | 4 soldados (8–10), capitán 14 |
 | `cap02_campamento` | `cap02_183` (la noche de guardia) | Jair 7, Cami 16, Rikka 12 | 5 soldados (8–10), capitán 16 |
 | `cap02_molino` | `cap02_p2_071r07` (detrás de Rikka) | Jair 8, Rikka 13, Cami 17 | 6 soldados (10–12), capitán 16 |
-| `cap02_molino_armored` | `cap02_p2_082` («un level up»), antes del berserk | Cami armored (20; usa el sprite de Cami) | 4 soldados (10–12), capitán 18 |
-| `cap02_molino_cassette` | **sin enganchar**: falta saber qué es el cassette | Jair, Cami, Rikka | 4 soldados, capitán 16 |
+| `cap02_molino_armored` | `cap02_p2_082` («un level up»), antes del berserk | Cami armored (20; usa el sprite de Cami), con el especial Armored | 4 soldados (10–12), capitán 18; **premio: el especial Armored** |
+
+**El cassette del molino** (decidido por el autor el 2026-11-03) no es una pelea: es el cassette del especial **Armored** de Cami, que se gana al ganar la pelea de Cami armored. Es un **especial normal** (no un «especial+»): ocupa su segundo hueco de especial, comparte la barra, y al usarlo Cami se cubre con la armadura, entra en berserk, golpea a todos y vuelve a su traje. Al salir del molino, la Voz avisa (`cap02_p2_084v`, de relleno). Motor: `especiales_extra` en la ficha (se desbloquea con la variable `especial_cami_armored`). Falta el arte: el sprite de Cami armored y el berserk (por ahora usa su animación de especial).
 
 ### La demo (`demo`, solo para probar)
 

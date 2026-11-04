@@ -42,5 +42,6 @@
   "cassette_piedra": 0,
   "cassette_grito": 0,
   "cassette_botella": 0,
+  "especial_cami_armored": false,
   "hangar_pelea": false
 }

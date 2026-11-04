@@ -1220,7 +1220,7 @@ function Pelea({
       const { n } = await golpear(h, h, CONFUSION.poder);
       return decir(fmt(t('batalla.recibe'), { quien: h.nombre, n }));
     }
-    if (c.tipo === 'especial') return usarEspecial(h, equipados(d.personajes[h.clave], h.nivel, progreso?.equipo?.[h.clave], sueltosQueTengo(progreso?.cassettes)).especiales[c.cual] ?? d.personajes[h.clave].especial!, d.personajes[h.clave].sprite, enemigos, objetivo(c.objetivo));
+    if (c.tipo === 'especial') return usarEspecial(h, equipados(d.personajes[h.clave], h.nivel, progreso?.equipo?.[h.clave], sueltosQueTengo(progreso?.cassettes), progreso?.especialesGanados).especiales[c.cual] ?? d.personajes[h.clave].especial!, d.personajes[h.clave].sprite, enemigos, objetivo(c.objetivo));
     if (c.tipo === 'hablar') {
       cargar(h, CARGA.hablar);
       const e = objetivo(c.objetivo);
@@ -1261,7 +1261,7 @@ function Pelea({
       return lineas(funciona ? 'hablar_ok' : 'hablar_no', { objetivo: e.nombre });
     }
     if (c.tipo !== 'atacar') return;
-    const ataque = equipados(d.personajes[h.clave], h.nivel, progreso?.equipo?.[h.clave], sueltosQueTengo(progreso?.cassettes)).ataques[c.ataque];
+    const ataque = equipados(d.personajes[h.clave], h.nivel, progreso?.equipo?.[h.clave], sueltosQueTengo(progreso?.cassettes), progreso?.especialesGanados).ataques[c.ataque];
     gastarUso(h, ataque);
     if (ataque.cebo) return dejarCebo(h, ataque);
     if (ataque.cura) {
@@ -1901,7 +1901,7 @@ function Pelea({
   const heroe = b.current.heroes.find((h) => h.id === eligiendo);
   // Lo equipado (docs/BIBLIA_RPG.md, sección 18): hasta 3 ataques y 2 especiales; los especiales comparten la barra y,
   // cuando está llena, se elige cuál.
-  const equipo = heroe ? equipados(d.personajes[heroe.clave], heroe.nivel, progreso?.equipo?.[heroe.clave], sueltosQueTengo(progreso?.cassettes)) : undefined;
+  const equipo = heroe ? equipados(d.personajes[heroe.clave], heroe.nivel, progreso?.equipo?.[heroe.clave], sueltosQueTengo(progreso?.cassettes), progreso?.especialesGanados) : undefined;
   const ataques = equipo?.ataques ?? [];
   const especiales = equipo?.especiales ?? [];
   const comandos = [t('batalla.atacar'), t('batalla.hablar'), t('batalla.esquivar'), t('batalla.objetos'), t('batalla.huir')];
