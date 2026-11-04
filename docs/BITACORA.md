@@ -261,3 +261,6 @@ fuera de la computadora principal. **Al volver a la principal: `git checkout des
   - **Confirmado por el autor:** la fusión de Cami y Rikka ocurre en la rama del Capítulo 6 que lleva al 7A; en la otra
     rama no ocurre porque hay un conflicto de fusión, y eso desemboca en el 7B. Pendiente: en qué punto de la rama lo
     intentan (antes o después de que Rikka rompa la computadora).
+  - **Cuándo se fusionan (decisión del autor):** en la pelea final contra el Rey Malvado del Capítulo 6. En la rama del
+    7B, eso queda después de que Rikka rompe la computadora. Sigue pendiente en qué fase de las cinco entra AnothergIrl
+    en la rama del 7A, qué choca entre ellas en la del 7B y si Jair ejecuta el comando.

@@ -18,7 +18,8 @@ análisis», que son paralelismos, no influencias confirmadas).
     y cómo se gana: `[PENDIENTE]`.
   - **Capítulo 6, rama que lleva al 7B:** **no se transforma**: es THE KING, más fuerte que en el Capítulo 3. **La
     fusión falla:** Rikka y Cami no logran fusionarse en AnothergIrl por un **conflicto de fusión** entre las dos
-    (2026-11-04; ver `docs/CANON.md`, «Hacia el 7B»).
+    (2026-11-04; ver `docs/CANON.md`, «Hacia el 7B»). La fusión, en las dos ramas, se intenta **en la pelea final contra el Rey
+    Malvado** del Capítulo 6.
 - **LA GRAN FUSIÓN** (en inglés **THE GREAT MERGE**) `[CANON]` (2026-11-04): el nombre de lo que Promptmetheus quiere hacer, consumirlo todo para que
   todo forme parte de él (ver «9. Objetivo de PROMPTMETHEUS» en el texto del autor y THE VOID, su culminación).
 - **THE WATCHER y el gatopulpo** `[CANON]` (2026-11-03): al ver la segunda transformación, Jair dice que es una fusión de un ojo con un pulpo y hace un chiste sobre un **gatopulpo** (el guiño a la mascota de la página de repositorios que Geekdump parodia; en el juego no se nombra la marca). Borrador de Claude, para corregir (quién le contesta depende de en qué fase entra AnothergIrl: `TODO(canon)`):
