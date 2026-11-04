@@ -55,6 +55,7 @@ El RPG, Boringram y el arte se hacen **para el capítulo que toca**, no por adel
 - [ ] **Pulir los diálogos del Capítulo 2.**
 - [ ] *Media:* Boringram del Capítulo 2 completo (Jordan, Lady, las fotos del viaje).
 
+- [ ] **Ataques intercambiables** (pedido del autor el 2026-11-03; diseño en `BIBLIA_RPG.md`, sección 18): 3 ataques y 2 especiales equipados, el resto en la mochila; los originales vinculados a su personaje; los sueltos se compran, se venden y se ganan en el torneo. Necesita antes partir `Batalla.tsx` (el menú de ataques y varios especiales).
 - [ ] **PayFoe y el Torneo Genesis** (pedido del autor el 2026-11-03; diseño en `BIBLIA_RPG.md`, sección 17), en partes: (1) ~~PayFoe y la transferencia con el arreglo contra la duplicación~~ **hecho el 2026-11-03**; (2) el torneo y sus copas; (3) Nikki campeona; (4) desbloqueables a la venta y la versión sin censura de 1.000.000.
 
 ## Semanas 3 y 4 (17–30 de noviembre): el Capítulo 3
