@@ -135,3 +135,17 @@ No hay que probarlo: son decisiones del autor. Claude puede repasarlas una por u
 **Publicar y limpiar**
 - [ ] **La demo publicada** (`main`) sigue en la versión 1.0, con el Capitán del hangar en nivel 12, el más difícil. Publicar solo con orden del autor, cuando las pruebas de arriba estén bien (pasos en `docs/METODOLOGIA.md`).
 - [ ] **La segunda computadora** (`MARKETING1ICSH`): si no se va a usar más, borrar la credencial `git:https://jorgeandresur18@github.com` y revocar «Git Credential Manager» en GitHub (Settings → Applications).
+
+## 9. Lo que ya se probó en un navegador real (4 de noviembre)
+
+En la segunda computadora, con un navegador automático sin ventana y sin sonido, que lee texto y errores. **No mira cómo se ve:** los puntos de arriba sobre colores, tamaños y botones siguen pendientes. Los scripts no están en el repositorio.
+
+**Corrieron sin errores en la consola:**
+- Bastión y hangar (110 segundos cada uno, sin trabarse; no llegaron al final), demo y bar con Nikki.
+- La traición de Nikki: hablarle y después atacarla (sale el veneno y la pelea termina).
+- Cebos sueño, tóxico y caliente, con su efecto; cebo explosivo; autodestrucción; la bomba, que explota.
+- Exportar, importar en otro espacio y el aviso con un archivo que no es una partida.
+
+**Para revisar primero:** las dos pruebas de cebos de estado (sueño, frío y paralizante; tóxico, confuso y caliente) marcaron 30 segundos sin cambios. Lo más probable es que sea el script, que insistía en poner un cebo cuando ya había uno en pie, pero **no está confirmado**. Probar a mano: poner un cebo, intentar poner otro y seguir la pelea.
+
+**No se llegó a probar en navegador:** el empate, un héroe dormido o congelado, la tienda, la ropa y el premio del torneo.
