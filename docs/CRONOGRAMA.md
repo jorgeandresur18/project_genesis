@@ -56,6 +56,8 @@ El RPG, Boringram y el arte se hacen **para el capítulo que toca**, no por adel
 - [ ] *Media:* Boringram del Capítulo 2 completo (Jordan, Lady, las fotos del viaje).
 
 - [x] **Ataques intercambiables** (hecho el 2026-11-03; diseño en `BIBLIA_RPG.md`, sección 18): 3 ataques y 2 especiales equipados, el resto en la mochila; los originales vinculados a su personaje; los sueltos se compran, se venden y se ganan en el torneo. Falta probarlos en el navegador y los ataques del torneo.
+- [x] **Partir `Boringram.tsx` y `App.tsx`** (2026-11-04, segunda computadora): solo se movió código.
+- [ ] **Mecánicas nuevas** (pedidas el 2026-11-04; `BIBLIA_RPG.md`, sección 19): dormido, quemado y congelado, cebos con efecto, cebo explosivo, autodestrucción, bomba del día del juicio y empate.
 - [x] **Equipo y permanentes fuera de pelea** (2026-11-04, segunda computadora; `src/engine/equipo.ts`). Falta probarlo en pantalla.
 - [ ] **PayFoe y el Torneo Genesis** (pedido del autor el 2026-11-03; diseño en `BIBLIA_RPG.md`, sección 17), en partes: (1) ~~PayFoe y la transferencia~~, (2) ~~el torneo y sus copas~~ y (3) ~~Nikki campeona~~ **hechos el 2026-11-03 (de relleno)**; falta (4): los desbloqueables a la venta y la versión sin censura de 1.000.000, y los seis ataques de Nikki.
 
