@@ -193,6 +193,8 @@ export interface GameConfig {
   musica_bootcamp?: string | null;
   /** Versión que se ve en una esquina del título. */
   version?: string;
+  /** Hasta qué capítulo se puede jugar: al terminar el anterior, «Continuar» sigue a ese (si no, «próximamente»). */
+  capitulo_maximo?: number;
   /** PayFoe se ve en Boringplace (apagado hasta que haya algo que comprar con él; ver docs/BIBLIA_RPG.md, sección 17). */
   payfoe_activo?: boolean;
 }

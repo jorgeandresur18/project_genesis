@@ -12,6 +12,7 @@ Qué trae cada versión. La que está en curso lleva `-dev` y todavía no se pub
 - **Boringplace:** la tienda como un marketplace (foto con el color del tipo de objeto, nombre, precio; adentro,
   descripción y cuántos comprar; el objeto flota en 3D con la luz de su tipo). Sin «Para ti» ni las publicaciones de
   relleno.
+- **Capítulo 2 jugable:** al terminar el Capítulo 1, «Continuar» sigue al Capítulo 2 (`capitulo_maximo: 2` en `juego.json`; ponerlo en 1 si no se quiere publicar todavía). El cassette del molino es el especial Armored de Cami.
 - **Capítulo 2:** plantillas de las peleas (muralla, campamento, molino con Rikka, Cami armored; la del cassette sin
   enganchar), con perder que repite la pelea.
 - **Galería:** casillas vacías en el orden en que salen en la historia (lugares y pixel art), el hangar destruido entre

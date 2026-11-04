@@ -2,7 +2,7 @@ import { useEffect, useState, type ReactNode } from 'react';
 import { MODO_TODO } from '../engine/modo';
 import { CHAPTER_STARTS } from './ChapterIntro';
 import { useStore } from '../engine/store';
-import { storyFiles } from '../engine/story';
+import { config, storyFiles } from '../engine/story';
 import { playCancel, playGlitch, playSelect } from '../engine/sound';
 import textosEs from '../data/fin_capitulo.json';
 import textosEn from '../data/en/fin_capitulo.json';
@@ -128,8 +128,10 @@ export function ChapterEnd({ chapter, lastScene, onSave, onTitle }: Props) {
       <nav className="chapter-end-menu">
         <button
           onClick={click(() => {
-            // En /all (todo unido) sigue en el capítulo siguiente; si no, «próximamente».
-            const siguiente = MODO_TODO ? [...CHAPTER_STARTS].find(([, n]) => n === chapter + 1)?.[0] : undefined;
+            // Sigue en el capítulo siguiente si ya se puede jugar (`capitulo_maximo` en juego.json; en /all, todos);
+            // si no, «próximamente».
+            const jugable = MODO_TODO || chapter + 1 <= (config.capitulo_maximo ?? 1);
+            const siguiente = jugable ? [...CHAPTER_STARTS].find(([, n]) => n === chapter + 1)?.[0] : undefined;
             if (siguiente) useStore.getState().seguirCapitulo(siguiente);
             else setSoon(true);
           })}

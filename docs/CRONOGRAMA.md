@@ -29,7 +29,7 @@ El RPG, Boringram y el arte se hacen **para el capítulo que toca**, no por adel
 | Parte | Estado |
 |---|---|
 | Capítulo 1 | **Lógica cerrada** (2026-11-03). Completo y jugable; tiene el RPG (bar, Bastión, hangar). Diálogos y arte, al final. |
-| Capítulo 2 | Borrador avanzado en `cap02.json`, **sin enlazar** al Capítulo 1. Faltan sus peleas y arte. |
+| Capítulo 2 | Borrador avanzado en `cap02.json`, **enlazado** al Capítulo 1 (2026-11-03: «Continuar» en la pantalla de fin). Coherencia revisada. Faltan la historia de sus peleas y el arte. |
 | Capítulo 3 | Canon escrito en `docs/CANON.md`; **no hay guion**. |
 | Capítulo 4 | Borrador del autor (17 escenas) en `docs/CANON.md`; sin guion. |
 | Capítulos 5 a 7 | Esquema en el canon. |

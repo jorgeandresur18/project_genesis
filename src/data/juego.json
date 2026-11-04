@@ -1,8 +1,9 @@
 {
-  "nota": "«musica_bootcamp»: el tema del Bootcamp Genesis (TODO: falta el archivo; mientras sea null, suena el del título). «payfoe_activo»: PayFoe se ve en Boringplace (se prendió con el Torneo Genesis, que paga sus premios en PayFoe).",
+  "nota": "«musica_bootcamp»: el tema del Bootcamp Genesis (TODO: falta el archivo; mientras sea null, suena el del título). «payfoe_activo»: PayFoe se ve en Boringplace (se prendió con el Torneo Genesis, que paga sus premios en PayFoe). «capitulo_maximo»: hasta qué capítulo se puede jugar; al terminar el anterior, «Continuar» sigue a ese (2: el Capítulo 1 sigue al 2; en la demo 1.0 era 1).",
   "inicio": "cap01_001",
   "musica_titulo": "audio/musica/into_the_ciberse.mp3",
   "musica_bootcamp": null,
   "version": "1.1.0-dev",
-  "payfoe_activo": true
+  "payfoe_activo": true,
+  "capitulo_maximo": 2
 }
