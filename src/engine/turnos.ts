@@ -28,6 +28,8 @@ import {
   type Luchador,
   type Progreso,
 } from './batalla';
+import { FICHAS } from './batallas';
+import { bonos, puestosDe } from './equipo';
 
 /** Un cebo en pie: la copia del héroe `de`, dónde se dibuja y cuántos turnos le quedan. */
 export interface CeboEnPie {
@@ -76,9 +78,18 @@ export interface EstadoPelea {
  */
 export function estadoInicial(d: DatosBatalla, progreso?: Progreso): EstadoPelea {
   return {
-    heroes: d.heroes.map((k) =>
-      crearLuchador(k, k, 'heroe', d.personajes[k], progreso?.heroes[k]?.nivel || d.personajes[k].nivel, progreso?.heroes[k]?.xp ?? 0),
-    ),
+    heroes: d.heroes.map((k) => {
+      const h = crearLuchador(k, k, 'heroe', d.personajes[k], progreso?.heroes[k]?.nivel || d.personajes[k].nivel, progreso?.heroes[k]?.xp ?? 0);
+      // Lo que lleva puesto (va en `extra` para que subir de nivel no lo borre).
+      const ropa = puestosDe(progreso, k);
+      if (ropa.length) {
+        const { atq, def, ...resto } = bonos(ropa, FICHAS.objetos);
+        h.extra += atq;
+        h.extraDef += def;
+        h.equipo = resto;
+      }
+      return h;
+    }),
     enemigos: [],
     monedas: progreso?.monedas ?? 0,
     mochila: Object.fromEntries(
@@ -239,7 +250,8 @@ export function resolverGolpe(
   aMedias = false,
   azar: () => number = Math.random,
 ): { n: number; critico: boolean; bloqueado?: boolean } {
-  const extra = d.ayuda && atacante.lado === 'heroe' && vanPerdiendo(estado.heroes, d.ayuda.umbral) ? d.ayuda.critico : 0;
+  const ayuda = d.ayuda && atacante.lado === 'heroe' && vanPerdiendo(estado.heroes, d.ayuda.umbral) ? d.ayuda.critico : 0;
+  const extra = ayuda + (atacante.equipo?.critico ?? 0);
   if (defensor.protegido > 0 && atacante !== defensor) {
     defensor.protegido--;
     return { n: 0, critico: false, bloqueado: true };
@@ -263,6 +275,8 @@ export function paralizarA(estado: EstadoPelea, x: Luchador, n: number) {
 
 /** Confunde: empieza a descontar desde el turno siguiente. */
 export function confundirA(estado: EstadoPelea, x: Luchador, n: number) {
+  // La flor de pureza: no se puede confundir.
+  if (x.equipo?.sinConfusion) return;
   x.confundido = n;
   estado.confundidoRecien.push(x.id);
 }

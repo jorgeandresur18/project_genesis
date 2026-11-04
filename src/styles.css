@@ -3013,6 +3013,10 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 .equipo-espacios { display: grid; gap: 0.2rem; margin: 0; padding: 0; list-style: none; font-size: 0.8rem; }
 .equipo-espacios li { display: flex; justify-content: space-between; padding: 0.25rem 0.5rem; border: 1px dashed rgba(214, 218, 226, 0.18); border-radius: 0.3rem; }
 .equipo-espacios em { color: #6f6b62; font-style: normal; }
+.equipo-puesto { display: flex; align-items: center; gap: 0.5rem; font-weight: 600; }
+.equipo-acciones { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.4rem; }
+.equipo-accion { padding: 0.1rem 0.45rem; border: 1px solid rgba(214, 218, 226, 0.35); border-radius: 0.25rem; background: transparent; color: inherit; font-size: 0.72rem; cursor: pointer; }
+.equipo-accion:hover { background: rgba(214, 218, 226, 0.12); }
 .equipo-nota { grid-column: 1 / -1; margin: 0.2rem 0 0; font-size: 0.8rem; }
 .equipo-mochila { display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: 0.6rem; }
 .equipo-objeto { padding: 0.6rem 0.75rem; border: 1px solid rgba(214, 218, 226, 0.15); border-radius: 0.5rem; }

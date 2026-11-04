@@ -8,7 +8,7 @@ import { useLang } from './i18n';
 import dataEs from '../data/boringplace.json';
 import dataEn from '../data/en/boringplace.json';
 import { tipoDe, type Objeto } from './batalla';
-import { BATALLAS } from './batallas';
+import { FICHAS } from './batallas';
 
 export interface Articulo {
   id: string;
@@ -64,9 +64,8 @@ const EN = merge(dataEs, dataEn) as BoringplaceData;
 export const unlockScenesBoringplace = (): string[] =>
   [ES.desbloqueo, ...ES.articulos.map((a) => a.desbloqueo)].filter((x): x is string => !!x);
 
-/** Los objetos de las peleas (el primero que aparece con cada clave), para la tienda. */
-export const OBJETOS_TIENDA = new Map<string, Objeto>();
-for (const d of Object.values(BATALLAS)) for (const [k, o] of Object.entries(d.objetos)) if (!OBJETOS_TIENDA.has(k)) OBJETOS_TIENDA.set(k, o);
+/** Todos los objetos del juego (también el equipo, que no está en ninguna pelea), para la tienda. */
+export const OBJETOS_TIENDA = new Map<string, Objeto>(Object.entries(FICHAS.objetos));
 /**
  * El color de la foto de un objeto en la tienda, según su tipo (los colores aprobados de la biblia del RPG, sección 15):
  * curación verde menta, mejora dorado, para el rival rojo, para un aliado plateado. Los que la biblia no tiene

@@ -49,6 +49,7 @@
     "comprar": "Buy",
     "vender": "Sell",
     "tienes": "You have {n}",
+    "ya_tuyo": "Already yours. Gear is one of a kind: you only buy it once.",
     "sin_monedas": "You can't afford it. {n} tokens short.",
     "comprado": "You bought {objeto}. It goes to your bag.",
     "vendido_ok": "You sold {objeto} for {n} tokens.",
@@ -169,6 +170,15 @@
     },
     {
       "descripcion": "Protects an ally from the next hit. Cheap, no-brand condom."
+    },
+    {
+      "descripcion": "For your head. +5% critical chance. Equip it from the Party panel."
+    },
+    {
+      "descripcion": "Outfit. +2 DEF, +2 SPD. Equip it from the Party panel."
+    },
+    {
+      "descripcion": "For your feet. +3 SPD. Equip it from the Party panel."
     }
   ]
 }

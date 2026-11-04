@@ -673,7 +673,23 @@
       "protege": 1,
       "texto": "Le dan a {quien} un condón barato, sin marca. Es protección: el próximo golpe no le hace nada.",
       "icono": "objetos/condon_barato"
-    }
+    },
+    "caramelo_dulce": {
+      "nombre": "Caramelo dulce",
+      "niveles": 1,
+      "texto": "{quien} se come el caramelo dulce. Sube {n} nivel.",
+      "tipo": "permanente",
+      "icono": "objetos/caramelo_dulce"
+    },
+    "flor_pureza": { "nombre": "Flor de pureza", "tipo": "equipo", "espacio": "amuleto", "sin_confusion": true, "texto": "Amuleto. No se puede confundir.", "icono": "objetos/flor_pureza" },
+    "gorro_navidad": { "nombre": "Gorro de navidad", "tipo": "equipo", "espacio": "cabeza", "critico": 0.05, "texto": "Cabeza. +5 % de crítico.", "icono": "objetos/gorro_navidad" },
+    "chaqueta_cuero": { "nombre": "Chaqueta de cuero", "tipo": "equipo", "espacio": "traje", "def": 4, "texto": "Traje. +4 DEF.", "icono": "objetos/chaqueta_cuero" },
+    "chaqueta_jean": { "nombre": "Chaqueta jean", "tipo": "equipo", "espacio": "traje", "def": 2, "vel": 2, "texto": "Traje. +2 DEF, +2 VEL.", "icono": "objetos/chaqueta_jean" },
+    "traje_azul": { "nombre": "Traje de combate azul", "tipo": "equipo", "espacio": "traje", "def": 6, "texto": "Traje. +6 DEF.", "icono": "objetos/traje_azul" },
+    "traje_rojo": { "nombre": "Traje de combate rojo", "tipo": "equipo", "espacio": "traje", "def": 4, "atq": 3, "texto": "Traje. +4 DEF, +3 ATQ.", "icono": "objetos/traje_rojo" },
+    "prendas_sacerdotisa": { "nombre": "Prendas de sacerdotisa", "tipo": "equipo", "espacio": "traje", "def": 5, "resiste_veneno": true, "texto": "Traje. +5 DEF, resiste el veneno.", "icono": "objetos/prendas_sacerdotisa" },
+    "zapatillas_buenas": { "nombre": "Zapatillas buenas", "tipo": "equipo", "espacio": "pies", "vel": 3, "texto": "Pies. +3 VEL.", "icono": "objetos/zapatillas_buenas" },
+    "zapatos_plataforma": { "nombre": "Zapatos de plataforma", "tipo": "equipo", "espacio": "pies", "def": 2, "vel": -1, "texto": "Pies. +2 DEF, −1 VEL.", "icono": "objetos/zapatos_plataforma" }
   },
   "retratos": {
     "Jair": "batalla/retratos/jair",

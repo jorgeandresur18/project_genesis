@@ -232,6 +232,11 @@ interface Store {
    * (docs/BIBLIA_RPG.md, sección 18). Solo fuera de las peleas: el panel de Equipo no lo ofrece en una pelea.
    */
   equipar: (heroe: string, tipo: 'ataques' | 'especiales', nombres: string[]) => void;
+  /**
+   * El equipo y los permanentes, fuera de las peleas (engine/equipo.ts). Aplica un cambio a las variables de la
+   * partida: `cambio` devuelve las nuevas, o null si no se pudo. Devuelve si se pudo.
+   */
+  cambiarVars: (cambio: (vars: Vars) => Vars | null) => boolean;
   /** Boringplace: comprar (si alcanzan los tokens) y vender un cassette suelto (`cassette_<id>`). Devuelven si se pudo. */
   comprarCassette: (id: string, precio: number) => boolean;
   venderCassette: (id: string, precio: number) => boolean;
@@ -597,6 +602,13 @@ export const useStore = create<Store>()(
           const { game } = get();
           if (!game) return;
           set({ game: { ...game, vars: { ...game.vars, [`${tipo}_${heroe}`]: escribirEquipo(nombres) } } });
+        },
+        cambiarVars: (cambio) => {
+          const { game } = get();
+          const vars = game && cambio(game.vars);
+          if (!game || !vars) return false;
+          set({ game: { ...game, vars } });
+          return true;
         },
 
         comprarCassette: (id, precio) => {

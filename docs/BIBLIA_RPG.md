@@ -356,8 +356,8 @@ cosas raras; los chistes van en las descripciones.
   siguiente ya equipado. Cada partida tiene su propio dinero.
 - **Botón «Equipo»** en la barra del juego (**hecho**, sin equipo todavía): pestaña Personajes (una ficha por
   personaje con su sprite, nivel, PS, ATQ, DEF, VEL, XP, ataques y los tres espacios de equipo) y pestaña Mochila (lo
-  que tienes, con su tipo y descripción). Falta: equipar, y usar fuera de pelea los permanentes (caramelos,
-  suplementos). Las curas no se usan fuera de pelea: al terminar una pelea ya se curan.
+  que tienes, con su tipo y descripción). **Hecho (2026-11-04):** ponerse y quitarse la ropa y usar fuera de pelea los permanentes (caramelos;
+  los suplementos no tienen datos todavía): `src/engine/equipo.ts`. Las curas no se usan fuera de pelea: al terminar una pelea ya se curan.
 - **En la pelea**, «Objetos» muestra solo lo que se usa en pelea.
 - **Qué es de cada partida y qué no:** el dinero, la mochila, el equipo y los niveles son de cada partida (una
   partida nueva empieza vacía; no se pasa nada de una a otra). Lo desbloqueado en Boringram (fotos, pensamientos,
@@ -430,6 +430,7 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
 **En la tienda de Boringplace** (pedido del autor, 2026-11-03), la foto de cada objeto tiene el color de su tipo: curación, verde menta; mejora, dorado; para el rival, rojo; para un aliado (como el condón), plateado. Propuesta, sin aprobar: permanente (el caramelo), lila; equipo, azul; colección, gris.
 
 **Equipo (aprobado):**
+- **Hecho (2026-11-04):** las 9 prendas de la tabla (`src/data/rpg/personajes.json`), ponérselas y quitárselas desde Equipo (fuera de las peleas), sus efectos en la pelea y la compra de las 3 de la tienda (precios propuestos por Claude: gorro 120, jean 90, zapatillas 80; se compran una sola vez). ATQ y DEF van en `extra` y `extraDef`; VEL se ve y se guarda, pero hoy no decide nada. **Sin dueño todavía:** los trajes, la flor, la chaqueta de cuero y los zapatos no se consiguen en el juego hasta que el autor decida cómo. `TODO(canon)`: «resiste el veneno» se hizo como la mitad del daño (interpretación de Claude).
 - Cuatro espacios: **cabeza, traje, amuleto y pies** (se suma pies a los tres de la sección 14).
 - El equipo es **único**: no se compra (por ahora) y le pertenece a su personaje, aunque cualquiera puede ponérselo.
   Excepción: el **gorro de navidad**, que se compra en la tienda.

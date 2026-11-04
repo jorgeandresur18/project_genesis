@@ -218,6 +218,14 @@ export interface Objeto {
   niveles?: number;
   /** Revive a un caído con esta parte de su vida (0 a 1). Solo se puede usar en un caído. */
   revive?: number;
+  /** Equipo: en qué espacio va (cabeza, traje, pies o amuleto) y lo que da además de `atq` y `def` (ver engine/equipo.ts). */
+  espacio?: string;
+  vel?: number;
+  /** Suma a la probabilidad de crítico (0,05: 5 %). */
+  critico?: number;
+  sin_confusion?: boolean;
+  /** El veneno le hace la mitad. */
+  resiste_veneno?: boolean;
   /** Al usarlo ({quien}: en quién; {n}: cuánto). */
   texto: string;
 }
@@ -395,6 +403,8 @@ export interface Luchador {
   usados?: Record<string, number>;
   /** Acaba de salir de una parálisis: este turno no se lo puede volver a paralizar. */
   inmuneParalisis?: number;
+  /** Lo que da el equipo además de ATQ y DEF (esos van en `extra` y `extraDef`). */
+  equipo?: { vel: number; critico: number; sinConfusion: boolean; resisteVeneno: boolean };
 }
 
 /**
@@ -547,7 +557,8 @@ export const objetivoDe = (o: Objeto): ObjetivoObjeto => o.objetivo ?? 'aliado';
 export function tickVeneno(l: Luchador, jefe: boolean): number {
   if (!l.envenenado || l.ps <= 0) return 0;
   // El jefe (y el veneno que no mata: la traición en el bar) nunca bajan de 1.
-  const n = Math.min(l.envenenado.danio, jefe || l.envenenado.noMata ? l.ps - 1 : l.ps);
+  const danio = l.equipo?.resisteVeneno ? Math.ceil(l.envenenado.danio / 2) : l.envenenado.danio;
+  const n = Math.min(danio, jefe || l.envenenado.noMata ? l.ps - 1 : l.ps);
   l.ps -= Math.max(0, n);
   if (--l.envenenado.turnos <= 0) l.envenenado = null;
   return Math.max(0, n);
@@ -621,7 +632,7 @@ export const seConfunde = (l: Luchador, azar: () => number = Math.random) =>
 export function eligeAtaque(ataques: Ataque[], heroes: Luchador[], azar: () => number = Math.random): { ataque: Ataque; blancos: Luchador[] } | null {
   const vivos = heroes.filter((h) => h.ps > 0);
   const libres = (a: Ataque) =>
-    a.paraliza ? vivos.filter((h) => !h.paralizado && !h.inmuneParalisis) : a.confunde ? vivos.filter((h) => !h.confundido) : vivos;
+    a.paraliza ? vivos.filter((h) => !h.paralizado && !h.inmuneParalisis) : a.confunde ? vivos.filter((h) => !h.confundido && !h.equipo?.sinConfusion) : vivos;
   const posibles = ataques.filter((a) => libres(a).length > 0);
   if (!posibles.length) return null;
   const total = posibles.reduce((n, a) => n + (a.peso ?? 1), 0);
@@ -738,6 +749,8 @@ export interface Progreso {
   especialesGanados?: string[];
   /** Las monedas de la partida (para Boringplace); sin ninguna, no está. */
   monedas?: number;
+  /** Lo que lleva puesto cada héroe, por espacio (`puesto_<héroe>_<espacio>`; ver engine/equipo.ts). */
+  puestos?: Record<string, Record<string, string>>;
 }
 
 /** Monedas que da un enemigo al caer (según su nivel) y el jefe al retirarse (por nivel). */
@@ -757,6 +770,8 @@ export function progresoDeVars(vars: Vars): Progreso {
       const e = ((p.equipo ??= {})[eq[2]] ??= {});
       e[eq[1] as 'ataques' | 'especiales'] = leerEquipo(v);
     }
+    const puesto = k.match(/^puesto_(.+)_(cabeza|traje|pies|amuleto)$/);
+    if (puesto && typeof v === 'string' && v) ((p.puestos ??= {})[puesto[1]] ??= {})[puesto[2]] = v;
     if (typeof v !== 'number') continue;
     const nivel = k.match(/^nivel_(.+)$/);
     if (nivel && v > 0) p.heroes[nivel[1]] = { nivel: v, xp: typeof vars[`xp_${nivel[1]}`] === 'number' ? (vars[`xp_${nivel[1]}`] as number) : 0 };

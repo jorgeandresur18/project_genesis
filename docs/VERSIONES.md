@@ -22,6 +22,7 @@ Qué trae cada versión. La que está en curso lleva `-dev` y todavía no se pub
 - **Conoce más:** Bad Bunny en «La influencia latinoamericana» y Mac Miller en «Notas del autor».
 - **Torneo Genesis (de relleno):** cuatro copas, simple/doble/triple, cuatro rondas hasta Nikki campeona; premios a PayFoe (que se prende con el torneo).
 - **Ataques intercambiables:** 3 ataques y 2 especiales equipados con cassettes, ataques nuevos sin sprites, cassettes sueltos en Boringplace.
+- **Equipo:** ponerse y quitarse la ropa desde el panel de Equipo, con efecto en las peleas; gorro, chaqueta jean y zapatillas en Boringplace; los caramelos se comen fuera de las peleas.
 - **Hangar más justo:** el Capitán baja de nivel 12 a 10 (su cañón da 9 golpes; el jugador atento ganaba ~32 %, ahora ~73 %).
 - **RPG ordenado:** una sola ficha por personaje, `Batalla.tsx` partido (el dibujo y, desde el 4 de noviembre, la
   lógica de turnos de los enemigos en `engine/turnos.ts`), varios especiales con una barra.

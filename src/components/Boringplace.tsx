@@ -2,6 +2,7 @@ import { useState, type CSSProperties } from 'react';
 import { playSelect } from '../engine/sound';
 import { assetUrl } from '../engine/assets';
 import { OBJETOS_TIENDA, colorDeObjeto, precioVenta, useBoringplace, type Articulo } from '../engine/boringplace';
+import { esEquipo, yaTiene } from '../engine/equipo';
 import { useStore } from '../engine/store';
 import { useLang } from '../engine/i18n';
 import { config } from '../engine/story';
@@ -514,18 +515,23 @@ function ObjetoVista({ objeto, onBack, onToast }: { objeto: string; onBack: () =
         <small className={s.lugar}>{tx.lugar_tienda}</small>
         <p className={s.descripcion}>{x.descripcion}</p>
         {tengo > 0 && <small className={s.tienes}>{tx.tienes.replace('{n}', String(tengo))}</small>}
-        {vars ? (
+        {/* La ropa es única: se compra una sola vez. */}
+        {vars && esEquipo(o) && yaTiene(vars, objeto) ? (
+          <p className={s.sinTuyos}>{tx.ya_tuyo}</p>
+        ) : vars ? (
           <>
-            <div className={s.cantidad}>
-              <span>{tx.cantidad}</span>
-              <button aria-label={tx.menos} disabled={n <= 1} onClick={() => setN(n - 1)}>
-                −
-              </button>
-              <b>{n}</b>
-              <button aria-label={tx.mas} onClick={() => setN(n + 1)}>
-                +
-              </button>
-            </div>
+            {!esEquipo(o) && (
+              <div className={s.cantidad}>
+                <span>{tx.cantidad}</span>
+                <button aria-label={tx.menos} disabled={n <= 1} onClick={() => setN(n - 1)}>
+                  −
+                </button>
+                <b>{n}</b>
+                <button aria-label={tx.mas} onClick={() => setN(n + 1)}>
+                  +
+                </button>
+              </div>
+            )}
             <button className={s.boton} onClick={comprar}>
               {tx.comprar_n.replace('{n}', String(n)).replace('{total}', String(total))}
             </button>

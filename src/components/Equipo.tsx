@@ -7,22 +7,21 @@ import { playSelect } from '../engine/sound';
 import { MAX_ATAQUES, MAX_ESPECIALES, enMochila, equipados, progresoDeVars, statsEn, tipoDe, xpParaSubir, type Heroe, type Objeto } from '../engine/batalla';
 import { Cassette } from './Cassette';
 import { BATALLAS, FICHAS, copiasLibres, sueltosQueTengo } from '../engine/batallas';
+import { ESPACIOS, bonos, esEquipo, ponerEquipo, puestosDe, quitarEquipo, usarPermanente } from '../engine/equipo';
 
 /**
  * Equipo (botón de la barra del juego): las estadísticas de cada personaje del equipo con su sprite, lo que tiene
- * equipado (cabeza, traje y amuleto) y la mochila. Todo es de la partida en curso. El equipo se compra en
- * Boringplace (por construir: por ahora los espacios están vacíos).
+ * puesto (cabeza, traje, pies y amuleto) y la mochila, desde donde se pone la ropa y se comen los caramelos. Todo es de
+ * la partida en curso; en una pelea se mira, no se cambia. Cuentas: engine/equipo.ts.
  */
-/** Cada héroe y cada objeto como aparecen por primera vez en las peleas (el Bastión primero). */
+/** Cada héroe como aparece por primera vez en las peleas (el Bastión primero) y todos los objetos del juego. */
 const HEROES = new Map<string, Heroe>();
 const OBJETOS = new Map<string, Objeto>();
 for (const k of Object.keys(BATALLAS).sort((a, b) => (a.includes('bastion') ? -1 : b.includes('bastion') ? 1 : a.localeCompare(b)))) {
   const d = BATALLAS[k];
   for (const [id, h] of Object.entries(d.personajes)) if (!HEROES.has(id)) HEROES.set(id, h);
-  for (const [id, o] of Object.entries(d.objetos)) if (!OBJETOS.has(id)) OBJETOS.set(id, o);
 }
-/** Los espacios de equipo de cada personaje (traje sirve para un vestido, una armadura o lo que lleve). */
-export const ESPACIOS = ['cabeza', 'traje', 'pies', 'amuleto'] as const;
+for (const [id, o] of Object.entries(FICHAS.objetos)) OBJETOS.set(id, o);
 /** Cuántos van en el grupo (las fichas vacías son los lugares que todavía no se ocupan). */
 const GRUPO = 3;
 
@@ -159,6 +158,8 @@ export function EquipoPanel({ onClose, soloVer = false, grupo }: { onClose: () =
             const nivel = progreso.heroes[k]?.nivel || h.nivel;
             const xp = progreso.heroes[k]?.xp ?? 0;
             const s = statsEn(h.base, h.crece, nivel);
+            // Con lo que lleva puesto.
+            const b = bonos(puestosDe(progreso, k), FICHAS.objetos);
             return (
               <article key={k} className="equipo-ficha" style={{ '--c': h.especial?.color ?? '#e8e2d4' } as CSSProperties}>
                 <div className="equipo-sprite">
@@ -172,11 +173,11 @@ export function EquipoPanel({ onClose, soloVer = false, grupo }: { onClose: () =
                     <dt>PS</dt>
                     <dd>{s.ps}</dd>
                     <dt>ATQ</dt>
-                    <dd>{s.atq}</dd>
+                    <dd>{s.atq + b.atq}</dd>
                     <dt>DEF</dt>
-                    <dd>{s.def}</dd>
+                    <dd>{s.def + b.def}</dd>
                     <dt>VEL</dt>
-                    <dd>{s.vel}</dd>
+                    <dd>{s.vel + b.vel}</dd>
                     <dt>XP</dt>
                     <dd>
                       {xp} / {xpParaSubir(nivel)}
@@ -184,12 +185,32 @@ export function EquipoPanel({ onClose, soloVer = false, grupo }: { onClose: () =
                   </dl>
                   <Cassettes heroe={k} h={h} nivel={nivel} elegidos={progreso.equipo?.[k]} soloVer={soloVer || !useStore.getState().game} cassettes={progreso.cassettes} equipoTodos={progreso.equipo} ganados={progreso.especialesGanados} />
                   <ul className="equipo-espacios">
-                    {ESPACIOS.map((e) => (
-                      <li key={e}>
-                        <span>{t(`equipo.${e}`)}</span>
-                        <em>{t('equipo.vacio')}</em>
-                      </li>
-                    ))}
+                    {ESPACIOS.map((e) => {
+                      const id = progreso.puestos?.[k]?.[e];
+                      return (
+                        <li key={e}>
+                          <span>{t(`equipo.${e}`)}</span>
+                          {id ? (
+                            <b className="equipo-puesto">
+                              {FICHAS.objetos[id]?.nombre ?? id}
+                              {!soloVer && (
+                                <button
+                                  className="equipo-accion"
+                                  onClick={() => {
+                                    playSelect();
+                                    useStore.getState().cambiarVars((v) => quitarEquipo(v, k, e));
+                                  }}
+                                >
+                                  {t('equipo.quitar')}
+                                </button>
+                              )}
+                            </b>
+                          ) : (
+                            <em>{t('equipo.vacio')}</em>
+                          )}
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               </article>
@@ -210,6 +231,24 @@ export function EquipoPanel({ onClose, soloVer = false, grupo }: { onClose: () =
                 </b>
                 <span className="equipo-tipo">{t(`equipo.tipo_${tipoDe(o)}`)}</span>
                 <p>{o.texto.replace(/\{quien\}/g, t('equipo.alguien')).replace(/\{n\}/g, '…')}</p>
+                {/* Fuera de las peleas: la ropa se pone y los caramelos se comen. */}
+                {!soloVer && (esEquipo(o) || (tipoDe(o) === 'permanente' && !!o.niveles)) && (
+                  <div className="equipo-acciones">
+                    {equipo.map((h) => (
+                      <button
+                        key={h}
+                        className="equipo-accion"
+                        onClick={() => {
+                          playSelect();
+                          const nivel = progreso.heroes[h]?.nivel || HEROES.get(h)!.nivel;
+                          useStore.getState().cambiarVars((v) => (esEquipo(o) ? ponerEquipo(v, h, k, o) : usarPermanente(v, k, h, nivel, o)));
+                        }}
+                      >
+                        {t(esEquipo(o) ? 'equipo.poner_en' : 'equipo.usar_en').replace('{quien}', HEROES.get(h)!.nombre)}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
             );
           })}

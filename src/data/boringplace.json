@@ -52,6 +52,7 @@
     "comprar": "Comprar",
     "vender": "Vender",
     "tienes": "Tienes {n}",
+    "ya_tuyo": "Ya es tuyo. La ropa es única: se compra una sola vez.",
     "sin_monedas": "No te alcanza. Faltan {n} tokens.",
     "comprado": "Compraste {objeto}. Va a la mochila.",
     "vendido_ok": "Vendiste {objeto} por {n} tokens.",
@@ -263,6 +264,21 @@
       "objeto": "condon",
       "precio": 40,
       "descripcion": "Protege a un aliado del próximo golpe. Condón barato, sin marca."
+    },
+    {
+      "objeto": "gorro_navidad",
+      "precio": 120,
+      "descripcion": "Para la cabeza. +5 % de crítico. Se equipa desde el panel de Equipo."
+    },
+    {
+      "objeto": "chaqueta_jean",
+      "precio": 90,
+      "descripcion": "Traje. +2 DEF, +2 VEL. Se equipa desde el panel de Equipo."
+    },
+    {
+      "objeto": "zapatillas_buenas",
+      "precio": 80,
+      "descripcion": "Para los pies. +3 VEL. Se equipa desde el panel de Equipo."
     }
   ]
 }
