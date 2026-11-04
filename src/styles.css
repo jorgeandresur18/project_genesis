@@ -660,7 +660,13 @@ input, textarea { -webkit-user-select: text; user-select: text; }
 .fondo-capas-contener .fondo-capas-caja { width: min(100cqw, calc(100cqh * var(--r))); overflow: hidden; }
 .fondo-capas .emblema-18 { pointer-events: auto; }
 .viewer-stage { position: relative; }
-.gallery-secreta .gallery-thumb, .sprite-item-secreto .sprite-cell { border-color: #ff7ac0; box-shadow: 0 0 0.9rem rgba(255, 90, 170, 0.35); }
+/* Los desbloqueables especiales (imágenes y sprites secretos): borde magenta y un resplandor que respira. */
+.gallery-secreta .gallery-thumb, .sprite-item-secreto .sprite-cell { border-color: #ff7ac0; box-shadow: 0 0 0.9rem rgba(255, 90, 170, 0.35); animation: resplandorEspecial 2.8s ease-in-out infinite; }
+@keyframes resplandorEspecial {
+  0%, 100% { box-shadow: 0 0 0.7rem rgba(255, 90, 170, 0.3), inset 0 0 0.4rem rgba(255, 122, 192, 0.15); }
+  50% { box-shadow: 0 0 1.6rem rgba(255, 90, 170, 0.6), 0 0 0.35rem rgba(255, 190, 225, 0.55), inset 0 0 0.7rem rgba(255, 122, 192, 0.3); }
+}
+@media (prefers-reduced-motion: reduce) { .gallery-secreta .gallery-thumb, .sprite-item-secreto .sprite-cell { animation: none; } }
 .sprite-item-secreto .sprite-name { color: #ff9ad0; }
 .gallery-viewer-bar .viewer-vapor-btn { border-color: #ff7ac0; color: #ffb3dc; white-space: nowrap; }
 .gallery-viewer-bar .viewer-vapor-btn.active { background: rgba(255, 122, 192, 0.18); }
