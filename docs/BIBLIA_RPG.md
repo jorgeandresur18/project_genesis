@@ -362,13 +362,13 @@ cosas raras; los chistes van en las descripciones.
 - **Qué es de cada partida y qué no:** el dinero, la mochila, el equipo y los niveles son de cada partida (una
   partida nueva empieza vacía; no se pasa nada de una a otra). Lo desbloqueado en Boringram (fotos, pensamientos,
   historias, mensajes, notificaciones), la galería, los finales y el 100 % son de todo el juego y quedan siempre.
-- **Boringplace abierto** (decisión del autor, 2026-11-02; reemplaza lo de «desde el Capítulo 2»): antes de ganar la pelea del Bastión dice que todavía nadie vende nada; al ganarla (`cap01_n06`) baja en la novela el aviso «Hay nuevos productos en Boringplace» y desde ahí se compra y se vende. **Hecho:** la pestaña «Tienda» (los objetos de las peleas con su dibujo, su precio en monedas y «Comprar»; precios en `src/data/boringplace.json`, «tienda»: propuesta de Claude) y, en «Tus artículos», lo de la mochila se vende a la mitad. Se compra dentro de una partida; desde el título, por ahora solo se mira (comprar para una partida guardada: pendiente).
+- **Boringplace abierto** (decisión del autor, 2026-11-02; reemplaza lo de «desde el Capítulo 2»): antes de ganar la pelea del Bastión dice que todavía nadie vende nada; al ganarla (`cap01_n06`) baja en la novela el aviso «Hay nuevos productos en Boringplace» y desde ahí se compra y se vende. **Hecho:** la pestaña «Tienda» (los objetos de las peleas con su dibujo, su precio en monedas y «Comprar»; precios en `src/data/boringplace.json`, «tienda»: propuesta de Claude) y, en «Tus artículos», lo de la mochila se vende a la mitad. Se compra dentro de una partida o, desde el título, para una partida guardada (arriba, «Comprando para:»; hecho el 2026-11-04).
 - **Saltar con el mapa de escenas** conserva el dinero, la mochila, el equipo y los niveles de ahora (no los de la
   primera vez que se pasó por ahí).
-- **Stock limitado:** lo permanente (caramelos, suplementos) se vende de a poco por capítulo (p. ej. un caramelo
-  rancio por capítulo) y es caro. Vender a la mitad impide ganar plata comprando y vendiendo.
+- **Stock limitado (hecho, 2026-11-04):** lo permanente se vende de a poco por capítulo: un caramelo dulce (250 tokens) y
+  un caramelo rancio (1.500) por capítulo (precios propuestos por Claude). Vender a la mitad impide ganar plata comprando y vendiendo.
 - **Orden de construcción:** 1) tipos de objeto y estados nuevos (**hecho**); 2) monedas (**hecho**); 3) comprar y vender en Boringplace
-  (en el juego: **hecho**; desde el título: pendiente); 4) el panel de Equipo.
+  (**hecho**, en el juego y desde el título); 4) el panel de Equipo.
 
 ## 15. Repertorio, estados nuevos, colores y los objetos del autor (decisiones del 2026-11-02; por construir)
 
@@ -439,6 +439,8 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
   sacerdotisa y la flor de pureza.
 - **Se compran en Boringplace:** el gorro de navidad, la chaqueta jean y las zapatillas buenas.
 
+**Hecho (2026-11-04):** todos los consumibles de esta tabla (`src/data/rpg/personajes.json`), a la venta en Boringplace (precios propuestos por Claude). Se pueden usar en cualquier pelea. **Decisión del autor:** Hepatol quita solo el veneno; la galleta clásica solo sube vida; arcoíris, brownie y red velvet suben vida y quitan un estado (propuesta de Claude: el veneno, si no la quemadura y, si no, la confusión).
+
 **Los objetos del autor** (sprites en `docs/sprites de prueba/objetos/`; nombres y efectos aprobados):
 
 | Sprite | Nombre | Tipo | Qué hace |
@@ -454,10 +456,10 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
 | veneno para ratas | Veneno para ratas | táctico | Envenena a un rival |
 | condón barato | Condón barato | táctico | Protege a un aliado de 1 golpe. Descripción: «Condón barato, sin marca». |
 | condón Spartan | Condón Spartan | táctico | Protege a todo el equipo de 1 golpe |
-| medicamento para el hígado | Hepatol | curación | Quita la confusión y el veneno |
+| medicamento para el hígado | Hepatol | curación | Quita el veneno |
 | galleta clásica | Galleta clásica | curación | +20 PS |
-| galleta con grageas | Galleta arcoíris | curación | +20 PS a todo el equipo |
-| galleta brownie | Galleta brownie | curación | +50 PS |
+| galleta con grageas | Galleta arcoíris | curación | +20 PS a todo el equipo y quita un estado |
+| galleta brownie | Galleta brownie | curación | +50 PS y quita un estado |
 | galleta red velvet | Galleta red velvet | curación | +35 PS y quita un estado |
 | flor de pureza | Flor de pureza | equipo (amuleto) | No se puede confundir |
 | gorro de navidad | Gorro de navidad | equipo (cabeza) | +5 % de crítico; se compra |

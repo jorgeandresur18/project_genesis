@@ -65,6 +65,14 @@ Hay que jugar la historia (o usar `/all`) hasta ganar el Bastión, porque ahí s
 - [ ] En Equipo › Mochila, «Usar en Jair» sube 10 niveles, la experiencia vuelve a 0 y se gasta.
 - [ ] Los números de la ficha suben, y en la siguiente pelea entra con ese nivel.
 
+## 5b. Tienda: consumibles, stock, título e inglés (nuevo)
+
+- [ ] En Boringplace están Elixit++, Condón Spartan, Hepatol y las 4 galletas, con su dibujo, y se usan en las peleas.
+- [ ] Hepatol quita solo el veneno. En la pelea, su marca puede salir como «+0»: revisar si queda feo.
+- [ ] Caramelo dulce y rancio: se vende uno de cada uno por capítulo; después dice «Se acabó por este capítulo», y en el capítulo siguiente vuelve.
+- [ ] **Desde el título** (Extras › Boringram › Boringplace): arriba dice «Comprando para:» con la partida más reciente; se puede elegir otra; al cargar esa partida, lo comprado está ahí y los tokens bajaron. Sin partidas guardadas, solo se mira.
+- [ ] **En inglés:** nombres y descripciones de objetos y cassettes, en Boringplace y en Equipo. Cambiar de idioma no desequipa nada. En las peleas todavía sale en español (ver la bitácora).
+
 ## 6. Limpieza (revisar que no se rompió nada)
 
 - [ ] Se partieron `Boringram.tsx` y `App.tsx` en archivos más chicos. Boringram tiene que verse y andar igual: inicio,

@@ -1,7 +1,8 @@
 import { useState, type CSSProperties } from 'react';
 import { Panel } from './Panels';
 import { SpriteHoja } from './batalla/sprites';
-import { useT } from '../engine/i18n';
+import { useLang, useT } from '../engine/i18n';
+import { ataqueEn, nombreAtaque, objetoEn } from '../engine/rpgTexto';
 import { useStore } from '../engine/store';
 import { playSelect } from '../engine/sound';
 import { MAX_ATAQUES, MAX_ESPECIALES, enMochila, equipados, progresoDeVars, statsEn, tipoDe, xpParaSubir, type Heroe, type Objeto } from '../engine/batalla';
@@ -51,6 +52,7 @@ function Cassettes({
   ganados?: string[];
 }) {
   const t = useT();
+  const lang = useLang();
   const [aviso, setAviso] = useState('');
   const sueltos = sueltosQueTengo(cassettes);
   const eq = equipados(h, nivel, elegidos, sueltos, ganados);
@@ -84,14 +86,14 @@ function Cassettes({
       <span className="equipo-cassettes-titulo">{t('equipo.ataques')}</span>
       <div className="equipo-cassettes-fila">
         {eq.ataques.map((a) => (
-          <Cassette key={a.nombre} de={de(a.nombre)} nombre={a.nombre} onClick={soloVer ? undefined : () => cambiar('ataques', a.nombre)} titulo={a.texto.replace(/\{quien\}/g, h.nombre)} />
+          <Cassette key={a.nombre} de={de(a.nombre)} nombre={nombreAtaque(lang, a.nombre)} onClick={soloVer ? undefined : () => cambiar('ataques', a.nombre)} titulo={ataqueEn(lang, a).texto.replace(/\{quien\}/g, h.nombre)} />
         ))}
         {huecos(eq.ataques.length, MAX_ATAQUES)}
       </div>
       <span className="equipo-cassettes-titulo">{t('equipo.especiales')}</span>
       <div className="equipo-cassettes-fila">
         {eq.especiales.map((e) => (
-          <Cassette key={e.nombre} de={de(e.nombre)} nombre={e.nombre} especial onClick={soloVer ? undefined : () => cambiar('especiales', e.nombre)} titulo={e.texto.replace(/\{quien\}/g, h.nombre)} />
+          <Cassette key={e.nombre} de={de(e.nombre)} nombre={nombreAtaque(lang, e.nombre)} especial onClick={soloVer ? undefined : () => cambiar('especiales', e.nombre)} titulo={ataqueEn(lang, e).texto.replace(/\{quien\}/g, h.nombre)} />
         ))}
         {huecos(eq.especiales.length, MAX_ESPECIALES)}
       </div>
@@ -100,10 +102,10 @@ function Cassettes({
           <span className="equipo-cassettes-titulo">{t('equipo.en_mochila')}</span>
           <div className="equipo-cassettes-fila">
             {mochila.ataques.map((a) => (
-              <Cassette key={a.nombre} de={de(a.nombre)} nombre={a.nombre} apagado onClick={soloVer ? undefined : () => cambiar('ataques', a.nombre)} />
+              <Cassette key={a.nombre} de={de(a.nombre)} nombre={nombreAtaque(lang, a.nombre)} apagado onClick={soloVer ? undefined : () => cambiar('ataques', a.nombre)} />
             ))}
             {mochila.especiales.map((e) => (
-              <Cassette key={e.nombre} de={de(e.nombre)} nombre={e.nombre} especial apagado onClick={soloVer ? undefined : () => cambiar('especiales', e.nombre)} />
+              <Cassette key={e.nombre} de={de(e.nombre)} nombre={nombreAtaque(lang, e.nombre)} especial apagado onClick={soloVer ? undefined : () => cambiar('especiales', e.nombre)} />
             ))}
           </div>
         </>
@@ -115,6 +117,7 @@ function Cassettes({
 
 export function EquipoPanel({ onClose, soloVer = false, grupo }: { onClose: () => void; soloVer?: boolean; grupo?: string[] }) {
   const t = useT();
+  const lang = useLang();
   const vars = useStore((s) => s.game?.vars ?? {});
   const progreso = progresoDeVars(vars);
   const [pestana, setPestana] = useState<'personajes' | 'mochila'>('personajes');
@@ -192,7 +195,7 @@ export function EquipoPanel({ onClose, soloVer = false, grupo }: { onClose: () =
                           <span>{t(`equipo.${e}`)}</span>
                           {id ? (
                             <b className="equipo-puesto">
-                              {FICHAS.objetos[id]?.nombre ?? id}
+                              {FICHAS.objetos[id] ? objetoEn(lang, id, FICHAS.objetos[id]).nombre : id}
                               {!soloVer && (
                                 <button
                                   className="equipo-accion"
@@ -222,7 +225,7 @@ export function EquipoPanel({ onClose, soloVer = false, grupo }: { onClose: () =
         <div className="equipo-mochila">
           {mochila.length === 0 && <p className="equipo-mochila-vacia">{t('equipo.mochila_vacia_titulo')}</p>}
           {mochila.map(([k, n]) => {
-            const o = OBJETOS.get(k)!;
+            const o = objetoEn(lang, k, OBJETOS.get(k)!);
             return (
               <div key={k} className="equipo-objeto">
                 <b>

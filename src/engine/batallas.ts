@@ -49,6 +49,8 @@ export function armarBatalla(p: PeleaArchivo, f: Fichas = FICHAS, id = '?'): Dat
     if (!f.objetos[k]) throw new Error(`Pelea ${id}: el objeto «${k}» no tiene ficha`);
     objetos[k] = f.objetos[k];
   }
+  // Lo demás que se puede usar en una pelea: se compra en Boringplace y sirve en cualquiera (salvo el equipo).
+  for (const [k, o] of Object.entries(f.objetos)) if (!objetos[k] && o.tipo !== 'equipo' && o.tipo !== 'coleccion') objetos[k] = o;
   return { ...p, personajes, enemigos, objetos, retratos: { ...f.retratos, ...p.retratos } } as DatosBatalla;
 }
 

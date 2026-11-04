@@ -218,6 +218,10 @@ export interface Objeto {
   paraliza?: number;
   /** Saca los estados: veneno, confusión y parálisis. */
   cura_estados?: boolean;
+  /** Saca solo el veneno (el Hepatol). */
+  quita_veneno?: boolean;
+  /** Saca un estado: el veneno, si no la quemadura y, si no, la confusión (las galletas). */
+  quita_estado?: boolean;
   atq?: number;
   def?: number;
   ps?: number;
@@ -537,6 +541,12 @@ export function usarObjeto(o: Objeto, h: Luchador, d?: { base: Stats; crece: Sta
     if (h.paralizado) h.inmuneParalisis = 1;
     h.paralizado = 0;
   }
+  if (o.quita_veneno) h.envenenado = null;
+  if (o.quita_estado) {
+    if (h.envenenado) h.envenenado = null;
+    else if (h.quemado) h.quemado = 0;
+    else h.confundido = 0;
+  }
   // Los tácticos: estados (sobre un rival o un compañero).
   if (o.cura_estados) {
     h.envenenado = null;
@@ -580,7 +590,7 @@ export function usarObjeto(o: Objeto, h: Luchador, d?: { base: Stats; crece: Sta
 
 /** El tipo de un objeto: el que dice o, si no dice, el que corresponde a lo que hace. */
 export const tipoDe = (o: Objeto): TipoObjeto =>
-  o.tipo ?? (o.niveles ? 'permanente' : o.ps || o.revive || o.cura_estados ? 'curacion' : o.veneno || o.protege || o.confunde || o.paraliza ? 'tactico' : 'mejora');
+  o.tipo ?? (o.niveles ? 'permanente' : o.ps || o.revive || o.cura_estados || o.quita_veneno ? 'curacion' : o.veneno || o.protege || o.confunde || o.paraliza ? 'tactico' : 'mejora');
 /** Lo que se puede usar en una pelea (el equipo y la colección, no). */
 export const usableEnPelea = (o: Objeto) => !['equipo', 'coleccion'].includes(tipoDe(o));
 /** A quién se aplica un objeto. */

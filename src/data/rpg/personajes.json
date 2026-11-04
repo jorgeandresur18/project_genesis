@@ -681,6 +681,13 @@
       "tipo": "permanente",
       "icono": "objetos/caramelo_dulce"
     },
+    "revivir_plus": { "nombre": "Elixit++", "tipo": "curacion", "revive": 1, "texto": "{quien} se toma el Elixit++ y vuelve a pararse con toda la vida: +{n} PS.", "icono": "objetos/elixit_plus" },
+    "condon_spartan": { "nombre": "Condón Spartan", "tipo": "tactico", "objetivo": "equipo", "protege": 1, "texto": "Le dan a {quien} un condón Spartan. El próximo golpe no le hace nada a nadie del equipo.", "icono": "objetos/condon_spartan" },
+    "hepatol": { "nombre": "Hepatol", "tipo": "curacion", "quita_veneno": true, "texto": "{quien} se toma el Hepatol. Se le va el veneno.", "icono": "objetos/hepatol" },
+    "galleta_clasica": { "nombre": "Galleta clásica", "tipo": "curacion", "ps": 20, "texto": "{quien} se come una galleta clásica: +{n} PS.", "icono": "objetos/galleta_clasica" },
+    "galleta_arcoiris": { "nombre": "Galleta arcoíris", "tipo": "curacion", "objetivo": "equipo", "ps": 20, "quita_estado": true, "texto": "{quien} comparte la galleta arcoíris: +{n} PS y se le va un estado.", "icono": "objetos/galleta_arcoiris" },
+    "galleta_brownie": { "nombre": "Galleta brownie", "tipo": "curacion", "ps": 50, "quita_estado": true, "texto": "{quien} se come una galleta brownie: +{n} PS y se le va un estado.", "icono": "objetos/galleta_brownie" },
+    "galleta_red_velvet": { "nombre": "Galleta red velvet", "tipo": "curacion", "ps": 35, "quita_estado": true, "texto": "{quien} se come una galleta red velvet: +{n} PS y se le va un estado.", "icono": "objetos/galleta_red_velvet" },
     "flor_pureza": { "nombre": "Flor de pureza", "tipo": "equipo", "espacio": "amuleto", "sin_confusion": true, "texto": "Amuleto. No se puede confundir.", "icono": "objetos/flor_pureza" },
     "gorro_navidad": { "nombre": "Gorro de navidad", "tipo": "equipo", "espacio": "cabeza", "critico": 0.05, "texto": "Cabeza. +5 % de crítico.", "icono": "objetos/gorro_navidad" },
     "chaqueta_cuero": { "nombre": "Chaqueta de cuero", "tipo": "equipo", "espacio": "traje", "def": 4, "texto": "Traje. +4 DEF.", "icono": "objetos/chaqueta_cuero" },

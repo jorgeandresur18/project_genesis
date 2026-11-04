@@ -74,5 +74,12 @@
   "puesto_rikka_cabeza": "",
   "puesto_rikka_traje": "",
   "puesto_rikka_pies": "",
-  "puesto_rikka_amuleto": ""
+  "puesto_rikka_amuleto": "",
+  "mochila_revivir_plus": 0,
+  "mochila_condon_spartan": 0,
+  "mochila_hepatol": 0,
+  "mochila_galleta_clasica": 0,
+  "mochila_galleta_arcoiris": 0,
+  "mochila_galleta_brownie": 0,
+  "mochila_galleta_red_velvet": 0
 }

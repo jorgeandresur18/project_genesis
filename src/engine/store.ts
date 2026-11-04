@@ -1,3 +1,4 @@
+import { partidaParaComprar } from './tienda';
 import { conBomba, ganaBomba } from './torneo';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
@@ -225,7 +226,12 @@ interface Store {
   save: (slot: number, nombre?: string) => void;
   /** Cambia el nombre de una partida guardada (vacío: vuelve a «Espacio N»). */
   /** Boringplace: comprar (si alcanzan las monedas) y vender (de la mochila). Devuelven si se pudo. */
-  comprarObjeto: (objeto: string, precio: number) => boolean;
+  comprarObjeto: (objeto: string, precio: number, stockVar?: string) => boolean;
+  /** Desde el título: la partida guardada para la que se compra (null: la más reciente). */
+  slotCompra: number | null;
+  setSlotCompra: (slot: number | null) => void;
+  /** Cambia las variables de la partida en curso o, en el título, las de la partida para la que se compra. */
+  conVarsTienda: (cambio: (vars: Vars) => Vars | null) => boolean;
   /** PayFoe: la billetera del jugador, fuera de las partidas (ver src/engine/payfoe.ts). */
   payfoe: PayFoe;
   /**
@@ -584,22 +590,38 @@ export const useStore = create<Store>()(
           set({ saves: get().saves.map((x, i) => (i === slot && x ? { ...x, auto: true } : x)) });
         },
 
-        comprarObjeto: (objeto, precio) => {
-          const { game } = get();
-          if (!game) return false;
-          const monedas = (game.vars.monedas as number) ?? 0;
-          if (monedas < precio) return false;
-          const k = `mochila_${objeto}`;
-          set({ game: { ...game, vars: { ...game.vars, monedas: monedas - precio, [k]: ((game.vars[k] as number) ?? 0) + 1 } } });
+        slotCompra: null,
+        setSlotCompra: (slot) => set({ slotCompra: slot }),
+        conVarsTienda: (cambio) => {
+          const { game, saves, slotCompra } = get();
+          if (game) {
+            const vars = cambio(game.vars);
+            if (!vars) return false;
+            set({ game: { ...game, vars } });
+            return true;
+          }
+          const slot = partidaParaComprar(saves, slotCompra);
+          const partida = slot >= 0 ? saves[slot] : null;
+          const vars = partida && cambio(partida.vars);
+          if (!partida || !vars) return false;
+          set({ saves: saves.map((x, i) => (i === slot ? { ...partida, vars } : x)) });
           return true;
         },
-        venderObjeto: (objeto, precio) => {
-          const { game } = get();
-          const k = `mochila_${objeto}`;
-          if (!game || !((game.vars[k] as number) > 0)) return false;
-          set({ game: { ...game, vars: conGanados(game.vars, { ...game.vars, monedas: ((game.vars.monedas as number) ?? 0) + precio, [k]: (game.vars[k] as number) - 1 }) } });
-          return true;
-        },
+        comprarObjeto: (objeto, precio, stockVar) =>
+          get().conVarsTienda((v) => {
+            const monedas = (v.monedas as number) ?? 0;
+            if (monedas < precio) return null;
+            const k = `mochila_${objeto}`;
+            const nuevas: Vars = { ...v, monedas: monedas - precio, [k]: ((v[k] as number) ?? 0) + 1 };
+            if (stockVar) nuevas[stockVar] = ((v[stockVar] as number) ?? 0) + 1;
+            return nuevas;
+          }),
+        venderObjeto: (objeto, precio) =>
+          get().conVarsTienda((v) => {
+            const k = `mochila_${objeto}`;
+            if (!((v[k] as number) > 0)) return null;
+            return conGanados(v, { ...v, monedas: ((v.monedas as number) ?? 0) + precio, [k]: (v[k] as number) - 1 });
+          }),
 
         equipar: (heroe, tipo, nombres) => {
           const { game } = get();
@@ -614,23 +636,19 @@ export const useStore = create<Store>()(
           return true;
         },
 
-        comprarCassette: (id, precio) => {
-          const { game } = get();
-          if (!game) return false;
-          const monedas = (game.vars.monedas as number) ?? 0;
-          if (monedas < precio) return false;
-          const k = `cassette_${id}`;
-          set({ game: { ...game, vars: { ...game.vars, monedas: monedas - precio, [k]: ((game.vars[k] as number) ?? 0) + 1 } } });
-          return true;
-        },
-        venderCassette: (id, precio) => {
-          const { game } = get();
-          const k = `cassette_${id}`;
-          if (!game || !((game.vars[k] as number) > 0)) return false;
-          const vars = { ...game.vars, monedas: ((game.vars.monedas as number) ?? 0) + precio, [k]: (game.vars[k] as number) - 1 };
-          set({ game: { ...game, vars: conGanados(game.vars, vars) } });
-          return true;
-        },
+        comprarCassette: (id, precio) =>
+          get().conVarsTienda((v) => {
+            const monedas = (v.monedas as number) ?? 0;
+            if (monedas < precio) return null;
+            const k = `cassette_${id}`;
+            return { ...v, monedas: monedas - precio, [k]: ((v[k] as number) ?? 0) + 1 };
+          }),
+        venderCassette: (id, precio) =>
+          get().conVarsTienda((v) => {
+            const k = `cassette_${id}`;
+            if (!((v[k] as number) > 0)) return null;
+            return conGanados(v, { ...v, monedas: ((v.monedas as number) ?? 0) + precio, [k]: (v[k] as number) - 1 });
+          }),
 
         torneo: { ganadas: {}, defensas: 0 },
         premioTorneo: (n) => {

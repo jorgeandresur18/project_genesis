@@ -49,6 +49,8 @@
     "comprar": "Buy",
     "vender": "Sell",
     "tienes": "You have {n}",
+    "comprando_para": "Buying for:",
+    "sin_stock": "Sold out for this chapter.",
     "ya_tuyo": "Already yours. Gear is one of a kind: you only buy it once.",
     "sin_monedas": "You can't afford it. {n} tokens short.",
     "comprado": "You bought {objeto}. It goes to your bag.",
@@ -179,6 +181,33 @@
     },
     {
       "descripcion": "For your feet. +3 SPD. Equip it from the Party panel."
+    },
+    {
+      "descripcion": "Revives a fallen ally with all their HP."
+    },
+    {
+      "descripcion": "Protects the whole party from the next hit."
+    },
+    {
+      "descripcion": "Removes poison."
+    },
+    {
+      "descripcion": "+20 HP."
+    },
+    {
+      "descripcion": "+20 HP to the whole party, and removes one status from each."
+    },
+    {
+      "descripcion": "+50 HP and removes one status."
+    },
+    {
+      "descripcion": "+35 HP and removes one status."
+    },
+    {
+      "descripcion": "Permanently raises 1 level. One per chapter."
+    },
+    {
+      "descripcion": "Permanently raises 10 levels. One per chapter."
     }
   ]
 }

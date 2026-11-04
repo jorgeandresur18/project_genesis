@@ -24,6 +24,8 @@ Qué trae cada versión. La que está en curso lleva `-dev` y todavía no se pub
 - **Ataques intercambiables:** 3 ataques y 2 especiales equipados con cassettes, ataques nuevos sin sprites, cassettes sueltos en Boringplace.
 - **Equipo:** ponerse y quitarse la ropa desde el panel de Equipo, con efecto en las peleas; gorro, chaqueta jean y zapatillas en Boringplace; los caramelos se comen fuera de las peleas.
 - **Estados y ataques nuevos:** dormido, quemado y congelado; cebos con efecto y explosivo; autodestrucción; la bomba del día del juicio; y el empate.
+- **Tienda:** todos los consumibles de la tabla, caramelos con stock por capítulo y comprar desde el título para una partida guardada.
+- **Inglés:** objetos, cassettes y ataques de los héroes, en Boringplace y en Equipo.
 - **Hangar más justo:** el Capitán baja de nivel 12 a 10 (su cañón da 9 golpes; el jugador atento ganaba ~32 %, ahora ~73 %).
 - **RPG ordenado:** una sola ficha por personaje, `Batalla.tsx` partido (el dibujo y, desde el 4 de noviembre, la
   lógica de turnos de los enemigos en `engine/turnos.ts`), varios especiales con una barra.

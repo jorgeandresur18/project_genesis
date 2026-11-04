@@ -1,7 +1,9 @@
 import { useState, type CSSProperties } from 'react';
 import { playSelect } from '../engine/sound';
 import { assetUrl } from '../engine/assets';
-import { OBJETOS_TIENDA, colorDeObjeto, precioVenta, useBoringplace, type Articulo } from '../engine/boringplace';
+import { OBJETOS_TIENDA, colorDeObjeto, precioVenta, useBoringplace, usePartidaTienda, type Articulo } from '../engine/boringplace';
+import { quedanStock, varStock } from '../engine/tienda';
+import { ataqueEn, objetoEn } from '../engine/rpgTexto';
 import { esEquipo, yaTiene } from '../engine/equipo';
 import { useStore } from '../engine/store';
 import { useLang } from '../engine/i18n';
@@ -23,7 +25,9 @@ export function Boringplace({ onArticulo, onToast }: { onArticulo: (id: string) 
   const p = useBoringplace();
   const tx = p.data.textos;
   const [pestana, setPestana] = useState<'tienda' | 'tuyos'>('tienda');
-  const vars = useStore((st) => st.game?.vars);
+  const partida = usePartidaTienda();
+  const lang = useLang();
+  const vars = partida.vars;
   const monedas = (vars?.monedas as number | undefined) ?? 0;
   const tengo = (k: string) => ((vars?.[`mochila_${k}`] as number | undefined) ?? 0);
   const aviso = (texto: string) => onToast?.(texto);
@@ -39,7 +43,7 @@ export function Boringplace({ onArticulo, onToast }: { onArticulo: (id: string) 
   }
   /** Una fila de la mochila (vender a la mitad). */
   const fila = (objeto: string, precio: number) => {
-    const o = OBJETOS_TIENDA.get(objeto)!;
+    const o = objetoEn(lang, objeto, OBJETOS_TIENDA.get(objeto)!);
     return (
       <div key={objeto} className={s.objeto}>
         {o.icono ? <img src={assetUrl(`${o.icono}.webp`)} alt="" draggable={false} /> : <span />}
@@ -91,10 +95,25 @@ export function Boringplace({ onArticulo, onToast }: { onArticulo: (id: string) 
       </div>
       {config.payfoe_activo && <TarjetaPayfoe onAbrir={() => onArticulo(ID_PAYFOE)} />}
       {!vars && <p className={s.sinTuyos}>{tx.sin_partida}</p>}
+      {/* Desde el título se compra para una partida guardada. */}
+      {vars && partida.desdeTitulo && (
+        <label className={s.compraPara}>
+          {tx.comprando_para}{' '}
+          <select value={partida.slot} onChange={(e) => useStore.getState().setSlotCompra(Number(e.target.value))}>
+            {partida.saves.map((x, i) =>
+              x ? (
+                <option key={i} value={i}>
+                  {x.nombre ?? x.date.slice(0, 10)}
+                </option>
+              ) : null,
+            )}
+          </select>
+        </label>
+      )}
       {pestana === 'tienda' ? (
         <div className={s.grilla}>
           {p.tienda.map((x) => {
-            const o = OBJETOS_TIENDA.get(x.objeto)!;
+            const o = objetoEn(lang, x.objeto, OBJETOS_TIENDA.get(x.objeto)!);
             return (
               <button key={x.objeto} className={s.tarjeta} onClick={() => onArticulo(`${ID_TIENDA}${x.objeto}`)}>
                 <FotoObjeto icono={o.icono} color={colorDeObjeto(o)} />
@@ -107,7 +126,7 @@ export function Boringplace({ onArticulo, onToast }: { onArticulo: (id: string) 
           {Object.entries(SUELTOS_EN_VENTA).map(([id, c]) => (
             <button key={`c-${id}`} className={s.tarjeta} onClick={() => onArticulo(`${ID_CASSETTE}${id}`)}>
               <FotoObjeto icono="objetos/cassette_generico" color={GRIS_CASSETTE} />
-              <span className={s.nombre}>{c.ataque.nombre}</span>
+              <span className={s.nombre}>{ataqueEn(lang, c.ataque).nombre}</span>
               <Precio n={c.precio} />
             </button>
           ))}
@@ -371,10 +390,12 @@ const textoCassette = (texto: string, quien: string, objetivo: string) => texto.
 /** La publicación de un cassette suelto: foto, precio, qué hace, cuántos tienes y cuántos comprar. */
 function CassetteVista({ id, onBack, onToast }: { id: string; onBack: () => void; onToast: (texto: string) => void }) {
   const tx = useBoringplace().data.textos;
-  const vars = useStore((st) => st.game?.vars);
+  const { vars } = usePartidaTienda();
   const [n, setN] = useState(1);
-  const c = SUELTOS_EN_VENTA[id];
-  if (!c) return null;
+  const lang = useLang();
+  const base = SUELTOS_EN_VENTA[id];
+  if (!base) return null;
+  const c = { ...base, ataque: ataqueEn(lang, base.ataque) };
   const monedas = (vars?.monedas as number | undefined) ?? 0;
   const tengo = (vars?.[`cassette_${id}`] as number | undefined) ?? 0;
   const total = n * c.precio;
@@ -429,7 +450,8 @@ function CassetteVista({ id, onBack, onToast }: { id: string; onBack: () => void
 /** «Tus artículos»: los cassettes sueltos que se tienen, para vender a la mitad (los equipados, no: primero se guardan). */
 function CassettesParaVender({ onToast }: { onToast: (texto: string) => void }) {
   const tx = useBoringplace().data.textos;
-  const vars = useStore((st) => st.game?.vars);
+  const { vars } = usePartidaTienda();
+  const lang = useLang();
   if (!vars) return null;
   const progreso = progresoDeVars(vars);
   const mios = Object.entries(SUELTOS_EN_VENTA).filter(([id]) => (progreso.cassettes?.[id] ?? 0) > 0);
@@ -438,7 +460,8 @@ function CassettesParaVender({ onToast }: { onToast: (texto: string) => void }) 
     <>
       <h4 className={s.subtitulo}>{tx.tus_cassettes}</h4>
       <div className={s.lista}>
-        {mios.map(([id, c]) => {
+        {mios.map(([id, base]) => {
+          const c = { ...base, ataque: ataqueEn(lang, base.ataque) };
           const libres = copiasLibres(id, progreso.cassettes, progreso.equipo);
           const precio = precioVentaCassette(c.precio);
           return (
@@ -475,21 +498,26 @@ const ID_TIENDA = 'tienda:';
 function ObjetoVista({ objeto, onBack, onToast }: { objeto: string; onBack: () => void; onToast: (texto: string) => void }) {
   const p = useBoringplace();
   const tx = p.data.textos;
-  const vars = useStore((st) => st.game?.vars);
+  const { vars, capitulo } = usePartidaTienda();
   const [n, setN] = useState(1);
+  const lang = useLang();
   const x = p.tienda.find((t) => t.objeto === objeto);
-  const o = OBJETOS_TIENDA.get(objeto);
-  if (!x || !o) return null;
+  const base = OBJETOS_TIENDA.get(objeto);
+  if (!x || !base) return null;
+  const o = objetoEn(lang, objeto, base);
   const monedas = (vars?.monedas as number | undefined) ?? 0;
   const tengo = (vars?.[`mochila_${objeto}`] as number | undefined) ?? 0;
   const total = n * x.precio;
+  // Lo permanente se vende de a poco por capítulo.
+  const quedan = quedanStock(vars, objeto, capitulo, x.stock_por_capitulo);
   const comprar = () => {
     playSelect();
     if (monedas < total) {
       onToast(tx.sin_monedas.replace('{n}', String(total - monedas)));
       return;
     }
-    for (let i = 0; i < n; i++) useStore.getState().comprarObjeto(objeto, x.precio);
+    if (n > quedan) return onToast(tx.sin_stock);
+    for (let i = 0; i < n; i++) useStore.getState().comprarObjeto(objeto, x.precio, x.stock_por_capitulo === undefined ? undefined : varStock(objeto, capitulo));
     onToast(n === 1 ? tx.comprado.replace('{objeto}', o.nombre) : tx.comprados.replace('{n}', String(n)).replace('{objeto}', o.nombre));
     setN(1);
   };
@@ -518,6 +546,8 @@ function ObjetoVista({ objeto, onBack, onToast }: { objeto: string; onBack: () =
         {/* La ropa es única: se compra una sola vez. */}
         {vars && esEquipo(o) && yaTiene(vars, objeto) ? (
           <p className={s.sinTuyos}>{tx.ya_tuyo}</p>
+        ) : vars && quedan <= 0 ? (
+          <p className={s.sinTuyos}>{tx.sin_stock}</p>
         ) : vars ? (
           <>
             {!esEquipo(o) && (

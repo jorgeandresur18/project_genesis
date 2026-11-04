@@ -4,6 +4,8 @@
 // - Se abre al visitar la escena de «desbloqueo» (al ganar la pelea del Bastión); antes no hay nadie vendiendo nada.
 // - «Tienda»: los objetos de las peleas, con precio en monedas; lo de la mochila se vende a la mitad.
 import { useStore } from './store';
+import { scenes } from './story';
+import { partidaParaComprar } from './tienda';
 import { useLang } from './i18n';
 import dataEs from '../data/boringplace.json';
 import dataEn from '../data/en/boringplace.json';
@@ -37,7 +39,7 @@ export interface Articulo {
 export interface BoringplaceData {
   desbloqueo: string | null;
   /** Lo que se compra con monedas: la clave del objeto de las peleas y su precio (se vende a la mitad). */
-  tienda: { objeto: string; precio: number; descripcion: string }[];
+  tienda: { objeto: string; precio: number; descripcion: string; /** Cuántos se venden por capítulo (lo permanente); sin esto, sin límite. */ stock_por_capitulo?: number }[];
   vacio: { titulo: string; texto: string };
   textos: Record<string, string>;
   articulos: Articulo[];
@@ -79,6 +81,22 @@ export function colorDeObjeto(o: Objeto): string {
   if (tipo === 'permanente') return '#a07bff';
   if (tipo === 'equipo') return '#4f8cff';
   return '#8d8d99';
+}
+/** Para qué partida se compra: la que se está jugando o, en el título, la elegida (o la más reciente). */
+export function usePartidaTienda() {
+  const game = useStore((st) => st.game);
+  const saves = useStore((st) => st.saves);
+  const slotCompra = useStore((st) => st.slotCompra);
+  const slot = partidaParaComprar(saves, slotCompra);
+  const guardada = !game && slot >= 0 ? saves[slot] : null;
+  const sceneId = game?.sceneId ?? guardada?.sceneId;
+  return {
+    vars: game?.vars ?? guardada?.vars,
+    capitulo: (sceneId && scenes.get(sceneId)?.chapter) || 1,
+    desdeTitulo: !game,
+    slot,
+    saves,
+  };
 }
 /** Lo que se paga al vender: la mitad de lo que cuesta. */
 export const precioVenta = (precio: number) => Math.floor(precio / 2);

@@ -52,6 +52,8 @@
     "comprar": "Comprar",
     "vender": "Vender",
     "tienes": "Tienes {n}",
+    "comprando_para": "Comprando para:",
+    "sin_stock": "Se acabó por este capítulo.",
     "ya_tuyo": "Ya es tuyo. La ropa es única: se compra una sola vez.",
     "sin_monedas": "No te alcanza. Faltan {n} tokens.",
     "comprado": "Compraste {objeto}. Va a la mochila.",
@@ -279,6 +281,53 @@
       "objeto": "zapatillas_buenas",
       "precio": 80,
       "descripcion": "Para los pies. +3 VEL. Se equipa desde el panel de Equipo."
+    },
+    {
+      "objeto": "revivir_plus",
+      "precio": 150,
+      "descripcion": "Levanta a un caído con toda su vida."
+    },
+    {
+      "objeto": "condon_spartan",
+      "precio": 110,
+      "descripcion": "Protege a todo el equipo del próximo golpe."
+    },
+    {
+      "objeto": "hepatol",
+      "precio": 40,
+      "descripcion": "Quita el veneno."
+    },
+    {
+      "objeto": "galleta_clasica",
+      "precio": 12,
+      "descripcion": "+20 PS."
+    },
+    {
+      "objeto": "galleta_arcoiris",
+      "precio": 45,
+      "descripcion": "+20 PS a todo el equipo y le quita un estado a cada uno."
+    },
+    {
+      "objeto": "galleta_brownie",
+      "precio": 50,
+      "descripcion": "+50 PS y quita un estado."
+    },
+    {
+      "objeto": "galleta_red_velvet",
+      "precio": 40,
+      "descripcion": "+35 PS y quita un estado."
+    },
+    {
+      "objeto": "caramelo_dulce",
+      "precio": 250,
+      "descripcion": "Sube 1 nivel para siempre. Se vende uno por capítulo.",
+      "stock_por_capitulo": 1
+    },
+    {
+      "objeto": "caramelo_rancio",
+      "precio": 1500,
+      "descripcion": "Sube 10 niveles para siempre. Se vende uno por capítulo.",
+      "stock_por_capitulo": 1
     }
   ]
 }
