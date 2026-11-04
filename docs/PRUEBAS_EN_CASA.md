@@ -70,6 +70,25 @@ Hay que jugar la historia (o usar `/all`) hasta ganar el Bastión, porque ahí s
 - [ ] Se partieron `Boringram.tsx` y `App.tsx` en archivos más chicos. Boringram tiene que verse y andar igual: inicio,
       historias, mensajes, perfil, compartir, el panel de notificaciones y el tour.
 
-## 7. Las mecánicas nuevas
+## 7. Las mecánicas nuevas (hechas sin verlas; lo visual es provisional)
 
-Pedidas el 4 de noviembre; ver `docs/BIBLIA_RPG.md`, sección 19. Cuando estén hechas, se agrega aquí qué probar.
+Reglas en `docs/BIBLIA_RPG.md`, sección 19. Se compran en Boringplace después de ganar el Bastión y se equipan desde Equipo.
+Lo que más hay que mirar: **que la pelea no se trabe** después de cada efecto.
+
+- [ ] Los 7 cebos y la autodestrucción aparecen en Boringplace en gris, con precio, y se equipan desde Equipo.
+- [ ] Cada cebo se ve del color de su estado (¿se distinguen?, ¿el filtro se ve bien?).
+- [ ] Cuando un enemigo golpea un cebo con efecto, al terminar su ataque sale «¡Era una trampa!» y le aparece el estado en su
+      tarjeta. Probarlo con el Capitán también, porque sus balas llegan a destiempo.
+- [ ] **Dormido** (cebo sueño): el enemigo no actúa de 2 a 4 turnos.
+- [ ] **Dormido en un héroe** (si hace falta, pedirle a Claude que lo fuerce): el menú solo deja Objetos y Esquivar («seguir
+      durmiendo»); un objeto lo despierta; un golpe, no; sin objetos, se saltea su turno.
+- [ ] **Quemado:** pierde vida cada turno y pega a la mitad. **Congelado:** no actúa y el primer golpe hace más daño.
+- [ ] **Cebo explosivo:** le quita vida al que lo atacó y a su dueño. ¿Es justo lo que quita (25 % y 10 %)?
+- [ ] **Autodestrucción:** cae el que la usa y a todos los demás les quita vida, también a los compañeros.
+- [ ] **Bomba:** se gana con un 2 % por enemigo. Para probarla sin esperar, pedirle a Claude que suba `BOMBA_BOTIN` (solo para
+      la prueba, sin subirlo) o que dé el cassette en la partida. Se equipa como especial, pide la barra llena, se ve la
+      cuenta en medio del campo y explota a los 5 turnos. No deja poner otra mientras haya una.
+- [ ] **Empate:** Jair solo y un rival: que caigan los dos (la autodestrucción o la bomba). Tiene que decir «¡Empate!» y llevar
+      al bad end de esa pelea.
+- [ ] ¿La bomba y la autodestrucción son demasiado fuertes contra los jefes? Los dejan casi listos para retirarse.
+- [ ] Decidir: cómo se gana la bomba en el torneo, y confirmar las reglas de dormido (biblia, sección 19).

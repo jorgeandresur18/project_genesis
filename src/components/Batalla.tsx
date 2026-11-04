@@ -11,6 +11,7 @@ import {
   ESPECIAL_MS,
   monedasJefe,
   monedasDe,
+  tickQuemado,
   tickVeneno,
   usableEnPelea,
   objetivoDe,
@@ -55,6 +56,8 @@ import { EquipoPanel } from './Equipo';
 import { OptionsPanel } from './Panels';
 import { BATALLAS, sueltosQueTengo } from '../engine/batallas';
 import {
+  BOMBA_BOTIN,
+  autodestruir,
   blancoDelCanon,
   confundirA,
   decidirEnemigo,
@@ -67,7 +70,11 @@ import {
   llegaRefuerzo,
   paralizarA,
   poderBarrido,
+  ponerBomba,
+  reaccionCebo,
   resolverGolpe,
+  resultado,
+  tickBomba,
   sumarEnemigo,
   type EstadoPelea,
 } from '../engine/turnos';
@@ -218,6 +225,8 @@ function Pelea({
    */
   const retenidos = useRef(new Set<string>());
   const enEspecial = useRef(false);
+  /** Los cebos con efecto que recibieron un golpe en este ataque, y de quién. */
+  const cebosGolpeados = useRef<[Luchador, Luchador][]>([]);
   /** Cuánto se corre cada uno de su lugar (y en cuántos ms, si no es el deslizamiento de siempre). */
   const [desliz, setDesliz] = useState<Record<string, { x: number; y: number; ms?: number }>>({});
   /** La pantalla oscura de un especial (el vórtice de la sombra). */
@@ -539,7 +548,7 @@ function Pelea({
     const r = f?.getBoundingClientRect();
     // Uno solo por héroe: el viejo se va.
     b.current.cebos = b.current.cebos.filter((x) => x.de !== h.id && vivo(x.l));
-    const k = crearCebo(h, `${h.id}-cebo-${Date.now()}`);
+    const k = crearCebo(h, `${h.id}-cebo-${Date.now()}`, a.cebo_efecto);
     // El turno en que aparece cuenta (los enemigos ya pueden pegarle).
     b.current.cebos.push({ l: k, de: h.id, x: r && lado ? r.left - lado.left - r.width * 0.45 : 0, y: r && lado ? r.top - lado.top : 0, turnos: CEBO_TURNOS });
     efecto(k.id, 'aparece-cebo', 700);
@@ -569,6 +578,7 @@ function Pelea({
   };
   /** Los cebos que recibieron un golpe se deshacen (y se van). */
   const limpiarCebos = async () => {
+    for (const [cebo, atacante] of cebosGolpeados.current.splice(0)) await reaccionarCebo(cebo, atacante);
     const caidos = b.current.cebos.filter((x) => !vivo(x.l));
     if (!caidos.length) return;
     for (const x of caidos) await decir(fmt(t('batalla.cebo_cae'), { quien: x.l.nombre }));
@@ -657,10 +667,13 @@ function Pelea({
     // En la vida real no se guarda nada de la pelea (ni niveles ni mochila), salvo el premio (más abajo).
     d.vida_real
       ? Object.fromEntries(Object.entries(d.premio?.objetos ?? {}).filter(([k]) => (b.current.mochila[k] ?? 0) > 0).map(([k]) => [`mochila_${k}`, (guardado?.mochila[k] ?? 0) + b.current.mochila[k]]))
-      : varsDeProgreso(
-      { heroes: Object.fromEntries(b.current.heroes.map((h) => [h.clave, { nivel: h.nivel, xp: h.xp }])), mochila: b.current.mochila, monedas: b.current.monedas },
-      Object.keys(d.objetos),
-    );
+      : {
+          ...varsDeProgreso(
+            { heroes: Object.fromEntries(b.current.heroes.map((h) => [h.clave, { nivel: h.nivel, xp: h.xp }])), mochila: b.current.mochila, monedas: b.current.monedas },
+            Object.keys(d.objetos),
+          ),
+          ...Object.fromEntries(b.current.cassettesGanados.map((id) => [`cassette_${id}`, (guardado?.cassettes?.[id] ?? 0) + b.current.cassettesGanados.filter((x) => x === id).length])),
+        };
 
   /** Pide el comando de un héroe (el menú de abajo). `null`: volver al héroe anterior. */
   const pedirComando = (h: Luchador, primero: boolean) =>
@@ -702,11 +715,15 @@ function Pelea({
   };
 
   /** Un turno: eligen los héroes que pueden actuar, actúan en ese orden y después atacan los enemigos. */
-  const turno = async (): Promise<'sigue' | 'gana' | 'huye' | 'pierde' | 'perdona'> => {
-    const opciones = disponibles(b.current.heroes, d.personajes, b.current.actuaron);
+  const turno = async (): Promise<'sigue' | 'gana' | 'huye' | 'pierde' | 'perdona' | 'empate'> => {
+    // Dormido: solo puede usar un objeto; sin objetos, sigue durmiendo.
+    const hayObjetos = Object.keys(d.objetos).some((k) => (b.current.mochila[k] ?? 0) > 0 && usableEnPelea(d.objetos[k]));
+    const opciones = disponibles(b.current.heroes, d.personajes, b.current.actuaron).filter((h) => !h.dormido || hayObjetos);
     b.current.descansan = b.current.heroes.filter((h) => vivo(h) && !opciones.includes(h)).map((h) => h.id);
     forzar();
     for (const h of b.current.heroes.filter((x) => vivo(x) && x.paralizado)) await decir(fmt(t('batalla.sigue_paralizado'), { quien: h.nombre, n: h.paralizado }));
+    for (const h of b.current.heroes.filter((x) => vivo(x) && x.congelado)) await decir(fmt(t('batalla.sigue_congelado'), { quien: h.nombre }));
+    if (!hayObjetos) for (const h of b.current.heroes.filter((x) => vivo(x) && x.dormido)) await decir(fmt(t('batalla.sigue_dormido'), { quien: h.nombre }));
     if (!opciones.length) {
       await lineas('descanso');
       b.current.actuaron = [];
@@ -746,6 +763,9 @@ function Pelea({
         if (c.tipo !== 'objeto' && c.tipo !== 'esquivar' && !b.current.enemigos.some(vivo)) continue;
         await actuarHeroe(h, c);
         if (b.current.perdona) return 'perdona';
+        // La autodestrucción o un cebo explosivo pueden terminarla de golpe.
+        const r = resultado(b.current, d);
+        if (r === 'empate' || r === 'pierde') return r;
         if (jefeSeRetira()) return 'gana';
         if (ataca(c)) await cansarse(h);
       }
@@ -771,9 +791,19 @@ function Pelea({
     }
     finDeTurno(b.current);
     forzar();
-    if (!b.current.heroes.some(vivo)) return 'pierde';
+    // Sin héroes: pierden, o empatan si tampoco quedó nadie del otro lado.
+    const terminada = () => {
+      const r = resultado(b.current, d);
+      return r === 'empate' || r === 'pierde' ? r : null;
+    };
+    let fin = terminada();
+    if (fin) return fin;
     await venenos();
-    if (!b.current.heroes.some(vivo)) return 'pierde';
+    fin = terminada();
+    if (fin) return fin;
+    await explotarBomba();
+    fin = terminada();
+    if (fin) return fin;
     if (jefeSeRetira()) return 'gana';
     await evaporar();
     await evaporarCebos();
@@ -788,7 +818,7 @@ function Pelea({
     const rivales = b.current.enemigos.filter((e) => !vivo(e) && e.clon === undefined);
     if (!heroes.length && !rivales.length) return;
     for (const h of heroes) {
-      Object.assign(h, { ps: h.psMax, paralizado: 0, confundido: 0, envenenado: null, protegido: 0, carga: 0, usados: {} });
+      Object.assign(h, { ps: h.psMax, paralizado: 0, confundido: 0, envenenado: null, protegido: 0, quemado: 0, congelado: 0, dormido: 0, carga: 0, usados: {} });
       b.current.cansados.delete(h.id);
       void animar(h.id, 'idle');
       luz(h.id, '#7dffb0', true);
@@ -813,6 +843,76 @@ function Pelea({
       void animar(l.id, 'ko');
       if (l.lado === 'enemigo') await alCaer(l);
       else await decir(fmt(t('batalla.cae'), { quien: l.nombre }));
+    }
+    for (const l of [...b.current.heroes, ...b.current.enemigos].filter((x) => vivo(x) && x.quemado)) {
+      const n = tickQuemado(l, l.lado === 'enemigo' && !!d.enemigos[l.clave]?.jefe && l.clon === undefined);
+      if (!n) continue;
+      numero(l.id, String(n), 'dano');
+      luz(l.id, '#ff8a3c');
+      playChip('impacto');
+      forzar();
+      await decir(fmt(t('batalla.quemadura'), { quien: l.nombre, n }));
+      if (vivo(l)) continue;
+      void animar(l.id, 'ko');
+      if (l.lado === 'enemigo') await alCaer(l);
+      else await decir(fmt(t('batalla.cae'), { quien: l.nombre }));
+    }
+  };
+  /**
+   * Una explosión (la bomba o la autodestrucción): cada uno recibe lo suyo. Los enemigos que caen, caen después de ver
+   * cómo terminó: si no quedó nadie, es empate y no llegan refuerzos.
+   */
+  const mostrarExplosion = async (golpes: { l: Luchador; n: number }[]) => {
+    playChip('impacto');
+    setFogonazo({ key: Math.random(), color: '#ff5a36' });
+    setTiembla(Math.random());
+    for (const { l, n } of golpes) {
+      numero(l.id, String(n), 'critico');
+      luz(l.id, '#ff5a36', true);
+      void animar(l.id, vivo(l) ? 'daño' : 'ko', 500);
+    }
+    forzar();
+    await espera(700);
+    await limpiarCebos();
+    const r = resultado(b.current, d);
+    if (r === 'empate' || r === 'pierde') return;
+    for (const { l } of golpes) {
+      if (vivo(l) || l.cebo) continue;
+      if (l.lado === 'enemigo') await alCaer(l);
+      else await decir(fmt(t('batalla.cae'), { quien: l.nombre }));
+    }
+  };
+  /** Al final del turno la bomba descuenta y, al llegar a 0, explota contra todos. */
+  const explotarBomba = async () => {
+    const hadBomba = !!b.current.bomba;
+    const golpes = tickBomba(b.current, d);
+    if (hadBomba) forzar();
+    if (!golpes) return;
+    await decir(t('batalla.bomba_explota'));
+    await mostrarExplosion(golpes);
+  };
+  /** Lo que le pasa al que golpeó un cebo con efecto. */
+  const reaccionarCebo = async (cebo: Luchador, atacante: Luchador) => {
+    const r = reaccionCebo(b.current, d, cebo, atacante);
+    if (!r) return;
+    forzar();
+    if (r.tipo === 'estado') {
+      luz(atacante.id, '#ffffff', true);
+      playChip('boing');
+      return decir(fmt(t('batalla.cebo_causa'), { quien: atacante.nombre, estado: t(r.estado === 'paralizado' ? 'batalla.cebo_paralizado' : `batalla.estado_${r.estado}`) }));
+    }
+    playChip('impacto');
+    setFogonazo({ key: Math.random(), color: '#ff5a36' });
+    numero(atacante.id, String(r.aAtacante), 'critico');
+    if (r.dueno) numero(r.dueno.id, String(r.aDueno), 'dano');
+    await decir(fmt(t('batalla.cebo_explota'), { quien: atacante.nombre, n: r.aAtacante }));
+    if (!vivo(atacante)) {
+      void animar(atacante.id, 'ko');
+      if (atacante.lado === 'enemigo') await alCaer(atacante);
+    }
+    if (r.dueno && !vivo(r.dueno)) {
+      void animar(r.dueno.id, 'ko');
+      await decir(fmt(t('batalla.cae'), { quien: r.dueno.nombre }));
     }
   };
   /** El juego ayuda si van perdiendo: a veces cae un objeto (del cielo o de algún lado) a la mochila. */
@@ -884,6 +984,11 @@ function Pelea({
           continue;
         }
         if (r === 'huye') return salir(() => fin.current.onGanar(varsFinales()));
+        // Empate: mueren todos. En la historia cuenta como perder (lleva a su bad end).
+        if (r === 'empate') {
+          await decir(t('batalla.empate'));
+          return salir(() => fin.current.onPerder());
+        }
         if (r === 'perdona') {
           await lineas('perdon');
           return salir(() => (fin.current.onPerdonar ?? fin.current.onGanar)(varsFinales()));
@@ -1005,6 +1110,7 @@ function Pelea({
       return golpe;
     }
     const { n, critico } = golpe;
+    if (golpe.rompeHielo) luz(defensor.id, '#8fd3ff', true);
     if (aMedias) {
       numero(defensor.id, t('batalla.a_medias'), 'falla');
       void animar(defensor.id, 'salto', 600);
@@ -1024,6 +1130,8 @@ function Pelea({
       if (defensor.lado === 'enemigo') playChip('muerte');
     } else if (enElAire.current.has(defensor.id) || bajoEspecial.current.has(defensor.id)) void animar(defensor.id, 'golpeado');
     else void animar(defensor.id, 'daño', 500);
+    // El cebo reacciona al terminar el ataque (ver limpiarCebos).
+    if (defensor.cebo && defensor !== atacante) cebosGolpeados.current.push([defensor, atacante]);
     return { n, critico };
   };
 
@@ -1057,6 +1165,12 @@ function Pelea({
       forzar();
       await lineas('botin', { objetivo: e.nombre, objeto: d.objetos[k].nombre });
     }
+    // Muy de vez en cuando suelta la bomba del día del juicio (solo en una partida: la vida real y las pruebas, no).
+    if (guardado && !d.vida_real && !arena && Math.random() < BOMBA_BOTIN) {
+      b.current.cassettesGanados.push('bomba_juicio');
+      playChip('vida');
+      await decir(fmt(t('batalla.bomba_botin'), { quien: e.nombre }));
+    }
     // Refuerzos: cada vez que cae uno de la horda, llega el siguiente.
     const { horda } = d;
     if (llegaRefuerzo(b.current, d, e)) {
@@ -1082,6 +1196,8 @@ function Pelea({
     }
     // Si su objetivo ya cayó, va contra el primero que quede.
     const objetivo = (oid: string) => enemigos.find((e) => e.id === oid) ?? enemigos[0];
+    // Dormido: esquivar es seguir durmiendo (ver el menú).
+    if (c.tipo === 'esquivar' && h.dormido) return decir(fmt(t('batalla.sigue_dormido'), { quien: h.nombre }));
     if (c.tipo === 'esquivar') {
       h.esquivando = true;
       cargar(h, CARGA.esquivar);
@@ -1161,7 +1277,18 @@ function Pelea({
       const { n } = await golpear(h, h, CONFUSION.poder);
       return decir(fmt(t('batalla.recibe'), { quien: h.nombre, n }));
     }
-    if (c.tipo === 'especial') return usarEspecial(h, equipados(d.personajes[h.clave], h.nivel, progreso?.equipo?.[h.clave], sueltosQueTengo(progreso?.cassettes), progreso?.especialesGanados).especiales[c.cual] ?? d.personajes[h.clave].especial!, d.personajes[h.clave].sprite, enemigos, objetivo(c.objetivo));
+    if (c.tipo === 'especial') {
+      const esp = equipados(d.personajes[h.clave], h.nivel, progreso?.equipo?.[h.clave], sueltosQueTengo(progreso?.cassettes), progreso?.especialesGanados).especiales[c.cual] ?? d.personajes[h.clave].especial!;
+      // La bomba: no golpea, queda en el campo.
+      if (esp.bomba) {
+        if (!ponerBomba(b.current, h, esp.bomba)) return decir(t('batalla.bomba_ya'));
+        await avisar(esp, d.personajes[h.clave].sprite, true);
+        playChip('carga');
+        forzar();
+        return decir(fmt(esp.texto, { quien: h.nombre }));
+      }
+      return usarEspecial(h, esp, d.personajes[h.clave].sprite, enemigos, objetivo(c.objetivo));
+    }
     if (c.tipo === 'hablar') {
       cargar(h, CARGA.hablar);
       const e = objetivo(c.objetivo);
@@ -1205,6 +1332,11 @@ function Pelea({
     const ataque = equipados(d.personajes[h.clave], h.nivel, progreso?.equipo?.[h.clave], sueltosQueTengo(progreso?.cassettes), progreso?.especialesGanados).ataques[c.ataque];
     gastarUso(h, ataque);
     if (ataque.cebo) return dejarCebo(h, ataque);
+    if (ataque.autodestruccion) {
+      await decir(fmt(ataque.texto, { quien: h.nombre }));
+      void animar(h.id, 'ko');
+      return mostrarExplosion(autodestruir(b.current, d, h, ataque.autodestruccion));
+    }
     if (ataque.cura) {
       // Se cura (Rikka, Ctrl+Z de Jair): carga y lo rodea el aura verde de la curación.
       cargar(h, CARGA.atacar);
@@ -1677,6 +1809,8 @@ function Pelea({
   const actuarEnemigo = async (e: Luchador) => {
     const decision = decidirEnemigo(b.current, d, e, !!arena);
     if (decision.tipo === 'paralizado') return decir(fmt(t('batalla.sigue_paralizado'), { quien: e.nombre }));
+    if (decision.tipo === 'congelado') return decir(fmt(t('batalla.sigue_congelado'), { quien: e.nombre }));
+    if (decision.tipo === 'dormido') return decir(fmt(t('batalla.sigue_dormido'), { quien: e.nombre }));
     if (decision.tipo === 'confundido') {
       await decir(fmt(t('batalla.se_golpea'), { quien: e.nombre }));
       void animar(e.id, 'ataque', 600);
@@ -1826,6 +1960,11 @@ function Pelea({
     if (conVolver && i === base()) return volver();
     const listo = elegido.current;
     if (menu.paso === 'comando') {
+      // Dormido: solo un objeto lo despierta; «Esquivar» es seguir durmiendo.
+      if (heroe.dormido > 0 && i !== 2 && i !== 3) {
+        playChip('vacio');
+        return setMensaje({ texto: fmt(t('batalla.dormido_no'), { quien: heroe.nombre }), n: Math.random() });
+      }
       if (i === 3 && !enMochila.length) {
         playChip('vacio');
         return setMensaje({ texto: t(d.vida_real ? 'batalla.mochila_vida_real' : 'batalla.mochila_vacia'), n: Math.random() });
@@ -1845,6 +1984,10 @@ function Pelea({
         if (!especialListo(heroe)) {
           playChip('vacio');
           return setMensaje({ texto: fmt(t('batalla.especial_no'), { n: Math.floor(heroe.carga) }), n: Math.random() });
+        }
+        if (especial.bomba && b.current.bomba) {
+          playChip('vacio');
+          return setMensaje({ texto: t('batalla.bomba_ya'), n: Math.random() });
         }
         // A todos: no hace falta elegir.
         if (especial.objetivo === 'todos') return listo({ tipo: 'especial', objetivo: vivosDe('enemigo')[0]?.id ?? '', cual });
@@ -2121,9 +2264,11 @@ function Pelea({
               numeros={numeros.filter((n) => n.id === h.id)}
             />,
           ))}
+          {/* La bomba del día del juicio: la cuenta regresiva en medio del campo (provisional, sin arte). */}
+          {b.current.bomba && <div className="batalla-bomba">💣 {b.current.bomba.turnos}</div>}
           {/* Los cebos: copias en blanco y negro, delante de su héroe (no mueven a nadie). */}
           {b.current.cebos.map((c) => (
-            <div key={c.l.id} className="batalla-cebo" style={{ left: c.x, top: c.y }}>
+            <div key={c.l.id} className={`batalla-cebo ${c.l.ceboEfecto ? `efecto-${c.l.ceboEfecto}` : ''}`} style={{ left: c.x, top: c.y }}>
               <Figura
                 l={c.l}
                 caido={c.l.ps === 0}

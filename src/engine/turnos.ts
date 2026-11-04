@@ -9,6 +9,8 @@
 import {
   CARGA,
   CEBO,
+  CONGELADO,
+  QUEMADO,
   cargar,
   crearClon,
   crearLuchador,
@@ -19,8 +21,11 @@ import {
   quedan,
   repartirRafagas,
   seConfunde,
+  seRetira,
+  turnosDormido,
   vanPerdiendo,
   vivo,
+  yaTiene,
   type Ataque,
   type DatosBatalla,
   type Enemigo,
@@ -61,6 +66,12 @@ export interface EstadoPelea {
   /** Los que quedaron paralizados (o confundidos) en este turno (empiezan a descontar en el siguiente). */
   paralizadoRecien: string[];
   confundidoRecien: string[];
+  /** Los que quedaron congelados o dormidos en este turno (`<id>/<estado>`): empiezan a descontar en el siguiente. */
+  estadoRecien: string[];
+  /** La bomba en el campo: quién la puso, cuántos turnos le quedan y qué parte de la vida máxima quita. */
+  bomba: { de: string; turnos: number; vida: number } | null;
+  /** Los cassettes sueltos que cayeron en esta pelea. */
+  cassettesGanados: string[];
   /** Los cebos (copias de un héroe que no hacen nada): aparte de los héroes, con dónde se dibujan. */
   cebos: CeboEnPie[];
   /** Los que no pueden actuar en este turno (Cami, un turno sí y uno no). */
@@ -106,6 +117,9 @@ export function estadoInicial(d: DatosBatalla, progreso?: Progreso): EstadoPelea
     remate: null,
     paralizadoRecien: [],
     confundidoRecien: [],
+    estadoRecien: [],
+    bomba: null,
+    cassettesGanados: [],
     cebos: [],
     descansan: [],
     cansados: new Set<string>(),
@@ -131,6 +145,9 @@ export function desviarACebo(estado: EstadoPelea, blancos: Luchador[], caeEnCebo
 export type DecisionEnemigo =
   /** Sigue paralizado: no hace nada. */
   | { tipo: 'paralizado' }
+  /** Está congelado o dormido: no hace nada. */
+  | { tipo: 'congelado' }
+  | { tipo: 'dormido' }
   /** Está confundido y se pega a sí mismo. */
   | { tipo: 'confundido' }
   /** Lo distrajeron con «Hablar»: pierde este ataque. */
@@ -162,6 +179,8 @@ export function decidirEnemigo(
 ): DecisionEnemigo {
   cargar(e, CARGA.turnoEnemigo);
   if (e.paralizado > 0) return { tipo: 'paralizado' };
+  if (e.congelado > 0) return { tipo: 'congelado' };
+  if (e.dormido > 0) return { tipo: 'dormido' };
   if (seConfunde(e, azar)) return { tipo: 'confundido' };
   if (e.distraido) {
     e.distraido = false;
@@ -220,9 +239,12 @@ export function finDeTurno(estado: EstadoPelea) {
     if (h.inmuneParalisis) h.inmuneParalisis--;
     if (h.paralizado && !estado.paralizadoRecien.includes(h.id) && --h.paralizado === 0) h.inmuneParalisis = 1;
     if (h.confundido && !estado.confundidoRecien.includes(h.id)) h.confundido--;
+    if (h.congelado && !estado.estadoRecien.includes(`${h.id}/congelado`)) h.congelado--;
+    if (h.dormido && !estado.estadoRecien.includes(`${h.id}/dormido`)) h.dormido--;
   });
   estado.paralizadoRecien = [];
   estado.confundidoRecien = [];
+  estado.estadoRecien = [];
 }
 
 /** Un enemigo entra a la pelea (con algo de barra cargada); los caídos dejan de estar en la lista. */
@@ -249,7 +271,7 @@ export function resolverGolpe(
   poder: number,
   aMedias = false,
   azar: () => number = Math.random,
-): { n: number; critico: boolean; bloqueado?: boolean } {
+): { n: number; critico: boolean; bloqueado?: boolean; rompeHielo?: boolean } {
   const ayuda = d.ayuda && atacante.lado === 'heroe' && vanPerdiendo(estado.heroes, d.ayuda.umbral) ? d.ayuda.critico : 0;
   const extra = ayuda + (atacante.equipo?.critico ?? 0);
   if (defensor.protegido > 0 && atacante !== defensor) {
@@ -257,12 +279,16 @@ export function resolverGolpe(
     return { n: 0, critico: false, bloqueado: true };
   }
   const golpe = dano(atacante, defensor, poder, azar, extra);
-  const n = aMedias ? Math.max(1, Math.round(golpe.n / 2)) : golpe.n;
+  // El golpe que rompe el hielo hace más daño.
+  const rompeHielo = defensor.congelado > 0;
+  const conHielo = rompeHielo ? Math.round(golpe.n * CONGELADO.golpe) : golpe.n;
+  if (rompeHielo) defensor.congelado = 0;
+  const n = aMedias ? Math.max(1, Math.round(conHielo / 2)) : conHielo;
   cargar(defensor, CARGA.recibir);
   const jefe = defensor.lado === 'enemigo' ? d.enemigos[defensor.clave] : null;
   defensor.ps = Math.max(jefe?.huye_a && defensor.clon === undefined ? 1 : 0, defensor.ps - n);
-  if (defensor.ps === 0) defensor.confundido = 0;
-  return { n, critico: golpe.critico };
+  if (defensor.ps === 0) limpiarEstados(defensor);
+  return { n, critico: golpe.critico, rompeHielo };
 }
 
 /** Paraliza: empieza a descontar desde el turno siguiente y reemplaza el descanso (no se suma). */
@@ -332,4 +358,105 @@ export function blancoDelCanon(heroes: Luchador[], blanco: Luchador, fuerte: boo
   const otros = vivos.filter((h) => h !== blanco);
   if (otros.length) return alAzar(otros, azar);
   return vivo(blanco) ? blanco : alAzar(vivos, azar);
+}
+
+/** Al caer se le van los estados que se ven. */
+function limpiarEstados(x: Luchador) {
+  x.confundido = 0;
+  x.quemado = 0;
+  x.congelado = 0;
+  x.dormido = 0;
+}
+
+/** Quema, congela o duerme (no se acumula: al que ya lo está no le hace nada). Devuelve si se aplicó. */
+export function aplicarEstado(estado: EstadoPelea, x: Luchador, cual: 'quemado' | 'congelado' | 'dormido', azar: () => number = Math.random): boolean {
+  if (x[cual] > 0) return false;
+  if (cual === 'quemado') x.quemado = QUEMADO.turnos;
+  if (cual === 'congelado') x.congelado = CONGELADO.turnos;
+  if (cual === 'dormido') x.dormido = turnosDormido(azar);
+  if (cual !== 'quemado') estado.estadoRecien.push(`${x.id}/${cual}`);
+  return true;
+}
+
+/** Lo que quita una explosión: una parte de la vida máxima (no depende del nivel). El jefe que se retira queda en 1. */
+function explosionA(d: DatosBatalla, x: Luchador, vida: number): number {
+  const jefe = x.lado === 'enemigo' ? d.enemigos[x.clave] : null;
+  const antes = x.ps;
+  x.ps = Math.max(jefe?.huye_a && x.clon === undefined ? 1 : 0, x.ps - Math.max(1, Math.round(x.psMax * vida)));
+  if (x.ps === 0) limpiarEstados(x);
+  return antes - x.ps;
+}
+
+/** El cebo explosivo: parte de la vida máxima que le quita a quien lo atacó y a su dueño. */
+export const EXPLOSION_CEBO = { atacante: 0.25, dueno: 0.1 } as const;
+/** Lo que le pasa a quien golpeó un cebo con efecto. */
+export type ReaccionCebo =
+  | { tipo: 'estado'; estado: 'paralizado' | 'envenenado' | 'confundido' | 'quemado' | 'congelado' | 'dormido' }
+  | { tipo: 'explota'; aAtacante: number; aDueno: number; dueno?: Luchador };
+/** Un cebo con efecto recibió un golpe de `atacante`. Devuelve qué le pasó (null si nada: sin efecto, o ya lo tenía). */
+export function reaccionCebo(estado: EstadoPelea, d: DatosBatalla, cebo: Luchador, atacante: Luchador, azar: () => number = Math.random): ReaccionCebo | null {
+  const efecto = cebo.ceboEfecto;
+  if (!efecto || !vivo(atacante)) return null;
+  if (efecto === 'explota') {
+    // El cebo es una copia de su dueño: tiene su misma clave.
+    const dueno = estado.heroes.find((h) => h.clave === cebo.clave && vivo(h));
+    return { tipo: 'explota', aAtacante: explosionA(d, atacante, EXPLOSION_CEBO.atacante), aDueno: dueno ? explosionA(d, dueno, EXPLOSION_CEBO.dueno) : 0, dueno };
+  }
+  if (efecto === 'paraliza') {
+    if (yaTiene(atacante, { paraliza: 1 })) return null;
+    paralizarA(estado, atacante, 2);
+    return { tipo: 'estado', estado: 'paralizado' };
+  }
+  if (efecto === 'veneno') {
+    if (atacante.envenenado) return null;
+    atacante.envenenado = { danio: 6, turnos: 3 };
+    return { tipo: 'estado', estado: 'envenenado' };
+  }
+  if (efecto === 'confunde') {
+    if (atacante.confundido) return null;
+    confundirA(estado, atacante, 3);
+    return { tipo: 'estado', estado: 'confundido' };
+  }
+  const cual = efecto === 'quema' ? 'quemado' : efecto === 'congela' ? 'congelado' : 'dormido';
+  return aplicarEstado(estado, atacante, cual, azar) ? { tipo: 'estado', estado: cual } : null;
+}
+
+/** Todos los que están de pie en el campo. */
+const enElCampo = (estado: EstadoPelea) => [...estado.heroes, ...estado.enemigos, ...estado.cebos.map((c) => c.l)].filter(vivo);
+
+/** Autodestrucción: quien la usa cae y todos los demás del campo (compañeros, rivales y cebos) reciben la explosión. */
+export function autodestruir(estado: EstadoPelea, d: DatosBatalla, h: Luchador, vida: number): { l: Luchador; n: number }[] {
+  const otros = enElCampo(estado).filter((x) => x !== h);
+  h.ps = 0;
+  limpiarEstados(h);
+  return otros.map((l) => ({ l, n: explosionA(d, l, vida) }));
+}
+
+/** Pone la bomba (una a la vez). Devuelve si se pudo. */
+export function ponerBomba(estado: EstadoPelea, de: Luchador, bomba: { turnos: number; vida: number }): boolean {
+  if (estado.bomba) return false;
+  de.carga = 0;
+  estado.bomba = { de: de.id, ...bomba };
+  return true;
+}
+/** Al final del turno la bomba descuenta; al llegar a 0 explota contra todos. Devuelve a quién le pegó (null si no explotó). */
+export function tickBomba(estado: EstadoPelea, d: DatosBatalla): { l: Luchador; n: number }[] | null {
+  if (!estado.bomba || --estado.bomba.turnos > 0) return null;
+  const { vida } = estado.bomba;
+  estado.bomba = null;
+  return enElCampo(estado).map((l) => ({ l, n: explosionA(d, l, vida) }));
+}
+
+/** Probabilidad de que un enemigo que cae suelte la bomba del día del juicio. */
+export const BOMBA_BOTIN = 0.02;
+
+/**
+ * Cómo está la pelea: `empate` si no queda ningún héroe y tampoco queda rival en pie (o el jefe, que nunca cae, quedó
+ * por retirarse: «mueren todos»); `pierde` si no queda ningún héroe; `gana` si el jefe se retira; si no, null.
+ */
+export function resultado(estado: EstadoPelea, d: DatosBatalla): 'empate' | 'pierde' | 'gana' | null {
+  const jefe = estado.enemigos.find((e) => d.enemigos[e.clave].jefe && e.clon === undefined);
+  const retira = !!jefe && seRetira(jefe, d.enemigos[jefe.clave]);
+  if (!estado.heroes.some(vivo)) return retira || !estado.enemigos.some(vivo) ? 'empate' : 'pierde';
+  return retira ? 'gana' : null;
 }

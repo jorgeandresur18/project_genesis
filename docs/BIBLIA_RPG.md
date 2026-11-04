@@ -580,33 +580,48 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
 
 ---
 
-## 19. Mecánicas nuevas (pedidas por el autor el 2026-11-04; por construir)
+## 19. Mecánicas nuevas (pedidas por el autor el 2026-11-04; hechas el mismo día, con lo visual provisional)
 
-**Estado nuevo: dormido.** Se suma a quemado y congelado (sección 15), que tampoco están hechos y hacen falta para estos
-cebos. Cómo funciona: `[PENDIENTE]`.
+Código: `src/engine/turnos.ts` y `src/engine/batalla.ts`; pruebas: `tests/mecanicas.test.ts`. La simulación del balance
+no las usa (ni los cebos), porque ningún jugador simulado las elige.
 
-**Ataques nuevos: los cebos con efecto.** Funcionan como el Cebo, pero **al golpearlos le causan el estado a quien los
-golpeó**. El sprite del cebo toma el color de ese estado (los colores de la sección 15):
+**Dormido** (decisión del autor): dura de 2 a 4 turnos, al azar. No puede atacar, hablar ni huir; **solo se cura usando un
+objeto** o cuando se le acaba. Interpretación de Claude, para confirmar: lo despierta cualquier objeto que no sea para
+un rival; un golpe no lo despierta; en el menú, «Esquivar» es seguir durmiendo (si no, con objetos en la mochila no
+podría pasar el turno); sin objetos, se saltea su turno.
 
-| Cebo | Estado que causa | Color |
-|---|---|---|
-| Cebo paralizante | Paralizado | Amarillo eléctrico |
-| Cebo tóxico | Envenenado | Morado |
-| Cebo confuso | Confundido | Rosa |
-| Cebo caliente | Quemado | Naranja |
-| Cebo frío | Congelado | Azul hielo |
-| Cebo sueño | Dormido | `[PENDIENTE]` |
+**Quemado y congelado** (los de la sección 15, ya hechos): quemado pierde el 5 % de su vida máxima cada turno y pega a la
+mitad, 3 turnos. Congelado no actúa; el primer golpe rompe el hielo y hace 1,5 veces el daño; si no, se descongela a
+los 3 turnos.
 
-**Cebo explosivo.** Cuando lo atacan, lastima al usuario del cebo y al que lo atacó.
+**Los cebos con efecto** (genéricos: cassettes grises en Boringplace, 5 usos). Funcionan como el Cebo, pero **al golpearlos
+le causan el estado a quien los golpeó** (al terminar el ataque; si ya lo tiene, no se acumula). El sprite toma el color
+del estado (provisional, con filtros):
 
-**Autodestrucción.** Un ataque que afecta a todos los personajes del campo.
+| Cebo | Causa | Color | Precio (propuesta) |
+|---|---|---|---|
+| Cebo paralizante | Paralizado, 2 turnos | Amarillo eléctrico | 80 |
+| Cebo tóxico | Envenenado (6 PS, 3 turnos) | Morado | 80 |
+| Cebo confuso | Confundido, 3 turnos | Rosa | 80 |
+| Cebo caliente | Quemado | Naranja | 90 |
+| Cebo frío | Congelado | Azul hielo | 90 |
+| Cebo sueño | Dormido | Lila (propuesta) | 90 |
+| Cebo explosivo | Le quita al que lo atacó el 25 % de su vida máxima y a su dueño el 10 % (calculado por Claude, por encargo del autor) | Rojo | 120 |
 
-**Bomba del día del juicio (especial).** El usuario pone una bomba en medio del escenario. Pasan 5 turnos y explota,
-con un gran daño a todos los personajes. Si mueren todos, es un **empate**.
+**Autodestrucción** (genérica; 200 tokens, 1 uso por pelea): el que la usa cae y todos los demás del campo (compañeros,
+rivales y cebos) pierden el 50 % de su vida máxima (propuesta).
 
-**El empate (dinámica nueva).** Hoy una pelea solo se gana o se pierde. Hay que agregar el tercer resultado.
+**Bomba del día del juicio** (especial genérico; cuesta la barra llena; no se vende): queda en medio del campo con la cuenta
+regresiva y a los 5 turnos explota: todos los del campo pierden el 90 % de su vida máxima (propuesta). **No se desactiva.**
+Una a la vez. Se gana en las peleas: cada enemigo que cae tiene un 2 % de soltarla (propuesta; no en la vida real ni en
+la arena). `TODO(canon)`: **en el torneo**, falta decidir para qué partida (el torneo está fuera de las partidas).
 
-**Falta definir** `[PENDIENTE]`: quién aprende cada uno, el daño, qué pasa en la historia con un empate.
+**El empate** (`resultado` en `turnos.ts`): si no queda ningún héroe y tampoco queda rival en pie, o el jefe, que nunca
+cae, quedó por retirarse. **En la historia es perder:** lleva a la misma escena que la derrota, su bad end (decisión del
+autor). En el torneo también cuenta como perder; en la arena, los caídos se levantan.
+
+**Una consecuencia, para mirar:** como el jefe que se retira queda en 1 PS, la bomba y la autodestrucción lo dejan casi siempre
+listo para retirarse: si queda un héroe en pie, se gana. Puede ser demasiado fuerte.
 
 ## 16. Pendientes e ideas
 

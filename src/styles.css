@@ -2920,6 +2920,19 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 .batalla-cebo { position: absolute; z-index: 2; }
 .batalla-cebo .batalla-sprite { filter: grayscale(1) contrast(1.15) brightness(0.95); opacity: 0.92; }
 .batalla-cebo .batalla-figura { filter: drop-shadow(0 0 1px #000); }
+/* Los cebos con efecto toman el color de su estado (provisional, con filtros sobre el sprite). */
+.batalla-cebo.efecto-paraliza .batalla-sprite { filter: grayscale(1) sepia(1) saturate(6) hue-rotate(10deg) brightness(1.1); }
+.batalla-cebo.efecto-veneno .batalla-sprite { filter: grayscale(1) sepia(1) saturate(5) hue-rotate(230deg); }
+.batalla-cebo.efecto-confunde .batalla-sprite { filter: grayscale(1) sepia(1) saturate(5) hue-rotate(290deg) brightness(1.1); }
+.batalla-cebo.efecto-quema .batalla-sprite { filter: grayscale(1) sepia(1) saturate(7) hue-rotate(-20deg); }
+.batalla-cebo.efecto-congela .batalla-sprite { filter: grayscale(1) sepia(1) saturate(4) hue-rotate(160deg) brightness(1.2); }
+.batalla-cebo.efecto-duerme .batalla-sprite { filter: grayscale(1) sepia(1) saturate(3) hue-rotate(215deg) brightness(1.15); }
+.batalla-cebo.efecto-explota .batalla-sprite { filter: grayscale(1) sepia(1) saturate(9) hue-rotate(-35deg) contrast(1.2); }
+/* La bomba del día del juicio (provisional): la cuenta regresiva en medio del campo. */
+.batalla-bomba { position: absolute; left: 50%; top: 45%; z-index: 3; translate: -50% -50%; padding: 0.3rem 0.6rem; border: 2px solid #ff5a36; background: rgba(0, 0, 0, 0.75); color: #ffd7cc; font-family: 'Press Start 2P', monospace; font-size: 1rem; }
+.batalla-descansa.quemado { color: #ff8a3c; }
+.batalla-descansa.congelado { color: #8fd3ff; }
+.batalla-descansa.dormido { color: #c7b6ff; }
 .batalla-cebo .batalla-figura.ko { opacity: 0; transition: opacity 0.8s ease 0.2s; }
 .batalla-figura.aparece-cebo .batalla-sprite { animation: aparece-cebo 0.7s ease-out both; }
 @keyframes aparece-cebo { from { opacity: 0; translate: 30% 0; filter: grayscale(1) blur(2px); } to { opacity: 0.92; translate: 0 0; filter: grayscale(1) contrast(1.15) brightness(0.95); } }

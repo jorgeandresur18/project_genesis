@@ -56,6 +56,9 @@ export function EstadosDe({ l }: { l: Luchador }) {
       {l.envenenado && <span className="batalla-descansa veneno">{t('batalla.tag_veneno')}</span>}
       {l.confundido > 0 && <span className="batalla-descansa confundido">{t('batalla.confundido_tag')}</span>}
       {l.paralizado > 0 && <span className="batalla-descansa paralizado">{t('batalla.tag_paralizado')}</span>}
+      {l.quemado > 0 && <span className="batalla-descansa quemado">{t('batalla.tag_quemado')}</span>}
+      {l.congelado > 0 && <span className="batalla-descansa congelado">{t('batalla.tag_congelado')}</span>}
+      {l.dormido > 0 && <span className="batalla-descansa dormido">{t('batalla.tag_dormido')}</span>}
       {l.protegido > 0 && <span className="batalla-descansa protegido">{t('batalla.tag_protegido')}</span>}
     </>
   );

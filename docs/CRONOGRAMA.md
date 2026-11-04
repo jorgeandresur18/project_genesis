@@ -33,7 +33,7 @@ El RPG, Boringram y el arte se hacen **para el capítulo que toca**, no por adel
 | Capítulo 3 | Canon escrito en `docs/CANON.md`; **no hay guion**. |
 | Capítulo 4 | Borrador del autor (17 escenas) en `docs/CANON.md`; sin guion. |
 | Capítulos 5 a 7 | Esquema en el canon. |
-| RPG | Ficha única por personaje, varios especiales, ataques intercambiables con cassettes, ataques nuevos y sueltos, Torneo Genesis y PayFoe (de relleno). Faltan: quemado y congelado, olvidar ataques, la regla anti-farmeo y sacar de `Batalla.tsx` los turnos de los héroes (los de los enemigos ya están en `engine/turnos.ts`). |
+| RPG | Ficha única por personaje, varios especiales, ataques intercambiables con cassettes, ataques nuevos y sueltos, Torneo Genesis y PayFoe (de relleno). Faltan: olvidar ataques, la regla anti-farmeo y sacar de `Batalla.tsx` los turnos de los héroes (los de los enemigos ya están en `engine/turnos.ts`). |
 | Boringram y Boringplace | Completos para los Capítulos 1 y 2. |
 | Robustez | Hecha el 3 de noviembre: pantalla de error, guardado seguro, ESLint y CI. |
 
@@ -57,7 +57,7 @@ El RPG, Boringram y el arte se hacen **para el capítulo que toca**, no por adel
 
 - [x] **Ataques intercambiables** (hecho el 2026-11-03; diseño en `BIBLIA_RPG.md`, sección 18): 3 ataques y 2 especiales equipados, el resto en la mochila; los originales vinculados a su personaje; los sueltos se compran, se venden y se ganan en el torneo. Falta probarlos en el navegador y los ataques del torneo.
 - [x] **Partir `Boringram.tsx` y `App.tsx`** (2026-11-04, segunda computadora): solo se movió código.
-- [ ] **Mecánicas nuevas** (pedidas el 2026-11-04; `BIBLIA_RPG.md`, sección 19): dormido, quemado y congelado, cebos con efecto, cebo explosivo, autodestrucción, bomba del día del juicio y empate.
+- [x] **Mecánicas nuevas** (2026-11-04, segunda computadora; `BIBLIA_RPG.md`, sección 19): dormido, quemado y congelado, cebos con efecto, cebo explosivo, autodestrucción, bomba del día del juicio y empate. Falta probarlas en pantalla y lo visual definitivo.
 - [x] **Equipo y permanentes fuera de pelea** (2026-11-04, segunda computadora; `src/engine/equipo.ts`). Falta probarlo en pantalla.
 - [ ] **PayFoe y el Torneo Genesis** (pedido del autor el 2026-11-03; diseño en `BIBLIA_RPG.md`, sección 17), en partes: (1) ~~PayFoe y la transferencia~~, (2) ~~el torneo y sus copas~~ y (3) ~~Nikki campeona~~ **hechos el 2026-11-03 (de relleno)**; falta (4): los desbloqueables a la venta y la versión sin censura de 1.000.000, y los seis ataques de Nikki.
 
@@ -79,7 +79,7 @@ El RPG, Boringram y el arte se hacen **para el capítulo que toca**, no por adel
 ## Después (desde el 15 de diciembre)
 - Capítulo 5 (escenas 10 a 17 del borrador: Dulce Frío, el beso, el parque y el bar; el medio que falta; el descubrimiento). Fondos: Dulce Frío por dentro, el parque, el centro. Después, si el autor quiere, Génesis++.
 - Capítulo 6 (la bifurcación y sus dos ramas: la cara del Rey; en la rama A, la fusión en AnothergIrl y la batalla de las cinco manifestaciones) y los epílogos 7A y 7B.
-- Pendientes del RPG sin fecha: quemado y congelado, olvidar un ataque, regla anti-farmeo, `npm run escalar` con Upscayl.
+- Pendientes del RPG sin fecha: olvidar un ataque, regla anti-farmeo, `npm run escalar` con Upscayl.
 
 ---
 
@@ -117,5 +117,6 @@ Se responden cuando toque su semana; mientras, no se inventan.
 - Cuánto tardó GENESIS en terminar el juego.
 - `AnothergIrl`: si las mayúsculas forman «AI» a propósito.
 - El conflicto de fusión del 7B (en la pelea final del Capítulo 6): qué choca entre Rikka y Cami y si Jair ejecuta el comando.
+- Cómo se gana la bomba del día del juicio en el torneo, y confirmar las reglas de dormido (`docs/BIBLIA_RPG.md`, sección 19).
 - Cómo se consiguen las prendas que no se compran (trajes, flor, chaqueta de cuero, zapatos): `docs/BIBLIA_RPG.md`, sección 15.
 - Las frases de confusión del RPG, para aprobar o corregir.

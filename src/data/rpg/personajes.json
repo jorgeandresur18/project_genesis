@@ -700,6 +700,107 @@
     "Capitán de la Federación": "batalla/retratos/soldado"
   },
   "sueltos": {
+    "cebo_paralizante": {
+      "precio": 80,
+      "ataque": {
+        "nombre": "Cebo paralizante",
+        "poder": 0,
+        "cebo": true,
+        "cebo_efecto": "paraliza",
+        "usos": 5,
+        "texto": "{quien} deja una copia de sí. Al que le pegue, se le acalambra todo. [Relleno]"
+      }
+    },
+    "cebo_toxico": {
+      "precio": 80,
+      "ataque": {
+        "nombre": "Cebo tóxico",
+        "poder": 0,
+        "cebo": true,
+        "cebo_efecto": "veneno",
+        "usos": 5,
+        "texto": "{quien} deja una copia de sí. Al que le pegue, lo envenena. [Relleno]"
+      }
+    },
+    "cebo_confuso": {
+      "precio": 80,
+      "ataque": {
+        "nombre": "Cebo confuso",
+        "poder": 0,
+        "cebo": true,
+        "cebo_efecto": "confunde",
+        "usos": 5,
+        "texto": "{quien} deja una copia de sí. Al que le pegue, lo confunde. [Relleno]"
+      }
+    },
+    "cebo_caliente": {
+      "precio": 90,
+      "ataque": {
+        "nombre": "Cebo caliente",
+        "poder": 0,
+        "cebo": true,
+        "cebo_efecto": "quema",
+        "usos": 5,
+        "texto": "{quien} deja una copia de sí. Al que le pegue, lo quema. [Relleno]"
+      }
+    },
+    "cebo_frio": {
+      "precio": 90,
+      "ataque": {
+        "nombre": "Cebo frío",
+        "poder": 0,
+        "cebo": true,
+        "cebo_efecto": "congela",
+        "usos": 5,
+        "texto": "{quien} deja una copia de sí. Al que le pegue, lo congela. [Relleno]"
+      }
+    },
+    "cebo_sueno": {
+      "precio": 90,
+      "ataque": {
+        "nombre": "Cebo sueño",
+        "poder": 0,
+        "cebo": true,
+        "cebo_efecto": "duerme",
+        "usos": 5,
+        "texto": "{quien} deja una copia de sí. Al que le pegue, lo duerme. [Relleno]"
+      }
+    },
+    "cebo_explosivo": {
+      "precio": 120,
+      "ataque": {
+        "nombre": "Cebo explosivo",
+        "poder": 0,
+        "cebo": true,
+        "cebo_efecto": "explota",
+        "usos": 5,
+        "texto": "{quien} deja una copia de sí. Al que le pegue, le explota en la cara; a su dueño también le llega. [Relleno]"
+      }
+    },
+    "autodestruccion": {
+      "precio": 200,
+      "ataque": {
+        "nombre": "Autodestrucción",
+        "poder": 0,
+        "autodestruccion": 0.5,
+        "usos": 1,
+        "objetivo": "todos",
+        "texto": "{quien} aprieta el botón que nadie debe apretar. [Relleno]"
+      }
+    },
+    "bomba_juicio": {
+      "especial": {
+        "nombre": "Bomba del día del juicio",
+        "poder": 0,
+        "golpes": 0,
+        "objetivo": "todos",
+        "color": "#ff5a36",
+        "ojos": [0, 0, 1, 1],
+        "posicion": "objetivo",
+        "bomba": { "turnos": 5, "vida": 0.9 },
+        "texto": "{quien} deja una bomba en medio del campo. Explota en 5 turnos. [Relleno]"
+      }
+    },
     "piedra": {
       "precio": 40,
       "ataque": {

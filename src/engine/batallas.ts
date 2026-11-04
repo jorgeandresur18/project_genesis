@@ -1,7 +1,7 @@
 // Las peleas, completas: cada una (src/data/batallas/<id>.json) dice quién pelea, en qué nivel y lo que cambia en esa
 // pelea; la ficha única de cada personaje, los objetos y los retratos están en src/data/rpg/personajes.json
 // (docs/BIBLIA_RPG.md, sección 13). Aquí se juntan: todo el juego y las pruebas leen las peleas desde este módulo.
-import type { Ataque, DatosBatalla, Enemigo, Heroe, Objeto } from './batalla';
+import type { Ataque, DatosBatalla, Enemigo, Especial, Heroe, Objeto } from './batalla';
 import fichas from '../data/rpg/personajes.json';
 
 /** Una pelea tal como está en su archivo: los héroes con lo que cambia, los enemigos y los objetos por nombre. */
@@ -14,8 +14,11 @@ export interface PeleaArchivo extends Omit<DatosBatalla, 'personajes' | 'enemigo
 
 /** Un cassette suelto (docs/BIBLIA_RPG.md, sección 18): un ataque que puede usar cualquiera, con su precio en tokens. */
 export interface Suelto {
-  precio: number;
-  ataque: Ataque;
+  /** Sin precio: no se vende (se gana). */
+  precio?: number;
+  ataque?: Ataque;
+  /** Un especial suelto (la bomba del día del juicio): se equipa en los espacios de especial. */
+  especial?: Especial;
 }
 
 export interface Fichas {
@@ -59,6 +62,11 @@ export const BATALLAS: Record<string, DatosBatalla> = Object.fromEntries(
   }),
 );
 
+/** Los cassettes sueltos que se venden en Boringplace (la bomba no: se gana). */
+export const SUELTOS_EN_VENTA = Object.fromEntries(
+  Object.entries(FICHAS.sueltos).filter(([, c]) => c.ataque && c.precio !== undefined),
+) as Record<string, { precio: number; ataque: Ataque }>;
+
 /** Lo que se vende al vender un cassette suelto: la mitad de lo que cuesta. */
 export const precioVentaCassette = (precio: number) => Math.floor(precio / 2);
 
@@ -66,14 +74,15 @@ export const precioVentaCassette = (precio: number) => Math.floor(precio / 2);
  * Los cassettes sueltos que se tienen, como ataques para equipar: uno por cada id con al menos una copia. Cuántos
  * héroes pueden llevar el mismo a la vez lo limita la cantidad de copias (ver `copiasLibres`).
  */
-export const sueltosQueTengo = (cassettes: Record<string, number> = {}): Ataque[] =>
+export const sueltosQueTengo = (cassettes: Record<string, number> = {}): (Ataque | Especial)[] =>
   Object.entries(FICHAS.sueltos)
     .filter(([id]) => (cassettes[id] ?? 0) > 0)
-    .map(([, s]) => s.ataque);
+    .map(([, s]) => (s.ataque ?? s.especial)!);
 
 /** Cuántas copias de un suelto quedan sin equipar (las que tiene menos los héroes que lo llevan equipado). */
-export function copiasLibres(id: string, cassettes: Record<string, number> = {}, equipo: Record<string, { ataques?: string[] }> = {}): number {
-  const nombre = FICHAS.sueltos[id]?.ataque.nombre;
-  const usado = Object.values(equipo).filter((e) => e.ataques?.includes(nombre)).length;
+export function copiasLibres(id: string, cassettes: Record<string, number> = {}, equipo: Record<string, { ataques?: string[]; especiales?: string[] }> = {}): number {
+  const s = FICHAS.sueltos[id];
+  const nombre = (s?.ataque ?? s?.especial)?.nombre ?? '';
+  const usado = Object.values(equipo).filter((e) => e.ataques?.includes(nombre) || e.especiales?.includes(nombre)).length;
   return (cassettes[id] ?? 0) - usado;
 }

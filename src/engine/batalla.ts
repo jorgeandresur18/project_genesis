@@ -9,6 +9,8 @@ export interface Stats {
   def: number;
   vel: number;
 }
+/** Lo que hace un cebo con efecto al golpearlo. */
+export type EfectoCebo = 'paraliza' | 'veneno' | 'confunde' | 'quema' | 'congela' | 'duerme' | 'explota';
 export interface Ataque {
   /** No hace daño: paraliza al blanco tantos turnos (la parálisis de pesadilla de la sombra). */
   paraliza?: number;
@@ -23,6 +25,10 @@ export interface Ataque {
    * en vez de a él (CEBO), y muere al primer golpe. No se elige a quién.
    */
   cebo?: boolean;
+  /** El cebo con efecto: al golpearlo, le causa esto a quien lo golpeó (docs/BIBLIA_RPG.md, sección 19). */
+  cebo_efecto?: EfectoCebo;
+  /** Quien lo usa cae y todos los demás del campo reciben esta parte de su vida máxima (sección 19). */
+  autodestruccion?: number;
   /** Se cura a sí mismo esta parte de su vida máxima (la curación de Rikka); no se elige a quién. */
   cura?: number;
   /**
@@ -55,6 +61,8 @@ export interface Ataque {
  * objetivo es «todos», se reparten entre los enemigos de pie (si queda uno solo, van todos para él).
  */
 export interface Especial {
+  /** La bomba (sección 19): en vez de golpear, queda en el campo y explota a estos turnos con esta parte de la vida máxima de todos. */
+  bomba?: { turnos: number; vida: number };
   nombre: string;
   poder: number;
   golpes: number;
@@ -302,7 +310,7 @@ export interface DatosBatalla {
  * Si tiene varios, manda el primero de esa lista. TODO: congelado y quemado, cuando existan esos estados.
  */
 export type EstadoHabla = 'congelado' | 'confundido' | 'quemado' | 'envenenado' | null;
-export const estadoHabla = (l: Luchador): EstadoHabla => (l.confundido > 0 ? 'confundido' : l.envenenado ? 'envenenado' : null);
+export const estadoHabla = (l: Luchador): EstadoHabla => (l.congelado > 0 ? 'congelado' : l.confundido > 0 ? 'confundido' : l.quemado > 0 ? 'quemado' : l.envenenado ? 'envenenado' : null);
 /** Revuelve las palabras de una frase (el confundido sin frases propias). La primera va con mayúscula. */
 export function revolver(texto: string, azar: () => number = Math.random) {
   const p = texto.replace(/[.,;:!?¡¿…]+/g, '').toLowerCase().split(/\s+/).filter(Boolean);
@@ -337,14 +345,15 @@ export const PUNTERIA = {
   falloMin: 0.02, falloMax: 0.3,
   /** Esquivar: ±2 puntos por nivel de diferencia con el que ataca (hasta 10 niveles). */
   esquivaPorNivel: 0.02, esquivaNivelMax: 10,
-  /** Confundido o envenenado, esquiva peor. TODO: quemado y congelado (cuando existan) también restan. */
+  /** Confundido o envenenado, esquiva peor. */
   esquivaConfundido: 0.2, esquivaEnvenenado: 0.1,
   esquivaMin: 0.05, esquivaMax: 0.8,
 } as const;
 const entre = (x: number, min: number, max: number) => Math.min(max, Math.max(min, x));
 /** Probabilidad de que el golpe de `at` a `de` falle solo (sin que `de` haya elegido esquivar). */
 export function probFallo(d: { fallo?: number }, at: Luchador, de: Luchador) {
-  if (de.paralizado > 0) return 0;
+  // Al que no se puede mover no se le falla.
+  if (de.paralizado > 0 || de.congelado > 0 || de.dormido > 0) return 0;
   const P = PUNTERIA;
   const dif = entre(de.nivel - at.nivel, -P.falloNivelMin, P.falloNivelMax);
   const estado = (at.confundido > 0 ? P.falloConfundido : 0) + (at.envenenado ? P.falloEnvenenado : 0);
@@ -397,6 +406,14 @@ export interface Luchador {
   clon?: number;
   /** Envenenado: pierde `danio` PS al final de cada turno, `turnos` turnos más. */
   envenenado: { danio: number; turnos: number; noMata?: boolean } | null;
+  /** Turnos que le quedan quemado: pierde vida cada turno y pega a la mitad. */
+  quemado: number;
+  /** Turnos que le quedan congelado: no actúa; el primer golpe rompe el hielo y hace más daño. */
+  congelado: number;
+  /** Turnos que le quedan dormido: no ataca ni huye; solo un objeto lo despierta. */
+  dormido: number;
+  /** Si es un cebo con efecto: lo que le hace a quien lo golpea. */
+  ceboEfecto?: EfectoCebo;
   /** Protegido: tantos golpes que no le hacen daño. */
   protegido: number;
   /** Cuántas veces usó cada ataque con usos limitados en esta pelea (por nombre). */
@@ -455,7 +472,7 @@ export function crearLuchador(
   xp = 0,
 ): Luchador {
   const s = statsEn(d.base, d.crece, nivel);
-  return { id, clave, lado, nombre: d.nombre, nivel, xp, ps: s.ps, psMax: s.ps, atq: s.atq, def: s.def, vel: s.vel, extra: 0, extraDef: 0, esquivando: false, distraido: false, carga: 0, paralizado: 0, confundido: 0, envenenado: null, protegido: 0 };
+  return { id, clave, lado, nombre: d.nombre, nivel, xp, ps: s.ps, psMax: s.ps, atq: s.atq, def: s.def, vel: s.vel, extra: 0, extraDef: 0, esquivando: false, distraido: false, carga: 0, paralizado: 0, confundido: 0, envenenado: null, protegido: 0, quemado: 0, congelado: 0, dormido: 0 };
 }
 
 /**
@@ -483,7 +500,8 @@ export function ganarXp(l: Luchador, d: { base: Stats; crece: Stats }, xp: numbe
 export function dano(atacante: Luchador, defensor: Luchador, poder: number, azar: () => number = Math.random, criticoExtra = 0) {
   const base = ((atacante.atq + atacante.extra) * poder) / 10 - (defensor.def + defensor.extraDef) / 2;
   const critico = azar() < 0.08 + criticoExtra;
-  const n = Math.max(1, Math.round(base * (0.9 + azar() * 0.2) * (critico ? 1.5 : 1)));
+  // Quemado: pega a la mitad.
+  const n = Math.max(1, Math.round(base * (0.9 + azar() * 0.2) * (critico ? 1.5 : 1) * (atacante.quemado > 0 ? 0.5 : 1)));
   return { n, critico };
 }
 
@@ -492,7 +510,7 @@ export function dano(atacante: Luchador, defensor: Luchador, poder: number, azar
  * (`seguido: false`). Así Cami actúa un turno sí y uno no; Jair, siempre.
  */
 export function disponibles(heroes: Luchador[], datos: Record<string, Heroe>, actuaron: string[]): Luchador[] {
-  return heroes.filter((h) => h.ps > 0 && !h.paralizado && (datos[h.clave].seguido || !actuaron.includes(h.id)));
+  return heroes.filter((h) => h.ps > 0 && !h.paralizado && !h.congelado && (datos[h.clave].seguido || !actuaron.includes(h.id)));
 }
 
 /** Sube `n` niveles de golpe (el caramelo rancio): las estadísticas pasan a las del nivel nuevo. */
@@ -509,11 +527,15 @@ export function subirNiveles(l: Luchador, d: { base: Stats; crece: Stats }, n: n
 
 /** Usa un objeto en un héroe: devuelve cuánto hizo (lo que subió o curó). `d`: sus datos (para subir niveles). */
 export function usarObjeto(o: Objeto, h: Luchador, d?: { base: Stats; crece: Stats }): number {
+  // Dormido: solo un objeto lo despierta (los que se usan contra un rival, no).
+  if (!o.veneno && !o.confunde && !o.paraliza) h.dormido = 0;
   // Los tácticos: estados (sobre un rival o un compañero).
   if (o.cura_estados) {
     h.envenenado = null;
     h.confundido = 0;
     h.paralizado = 0;
+    h.quemado = 0;
+    h.congelado = 0;
   }
   if (o.veneno) h.envenenado = { ...o.veneno };
   if (o.protege) h.protegido += o.protege;
@@ -528,6 +550,9 @@ export function usarObjeto(o: Objeto, h: Luchador, d?: { base: Stats; crece: Sta
     if (h.ps > 0) return 0;
     h.ps = Math.max(1, Math.round(h.psMax * o.revive));
     h.paralizado = 0;
+    h.quemado = 0;
+    h.congelado = 0;
+    h.dormido = 0;
     return h.ps;
   }
   if (o.atq) h.extra += o.atq;
@@ -564,6 +589,20 @@ export function tickVeneno(l: Luchador, jefe: boolean): number {
   return Math.max(0, n);
 }
 
+/** Quemado: cada turno pierde esta parte de su vida máxima (al menos 1). Un jefe nunca baja de 1. Descuenta un turno. */
+export const QUEMADO = { turnos: 3, vida: 0.05 } as const;
+export function tickQuemado(l: Luchador, jefe: boolean): number {
+  if (!l.quemado || l.ps <= 0) return 0;
+  const n = Math.max(0, Math.min(Math.max(1, Math.round(l.psMax * QUEMADO.vida)), jefe ? l.ps - 1 : l.ps));
+  l.ps -= n;
+  l.quemado--;
+  return n;
+}
+/** Congelado: se descongela solo a estos turnos; el golpe que rompe el hielo hace `golpe` veces el daño. */
+export const CONGELADO = { turnos: 3, golpe: 1.5 } as const;
+/** Dormido: duerme de 2 a 4 turnos, al azar. */
+export const turnosDormido = (azar: () => number = Math.random) => 2 + Math.floor(azar() * 3);
+
 /** Crea el clon de sombra de un enemigo: más débil (`fuerza`), con la vida que le costó, sin especiales. */
 export function crearClon(o: Luchador, c: NonNullable<Enemigo['clon']>, id: string): Luchador {
   const ps = Math.max(1, Math.round(o.psMax * c.costo));
@@ -584,6 +623,9 @@ export function crearClon(o: Luchador, c: NonNullable<Enemigo['clon']>, id: stri
     paralizado: 0,
     envenenado: null,
     protegido: 0,
+    quemado: 0,
+    congelado: 0,
+    dormido: 0,
     // Uno más: el turno en que aparece no cuenta.
     clon: c.turnos + 1,
   };
@@ -687,20 +729,21 @@ export const escribirEquipo = (nombres: string[]): string => nombres.join('|');
  * Lo que un héroe puede equiparse en su nivel: sus ataques (los de siempre y los aprendidos), sus especiales y los
  * cassettes sueltos que se tienen (`sueltos`: los ataques, que puede usar cualquiera).
  */
-export const conocidos = (d: Heroe, nivel: number, sueltos: Ataque[] = [], ganados: string[] = []) => ({
-  ataques: [...ataquesDe({ nivel }, d), ...sueltos],
-  especiales: [...especialesDe(d), ...(d.especiales_extra ?? []).filter((x) => ganados.includes(x.desbloqueo)).map((x) => x.especial)],
+const esEspecialSuelto = (x: Ataque | Especial): x is Especial => 'golpes' in x;
+export const conocidos = (d: Heroe, nivel: number, sueltos: (Ataque | Especial)[] = [], ganados: string[] = []) => ({
+  ataques: [...ataquesDe({ nivel }, d), ...sueltos.filter((x): x is Ataque => !esEspecialSuelto(x))],
+  especiales: [...especialesDe(d), ...(d.especiales_extra ?? []).filter((x) => ganados.includes(x.desbloqueo)).map((x) => x.especial), ...sueltos.filter(esEspecialSuelto)],
 });
 
 /**
  * Lo equipado: los elegidos (por nombre, en ese orden, si los conoce) o, sin elección, los primeros que conoce, hasta
  * el máximo. Lo que conoce y no está equipado queda en la mochila de ataques (ver `enMochila`).
  */
-export function equipados(d: Heroe, nivel: number, elegidos?: { ataques?: string[]; especiales?: string[] }, sueltos: Ataque[] = [], ganados: string[] = []) {
+export function equipados(d: Heroe, nivel: number, elegidos?: { ataques?: string[]; especiales?: string[] }, sueltos: (Ataque | Especial)[] = [], ganados: string[] = []) {
   const c = conocidos(d, nivel, sueltos, ganados);
   const elegir = <T extends { nombre: string }>(todos: T[], nombres: string[] | undefined, max: number): T[] => {
     // Sin elección: los suyos (los sueltos solo si se eligen).
-    if (!nombres) return todos.filter((x) => !sueltos.includes(x as unknown as Ataque)).slice(0, max);
+    if (!nombres) return todos.filter((x) => !sueltos.includes(x as unknown as Ataque | Especial)).slice(0, max);
     const out = nombres.map((n) => todos.find((x) => x.nombre === n)).filter((x): x is T => !!x);
     return out.slice(0, max);
   };
@@ -708,7 +751,7 @@ export function equipados(d: Heroe, nivel: number, elegidos?: { ataques?: string
 }
 
 /** Lo que conoce y no tiene equipado: va a la mochila de ataques (sus cassettes). */
-export function enMochila(d: Heroe, nivel: number, elegidos?: { ataques?: string[]; especiales?: string[] }, sueltos: Ataque[] = [], ganados: string[] = []) {
+export function enMochila(d: Heroe, nivel: number, elegidos?: { ataques?: string[]; especiales?: string[] }, sueltos: (Ataque | Especial)[] = [], ganados: string[] = []) {
   const c = conocidos(d, nivel, sueltos, ganados);
   const e = equipados(d, nivel, elegidos, sueltos, ganados);
   return {
@@ -725,8 +768,8 @@ export const CEBO = 0.55;
 /** Turnos que dura un cebo si nadie le pega: después se evapora. */
 export const CEBO_TURNOS = 3;
 /** Crea el cebo de un héroe: su copia en blanco y negro, con 1 PS y sin poder hacer nada. */
-export function crearCebo(h: Luchador, id: string): Luchador {
-  return { ...h, id, ps: 1, psMax: 1, extra: 0, extraDef: 0, carga: 0, esquivando: false, distraido: false, paralizado: 0, confundido: 0, envenenado: null, protegido: 0, cebo: true };
+export function crearCebo(h: Luchador, id: string, efecto?: EfectoCebo): Luchador {
+  return { ...h, id, ps: 1, psMax: 1, extra: 0, extraDef: 0, carga: 0, esquivando: false, distraido: false, paralizado: 0, confundido: 0, envenenado: null, protegido: 0, quemado: 0, congelado: 0, dormido: 0, cebo: true, ceboEfecto: efecto };
 }
 
 /** El jefe se retira cuando le queda esta parte de sus PS (o menos). */

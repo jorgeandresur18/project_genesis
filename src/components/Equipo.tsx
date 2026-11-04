@@ -46,7 +46,7 @@ function Cassettes({
   soloVer: boolean;
   /** Los cassettes sueltos que se tienen y lo que tiene equipado cada uno (para no equipar más copias de las que hay). */
   cassettes?: Record<string, number>;
-  equipoTodos?: Record<string, { ataques?: string[] }>;
+  equipoTodos?: Record<string, { ataques?: string[]; especiales?: string[] }>;
   /** Los especiales ganados en la historia (p. ej. el Armored de Cami). */
   ganados?: string[];
 }) {
@@ -56,7 +56,7 @@ function Cassettes({
   const eq = equipados(h, nivel, elegidos, sueltos, ganados);
   const mochila = enMochila(h, nivel, elegidos, sueltos, ganados);
   /** El id del suelto de un ataque (si es suelto): son grises y se equipan si queda una copia libre. */
-  const idSuelto = (nombre: string) => Object.entries(FICHAS.sueltos).find(([, x]) => x.ataque.nombre === nombre)?.[0];
+  const idSuelto = (nombre: string) => Object.entries(FICHAS.sueltos).find(([, x]) => (x.ataque ?? x.especial)?.nombre === nombre)?.[0];
   const de = (nombre: string) => (idSuelto(nombre) ? undefined : heroe);
   const nombres = (l: { nombre: string }[]) => l.map((x) => x.nombre);
   const cambiar = (tipo: 'ataques' | 'especiales', nombre: string) => {
@@ -91,7 +91,7 @@ function Cassettes({
       <span className="equipo-cassettes-titulo">{t('equipo.especiales')}</span>
       <div className="equipo-cassettes-fila">
         {eq.especiales.map((e) => (
-          <Cassette key={e.nombre} de={heroe} nombre={e.nombre} especial onClick={soloVer ? undefined : () => cambiar('especiales', e.nombre)} titulo={e.texto.replace(/\{quien\}/g, h.nombre)} />
+          <Cassette key={e.nombre} de={de(e.nombre)} nombre={e.nombre} especial onClick={soloVer ? undefined : () => cambiar('especiales', e.nombre)} titulo={e.texto.replace(/\{quien\}/g, h.nombre)} />
         ))}
         {huecos(eq.especiales.length, MAX_ESPECIALES)}
       </div>
@@ -103,7 +103,7 @@ function Cassettes({
               <Cassette key={a.nombre} de={de(a.nombre)} nombre={a.nombre} apagado onClick={soloVer ? undefined : () => cambiar('ataques', a.nombre)} />
             ))}
             {mochila.especiales.map((e) => (
-              <Cassette key={e.nombre} de={heroe} nombre={e.nombre} especial apagado onClick={soloVer ? undefined : () => cambiar('especiales', e.nombre)} />
+              <Cassette key={e.nombre} de={de(e.nombre)} nombre={e.nombre} especial apagado onClick={soloVer ? undefined : () => cambiar('especiales', e.nombre)} />
             ))}
           </div>
         </>

@@ -2,7 +2,7 @@
 // equipado va a la mochila; se guarda en la partida por nombre.
 import { describe, expect, it } from 'vitest';
 import { MAX_ATAQUES, enMochila, equipados, escribirEquipo, leerEquipo, progresoDeVars, type Ataque, type Heroe } from '../src/engine/batalla';
-import { FICHAS } from '../src/engine/batallas';
+import { FICHAS, SUELTOS_EN_VENTA } from '../src/engine/batallas';
 
 const at = (nombre: string): Ataque => ({ nombre, poder: 5, texto: '', usos: 5 });
 const jair = FICHAS.heroes.jair as Heroe;
@@ -54,11 +54,12 @@ describe('cassettes sueltos', () => {
 
   it('cada suelto tiene precio, usos limitados y su variable declarada en la partida', async () => {
     const variables = (await import('../src/data/variables.json')).default as Record<string, unknown>;
-    for (const [id, c] of Object.entries(FICHAS.sueltos)) {
+    for (const [id, c] of Object.entries(SUELTOS_EN_VENTA)) {
       expect(c.precio, id).toBeGreaterThan(0);
       expect(c.ataque.usos, id).toBeGreaterThan(0);
-      expect(variables, id).toHaveProperty(`cassette_${id}`);
     }
+    // También los que no se venden (la bomba del día del juicio, que se gana).
+    for (const id of Object.keys(FICHAS.sueltos)) expect(variables, id).toHaveProperty(`cassette_${id}`);
   });
 });
 

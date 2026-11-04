@@ -6,7 +6,7 @@ import { esEquipo, yaTiene } from '../engine/equipo';
 import { useStore } from '../engine/store';
 import { useLang } from '../engine/i18n';
 import { config } from '../engine/story';
-import { FICHAS, copiasLibres, precioVentaCassette } from '../engine/batallas';
+import { SUELTOS_EN_VENTA, copiasLibres, precioVentaCassette } from '../engine/batallas';
 import { progresoDeVars } from '../engine/batalla';
 import { TOPE_PAYFOE, transferible, type Movimiento } from '../engine/payfoe';
 import s from './Boringplace.module.css';
@@ -104,7 +104,7 @@ export function Boringplace({ onArticulo, onToast }: { onArticulo: (id: string) 
             );
           })}
           {/* Los cassettes sueltos (docs/BIBLIA_RPG.md, sección 18): grises, los puede usar cualquiera. */}
-          {Object.entries(FICHAS.sueltos).map(([id, c]) => (
+          {Object.entries(SUELTOS_EN_VENTA).map(([id, c]) => (
             <button key={`c-${id}`} className={s.tarjeta} onClick={() => onArticulo(`${ID_CASSETTE}${id}`)}>
               <FotoObjeto icono="objetos/cassette_generico" color={GRIS_CASSETTE} />
               <span className={s.nombre}>{c.ataque.nombre}</span>
@@ -373,7 +373,7 @@ function CassetteVista({ id, onBack, onToast }: { id: string; onBack: () => void
   const tx = useBoringplace().data.textos;
   const vars = useStore((st) => st.game?.vars);
   const [n, setN] = useState(1);
-  const c = FICHAS.sueltos[id];
+  const c = SUELTOS_EN_VENTA[id];
   if (!c) return null;
   const monedas = (vars?.monedas as number | undefined) ?? 0;
   const tengo = (vars?.[`cassette_${id}`] as number | undefined) ?? 0;
@@ -432,7 +432,7 @@ function CassettesParaVender({ onToast }: { onToast: (texto: string) => void }) 
   const vars = useStore((st) => st.game?.vars);
   if (!vars) return null;
   const progreso = progresoDeVars(vars);
-  const mios = Object.entries(FICHAS.sueltos).filter(([id]) => (progreso.cassettes?.[id] ?? 0) > 0);
+  const mios = Object.entries(SUELTOS_EN_VENTA).filter(([id]) => (progreso.cassettes?.[id] ?? 0) > 0);
   if (!mios.length) return null;
   return (
     <>
