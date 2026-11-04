@@ -7,12 +7,17 @@
 // - Lugares: los fondos del guion por dimensión (galeria.json «lugares»); se desbloquean al visitar una escena
 //   donde aparecen. Solo cuentan los que ya tienen imagen.
 // - Nuevo: desbloqueado y todavía no abierto en el visor de la galería (galleryOpened).
+// - Regla (del autor, 2026-11-03): en todos los desbloqueables, lo que ya está en la historia sale como casilla vacía
+//   («???») hasta descubrirlo, en el orden en que aparece en la historia. Lo que la historia todavía no usa, no sale.
 import { useStore } from './store';
 import { storyFiles } from './story';
 import galeria from '../data/galeria.json';
 import spriteConfig from '../../tools/sprites.config.json';
 import emblemas from '../data/emblemas_18.json';
 import { GALERIA_COMPLETA } from './modo';
+import type { DatosBatalla } from './batalla';
+
+const BATALLAS = import.meta.glob<DatosBatalla>('../data/batallas/*.json', { eager: true, import: 'default' });
 
 const cgsDe = (secretas: boolean): string[] => {
   const ids: string[] = [];
@@ -86,18 +91,37 @@ export interface SpriteRpg {
   hoja: string;
 }
 /**
- * Sprites del combate por personaje de la galería (galeria.json «rpg»): salen al final de su pestaña recién cuando
- * se vieron en una batalla (`rpgVistos`) y no cuentan para el total. En el visor se ven animados y la ficha tiene
- * sus acciones.
+ * Las hojas del combate que la historia ya usa, en el orden en que salen: cada pelea de la historia (por su escena), y
+ * en ella los héroes, la horda y el jefe. Solo las que tienen ficha en galeria.json («rpg»).
+ */
+const HOJAS_EN_HISTORIA: string[] = (() => {
+  const rpg = galeria.rpg as Record<string, unknown>;
+  const hojas: string[] = [];
+  for (const file of storyFiles) {
+    for (const scene of file.scenes) {
+      const d = scene.batalla ? BATALLAS[`../data/batallas/${scene.batalla}.json`] : undefined;
+      if (!d) continue;
+      const sprites = [...d.heroes.map((k) => d.personajes[k]?.sprite), d.enemigos[d.horda.enemigo]?.sprite, d.enemigos[d.jefe.enemigo]?.sprite];
+      for (const h of sprites) if (h && h in rpg && !hojas.includes(h)) hojas.push(h);
+    }
+  }
+  return hojas;
+})();
+
+/**
+ * Sprites del combate por personaje de la galería (galeria.json «rpg»), los que la historia ya usa: salen al final de
+ * su pestaña recién cuando se vieron en una batalla (`rpgVistos`) y no cuentan para el total. En el visor se ven
+ * animados y la ficha tiene sus acciones.
  */
 export const SPRITES_RPG: Map<string, SpriteRpg[]> = (() => {
+  const rpg = galeria.rpg as Record<string, { personaje: string }>;
   const map = new Map<string, SpriteRpg[]>();
-  for (const [hoja, { personaje }] of Object.entries(galeria.rpg)) map.set(personaje, [...(map.get(personaje) ?? []), { hoja }]);
+  for (const hoja of HOJAS_EN_HISTORIA) map.set(rpg[hoja].personaje, [...(map.get(rpg[hoja].personaje) ?? []), { hoja }]);
   return map;
 })();
 
-/** Todos los sprites del combate, en orden (la pestaña «Pixel art»). */
-export const TODOS_RPG: SpriteRpg[] = Object.keys(galeria.rpg).map((hoja) => ({ hoja }));
+/** Los sprites del combate de la pestaña «Pixel art»: los que la historia ya usa, en el orden en que salen. */
+export const TODOS_RPG: SpriteRpg[] = HOJAS_EN_HISTORIA.map((hoja) => ({ hoja }));
 
 export const TOTAL_SPRITES = CHARACTERS.reduce((n, c) => n + c.sprites.length, 0);
 
@@ -115,12 +139,15 @@ const SCENES_BY_BACKGROUND = (() => {
 
 export interface Dimension {
   id: string;
-  /** Fondos de la dimensión que ya están en el guion con su imagen, en el orden de galeria.json. */
+  /** Fondos de la dimensión que ya están en el guion con su imagen, en el orden en que salen en la historia. */
   fondos: { id: string; scenes: string[] }[];
 }
+/** En qué lugar de la historia aparece por primera vez cada fondo (para ordenar los lugares). */
+const PRIMERA_VEZ = new Map([...SCENES_BY_BACKGROUND.keys()].map((f, i) => [f, i]));
 export const DIMENSIONS: Dimension[] = Object.entries(galeria.lugares).map(([id, d]) => ({
   id,
   fondos: Object.keys(d.fondos)
+    .sort((a, b) => (PRIMERA_VEZ.get(a) ?? Infinity) - (PRIMERA_VEZ.get(b) ?? Infinity))
     .filter((f) => SCENES_BY_BACKGROUND.has(f))
     .map((f) => ({ id: f, scenes: SCENES_BY_BACKGROUND.get(f)! })),
 }));

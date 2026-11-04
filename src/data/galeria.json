@@ -497,8 +497,8 @@
           "info": "Naves, soldados de negro y el presupuesto que nunca le llega a la Resistencia."
         },
         "hangar_destruido": {
-          "nombre": "Hangar en llamas",
-          "info": "Un disparo que falló, una nave que se apagó y después explotó, y una flota entera cayendo como fichas de dominó. Cami vio arder su esperanza. Jair vio arder el decorado."
+          "nombre": "Hangar destruido",
+          "info": "Un disparo que falló, una nave que se apagó y después explotó, y una flota entera cayendo como fichas de dominó. Cami vio caer su esperanza. Jair vio caer el decorado."
         },
         "pozo_central": {
           "nombre": "Pozo central",
