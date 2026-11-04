@@ -77,3 +77,10 @@
 .cantidad button { width: 2rem; height: 2rem; border: 1px solid #34343d; border-radius: 0.5rem; background: #17171c; color: #f1f1f4; font: inherit; font-size: 1.1rem; line-height: 1; }
 .cantidad button:disabled { opacity: 0.35; }
 .cantidad b { min-width: 1.6rem; text-align: center; font-size: 1rem; }
+
+/* PayFoe: la billetera del jugador, arriba de la tienda. */
+.payfoe { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 0.2rem 0.6rem; margin: 0.6rem 0.6rem 0; padding: 0.6rem 0.75rem; border: 1px solid #23232b; border-radius: 0.7rem; background: linear-gradient(135deg, #17171d, #121217); color: #f1f1f4; }
+.payfoeMarca { color: #8fb4ff; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; }
+.payfoeSaldo { grid-column: 1; font-family: 'Press Start 2P', monospace; font-size: 0.78rem; color: #ffd76a; }
+.payfoePartida { grid-column: 1; color: #9a9aa6; font-size: 0.74rem; }
+.payfoe .botonChico { grid-column: 2; grid-row: 2 / span 2; }

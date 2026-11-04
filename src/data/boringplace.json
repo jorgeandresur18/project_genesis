@@ -8,6 +8,13 @@
   "textos": {
     "titulo": "Boringplace",
     "precio_monedas": "{n} tokens",
+    "payfoe": "PayFoe",
+    "payfoe_saldo": "{n} tokens",
+    "billetera_partida": "En esta partida: {n} tokens",
+    "transferir": "Transferir {n} a PayFoe",
+    "transferido": "Transferiste {n} tokens a PayFoe.",
+    "nada_transferible": "No hay tokens nuevos para transferir. PayFoe ya recibió lo que ganaste en esta partida.",
+    "payfoe_tope": "Límite de cuenta alcanzado. PayFoe no acepta más de 999.999 tokens.",
     "cantidad": "Cantidad",
     "comprar_n": "Comprar {n} · {total} tokens",
     "comprados": "Compraste {n} × {objeto}. Va a la mochila.",

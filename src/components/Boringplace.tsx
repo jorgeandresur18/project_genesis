@@ -3,6 +3,8 @@ import { playSelect } from '../engine/sound';
 import { assetUrl } from '../engine/assets';
 import { OBJETOS_TIENDA, colorDeObjeto, precioVenta, useBoringplace, type Articulo } from '../engine/boringplace';
 import { useStore } from '../engine/store';
+import { useLang } from '../engine/i18n';
+import { TOPE_PAYFOE, transferible } from '../engine/payfoe';
 import s from './Boringplace.module.css';
 import sb from './Boringram.module.css';
 
@@ -81,6 +83,7 @@ export function Boringplace({ onArticulo, onToast }: { onArticulo: (id: string) 
           </button>
         ))}
       </div>
+      <TarjetaPayfoe onToast={aviso} />
       {!vars && <p className={s.sinTuyos}>{tx.sin_partida}</p>}
       {pestana === 'tienda' ? (
         <div className={s.grilla}>
@@ -163,6 +166,42 @@ export function ArticuloVista({ id, onBack, onToast }: { id: string; onBack: () 
           {a.de_jair ? tx.vendido : tx.disponible}
         </button>
       </div>
+    </div>
+  );
+}
+
+/**
+ * PayFoe, la billetera del jugador: su saldo (se ve también desde el menú) y, dentro de una partida, cuánto hay en la
+ * billetera de la partida y el botón para pasar a PayFoe lo ganado que todavía no se transfirió (nunca al revés).
+ */
+function TarjetaPayfoe({ onToast }: { onToast: (texto: string) => void }) {
+  const tx = useBoringplace().data.textos;
+  const lang = useLang();
+  const payfoe = useStore((st) => st.payfoe);
+  const vars = useStore((st) => st.game?.vars);
+  // Con separador de miles siempre (999.999 / 999,999); es-ES no separa los de cuatro cifras.
+  const n = (x: number) => String(x).replace(/\B(?=(\d{3})+(?!\d))/g, lang === 'en' ? ',' : '.');
+  const puede = vars ? transferible(vars, payfoe) : 0;
+  return (
+    <div className={s.payfoe}>
+      <span className={s.payfoeMarca}>{tx.payfoe}</span>
+      <b className={s.payfoeSaldo}>{tx.payfoe_saldo.replace('{n}', n(payfoe.saldo))}</b>
+      {vars && (
+        <>
+          <small className={s.payfoePartida}>{tx.billetera_partida.replace('{n}', n((vars.monedas as number | undefined) ?? 0))}</small>
+          <button
+            className={s.botonChico}
+            onClick={() => {
+              playSelect();
+              if (payfoe.saldo >= TOPE_PAYFOE) return onToast(tx.payfoe_tope);
+              const t = useStore.getState().transferirAPayfoe(puede);
+              onToast(t > 0 ? tx.transferido.replace('{n}', n(t)) : tx.nada_transferible);
+            }}
+          >
+            {tx.transferir.replace('{n}', n(puede))}
+          </button>
+        </>
+      )}
     </div>
   );
 }

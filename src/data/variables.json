@@ -31,5 +31,7 @@
   "mochila_veneno_ratas": 0,
   "mochila_condon": 0,
   "monedas": 0,
+  "partida_id": "",
+  "tokens_ganados": 0,
   "hangar_pelea": false
 }

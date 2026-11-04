@@ -3,6 +3,7 @@ import { persist } from 'zustand/middleware';
 import type { Vars } from './types';
 import { config, scenes, variables } from './story';
 import { applyChoice, enterScene, resolveNext, visibleChoices } from './logic';
+import { PAYFOE_INICIAL, conGanados, nuevoIdPartida, transferir, type PayFoe } from './payfoe';
 
 export const SAVE_SLOTS = 6;
 /** El nombre del guardado automático antes de una pelea. */
@@ -222,6 +223,10 @@ interface Store {
   /** Cambia el nombre de una partida guardada (vacío: vuelve a «Espacio N»). */
   /** Boringplace: comprar (si alcanzan las monedas) y vender (de la mochila). Devuelven si se pudo. */
   comprarObjeto: (objeto: string, precio: number) => boolean;
+  /** PayFoe: la billetera del jugador, fuera de las partidas (ver src/engine/payfoe.ts). */
+  payfoe: PayFoe;
+  /** Pasa tokens de la partida en curso a PayFoe (nunca al revés). Devuelve cuántos pasaron. */
+  transferirAPayfoe: (n: number) => number;
   venderObjeto: (objeto: string, precio: number) => boolean;
   /** Antes de una pelea: guarda solo, si hay un espacio vacío (o el del guardado automático anterior). */
   autoguardarPelea: () => void;
@@ -246,7 +251,7 @@ export const useStore = create<Store>()(
       /** Avanza a la escena siguiente. Una escena con minijuego solo avanza cuando se resuelve. */
       function advanceFrom(solved: boolean, patch?: Vars) {
         const { game: actual } = get();
-        const game = actual && patch ? { ...actual, vars: { ...actual.vars, ...patch } } : actual;
+        const game = actual && patch ? { ...actual, vars: conGanados(actual.vars, { ...actual.vars, ...patch }) } : actual;
         if (!game) return;
         // En una pantalla de final o de fin de capítulo se sale con sus botones, no avanzando
         // (un doble clic en la última línea se saltaba la pantalla del final).
@@ -344,7 +349,7 @@ export const useStore = create<Store>()(
         error: null,
         textDone: false,
 
-        newGame: (start) => goTo(start && scenes.has(start) ? start : config.inicio, { ...variables }, []),
+        newGame: (start) => goTo(start && scenes.has(start) ? start : config.inicio, { ...variables, partida_id: nuevoIdPartida() }, []),
 
         next: () => {
           if (get().textDone) get().advance();
@@ -451,7 +456,7 @@ export const useStore = create<Store>()(
           const scene = game && scenes.get(game.sceneId);
           if (!game || !scene?.batalla_perdon) return;
           markRead(scene.scene_id);
-          goTo(scene.batalla_perdon, { ...game.vars, ...vars }, game.history, stepFrom(game));
+          goTo(scene.batalla_perdon, conGanados(game.vars, { ...game.vars, ...vars }), game.history, stepFrom(game));
         },
 
         toNextChoice: () => {
@@ -565,8 +570,17 @@ export const useStore = create<Store>()(
           const { game } = get();
           const k = `mochila_${objeto}`;
           if (!game || !((game.vars[k] as number) > 0)) return false;
-          set({ game: { ...game, vars: { ...game.vars, monedas: ((game.vars.monedas as number) ?? 0) + precio, [k]: (game.vars[k] as number) - 1 } } });
+          set({ game: { ...game, vars: conGanados(game.vars, { ...game.vars, monedas: ((game.vars.monedas as number) ?? 0) + precio, [k]: (game.vars[k] as number) - 1 }) } });
           return true;
+        },
+
+        payfoe: PAYFOE_INICIAL,
+        transferirAPayfoe: (n) => {
+          const { game, payfoe } = get();
+          if (!game) return 0;
+          const r = transferir(game.vars, payfoe, n);
+          if (r.transferido > 0 || r.vars.partida_id !== game.vars.partida_id) set({ game: { ...game, vars: r.vars }, payfoe: r.payfoe });
+          return r.transferido;
         },
 
         renameSave: (slot, nombre) => {
@@ -624,6 +638,7 @@ export const useStore = create<Store>()(
             bootcampAvisos: {},
             bootcampCalificacion: 0,
             bootcampResena: null,
+            payfoe: PAYFOE_INICIAL,
             choicesTaken: {},
             juegoCompleto: false,
         cap01Completo: false,
@@ -664,6 +679,7 @@ export const useStore = create<Store>()(
         bootcampAvisos: s.bootcampAvisos,
         bootcampCalificacion: s.bootcampCalificacion,
         bootcampResena: s.bootcampResena,
+        payfoe: s.payfoe,
         choicesTaken: s.choicesTaken,
         juegoCompleto: s.juegoCompleto,
         cap01Completo: s.cap01Completo,

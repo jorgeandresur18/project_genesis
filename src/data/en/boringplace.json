@@ -5,6 +5,13 @@
   },
   "textos": {
     "precio_monedas": "{n} tokens",
+    "payfoe": "PayFoe",
+    "payfoe_saldo": "{n} tokens",
+    "billetera_partida": "In this game: {n} tokens",
+    "transferir": "Transfer {n} to PayFoe",
+    "transferido": "You transferred {n} tokens to PayFoe.",
+    "nada_transferible": "No new tokens to transfer. PayFoe already received what you earned in this game.",
+    "payfoe_tope": "Account limit reached. PayFoe does not accept more than 999,999 tokens.",
     "cantidad": "Quantity",
     "comprar_n": "Buy {n} · {total} tokens",
     "comprados": "You bought {n} × {objeto}. It goes to your bag.",
