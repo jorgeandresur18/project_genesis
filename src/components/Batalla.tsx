@@ -15,7 +15,6 @@ import {
   usableEnPelea,
   objetivoDe,
   CEBO_TURNOS,
-  CEBO,
   crearCebo,
   aprendeEn,
   CONFUSION,
@@ -23,10 +22,7 @@ import {
   quedan,
   gastarUso,
   yaTiene,
-  repartirRafagas,
-  eligeAtaque,
   crearClon,
-  eligeEspecial,
   vanPerdiendo,
   falla,
   conQuejidos,
@@ -61,6 +57,7 @@ import { EnergiasHacia } from './EfectosSprite';
 import { EquipoPanel } from './Equipo';
 import { OptionsPanel } from './Panels';
 import { BATALLAS, sueltosQueTengo } from '../engine/batallas';
+import { decidirEnemigo, estadoInicial, finDeTurno, type EstadoPelea } from '../engine/turnos';
 import { BASE, PausaContexto, SpriteHoja, anguloDisparo, cargarHoja, rectSprite, type Anim, type Hoja } from './batalla/sprites';
 import { AvisoEspecial, CajaCasillas, Figura, Tarjeta, conNumeros, type Casillas } from './batalla/escena';
 import { Pixelado, Versus } from './batalla/presentacion';
@@ -173,43 +170,9 @@ function Pelea({
   const guardado = progreso;
   progreso = d.vida_real ? undefined : progreso;
   // El estado de la pelea vive en un ref (lo cambian las acciones, en orden) y se redibuja con `forzar`.
-  const b = useRef({
-    heroes: d.heroes.map((k) =>
-      crearLuchador(k, k, 'heroe', d.personajes[k], progreso?.heroes[k]?.nivel || d.personajes[k].nivel, progreso?.heroes[k]?.xp ?? 0),
-    ),
-    enemigos: [] as Luchador[],
-    // Con lo que empieza la mochila si tiene menos (p. ej. un revivir).
-    /** Las monedas de la partida (lo que traía más lo que se gana en esta pelea). */
-    monedas: progreso?.monedas ?? 0,
-    mochila: Object.fromEntries(
-      [...new Set([...Object.keys(progreso?.mochila ?? {}), ...Object.keys(d.mochila_inicial ?? {})])].map((k) => [
-        k,
-        Math.max(progreso?.mochila[k] ?? 0, d.mochila_inicial?.[k] ?? 0),
-      ]),
-    ) as Record<string, number>,
-    /** Cuántos de la horda ya salieron. */
-    salieron: 0,
-    /** Los héroes que atacaron el turno anterior (los que no pueden repetir, descansan este). */
-    actuaron: [] as string[],
-    /** Cuántos turnos seguidos se le habló al rival que perdona (Nikki), y si ya perdonó. */
-    racha: 0,
-    perdona: false,
-    /** Quién le pidió perdón a Nikki y después la atacó (la Mega Bola Tóxica va contra él). */
-    traicion: null as string | null,
-    /** A quién remata Nikki después de la Mega Bola (su próxima cachetada no falla, aunque esquive). */
-    remate: null as string | null,
-    /** Los que quedaron paralizados (o confundidos) en este turno (empiezan a descontar en el siguiente). */
-    paralizadoRecien: [] as string[],
-    confundidoRecien: [] as string[],
-    /** Los cebos (copias de un héroe que no hacen nada): aparte de los héroes, con dónde se dibujan. */
-    cebos: [] as { l: Luchador; de: string; x: number; y: number; turnos: number }[],
-    /** Los que no pueden actuar en este turno (Cami, un turno sí y uno no). */
-    descansan: [] as string[],
-    /** Los que se ven descansando (Cami agachada): desde que actúan hasta el final del turno siguiente. */
-    cansados: new Set<string>(),
-    avisoRefuerzos: false,
-    avisoCaida: false,
-  });
+  // Qué contiene y con qué empieza: engine/turnos.ts (`EstadoPelea`, `estadoInicial`).
+  const b = useRef<EstadoPelea>(null as unknown as EstadoPelea);
+  if (!b.current) b.current = estadoInicial(d, progreso);
   const [, setVersion] = useState(0);
   const forzar = () => setVersion((v) => v + 1);
   const [anims, setAnims] = useState<Record<string, Anim>>({});
@@ -580,13 +543,6 @@ function Pelea({
   };
   /** Si el héroe ya tiene un cebo en pie (no puede poner otro). */
   const tieneCebo = (h: Luchador) => b.current.cebos.some((x) => x.de === h.id && vivo(x.l));
-  /** A veces el golpe a uno solo va al cebo (según cuánto cae en él quien ataca). */
-  const desviar = (blancos: Luchador[], quien: Luchador) => {
-    const cebos = b.current.cebos.map((x) => x.l).filter(vivo);
-    if (!cebos.length) return blancos;
-    if (blancos.length > 1) return [...blancos, ...cebos];
-    return Math.random() < (d.enemigos[quien.clave]?.cae_en_cebo ?? CEBO) ? [azar(cebos)] : blancos;
-  };
   /** Al final de cada turno, el cebo al que nadie le pegó se acerca a evaporarse. */
   const evaporarCebos = async () => {
     let alguno = false;
@@ -812,15 +768,7 @@ function Pelea({
       if (!b.current.heroes.some(vivo)) break;
       await actuarEnemigo(e);
     }
-    b.current.heroes.forEach((h) => (h.esquivando = false));
-    [...b.current.heroes, ...b.current.enemigos].forEach((h) => {
-      // La parálisis se cuenta por turnos en que no pudo actuar (la de este turno, recién desde el siguiente).
-      if (h.inmuneParalisis) h.inmuneParalisis--;
-      if (h.paralizado && !b.current.paralizadoRecien.includes(h.id) && --h.paralizado === 0) h.inmuneParalisis = 1;
-      if (h.confundido && !b.current.confundidoRecien.includes(h.id)) h.confundido--;
-    });
-    b.current.paralizadoRecien = [];
-    b.current.confundidoRecien = [];
+    finDeTurno(b.current);
     forzar();
     if (!b.current.heroes.some(vivo)) return 'pierde';
     await venenos();
@@ -1742,10 +1690,11 @@ function Pelea({
     }
   };
 
+  /** El turno de un enemigo: lo que decide (engine/turnos.ts, `decidirEnemigo`) y cómo se ve. */
   const actuarEnemigo = async (e: Luchador) => {
-    cargar(e, CARGA.turnoEnemigo);
-    if (e.paralizado > 0) return decir(fmt(t('batalla.sigue_paralizado'), { quien: e.nombre }));
-    if (seConfunde(e)) {
+    const decision = decidirEnemigo(b.current, d, e, !!arena);
+    if (decision.tipo === 'paralizado') return decir(fmt(t('batalla.sigue_paralizado'), { quien: e.nombre }));
+    if (decision.tipo === 'confundido') {
       await decir(fmt(t('batalla.se_golpea'), { quien: e.nombre }));
       void animar(e.id, 'ataque', 600);
       playChip(sonidoDe(e));
@@ -1755,18 +1704,11 @@ function Pelea({
       if (!vivo(e)) await alCaer(e);
       return;
     }
-    if (e.distraido) {
-      e.distraido = false;
-      return decir(fmt(t('batalla.distraido'), { quien: e.nombre }));
-    }
+    if (decision.tipo === 'distraido') return decir(fmt(t('batalla.distraido'), { quien: e.nombre }));
     const hs = b.current.heroes.filter(vivo);
-    const esp = d.enemigos[e.clave].especial;
-    const bola = d.enemigos[e.clave].bola_toxica;
     // Después de la Mega Bola de la traición: la cachetada que remata, que no falla aunque esquive.
-    const rematado = bola && b.current.remate ? b.current.heroes.find((x) => x.id === b.current.remate && vivo(x)) : undefined;
-    if (rematado) {
-      b.current.remate = null;
-      const golpe = d.enemigos[e.clave].ataques.find((x) => !x.confunde && !x.paraliza && !x.cebo)!;
+    if (decision.tipo === 'remate') {
+      const { blanco: rematado, golpe } = decision;
       await decir(fmt(golpe.texto, { quien: e.nombre, objetivo: rematado.nombre }));
       await deslizar(e.id, rematado.id);
       void animar(e.id, 'ataque', 800);
@@ -1780,36 +1722,17 @@ function Pelea({
       if (!vivo(rematado)) await decir(fmt(t('batalla.cae'), { quien: rematado.nombre }));
       return;
     }
-    const traidor = bola && b.current.traicion ? b.current.heroes.find((x) => x.id === b.current.traicion && vivo(x)) : undefined;
-    if (traidor) {
-      b.current.traicion = null;
-      return megaBola(e, traidor);
-    }
-    // En la arena es una pelea normal: la Mega Bola sale al azar.
-    const elige = eligeEspecial(e, d.enemigos[e.clave], b.current.heroes, b.current.enemigos, Math.random, !bola?.solo_traicion || !!arena);
-    if (elige?.tipo === 'clon') return clonar(e);
-    if (elige?.tipo === 'bola') return megaBola(e);
-    if (elige && esp) {
-      const blanco = desviar([elige.blanco ?? azar(hs)], e)[0];
+    // La Mega Bola (contra el traidor, si lo hay; en la arena sale al azar).
+    if (decision.tipo === 'bola') return megaBola(e, decision.traidor);
+    if (decision.tipo === 'clon') return clonar(e);
+    if (decision.tipo === 'especial') {
+      const { especial: esp, blanco } = decision;
       if (esp.canon) await canonazo(e, esp, blanco);
       else await usarEspecial(e, esp, d.enemigos[e.clave].sprite, hs, blanco);
       return limpiarCebos();
     }
-    // La parálisis solo va contra los que todavía se mueven (si nadie se mueve, ataca de otra forma).
-    // Si no le queda ningún ataque posible (solo de efecto y ya todos lo tienen), espera.
-    const elegido = eligeAtaque(
-      d.enemigos[e.clave].ataques.filter((a) => quedan(e, a) > 0 && !(hs.some((x) => x.envenenado && x.ps <= 2) && (a.confunde || a.paraliza))),
-      hs,
-    );
-    if (!elegido) return;
-    const { ataque: a } = elegido;
-    // Las ráfagas (la sombra) se reparten: una a cada uno y las que sobran al azar.
-    const blancos = a.rafagas
-      ? repartirRafagas(a.rafagas, b.current.heroes.filter(vivo))
-      : a.confunde || a.paraliza
-        ? elegido.blancos
-        : desviar(elegido.blancos, e);
-    gastarUso(e, a);
+    if (decision.tipo === 'nada') return;
+    const { ataque: a, blancos } = decision;
     await decir(fmt(a.texto, { quien: e.nombre, objetivo: blancos.map((x) => x.nombre).join(' y ') }));
     if (a.confunde) return besar(e, a, blancos);
     if (a.paraliza) {

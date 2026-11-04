@@ -4,9 +4,11 @@ Las reglas de las batallas por turnos. **Todas las peleas siguen estas reglas** 
 sus datos: esas excepciones son **eventos** y se anotan en la sección 12. Si una regla de aquí cambia, se cambia
 aquí primero (y en el código y las pruebas en el mismo cambio).
 
-- Datos de cada pelea: `src/data/batallas/<id>.json`. Reglas en código: `src/engine/batalla.ts` (cuentas) y
-  `src/components/Batalla.tsx` (la pelea en pantalla).
-- Pruebas: `tests/batallas.test.ts` (datos completos y reglas) y `tests/balance.test.ts` (miles de peleas simuladas).
+- Datos de cada pelea: `src/data/batallas/<id>.json`. Reglas en código: `src/engine/batalla.ts` (cuentas),
+  `src/engine/turnos.ts` (la lógica de turnos sin dibujo: el estado inicial, qué decide cada enemigo, los cebos y el
+  fin del turno) y `src/components/Batalla.tsx` (la pelea en pantalla).
+- Pruebas: `tests/batallas.test.ts` (datos completos y reglas), `tests/turnos.test.ts` (la lógica de turnos) y
+  `tests/balance.test.ts` (miles de peleas simuladas).
 - Para probar: `?batalla=<id>` en la dirección (ver `LINKS_PRUEBAS.txt`). Sprites: `?sprites`.
 - Detalle técnico de cada función: `docs/SPEC.md` (sección «Batalla por turnos»). Esta biblia es el resumen de
   diseño: qué pasa y por qué.
