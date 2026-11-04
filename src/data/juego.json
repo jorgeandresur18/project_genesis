@@ -1,7 +1,8 @@
 {
-  "nota": "«musica_bootcamp»: el tema del Bootcamp Genesis (TODO: falta el archivo; mientras sea null, suena el del título).",
+  "nota": "«musica_bootcamp»: el tema del Bootcamp Genesis (TODO: falta el archivo; mientras sea null, suena el del título). «payfoe_activo»: PayFoe se ve en Boringplace (apagado hasta que haya algo que comprar con él: el Torneo Genesis o los desbloqueables a la venta).",
   "inicio": "cap01_001",
   "musica_titulo": "audio/musica/into_the_ciberse.mp3",
   "musica_bootcamp": null,
-  "version": "1.1.0-dev"
+  "version": "1.1.0-dev",
+  "payfoe_activo": false
 }

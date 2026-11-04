@@ -193,4 +193,6 @@ export interface GameConfig {
   musica_bootcamp?: string | null;
   /** Versión que se ve en una esquina del título. */
   version?: string;
+  /** PayFoe se ve en Boringplace (apagado hasta que haya algo que comprar con él; ver docs/BIBLIA_RPG.md, sección 17). */
+  payfoe_activo?: boolean;
 }

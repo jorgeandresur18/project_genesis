@@ -8,7 +8,7 @@ Qué trae cada versión. La que está en curso lleva `-dev` y todavía no se pub
 - **Robustez:** guardado seguro (se recupera de un guardado corrupto y nunca rompe el juego), pantalla de error dentro
   del juego, ESLint y CI en GitHub.
 - **PayFoe:** la billetera del jugador (aparte de las partidas), con transferencia desde la partida, movimientos y su
-  «?» de ayuda. La moneda del juego se llama **tokens**, con su moneda dibujada.
+  «?» de ayuda. **Escondida** (`payfoe_activo: false` en `juego.json`) hasta que haya algo que comprar con ella. La moneda del juego se llama **tokens**, con su moneda dibujada.
 - **Boringplace:** la tienda como un marketplace (foto con el color del tipo de objeto, nombre, precio; adentro,
   descripción y cuántos comprar; el objeto flota en 3D con la luz de su tipo). Sin «Para ti» ni las publicaciones de
   relleno.

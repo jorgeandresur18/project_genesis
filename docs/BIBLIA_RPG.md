@@ -460,6 +460,8 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
 
 ### Las dos billeteras
 
+**Hoy PayFoe está escondida** (`payfoe_activo: false` en `src/data/juego.json`, decidido el 2026-11-03): el código y sus pruebas están, pero no se ve hasta que haya algo que comprar con ella (el torneo o los desbloqueables). Mientras, Boringplace usa solo los tokens de la partida.
+
 | | Billetera de la partida (`monedas`) | **PayFoe** (del jugador, fuera de las partidas) |
 |---|---|---|
 | Se gana con | Las peleas de la historia (y vender lo de la mochila) | El Torneo Genesis y las transferencias desde las partidas |

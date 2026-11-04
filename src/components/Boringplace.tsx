@@ -4,6 +4,7 @@ import { assetUrl } from '../engine/assets';
 import { OBJETOS_TIENDA, colorDeObjeto, precioVenta, useBoringplace, type Articulo } from '../engine/boringplace';
 import { useStore } from '../engine/store';
 import { useLang } from '../engine/i18n';
+import { config } from '../engine/story';
 import { TOPE_PAYFOE, transferible, type Movimiento } from '../engine/payfoe';
 import s from './Boringplace.module.css';
 import sb from './Boringram.module.css';
@@ -85,7 +86,7 @@ export function Boringplace({ onArticulo, onToast }: { onArticulo: (id: string) 
           </button>
         ))}
       </div>
-      <TarjetaPayfoe onAbrir={() => onArticulo(ID_PAYFOE)} />
+      {config.payfoe_activo && <TarjetaPayfoe onAbrir={() => onArticulo(ID_PAYFOE)} />}
       {!vars && <p className={s.sinTuyos}>{tx.sin_partida}</p>}
       {pestana === 'tienda' ? (
         <div className={s.grilla}>
@@ -119,7 +120,7 @@ export function ArticuloVista({ id, onBack, onToast }: { id: string; onBack: () 
   const p = useBoringplace();
   const tx = p.data.textos;
   const a = [...p.ajenos, ...p.deJair].find((x) => x.id === id);
-  if (id === ID_PAYFOE) return <BilleteraVista onBack={onBack} onToast={onToast} />;
+  if (id === ID_PAYFOE && config.payfoe_activo) return <BilleteraVista onBack={onBack} onToast={onToast} />;
   if (id.startsWith(ID_TIENDA)) return <ObjetoVista objeto={id.slice(ID_TIENDA.length)} onBack={onBack} onToast={onToast} />;
   if (!a) return null;
   return (
