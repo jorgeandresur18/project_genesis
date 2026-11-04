@@ -420,5 +420,6 @@
   "torneo.total": "Ganaste {n} tokens en este torneo.",
   "torneo.otra": "Volver al torneo",
   "extras.torneo": "Torneo Genesis",
-  "extras.torneo_desc": "Peleas por tokens. Se abre al terminar el Capítulo 1."
+  "extras.torneo_desc": "Peleas por tokens. Se abre al terminar el Capítulo 1.",
+  "galeria.accion.victoria": "Victoria"
 }

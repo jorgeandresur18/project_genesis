@@ -3520,3 +3520,13 @@ button.cassette:hover .cassette-imagen { transform: translateY(-2px) rotate(-3de
 .torneo-opciones small { color: var(--muted); font-size: 0.72rem; }
 .torneo-opciones .torneo-ganada { color: #ffd76a; }
 .torneo-empezar { justify-self: start; margin-top: 0.4rem; padding: 0.6rem 1.4rem; border-color: var(--accent); color: var(--accent); font-weight: 700; }
+
+/* La victoria de Nikki: un corazoncito rojo con brillos que sale del beso, avanza unos pasos y se disuelve
+   (src/components/batalla/sprites.tsx). */
+.corazon-victoria { position: absolute; background: center / contain no-repeat; image-rendering: pixelated; pointer-events: none; transform-origin: center; filter: drop-shadow(0 0 2px #fff) drop-shadow(0 0 4px #ff4f9a); animation: corazonVictoria 0.9s ease-out forwards; }
+.corazon-victoria::before, .corazon-victoria::after { content: ''; position: absolute; width: 3px; height: 3px; background: #fff; border-radius: 50%; box-shadow: 0 0 3px #fff, 0 0 5px #ffd1e6; animation: brilloCorazon 0.9s ease-out forwards; }
+.corazon-victoria::before { left: -4px; top: 0; }
+.corazon-victoria::after { right: -3px; bottom: -2px; animation-delay: 0.12s; }
+@keyframes corazonVictoria { 0% { opacity: 0; transform: translate(0, 0) scale(0.2); } 20% { opacity: 1; transform: translate(4px, -2px) scale(0.55); } 70% { opacity: 1; transform: translate(18px, -6px) scale(0.5); } 100% { opacity: 0; transform: translate(26px, -9px) scale(0.35); } }
+@keyframes brilloCorazon { 0%, 15% { opacity: 0; scale: 0.3; } 40% { opacity: 1; scale: 1.3; } 100% { opacity: 0; scale: 0.4; } }
+@media (prefers-reduced-motion: reduce) { .corazon-victoria, .corazon-victoria::before, .corazon-victoria::after { animation-duration: 0.01s; } }

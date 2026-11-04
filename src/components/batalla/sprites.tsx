@@ -141,9 +141,11 @@ export function SpriteHoja({
     return () => clearTimeout(timer);
   }, [reposo, anims, pausada]);
   const nombre =
+    // Al ganar: su fila «victoria» (Cami se sonroja de fastidio; Nikki, un beso corto con un corazoncito) o, si no la
+    // tiene (Jair, Rikka), el salto en bucle.
     anim === 'victoria'
-      ? anims?.sonrojada
-        ? 'sonrojada'
+      ? anims?.victoria
+        ? 'victoria'
         : 'salto'
       : anim === 'ko'
         ? anims?.derrotado
@@ -181,6 +183,13 @@ export function SpriteHoja({
   useEffect(() => {
     if (hoja && 'animations' in hoja && a) avisar.current?.(nombre, col, hoja);
   }, [col, nombre, hoja, a, vez]);
+  // La victoria de Nikki: en el cuadro en que suelta el corazón del beso, sale un corazoncito rojo con brillos que
+  // avanza unos pasos y se disuelve (no cruza la pantalla como en el ataque).
+  const corazonVictoria = nombre === 'victoria' && hoja && 'animations' in hoja ? hoja.proyectiles?.beso : undefined;
+  const [corazon, setCorazon] = useState(0);
+  useEffect(() => {
+    if (corazonVictoria && col === corazonVictoria.cuadro) setCorazon((n) => n + 1);
+  }, [col, corazonVictoria]);
   if (!hoja) return <span className="batalla-sprite" />;
   if (!('animations' in hoja)) {
     const [w, h] = hoja.cuadro;
@@ -196,8 +205,26 @@ export function SpriteHoja({
           height: hoja.frameHeight,
           backgroundImage: `url(${BASE}${src}.png)`,
           backgroundPosition: `-${x * hoja.frameWidth}px -${y * hoja.frameHeight}px`,
+          ...(corazonVictoria ? { position: 'relative' } : {}),
         } as CSSProperties
       }
-    />
+    >
+      {corazonVictoria && corazon > 0 && (
+        <span
+          key={corazon}
+          className="corazon-victoria"
+          style={
+            {
+              left: corazonVictoria.x,
+              top: corazonVictoria.y,
+              width: corazonVictoria.ancho,
+              height: corazonVictoria.alto,
+              backgroundImage: `url(${BASE}${corazonVictoria.imagen}.png)`,
+            } as CSSProperties
+          }
+          aria-hidden
+        />
+      )}
+    </span>
   );
 }

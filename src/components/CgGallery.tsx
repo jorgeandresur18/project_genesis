@@ -980,7 +980,7 @@ function Centrado({ hoja, children, alto }: { hoja: string; children: ReactNode;
 }
 
 /** Las acciones que se muestran en la ficha, en este orden: la pose base, los ataques, el especial, el golpe y la caída. */
-const ACCIONES_FICHA = ['idle', 'ataque', 'beso', 'especial', 'aura', 'clon', 'daño', 'derrotado'];
+const ACCIONES_FICHA = ['idle', 'ataque', 'beso', 'especial', 'aura', 'clon', 'daño', 'derrotado', 'victoria'];
 /** Las hojas que tienen el Clon de sombra (Nikki): no es una fila de la hoja, es un especial del combate. */
 const CON_CLON = new Set(
   Object.values(BATALLAS).flatMap((d) =>

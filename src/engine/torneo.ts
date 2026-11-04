@@ -65,7 +65,8 @@ const soldadoVeterano = (): Enemigo => ({ ...FICHAS.enemigos.soldado, nombre: 'S
 const nikkiCampeona = (): Enemigo => {
   const { perdon: _perdon, ...resto } = FICHAS.enemigos.nikki;
   // Aguanta casi hasta el final (en el bar se va a la mitad): es la campeona.
-  return { ...resto, nombre: 'Nikki, la campeona', huye_a: TORNEO.nikki.huye_a };
+  // Si gana, festeja (en el bar, si gana, llora: eso es de la historia).
+  return { ...resto, nombre: 'Nikki, la campeona', huye_a: TORNEO.nikki.huye_a, al_ganar: 'victoria' };
 };
 
 /**
