@@ -56,6 +56,12 @@ para las otras.
 - **Cada entrada de la bitácora dice en qué computadora se hizo** («Computadora: principal» o «Computadora: segunda»).
 - Los commits se firman siempre como `jorgeandresur18 <jorgeurgiles18@gmail.com>`. En la segunda computadora está
   configurado solo para este repositorio (`git config` local), porque esa computadora tiene otra cuenta.
+- **Subir desde la segunda computadora:** su cuenta de GitHub guardada (`clinicaserhumano`) no tiene permiso en el
+  repositorio. Por eso la dirección del repositorio lleva el usuario
+  (`git remote set-url origin https://jorgeandresur18@github.com/jorgeandresur18/project_genesis.git`) y la sesión de
+  `jorgeandresur18` quedó guardada aparte en el Administrador de credenciales de Windows
+  (`git:https://jorgeandresur18@github.com`). Si se deja de usar esa computadora: borrar esa credencial y revocar
+  «Git Credential Manager» en GitHub (Settings → Applications).
 - La rama local `respaldo-historial-2026-11-02` existe solo en la computadora principal (no está en GitHub).
 - Si las dos computadoras tocaron lo mismo sin `pull` de por medio, `git pull` avisa del conflicto: se resuelve a mano
   y nunca con `push --force`.

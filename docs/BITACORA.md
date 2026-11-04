@@ -240,5 +240,8 @@ fuera de la computadora principal. **Al volver a la principal: `git checkout des
     cuenta el turno de respiro después de la parálisis. Ahora podría usar `finDeTurno` y `decidirEnemigo`, pero eso
     cambia un poco los números del balance: queda para decidir.
 - **Esta computadora no tiene Python:** `npm run sprites` y las herramientas de `tools/*.py` solo andan en la principal.
-- **Pendiente:** subir estos commits a GitHub. El push desde esta computadora fue rechazado (403): está guardada la
-  cuenta de GitHub `clinicaserhumano`, que no tiene permiso en el repositorio. Lo demás, igual que el 3 de noviembre.
+- **Subir desde esta computadora:** el primer push fue rechazado (403) porque estaba guardada la cuenta de GitHub
+  `clinicaserhumano`, sin permiso en el repositorio. Se resolvió sin darle acceso: la dirección del repositorio lleva el
+  usuario (`https://jorgeandresur18@github.com/...`) y el autor inició sesión como `jorgeandresur18` con el código del
+  dispositivo y GitHub Mobile. Desde ahí sube sin pedir nada.
+- **Pendiente:** probar jugando la etapa 2 de `Batalla.tsx`. Lo demás, igual que el 3 de noviembre.
