@@ -10,6 +10,8 @@ import { CARGA, CONFUSION, cargar, crearClon, crearLuchador, dano, eligeAtaque, 
 import { BATALLAS } from '../src/engine/batallas';
 function sim(D: DatosBatalla, listo: boolean, N = 2000) {
   let gana = 0, hpFin = 0;
+  /** La suma de los niveles con que termina cada héroe las peleas ganadas (para saber con qué nivel se llega a la siguiente). */
+  const niveles: Record<string, number> = {};
   for (let s = 0; s < N; s++) {
     const hs = D.heroes.map((k) => crearLuchador(k, k, 'heroe', D.personajes[k], D.personajes[k].nivel));
     const mochila: Record<string, number> = {};
@@ -120,9 +122,9 @@ function sim(D: DatosBatalla, listo: boolean, N = 2000) {
       es.forEach((x) => { if (x.clon !== undefined && x.ps > 0 && --x.clon <= 0) x.ps = 0; });
       if (D.ayuda && pierden() && Math.random() < D.ayuda.cae) mochila[D.ayuda.objeto] = (mochila[D.ayuda.objeto] ?? 0) + 1;
     }
-    if (fin) { gana++; hpFin += hs.reduce((s, h) => s + h.ps / h.psMax, 0) / hs.length; }
+    if (fin) { gana++; hpFin += hs.reduce((s, h) => s + h.ps / h.psMax, 0) / hs.length; hs.forEach((h) => (niveles[h.clave] = (niveles[h.clave] ?? 0) + h.nivel)); }
   }
-  return { gana: gana / N, vida: hpFin / gana };
+  return { gana: gana / N, vida: hpFin / gana, niveles: Object.fromEntries(Object.entries(niveles).map(([k, n]) => [k, n / gana])) };
 }
 
 /** Para calibrar a mano: `npx vitest run tests/balance.test.ts` muestra cómo quedó. */
@@ -142,6 +144,19 @@ describe('balance del Bastión', () => {
     const r = sim(D, true);
     expect(r.gana).toBeGreaterThan(0.75);
     expect(r.vida).toBeLessThan(0.5);
+  });
+});
+
+describe('balance del hangar (camino alternativo del Capítulo 1)', () => {
+  const D = BATALLAS.hangar;
+  // Más difícil que el Bastión (es el camino alternativo), pero ganable con cuidado. Con el Capitán en nivel 14 el
+  // atento ganaba ~34 %; en 12, ~71 %. Jair llega del Bastión casi en el mismo nivel (5,7 en promedio).
+  it('el descuidado pierde casi siempre (menos de 45 %) y el atento gana la mayoría (entre 55 % y 90 %)', () => {
+    const r = informe(D);
+    console.log('hangar', JSON.stringify(r));
+    expect(r.descuidado.gana).toBeLessThan(0.45);
+    expect(r.atento.gana).toBeGreaterThan(0.55);
+    expect(r.atento.gana).toBeLessThan(0.9);
   });
 });
 

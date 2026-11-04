@@ -271,7 +271,7 @@ necesitar nada de esto.
 ### El hangar (Capítulo 1, camino alternativo, `hangar`)
 
 - Se llega con «Probar la nave grande» en el hangar (enciende la alarma). Jair y Cami (con el tobillo: descansa como en el Bastión).
-- Horda: empiezan 2 soldados y llegan otros hasta ser 4 (niveles 6, 6, 8, 8); después sale el **Capitán de la Federación** (nivel 14), que se retira al 35 % de su vida. No se puede huir. Perder: bad end `bad_cap01_hangar`.
+- Horda: empiezan 2 soldados y llegan otros hasta ser 4 (niveles 6, 6, 8, 8); después sale el **Capitán de la Federación** (nivel 12; era 14, bajado el 2026-11-03 porque con sus ráfagas el jugador atento ganaba solo ~34 %), que se retira al 35 % de su vida. No se puede huir. Perder: bad end `bad_cap01_hangar`.
 - **El Capitán de la Federación:** ataca de lejos: cada ataque es una **ráfaga de 3 a 5 balas rojas** que salen de la punta del fusil, una por fogonazo de su animación (si son más de 3, la repite), hacia su blanco («Ráfaga de blaster», 4 por bala, 20 usos) o repartidas entre todos («Barrido rojo», 3 por bala, 10 usos); cada bala puede fallar o esquivarse. Su especial, el **Cañón de blaster**, se juega tal cual su sprite: hinca una rodilla y carga, suelta un rayo horizontal que sigue, ondulado, hasta el borde de la pantalla (golpe fuerte, 24, a su blanco) y después se vuelve loco y lo agita arriba y abajo (cada barrido le puede dar a cualquiera, 4). Cae poco en el cebo (0,3). Sprite: `public/batalla/capitan` (del HTML del autor; en el ataque se borran los rayos dibujados y el juego dispara balas desde la punta; en el especial, `rayo` dice dónde sale el rayo del cuadro para seguirlo).
 - Fondo: el pasillo de instalación (`batalla/fondos/bastion`, con la ventana al hangar).
 
@@ -498,7 +498,7 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
   rondas se recupera parte de la vida.
 - **Copas con dificultad creciente** (propuesta: Bronce → Plata → Oro → Leyenda); ganar una abre la siguiente y cada una
   paga más. En el torneo, **los niveles los fija la copa** (los tuyos y los de los rivales), así que no hace falta dar
-  experiencia y no toca la historia.
+  experiencia y no toca la historia. **Como en el competitivo de Pokémon** (decidido por el autor el 2026-11-03): en cada dificultad todos pelean **al mismo nivel**, alineados, sin importar cuánto subió cada uno en la historia; lo que cuenta es el equipo, los ataques y la mochila.
 - **Los premios van a PayFoe.** Se puede repetir sin límite: es la forma de farmear desbloqueables.
 - **Nikki es la campeona vigente** y está muy fuerte («chetada»): es la única con **seis ataques, tres normales y tres
   especiales**, y recarga sus especiales muy rápido. Cada vez que le ganas defiende el título más fuerte (más nivel,
