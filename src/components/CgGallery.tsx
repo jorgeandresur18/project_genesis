@@ -988,6 +988,14 @@ const CON_CLON = new Set(
   ),
 );
 
+/** El nombre del especial de cada hoja (de las peleas: «Ráfaga de puños», «Lluvia de plasma»…), para su botón. */
+const NOMBRE_ESPECIAL = new Map<string, string>();
+for (const d of Object.values(import.meta.glob<DatosBatalla>('../data/batallas/*.json', { eager: true, import: 'default' }))) {
+  for (const x of [...Object.values(d.personajes), ...Object.values(d.enemigos)]) {
+    if (x.especial && !NOMBRE_ESPECIAL.has(x.sprite)) NOMBRE_ESPECIAL.set(x.sprite, x.especial.nombre);
+  }
+}
+
 /** Las acciones de un sprite del combate (las filas de su hoja, el especial incluido), para verlas en el visor. */
 function AccionesRpg({ r, accion, onAccion }: { r: SpriteRpg; accion: string; onAccion: (a: string) => void }) {
   const t = useT();
@@ -1013,7 +1021,8 @@ function AccionesRpg({ r, accion, onAccion }: { r: SpriteRpg; accion: string; on
               onAccion(a);
             }}
           >
-            {t(`galeria.accion.${a}`)}
+            {/* El especial se llama como en la pelea. */}
+            {(a === 'especial' && NOMBRE_ESPECIAL.get(r.hoja)) || t(`galeria.accion.${a}`)}
           </button>
         ) : (
           <button key={a} className="bloqueada" disabled title={t('galeria.accion_bloqueada')}>
