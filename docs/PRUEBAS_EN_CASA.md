@@ -99,3 +99,29 @@ Lo que más hay que mirar: **que la pelea no se trabe** después de cada efecto.
       al bad end de esa pelea.
 - [ ] **Contra un jefe:** la bomba y la autodestrucción lo dejan justo antes de retirarse, sin ganar solas. Si caen todos los héroes en la explosión, es empate. ¿Se siente bien?
 - [ ] **La bomba en el torneo:** al ganar una copa por primera vez, pregunta a qué partida va; al cargarla, el cassette aparece en Equipo. Sin partidas guardadas, espera.
+
+## 8. Lo que queda pendiente de decidir
+
+No hay que probarlo: son decisiones del autor. Claude puede repasarlas una por una.
+
+**Historia**
+- [ ] **Capítulo 3:** las 13 preguntas de `docs/guion/cap03_plan.md`. La primera: con qué se llenan sus 2 h 30 min a 3 h.
+- [ ] **Capítulo 2:** la historia de las peleas de la muralla y el campamento, y sus bad ends.
+- [ ] **El conflicto de fusión del 7B:** qué choca entre Rikka y Cami, y si Jair ejecuta `git merge`.
+- [ ] El resto de la lista, en `docs/CRONOGRAMA.md`, «Decisiones pendientes del autor».
+
+**RPG**
+- [ ] **Las 6 prendas que no se consiguen** (dos trajes de combate, prendas de sacerdotisa, flor, chaqueta de cuero y zapatos de plataforma). Propuesta de Claude: Cami y Rikka reciben las suyas al empezar el Capítulo 2, sin ponérselas, para no cambiar el Capítulo 1. Falta aclarar si el traje que vende Rikka es uno de estos.
+- [ ] **Los números que propuso Claude:** precios de la tienda y de los cassettes; la bomba (90 %, y 2 % de que caiga); la autodestrucción (50 %); el cebo explosivo (25 % y 10 %); dormido, congelado y paralizado en 1 vs 1 (1 a 2 turnos).
+- [ ] **«Reunión que pudo ser un correo»** (ataque de Jair): ahora paraliza de 2 a 4 turnos, no 1. ¿Queda muy fuerte?
+- [ ] **La final en triple del torneo** sale casi regalada (~99 %). Es de relleno: se balancea cuando se armen las copas de verdad.
+
+**Técnico, para después de probar las peleas**
+- [ ] **El inglés en las peleas:** menús, mensajes, y ataques y diálogos de los rivales siguen en español.
+- [ ] **La opción C:** que la velocidad (VEL) decida quién actúa primero.
+- [ ] **Lo visual provisional:** los colores de los cebos y estados, y la bomba (un 💣 con la cuenta).
+- [ ] **Sacar los turnos de los héroes** de `Batalla.tsx` a `engine/turnos.ts`.
+
+**Publicar y limpiar**
+- [ ] **La demo publicada** (`main`) sigue en la versión 1.0, con el Capitán del hangar en nivel 12, el más difícil. Publicar solo con orden del autor, cuando las pruebas de arriba estén bien (pasos en `docs/METODOLOGIA.md`).
+- [ ] **La segunda computadora** (`MARKETING1ICSH`): si no se va a usar más, borrar la credencial `git:https://jorgeandresur18@github.com` y revocar «Git Credential Manager» en GitHub (Settings → Applications).
