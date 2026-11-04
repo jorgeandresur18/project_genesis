@@ -325,7 +325,7 @@ Todo lo de esta sección es canon dicho por el autor, pero **en borrador**: pued
 
 #### Hacia el 7B (`final_canon_1`, el malo)
 
-Todo esto pasa en el Capítulo 6, en la rama que lleva al 7B; el 7B es el epílogo. En esta rama **la fusión falla** (ver el conflicto de fusión, más abajo) y el Rey no se transforma.
+Todo esto pasa en el Capítulo 6, en la rama que lleva al 7B, salvo el último punto: el 7B es el epílogo, después de la batalla. En esta rama **la fusión falla** (ver el conflicto de fusión, más abajo) y el Rey no se transforma.
 
 - **Rikka decide borrar el progreso de la restauración del mundo rompiendo la computadora de Jair.** La rompe Rikka. Ya no hay un lugar al que volver: el mundo estaba en local. `[CANON]`
 - Cami y Jair creían que, al destruirla, ellas iban a desaparecer. No: siguen vivas en los servidores de Noodle. `[CANON]`
@@ -337,11 +337,11 @@ Todo esto pasa en el Capítulo 6, en la rama que lleva al 7B; el 7B es el epílo
 - Después, Noodle dice que el modelo del Rey Malvado consume demasiada caché de sus servidores y lo **borra de sus servidores**. Así termina el Rey en esta ruta. `[CANON]`
 - Noodle le pregunta qué hacer con las personajes de IA que creó: según el **acuerdo legal que Jair aceptó**, no las pueden borrar, pero mantenerlas le cuesta una **suscripción a Noodle de 20 dólares al mes**, con acceso anticipado a sus lanzamientos y a su sistema operativo **NoodleOS**. `[CANON]`
 - Jair acepta: no quiere borrarlas. Queda **condenado a pagar una suscripción para que sigan con sus vidas**: vidas inmortales, como humanas generadas por IA. `[CANON]`
-- Después viene lo que ya estaba en el canon: el salto de un año, el exilio y la jaula voluntaria (ver `docs/FINALES.md`). **Génesis#** es el segundo epílogo de esta ruta.
+- **Epílogo 7B, después de la batalla** (ya no es el Capítulo 6): el salto de un año, el exilio y la jaula voluntaria; Cami se queda con Jair y le pregunta «¿Soy tu mayor creación?» (ver `docs/FINALES.md`). **Génesis#** es el segundo epílogo de esta ruta.
 
 #### Hacia el 7A (`final_canon_2`, el bueno)
 
-Todo esto pasa en el Capítulo 6, en la rama que lleva al 7A; el 7A es el epílogo (corregido por el autor el 2026-11-03). La fusión en AnothergIrl pasa solo en esta rama.
+Todo esto pasa en el Capítulo 6, en la rama que lleva al 7A, salvo el último punto: el 7A es el epílogo, después de la batalla (corregido por el autor el 2026-11-03 y aclarado el 2026-11-04). La fusión en AnothergIrl pasa solo en esta rama.
 
 - Pasa algo parecido, pero **la computadora de Jair (el servidor) no se apaga ni se destruye**, y el Rey Malvado logra **unir la realidad con el mundo de la IA**. `[CANON]`
 - Jair va a Noodle. Le dicen que no pueden hacer nada: los servidores están cifrados y perdieron el acceso. Y que debieron hacerle caso al tipo que, en el foro de **Remmit** (parodia de Reddit) del programa GENESIS, decía que esto iba a pasar. `[CANON]`
@@ -350,7 +350,7 @@ Todo esto pasa en el Capítulo 6, en la rama que lleva al 7A; el 7A es el epílo
 - La única solución es una **superllave** para eliminar al Rey Malvado. La única forma de tenerla es **la fusión de Rikka y Cami**, que juntas son **la llave completa**: **AnothergIrl**. Jair es el que puede activar la llave. `[CANON]`
 - Así derrotan al Rey Malvado y salvan la realidad. Pero **los datos de Cami y Rikka se borran para siempre**: Jair decidió borrar todo, porque era la única solución, y **esta vez no se olvidó del WHERE**: borra **todo lo generado por GENESIS**, incluidas Cami y Rikka, y la realidad sobrevive. No hay otra opción. `[CANON]`
 - **Nikki también participa y ayuda** en esta parte. `[CANON]` Cómo: `[PENDIENTE]`.
-- **Después, el tiempo pasa:** Jair trabaja como desarrollador web y hace un **videojuego indie que está pegando un poco**. Nikki terminó sus estudios de **enfermería** y trabaja de eso. Decidieron arreglar sus problemas y ser solo amigos, hasta que empiezan a frecuentarse más y van formando una **nueva relación**. `[CANON]`
+- **Epílogo 7A, después de la batalla** (ya no es el Capítulo 6). **El tiempo pasa:** Jair consigue un trabajo mejor, como desarrollador web, y hace un **videojuego indie que está pegando un poco**. Nikki terminó sus estudios de **enfermería** y trabaja de eso. Decidieron arreglar sus problemas y ser solo amigos, hasta que empiezan a frecuentarse más y van formando una **nueva relación**. `[CANON]`
 
 ## 7. Génesis++ (realidad paralela, no canon) `[CANON]`
 
