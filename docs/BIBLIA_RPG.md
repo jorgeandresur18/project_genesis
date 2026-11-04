@@ -456,6 +456,47 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
 
 ---
 
+## 17. PayFoe y el Torneo Genesis (decidido por el autor el 2026-11-03; por construir)
+
+### Las dos billeteras
+
+| | Billetera de la partida (`monedas`) | **PayFoe** (del jugador, fuera de las partidas) |
+|---|---|---|
+| Se gana con | Las peleas de la historia (y vender lo de la mochila) | El Torneo Genesis y las transferencias desde las partidas |
+| Compra | Objetos de pelea para esa partida | Desbloqueables (y la «versión sin censura») |
+| Tope | — | **999.999 tokens** |
+| Desde el menú | No se ve | Se ve y se usa |
+
+- **PayFoe** es la parodia de PayPal (como Coffee de JavaScript y Oráculo de Oracle). La moneda son los **tokens**.
+- **Transferir:** dentro de una partida, se pueden pasar tokens de la partida a PayFoe. **Nunca al revés** (lo farmeado no
+  facilita la historia).
+- **Contra la duplicación** (guardar, transferir, cargar el guardado viejo y volver a transferir): cada partida tiene un
+  número (`partida_id`, al empezar) y un contador que solo sube, `tokens_ganados`. PayFoe anota cuánto recibió de cada
+  partida y solo deja transferir lo ganado que no se transfirió todavía (y lo que haya en la billetera).
+- **El tope y el chiste:** PayFoe no pasa de 999.999 («Límite de cuenta alcanzado»; lo que sobra se pierde). La
+  **legendaria versión sin censura** cuesta **1.000.000**: nunca se puede comprar y nunca muestra nada (al intentarlo:
+  «Fondos insuficientes. Te falta 1 token»). Es solo un chiste; no hay contenido sin censura.
+
+### El Torneo Genesis
+
+- **Se desbloquea al terminar el Capítulo 1** y se va abriendo más a medida que avanza la historia (más copas, más
+  peleadores).
+- **Simple, doble y triple:** el tamaño de tu equipo (1, 2 o 3 peleadores). Los peleadores son los que la historia ya
+  desbloqueó.
+- **Cuatro rondas** hasta la final. Si pierdes, quedas eliminado pero te llevas los tokens de las rondas ganadas. Entre
+  rondas se recupera parte de la vida.
+- **Copas con dificultad creciente** (propuesta: Bronce → Plata → Oro → Leyenda); ganar una abre la siguiente y cada una
+  paga más. En el torneo, **los niveles los fija la copa** (los tuyos y los de los rivales), así que no hace falta dar
+  experiencia y no toca la historia.
+- **Los premios van a PayFoe.** Se puede repetir sin límite: es la forma de farmear desbloqueables.
+- **Nikki es la campeona vigente** y está muy fuerte («chetada»): es la única con **seis ataques, tres normales y tres
+  especiales**, y recarga sus especiales muy rápido. Cada vez que le ganas defiende el título más fuerte (más nivel,
+  más objetos). En las copas siguientes van saliendo más personajes.
+- `TODO(canon)`: nombres de las copas, cuándo abre cada una, qué personajes salen en cada copa, los tres especiales de
+  Nikki, los premios exactos.
+
+---
+
 ## 16. Pendientes e ideas
 
 | Tema | Estado |

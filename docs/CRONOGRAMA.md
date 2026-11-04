@@ -54,6 +54,8 @@ El RPG, Boringram y el arte se hacen **para el capítulo que toca**, no por adel
 - [ ] **Pulir los diálogos del Capítulo 2.**
 - [ ] *Media:* Boringram del Capítulo 2 completo (Jordan, Lady, las fotos del viaje).
 
+- [ ] **PayFoe y el Torneo Genesis** (pedido del autor el 2026-11-03; diseño en `BIBLIA_RPG.md`, sección 17), en partes: (1) PayFoe y la transferencia con el arreglo contra la duplicación; (2) el torneo y sus copas; (3) Nikki campeona; (4) desbloqueables a la venta y la versión sin censura de 1.000.000.
+
 ## Semanas 3 y 4 (17–30 de noviembre): el Capítulo 3
 - [ ] **Escribir el guion del Capítulo 3** desde el canon: la torre del Oráculo, el Rey Malvado, la espada DELETE, el DELETE sin WHERE, el regreso (`alt_1`: volver solo) y el despertar con Cami y Rikka en el cuarto.
 - [ ] **Resolver antes de escribir:** las decisiones pendientes del Capítulo 3 (ver abajo).
