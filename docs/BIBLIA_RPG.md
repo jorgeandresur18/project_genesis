@@ -235,9 +235,11 @@ falla.
 
 | Pelea | Jugador | Meta | Hoy |
 |---|---|---|---|
-| Bastión | Descuidado (solo ataca, nunca usa la mochila) | Gana entre 10 % y 55 % | ~38 % |
-| Bastión | Atento (cura al que baja del 40 %, usa potenciadores) | Gana 75 % o más, terminando con menos de la mitad de la vida | ~99 %, con ~36 % de vida |
-| Bar (Nikki) | Solo ataca | Gana entre 2 % y 15 % | ~6 % |
+| Bastión | Descuidado (solo ataca, nunca usa la mochila) | Gana entre 10 % y 55 % | ~26 % |
+| Bastión | Atento (cura al que baja del 40 %, usa potenciadores) | Gana 75 % o más, terminando con menos de la mitad de la vida | ~98 %, con ~35 % de vida |
+| Hangar | Descuidado | Gana menos de 45 % | ~5 % |
+| Hangar | Atento | Gana entre 55 % y 90 % | **~32 %: no cumple** (por decidir; medido con Jair en nivel 5, el de su ficha) |
+| Bar (Nikki) | Solo ataca | Gana entre 2 % y 15 % | ~5 % |
 | Bar (Nikki) | Pide perdón desde el primer turno | (no tiene meta en la prueba) | ~99,7 % |
 
 ---
@@ -512,8 +514,8 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
   final de llave (el Capitán) y la gran final contra **Nikki, la campeona** (sin el perdón del bar, se rinde recién con
   el 10 % de su vida, 70 % más de nivel que la copa, con escoltas según la modalidad, y +2 niveles por cada defensa del
   título). En doble y triple hay más rivales y de más nivel. Mochila fija (2 aguas y un Elixit). Los premios van a
-  PayFoe (que se prendió con el torneo). **Balance (jugador atento, Copa Bronce):** la final, ~11 % en simple, ~72 % en
-  doble y ~93 % en triple; las rondas anteriores, fáciles. Entre rondas la vida se recupera entera (pendiente: solo
+  PayFoe (que se prendió con el torneo). **Balance (jugador atento, Copa Bronce; medido el 2026-11-04):** la final, ~32 % en simple, ~93 % en
+  doble y ~99 % en triple (regalada, por balancear); las rondas anteriores, fáciles. Entre rondas la vida se recupera entera (pendiente: solo
   una parte).
 - `TODO(canon)`: nombres de las copas, cuándo abre cada una, qué personajes salen en cada copa, los tres especiales de
   Nikki, los premios exactos.

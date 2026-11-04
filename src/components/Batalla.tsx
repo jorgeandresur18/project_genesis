@@ -55,6 +55,7 @@ import { EquipoPanel } from './Equipo';
 import { OptionsPanel } from './Panels';
 import { BATALLAS, sueltosQueTengo } from '../engine/batallas';
 import {
+  blancoDelCanon,
   confundirA,
   decidirEnemigo,
   envenenarConBola,
@@ -1487,10 +1488,8 @@ function Pelea({
     const desde = Date.now();
     for (const g of golpes) {
       await espera(Math.max(0, g.ms - (Date.now() - desde)));
-      const vivos = b.current.heroes.filter(vivo);
-      if (!vivos.length) break;
-      const otros = vivos.filter((h) => h !== blanco);
-      const x = g.fuerte && vivo(blanco) ? blanco : otros.length ? azar(otros) : vivo(blanco) ? blanco : azar(vivos);
+      const x = blancoDelCanon(b.current.heroes, blanco, g.fuerte);
+      if (!x) break;
       playChip(g.fuerte ? 'impacto' : 'disparo');
       if (g.fuerte) setFogonazo({ key: Math.random(), color: e.color });
       bajoEspecial.current.add(x.id);

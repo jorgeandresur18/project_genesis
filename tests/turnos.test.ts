@@ -3,7 +3,22 @@
 import { describe, expect, it } from 'vitest';
 import { CARGA, crearCebo, crearLuchador, type DatosBatalla, type Luchador } from '../src/engine/batalla';
 import { BATALLAS } from '../src/engine/batallas';
-import { decidirEnemigo, desviarACebo, estadoInicial, finDeTurno } from '../src/engine/turnos';
+import {
+  blancoDelCanon,
+  decidirEnemigo,
+  desviarACebo,
+  envenenarConBola,
+  estadoInicial,
+  evaporarClones,
+  finDeTurno,
+  golpesDelCanon,
+  hacerClon,
+  llegaRefuerzo,
+  paralizarA,
+  poderBarrido,
+  resolverGolpe,
+  sumarEnemigo,
+} from '../src/engine/turnos';
 
 const D = (id: string) => BATALLAS[id] as DatosBatalla;
 /** Un azar que siempre devuelve lo mismo. */
@@ -138,5 +153,104 @@ describe('fin del turno', () => {
     expect([h.paralizado, h.inmuneParalisis]).toEqual([0, 1]);
     finDeTurno(s);
     expect(h.inmuneParalisis).toBe(0);
+  });
+});
+
+describe('reglas compartidas con el simulador', () => {
+  const D = () => BATALLAS.bastion as DatosBatalla;
+
+  it('protegido: el golpe no hace nada, gasta la protección y no carga la barra', () => {
+    const s = estadoInicial(D());
+    const [h] = s.heroes;
+    const e = enemigo(D(), 'soldado');
+    h.protegido = 1;
+    const ps = h.ps;
+    expect(resolverGolpe(s, D(), e, h, 50)).toMatchObject({ n: 0, bloqueado: true });
+    expect([h.ps, h.protegido, h.carga]).toEqual([ps, 0, 0]);
+  });
+
+  it('a medias: hace la mitad (al menos 1); recibir carga la barra', () => {
+    const s = estadoInicial(D());
+    const [h] = s.heroes;
+    const e = enemigo(D(), 'soldado');
+    const azar = fijo(0.99);
+    const entero = resolverGolpe(s, D(), e, h, 10, false, azar).n;
+    h.ps = h.psMax;
+    expect(resolverGolpe(s, D(), e, h, 10, true, azar).n).toBe(Math.max(1, Math.round(entero / 2)));
+    expect(h.carga).toBe(CARGA.recibir * 2);
+  });
+
+  it('el jefe que se retira nunca llega a 0; su clon, sí', () => {
+    const d = BATALLAS.nikki as DatosBatalla;
+    const s = estadoInicial(d);
+    const nikki = enemigo(d, 'nikki', 20);
+    resolverGolpe(s, d, s.heroes[0], nikki, 100000);
+    expect(nikki.ps).toBe(1);
+    const k = enemigo(d, 'nikki', 20);
+    k.clon = 3;
+    resolverGolpe(s, d, s.heroes[0], k, 100000);
+    expect(k.ps).toBe(0);
+  });
+
+  it('paralizar reemplaza el descanso; los refuerzos llegan solo con los de la horda', () => {
+    const s = estadoInicial(D());
+    const [h] = s.heroes;
+    s.actuaron = [h.id];
+    s.cansados.add(h.id);
+    paralizarA(s, h, 2);
+    expect([h.paralizado, s.actuaron.length, s.cansados.size, s.paralizadoRecien[0]]).toEqual([2, 0, 0, h.id]);
+    const soldado = enemigo(D(), D().horda.enemigo);
+    expect(llegaRefuerzo(s, D(), soldado)).toBe(true);
+    expect(llegaRefuerzo(s, D(), enemigo(D(), D().jefe.enemigo))).toBe(false);
+    s.salieron = D().horda.niveles.length;
+    expect(llegaRefuerzo(s, D(), soldado)).toBe(false);
+  });
+
+  it('el clon cuesta vida y se evapora al terminar sus turnos', () => {
+    const d = BATALLAS.nikki as DatosBatalla;
+    const s = estadoInicial(d);
+    const nikki = sumarEnemigo(s, d, 'nikki', 20, fijo(0));
+    const c = d.enemigos.nikki.clon!;
+    const { clon, costo } = hacerClon(s, c, nikki, 'clon-1');
+    expect(nikki.ps).toBe(nikki.psMax - costo);
+    expect(s.enemigos).toContain(clon);
+    for (let i = 0; i < c.turnos; i++) expect(evaporarClones(s)).toEqual([]);
+    expect(evaporarClones(s)).toEqual([clon]);
+    expect(clon.ps).toBe(0);
+  });
+
+  it('el veneno de la bola no se acumula y al que esquiva le dura un turno menos', () => {
+    const s = estadoInicial(D());
+    const [h, otro] = s.heroes;
+    envenenarConBola(h, { danio: 6, turnos: 3 }, true);
+    expect(h.envenenado?.turnos).toBe(2);
+    envenenarConBola(h, { danio: 9, turnos: 9 });
+    expect(h.envenenado?.danio).toBe(6);
+    otro.ps = 0;
+    envenenarConBola(otro, { danio: 6, turnos: 3 });
+    expect(otro.envenenado).toBeNull();
+  });
+
+  it('el cañón: un solo golpe fuerte, el primer rayo horizontal; cada barrido nuevo es flojo', () => {
+    const rayo = { 1: [0, 0, 0], 2: [0, 0, -5], 3: [0, 0, 5] };
+    expect(golpesDelCanon([0, 1, 1, 2, 2, 3, 0, 1], rayo)).toEqual([
+      { ms: 1, fuerte: true },
+      { ms: 3, fuerte: false },
+      { ms: 5, fuerte: false },
+      { ms: 7, fuerte: false },
+    ]);
+    expect(poderBarrido(24)).toBe(4);
+    expect(poderBarrido(6)).toBe(3);
+  });
+
+  it('a quién le da el cañón: el fuerte a su blanco; los barridos, a otro; sin nadie de pie, a nadie', () => {
+    const s = estadoInicial(D());
+    const [a, b] = s.heroes;
+    expect(blancoDelCanon(s.heroes, a, true)).toBe(a);
+    expect(blancoDelCanon(s.heroes, a, false)).toBe(b);
+    b.ps = 0;
+    expect(blancoDelCanon(s.heroes, a, false)).toBe(a);
+    a.ps = 0;
+    expect(blancoDelCanon(s.heroes, a, true)).toBeNull();
   });
 });

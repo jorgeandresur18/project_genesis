@@ -310,3 +310,12 @@ export function golpesDelCanon(seq: number[], rayo: Record<string, number[]>, ms
 }
 /** Lo que pega un barrido flojo del cañón. */
 export const poderBarrido = (poder: number) => Math.max(3, Math.round(poder / 6));
+/** A quién le da cada golpe del cañón: el fuerte, a su blanco; los barridos, a cualquier otro que siga de pie. */
+export function blancoDelCanon(heroes: Luchador[], blanco: Luchador, fuerte: boolean, azar: () => number = Math.random): Luchador | null {
+  const vivos = heroes.filter(vivo);
+  if (!vivos.length) return null;
+  if (fuerte && vivo(blanco)) return blanco;
+  const otros = vivos.filter((h) => h !== blanco);
+  if (otros.length) return alAzar(otros, azar);
+  return vivo(blanco) ? blanco : alAzar(vivos, azar);
+}

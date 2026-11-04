@@ -49,7 +49,7 @@ El RPG, Boringram y el arte se hacen **para el capítulo que toca**, no por adel
 - [ ] *Liviana:* arte del Capítulo 2 que falte (`docs/guion/cap02_arte.md`): Rikka con traje rojo y espada, etc.
 
 ## Semana 2 (10–16 de noviembre): las peleas del Capítulo 2
-- [x] **Ordenar el RPG antes de sumar peleas** (2026-11-03): una sola ficha por personaje, `Batalla.tsx` partido (etapa 1: el dibujo), varios especiales y balance simulado del Bastión, el bar, el hangar y el torneo. Etapa 2 (2026-11-04, segunda computadora): la lógica de turnos sin dibujo en `src/engine/turnos.ts` (estado inicial, decisión de los enemigos, cebos, fin del turno). Queda para después: los turnos de los héroes y el bucle de la pelea, y que la simulación del balance use `turnos.ts`.
+- [x] **Ordenar el RPG antes de sumar peleas** (2026-11-03): una sola ficha por personaje, `Batalla.tsx` partido (etapa 1: el dibujo), varios especiales y balance simulado del Bastión, el bar, el hangar y el torneo. Etapa 2 (2026-11-04, segunda computadora): la lógica de turnos sin dibujo en `src/engine/turnos.ts` (estado inicial, decisión de los enemigos, cebos, fin del turno). El simulador del balance ya juega con esas reglas (`tests/simulador.ts`, 2026-11-04). Queda para después: los turnos de los héroes y el bucle de la pelea en pantalla.
 - [ ] **Decidir y hacer las peleas del Capítulo 2:** la muralla (Rikka sola), el campamento, el molino con el cassette y Cami acorazada. **Plantillas de relleno ya enganchadas** (2026-11-03; ver `BIBLIA_RPG.md`, sección 12): falta la historia de cada una. El plan simplificado de la cuenta regresiva espera la confirmación del autor.
 - [ ] *Pesada:* sprites del RPG de esas peleas, en tanda.
 - [ ] **Pulir los diálogos del Capítulo 2.**
@@ -114,4 +114,5 @@ Se responden cuando toque su semana; mientras, no se inventan.
 - Cuánto tardó GENESIS en terminar el juego.
 - `AnothergIrl`: si las mayúsculas forman «AI» a propósito.
 - El conflicto de fusión del 7B (en la pelea final del Capítulo 6): qué choca entre Rikka y Cami y si Jair ejecuta el comando.
+- El balance del hangar: el atento gana ~32 % y la meta es 55-90 % (opciones en `docs/BITACORA.md`, 4 de noviembre).
 - Las frases de confusión del RPG, para aprobar o corregir.
