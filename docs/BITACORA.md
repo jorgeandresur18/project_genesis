@@ -255,3 +255,6 @@ fuera de la computadora principal. **Al volver a la principal: `git checkout des
     intentan, qué choca entre ellas y si Jair ejecuta el comando (Claude sugirió la respuesta de git «CONFLICT…
     Automatic merge failed»). Así el MERGE queda en las dos ramas: en el 7A sale, en el 7B choca, y THE GREAT MERGE es
     el de Promptmetheus.
+  - **Respuestas del autor:** en español se dice **LA GRAN FUSIÓN** (en inglés, THE GREAT MERGE). La fusión pasa **en el
+    Capítulo 6**, dentro del capítulo: en la rama que lleva al 7A se logra (AnothergIrl) y en la que lleva al 7B no
+    (el conflicto de fusión). Sigue pendiente qué choca entre ellas y si Jair ejecuta el comando.

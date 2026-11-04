@@ -113,6 +113,5 @@ Se responden cuando toque su semana; mientras, no se inventan.
 - El clon del lado de los héroes.
 - Cuánto tardó GENESIS en terminar el juego.
 - `AnothergIrl`: si las mayúsculas forman «AI» a propósito.
-- THE GREAT MERGE: si en español se dice igual o se traduce.
-- El conflicto de fusión del 7B: cuándo lo intentan, qué choca entre Rikka y Cami y si Jair ejecuta el comando.
+- El conflicto de fusión del 7B (en el Capítulo 6): qué choca entre Rikka y Cami y si Jair ejecuta el comando.
 - Las frases de confusión del RPG, para aprobar o corregir.
