@@ -525,7 +525,8 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
   los puede usar cualquiera, se guardan en la mochila y se venden.
 - **Los cassettes** (decidido por el autor el 2026-11-03; sprites del autor en proceso): cada ataque de la mochila es un
   cassette. **Solo los de los protagonistas tienen color**: Jair `#f0b54a` (acento `#ff8a1f`), Cami `#5ea8ff` (acento
-  `#2f8cff`) y Rikka `#ef4f5c` (acento `#ff4f8b`), los de su caja de diálogo y su especial. **Los genéricos** (los sueltos)
+  `#2f8cff`), Rikka `#ef4f5c` (acento `#ff4f8b`) y Nikki `#ff6fa5` (acento `#ff4f9a`), los de su caja de diálogo y su
+  especial. **Los genéricos** (los sueltos)
   van en gris neutro `#c9ced6`.
 - **De dónde salen:** se aprenden al **subir de nivel**; se compran en **Boringplace** o se ganan en el **Torneo Genesis**.
 - **Vender:** los sueltos se venden en Boringplace y **se pueden volver a comprar**.
