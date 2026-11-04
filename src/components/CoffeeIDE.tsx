@@ -227,7 +227,6 @@ export function CoffeeIDE({
       clearTimeout(timer);
       clearTimeout(out);
     };
-     
   }, [reaction]);
   // Cada comentario busca un lugar libre dentro del IDE (el explorador, la paleta o la terminal), sin tapar el
   // código. Se mide antes de pintarse, así que no salta.

@@ -99,7 +99,6 @@ export function Nivel({ id, onGanar, onPerder }: { id: string; onGanar: () => vo
       window.removeEventListener('keydown', onKey, true);
       document.removeEventListener('visibilitychange', onOculta);
     };
-     
   }, []);
   useEffect(() => () => control.current?.destruir(), []);
 
