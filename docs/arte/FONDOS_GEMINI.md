@@ -4,7 +4,7 @@
 
 Pendientes y alternativas:
 - `dulce_frio_fachada`: por ahora se usa la imagen con el letrero «SWEET CHILL» (la versión en inglés). Falta la versión en español: pídela igual, pero con el letrero «DULCE FRÍO» (o sin texto); renombra la actual `dulcefrio_fachada_en.png`, guarda la nueva como `docs/fondos/dulcefrio_fachada.png` y corre `npm run fondos`.
-- `hangar_destruido`: se usará más adelante (ninguna escena del Capítulo 1 lo usa todavía).
+- `hangar_destruido`: se usa en el camino alternativo del hangar del Capítulo 1 (decisión «Probar la nave grande»), después de la pelea, de `cap01_hg_013` a `cap01_hg_021`.
 - «Caída amorosa entre mundos flotantes» y «Abrazo en la Grieta Cósmica»: variantes de `cg_caida_multiverso`, guardadas sin publicar.
 - `calle_noche_taxi`: variante de `calle_noche` con el taxi; se usa mientras Nikki pide el taxi y se sube (escenas 108 a 114).
 - Los CG (`cg_*`) miden menos de 1920 px de ancho y la caída no es 16:9: se ven bien, pero en pantallas grandes un poco más suaves.
