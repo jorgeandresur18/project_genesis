@@ -96,6 +96,22 @@ function sim(D: DatosBatalla, listo: boolean, N = 2000) {
         if (a.paraliza) { for (const h of bl) { h.paralizado = a.paraliza; recien.push(h); act = act.filter((id) => id !== h.id); } continue; }
         // El beso confusión: no hace daño; confunde (a veces se esquiva).
         if (a.confunde) { for (const h of bl) { h.confundido = a.confunde; recien.push(h); } continue; }
+        // La ráfaga del Capitán: entre balas[0] y balas[1] balas, una a cada blanco por turno; cada una puede fallar.
+        if (a.balas) {
+          const n = a.balas[0] + Math.floor(Math.random() * (a.balas[1] - a.balas[0] + 1));
+          for (let k = 0; k < n; k++) { const h = bl[k % bl.length]; if (vivo(h)) pegar(e, h, a.poder); }
+          continue;
+        }
+        // Las medias lunas de la sombra: primero una a cada héroe en pie y las que sobran, al azar.
+        if (a.rafagas) {
+          const enPie = hs.filter(vivo);
+          for (let k = 0; k < a.rafagas; k++) {
+            const vivos = enPie.filter(vivo); if (!vivos.length) break;
+            const h = k < enPie.length ? enPie[k] : vivos[Math.floor(Math.random() * vivos.length)];
+            if (vivo(h)) pegar(e, h, a.poder);
+          }
+          continue;
+        }
         for (const h of bl) pegar(e, h, a.poder);
       }
       if (!hs.some(vivo)) break;
