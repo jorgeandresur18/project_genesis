@@ -24,6 +24,8 @@ export interface Hoja {
   rayo?: Record<string, [number, number, number, number]>;
   /** El pecho: sin dirección anotada, la bala sale en la dirección pecho → punta de la pistola. */
   ancla_disparo?: [number, number];
+  /** Dónde está el cuerpo en reposo, en el cuadro ([x0, y0, x1, y1]): para centrar la luz de los golpes y la galería. */
+  cuerpo?: [number, number, number, number];
   /** Si sus filas largas están partidas en renglones de tantos cuadros (las hojas muy anchas no cargan en celulares). */
   columnas?: number;
   /**

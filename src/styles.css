@@ -2524,9 +2524,11 @@ button.kingdom-item:hover .kingdom-frame img { transform: scale(1.06) rotate(-6d
 .batalla-menu button.especial { color: #9b968c; }
 .batalla-menu button.especial.listo { color: #ffd76a; text-shadow: 0 0 6px rgba(255, 200, 80, 0.7); }
 /* Luz de cada golpe sobre quien lo recibe: un destello del color del ataque; el sprite se pone blanco un instante. */
-.batalla-luz { position: absolute; left: 50%; top: 45%; width: 70%; aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; pointer-events: none; mix-blend-mode: screen; background: radial-gradient(circle, #fff 0 12%, var(--c) 30%, transparent 68%); animation: batalla-luz 0.42s ease-out forwards; }
-.batalla-luz.fuerte { width: 110%; }
-@keyframes batalla-luz { from { opacity: 1; scale: 0.3; } to { opacity: 0; scale: 1.3; } }
+.batalla-golpe-luz { position: absolute; left: var(--lx, 50%); top: var(--ly, 45%); width: var(--lw, 70%); aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; pointer-events: none; mix-blend-mode: screen; background: radial-gradient(circle, #fff 0 12%, var(--c) 30%, transparent 68%); animation: batalla-golpe-luz 0.42s ease-out forwards; }
+/* Centrada en el cuerpo (--lx, --ly, --lw: ver Figura en src/components/batalla/escena.tsx). */
+.batalla-golpe-luz.fuerte { width: calc(var(--lw, 70%) * 1.55); }
+/* Antes se llamaba .batalla-luz, igual que las luces del bar, que la pisaban (quedaba una bola quieta). */
+@keyframes batalla-golpe-luz { from { opacity: 1; scale: 0.3; } to { opacity: 0; scale: 1.3; } }
 .batalla-figura.golpeado .batalla-sprite { animation: batalla-golpeado 0.18s steps(2) 2; }
 @keyframes batalla-golpeado { 50% { filter: brightness(2.1) saturate(0.4); } }
 /* Quien ataca brilla; con el especial, del color del personaje. */
@@ -2572,7 +2574,7 @@ button.kingdom-item:hover .kingdom-frame img { transform: scale(1.06) rotate(-6d
 @keyframes aviso-velocidad { from { mask-position: 0 0; -webkit-mask-position: 0 0; } to { mask-position: -300px 0; -webkit-mask-position: -300px 0; } }
 @keyframes aviso-entra { 0% { clip-path: inset(48% 0 48% 0); translate: 30% 0; } 18% { clip-path: inset(0 0 0 0); translate: 0 0; } 85% { clip-path: inset(0 0 0 0); opacity: 1; } 100% { clip-path: inset(48% 0 48% 0); opacity: 0; } }
 @media (max-height: 500px) { .batalla-aviso-franja { --z: 4; } }
-@media (prefers-reduced-motion: reduce) { .batalla-aviso-franja::before, .batalla-aviso-franja::after { animation: none; } .batalla-luz, .batalla-figura.golpeado .batalla-sprite { animation-duration: 0.01s; } }
+@media (prefers-reduced-motion: reduce) { .batalla-aviso-franja::before, .batalla-aviso-franja::after { animation: none; } .batalla-golpe-luz, .batalla-figura.golpeado .batalla-sprite { animation-duration: 0.01s; } }
 @media (max-width: 760px) {
   .batalla-abajo { flex-direction: column; }
   .batalla-figura .batalla-sprite, .batalla-figura img { zoom: calc(0.9 * var(--e, 1)); }

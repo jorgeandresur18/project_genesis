@@ -123,6 +123,25 @@ export function Figura({
   const caja = useRef<HTMLDivElement | null>(null);
   const confundido = l.confundido > 0 && l.ps > 0 && !caido;
   const [cabeza, setCabeza] = useState<CSSProperties | undefined>(undefined);
+  // La luz de los golpes, centrada en el cuerpo (no en el cuadro): los cuadros grandes, como el de la sombra, tienen
+  // mucho aire arriba y la luz quedaba flotando encima. Los héroes se dibujan espejados.
+  const [centro, setCentro] = useState<CSSProperties | undefined>(undefined);
+  useEffect(() => {
+    let vivo = true;
+    void cargarHoja(sprite).then((h: Hoja | { cuadro: [number, number] }) => {
+      if (!vivo || !('frameHeight' in h) || !h.cuerpo) return;
+      const [x0, y0, x1, y1] = h.cuerpo;
+      const cx = (((x0 + x1) / 2) / h.frameWidth) * 100;
+      setCentro({
+        '--lx': `${heroe ? 100 - cx : cx}%`,
+        '--ly': `${(((y0 + y1) / 2) / h.frameHeight) * 100}%`,
+        '--lw': `${Math.min(110, (((x1 - x0) / h.frameWidth) * 100) * 1.1)}%`,
+      } as CSSProperties);
+    });
+    return () => {
+      vivo = false;
+    };
+  }, [sprite, heroe]);
   useEffect(() => {
     if (!confundido || !especial?.ojos) return;
     let vivo = true;
@@ -150,6 +169,7 @@ export function Figura({
           ...(desliz?.ms ? { '--dt': `${desliz.ms}ms` } : {}),
           '--alto': `${-alto}px`,
           ...(especial ? { '--c': especial.color } : {}),
+          ...centro,
           '--e': escala,
         } as CSSProperties
       }
@@ -186,7 +206,7 @@ export function Figura({
         <SpriteHoja src={sprite} anim={quieto ? 'idle' : anim} vez={vez} alCuadro={alCuadro} cuadroFijo={quieto ? 0 : undefined} />
       )}
       {luces.map((x) => (
-        <span key={x.key} className={`batalla-luz ${x.fuerte ? 'fuerte' : ''}`} style={{ '--c': x.color } as CSSProperties} aria-hidden />
+        <span key={x.key} className={`batalla-golpe-luz ${x.fuerte ? 'fuerte' : ''}`} style={{ '--c': x.color } as CSSProperties} aria-hidden />
       ))}
       {!heroe && !caido && (
         <span className="batalla-vida" aria-hidden>
