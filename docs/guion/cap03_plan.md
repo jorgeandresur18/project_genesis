@@ -60,3 +60,17 @@ Ordenado de lo que más frena el guion a lo que menos. La primera es la más imp
 - **RPG:** el sprite de THE KING (el autor todavía no lo tiene) y su ficha.
 - **Novela:** fondos y CG del lugar del Rey, de la nada después del borrado y del cuarto de Jair.
 - **Celular:** la notificación de la migración.
+
+## Revisión de coherencia contra el canon (Claude, 5 de noviembre de 2026)
+
+Revisado el borrador (`cap03.json`) contra `docs/CANON.md`. **Calza:** la torre piso por piso, la espada en el arsenal del piso 5, el yelmo cerrado, «THE NEXUS» dicho por el Rey, el DELETE sin WHERE que se escribe solo, `alt_1` con la restauración (8 exabytes / 8.112 años; 5 petabytes / 6 meses), el despertar a las 9:36 con la batería al 1 %, y que Cami y Rikka aparezcan en el cuarto.
+
+**Arreglado:**
+- La notificación de la migración (`cap03_despertar_09`) era una línea de la Voz; el canon dice que llega **al celular de Jair**: ahora se lee en la pantalla del celular.
+- En el canon, «el yelmo no se quita, ni en su forma gigante» chocaba con «el Rey no se hace gigante en este capítulo»: se aclaró que la forma gigante es del Capítulo 6.
+
+**Preguntas para el autor (no se cambió nada):**
+1. **«Sin que su pueblo lo sepa»:** el canon dice que los cuatro reyes estacionales están a merced del Rey Malvado sin que su pueblo lo sepa. En la torre hay guardias de las estaciones al servicio del Rey y 1.204 presos de los reinos. ¿Sirve como está (pasa lejos, en el espacio dimensional, y nadie vuelve para contarlo) o hay que suavizarlo?
+2. **La pista de la cara** (`cap03_trono_10`): «Jair tiene la impresión absurda de que debajo hay alguien conocido». La cara del Rey (la de Jair) se revela en el Capítulo 6. ¿Se deja la pista o se quita?
+3. **«Me mejoraron… alguien escribió encima de lo que yo era»** (`cap03_trono_08`): el Rey admite que lo reescribieron (en el Verano solo se dice «como si hubieran reescrito su forma de ser»). ¿Está bien que él lo sepa y lo diga, o es mucho para el Capítulo 3?
+

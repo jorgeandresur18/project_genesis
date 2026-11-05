@@ -8,13 +8,13 @@
   ],
   "personajes": {
     "jair": {
-      "nivel": 12
+      "nivel": 13
     },
     "cami": {
       "nivel": 17
     },
     "rikka": {
-      "nivel": 14
+      "nivel": 15
     }
   },
   "enemigos": [

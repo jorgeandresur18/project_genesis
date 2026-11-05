@@ -31,7 +31,11 @@ import {
   type Luchador,
 } from '../src/engine/batalla';
 import {
+  aplicarEstacion,
   blancoDelCanon,
+  desterrar,
+  estacionAlAzar,
+  quemarConEspecial,
   confundirA,
   decidirEnemigo,
   envenenarConBola,
@@ -152,6 +156,14 @@ function pelea(D: DatosBatalla, listo: boolean) {
       }
       const blancos = esp.objetivo === 'todos' ? hs.filter(vivo) : [r.blanco];
       for (const b of golpesEspecial(esp, blancos, hs.length)) if (vivo(b)) especialA(e, b, esp.poder);
+      // Lo que el especial deja además, como en el juego: las estaciones (el Rey), la grieta y la quemadura.
+      if (esp.estaciones) for (const x of [...new Set(blancos)].filter(vivo)) aplicarEstacion(s, x, estacionAlAzar());
+      if (esp.destierro) {
+        const candidatos = hs.filter(enCampo);
+        const x = candidatos[Math.floor(Math.random() * candidatos.length)];
+        if (x) desterrar(s, x, esp.destierro);
+      }
+      quemarConEspecial(s, esp, blancos);
     } else if (r.tipo === 'ataque') {
       const a = r.ataque;
       if (a.confunde || a.paraliza) {

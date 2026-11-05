@@ -115,6 +115,8 @@ export function BootcampAviso({ onOpen }: { onOpen: () => void }) {
       playNotify();
     }, 1200);
     return () => clearTimeout(timer);
+    // El nombre del curso se lee al momento del aviso; cambiar de idioma no tiene que volver a avisar.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nivel, avisar]);
   useEffect(() => {
     if (!toast) return;

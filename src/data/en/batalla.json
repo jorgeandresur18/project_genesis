@@ -148,7 +148,7 @@
     "Banquete": "Banquet",
     "El chef da vuelta todas las ollas a la vez. Comen todos, quieran o no.": "The chef flips every pot at once. Everyone eats, like it or not.",
     "Especialidad de la casa": "House Specialty",
-    "El chef destapa una olla. Lo de adentro burbujea verde y lo mira. Se lo sirve a {quien}.": "The chef lifts a lid. What's inside bubbles green and stares back. He serves it to {quien}.",
+    "{quien} destapa una olla. Lo de adentro burbujea verde y los mira. Les sirve a todos, y a sus ayudantes también.": "{quien} lifts a lid. What's inside bubbles green and stares back at them. He serves everyone, his helpers included.",
     "Maestro herrero": "Master Blacksmith",
     "Martillo al rojo": "Red-Hot Hammer",
     "El maestro herrero le da a {objetivo} con el martillo al rojo vivo.": "The master blacksmith hits {objetivo} with the red-hot hammer.",

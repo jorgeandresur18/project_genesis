@@ -92,6 +92,7 @@ export function useSceneTransition(scene: Scene | null, instant: boolean) {
       cancelLoad();
     };
     // `shown` no va en las dependencias: solo se reacciona al cambio de escena del motor.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scene, instant]);
 
   useEffect(() => {

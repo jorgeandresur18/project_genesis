@@ -8219,8 +8219,8 @@
         }
       ],
       "dialogue": {
-        "speaker": "Voz",
-        "text": "> GENESIS: migración completada. 2 entidades movidas a la tabla «jair»."
+        "speaker": null,
+        "text": "En la pantalla del celular, una notificación de GENESIS: «Migración completada. 2 entidades movidas a la tabla jair»."
       },
       "choices": [],
       "conditions": [],

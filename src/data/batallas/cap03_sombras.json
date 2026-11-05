@@ -8,7 +8,7 @@
   ],
   "personajes": {
     "jair": {
-      "nivel": 12
+      "nivel": 11
     },
     "cami": {
       "nivel": 17
@@ -25,14 +25,14 @@
     "enemigo": "soldado",
     "al_inicio": 2,
     "niveles": [
-      19,
-      19,
-      19
+      18,
+      18,
+      18
     ]
   },
   "jefe": {
     "enemigo": "sombra",
-    "nivel": 20
+    "nivel": 19
   },
   "botin": {
     "probabilidad": 0.6,

@@ -819,7 +819,7 @@
 
 `despertar_08` **Jair:** No. No, no, no. Tarde otra vez.
 
-`despertar_09` **Voz:** > GENESIS: migración completada. 2 entidades movidas a la tabla «jair».
+`despertar_09` — En la pantalla del celular, una notificación de GENESIS: «Migración completada. 2 entidades movidas a la tabla jair».
 
 `despertar_10` **Jair:** ¿Migración de qué?
 
