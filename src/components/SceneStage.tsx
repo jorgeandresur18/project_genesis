@@ -129,7 +129,7 @@ type Emblema = { x: number; y: number; w: number; zona?: 'pecho' };
 type Mano = { imagen: string; x: number; y: number; w: number; h: number };
 /** Lo que hace cada mano (ver EmblemasTocables). */
 type Accion =
-  | { tipo: 'nalgada'; lado: 'izq' | 'der'; mano: Mano }
+  | { tipo: 'nalgada'; lado: 'izq' | 'der'; mano: Mano; marca?: Mano }
   | { tipo: 'pecho'; lado: 'izq' | 'der'; emblema: number; abierta: Mano; cerrada: Mano }
   | { tipo: 'apunta'; emblema: number; mano: Mano };
 /** Las manos de un grupo de sprites secretos; `marca`: si la nalgada deja la marca roja (no con el pantalón puesto). */
@@ -574,22 +574,13 @@ function EmblemasTocables({
         if (a.tipo !== 'nalgada') return null;
         const m = a.mano;
         const palma = { x: m.x + m.w / 2, y: m.y + m.h * 0.42 };
-        // La marca: la silueta de la mano entera (pulgar incluido) en su lugar, recortada por el sprite (no se sale del
-        // cuerpo). Ocupa toda la caja: la mano va con su tamaño y posición; el sprite, entero.
-        const mascaraMarca = `url(${assetUrl(`${m.imagen}.webp`)}), url(${src})`;
-        const posMarca = `${(m.x / (100 - m.w)) * 100}% ${(m.y / (100 - m.h)) * 100}%, 0 0`;
-        const tamMarca = `${m.w}% ${m.h}%, 100% 100%`;
         const mascaraOnda = `radial-gradient(ellipse ${m.w * 0.62}% ${m.h * 0.62}% at ${palma.x}% ${palma.y}%, #000 50%, transparent 100%)`;
         const n = vivas[i];
         return (
           <Fragment key={`nalgada-${i}`}>
-            {marcas[a.lado] && (
-              <span
-                key={`marca-${marcas[a.lado]}`}
-                className="nalgada-marca"
-                style={{ maskImage: mascaraMarca, WebkitMaskImage: mascaraMarca, maskPosition: posMarca, WebkitMaskPosition: posMarca, maskSize: tamMarca, WebkitMaskSize: tamMarca }}
-                aria-hidden
-              />
+            {/* La marca: ya viene difuminada, solo la palma y dentro del cuerpo (tools/desbloqueables_rikka.mjs). */}
+            {marcas[a.lado] && a.marca && (
+              <img key={`marca-${marcas[a.lado]}`} className="nalgada-marca" src={assetUrl(`${a.marca.imagen}.webp`)} alt="" draggable={false} aria-hidden style={caja(a.marca)} />
             )}
             {n !== undefined && (
               <>

@@ -3639,23 +3639,18 @@ button.cassette:hover .cassette-imagen { transform: translateY(-2px) rotate(-3de
 }
 .nalgada-marca {
   position: absolute;
-  inset: 0;
   pointer-events: none;
-  background: #d4202f;
-  mask-repeat: no-repeat;
-  -webkit-mask-repeat: no-repeat;
-  mask-composite: intersect;
-  -webkit-mask-composite: source-in;
-  filter: blur(4px);
+  user-select: none;
   mix-blend-mode: multiply;
   opacity: 0;
   animation: nalgada-marca 2.6s ease both;
 }
-/* Se forma de a poco (de borrosa a nítida), queda un momento y se va rápido. */
+/* Sutil: se forma de a poco, queda un momento y se va rápido. */
 @keyframes nalgada-marca {
-  0% { opacity: 0; filter: blur(10px); }
-  25% { opacity: 0.32; filter: blur(4px); }
-  85% { opacity: 0.32; filter: blur(4px); }
-  100% { opacity: 0; filter: blur(5px); }
+  0% { opacity: 0; }
+  30% { opacity: 0.5; }
+  82% { opacity: 0.5; }
+  100% { opacity: 0; }
 }
+
 @media (prefers-reduced-motion: reduce) { .pecho-grupo.rebota, .nalgada-onda, .nalgada-zas { animation-duration: 0.01s; } .nalgada-mano, .mano-apunta { animation-duration: 0.01s; } }

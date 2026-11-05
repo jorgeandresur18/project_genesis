@@ -131,6 +131,60 @@ async function exportarMano(capa, nombre) {
   return { imagen: `sprites/rikka/manos/${nombre}`, x: red((l / W) * 100), y: red((t / H) * 100), w: red(((cw * f) / W) * 100), h: red(((ch * f) / H) * 100) };
 }
 
+/**
+ * La marca roja de una nalgada (pedido del autor: sutil, difuminada, solo la palma y sin línea roja en el borde): la
+ * silueta de la mano sin la parte de abajo, recortada por el cuerpo un poco hacia adentro (así no toca el contorno),
+ * difuminada después de recortar y pintada de rojo. Se guarda con un margen para el difuminado.
+ */
+async function exportarMarca(mano, sprite, nombre) {
+  const M = 14; // margen en px del sprite
+  const bx = Math.round((mano.x / 100) * W) - M, by = Math.round((mano.y / 100) * H) - M;
+  const bw = Math.round((mano.w / 100) * W) + 2 * M, bh = Math.round((mano.h / 100) * H) + 2 * M;
+  // La mano en su caja (con margen).
+  const img = await sharp(`public/${mano.imagen}.webp`).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  const mw = img.info.width, mh = img.info.height;
+  const palma = new Float32Array(bw * bh);
+  for (let y = 0; y < mh; y++) {
+    // Solo la palma y los dedos: la parte de abajo (la base de la mano y el puño) se desvanece.
+    const t = y / mh;
+    const corte = t < 0.42 ? 1 : t > 0.62 ? 0 : 1 - (t - 0.42) / 0.2;
+    for (let x = 0; x < mw; x++) palma[(y + M) * bw + x + M] = (img.data[(y * mw + x) * 4 + 3] / 255) * corte;
+  }
+  // El cuerpo, un poco hacia adentro: el alfa del sprite difuminado y con un umbral alto.
+  // (En dos pasos: sharp guarda un solo «extractChannel» y el último pisaría al del alfa.)
+  const region = { left: Math.max(0, bx), top: Math.max(0, by), width: Math.min(bw, W - Math.max(0, bx)), height: Math.min(bh, H - Math.max(0, by)) };
+  const soloAlfa = await sharp(sprite).ensureAlpha().extract(region).extractChannel('alpha').raw().toBuffer({ resolveWithObject: true });
+  const cuerpo = await sharp(soloAlfa.data, { raw: { width: soloAlfa.info.width, height: soloAlfa.info.height, channels: 1 } })
+    .blur(7)
+    .extractChannel(0)
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+  if (cuerpo.info.channels !== 1) throw new Error('el cuerpo debería tener un solo canal');
+  const cw = cuerpo.info.width;
+  const ox = Math.max(0, bx) - bx, oy = Math.max(0, by) - by;
+  const alfa = Buffer.alloc(bw * bh);
+  for (let y = 0; y < bh; y++)
+    for (let x = 0; x < bw; x++) {
+      const cx = x - ox, cy = y - oy;
+      const c = cx >= 0 && cy >= 0 && cx < cw && cy < cuerpo.info.height ? cuerpo.data[cy * cw + cx] : 0;
+      const dentro = Math.max(0, Math.min(1, (c - 235) / 20));
+      alfa[y * bw + x] = Math.round(palma[y * bw + x] * dentro * 255);
+    }
+  const suave = await sharp(alfa, { raw: { width: bw, height: bh, channels: 1 } }).blur(9).extractChannel(0).raw().toBuffer();
+  if (suave.length !== bw * bh) throw new Error(`difuminado con ${suave.length / (bw * bh)} canales`);
+  const rgba = Buffer.alloc(bw * bh * 4);
+  for (let i = 0; i < bw * bh; i++) {
+    rgba[i * 4] = 200;
+    rgba[i * 4 + 1] = 24;
+    rgba[i * 4 + 2] = 40;
+    rgba[i * 4 + 3] = suave[i];
+  }
+  await sharp(rgba, { raw: { width: bw, height: bh, channels: 4 } }).webp({ quality: 90, alphaQuality: 100 }).toFile(`public/sprites/rikka/manos/${nombre}.webp`);
+  const red = (n) => Math.round(n * 100) / 100;
+  console.log(`✓ marca → manos/${nombre}.webp`);
+  return { imagen: `sprites/rikka/manos/${nombre}`, x: red((bx / W) * 100), y: red((by / H) * 100), w: red((bw / W) * 100), h: red((bh / H) * 100) };
+}
+
 /** Las hojas (capas sin hijos) de un grupo, con el camino de nombres. */
 const hojas = (n, camino = []) => (n.children ?? []).flatMap((c) => (c.children ? hojas(c, [...camino, c.name]) : [{ capa: c, camino }]));
 
@@ -187,7 +241,9 @@ for (const nodo of psd.children ?? []) {
   // Izquierda y derecha de los pechos, según dónde está su emblema.
   const ps = acciones.filter((a) => a.tipo === 'pecho').sort((a, b) => badges[a.emblema].x - badges[b.emblema].x);
   ps.forEach((a, i) => { a.lado = ps.length === 1 ? 'izq' : i === 0 ? 'izq' : 'der'; delete a.clave; });
-  // En los de termas con el pantalón del traje, la nalgada no deja marca (pedido del autor).
+  // En los de termas con el pantalón del traje, la nalgada no deja marca (pedido del autor). En los demás, su marca.
+  if (grupo !== 'vistiendose')
+    for (const a of acciones) if (a.tipo === 'nalgada') a.marca = await exportarMarca(a.mano, `public/sprites/${sprites[0]}.webp`, `${grupo}_marca_${a.lado}`);
   // Dónde está su cara (en % del sprite): el globo de lo que dice sale pegado a la izquierda de su cabeza.
   const CARAS = { vistiendose: { x: 36, y: 26 }, frente: { x: 33, y: 26 }, espalda: { x: 35, y: 26 } };
   manos[grupo] = { sprites, marca: grupo !== 'vistiendose', cara: CARAS[grupo], acciones };

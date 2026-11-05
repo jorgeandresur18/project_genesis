@@ -338,6 +338,13 @@
             "y": 67.45,
             "w": 16.28,
             "h": 14.9
+          },
+          "marca": {
+            "imagen": "sprites/rikka/manos/espalda_marca_izq",
+            "x": 35.33,
+            "y": 66.56,
+            "w": 18.58,
+            "h": 16.63
           }
         },
         {
@@ -349,6 +356,13 @@
             "y": 68.05,
             "w": 15.68,
             "h": 15.67
+          },
+          "marca": {
+            "imagen": "sprites/rikka/manos/espalda_marca_der",
+            "x": 58.83,
+            "y": 67.19,
+            "w": 18,
+            "h": 17.44
           }
         },
         {
