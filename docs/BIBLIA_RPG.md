@@ -666,3 +666,4 @@ Detalle completo en `docs/BATALLA_FINAL.md`.
   AnothergIrl) `[PENDIENTE]`. Sprites: el autor pasa los borradores de las transformaciones; el de THE KING todavía
   no existe.
 
+**La torre del Capítulo 3 sube de dificultad poco a poco** (decisión del autor, 2026-11-05): el jugador atento gana ~95 % en el calabozo y cada piso un poco menos, hasta ~60 % contra el Rey; el jefe de cada piso es algo más duro que sus peleas. Se ajusta con `tests/torre_ajuste.test.ts`.

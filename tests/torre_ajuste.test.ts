@@ -2,7 +2,7 @@
 // pelea se llevan a la siguiente). Los niveles de los enemigos suben fijos piso a piso (PLAN); lo que se ajusta es la
 // fuerza de cada enemigo nuevo (multiplica vida y ataque de su ficha) o, en las peleas de soldados, el nivel.
 // Ver: TORRE=1 npx vitest run tests/torre_ajuste.test.ts --disable-console-intercept
-// Ajustar y escribir los JSON: TORRE=1 AJUSTAR=1 (lo mismo). Metas: normal 90 %, jefe de piso 80 %, Rey 70 % (atento).
+// Ajustar y escribir los JSON: TORRE=1 AJUSTAR=1 (lo mismo). Metas (atento): bajan piso a piso, de ~95 % a ~58 % con el Rey (ver PISO y meta).
 import fs from 'node:fs';
 import { it } from 'vitest';
 import { BATALLAS, FICHAS } from '../src/engine/batallas';
@@ -65,7 +65,15 @@ const PERILLA: Record<string, string[] | 'nivel'> = {
   cap03_rey: ['rey'],
 };
 const JEFES = new Set(['cap03_cloacas_2', 'cap03_bodegas_2', 'cap03_cuarteles_2', 'cap03_comedor_2', 'cap03_forja_2', 'cap03_celdas_2', 'cap03_patio_2', 'cap03_arsenal', 'cap03_salon_2', 'cap03_galeria_2']);
-const meta = (id: string) => (id === 'cap03_rey' ? 0.7 : JEFES.has(id) ? 0.8 : 0.9);
+// La torre sube de dificultad poco a poco (decisión del autor, 2026-11-05): cuánto gana el jugador atento baja piso a
+// piso, de ~95 % en el calabozo a ~58 % contra el Rey; el jefe de cada piso, un poco menos que las peleas de su piso.
+const PISO: Record<string, number> = {
+  cap03_calabozo: 0, cap03_cloacas_1: 1, cap03_cloacas_2: 1, cap03_bodegas_1: 1, cap03_bodegas_2: 1,
+  cap03_cuarteles: 2, cap03_cuarteles_2: 2, cap03_comedor_1: 3, cap03_comedor_2: 3, cap03_forja_1: 3, cap03_forja_2: 3,
+  cap03_biblioteca_1: 4, cap03_sombras: 4, cap03_celdas_1: 5, cap03_celdas_2: 5, cap03_patio_1: 5, cap03_patio_2: 5,
+  cap03_arsenal: 6, cap03_salon_1: 7, cap03_salon_2: 7, cap03_galeria_1: 7, cap03_galeria_2: 7,
+};
+const meta = (id: string) => (id === 'cap03_rey' ? 0.58 : 0.95 - 0.035 * PISO[id] - (JEFES.has(id) ? 0.07 : 0));
 const N = Number(process.env.SIM_N ?? 300);
 const AJUSTAR = !!process.env.AJUSTAR;
 

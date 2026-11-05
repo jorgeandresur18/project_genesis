@@ -25,15 +25,15 @@
     "enemigo": "caballero",
     "al_inicio": 2,
     "niveles": [
-      16,
-      16,
       17,
-      17
+      17,
+      18,
+      18
     ]
   },
   "jefe": {
     "enemigo": "comandante",
-    "nivel": 18
+    "nivel": 19
   },
   "botin": {
     "probabilidad": 0.6,

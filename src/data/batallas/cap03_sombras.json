@@ -25,14 +25,14 @@
     "enemigo": "soldado",
     "al_inicio": 2,
     "niveles": [
-      18,
-      18,
-      18
+      19,
+      19,
+      19
     ]
   },
   "jefe": {
     "enemigo": "sombra",
-    "nivel": 19
+    "nivel": 20
   },
   "botin": {
     "probabilidad": 0.6,

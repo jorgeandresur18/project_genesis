@@ -618,14 +618,14 @@
       "jefe": true,
       "huye_a": 0.3,
       "base": {
-        "ps": 81,
+        "ps": 84,
         "atq": 9,
         "def": 6,
         "vel": 7
       },
       "crece": {
-        "ps": 10.8,
-        "atq": 1.21,
+        "ps": 11.2,
+        "atq": 1.26,
         "def": 0.8,
         "vel": 0.3
       },
@@ -784,14 +784,14 @@
       "nombre": "Bicho de memoria",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 12,
+        "ps": 14,
         "atq": 3,
         "def": 3,
         "vel": 7
       },
       "crece": {
-        "ps": 4,
-        "atq": 0.4,
+        "ps": 4.6,
+        "atq": 0.46,
         "def": 0.6,
         "vel": 0.4
       },
@@ -834,14 +834,14 @@
       "nombre": "Bodeguero",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 23,
-        "atq": 5,
+        "ps": 20,
+        "atq": 4,
         "def": 6,
         "vel": 7
       },
       "crece": {
-        "ps": 5.3,
-        "atq": 0.53,
+        "ps": 4.7,
+        "atq": 0.47,
         "def": 0.6,
         "vel": 0.4
       },
@@ -884,14 +884,14 @@
       "nombre": "Cocinero de guerra",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 27,
+        "ps": 28,
         "atq": 6,
         "def": 3,
         "vel": 7
       },
       "crece": {
-        "ps": 6.7,
-        "atq": 0.67,
+        "ps": 7,
+        "atq": 0.7,
         "def": 0.6,
         "vel": 0.4
       },
@@ -934,14 +934,14 @@
       "nombre": "Herrero",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 28,
-        "atq": 7,
+        "ps": 30,
+        "atq": 8,
         "def": 3,
         "vel": 7
       },
       "crece": {
-        "ps": 5.8,
-        "atq": 0.58,
+        "ps": 6.3,
+        "atq": 0.63,
         "def": 0.6,
         "vel": 0.4
       },
@@ -984,14 +984,14 @@
       "nombre": "Escriba de tinta",
       "sprite": "batalla/sombra",
       "base": {
-        "ps": 34,
+        "ps": 36,
         "atq": 9,
         "def": 6,
         "vel": 6
       },
       "crece": {
-        "ps": 12.3,
-        "atq": 1.39,
+        "ps": 12.9,
+        "atq": 1.46,
         "def": 0.8,
         "vel": 0.2
       },
@@ -1038,14 +1038,14 @@
       "nombre": "Celador",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 27,
+        "ps": 28,
         "atq": 5,
         "def": 7,
         "vel": 7
       },
       "crece": {
-        "ps": 5.5,
-        "atq": 0.55,
+        "ps": 5.6,
+        "atq": 0.56,
         "def": 0.6,
         "vel": 0.4
       },
@@ -1088,14 +1088,14 @@
       "nombre": "Caballero de la tabla",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 5,
-        "atq": 1,
+        "ps": 15,
+        "atq": 3,
         "def": 9,
         "vel": 7
       },
       "crece": {
-        "ps": 0.9,
-        "atq": 0.09,
+        "ps": 2.7,
+        "atq": 0.27,
         "def": 0.6,
         "vel": 0.4
       },
@@ -1140,14 +1140,14 @@
       "jefe": true,
       "huye_a": 0.3,
       "base": {
-        "ps": 134,
+        "ps": 131,
         "atq": 16,
         "def": 6,
         "vel": 6
       },
       "crece": {
-        "ps": 21.4,
-        "atq": 2.41,
+        "ps": 21,
+        "atq": 2.36,
         "def": 0.8,
         "vel": 0.2
       },
@@ -1204,14 +1204,14 @@
       "jefe": true,
       "huye_a": 0.35,
       "base": {
-        "ps": 77,
+        "ps": 78,
         "atq": 12,
         "def": 6,
         "vel": 7
       },
       "crece": {
-        "ps": 13.2,
-        "atq": 1.49,
+        "ps": 13.3,
+        "atq": 1.5,
         "def": 0.8,
         "vel": 0.3
       },
@@ -1393,14 +1393,14 @@
       "jefe": true,
       "huye_a": 0.35,
       "base": {
-        "ps": 74,
+        "ps": 71,
         "atq": 11,
         "def": 6,
         "vel": 7
       },
       "crece": {
-        "ps": 10.9,
-        "atq": 1.23,
+        "ps": 10.5,
+        "atq": 1.18,
         "def": 0.8,
         "vel": 0.3
       },
@@ -1456,14 +1456,14 @@
       "jefe": true,
       "huye_a": 0.35,
       "base": {
-        "ps": 55,
+        "ps": 57,
         "atq": 7,
         "def": 8,
         "vel": 7
       },
       "crece": {
-        "ps": 7.9,
-        "atq": 0.88,
+        "ps": 8.2,
+        "atq": 0.92,
         "def": 0.8,
         "vel": 0.3
       },
@@ -1519,14 +1519,14 @@
       "jefe": true,
       "huye_a": 0.35,
       "base": {
-        "ps": 48,
-        "atq": 5,
+        "ps": 54,
+        "atq": 6,
         "def": 6,
         "vel": 7
       },
       "crece": {
-        "ps": 6.6,
-        "atq": 0.74,
+        "ps": 7.4,
+        "atq": 0.83,
         "def": 0.8,
         "vel": 0.3
       },
@@ -1582,14 +1582,14 @@
       "jefe": true,
       "huye_a": 0.35,
       "base": {
-        "ps": 72,
+        "ps": 73,
         "atq": 10,
         "def": 9,
         "vel": 7
       },
       "crece": {
-        "ps": 9.3,
-        "atq": 1.05,
+        "ps": 9.4,
+        "atq": 1.06,
         "def": 0.8,
         "vel": 0.3
       },
@@ -1643,14 +1643,14 @@
       "nombre": "Guardia del Verano",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 25,
+        "ps": 26,
         "atq": 7,
         "def": 3,
         "vel": 7
       },
       "crece": {
-        "ps": 6.1,
-        "atq": 0.61,
+        "ps": 6.3,
+        "atq": 0.63,
         "def": 0.6,
         "vel": 0.4
       },
@@ -1693,14 +1693,14 @@
       "nombre": "Guardia del Otoño",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 29,
+        "ps": 28,
         "atq": 8,
         "def": 8,
         "vel": 7
       },
       "crece": {
-        "ps": 6.3,
-        "atq": 0.63,
+        "ps": 6.2,
+        "atq": 0.62,
         "def": 0.6,
         "vel": 0.4
       },
@@ -1743,14 +1743,14 @@
       "nombre": "Guardia del Invierno",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 31,
+        "ps": 32,
         "atq": 8,
         "def": 3,
         "vel": 7
       },
       "crece": {
-        "ps": 5.9,
-        "atq": 0.59,
+        "ps": 6.1,
+        "atq": 0.61,
         "def": 0.6,
         "vel": 0.4
       },

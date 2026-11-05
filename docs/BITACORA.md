@@ -370,4 +370,5 @@ fuera de la computadora principal. **Al volver a la principal: `git checkout des
 - **Guion sincronizado:** `docs/guion/cap02.md` y `cap03.md` exportados con las escenas nuevas. Se respetó el cambio a mano del autor en `p2_054` («Cuatro por ciento»; el juego dice «Cinco», como el canon): queda la pregunta de cuál va.
 - **Batería (canon del autor):** Jair termina el Capítulo 3 de vuelta en el mundo real con el celular al 1 % (`cap03_despertar_07`).
 - **Batería en el Otoño (el autor: «la que se adapte mejor»):** queda «Cinco por ciento» en `p2_054`: va después del 9 % de la foto y antes del «Cinco por ciento» de la taberna (con «cuatro», la batería subía sola). Guion del Capítulo 2 sincronizado con el juego.
+- **La torre sube de dificultad poco a poco (decisión del autor):** reequilibrada con metas que bajan piso a piso (jugador atento): calabozo ~95 %, subsuelo ~93 %, cuarteles ~90 %, comedor o forja ~80 %, biblioteca ~83 %, prisión ~75 %, arsenal ~66 %, guardia real ~70 % (su jefe ~61 %) y el Rey ~60 %. Los jefes de piso, un poco más duros que sus peleas. El descuidado empieza a perder desde la biblioteca.
 
