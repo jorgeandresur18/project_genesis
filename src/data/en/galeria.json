@@ -652,7 +652,14 @@
           "That was way too close! That's where I keep… where I keep my purity.",
           "Are you pointing at me? I know you're pointing at me!"
         ]
-      }
+      },
+      "al_pasar": [
+        "That's enough! I'm changing my pose… my sprite… whatever this is!",
+        "I'm turning around. At least this way I don't have to see your click face.",
+        "Scene change. If you keep going, I'll keep changing until I run out of sprites.",
+        "Happy now? I moved. You're going to find me anyway, aren't you?",
+        "I'm off to another sprite to recover my dignity. If you find it, give it back."
+      ]
     }
   }
 }

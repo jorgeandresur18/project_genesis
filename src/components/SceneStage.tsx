@@ -540,9 +540,11 @@ function EmblemasTocables({
   };
   const zonaRebota = rebota ? lista[rebota.i] : undefined;
   const conPecho = new Set(acciones.flatMap((a) => (a.tipo === 'pecho' ? [a.emblema] : [])));
+  // Con la mano que apunta, rebota solo el emblema: la copia agrandada dejaba asomar el mosaico alrededor.
+  const conApunta = new Set(acciones.flatMap((a) => (a.tipo === 'apunta' ? [a.emblema] : [])));
   return (
     <>
-      {rebota && zonaRebota && !conPecho.has(rebota.i) && (
+      {rebota && zonaRebota && !conPecho.has(rebota.i) && !conApunta.has(rebota.i) && (
         <img
           key={`zona-${rebota.n}`}
           className="emblema-zona"
@@ -605,7 +607,17 @@ function EmblemasTocables({
           </Fragment>
         );
       })}
-      {/* Las manos de los pechos y la que apunta: debajo de los emblemas (pedido del autor). */}
+      {/* Cada pecho que rebota: la copia del sprite (debajo de la mano). */}
+      {acciones.map((a, i) => {
+        if (a.tipo !== 'pecho' || vivas[i] === undefined || !lista[a.emblema]) return null;
+        const e = lista[a.emblema];
+        return (
+          <div key={`copia-${i}-${vivas[i]}`} className="pecho-grupo rebota">
+            <img className="pecho-zona" src={src} alt="" draggable={false} aria-hidden style={{ maskImage: mascaraPecho(e, proporcion), WebkitMaskImage: mascaraPecho(e, proporcion) }} />
+          </div>
+        );
+      })}
+      {/* Las manos de los pechos y la que apunta: encima de la copia, debajo de los emblemas (pedido del autor). */}
       {acciones.map((a, i) =>
         a.tipo === 'pecho' && vivas[i] !== undefined ? (
           <Fragment key={`manos-pecho-${i}`}>
@@ -619,35 +631,23 @@ function EmblemasTocables({
           <img key={`apunta-${vivas[i]}`} className="mano-apunta" src={assetUrl(`${a.mano.imagen}.webp`)} alt="" draggable={false} aria-hidden style={caja(a.mano)} />
         ) : null,
       )}
-      {/* Cada pecho: la copia del sprite y su emblema suben y bajan juntos; las manos van antes (debajo de los emblemas). */}
+      {/* Lo que se toca de cada pecho y su emblema, encima de todo; rebotan igual que la copia. */}
       {acciones.map((a, i) => {
         if (a.tipo !== 'pecho') return null;
         const e = lista[a.emblema];
         if (!e) return null;
         const n = vivas[i];
         return (
-          <Fragment key={`pecho-${i}`}>
-            <div key={n !== undefined ? `grupo-${n}` : 'grupo'} className={`pecho-grupo ${n !== undefined ? 'rebota' : ''}`}>
-              {n !== undefined && (
-                <img
-                  className="pecho-zona"
-                  src={src}
-                  alt=""
-                  draggable={false}
-                  aria-hidden
-                  style={{ maskImage: mascaraPecho(e, proporcion), WebkitMaskImage: mascaraPecho(e, proporcion) }}
-                />
-              )}
-              <button
-                type="button"
-                className="pecho-toque"
-                style={{ left: `${e.x}%`, top: `${e.y}%`, width: `${e.w * 3.4}%` }}
-                {...pulsar(i)}
-                aria-label={a.lado === 'izq' ? '←' : '→'}
-              />
-              {boton(e, a.emblema)}
-            </div>
-          </Fragment>
+          <div key={n !== undefined ? `grupo-${i}-${n}` : `grupo-${i}`} className={`pecho-grupo ${n !== undefined ? 'rebota' : ''}`}>
+            <button
+              type="button"
+              className="pecho-toque"
+              style={{ left: `${e.x}%`, top: `${e.y}%`, width: `${e.w * 3.4}%` }}
+              {...pulsar(i)}
+              aria-label={a.lado === 'izq' ? '←' : '→'}
+            />
+            {boton(e, a.emblema)}
+          </div>
         );
       })}
       {lista.map((e, i) => (conPecho.has(i) ? null : boton(e, i)))}

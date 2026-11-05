@@ -691,7 +691,14 @@
           "¡Eso fue demasiado cerca! Ahí guardo… ahí guardo mi pureza.",
           "¿Me están señalando? ¡Sé que me están señalando!"
         ]
-      }
+      },
+      "al_pasar": [
+        "¡Ya basta! Me cambio de pose… de sprite… ¡de lo que sea!",
+        "Me doy vuelta. Así por lo menos no te veo la cara de clic.",
+        "Cambio de escena. Si sigues, me sigo cambiando hasta quedarme sin sprites.",
+        "¿Contento? Me moví. Igual me vas a encontrar, ¿verdad?",
+        "Me voy a otro sprite a recuperar la dignidad. Si la encuentras, devuélvemela."
+      ]
     }
   }
 }

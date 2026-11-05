@@ -37,7 +37,7 @@ interface Texts {
   personajes: Record<string, string>;
   sprites: Record<string, { nombre: string; info: string }>;
   rpg: Record<string, { personaje: string; nombre: string; info: string }>;
-  quejas: Record<string, { imagenes: string[]; lineas: string[]; zonas?: Record<string, string[]>; zonas_novela?: Record<string, string[]> }>;
+  quejas: Record<string, { imagenes: string[]; lineas: string[]; zonas?: Record<string, string[]>; zonas_novela?: Record<string, string[]>; al_pasar?: string[] }>;
   lugares: Record<string, { nombre: string; fondos: Record<string, { nombre: string; info: string; reino?: string }> }>;
 }
 /** Toques en un sprite secreto para que pase solo al siguiente, y cuánto espera (que alcance a leer lo que dice). */
@@ -713,8 +713,11 @@ function Viewer({
   // Cuántas veces la tocaron en este sprite (para pasar sola al siguiente) y si ya va a pasar.
   const toquesAqui = useRef(0);
   const pasando = useRef<ReturnType<typeof setTimeout> | null>(null);
+  /** Lo que dice al pasar sola al siguiente sprite (se muestra apenas cambia). */
+  const alPasar = useRef<string | null>(null);
   useEffect(() => {
-    setQueja(null);
+    setQueja(alPasar.current ? { texto: alPasar.current, n: Math.random() } : null);
+    alPasar.current = null;
     toquesAqui.current = 0;
     return () => {
       if (pasando.current) clearTimeout(pasando.current);
@@ -734,6 +737,9 @@ function Viewer({
     if (sig === null || sig === undefined || pasando.current || ++toquesAqui.current < TOQUES_PARA_PASAR) return;
     pasando.current = setTimeout(() => {
       pasando.current = null;
+      // Al cambiar, lanza un comentario (pedido del autor).
+      const dice = q?.al_pasar;
+      if (dice?.length) alPasar.current = siguienteQueja(`${quien}:al_pasar`, dice);
       onIndex(sig);
     }, PASAR_MS);
   };
