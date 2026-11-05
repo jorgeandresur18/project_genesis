@@ -80,6 +80,21 @@ export default function App() {
     window.addEventListener('genesis:borrado', onReset);
     return () => window.removeEventListener('genesis:borrado', onReset);
   }, [still]);
+  // Después del grito de Rikka en la galería (pedido del autor): de la pantalla blanca, un degradado al título, que
+  // vuelve a empezar (se monta de nuevo, con su entrada).
+  const [vueltaTitulo, setVueltaTitulo] = useState(0);
+  const [blanco, setBlanco] = useState(false);
+  useEffect(() => {
+    const onGrito = () => {
+      setOverlay(null);
+      setIntro('juego');
+      setVueltaTitulo((n) => n + 1);
+      setBlanco(true);
+      setTimeout(() => setBlanco(false), still ? 150 : 1800);
+    };
+    window.addEventListener('genesis:grito', onGrito);
+    return () => window.removeEventListener('genesis:grito', onGrito);
+  }, [still]);
   // Opciones de lectura: tamaño del texto y opacidad de la caja (las usa styles.css).
   // El atributo lang de la página sigue al idioma del juego (lectores de pantalla, traducción del navegador).
   const lang = useLang();
@@ -136,6 +151,7 @@ export default function App() {
         </TvViejo>
       ) : (
         <TitleScreen
+          key={vueltaTitulo}
           open={setOverlay}
           intro={intro}
           onEgg={() => {
@@ -176,6 +192,7 @@ export default function App() {
       {/* Siempre montado: lleva la cuenta aunque Boringram esté abierto (adentro avisa el propio celular). */}
       <EventToast hidden={overlay === 'boringram'} onOpen={() => setOverlay('boringram')} />
       {hasGame && <RotateHint />}
+      {blanco && <div className="grito-al-titulo" aria-hidden />}
       {toTitle && (
         <div
           className={`to-title-fade to-title-${toTitle}`}

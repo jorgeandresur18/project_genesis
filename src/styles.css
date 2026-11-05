@@ -3671,3 +3671,8 @@ button.cassette:hover .cassette-imagen { transform: translateY(-2px) rotate(-3de
 @keyframes grito-texto { 0% { opacity: 0; scale: 0.4; } 10% { opacity: 1; scale: 1.15; } 18% { scale: 1; } 100% { scale: 1.6; } }
 @keyframes grito-blanco-lento { 0%, 55% { opacity: 0; } 88%, 100% { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .viewer-grito, .viewer-grito > img, .viewer-grito > .fondo-capas, .viewer-grito-texto { animation: none; } }
+
+/* Después del grito: la pantalla blanca se disuelve sobre el título, que vuelve a empezar. */
+.grito-al-titulo { position: fixed; inset: 0; z-index: 9999; background: #fff; pointer-events: none; animation: grito-al-titulo 1.8s ease-out forwards; }
+@keyframes grito-al-titulo { 0%, 15% { opacity: 1; } 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .grito-al-titulo { animation-duration: 0.15s; } }

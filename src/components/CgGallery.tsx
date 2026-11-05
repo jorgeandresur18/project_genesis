@@ -115,7 +115,7 @@ export function CgGallery({ onClose }: { onClose: () => void }) {
         active={tab}
         onTab={(k) => pick(k as Tab)}
       >
-        {tab === 'imagenes' ? <Images /> : tab === 'personajes' ? <Characters onSalir={onClose} /> : tab === 'pixel' ? <PixelArt /> : <Places />}
+        {tab === 'imagenes' ? <Images /> : tab === 'personajes' ? <Characters /> : tab === 'pixel' ? <PixelArt /> : <Places />}
       </TermWindow>
     </Panel>
   );
@@ -435,7 +435,7 @@ const OTHERS = CHARACTERS.filter((c) => !galeriaEs.principales.includes(c.id));
  * Pestañas: Todos, una por personaje principal con su color, y Varios. Un personaje que todavía no
  * apareció en la historia se llama «???».
  */
-function Characters({ onSalir }: { onSalir: () => void }) {
+function Characters() {
   const t = useT();
   const texts = useTexts();
   const g = useGalleryState();
@@ -621,7 +621,7 @@ function Characters({ onSalir }: { onSalir: () => void }) {
             const src = assetUrl(`sprites/${cual}.webp`);
             return { src, capas: capa && <CapasFondo capa={capa} src={src} contener fijos /> };
           }}
-          onGrito={onSalir}
+          onGrito={() => window.dispatchEvent(new Event('genesis:grito'))}
           siguiente={(i) => {
             // Con todos sus secretos desbloqueados, tocarla mucho pasa sola al siguiente, pero solo entre los de su
             // mismo grupo (de frente, de espalda o con el traje): no se da vuelta (pedido del autor).
