@@ -339,3 +339,16 @@ fuera de la computadora principal. **Al volver a la principal: `git checkout des
 - **Círculo dibujado sobre Rikka:** era el borde de foco de la zona invisible de la nalgada (aparecía después de usar el teclado). Quitado en las zonas invisibles del pecho y la nalgada.
 - **Objetos nuevos (pedido del autor):** **pastelillo herbal** (cura toda la vida, pero confunde 3 turnos a quien se lo come; campos nuevos `cura_toda` y `confunde_al_comer`) y **pastillas felices** (a un rival: lo confunde 3 turnos). Con su dibujo (`tools/objetos.py`), a la venta en Boringplace (precios propuestos por Claude: 90 y 45; el autor los revisa después) y en inglés («Herbal Brownie», «Happy Pills»). Sirven en cualquier pelea.
 - **Idea anotada (del autor):** dos Boringram, el de la historia ligado a la partida en curso y el del menú con todo lo desbloqueado; con la propuesta de Claude para PayFoe y las compras. Está en `CRONOGRAMA.md`, «Ideas anotadas». Sin hacer.
+
+## 5 de noviembre — Computadora del trabajo: revisión de lo de la noche y arreglos
+
+**Computadora: segunda (la del trabajo).**
+
+- **Revisión de los 27 commits de la noche:** 209 pruebas, tipos, lint, compilación y CI bien (`main` y `desarrollo`). No se encontraron errores de lógica en lo revisado.
+- **El autor probó las peleas la noche del 4 y salieron bien,** también con los cambios; queda una segunda revisión (`PRUEBAS_EN_CASA.md`).
+- **`/all` se queda en lo publicado (decisión del autor):** para probar desde el celular, sin computadora a mano. Ahora prende todo lo que `demo_publica` apaga, y `?galeria=todo` sigue solo en desarrollo. Lo ve cualquiera que conozca la dirección: decidir antes del lanzamiento si se cierra. Llega al celular cuando se publique.
+- **El repositorio sigue público** por ahora (decisión del autor).
+- **`.gitignore`:** `*.psd` en cualquier carpeta, no solo en `docs/sprites/`.
+- **Prueba del Multicebo:** fallaba a veces. Era la prueba: Enter pasaba un mensaje justo cuando aparecía el menú, y elegía «Atacar». El ayudante `hastaElMenu` ahora vuelve a los comandos.
+- **Documentos al día:** `LINKS_PRUEBAS.txt`, `METODOLOGIA.md`, `CRONOGRAMA.md` y `diagnostico.html`.
+- **Falta la orden del autor** para publicar la 1.1.1.

@@ -124,14 +124,11 @@ La misma proyección, para mirarla en el navegador: `docs/proyeccion.html`.
 Decisiones y datos que solo puede dar el autor; Claude los aplica sin pedir pruebas (las pruebas, de noche, en la
 computadora de Jorge: ver `docs/PRUEBAS_EN_CASA.md`).
 
-0. **¿Publicar la 1.1.1 en `main`?** Lleva dos cosas que sí deben verse en Vercel: la advertencia «Alcohol y drogas»
-   (lo publicado ya habla del cannabis en Conoce más) y los atajos `/all` y `?galeria=todo` apagados en lo publicado
-   (se saltaban el Capítulo 2 y los secretos de Rikka). Están en `desarrollo`; falta la orden del autor. Si usa `/all`
-   en Vercel para revisar, avisar antes.
+0. **¿Publicar la 1.1.1 en `main`?** Lleva la advertencia «Alcohol y drogas» (lo publicado ya habla del cannabis en Conoce más), `?galeria=todo` apagado y `/all` con todo prendido para probar desde el celular (decisión del autor: `/all` se queda). Falta la orden del autor.
 1. **Los enlaces de Lolabúm** que faltan: «16 Phantasmas», «Tócame» y «Novedades ecuatorianas» (hoy abren la búsqueda
    de Spotify).
-2. **¿El repositorio pasa a privado?** (hoy es público).
-3. **Mirar la CI de la 1.1.0** en GitHub → Actions y que Vercel la haya publicado (solo mirar, no probar).
+2. **El repositorio sigue público** (decisión del autor, 5 de noviembre: por ahora no pasa a privado).
+3. **Mirar que Vercel haya publicado la 1.1.0** (la CI de `main` dio bien: comprobado el 5 de noviembre).
 4. **Boringram del menú:** si en el menú se pueden comprar objetos de pelea con PayFoe, ¿llegan a la próxima partida
    («cofre») o no se venden ahí? (ver «Ideas anotadas»).
 5. **Estados (opcionales):** ¿a los jefes les duran menos dormido, congelado y paralizado? ¿un golpe despierta al
@@ -143,7 +140,7 @@ computadora de Jorge: ver `docs/PRUEBAS_EN_CASA.md`).
 8. **Arte (cuando toque):** si quiere el mosaico de la censura más grueso en los archivos; si la mano de abajo de espalda
    queda como está.
 
-**Para la noche (computadora de Jorge), lo que falta probar:** las peleas del Bastión, Nikki y el hangar con las reglas
+**Para la noche (computadora de Jorge), lo que falta probar:** la segunda revisión de las peleas del Bastión, Nikki y el hangar con las reglas
 nuevas (veneno y quemadura desde el turno siguiente, turno libre, quemar de Jair, saltos al esquivar); la galería de
 Rikka (manos, nalgadas, la marca a las 7, el grito a los 30); el CeBiDol desde Equipo; y la demo publicada 1.1.0.
 

@@ -21,6 +21,8 @@ que se movió a `src/engine/turnos.ts`.
 
 ## 2. Las peleas (se cambió cómo está armado el código, no cómo se juega)
 
+**Primera revisión hecha: el autor jugó las peleas la noche del 4 de noviembre y salieron bien, también con los cambios de esa noche.** Queda una **segunda revisión**, a pedido del autor: por eso estos puntos siguen sin marcar.
+
 Tienen que jugarse **igual que antes**. Lo que más hay que mirar: que nada se trabe y que no aparezcan errores.
 
 - [ ] `http://localhost:5173/?batalla=bastion`: los refuerzos llegan cuando cae un soldado, sale la sombra al final, su

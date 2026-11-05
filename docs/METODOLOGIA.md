@@ -83,3 +83,7 @@ para las otras.
 
 Hasta cerrar la lógica y la coherencia de todo el juego, se trabaja con textos de Claude (borrador) y placeholders; el
 arte queda para el final (decidido por el autor el 2026-11-03).
+
+## Probar sin la computadora de casa (celular o cualquier PC)
+
+`/all` en la dirección publicada (`project-genesis-yeah.vercel.app/all`) funciona siempre, en el celular y en cualquier PC, y prende todo lo que `demo_publica` apaga: el autor lo usa para probar sin computadora a mano (decisión del autor, 2026-11-05). Trae lo que esté en `main`: lo de `desarrollo` no llega hasta publicar. Quien conozca la dirección ve lo que está apagado. Antes del lanzamiento hay que decidir si se cierra.
