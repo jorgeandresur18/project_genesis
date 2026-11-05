@@ -789,3 +789,7 @@ export const useStore = create<Store>()(
     },
   ),
 );
+
+// Solo en desarrollo (npm run dev y las pruebas en navegador, tests/e2e): las pruebas recorren la historia moviendo el
+// estado del juego (avanzar, elegir, ganar o perder una pelea) sin jugar cada pelea. En lo publicado no existe.
+if (import.meta.env.DEV && typeof window !== 'undefined') (window as unknown as { __genesis?: typeof useStore }).__genesis = useStore;
