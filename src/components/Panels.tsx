@@ -516,9 +516,16 @@ function BloqueConoce({ b }: { b: object }) {
   const { parrafos, canciones, cierre } = b as BloqueConoceData;
   return (
     <>
-      {parrafos.map((p, i) => (
-        <p key={i}>{conVinculos(p)}</p>
-      ))}
+      {/* Un párrafo que empieza con «### » es un subtítulo dentro de la sección (la nota personal). */}
+      {parrafos.map((p, i) =>
+        p.startsWith('### ') ? (
+          <h4 key={i} className="about-subtitulo">
+            {p.slice(4)}
+          </h4>
+        ) : (
+          <p key={i}>{conVinculos(p)}</p>
+        ),
+      )}
       {/* La canción de cada personaje: con su botón para escucharla en Spotify (decisión del autor). */}
       {canciones?.map((c) => (
         <div key={c.cancion} className="about-cancion">

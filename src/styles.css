@@ -3685,3 +3685,6 @@ button.cassette:hover .cassette-imagen { transform: translateY(-2px) rotate(-3de
 .puerta-all button:disabled { opacity: 0.45; cursor: default; }
 .puerta-all p { margin: 0; color: #ff9d9d; }
 .puerta-all a { color: #a9a5b2; font-size: 0.875rem; }
+
+/* Conoce más: un subtítulo dentro de una sección (la nota personal). */
+.about-subtitulo { margin: 1.4em 0 0.4em; font-size: 1rem; opacity: 0.9; }
