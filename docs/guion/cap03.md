@@ -815,7 +815,7 @@
 
 `despertar_06` — La pantalla está en negro. En la mesa, el celular vibra.
 
-`despertar_07` — Son las 9:36. Entraba a las nueve.
+`despertar_07` — Son las 9:36. Entraba a las nueve. La batería: 1 %.
 
 `despertar_08` **Jair:** No. No, no, no. Tarde otra vez.
 
