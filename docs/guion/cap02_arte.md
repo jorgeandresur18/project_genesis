@@ -101,7 +101,7 @@ Las más repetidas hoy: Jair `base` (233), Jair `asustado1` (220), Rikka `base` 
 - **Nail:** `asustada`, `agradecida` (la bolsa de monedas), `ladrona` (sonrisa pícara).
 - **Mike y Nora:** ya tienen cuatro cada uno; alcanza.
 - **Caballero de la Primavera:** `serio` y `en_guardia` (con la katana).
-- **Guardias del Verano, el Otoño y el Invierno** (pedido del autor, 2026-11-05): `guardia_verano` (armadura polinesia), `guardia_otono` (celta) y `guardia_invierno` (siberiana), como el de la Primavera (samurái). Aparecen cuando la historia visita su reino. **Vestimenta estacionaria** (canon): la de guardias y sacerdotisas lleva siempre el emblema de su estación en la espalda (también `sacerdotisa_invierno` y `sacerdotisa_otono`, y la ropa de sacerdotisa de Rikka; el traje rojo no lo tiene).
+- **Guardias del Verano, el Otoño y el Invierno** (pedido del autor, 2026-11-05): `guardia_verano` (armadura polinesia), `guardia_otono` (celta) y `guardia_invierno` (siberiana), como el de la Primavera (samurái). Aparecen cuando la historia visita su reino. **Vestimenta estacionaria** (canon): la de guardias y sacerdotisas lleva siempre el emblema de su estación en la espalda (los emblemas, del autor: `public/emblemas/primavera|verano|otono|invierno.webp`; también `sacerdotisa_invierno` y `sacerdotisa_otono`, y la ropa de sacerdotisa de Rikka; el traje rojo no lo tiene).
 
 ---
 
