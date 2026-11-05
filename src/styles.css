@@ -3688,3 +3688,7 @@ button.cassette:hover .cassette-imagen { transform: translateY(-2px) rotate(-3de
 
 /* Conoce más: un subtítulo dentro de una sección (la nota personal). */
 .about-subtitulo { margin: 1.4em 0 0.4em; font-size: 1rem; opacity: 0.9; }
+
+/* Desterrado por la Tajada del abismo (provisional): casi invisible, como si no estuviera. */
+.batalla-figura.desterrado { opacity: 0.12; filter: grayscale(1); transition: opacity 0.6s ease; }
+.batalla-descansa.desterrado { color: #b48cff; }

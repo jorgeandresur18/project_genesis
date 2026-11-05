@@ -59,6 +59,7 @@ export function EstadosDe({ l }: { l: Luchador }) {
       {l.quemado > 0 && <span className="batalla-descansa quemado">{t('batalla.tag_quemado')}</span>}
       {l.congelado > 0 && <span className="batalla-descansa congelado">{t('batalla.tag_congelado')}</span>}
       {l.dormido > 0 && <span className="batalla-descansa dormido">{t('batalla.tag_dormido')}</span>}
+      {l.desterrado > 0 && <span className="batalla-descansa desterrado">{t('batalla.tag_desterrado')}</span>}
       {l.protegido > 0 && <span className="batalla-descansa protegido">{t('batalla.tag_protegido')}</span>}
     </>
   );
@@ -165,7 +166,7 @@ export function Figura({
         caja.current = el;
         refFigura(el);
       }}
-      className={`batalla-figura ${heroe ? 'heroe' : 'enemigo'} ${jefe ? 'jefe' : ''} ${l.clon !== undefined ? 'clon' : ''} ${marcado ? 'marcado' : ''} ${alto ? 'en-aire' : ''} ${l.envenenado && l.ps > 0 ? 'envenenado' : ''} ${l.protegido > 0 && l.ps > 0 ? 'protegido' : ''} anim-${anim} ${luces.length ? 'golpeado' : ''} ${activo ? 'activo' : ''} ${caido ? 'ko' : ''} ${efecto ?? ''} ${desliz && (desliz.x || desliz.y) ? 'deslizando' : ''}`}
+      className={`batalla-figura ${heroe ? 'heroe' : 'enemigo'} ${l.desterrado ? 'desterrado' : ''} ${jefe ? 'jefe' : ''} ${l.clon !== undefined ? 'clon' : ''} ${marcado ? 'marcado' : ''} ${alto ? 'en-aire' : ''} ${l.envenenado && l.ps > 0 ? 'envenenado' : ''} ${l.protegido > 0 && l.ps > 0 ? 'protegido' : ''} anim-${anim} ${luces.length ? 'golpeado' : ''} ${activo ? 'activo' : ''} ${caido ? 'ko' : ''} ${efecto ?? ''} ${desliz && (desliz.x || desliz.y) ? 'deslizando' : ''}`}
       style={
         {
           ...(desliz ? { '--dx': `${desliz.x}px`, '--dy': `${desliz.y}px` } : {}),

@@ -61,6 +61,10 @@ export interface Ataque {
  * objetivo es «todos», se reparten entre los enemigos de pie (si queda uno solo, van todos para él).
  */
 export interface Especial {
+  /** La Espada de las estaciones (el Rey): a cada blanco que queda en pie le cae una estación al azar (ver turnos.ts). */
+  estaciones?: boolean;
+  /** La Tajada del abismo (el Rey): destierra a un rival al azar entre [min, max] turnos (nunca al último en pie). */
+  destierro?: [number, number];
   /** La bomba (sección 19): en vez de golpear, queda en el campo y explota a estos turnos con esta parte de la vida máxima de todos. */
   bomba?: { turnos: number; vida: number };
   nombre: string;
@@ -147,6 +151,8 @@ export interface Enemigo {
   crece: Stats;
   ataques: Ataque[];
   especial?: Especial;
+  /** Más especiales (el Rey): con la barra llena se elige uno al azar entre `especial` y estos. */
+  especiales?: Especial[];
   escala?: number;
   jefe?: boolean;
   /** El jefe se retira (y la pelea se gana) cuando le queda esta parte de sus PS. */
@@ -428,6 +434,11 @@ export interface Luchador {
   quemado: number;
   /** Turnos que le quedan congelado: igual que dormido (pierde su turno; lo saca un compañero con un objeto). */
   congelado: number;
+  /**
+   * Turnos que le quedan **desaparecido** (el estado que causa un ataque que banea, como la Tajada del abismo; en el
+   * código se llama así): fuera del campo; no actúa y nadie lo toca, lo elige ni lo cura.
+   */
+  desterrado: number;
   /** Turnos que le quedan dormido: pierde su turno; lo saca un compañero con un objeto, o se le pasa solo. */
   dormido: number;
   /** Si es un cebo con efecto: lo que le hace a quien lo golpea. */
@@ -493,7 +504,7 @@ export function crearLuchador(
   xp = 0,
 ): Luchador {
   const s = statsEn(d.base, d.crece, nivel);
-  return { id, clave, lado, nombre: d.nombre, nivel, xp, ps: s.ps, psMax: s.ps, atq: s.atq, def: s.def, vel: s.vel, extra: 0, extraDef: 0, esquivando: false, distraido: false, carga: 0, paralizado: 0, confundido: 0, envenenado: null, protegido: 0, quemado: 0, congelado: 0, dormido: 0 };
+  return { id, clave, lado, nombre: d.nombre, nivel, xp, ps: s.ps, psMax: s.ps, atq: s.atq, def: s.def, vel: s.vel, extra: 0, extraDef: 0, esquivando: false, distraido: false, carga: 0, paralizado: 0, confundido: 0, envenenado: null, protegido: 0, quemado: 0, congelado: 0, dormido: 0, desterrado: 0 };
 }
 
 /**
@@ -533,7 +544,7 @@ export function dano(atacante: Luchador, defensor: Luchador, poder: number, azar
 /** Dormido, congelado o paralizado: pierde su turno. */
 export const noActua = (l: Luchador) => l.dormido > 0 || l.congelado > 0 || l.paralizado > 0;
 export function disponibles(heroes: Luchador[], datos: Record<string, Heroe>, actuaron: string[]): Luchador[] {
-  return heroes.filter((h) => h.ps > 0 && !noActua(h) && (datos[h.clave].seguido || !actuaron.includes(h.id)));
+  return heroes.filter((h) => h.ps > 0 && !h.desterrado && !noActua(h) && (datos[h.clave].seguido || !actuaron.includes(h.id)));
 }
 
 /** Sube `n` niveles de golpe (el caramelo rancio): las estadísticas pasan a las del nivel nuevo. */
@@ -666,6 +677,7 @@ export function crearClon(o: Luchador, c: NonNullable<Enemigo['clon']>, id: stri
     quemado: 0,
     congelado: 0,
     dormido: 0,
+    desterrado: 0,
     // Uno más: el turno en que aparece no cuenta.
     clon: c.turnos + 1,
   };
@@ -683,9 +695,9 @@ export function eligeEspecial(
   enemigos: Luchador[],
   azar: () => number = Math.random,
   conBola = !en.bola_toxica?.solo_traicion,
-): { tipo: 'especial' | 'clon' | 'bola'; blanco?: Luchador } | null {
+): { tipo: 'especial' | 'clon' | 'bola'; blanco?: Luchador; especial?: Especial } | null {
   if (e.clon !== undefined) return null;
-  const bajo = en.remata ? heroes.find((h) => h.ps > 0 && h.ps <= h.psMax * en.remata!.vida) : undefined;
+  const bajo = en.remata ? heroes.find((h) => enCampo(h) && h.ps <= h.psMax * en.remata!.vida) : undefined;
   if (en.especial && bajo && e.carga >= en.remata!.carga) return { tipo: 'especial', blanco: bajo };
   const puedeClonar =
     !!en.clon &&
@@ -696,7 +708,13 @@ export function eligeEspecial(
   if (!especialListo(e)) return null;
   // Con la barra llena, al azar: la Mega Bola Tóxica (si la tiene) o su especial.
   if (en.bola_toxica && conBola && (!en.especial || azar() < (en.bola_toxica.peso ?? 0.35))) return { tipo: 'bola' };
-  return en.especial ? { tipo: 'especial' } : null;
+  if (!en.especial) return null;
+  // Con varios especiales (el Rey), uno al azar. El que destierra es para peleas contra varios: con un solo rival en
+  // pie no se elige (decisión del autor, 2026-11-05).
+  const enPie = heroes.filter(enCampo).length;
+  const lista = [en.especial, ...(en.especiales ?? [])].filter((x) => !x.destierro || enPie > 1);
+  if (!lista.length) return null;
+  return { tipo: 'especial', especial: lista[Math.min(lista.length - 1, Math.floor(azar() * lista.length))] };
 }
 
 /**
@@ -712,7 +730,7 @@ export const seConfunde = (l: Luchador, azar: () => number = Math.random) =>
  * todavía no lo está (si nadie, no se eligen). Devuelve el ataque y sus blancos (null si no hay ninguno posible).
  */
 export function eligeAtaque(ataques: Ataque[], heroes: Luchador[], azar: () => number = Math.random): { ataque: Ataque; blancos: Luchador[] } | null {
-  const vivos = heroes.filter((h) => h.ps > 0);
+  const vivos = heroes.filter(enCampo);
   const libres = (a: Ataque) =>
     a.paraliza ? vivos.filter((h) => !noActua(h) && !h.inmuneParalisis) : a.confunde ? vivos.filter((h) => !h.confundido && !h.equipo?.sinConfusion) : vivos;
   const posibles = ataques.filter((a) => libres(a).length > 0);
@@ -812,13 +830,15 @@ export const CEBO = 0.55;
 export const CEBO_TURNOS = 3;
 /** Crea el cebo de un héroe: su copia en blanco y negro, con 1 PS y sin poder hacer nada. */
 export function crearCebo(h: Luchador, id: string, efecto?: EfectoCebo): Luchador {
-  return { ...h, id, ps: 1, psMax: 1, extra: 0, extraDef: 0, carga: 0, esquivando: false, distraido: false, paralizado: 0, confundido: 0, envenenado: null, protegido: 0, quemado: 0, congelado: 0, dormido: 0, cebo: true, ceboEfecto: efecto };
+  return { ...h, id, ps: 1, psMax: 1, extra: 0, extraDef: 0, carga: 0, esquivando: false, distraido: false, paralizado: 0, confundido: 0, envenenado: null, protegido: 0, quemado: 0, congelado: 0, dormido: 0, desterrado: 0, cebo: true, ceboEfecto: efecto };
 }
 
 /** El jefe se retira cuando le queda esta parte de sus PS (o menos). */
 export const seRetira = (l: Luchador, e: Enemigo) => !!e.huye_a && l.ps > 0 && l.ps <= l.psMax * e.huye_a;
 
 export const vivo = (l: Luchador) => l.ps > 0;
+/** En el campo: vivo y no desterrado. Solo a esos se los puede elegir, golpear o curar. */
+export const enCampo = (l: Luchador) => l.ps > 0 && !l.desterrado;
 
 /** Lo que se guarda en la partida: nivel y experiencia de cada héroe y la mochila. */
 export interface Progreso {

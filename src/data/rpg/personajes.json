@@ -655,11 +655,11 @@
         }
       ],
       "especial": {
-        "nombre": "Cañón de blaster",
-        "poder": 24,
-        "golpes": 1,
+        "nombre": "Espada de las estaciones",
+        "poder": 14,
+        "golpes": 3,
         "objetivo": "uno",
-        "color": "#ff2a2a",
+        "color": "#9be27c",
         "ojos": [
           58,
           27,
@@ -667,13 +667,34 @@
           15
         ],
         "posicion": "objetivo",
-        "canon": true,
-        "texto": "El capitán hinca una rodilla. El blaster zumba, se calienta, se pone blanco en la punta. Apunta a {objetivo}."
+        "texto": "{quien} desenvaina la espada de las estaciones. Cuatro reinos en un solo filo, contra {objetivo}.",
+        "estaciones": true
       },
       "escala": 1.34,
       "sonido": "disparo",
       "cae_en_cebo": 0.3,
-      "_nota": "Ficha provisional (Claude, 2026-11-05): usa la hoja del Capitán hasta que exista el sprite de THE KING."
+      "_nota": "Ficha provisional (Claude, 2026-11-05): usa la hoja del Capitán hasta que exista el sprite de THE KING. Sus dos especiales son del autor: la Espada de las estaciones y la Tajada del abismo.",
+      "especiales": [
+        {
+          "nombre": "Tajada del abismo",
+          "poder": 9,
+          "golpes": 1,
+          "objetivo": "uno",
+          "color": "#6a3fb0",
+          "ojos": [
+            58,
+            27,
+            30,
+            15
+          ],
+          "posicion": "objetivo",
+          "texto": "{quien} corta el aire. Del corte se abre una grieta que no lleva a ningún lugar.",
+          "destierro": [
+            2,
+            3
+          ]
+        }
+      ]
     },
     "rey_gigante": {
       "nombre": "Rey Malvado (gigante)",
@@ -718,11 +739,11 @@
         }
       ],
       "especial": {
-        "nombre": "Cañón de blaster",
-        "poder": 24,
-        "golpes": 1,
+        "nombre": "Espada de las estaciones",
+        "poder": 18,
+        "golpes": 3,
         "objetivo": "uno",
-        "color": "#ff2a2a",
+        "color": "#9be27c",
         "ojos": [
           58,
           27,
@@ -730,13 +751,34 @@
           15
         ],
         "posicion": "objetivo",
-        "canon": true,
-        "texto": "El capitán hinca una rodilla. El blaster zumba, se calienta, se pone blanco en la punta. Apunta a {objetivo}."
+        "texto": "{quien} desenvaina la espada de las estaciones. Cuatro reinos en un solo filo, contra {objetivo}.",
+        "estaciones": true
       },
       "escala": 2.0100000000000002,
       "sonido": "disparo",
       "cae_en_cebo": 0.3,
-      "_nota": "Ficha provisional (Claude, 2026-11-05): usa la hoja del Capitán hasta que exista el sprite de THE KING."
+      "_nota": "Ficha provisional (Claude, 2026-11-05): usa la hoja del Capitán hasta que exista el sprite de THE KING. Sus dos especiales son del autor: la Espada de las estaciones y la Tajada del abismo.",
+      "especiales": [
+        {
+          "nombre": "Tajada del abismo",
+          "poder": 12,
+          "golpes": 1,
+          "objetivo": "uno",
+          "color": "#6a3fb0",
+          "ojos": [
+            58,
+            27,
+            30,
+            15
+          ],
+          "posicion": "objetivo",
+          "texto": "{quien} corta el aire. Del corte se abre una grieta que no lleva a ningún lugar.",
+          "destierro": [
+            2,
+            3
+          ]
+        }
+      ]
     }
   },
   "objetos": {

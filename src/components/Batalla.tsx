@@ -11,6 +11,7 @@ import {
   ESPECIAL_MS,
   monedasJefe,
   monedasDe,
+  enCampo,
   noActua,
   tickQuemado,
   tickVeneno,
@@ -60,7 +61,10 @@ import {
   BOMBA_BOTIN,
   autodestruir,
   blancoDelCanon,
+  aplicarEstacion,
   confundirA,
+  desterrar,
+  estacionAlAzar,
   decidirEnemigo,
   envenenarConBola,
   estadoInicial,
@@ -733,7 +737,8 @@ function Pelea({
     b.current.descansan = b.current.heroes.filter((h) => vivo(h) && !opciones.includes(h)).map((h) => h.id);
     forzar();
     // Dormido, congelado o paralizado: pierde su turno.
-    for (const h of b.current.heroes.filter((x) => vivo(x) && noActua(x))) await decir(fmt(t(h.paralizado ? 'batalla.sigue_paralizado' : h.congelado ? 'batalla.sigue_congelado' : 'batalla.sigue_dormido'), { quien: h.nombre, n: h.paralizado }));
+    for (const h of b.current.heroes.filter((x) => vivo(x) && x.desterrado)) await decir(fmt(t('batalla.sigue_desterrado'), { quien: h.nombre, n: h.desterrado }));
+    for (const h of b.current.heroes.filter((x) => vivo(x) && !x.desterrado && noActua(x))) await decir(fmt(t(h.paralizado ? 'batalla.sigue_paralizado' : h.congelado ? 'batalla.sigue_congelado' : 'batalla.sigue_dormido'), { quien: h.nombre, n: h.paralizado }));
     if (!opciones.length) {
       await lineas('descanso');
       b.current.actuaron = [];
@@ -855,7 +860,7 @@ function Pelea({
   };
   /** El veneno al final del turno: cada envenenado pierde PS (los enemigos que caen, caen). */
   const venenos = async (alEmpezar: Map<string, EstadoQueTermina[]>) => {
-    for (const l of [...b.current.heroes, ...b.current.enemigos].filter((x) => vivo(x) && x.envenenado && sufreAlFinal(alEmpezar, x, 'envenenado'))) {
+    for (const l of [...b.current.heroes, ...b.current.enemigos].filter((x) => vivo(x) && !x.desterrado && x.envenenado && sufreAlFinal(alEmpezar, x, 'envenenado'))) {
       const n = tickVeneno(l, l.lado === 'enemigo' && !!d.enemigos[l.clave]?.jefe && l.clon === undefined);
       if (!n) continue;
       numero(l.id, String(n), 'dano');
@@ -868,7 +873,7 @@ function Pelea({
       if (l.lado === 'enemigo') await alCaer(l);
       else await decir(fmt(t('batalla.cae'), { quien: l.nombre }));
     }
-    for (const l of [...b.current.heroes, ...b.current.enemigos].filter((x) => vivo(x) && x.quemado && sufreAlFinal(alEmpezar, x, 'quemado'))) {
+    for (const l of [...b.current.heroes, ...b.current.enemigos].filter((x) => vivo(x) && !x.desterrado && x.quemado && sufreAlFinal(alEmpezar, x, 'quemado'))) {
       const n = tickQuemado(l, l.lado === 'enemigo' && !!d.enemigos[l.clave]?.jefe && l.clon === undefined);
       if (!n) continue;
       numero(l.id, String(n), 'dano');
@@ -1539,7 +1544,7 @@ function Pelea({
     playChip('vortice');
     await espera(info.suelta * msPaso - info.aparece * msPaso - 80);
     // Baja la mano: sale disparada al centro de los rivales y explota.
-    const rivales = e.lado === 'enemigo' ? b.current.heroes.filter(vivo) : b.current.enemigos.filter(vivo);
+    const rivales = e.lado === 'enemigo' ? b.current.heroes.filter(enCampo) : b.current.enemigos.filter(vivo);
     const centros = rivales.map(centroDe).filter(Boolean) as { x: number; y: number }[];
     const destino = centros.length
       ? { x: centros.reduce((n, c) => n + c.x, 0) / centros.length, y: centros.reduce((n, c) => n + c.y, 0) / centros.length }
@@ -1830,6 +1835,25 @@ function Pelea({
       await espera(500);
     }
     await decir(fmt(t('batalla.especial_total'), { quien: l.nombre, n: total }));
+    // La Espada de las estaciones: a cada uno que sigue en pie le cae una estación al azar.
+    if (e.estaciones) {
+      for (const x of [...new Set(blancos)].filter(enCampo)) {
+        const estacion = estacionAlAzar();
+        const ok = aplicarEstacion(b.current, x, estacion);
+        luz(x.id, ok ? '#c8f7c5' : '#ffffff', ok);
+        forzar();
+        await decir(fmt(t(ok ? `batalla.estacion_${estacion}` : 'batalla.estacion_nada'), { quien: x.nombre }));
+      }
+    }
+    // La Tajada del abismo: la grieta se traga a un rival al azar (nunca al último en pie).
+    if (e.destierro) {
+      const candidatos = (l.lado === 'enemigo' ? b.current.heroes : b.current.enemigos).filter(enCampo);
+      const x = candidatos[Math.floor(Math.random() * candidatos.length)];
+      const n = x ? desterrar(b.current, x, e.destierro) : 0;
+      playChip('vortice');
+      forzar();
+      await decir(n ? fmt(t('batalla.destierro'), { quien: x!.nombre, n }) : t('batalla.destierro_no'));
+    }
     // Algunos especiales a veces queman (Jair: puños de fuego sin querer).
     for (const x of quemarConEspecial(b.current, e, blancos)) {
       luz(x.id, '#ff8a3c');
@@ -1860,7 +1884,7 @@ function Pelea({
       return;
     }
     if (decision.tipo === 'distraido') return decir(fmt(t('batalla.distraido'), { quien: e.nombre }));
-    const hs = b.current.heroes.filter(vivo);
+    const hs = b.current.heroes.filter(enCampo);
     // Después de la Mega Bola de la traición: la cachetada que remata, que no falla aunque esquive.
     if (decision.tipo === 'remate') {
       const { blanco: rematado, golpe } = decision;
@@ -1984,7 +2008,8 @@ function Pelea({
   const especiales = equipo?.especiales ?? [];
   const comandos = [t('batalla.atacar'), t('batalla.hablar'), t('batalla.esquivar'), t('batalla.objetos'), t('batalla.huir')];
   const enMochila = Object.keys(d.objetos).filter((k) => (b.current.mochila[k] ?? 0) > 0 && usableEnPelea(d.objetos[k]));
-  const vivosDe = (lado: 'enemigo' | 'heroe') => (lado === 'enemigo' ? b.current.enemigos : b.current.heroes).filter(vivo);
+  // A los desterrados no se los puede elegir (tampoco para darles un objeto).
+  const vivosDe = (lado: 'enemigo' | 'heroe') => (lado === 'enemigo' ? b.current.enemigos.filter(vivo) : b.current.heroes.filter(enCampo));
   /** A quiénes se puede elegir: los de pie o, para revivir, los caídos. */
   const candidatos = () =>
     menu.paso === 'objetivo' ? (menu.caidos ? b.current.heroes.filter((x) => !vivo(x)) : vivosDe(menu.lado)) : [];

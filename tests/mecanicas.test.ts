@@ -1,11 +1,11 @@
 // Las mecánicas nuevas (docs/BIBLIA_RPG.md, sección 19): dormido, quemado y congelado, los cebos con efecto, el cebo
 // explosivo, la autodestrucción, la bomba del día del juicio y el empate.
 import { describe, expect, it } from 'vitest';
-import { crearCebo, crearLuchador, dano, disponibles, enMochila, noActua, equipados, tickQuemado, turnosDormido, usarObjeto, type DatosBatalla, type Heroe, type Luchador } from '../src/engine/batalla';
+import { crearCebo, crearLuchador, dano, disponibles, eligeAtaque, eligeEspecial, enCampo, enMochila, noActua, equipados, tickQuemado, turnosDormido, usarObjeto, type DatosBatalla, type Heroe, type Luchador } from '../src/engine/batalla';
 import { conBomba, ganaBomba } from '../src/engine/torneo';
 import type { Vars } from '../src/engine/types';
 import { BATALLAS, FICHAS, SUELTOS_EN_VENTA, copiasLibres, sueltosQueTengo } from '../src/engine/batallas';
-import { EXPLOSION_CEBO, aplicarEstado, autodestruir, decidirEnemigo, estadoInicial, finDeTurno, paralizarA, ponerBomba, reaccionCebo, resolverGolpe, resultado, tickBomba, type EstadoPelea } from '../src/engine/turnos';
+import { ESTACIONES, EXPLOSION_CEBO, aplicarEstacion, aplicarEstado, desterrar, estacionAlAzar, autodestruir, decidirEnemigo, estadoInicial, finDeTurno, paralizarA, ponerBomba, reaccionCebo, resolverGolpe, resultado, tickBomba, type EstadoPelea } from '../src/engine/turnos';
 
 const D = BATALLAS.bastion as DatosBatalla;
 const fijo = (n: number) => () => n;
@@ -312,5 +312,74 @@ describe('el CeBiDol (pedido del autor, 2026-11-05)', () => {
     const con = estadoInicial(d, progresoDeVars({ nivel_jair: 5, refuerzo_atq_jair: 2, refuerzo_def_jair: 2 })).heroes.find((h) => h.clave === 'jair')!;
     expect(con.extra - sin.extra).toBe(2);
     expect(con.extraDef - sin.extraDef).toBe(2);
+  });
+});
+
+describe('los especiales del Rey (Capítulo 3)', () => {
+  const D3 = BATALLAS.cap03_rey as DatosBatalla;
+
+  it('tiene los dos especiales del autor y elige uno al azar con la barra llena', () => {
+    const rey = D3.enemigos.rey;
+    expect([rey.especial?.nombre, ...(rey.especiales ?? []).map((e) => e.nombre)]).toEqual(['Espada de las estaciones', 'Tajada del abismo']);
+    const e = crearLuchador('r', 'rey', 'enemigo', rey, 20);
+    e.carga = 100;
+    const s = estadoInicial(D3);
+    expect(eligeEspecial(e, rey, s.heroes, [e], fijo(0))?.especial?.nombre).toBe('Espada de las estaciones');
+    expect(eligeEspecial(e, rey, s.heroes, [e], fijo(0.99))?.especial?.nombre).toBe('Tajada del abismo');
+  });
+
+  it('cada estación causa lo suyo: primavera envenena, verano quema, otoño paraliza, invierno congela', () => {
+    expect(ESTACIONES).toEqual({ primavera: 'envenenado', verano: 'quemado', otono: 'paralizado', invierno: 'congelado' });
+    for (const [estacion, campo] of [['primavera', 'envenenado'], ['verano', 'quemado'], ['otono', 'paralizado'], ['invierno', 'congelado']] as const) {
+      const s = estadoInicial(D3);
+      const [h] = s.heroes;
+      expect(aplicarEstacion(s, h, estacion, fijo(0)), estacion).toBe(true);
+      expect(h[campo], estacion).toBeTruthy();
+    }
+    expect([estacionAlAzar(fijo(0)), estacionAlAzar(fijo(0.3)), estacionAlAzar(fijo(0.6)), estacionAlAzar(fijo(0.99))]).toEqual(['primavera', 'verano', 'otono', 'invierno']);
+  });
+
+  it('el desterrado no actúa, nadie lo elige ni lo cura, y vuelve a los 2 o 3 turnos', () => {
+    const s = estadoInicial(D3);
+    const [h, otro] = s.heroes;
+    expect(desterrar(s, h, [2, 3], fijo(0))).toBe(2);
+    expect(enCampo(h)).toBe(false);
+    expect(disponibles(s.heroes, D3.personajes, [])).not.toContain(h);
+    expect(eligeAtaque([{ nombre: 'x', poder: 5, texto: '' }], s.heroes, fijo(0))?.blancos).not.toContain(h);
+    finDeTurno(s);
+    expect(h.desterrado).toBe(2);
+    finDeTurno(s);
+    finDeTurno(s);
+    expect([h.desterrado, enCampo(h)]).toEqual([0, true]);
+    expect(otro.desterrado).toBe(0);
+  });
+
+  it('nunca destierra al último héroe en pie', () => {
+    const s = estadoInicial(D3);
+    const [a, b, c] = s.heroes;
+    b.ps = 0;
+    c.ps = 0;
+    expect(desterrar(s, a, [2, 3])).toBe(0);
+    expect(enCampo(a)).toBe(true);
+  });
+
+  it('las explosiones no alcanzan al desterrado', () => {
+    const s = estadoInicial(D3);
+    const [a] = s.heroes;
+    desterrar(s, a, [2, 2]);
+    const ps = a.ps;
+    ponerBomba(s, s.heroes[1], { turnos: 1, vida: 0.5 });
+    expect(tickBomba(s, D3)!.map((g) => g.l)).not.toContain(a);
+    expect(a.ps).toBe(ps);
+  });
+
+  it('contra un solo héroe, el Rey no elige la Tajada del abismo', () => {
+    const rey = D3.enemigos.rey;
+    const e = crearLuchador('r', 'rey', 'enemigo', rey, 20);
+    e.carga = 100;
+    const s = estadoInicial(D3);
+    s.heroes[1].ps = 0;
+    s.heroes[2].ps = 0;
+    for (const a of [0, 0.5, 0.99]) expect(eligeEspecial(e, rey, s.heroes, [e], fijo(a))?.especial?.nombre).toBe('Espada de las estaciones');
   });
 });

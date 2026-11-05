@@ -24,6 +24,7 @@ import {
   noActua,
   turnosDormido,
   vanPerdiendo,
+  enCampo,
   vivo,
   yaTiene,
   type Ataque,
@@ -192,7 +193,7 @@ export function decidirEnemigo(
     return { tipo: 'distraido' };
   }
   const en = d.enemigos[e.clave];
-  const hs = estado.heroes.filter(vivo);
+  const hs = estado.heroes.filter(enCampo);
   const esp = en.especial;
   const bola = en.bola_toxica;
   const rematado = bola && estado.remate ? estado.heroes.find((x) => x.id === estado.remate && vivo(x)) : undefined;
@@ -210,9 +211,10 @@ export function decidirEnemigo(
   const elige = eligeEspecial(e, en, estado.heroes, estado.enemigos, azar, !bola?.solo_traicion || arena);
   if (elige?.tipo === 'clon') return { tipo: 'clon' };
   if (elige?.tipo === 'bola') return { tipo: 'bola' };
-  if (elige && esp) {
-    const blanco = desviarACebo(estado, [elige.blanco ?? alAzar(hs, azar)], caeEnCebo, azar)[0];
-    return { tipo: 'especial', especial: esp, blanco };
+  const especialElegido = elige?.tipo === 'especial' ? (elige.especial ?? esp) : undefined;
+  if (especialElegido) {
+    const blanco = desviarACebo(estado, [elige!.blanco ?? alAzar(hs, azar)], caeEnCebo, azar)[0];
+    return { tipo: 'especial', especial: especialElegido, blanco };
   }
   // La parálisis solo va contra los que todavía se mueven (si nadie se mueve, ataca de otra forma).
   // Si no le queda ningún ataque posible (solo de efecto y ya todos lo tienen), espera.
@@ -225,7 +227,7 @@ export function decidirEnemigo(
   const { ataque: a } = elegido;
   // Las ráfagas (la sombra) se reparten: una a cada uno y las que sobran al azar.
   const blancos = a.rafagas
-    ? repartirRafagas(a.rafagas, estado.heroes.filter(vivo), azar)
+    ? repartirRafagas(a.rafagas, estado.heroes.filter(enCampo), azar)
     : a.confunde || a.paraliza
       ? elegido.blancos
       : desviarACebo(estado, elegido.blancos, caeEnCebo, azar);
@@ -241,6 +243,11 @@ export function decidirEnemigo(
 export function finDeTurno(estado: EstadoPelea) {
   estado.heroes.forEach((h) => (h.esquivando = false));
   [...estado.heroes, ...estado.enemigos].forEach((h) => {
+    // Desterrado: solo descuenta el destierro; lo demás queda en pausa hasta que vuelve.
+    if (h.desterrado) {
+      if (!estado.estadoRecien.includes(`${h.id}/desterrado`)) h.desterrado--;
+      return;
+    }
     if (h.inmuneParalisis) h.inmuneParalisis--;
     if (h.paralizado && !estado.paralizadoRecien.includes(h.id) && --h.paralizado === 0) h.inmuneParalisis = 1;
     if (h.confundido && !estado.confundidoRecien.includes(h.id)) h.confundido--;
@@ -293,7 +300,7 @@ export function resolverGolpe(
 }
 
 /** Sin un compañero de pie que lo pueda sacar: el héroe que pelea solo (no los rivales). */
-const estaSolo = (estado: EstadoPelea, x: Luchador) => x.lado === 'heroe' && estado.heroes.filter(vivo).length <= 1;
+const estaSolo = (estado: EstadoPelea, x: Luchador) => x.lado === 'heroe' && estado.heroes.filter(enCampo).length <= 1;
 
 /** Paraliza: empieza a descontar desde el turno siguiente y reemplaza el descanso (no se suma). */
 export function paralizarA(estado: EstadoPelea, x: Luchador, azar: () => number = Math.random) {
@@ -356,7 +363,7 @@ export function golpesDelCanon(seq: number[], rayo: Record<string, number[]>, ms
 export const poderBarrido = (poder: number) => Math.max(3, Math.round(poder / 6));
 /** A quién le da cada golpe del cañón: el fuerte, a su blanco; los barridos, a cualquier otro que siga de pie. */
 export function blancoDelCanon(heroes: Luchador[], blanco: Luchador, fuerte: boolean, azar: () => number = Math.random): Luchador | null {
-  const vivos = heroes.filter(vivo);
+  const vivos = heroes.filter(enCampo);
   if (!vivos.length) return null;
   if (fuerte && vivo(blanco)) return blanco;
   const otros = vivos.filter((h) => h !== blanco);
@@ -437,7 +444,7 @@ export function reaccionCebo(estado: EstadoPelea, d: DatosBatalla, cebo: Luchado
 }
 
 /** Todos los que están de pie en el campo. */
-const enElCampo = (estado: EstadoPelea) => [...estado.heroes, ...estado.enemigos, ...estado.cebos.map((c) => c.l)].filter(vivo);
+const enElCampo = (estado: EstadoPelea) => [...estado.heroes, ...estado.enemigos, ...estado.cebos.map((c) => c.l)].filter(enCampo);
 
 /** Autodestrucción: quien la usa cae y todos los demás del campo (compañeros, rivales y cebos) reciben la explosión. */
 export function autodestruir(estado: EstadoPelea, d: DatosBatalla, h: Luchador, vida: number): { l: Luchador; n: number }[] {
@@ -481,7 +488,7 @@ export function resultado(estado: EstadoPelea, d: DatosBatalla): 'empate' | 'pie
 }
 
 /** Los estados que se anuncian cuando terminan (arriba, con su mensaje: «… se despierta»). */
-export type EstadoQueTermina = 'paralizado' | 'dormido' | 'congelado' | 'confundido' | 'envenenado' | 'quemado';
+export type EstadoQueTermina = 'paralizado' | 'dormido' | 'congelado' | 'confundido' | 'envenenado' | 'quemado' | 'desterrado';
 
 /** Los estados que tiene ahora un luchador. */
 export const estadosActivos = (l: Luchador): EstadoQueTermina[] =>
@@ -492,6 +499,7 @@ export const estadosActivos = (l: Luchador): EstadoQueTermina[] =>
     l.confundido > 0 && 'confundido',
     !!l.envenenado && 'envenenado',
     l.quemado > 0 && 'quemado',
+    l.desterrado > 0 && 'desterrado',
   ].filter((x): x is EstadoQueTermina => !!x);
 
 /** Qué estados tiene cada uno en este momento (para comparar después). */
@@ -526,4 +534,43 @@ export const sufreAlFinal = (antes: Map<string, EstadoQueTermina[]>, l: Luchador
 export function quemarConEspecial(estado: EstadoPelea, e: Especial, blancos: Luchador[], azar: () => number = Math.random): Luchador[] {
   if (!e.quema || azar() >= e.quema) return [];
   return [...new Set(blancos)].filter((x) => vivo(x) && !x.cebo && aplicarEstado(estado, x, 'quemado', azar));
+}
+
+/** Las estaciones de la Espada de las estaciones (el Rey; decisión del autor, 2026-11-05) y lo que causa cada una. */
+export const ESTACIONES = { primavera: 'envenenado', verano: 'quemado', otono: 'paralizado', invierno: 'congelado' } as const;
+export type Estacion = keyof typeof ESTACIONES;
+export const estacionAlAzar = (azar: () => number = Math.random): Estacion =>
+  (['primavera', 'verano', 'otono', 'invierno'] as const)[Math.min(3, Math.floor(azar() * 4))];
+
+/** Le cae una estación: el estado que causa (no se acumula; respeta el turno libre). Devuelve si se aplicó. */
+export function aplicarEstacion(estado: EstadoPelea, x: Luchador, estacion: Estacion, azar: () => number = Math.random): boolean {
+  if (!enCampo(x)) return false;
+  if (estacion === 'primavera') {
+    if (x.envenenado) return false;
+    x.envenenado = { danio: 6, turnos: 3 };
+    return true;
+  }
+  if (estacion === 'otono') {
+    if (yaTiene(x, { paraliza: 1 })) return false;
+    paralizarA(estado, x, azar);
+    return true;
+  }
+  return aplicarEstado(estado, x, estacion === 'verano' ? 'quemado' : 'congelado', azar);
+}
+
+/**
+ * La Tajada del abismo: la grieta se traga a `x` entre [min, max] turnos, como si lo banearan del juego: no actúa,
+ * nadie lo puede elegir, golpear ni curar, y sus estados quedan en pausa. Nunca al último héroe en pie (decisión del
+ * autor). Empieza a descontar desde el turno siguiente. Devuelve los turnos (0 si no se pudo).
+ */
+export function desterrar(estado: EstadoPelea, x: Luchador, [min, max]: [number, number], azar: () => number = Math.random): number {
+  if (!enCampo(x)) return 0;
+  if (x.lado === 'heroe' && estado.heroes.filter(enCampo).length <= 1) return 0;
+  const n = min + Math.min(max - min, Math.floor(azar() * (max - min + 1)));
+  x.desterrado = n;
+  x.esquivando = false;
+  estado.estadoRecien.push(`${x.id}/desterrado`);
+  estado.actuaron = estado.actuaron.filter((id) => id !== x.id);
+  estado.cansados.delete(x.id);
+  return n;
 }
