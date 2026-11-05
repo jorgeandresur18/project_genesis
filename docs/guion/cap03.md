@@ -1,7 +1,7 @@
 <!-- guion:cap03.json -->
 # Capítulo 3 — Sin DÓNDE ir
 
-> **Estado:** borrador. Borrador del Capítulo 3 escrito por Claude con las decisiones del autor del 5 de noviembre de 2026 (docs/guion/cap03_plan.md): la fortaleza del Rey piso por piso, la espada que se recupera en el arsenal, el Rey con yelmo, THE NEXUS dicho por el Rey, el DELETE sin WHERE que se escribe solo, alt_1 y el despertar. Peleas y enemigos de relleno: el autor va a crear los suyos. No es canon hasta que el autor lo apruebe.
+> **Estado:** borrador. Borrador del Capítulo 3 escrito por Claude con las decisiones del autor del 5 de noviembre de 2026 (docs/guion/cap03_plan.md): la fortaleza del Rey piso por piso, la espada que se recupera en el arsenal, el Rey con yelmo (sin la forma gigante, que queda para el Capítulo 6), THE NEXUS dicho por el Rey, el DELETE sin WHERE que se escribe solo, alt_1 y el despertar. Peleas y enemigos de relleno: el autor va a crear los suyos. No es canon hasta que el autor lo apruebe.
 >
 > **Cómo editar:** cambia el hablante (entre `**...:**`) o el texto de cualquier línea, o el texto de una opción.
 > No borres ni cambies los códigos entre comillas invertidas (`063`): así se sabe a qué escena corresponde cada línea.
@@ -324,14 +324,6 @@
 
 `trono_12` **Rey Malvado:** Tienen una espada. Veamos si saben usarla.
 
-`gigante_01` — El Rey cae de rodillas. Y en vez de rendirse, crece.
-
-`gigante_02` — El yelmo toca el techo. Las paredes de la sala se corren para hacerle lugar, como si la fortaleza entera fuera parte de su cuerpo.
-
-`gigante_03` **Voz:** > Advertencia: entidad excede los límites del mapa.
-
-`gigante_04` **Cami:** Esto no es justo. Esto no es nada justo.
-
 > ⤷ continúa en `delete_01`
 
 `bad_rey_01` **Rey Malvado:** Ya lo sabía. No saben usarla.
@@ -349,7 +341,7 @@
 
 ### sala_del_trono
 
-`delete_01` — El Rey gigante levanta una mano del tamaño de una casa. Debajo están Cami y Rikka, en el piso, sin poder moverse.
+`delete_01` — El Rey se levanta una última vez y alza la espada de las estaciones sobre Cami y Rikka, que están en el piso, sin poder moverse.
 
 `delete_02` **Rikka:** ¡Jair!
 

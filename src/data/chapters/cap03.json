@@ -4,7 +4,7 @@
   "title": "Sin DÓNDE ir",
   "title_en": "NoWHERE",
   "estado": "borrador",
-  "nota": "Borrador del Capítulo 3 escrito por Claude con las decisiones del autor del 5 de noviembre de 2026 (docs/guion/cap03_plan.md): la fortaleza del Rey piso por piso, la espada que se recupera en el arsenal, el Rey con yelmo, THE NEXUS dicho por el Rey, el DELETE sin WHERE que se escribe solo, alt_1 y el despertar. Peleas y enemigos de relleno: el autor va a crear los suyos. No es canon hasta que el autor lo apruebe.",
+  "nota": "Borrador del Capítulo 3 escrito por Claude con las decisiones del autor del 5 de noviembre de 2026 (docs/guion/cap03_plan.md): la fortaleza del Rey piso por piso, la espada que se recupera en el arsenal, el Rey con yelmo (sin la forma gigante, que queda para el Capítulo 6), THE NEXUS dicho por el Rey, el DELETE sin WHERE que se escribe solo, alt_1 y el despertar. Peleas y enemigos de relleno: el autor va a crear los suyos. No es canon hasta que el autor lo apruebe.",
   "scenes": [
     {
       "scene_id": "cap03_calabozo_01",
@@ -3441,142 +3441,8 @@
       "conditions": [],
       "audio": null,
       "ui_effect": null,
-      "next": "cap03_gigante_01",
-      "batalla": "cap03_rey",
-      "batalla_derrota": "cap03_bad_rey_01"
-    },
-    {
-      "scene_id": "cap03_gigante_01",
-      "chapter": 3,
-      "background": "PLACEHOLDER:sala_del_trono",
-      "video_fondo": null,
-      "loop_video": false,
-      "characters": [
-        {
-          "id": "jair",
-          "sprite": "sprites/jair/asustado1.webp",
-          "pos": "izquierda"
-        },
-        {
-          "id": "rey",
-          "sprite": "PLACEHOLDER:rey_gigante",
-          "pos": "centro"
-        },
-        {
-          "id": "rikka",
-          "sprite": "sprites/rikka/preocupada.webp",
-          "pos": "derecha"
-        }
-      ],
-      "dialogue": {
-        "speaker": null,
-        "text": "El Rey cae de rodillas. Y en vez de rendirse, crece."
-      },
-      "choices": [],
-      "conditions": [],
-      "audio": null,
-      "ui_effect": "flash",
-      "next": "cap03_gigante_02"
-    },
-    {
-      "scene_id": "cap03_gigante_02",
-      "chapter": 3,
-      "background": "PLACEHOLDER:sala_del_trono",
-      "video_fondo": null,
-      "loop_video": false,
-      "characters": [
-        {
-          "id": "jair",
-          "sprite": "sprites/jair/asustado1.webp",
-          "pos": "izquierda"
-        },
-        {
-          "id": "rey",
-          "sprite": "PLACEHOLDER:rey_gigante",
-          "pos": "centro"
-        },
-        {
-          "id": "rikka",
-          "sprite": "sprites/rikka/preocupada.webp",
-          "pos": "derecha"
-        }
-      ],
-      "dialogue": {
-        "speaker": null,
-        "text": "El yelmo toca el techo. Las paredes de la sala se corren para hacerle lugar, como si la fortaleza entera fuera parte de su cuerpo."
-      },
-      "choices": [],
-      "conditions": [],
-      "audio": null,
-      "ui_effect": null,
-      "next": "cap03_gigante_03"
-    },
-    {
-      "scene_id": "cap03_gigante_03",
-      "chapter": 3,
-      "background": "PLACEHOLDER:sala_del_trono",
-      "video_fondo": null,
-      "loop_video": false,
-      "characters": [
-        {
-          "id": "jair",
-          "sprite": "sprites/jair/asustado1.webp",
-          "pos": "izquierda"
-        },
-        {
-          "id": "rey",
-          "sprite": "PLACEHOLDER:rey_gigante",
-          "pos": "centro"
-        },
-        {
-          "id": "rikka",
-          "sprite": "sprites/rikka/preocupada.webp",
-          "pos": "derecha"
-        }
-      ],
-      "dialogue": {
-        "speaker": "Voz",
-        "text": "> Advertencia: entidad excede los límites del mapa."
-      },
-      "choices": [],
-      "conditions": [],
-      "audio": null,
-      "ui_effect": null,
-      "next": "cap03_gigante_04"
-    },
-    {
-      "scene_id": "cap03_gigante_04",
-      "chapter": 3,
-      "background": "PLACEHOLDER:sala_del_trono",
-      "video_fondo": null,
-      "loop_video": false,
-      "characters": [
-        {
-          "id": "jair",
-          "sprite": "sprites/jair/asustado1.webp",
-          "pos": "izquierda"
-        },
-        {
-          "id": "cami",
-          "sprite": "sprites/cami/impactada.webp",
-          "pos": "centro"
-        },
-        {
-          "id": "rikka",
-          "sprite": "sprites/rikka/preocupada.webp",
-          "pos": "derecha"
-        }
-      ],
-      "dialogue": {
-        "speaker": "Cami",
-        "text": "Esto no es justo. Esto no es nada justo."
-      },
-      "choices": [],
-      "conditions": [],
-      "audio": null,
-      "ui_effect": null,
       "next": "cap03_delete_01",
-      "batalla": "cap03_rey_gigante",
+      "batalla": "cap03_rey",
       "batalla_derrota": "cap03_bad_rey_01"
     },
     {
@@ -3677,7 +3543,7 @@
         },
         {
           "id": "rey",
-          "sprite": "PLACEHOLDER:rey_gigante",
+          "sprite": "PLACEHOLDER:rey_yelmo",
           "pos": "centro"
         },
         {
@@ -3688,7 +3554,7 @@
       ],
       "dialogue": {
         "speaker": null,
-        "text": "El Rey gigante levanta una mano del tamaño de una casa. Debajo están Cami y Rikka, en el piso, sin poder moverse."
+        "text": "El Rey se levanta una última vez y alza la espada de las estaciones sobre Cami y Rikka, que están en el piso, sin poder moverse."
       },
       "choices": [],
       "conditions": [],
@@ -3912,7 +3778,7 @@
         },
         {
           "id": "rey",
-          "sprite": "PLACEHOLDER:rey_gigante",
+          "sprite": "PLACEHOLDER:rey_yelmo",
           "pos": "centro"
         },
         {
@@ -3945,7 +3811,7 @@
         },
         {
           "id": "rey",
-          "sprite": "PLACEHOLDER:rey_gigante",
+          "sprite": "PLACEHOLDER:rey_yelmo",
           "pos": "centro"
         },
         {
@@ -3978,7 +3844,7 @@
         },
         {
           "id": "rey",
-          "sprite": "PLACEHOLDER:rey_gigante",
+          "sprite": "PLACEHOLDER:rey_yelmo",
           "pos": "centro"
         },
         {
@@ -4011,7 +3877,7 @@
         },
         {
           "id": "rey",
-          "sprite": "PLACEHOLDER:rey_gigante",
+          "sprite": "PLACEHOLDER:rey_yelmo",
           "pos": "centro"
         },
         {
@@ -4044,7 +3910,7 @@
         },
         {
           "id": "rey",
-          "sprite": "PLACEHOLDER:rey_gigante",
+          "sprite": "PLACEHOLDER:rey_yelmo",
           "pos": "centro"
         },
         {
