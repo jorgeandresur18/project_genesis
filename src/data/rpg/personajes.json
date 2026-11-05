@@ -1084,56 +1084,6 @@
       "cae_en_cebo": 0.85,
       "_nota": "Enemigo provisional del Capítulo 3 (Claude, 2026-11-05): usa una hoja que ya existe hasta que el autor haga el suyo."
     },
-    "arquero": {
-      "nombre": "Arquero del vacío",
-      "sprite": "batalla/soldado",
-      "base": {
-        "ps": 22,
-        "atq": 7,
-        "def": 3,
-        "vel": 7
-      },
-      "crece": {
-        "ps": 6,
-        "atq": 0.6,
-        "def": 0.6,
-        "vel": 0.4
-      },
-      "ataques": [
-        {
-          "nombre": "Flecha",
-          "poder": 6,
-          "usos": 20,
-          "texto": "Una flecha sale del vacío y le da a {objetivo}."
-        },
-        {
-          "nombre": "Lluvia de flechas",
-          "poder": 3,
-          "usos": 20,
-          "texto": "Llueven flechas sobre todos.",
-          "objetivo": "todos"
-        }
-      ],
-      "especial": {
-        "nombre": "Embestida de acero",
-        "poder": 8,
-        "golpes": 5,
-        "objetivo": "uno",
-        "color": "#d0213a",
-        "ojos": [
-          52,
-          44,
-          32,
-          22
-        ],
-        "texto": "El soldado de la Federación se lanza encima y golpea una y otra vez con la espada. Sin pausa. Sin expresión.",
-        "posicion": "objetivo"
-      },
-      "escala": 1.15,
-      "sonido": "espada",
-      "cae_en_cebo": 0.85,
-      "_nota": "Enemigo provisional del Capítulo 3 (Claude, 2026-11-05): usa una hoja que ya existe hasta que el autor haga el suyo."
-    },
     "caballero": {
       "nombre": "Caballero de la tabla",
       "sprite": "batalla/soldado",
@@ -1688,6 +1638,156 @@
       "sonido": "disparo",
       "cae_en_cebo": 0.3,
       "_nota": "Enemigo provisional del Capítulo 3 (Claude, 2026-11-05): usa una hoja que ya existe hasta que el autor haga el suyo."
+    },
+    "guardia_verano": {
+      "nombre": "Guardia del Verano",
+      "sprite": "batalla/soldado",
+      "base": {
+        "ps": 24,
+        "atq": 7,
+        "def": 3,
+        "vel": 7
+      },
+      "crece": {
+        "ps": 6,
+        "atq": 0.6,
+        "def": 0.6,
+        "vel": 0.4
+      },
+      "ataques": [
+        {
+          "nombre": "Lanza de tiburón",
+          "poder": 6,
+          "usos": 20,
+          "texto": "El guardia del Verano clava la lanza en {objetivo}. Los dientes de tiburón no perdonan."
+        },
+        {
+          "nombre": "Ola",
+          "poder": 3,
+          "usos": 20,
+          "texto": "El guardia golpea el suelo y una ola de calor les pasa por encima a todos.",
+          "objetivo": "todos"
+        }
+      ],
+      "especial": {
+        "nombre": "Embestida de acero",
+        "poder": 8,
+        "golpes": 5,
+        "objetivo": "uno",
+        "color": "#d0213a",
+        "ojos": [
+          52,
+          44,
+          32,
+          22
+        ],
+        "texto": "El soldado de la Federación se lanza encima y golpea una y otra vez con la espada. Sin pausa. Sin expresión.",
+        "posicion": "objetivo"
+      },
+      "escala": 1.15,
+      "sonido": "espada",
+      "cae_en_cebo": 0.85,
+      "_nota": "Enemigo provisional del Capítulo 3 (Claude, 2026-11-05): guardia estacional al servicio del Rey. Usa la hoja del soldado hasta que el autor haga el suyo."
+    },
+    "guardia_otono": {
+      "nombre": "Guardia del Otoño",
+      "sprite": "batalla/soldado",
+      "base": {
+        "ps": 28,
+        "atq": 7,
+        "def": 8,
+        "vel": 7
+      },
+      "crece": {
+        "ps": 6,
+        "atq": 0.6,
+        "def": 0.6,
+        "vel": 0.4
+      },
+      "ataques": [
+        {
+          "nombre": "Escudazo",
+          "poder": 5,
+          "usos": 20,
+          "texto": "El guardia del Otoño le da con el escudo redondo a {objetivo}."
+        },
+        {
+          "nombre": "Grito de cuervo",
+          "poder": 0,
+          "usos": 5,
+          "texto": "El guardia lanza un grito de cuervo y {objetivo} pierde el hilo.",
+          "confunde": 2
+        }
+      ],
+      "especial": {
+        "nombre": "Embestida de acero",
+        "poder": 8,
+        "golpes": 5,
+        "objetivo": "uno",
+        "color": "#d0213a",
+        "ojos": [
+          52,
+          44,
+          32,
+          22
+        ],
+        "texto": "El soldado de la Federación se lanza encima y golpea una y otra vez con la espada. Sin pausa. Sin expresión.",
+        "posicion": "objetivo"
+      },
+      "escala": 1.15,
+      "sonido": "espada",
+      "cae_en_cebo": 0.85,
+      "_nota": "Enemigo provisional del Capítulo 3 (Claude, 2026-11-05): guardia estacional al servicio del Rey. Usa la hoja del soldado hasta que el autor haga el suyo."
+    },
+    "guardia_invierno": {
+      "nombre": "Guardia del Invierno",
+      "sprite": "batalla/soldado",
+      "base": {
+        "ps": 32,
+        "atq": 8,
+        "def": 3,
+        "vel": 7
+      },
+      "crece": {
+        "ps": 6,
+        "atq": 0.6,
+        "def": 0.6,
+        "vel": 0.4
+      },
+      "ataques": [
+        {
+          "nombre": "Hachazo",
+          "poder": 7,
+          "usos": 20,
+          "texto": "El guardia del Invierno parte el aire, y a {objetivo}, con el hacha."
+        },
+        {
+          "nombre": "Escarcha",
+          "poder": 0,
+          "usos": 4,
+          "texto": "La barba del guardia suelta escarcha y {objetivo} queda tieso de frío.",
+          "paraliza": 1
+        }
+      ],
+      "especial": {
+        "nombre": "Embestida de acero",
+        "poder": 8,
+        "golpes": 5,
+        "objetivo": "uno",
+        "color": "#d0213a",
+        "ojos": [
+          52,
+          44,
+          32,
+          22
+        ],
+        "texto": "El soldado de la Federación se lanza encima y golpea una y otra vez con la espada. Sin pausa. Sin expresión.",
+        "posicion": "objetivo"
+      },
+      "escala": 1.15,
+      "sonido": "espada",
+      "cae_en_cebo": 0.85,
+      "_nota": "Enemigo provisional del Capítulo 3 (Claude, 2026-11-05): guardia estacional al servicio del Rey. Usa la hoja del soldado hasta que el autor haga el suyo."
     }
   },
   "objetos": {

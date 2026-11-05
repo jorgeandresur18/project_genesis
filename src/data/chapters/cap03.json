@@ -4635,7 +4635,40 @@
       ],
       "dialogue": {
         "speaker": null,
-        "text": "Las celdas guardan gente de todos los reinos: soldados de la Resistencia, campesinos del Otoño, alguien del Invierno que no habla."
+        "text": "Las celdas guardan gente de todos los reinos: campesinos del Otoño, soldados de la Resistencia y guardias de las cuatro estaciones, todavía con sus armaduras: los que no quisieron servir al Rey."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_celdas_01g01"
+    },
+    {
+      "scene_id": "cap03_celdas_01g01",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_prision_reinos",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "guardia_invierno",
+          "sprite": "PLACEHOLDER:guardia_invierno",
+          "pos": "izquierda"
+        },
+        {
+          "id": "guardia_otono",
+          "sprite": "PLACEHOLDER:guardia_otono",
+          "pos": "centro"
+        },
+        {
+          "id": "guardia_verano",
+          "sprite": "PLACEHOLDER:guardia_verano",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Guardia del Invierno",
+        "text": "Nos encerraron por decir que no. Los que dijeron que sí están en el patio y cuidan estas celdas, con el yelmo negro del Rey."
       },
       "choices": [],
       "conditions": [],
@@ -4870,15 +4903,48 @@
       ],
       "dialogue": {
         "speaker": null,
-        "text": "Lo patrullan arqueros que no le temen al vacío, porque no tienen nada que perder."
+        "text": "Lo patrullan guardias de las estaciones con el yelmo negro del Rey encima de su armadura: del Verano, del Otoño, del Invierno. Los que dijeron que sí."
       },
       "choices": [],
       "conditions": [],
       "audio": null,
       "ui_effect": null,
-      "next": "cap03_patio_2_01",
+      "next": "cap03_patio_02g01",
       "batalla": "cap03_patio_1",
       "batalla_derrota": "cap03_bad_prision_01"
+    },
+    {
+      "scene_id": "cap03_patio_02g01",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_patio",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Rikka",
+        "text": "Esas armaduras son de nuestros reinos. Esos guardias tenían que protegerlos."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_patio_2_01"
     },
     {
       "scene_id": "cap03_patio_2_01",

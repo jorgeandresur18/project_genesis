@@ -18,11 +18,11 @@
     }
   },
   "enemigos": [
-    "arquero",
+    "guardia_verano",
     "alcaide"
   ],
   "horda": {
-    "enemigo": "arquero",
+    "enemigo": "guardia_verano",
     "al_inicio": 2,
     "niveles": [
       15,

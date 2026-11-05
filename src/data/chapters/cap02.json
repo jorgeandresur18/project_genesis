@@ -11561,9 +11561,197 @@
       "conditions": [],
       "audio": "audio/musica/adventure1.mp3",
       "ui_effect": null,
-      "next": "cap02_p2_050",
+      "next": "cap02_p2_049g01",
       "transicion": "negro",
       "lugar": "ciudadela_otono"
+    },
+    {
+      "scene_id": "cap02_p2_049g01",
+      "chapter": 2,
+      "background": "PLACEHOLDER:ciudadela_otono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "guardia_otono",
+          "sprite": "PLACEHOLDER:guardia_otono",
+          "pos": "centro"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "En la puerta de la ciudadela, dos guardias del Otoño: armaduras de bronce con espirales grabadas, torques al cuello, escudos redondos y cascos con alas de cuervo."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap02_p2_049g02"
+    },
+    {
+      "scene_id": "cap02_p2_049g02",
+      "chapter": 2,
+      "background": "PLACEHOLDER:ciudadela_otono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/base.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "guardia_otono",
+          "sprite": "PLACEHOLDER:guardia_otono",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/traje_base.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Guardia del Otoño",
+        "text": "¿Nombre y motivo de la visita?"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap02_p2_049g03"
+    },
+    {
+      "scene_id": "cap02_p2_049g03",
+      "chapter": 2,
+      "background": "PLACEHOLDER:ciudadela_otono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/base.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "guardia_otono",
+          "sprite": "PLACEHOLDER:guardia_otono",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/traje_base.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Rikka",
+        "text": "Soy la sacerdotisa de la Primavera."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap02_p2_049g04"
+    },
+    {
+      "scene_id": "cap02_p2_049g04",
+      "chapter": 2,
+      "background": "PLACEHOLDER:ciudadela_otono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/base.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "guardia_otono",
+          "sprite": "PLACEHOLDER:guardia_otono",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/traje_base.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "",
+        "text": "El guardia la mira de arriba abajo: el traje rojo, ajustado, sin una sola flor bordada."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap02_p2_049g05"
+    },
+    {
+      "scene_id": "cap02_p2_049g05",
+      "chapter": 2,
+      "background": "PLACEHOLDER:ciudadela_otono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/base.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "guardia_otono",
+          "sprite": "PLACEHOLDER:guardia_otono",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/traje_avergonzda.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Guardia del Otoño",
+        "text": "Claro. Y yo soy el Rey del Invierno. Pasen, pero no se metan en problemas."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap02_p2_049g06"
+    },
+    {
+      "scene_id": "cap02_p2_049g06",
+      "chapter": 2,
+      "background": "PLACEHOLDER:ciudadela_otono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/verguenza1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/burla.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/traje_avergonzda.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "Sin el kimono no eres nadie. Bienvenida a mi vida."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap02_p2_050"
     },
     {
       "scene_id": "cap02_p2_050",
@@ -14764,6 +14952,128 @@
       "dialogue": {
         "speaker": "Jair",
         "text": "(Mi ciudad tiene una sola estación: «hace calor». Aquí tienen cuatro y ninguna me queda bien.)"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap02_t_a02g01"
+    },
+    {
+      "scene_id": "cap02_t_a02g01",
+      "chapter": 2,
+      "background": "PLACEHOLDER:camino_invierno",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "guardia_invierno",
+          "sprite": "PLACEHOLDER:guardia_invierno",
+          "pos": "centro"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Una patrulla del Invierno sale de entre la nieve: armaduras de escamas bajo abrigos de piel, gorros de piel con orejeras, hachas largas y la barba blanca de escarcha."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap02_t_a02g02"
+    },
+    {
+      "scene_id": "cap02_t_a02g02",
+      "chapter": 2,
+      "background": "PLACEHOLDER:camino_invierno",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "guardia_invierno",
+          "sprite": "PLACEHOLDER:guardia_invierno",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/base.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Guardia del Invierno",
+        "text": "Gente del sur. Se nota en cómo tiemblan."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap02_t_a02g03"
+    },
+    {
+      "scene_id": "cap02_t_a02g03",
+      "chapter": 2,
+      "background": "PLACEHOLDER:camino_invierno",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado2.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "guardia_invierno",
+          "sprite": "PLACEHOLDER:guardia_invierno",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/base.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "Yo tiemblo profesionalmente. Es lo único que hago bien."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap02_t_a02g04"
+    },
+    {
+      "scene_id": "cap02_t_a02g04",
+      "chapter": 2,
+      "background": "PLACEHOLDER:camino_invierno",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "guardia_invierno",
+          "sprite": "PLACEHOLDER:guardia_invierno",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/base.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "",
+        "text": "El guardia reconoce el sello de la Primavera en la mano de Rikka, se golpea el pecho con el puño y los deja pasar sin una palabra más."
       },
       "choices": [],
       "conditions": [],
@@ -23115,6 +23425,128 @@
       "dialogue": {
         "speaker": null,
         "text": "El reino del Verano los recibe con una playa infinita: arena blanca, agua turquesa y palmeras que se inclinan como si también estuvieran cansadas."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap02_ve_003g01"
+    },
+    {
+      "scene_id": "cap02_ve_003g01",
+      "chapter": 2,
+      "background": "PLACEHOLDER:playa_verano",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "guardia_verano",
+          "sprite": "PLACEHOLDER:guardia_verano",
+          "pos": "centro"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "En la orilla, guardias del Verano: armaduras tejidas de fibra de coco, cascos de plumas, lanzas con dientes de tiburón y tatuajes que les cubren los brazos."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap02_ve_003g02"
+    },
+    {
+      "scene_id": "cap02_ve_003g02",
+      "chapter": 2,
+      "background": "PLACEHOLDER:playa_verano",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/base.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "guardia_verano",
+          "sprite": "PLACEHOLDER:guardia_verano",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "",
+        "text": "Los miran pasar sin decir nada. Rikka les sostiene la mirada hasta que quedan atrás."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap02_ve_003g03"
+    },
+    {
+      "scene_id": "cap02_ve_003g03",
+      "chapter": 2,
+      "background": "PLACEHOLDER:playa_verano",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/base.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/sospecha.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "No les caes bien."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap02_ve_003g04"
+    },
+    {
+      "scene_id": "cap02_ve_003g04",
+      "chapter": 2,
+      "background": "PLACEHOLDER:playa_verano",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/base.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/sospecha.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Rikka",
+        "text": "La Primavera y el Verano no se caen bien desde hace mucho. Es una historia larga."
       },
       "choices": [],
       "conditions": [],

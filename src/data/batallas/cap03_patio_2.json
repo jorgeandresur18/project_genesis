@@ -18,11 +18,11 @@
     }
   },
   "enemigos": [
-    "arquero",
+    "guardia_otono",
     "alcaide"
   ],
   "horda": {
-    "enemigo": "arquero",
+    "enemigo": "guardia_otono",
     "al_inicio": 2,
     "niveles": [
       16,

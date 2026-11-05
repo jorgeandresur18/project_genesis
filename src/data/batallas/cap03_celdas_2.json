@@ -18,11 +18,11 @@
     }
   },
   "enemigos": [
-    "celador",
+    "guardia_invierno",
     "alcaide"
   ],
   "horda": {
-    "enemigo": "celador",
+    "enemigo": "guardia_invierno",
     "al_inicio": 2,
     "niveles": [
       16,
