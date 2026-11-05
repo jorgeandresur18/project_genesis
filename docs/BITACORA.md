@@ -369,4 +369,5 @@ fuera de la computadora principal. **Al volver a la principal: `git checkout des
 - **Recompensas de la torre:** un cofre en cada descanso (se elige una de tres: agua, Furia Roja o galletas arcoíris; Elixit, 200 monedas o 4Low-Co; Elixit++, caramelo dulce o galletas brownie) y el botín mejora piso a piso (el comedor suelta más comida y la forja más defensa). Cantidades propuestas por Claude.
 - **Guion sincronizado:** `docs/guion/cap02.md` y `cap03.md` exportados con las escenas nuevas. Se respetó el cambio a mano del autor en `p2_054` («Cuatro por ciento»; el juego dice «Cinco», como el canon): queda la pregunta de cuál va.
 - **Batería (canon del autor):** Jair termina el Capítulo 3 de vuelta en el mundo real con el celular al 1 % (`cap03_despertar_07`).
+- **Batería en el Otoño (el autor: «la que se adapte mejor»):** queda «Cinco por ciento» en `p2_054`: va después del 9 % de la foto y antes del «Cinco por ciento» de la taberna (con «cuatro», la batería subía sola). Guion del Capítulo 2 sincronizado con el juego.
 

@@ -915,7 +915,7 @@
 
 ### PANTALLA:negro
 
-`p2_054` — Jair saca el celular. Cuatro por ciento. Ahorro de energía. Busca la foto: Rikka en la piedra, mirando el atardecer, con el pelo suelto y el kimono puesto.
+`p2_054` — Jair saca el celular. Cinco por ciento. Ahorro de energía. Busca la foto: Rikka en la piedra, mirando el atardecer, con el pelo suelto y el kimono puesto.
 
 
 ### ciudadela_otono
