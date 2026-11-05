@@ -510,21 +510,28 @@ function conVinculos(texto: string): ReactNode[] {
 }
 
 function BloqueConoce({ b }: { b: object }) {
+  const t = useT();
   const { parrafos, canciones, cierre } = b as BloqueConoceData;
   return (
     <>
       {parrafos.map((p, i) => (
         <p key={i}>{conVinculos(p)}</p>
       ))}
-      {/* La canción de cada personaje: su nombre es el vínculo a Spotify. */}
+      {/* La canción de cada personaje: con su botón para escucharla en Spotify (decisión del autor). */}
       {canciones?.map((c) => (
-        <p key={c.cancion} className="about-cancion">
-          {c.personaje && <b>{c.personaje}:</b>}{' '}
-          <VinculoCancion href={c.spotify ?? `https://open.spotify.com/search/${encodeURIComponent(`${c.cancion} ${c.banda}`)}`}>
-            «{c.cancion}»
-          </VinculoCancion>
-          , {c.banda}. {c.nota}
-        </p>
+        <div key={c.cancion} className="about-cancion">
+          <p>
+            {c.personaje && <b>{c.personaje}:</b>} «{c.cancion}», {c.banda}. {c.nota}
+          </p>
+          <a
+            className="about-spotify"
+            href={c.spotify ?? `https://open.spotify.com/search/${encodeURIComponent(`${c.cancion} ${c.banda}`)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            ▶ {t('conoce.escuchar')}
+          </a>
+        </div>
       ))}
       {cierre?.map((p, i) => (
         <p key={`c${i}`}>{conVinculos(p)}</p>

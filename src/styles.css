@@ -3052,7 +3052,11 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
 
 /* Notas del autor: cada canción con su botón para escucharla en Spotify. */
 /* Las canciones en «Conoce más»: el nombre es un vínculo de color a Spotify, dentro del texto (sin listas ni botones). */
-.about-cancion { margin: 0.45rem 0; padding: 0.35rem 0.7rem; border-left: 2px solid #1db954; background: rgba(29, 185, 84, 0.06); border-radius: 0 0.4rem 0.4rem 0; }
+.about-cancion { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 0.8rem; margin: 0.45rem 0; padding: 0.5rem 0.7rem; border-left: 2px solid #1db954; background: rgba(29, 185, 84, 0.06); border-radius: 0 0.4rem 0.4rem 0; }
+.about-cancion p { flex: 1 1 18rem; margin: 0; }
+/* Las canciones de los personajes llevan su botón (decisión del autor). */
+.about-spotify { flex: none; padding: 0.3rem 0.75rem; border-radius: 999px; background: #1db954; color: #04130a; font-size: 0.82rem; font-weight: 700; text-decoration: none; }
+.about-spotify:hover { filter: brightness(1.1); }
 .about-vinculo { color: #1ed760; font-weight: 600; text-decoration: none; border-bottom: 1px solid rgba(30, 215, 96, 0.35); }
 .about-vinculo:hover, .about-vinculo:focus-visible { color: #5ff09a; border-bottom-color: currentColor; }
 
