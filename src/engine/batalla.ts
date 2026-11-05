@@ -51,6 +51,8 @@ export interface Ataque {
   /** Cuántas veces se puede usar en una pelea («5/5» en el menú); sin esto, sin límite. Se recuperan al terminar. */
   usos?: number;
   nombre: string;
+  /** Con el juego en inglés: su nombre en español (lo equipado se guarda y se busca por ese nombre). */
+  nombre_es?: string;
   poder: number;
   /** "uno" (al azar, o el elegido) o "todos". */
   objetivo?: 'uno' | 'todos';
@@ -68,6 +70,8 @@ export interface Especial {
   /** La bomba (sección 19): en vez de golpear, queda en el campo y explota a estos turnos con esta parte de la vida máxima de todos. */
   bomba?: { turnos: number; vida: number };
   nombre: string;
+  /** Con el juego en inglés: su nombre en español (ver Ataque). */
+  nombre_es?: string;
   poder: number;
   golpes: number;
   objetivo: 'uno' | 'todos';
@@ -805,7 +809,7 @@ export function equipados(d: Heroe, nivel: number, elegidos?: { ataques?: string
   const elegir = <T extends { nombre: string }>(todos: T[], nombres: string[] | undefined, max: number): T[] => {
     // Sin elección: los suyos (los sueltos solo si se eligen).
     if (!nombres) return todos.filter((x) => !sueltos.includes(x as unknown as Ataque | Especial)).slice(0, max);
-    const out = nombres.map((n) => todos.find((x) => x.nombre === n)).filter((x): x is T => !!x);
+    const out = nombres.map((n) => todos.find((x) => ((x as { nombre_es?: string }).nombre_es ?? x.nombre) === n)).filter((x): x is T => !!x);
     return out.slice(0, max);
   };
   return { ataques: elegir(c.ataques, elegidos?.ataques, MAX_ATAQUES), especiales: elegir(c.especiales, elegidos?.especiales, MAX_ESPECIALES) };

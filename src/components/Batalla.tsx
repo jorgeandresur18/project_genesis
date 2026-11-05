@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState, type CSSProperties } from 'react';
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
 import '@fontsource/press-start-2p/400.css';
 import '@fontsource/pixelify-sans/400.css';
 import '@fontsource/pixelify-sans/600.css';
-import { useT } from '../engine/i18n';
+import { useLang, useT } from '../engine/i18n';
 import { playChip, playSelect, precargarMenus, startTyping, stopTyping, type Chip } from '../engine/sound';
 import { TEXT_SPEED_INSTANT, useStore } from '../engine/store';
 import type { Vars } from '../engine/types';
@@ -57,6 +57,7 @@ import { EnergiasHacia } from './EfectosSprite';
 import { EquipoPanel } from './Equipo';
 import { OptionsPanel } from './Panels';
 import { BATALLAS, sueltosQueTengo } from '../engine/batallas';
+import { ataqueHeroeEn, batallaEn, textoBatalla } from '../engine/batallaTexto';
 import {
   BOMBA_BOTIN,
   autodestruir,
@@ -175,7 +176,12 @@ export function Batalla({
   /** Si el rival perdona y la pelea termina hablando (Nikki). Si no está, cuenta como ganar. */
   onPerdonar?: (vars: Vars) => void;
 }) {
-  const d = datos ?? BATALLAS[id];
+  const lang = useLang();
+  // Con el juego en inglés, la pelea entera se traduce al empezar (engine/batallaTexto.ts).
+  const d = useMemo(() => {
+    const x = datos ?? BATALLAS[id];
+    return x && batallaEn(x, lang);
+  }, [datos, id, lang]);
   return d ? <Pelea d={d} progreso={progreso} onGanar={onGanar} onPerder={onPerder} onPerdonar={onPerdonar} arena={arena} onSalir={onSalir} /> : null;
 }
 
@@ -197,6 +203,7 @@ function Pelea({
   arena?: [string, number][];
 }) {
   const t = useT();
+  const lang = useLang();
   // En la vida real (el bar) no cuentan los niveles ni la mochila del juego: Jair todavía no entró a GENESIS.
   const guardado = progreso;
   progreso = d.vida_real ? undefined : progreso;
@@ -1315,7 +1322,7 @@ function Pelea({
       return decir(fmt(t('batalla.recibe'), { quien: h.nombre, n }));
     }
     if (c.tipo === 'especial') {
-      const esp = equipados(d.personajes[h.clave], h.nivel, progreso?.equipo?.[h.clave], sueltosQueTengo(progreso?.cassettes), progreso?.especialesGanados).especiales[c.cual] ?? d.personajes[h.clave].especial!;
+      const esp = equipados(d.personajes[h.clave], h.nivel, progreso?.equipo?.[h.clave], sueltosQueTengo(progreso?.cassettes).map((a) => ataqueHeroeEn(lang, a)), progreso?.especialesGanados).especiales[c.cual] ?? d.personajes[h.clave].especial!;
       // El Multicebo: no golpea; un cebo normal delante de cada héroe en pie.
       if (esp.multicebo) {
         h.carga = 0;
@@ -1343,7 +1350,8 @@ function Pelea({
         return decir(fmt(t('batalla.clon_no_escucha'), { quien: e.nombre }));
       }
       const yo = quienEs(d.personajes[h.clave].sprite);
-      const charla = CHARLAS[yo]?.[quienEs(en.sprite)];
+      const cruda = CHARLAS[yo]?.[quienEs(en.sprite)];
+      const charla = cruda && { ...cruda, dice: cruda.dice.map((x) => textoBatalla(lang, x)), ok: cruda.ok?.map((x) => textoBatalla(lang, x)), no: cruda.no?.map((x) => textoBatalla(lang, x)) };
       // Según su estado, la frase sale distinta (congelado, confundido, con dolor); «Hablar» funciona igual.
       const estado = estadoHabla(h);
       const dicho = (normal: string, confusas?: string[]) => {
@@ -1374,7 +1382,7 @@ function Pelea({
       return lineas(funciona ? 'hablar_ok' : 'hablar_no', { objetivo: e.nombre });
     }
     if (c.tipo !== 'atacar') return;
-    const ataque = equipados(d.personajes[h.clave], h.nivel, progreso?.equipo?.[h.clave], sueltosQueTengo(progreso?.cassettes), progreso?.especialesGanados).ataques[c.ataque];
+    const ataque = equipados(d.personajes[h.clave], h.nivel, progreso?.equipo?.[h.clave], sueltosQueTengo(progreso?.cassettes).map((a) => ataqueHeroeEn(lang, a)), progreso?.especialesGanados).ataques[c.ataque];
     gastarUso(h, ataque);
     if (ataque.cebo) return dejarCebo(h, ataque);
     if (ataque.autodestruccion) {
@@ -2011,7 +2019,7 @@ function Pelea({
   const heroe = b.current.heroes.find((h) => h.id === eligiendo);
   // Lo equipado (docs/BIBLIA_RPG.md, sección 18): hasta 3 ataques y 2 especiales; los especiales comparten la barra y,
   // cuando está llena, se elige cuál.
-  const equipo = heroe ? equipados(d.personajes[heroe.clave], heroe.nivel, progreso?.equipo?.[heroe.clave], sueltosQueTengo(progreso?.cassettes), progreso?.especialesGanados) : undefined;
+  const equipo = heroe ? equipados(d.personajes[heroe.clave], heroe.nivel, progreso?.equipo?.[heroe.clave], sueltosQueTengo(progreso?.cassettes).map((a) => ataqueHeroeEn(lang, a)), progreso?.especialesGanados) : undefined;
   const ataques = equipo?.ataques ?? [];
   const especiales = equipo?.especiales ?? [];
   const comandos = [t('batalla.atacar'), t('batalla.hablar'), t('batalla.esquivar'), t('batalla.objetos'), t('batalla.huir')];
