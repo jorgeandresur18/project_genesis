@@ -5,6 +5,7 @@ Qué trae cada versión. La que está en curso lleva `-dev` y todavía no se pub
 
 ## 1.2.0-dev (en curso, rama `desarrollo`; sin publicar)
 
+- **El Rey Malvado y sus especiales:** Espada de las estaciones (una estación al azar: veneno, quemadura, parálisis o congelado) y Tajada del abismo, con el estado nuevo **desaparecido**.
 - **Capítulo 3 en borrador** («Sin DÓNDE ir»): la fortaleza del Rey piso por piso, 6 peleas de relleno, el DELETE sin WHERE, el final «Cancelar» y el despertar con Cami y Rikka. Se juega en desarrollo después del Capítulo 2; apagado en lo publicado.
 
 ## 1.1.3 (publicada el 5 de noviembre de 2026; etiqueta `v1.1.3`)

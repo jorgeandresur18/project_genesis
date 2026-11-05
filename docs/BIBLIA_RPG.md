@@ -626,6 +626,15 @@ la arena). **En el torneo** (decisión del autor): la primera vez que se gana ca
 cae, quedó por retirarse. **En la historia es perder:** lleva a la misma escena que la derrota, su bad end (decisión del
 autor). En el torneo también cuenta como perder; en la arena, los caídos se levantan.
 
+**El estado «desaparecido»** (pedido del autor, 2026-11-05): lo causa un ataque que **banea** al rival del juego por un rato, como la Tajada del abismo. Durante esos turnos no actúa y nadie lo puede elegir, golpear ni curar (tampoco lo alcanzan la bomba ni la autodestrucción); sus otros estados quedan en pausa. Vuelve solo, desde el turno siguiente al que desaparece. **Nunca hace desaparecer al último héroe en pie.** En el código: `desterrado` (`desterrar` en `turnos.ts`, `enCampo` en `batalla.ts`).
+
+**Los especiales del Rey Malvado** (decisión del autor, 2026-11-05; Capítulo 3, en `cap03_rey` y `cap03_rey_gigante`), los dos con la barra llena, uno al azar:
+
+- **Espada de las estaciones:** golpes fuertes y, a cada blanco que queda en pie, una estación al azar: primavera envenena, verano quema, otoño paraliza e invierno congela (sin acumular, y respetando el turno libre).
+- **Tajada del abismo:** un corte que abre una grieta: un rival al azar queda **desaparecido** de 2 a 3 turnos. Es para peleas contra varios: si el rival tiene un solo héroe en pie, el Rey no la elige.
+
+Los números (poder y golpes) son propuesta de Claude, sin balancear.
+
 **Los jefes** (el autor lo dejó a criterio de Claude): la bomba y la autodestrucción no hacen retirar a un jefe por sí solas: lo dejan justo por encima de su límite y hay que darle el último golpe. Si la explosión se lleva a todos los héroes con el jefe en el campo, es empate.
 
 ## 16. Pendientes e ideas
