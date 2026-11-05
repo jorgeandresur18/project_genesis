@@ -84,6 +84,8 @@ Para trabajar desde cualquier computadora. El detalle de cada sesión está en `
   `npm run dev` y en las pruebas está todo prendido. Para publicar algo nuevo, se cambia ese bloque. Ver
   `docs/METODOLOGIA.md`.
 
+**El PIN de `/all`:** en lo publicado, `/all` pide un PIN que solo sabe el autor. **Nunca escribas el número en un archivo, commit, documento ni mensaje del repositorio**, que es público: en el código va solo su huella (`src/engine/puerta.ts`). Para cambiarlo, el autor da el nuevo y se recalcula la huella. Disuade, pero no protege de verdad: todo corre en el navegador.
+
 **Pruebas**
 - `npm test` (Vitest, unas 200), `npm run test:routes` (antes de cada commit), `npm run lint`, `npx tsc --noEmit -p .`.
 - `npm run e2e`: Playwright en un navegador sin ventana (`tests/e2e/`, ayudantes en `tests/e2e/ayudantes.ts`).

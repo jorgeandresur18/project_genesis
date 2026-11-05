@@ -9,7 +9,7 @@ Capitulo 1 completo (con el RPG, la pelea con Nikki y Boringplace):
 Todo unido (/all), para probar desde el celular o cualquier PC: todo lo creado hasta lo ultimo publicado, de corrido,
 con todo prendido (Capitulo 2, Torneo, PayFoe, la tienda nueva y la galeria completa). Al terminar el
 Capitulo 1, "Continuar" sigue en el Capitulo 2, y el Bootcamp tiene todos sus niveles abiertos.
-OJO: lo ve cualquiera que conozca la direccion, y trae lo que este en main (lo de desarrollo no llega hasta publicar):
+Pide el PIN del autor la primera vez en cada navegador. Trae lo que este en main (lo de desarrollo no llega hasta publicar):
     https://project-genesis-yeah.vercel.app/all
 
 La portada del juego:

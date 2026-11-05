@@ -351,4 +351,5 @@ fuera de la computadora principal. **Al volver a la principal: `git checkout des
 - **`.gitignore`:** `*.psd` en cualquier carpeta, no solo en `docs/sprites/`.
 - **Prueba del Multicebo:** fallaba a veces. Era la prueba: Enter pasaba un mensaje justo cuando aparecía el menú, y elegía «Atacar». El ayudante `hastaElMenu` ahora vuelve a los comandos.
 - **Documentos al día:** `LINKS_PRUEBAS.txt`, `METODOLOGIA.md`, `CRONOGRAMA.md` y `diagnostico.html`.
-- **Falta la orden del autor** para publicar la 1.1.1.
+- **`/all` con PIN (decisión del autor):** en lo publicado pide un PIN que solo él sabe, una vez por navegador. En el código va solo su huella, porque el repositorio es público; el número no se escribe en ningún lado. Disuade, pero no es seguridad.
+- **Publicada la 1.1.1 (orden del autor).** `desarrollo` sigue en `1.2.0-dev`.

@@ -124,7 +124,7 @@ La misma proyección, para mirarla en el navegador: `docs/proyeccion.html`.
 Decisiones y datos que solo puede dar el autor; Claude los aplica sin pedir pruebas (las pruebas, de noche, en la
 computadora de Jorge: ver `docs/PRUEBAS_EN_CASA.md`).
 
-0. **¿Publicar la 1.1.1 en `main`?** Lleva la advertencia «Alcohol y drogas» (lo publicado ya habla del cannabis en Conoce más), `?galeria=todo` apagado y `/all` con todo prendido para probar desde el celular (decisión del autor: `/all` se queda). Falta la orden del autor.
+0. **Publicada la 1.1.1** (5 de noviembre, orden del autor). `/all` pide el PIN del autor.
 1. **Los enlaces de Lolabúm** que faltan: «16 Phantasmas», «Tócame» y «Novedades ecuatorianas» (hoy abren la búsqueda
    de Spotify).
 2. **El repositorio sigue público** (decisión del autor, 5 de noviembre: por ahora no pasa a privado).

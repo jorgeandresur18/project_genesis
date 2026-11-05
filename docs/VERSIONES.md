@@ -3,11 +3,13 @@
 Qué trae cada versión. La que está en curso lleva `-dev` y todavía no se publicó. Cómo se numeran y cómo se publica:
 `docs/METODOLOGIA.md`.
 
-## 1.2.0-dev (en curso, rama `desarrollo`; sin publicar)
+## 1.1.1 (publicada el 5 de noviembre de 2026; etiqueta `v1.1.1`)
+
+**Sigue apagado en lo publicado** (`demo_publica`): el Capítulo 2, el Torneo, PayFoe y la tienda nueva, con lo nuevo de ella (como el CeBiDol).
 
 - **Galería, Rikka:** si la tocas demasiado (30 veces en las termas, de frente, de espalda o vistiéndose), grita sin darse vuelta: tiembla todo, zoom lento a su cara, luz blanca y de vuelta a la pantalla de inicio.
 - **Advertencia de contenido:** «Alcohol y drogas» en un solo tema.
-- **Lo publicado, más cerrado:** los atajos `/all` y `?galeria=todo` solo funcionan en desarrollo.
+- **Lo publicado, más cerrado:** `?galeria=todo` solo funciona en desarrollo, y `/all` pide un PIN del autor; con él, prende todo, para probar desde el celular o cualquier PC.
 - **Después del grito de Rikka,** un degradado de blanco al título, que vuelve a empezar.
 - **CeBiDol:** +2 ATQ y +2 DEF para siempre, fuera de las peleas (Boringplace, 400 tokens, uno por capítulo).
 
