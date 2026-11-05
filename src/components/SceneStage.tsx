@@ -617,21 +617,7 @@ function EmblemasTocables({
           </div>
         );
       })}
-      {/* Las manos de los pechos y la que apunta: encima de la copia, debajo de los emblemas (pedido del autor). */}
-      {acciones.map((a, i) =>
-        a.tipo === 'pecho' && vivas[i] !== undefined ? (
-          <Fragment key={`manos-pecho-${i}`}>
-            <img key={`abierta-${vivas[i]}`} className="mano-pecho abierta" src={assetUrl(`${a.abierta.imagen}.webp`)} alt="" draggable={false} aria-hidden style={caja(a.abierta)} />
-            <img key={`cerrada-${vivas[i]}`} className="mano-pecho cerrada" src={assetUrl(`${a.cerrada.imagen}.webp`)} alt="" draggable={false} aria-hidden style={caja(a.cerrada)} />
-          </Fragment>
-        ) : null,
-      )}
-      {acciones.map((a, i) =>
-        a.tipo === 'apunta' && vivas[i] !== undefined ? (
-          <img key={`apunta-${vivas[i]}`} className="mano-apunta" src={assetUrl(`${a.mano.imagen}.webp`)} alt="" draggable={false} aria-hidden style={caja(a.mano)} />
-        ) : null,
-      )}
-      {/* Lo que se toca de cada pecho y su emblema, encima de todo; rebotan igual que la copia. */}
+      {/* Lo que se toca de cada pecho y su emblema, debajo de las manos; rebotan igual que la copia. */}
       {acciones.map((a, i) => {
         if (a.tipo !== 'pecho') return null;
         const e = lista[a.emblema];
@@ -651,6 +637,20 @@ function EmblemasTocables({
         );
       })}
       {lista.map((e, i) => (conPecho.has(i) ? null : boton(e, i)))}
+      {/* Las manos de los pechos y la que apunta: encima de todo, también de los emblemas (pedido del autor: no los atraviesan). */}
+      {acciones.map((a, i) =>
+        a.tipo === 'pecho' && vivas[i] !== undefined ? (
+          <Fragment key={`manos-pecho-${i}`}>
+            <img key={`abierta-${vivas[i]}`} className="mano-pecho abierta" src={assetUrl(`${a.abierta.imagen}.webp`)} alt="" draggable={false} aria-hidden style={caja(a.abierta)} />
+            <img key={`cerrada-${vivas[i]}`} className="mano-pecho cerrada" src={assetUrl(`${a.cerrada.imagen}.webp`)} alt="" draggable={false} aria-hidden style={caja(a.cerrada)} />
+          </Fragment>
+        ) : null,
+      )}
+      {acciones.map((a, i) =>
+        a.tipo === 'apunta' && vivas[i] !== undefined ? (
+          <img key={`apunta-${vivas[i]}`} className="mano-apunta" src={assetUrl(`${a.mano.imagen}.webp`)} alt="" draggable={false} aria-hidden style={caja(a.mano)} />
+        ) : null,
+      )}
     </>
   );
 }

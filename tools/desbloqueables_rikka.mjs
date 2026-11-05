@@ -147,7 +147,7 @@ for (const nodo of psd.children ?? []) {
     emblemas[`rikka/${destino}`] = badges;
     sprites.push(`rikka/${destino}`);
   }
-  // Las manos del grupo (las ocultas no se usan): pecho (abierta y cerrada, una por pecho), trasero (izquierdo y
+  // Las manos del grupo: pecho (abierta y cerrada, una por pecho), trasero (izquierdo y
   // derecho) y la que apunta (abajo).
   const grupo = nodo.name.replace('rikka_desbloqueable_', '');
   const acciones = [];
@@ -155,7 +155,8 @@ for (const nodo of psd.children ?? []) {
   for (const { capa, camino } of hojas(nodo)) {
     const ruta = [...camino, capa.name].join('/').toLowerCase();
     // Las sueltas del grupo son el sprite y los emblemas; de ellas solo cuenta la mano que apunta («abajo»).
-    if (capa.hidden || (!camino.length && !ruta.includes('abajo'))) continue;
+    // Las manos se usan aunque estén ocultas en el PSD (la de abajo de espalda lo está; pedido del autor).
+    if (!camino.length && !ruta.includes('abajo')) continue;
     if (ruta.includes('trasero') || ruta.includes('traserp')) {
       const lado = /izquierd/.test(capa.name) ? 'izq' : 'der';
       acciones.push({ tipo: 'nalgada', lado, mano: await exportarMano(capa, `${grupo}_nalgada_${lado}`) });

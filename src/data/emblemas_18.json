@@ -206,6 +206,10 @@
         "rikka/desbloqueable_vistiendose_muy_avergonzada"
       ],
       "marca": false,
+      "cara": {
+        "x": 36,
+        "y": 26
+      },
       "acciones": [
         {
           "tipo": "nalgada",
@@ -248,11 +252,7 @@
           },
           "lado": "izq"
         }
-      ],
-      "cara": {
-        "x": 36,
-        "y": 26
-      }
+      ]
     },
     "frente": {
       "sprites": [
@@ -260,6 +260,10 @@
         "rikka/desbloqueable_frente_asustada"
       ],
       "marca": true,
+      "cara": {
+        "x": 33,
+        "y": 26
+      },
       "acciones": [
         {
           "tipo": "apunta",
@@ -310,11 +314,7 @@
           },
           "lado": "izq"
         }
-      ],
-      "cara": {
-        "x": 33,
-        "y": 26
-      }
+      ]
     },
     "espalda": {
       "sprites": [
@@ -324,6 +324,10 @@
         "rikka/desbloqueable_espalda_asustada_ultima_grito"
       ],
       "marca": true,
+      "cara": {
+        "x": 35,
+        "y": 26
+      },
       "acciones": [
         {
           "tipo": "nalgada",
@@ -348,6 +352,17 @@
           }
         },
         {
+          "tipo": "apunta",
+          "emblema": 1,
+          "mano": {
+            "imagen": "sprites/rikka/manos/espalda_apunta",
+            "x": 50.14,
+            "y": 78.61,
+            "w": 13.5,
+            "h": 16.31
+          }
+        },
+        {
           "tipo": "pecho",
           "emblema": 0,
           "abierta": {
@@ -366,11 +381,7 @@
           },
           "lado": "izq"
         }
-      ],
-      "cara": {
-        "x": 35,
-        "y": 26
-      }
+      ]
     }
   }
 }

@@ -33,6 +33,9 @@ describe('manos de los sprites secretos', () => {
     const tipos = manos.frente.acciones.map((a) => `${a.tipo}:${a.lado ?? ''}`).sort();
     expect(tipos).toEqual(['apunta:', 'pecho:der', 'pecho:izq']);
   });
+  it('de espalda también está la mano de abajo (en el PSD está oculta, pero se usa)', () => {
+    expect(manos.espalda.acciones.some((a) => a.tipo === 'apunta')).toBe(true);
+  });
 });
 
 describe('lo que dice Rikka según dónde la tocan', () => {
