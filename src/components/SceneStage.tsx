@@ -148,7 +148,18 @@ export function GloboCara({ cara, texto, grito = false }: { cara?: Cara; texto: 
   return (
     <span
       className={`emblema-reaccion ${grito ? 'emblema-grito' : der ? 'globo-der' : ''}`}
-      style={cara && !grito ? { left: `${cara.x}%`, top: `${cara.y}%`, translate: der ? '0 -50%' : '-100% -50%' } : undefined}
+      style={
+        cara && !grito
+          ? {
+              left: `${cara.x}%`,
+              top: `${cara.y}%`,
+              translate: der ? '0 -50%' : '-100% -50%',
+              // Que no se salga de la imagen (p. ej. con la ficha de información abierta, la imagen se achica): usa el
+              // espacio libre a su lado y, si es poco, ocupa más renglones.
+              maxWidth: `min(17em, max(7em, ${der ? 98 - cara.x : cara.x - 2}%))`,
+            }
+          : undefined
+      }
       role="status"
     >
       {texto}
