@@ -618,14 +618,14 @@
       "jefe": true,
       "huye_a": 0.3,
       "base": {
-        "ps": 84,
-        "atq": 9,
+        "ps": 79,
+        "atq": 8,
         "def": 6,
         "vel": 7
       },
       "crece": {
-        "ps": 11.2,
-        "atq": 1.26,
+        "ps": 10.5,
+        "atq": 1.18,
         "def": 0.8,
         "vel": 0.3
       },
@@ -633,25 +633,25 @@
       "color_disparo": "#ff3b3b",
       "ataques": [
         {
-          "nombre": "Ráfaga de blaster",
-          "poder": 4,
+          "nombre": "Tajo de la corona",
+          "poder": 5,
+          "usos": 20,
+          "texto": "El Rey le corta a {objetivo} sin apuro, como quien firma una sentencia.",
           "balas": [
             3,
             5
-          ],
-          "usos": 20,
-          "texto": "El capitán apunta sin apuro y suelta una ráfaga: rayos rojos, uno detrás de otro, hacia {objetivo}."
+          ]
         },
         {
-          "nombre": "Barrido rojo",
+          "nombre": "Corte estacional",
           "poder": 3,
+          "usos": 10,
+          "texto": "El Rey gira la espada de las estaciones. El filo pasa por todos.",
           "balas": [
             3,
             5
           ],
-          "objetivo": "todos",
-          "usos": 10,
-          "texto": "El capitán barre el hangar con el blaster: rayos rojos para todos."
+          "objetivo": "todos"
         }
       ],
       "especial": {
@@ -717,25 +717,25 @@
       "color_disparo": "#ff3b3b",
       "ataques": [
         {
-          "nombre": "Ráfaga de blaster",
-          "poder": 4,
+          "nombre": "Tajo de la corona",
+          "poder": 5,
+          "usos": 20,
+          "texto": "El Rey le corta a {objetivo} sin apuro, como quien firma una sentencia.",
           "balas": [
             3,
             5
-          ],
-          "usos": 20,
-          "texto": "El capitán apunta sin apuro y suelta una ráfaga: rayos rojos, uno detrás de otro, hacia {objetivo}."
+          ]
         },
         {
-          "nombre": "Barrido rojo",
+          "nombre": "Corte estacional",
           "poder": 3,
+          "usos": 10,
+          "texto": "El Rey gira la espada de las estaciones. El filo pasa por todos.",
           "balas": [
             3,
             5
           ],
-          "objetivo": "todos",
-          "usos": 10,
-          "texto": "El capitán barre el hangar con el blaster: rayos rojos para todos."
+          "objetivo": "todos"
         }
       ],
       "especial": {
@@ -784,14 +784,14 @@
       "nombre": "Bicho de memoria",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 14,
-        "atq": 3,
+        "ps": 9,
+        "atq": 2,
         "def": 3,
         "vel": 7
       },
       "crece": {
-        "ps": 4.6,
-        "atq": 0.46,
+        "ps": 3.1,
+        "atq": 0.31,
         "def": 0.6,
         "vel": 0.4
       },
@@ -808,6 +808,14 @@
           "usos": 20,
           "texto": "Una nube de bichos chicos le pasa por encima a todos.",
           "objetivo": "todos"
+        },
+        {
+          "nombre": "Cortocircuito",
+          "poder": 0,
+          "usos": 3,
+          "texto": "El bicho muerde un cable y {objetivo} queda tieso de la descarga.",
+          "paraliza": 1,
+          "peso": 0.5
         }
       ],
       "especial": {
@@ -834,14 +842,14 @@
       "nombre": "Bodeguero",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 20,
-        "atq": 4,
+        "ps": 23,
+        "atq": 5,
         "def": 6,
         "vel": 7
       },
       "crece": {
-        "ps": 4.7,
-        "atq": 0.47,
+        "ps": 5.3,
+        "atq": 0.53,
         "def": 0.6,
         "vel": 0.4
       },
@@ -890,8 +898,8 @@
         "vel": 7
       },
       "crece": {
-        "ps": 7,
-        "atq": 0.7,
+        "ps": 7.1,
+        "atq": 0.71,
         "def": 0.6,
         "vel": 0.4
       },
@@ -908,6 +916,14 @@
           "usos": 20,
           "texto": "Les tira la olla entera a todos.",
           "objetivo": "todos"
+        },
+        {
+          "nombre": "Sal en la herida",
+          "poder": 0,
+          "usos": 4,
+          "texto": "El cocinero le tira un puñado de sal a {objetivo} en los ojos. No ve nada.",
+          "confunde": 2,
+          "peso": 0.5
         }
       ],
       "especial": {
@@ -934,14 +950,14 @@
       "nombre": "Herrero",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 30,
+        "ps": 31,
         "atq": 8,
         "def": 3,
         "vel": 7
       },
       "crece": {
-        "ps": 6.3,
-        "atq": 0.63,
+        "ps": 6.5,
+        "atq": 0.65,
         "def": 0.6,
         "vel": 0.4
       },
@@ -1005,9 +1021,10 @@
         {
           "nombre": "Errata",
           "poder": 0,
-          "usos": 5,
+          "usos": 8,
           "texto": "El escriba le corrige el nombre a {objetivo}. Ya no sabe quién es.",
-          "confunde": 3
+          "confunde": 3,
+          "peso": 2
         }
       ],
       "escala": 1.54,
@@ -1038,14 +1055,14 @@
       "nombre": "Celador",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 28,
+        "ps": 30,
         "atq": 5,
         "def": 7,
         "vel": 7
       },
       "crece": {
-        "ps": 5.6,
-        "atq": 0.56,
+        "ps": 5.9,
+        "atq": 0.59,
         "def": 0.6,
         "vel": 0.4
       },
@@ -1088,14 +1105,14 @@
       "nombre": "Caballero de la tabla",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 15,
-        "atq": 3,
+        "ps": 22,
+        "atq": 4,
         "def": 9,
         "vel": 7
       },
       "crece": {
-        "ps": 2.7,
-        "atq": 0.27,
+        "ps": 3.9,
+        "atq": 0.39,
         "def": 0.6,
         "vel": 0.4
       },
@@ -1140,46 +1157,45 @@
       "jefe": true,
       "huye_a": 0.3,
       "base": {
-        "ps": 131,
-        "atq": 16,
+        "ps": 152,
+        "atq": 19,
         "def": 6,
         "vel": 6
       },
       "crece": {
-        "ps": 21,
-        "atq": 2.36,
+        "ps": 24.4,
+        "atq": 2.74,
         "def": 0.8,
         "vel": 0.2
       },
       "ataques": [
         {
-          "nombre": "Garra de tinta",
-          "poder": 8,
-          "texto": "El monstruo alza el brazo y lo baja: una media luna de luz morada cruza todo el pasillo.",
-          "usos": 20
+          "nombre": "Picadura de reina",
+          "poder": 6,
+          "usos": 20,
+          "texto": "La reina le clava el aguijón a {objetivo}."
         },
         {
-          "nombre": "Ola de petróleo",
-          "poder": 5,
-          "objetivo": "todos",
-          "texto": "El monstruo gira sobre sí mismo y suelta tres medias lunas a ras del piso, una detrás de otra.",
-          "rafagas": 3,
-          "usos": 15
+          "nombre": "Nube de crías",
+          "poder": 2,
+          "usos": 20,
+          "texto": "Una nube de crías sale de debajo de la reina.",
+          "rafagas": 4
         },
         {
-          "nombre": "Parálisis de pesadilla",
+          "nombre": "Zumbido",
           "poder": 0,
-          "paraliza": 2,
-          "texto": "Los ojos del monstruo se encienden. Por un segundo, todos ven lo que más miedo les da. Alguien no se puede mover.",
-          "usos": 5
+          "usos": 4,
+          "texto": "La reina zumba tan fuerte que a {objetivo} se le olvida dónde está.",
+          "confunde": 2
         }
       ],
       "escala": 1.54,
       "especial": {
-        "nombre": "Desgarro sombrío",
+        "nombre": "Plaga",
         "poder": 6,
-        "golpes": 2,
-        "objetivo": "uno",
+        "golpes": 3,
+        "objetivo": "todos",
         "color": "#a64dff",
         "ojos": [
           84,
@@ -1187,8 +1203,8 @@
           26,
           13
         ],
-        "texto": "El monstruo se hunde en su propia sombra. En el piso queda un vórtice. Y el vórtice se mueve. Lo que encuentra, lo levanta por el aire.",
-        "posicion": "objetivo",
+        "texto": "La reina abre las alas. Todo el nido sale a la vez, y no hay dónde esconderse.",
+        "posicion": "centro",
         "pantalla": "oscura",
         "levanta": true
       },
@@ -1196,7 +1212,24 @@
       "al_retirarse": "retirada",
       "sale_atras": true,
       "cae_en_cebo": 0.35,
-      "_nota": "Enemigo provisional del Capítulo 3 (Claude, 2026-11-05): usa una hoja que ya existe hasta que el autor haga el suyo."
+      "_nota": "Enemigo provisional del Capítulo 3 (Claude, 2026-11-05): usa una hoja que ya existe hasta que el autor haga el suyo.",
+      "clon": {
+        "nombre": "Poner huevos",
+        "nombre_clon": "Cría de bicho",
+        "costo": 0.15,
+        "fuerza": 0.4,
+        "turnos": 3,
+        "color": "#7cff6b",
+        "texto": "La reina se agacha sobre el nido. Un huevo se parte y de adentro sale una cría, chica, rápida y con la misma mala intención.",
+        "reacciones": [
+          {
+            "quien": "Jair",
+            "texto": "Está generando bugs nuevos mientras arreglamos los viejos. Es mi trabajo, pero con patas."
+          }
+        ],
+        "carga": 50,
+        "probabilidad": 0.25
+      }
     },
     "jefe_bodega": {
       "nombre": "Jefe de bodega",
@@ -1204,14 +1237,14 @@
       "jefe": true,
       "huye_a": 0.35,
       "base": {
-        "ps": 78,
-        "atq": 12,
+        "ps": 98,
+        "atq": 15,
         "def": 6,
         "vel": 7
       },
       "crece": {
-        "ps": 13.3,
-        "atq": 1.5,
+        "ps": 16.6,
+        "atq": 1.88,
         "def": 0.8,
         "vel": 0.3
       },
@@ -1219,30 +1252,37 @@
       "color_disparo": "#ff3b3b",
       "ataques": [
         {
-          "nombre": "Ráfaga de blaster",
+          "nombre": "Libro de cuentas",
           "poder": 4,
+          "usos": 20,
+          "texto": "El jefe de bodega le pega a {objetivo} con el libro de cuentas. Tapa dura.",
           "balas": [
             3,
             5
-          ],
-          "usos": 20,
-          "texto": "El capitán apunta sin apuro y suelta una ráfaga: rayos rojos, uno detrás de otro, hacia {objetivo}."
+          ]
         },
         {
-          "nombre": "Barrido rojo",
+          "nombre": "Auditoría",
+          "poder": 0,
+          "usos": 5,
+          "texto": "El jefe de bodega le pide a {objetivo} los comprobantes de todo. {objetivo} ya no sabe ni cómo se llama.",
+          "confunde": 2
+        },
+        {
+          "nombre": "Inventario general",
           "poder": 3,
+          "usos": 10,
+          "texto": "El jefe de bodega tira cajas a todos. Cuenta en voz alta cada una.",
           "balas": [
             3,
             5
           ],
-          "objetivo": "todos",
-          "usos": 10,
-          "texto": "El capitán barre el hangar con el blaster: rayos rojos para todos."
+          "objetivo": "todos"
         }
       ],
       "especial": {
-        "nombre": "Cañón de blaster",
-        "poder": 24,
+        "nombre": "Cierre contable",
+        "poder": 22,
         "golpes": 1,
         "objetivo": "uno",
         "color": "#ff2a2a",
@@ -1253,8 +1293,7 @@
           15
         ],
         "posicion": "objetivo",
-        "canon": true,
-        "texto": "El capitán hinca una rodilla. El blaster zumba, se calienta, se pone blanco en la punta. Apunta a {objetivo}."
+        "texto": "El jefe de bodega cierra el libro de un golpe. «Faltante corregido.» Apunta a {objetivo}."
       },
       "escala": 1.34,
       "sonido": "disparo",
@@ -1267,14 +1306,14 @@
       "jefe": true,
       "huye_a": 0.35,
       "base": {
-        "ps": 74,
-        "atq": 11,
+        "ps": 84,
+        "atq": 12,
         "def": 6,
         "vel": 7
       },
       "crece": {
-        "ps": 11.8,
-        "atq": 1.32,
+        "ps": 13.3,
+        "atq": 1.49,
         "def": 0.8,
         "vel": 0.3
       },
@@ -1282,31 +1321,38 @@
       "color_disparo": "#ff3b3b",
       "ataques": [
         {
-          "nombre": "Ráfaga de blaster",
+          "nombre": "Orden de fuego",
           "poder": 4,
+          "usos": 20,
+          "texto": "El sargento grita «¡fuego!» y le cae todo a {objetivo}.",
           "balas": [
             3,
             5
-          ],
-          "usos": 20,
-          "texto": "El capitán apunta sin apuro y suelta una ráfaga: rayos rojos, uno detrás de otro, hacia {objetivo}."
+          ]
         },
         {
-          "nombre": "Barrido rojo",
+          "nombre": "¡Firmes!",
+          "poder": 0,
+          "usos": 4,
+          "texto": "El sargento le grita «¡firmes!» a {objetivo}, que se queda quieto sin querer.",
+          "paraliza": 1
+        },
+        {
+          "nombre": "Barrido de medallas",
           "poder": 3,
+          "usos": 10,
+          "texto": "El sargento se arranca medallas y las tira como cuchillos a todos.",
           "balas": [
             3,
             5
           ],
-          "objetivo": "todos",
-          "usos": 10,
-          "texto": "El capitán barre el hangar con el blaster: rayos rojos para todos."
+          "objetivo": "todos"
         }
       ],
       "especial": {
-        "nombre": "Cañón de blaster",
-        "poder": 24,
-        "golpes": 1,
+        "nombre": "Carga del sargento",
+        "poder": 9,
+        "golpes": 3,
         "objetivo": "uno",
         "color": "#ff2a2a",
         "ojos": [
@@ -1316,8 +1362,7 @@
           15
         ],
         "posicion": "objetivo",
-        "canon": true,
-        "texto": "El capitán hinca una rodilla. El blaster zumba, se calienta, se pone blanco en la punta. Apunta a {objetivo}."
+        "texto": "El sargento baja la cabeza y carga. Tres veces. Contra {objetivo}."
       },
       "escala": 1.34,
       "sonido": "disparo",
@@ -1330,47 +1375,47 @@
       "jefe": true,
       "huye_a": 0.35,
       "base": {
-        "ps": 72,
-        "atq": 10,
+        "ps": 84,
+        "atq": 12,
         "def": 6,
         "vel": 7
       },
       "crece": {
-        "ps": 11.5,
-        "atq": 1.3,
+        "ps": 13.3,
+        "atq": 1.51,
         "def": 0.8,
         "vel": 0.3
       },
       "distancia": true,
-      "color_disparo": "#ff3b3b",
+      "color_disparo": "#ff9a3c",
       "ataques": [
         {
-          "nombre": "Ráfaga de blaster",
+          "nombre": "Cucharonazo",
           "poder": 4,
+          "usos": 20,
+          "texto": "El chef le da con el cucharón de hierro a {objetivo}.",
           "balas": [
             3,
             5
-          ],
-          "usos": 20,
-          "texto": "El capitán apunta sin apuro y suelta una ráfaga: rayos rojos, uno detrás de otro, hacia {objetivo}."
+          ]
         },
         {
-          "nombre": "Barrido rojo",
+          "nombre": "Plato del día",
           "poder": 3,
+          "usos": 10,
+          "texto": "El chef reparte el plato del día a todos. Hirviendo.",
           "balas": [
             3,
             5
           ],
-          "objetivo": "todos",
-          "usos": 10,
-          "texto": "El capitán barre el hangar con el blaster: rayos rojos para todos."
+          "objetivo": "todos"
         }
       ],
       "especial": {
-        "nombre": "Cañón de blaster",
-        "poder": 24,
-        "golpes": 1,
-        "objetivo": "uno",
+        "nombre": "Banquete",
+        "poder": 8,
+        "golpes": 2,
+        "objetivo": "todos",
         "color": "#ff2a2a",
         "ojos": [
           58,
@@ -1378,14 +1423,30 @@
           30,
           15
         ],
-        "posicion": "objetivo",
-        "canon": true,
-        "texto": "El capitán hinca una rodilla. El blaster zumba, se calienta, se pone blanco en la punta. Apunta a {objetivo}."
+        "posicion": "centro",
+        "texto": "El chef da vuelta todas las ollas a la vez. Comen todos, quieran o no."
       },
       "escala": 1.34,
       "sonido": "disparo",
       "cae_en_cebo": 0.3,
-      "_nota": "Enemigo provisional del Capítulo 3 (Claude, 2026-11-05): usa una hoja que ya existe hasta que el autor haga el suyo."
+      "_nota": "Enemigo provisional del Capítulo 3 (Claude, 2026-11-05): usa una hoja que ya existe hasta que el autor haga el suyo.",
+      "bola_toxica": {
+        "nombre": "Especialidad de la casa",
+        "poder": 14,
+        "color": "#9fdc3c",
+        "ojos": [
+          58,
+          27,
+          30,
+          15
+        ],
+        "texto": "El chef destapa una olla. Lo de adentro burbujea verde y lo mira. Se lo sirve a {quien}.",
+        "veneno": {
+          "danio": 4,
+          "turnos": 3
+        },
+        "peso": 0.3
+      }
     },
     "maestro_herrero": {
       "nombre": "Maestro herrero",
@@ -1393,44 +1454,44 @@
       "jefe": true,
       "huye_a": 0.35,
       "base": {
-        "ps": 71,
-        "atq": 11,
+        "ps": 86,
+        "atq": 13,
         "def": 6,
         "vel": 7
       },
       "crece": {
-        "ps": 10.5,
-        "atq": 1.18,
+        "ps": 12.7,
+        "atq": 1.43,
         "def": 0.8,
         "vel": 0.3
       },
       "distancia": true,
-      "color_disparo": "#ff3b3b",
+      "color_disparo": "#ff6a1a",
       "ataques": [
         {
-          "nombre": "Ráfaga de blaster",
-          "poder": 4,
-          "balas": [
-            3,
-            5
-          ],
+          "nombre": "Martillo al rojo",
+          "poder": 5,
           "usos": 20,
-          "texto": "El capitán apunta sin apuro y suelta una ráfaga: rayos rojos, uno detrás de otro, hacia {objetivo}."
+          "texto": "El maestro herrero le da a {objetivo} con el martillo al rojo vivo.",
+          "balas": [
+            2,
+            4
+          ]
         },
         {
-          "nombre": "Barrido rojo",
+          "nombre": "Lluvia de chispas",
           "poder": 3,
+          "usos": 10,
+          "texto": "El maestro herrero golpea el yunque y las chispas les caen a todos.",
           "balas": [
             3,
             5
           ],
-          "objetivo": "todos",
-          "usos": 10,
-          "texto": "El capitán barre el hangar con el blaster: rayos rojos para todos."
+          "objetivo": "todos"
         }
       ],
       "especial": {
-        "nombre": "Cañón de blaster",
+        "nombre": "El yunque",
         "poder": 24,
         "golpes": 1,
         "objetivo": "uno",
@@ -1442,8 +1503,8 @@
           15
         ],
         "posicion": "objetivo",
-        "canon": true,
-        "texto": "El capitán hinca una rodilla. El blaster zumba, se calienta, se pone blanco en la punta. Apunta a {objetivo}."
+        "texto": "El maestro herrero levanta el yunque entero sobre la cabeza. Lo tira contra {objetivo}.",
+        "quema": 0.5
       },
       "escala": 1.34,
       "sonido": "disparo",
@@ -1456,14 +1517,14 @@
       "jefe": true,
       "huye_a": 0.35,
       "base": {
-        "ps": 57,
+        "ps": 60,
         "atq": 7,
         "def": 8,
         "vel": 7
       },
       "crece": {
-        "ps": 8.2,
-        "atq": 0.92,
+        "ps": 8.7,
+        "atq": 0.98,
         "def": 0.8,
         "vel": 0.3
       },
@@ -1471,31 +1532,38 @@
       "color_disparo": "#ff3b3b",
       "ataques": [
         {
-          "nombre": "Ráfaga de blaster",
+          "nombre": "Llavero de hierro",
           "poder": 4,
+          "usos": 20,
+          "texto": "El alcaide le pega a {objetivo} con el llavero de toda la prisión.",
           "balas": [
             3,
             5
-          ],
-          "usos": 20,
-          "texto": "El capitán apunta sin apuro y suelta una ráfaga: rayos rojos, uno detrás de otro, hacia {objetivo}."
+          ]
         },
         {
-          "nombre": "Barrido rojo",
+          "nombre": "Grilletes",
+          "poder": 0,
+          "usos": 4,
+          "texto": "El alcaide le pone grilletes a {objetivo}.",
+          "paraliza": 1
+        },
+        {
+          "nombre": "Cerrojo general",
           "poder": 3,
+          "usos": 10,
+          "texto": "El alcaide da vuelta todas las llaves a la vez. Las rejas golpean a todos.",
           "balas": [
             3,
             5
           ],
-          "objetivo": "todos",
-          "usos": 10,
-          "texto": "El capitán barre el hangar con el blaster: rayos rojos para todos."
+          "objetivo": "todos"
         }
       ],
       "especial": {
-        "nombre": "Cañón de blaster",
-        "poder": 24,
-        "golpes": 1,
+        "nombre": "Cadena perpetua",
+        "poder": 7,
+        "golpes": 4,
         "objetivo": "uno",
         "color": "#ff2a2a",
         "ojos": [
@@ -1505,8 +1573,7 @@
           15
         ],
         "posicion": "objetivo",
-        "canon": true,
-        "texto": "El capitán hinca una rodilla. El blaster zumba, se calienta, se pone blanco en la punta. Apunta a {objetivo}."
+        "texto": "El alcaide suelta la cadena del cinturón y la hace girar. Cuatro vueltas alrededor de {objetivo}."
       },
       "escala": 1.34,
       "sonido": "disparo",
@@ -1519,14 +1586,14 @@
       "jefe": true,
       "huye_a": 0.35,
       "base": {
-        "ps": 54,
-        "atq": 6,
+        "ps": 77,
+        "atq": 9,
         "def": 6,
         "vel": 7
       },
       "crece": {
-        "ps": 7.4,
-        "atq": 0.83,
+        "ps": 10.6,
+        "atq": 1.19,
         "def": 0.8,
         "vel": 0.3
       },
@@ -1534,32 +1601,32 @@
       "color_disparo": "#ff3b3b",
       "ataques": [
         {
-          "nombre": "Ráfaga de blaster",
+          "nombre": "Inventario de armas",
           "poder": 4,
+          "usos": 20,
+          "texto": "El intendente le tira a {objetivo} lo primero que encuentra en el estante.",
           "balas": [
             3,
             5
-          ],
-          "usos": 20,
-          "texto": "El capitán apunta sin apuro y suelta una ráfaga: rayos rojos, uno detrás de otro, hacia {objetivo}."
+          ]
         },
         {
-          "nombre": "Barrido rojo",
+          "nombre": "Lanza del armero",
           "poder": 3,
+          "usos": 10,
+          "texto": "El intendente barre a todos con una lanza larga.",
           "balas": [
             3,
             5
           ],
-          "objetivo": "todos",
-          "usos": 10,
-          "texto": "El capitán barre el hangar con el blaster: rayos rojos para todos."
+          "objetivo": "todos"
         }
       ],
       "especial": {
-        "nombre": "Cañón de blaster",
-        "poder": 24,
-        "golpes": 1,
-        "objetivo": "uno",
+        "nombre": "Lluvia de armas",
+        "poder": 5,
+        "golpes": 5,
+        "objetivo": "todos",
         "color": "#ff2a2a",
         "ojos": [
           58,
@@ -1567,9 +1634,8 @@
           30,
           15
         ],
-        "posicion": "objetivo",
-        "canon": true,
-        "texto": "El capitán hinca una rodilla. El blaster zumba, se calienta, se pone blanco en la punta. Apunta a {objetivo}."
+        "posicion": "centro",
+        "texto": "El intendente patea el armero. Espadas, hachas y lanzas les llueven encima a todos."
       },
       "escala": 1.34,
       "sonido": "disparo",
@@ -1582,14 +1648,14 @@
       "jefe": true,
       "huye_a": 0.35,
       "base": {
-        "ps": 73,
-        "atq": 10,
+        "ps": 84,
+        "atq": 12,
         "def": 9,
         "vel": 7
       },
       "crece": {
-        "ps": 9.4,
-        "atq": 1.06,
+        "ps": 10.8,
+        "atq": 1.22,
         "def": 0.8,
         "vel": 0.3
       },
@@ -1597,32 +1663,39 @@
       "color_disparo": "#ff3b3b",
       "ataques": [
         {
-          "nombre": "Ráfaga de blaster",
-          "poder": 4,
+          "nombre": "Tajo de comandante",
+          "poder": 5,
+          "usos": 20,
+          "texto": "El comandante le corta a {objetivo} con la precisión de una clave primaria.",
           "balas": [
             3,
-            5
-          ],
-          "usos": 20,
-          "texto": "El capitán apunta sin apuro y suelta una ráfaga: rayos rojos, uno detrás de otro, hacia {objetivo}."
+            4
+          ]
         },
         {
-          "nombre": "Barrido rojo",
+          "nombre": "Formación cerrada",
           "poder": 3,
+          "usos": 10,
+          "texto": "El comandante da una orden y la guardia golpea a todos en formación.",
           "balas": [
             3,
             5
           ],
-          "objetivo": "todos",
-          "usos": 10,
-          "texto": "El capitán barre el hangar con el blaster: rayos rojos para todos."
+          "objetivo": "todos"
+        },
+        {
+          "nombre": "Orden de la tabla",
+          "poder": 0,
+          "usos": 3,
+          "texto": "El comandante le grita el número de {objetivo}. {objetivo} se queda quieto, como si estuviera en la tabla.",
+          "paraliza": 1
         }
       ],
       "especial": {
-        "nombre": "Cañón de blaster",
-        "poder": 24,
-        "golpes": 1,
-        "objetivo": "uno",
+        "nombre": "Juicio de la tabla",
+        "poder": 10,
+        "golpes": 2,
+        "objetivo": "todos",
         "color": "#ff2a2a",
         "ojos": [
           58,
@@ -1630,9 +1703,8 @@
           30,
           15
         ],
-        "posicion": "objetivo",
-        "canon": true,
-        "texto": "El capitán hinca una rodilla. El blaster zumba, se calienta, se pone blanco en la punta. Apunta a {objetivo}."
+        "posicion": "centro",
+        "texto": "El comandante baja la visera. «Cada fila, una sentencia.» La espada cae dos veces sobre todos."
       },
       "escala": 1.34,
       "sonido": "disparo",
@@ -1643,14 +1715,14 @@
       "nombre": "Guardia del Verano",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 26,
+        "ps": 28,
         "atq": 7,
         "def": 3,
         "vel": 7
       },
       "crece": {
-        "ps": 6.3,
-        "atq": 0.63,
+        "ps": 6.7,
+        "atq": 0.67,
         "def": 0.6,
         "vel": 0.4
       },
@@ -1693,14 +1765,14 @@
       "nombre": "Guardia del Otoño",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 28,
+        "ps": 30,
         "atq": 8,
         "def": 8,
         "vel": 7
       },
       "crece": {
-        "ps": 6.2,
-        "atq": 0.62,
+        "ps": 6.6,
+        "atq": 0.66,
         "def": 0.6,
         "vel": 0.4
       },
@@ -1743,14 +1815,14 @@
       "nombre": "Guardia del Invierno",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 32,
+        "ps": 34,
         "atq": 8,
         "def": 3,
         "vel": 7
       },
       "crece": {
-        "ps": 6.1,
-        "atq": 0.61,
+        "ps": 6.5,
+        "atq": 0.65,
         "def": 0.6,
         "vel": 0.4
       },

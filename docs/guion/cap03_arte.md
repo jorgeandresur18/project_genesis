@@ -59,7 +59,7 @@ Pisos de abajo hacia arriba, como en la torre:
 
 ## 3. Peleas: hojas de los enemigos nuevos
 
-Hoy todos usan una hoja que ya existe (soldado, capitán o sombra) con otro nombre. Cuando el autor haga los suyos, se
+Hoy todos usan una hoja que ya existe (soldado, capitán o sombra) con otro nombre, pero ya tienen sus propios ataques y especiales (`src/data/rpg/personajes.json`). Cuando el autor haga los suyos, se
 cambia la ficha en `src/data/rpg/personajes.json` y se reequilibra la torre (`tests/torre_ajuste.test.ts`).
 
 | Enemigo | Usa hoy | Piso | Idea |
