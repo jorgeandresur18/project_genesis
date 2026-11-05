@@ -124,7 +124,7 @@ La misma proyección, para mirarla en el navegador: `docs/proyeccion.html`.
 Decisiones y datos que solo puede dar el autor; Claude los aplica sin pedir pruebas (las pruebas, de noche, en la
 computadora de Jorge: ver `docs/PRUEBAS_EN_CASA.md`).
 
-0. **Publicada la 1.1.2** (5 de noviembre, orden del autor): `/all` y los demás atajos piden el PIN del autor. Publicar en tandas, para no gastar el límite de Vercel; probar a diario con `npm run dev`.
+0. **Publicada la 1.1.3** (5 de noviembre, orden del autor; la 1.1.2 cerró los atajos): `/all` y los demás atajos piden el PIN del autor. Publicar en tandas, para no gastar el límite de Vercel; probar a diario con `npm run dev`.
 1. **Los enlaces de Lolabúm** que faltan: «16 Phantasmas», «Tócame» y «Novedades ecuatorianas» (hoy abren la búsqueda
    de Spotify).
 2. **El repositorio sigue público** (decisión del autor, 5 de noviembre: por ahora no pasa a privado).
