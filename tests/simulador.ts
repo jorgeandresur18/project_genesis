@@ -7,6 +7,7 @@
 import capitan from '../public/batalla/capitan.json';
 import {
   CARGA,
+  enCampo,
   CONFUSION,
   cargar,
   disponibles,
@@ -189,7 +190,7 @@ function pelea(D: DatosBatalla, listo: boolean) {
       continue;
     }
     for (const e of s.enemigos.filter(vivo)) {
-      if (!hs.some(vivo)) break;
+      if (!hs.some(enCampo)) break;
       actuarEnemigo(e);
     }
     finDeTurno(s);

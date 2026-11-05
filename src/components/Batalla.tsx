@@ -64,6 +64,7 @@ import {
   aplicarEstacion,
   confundirA,
   desterrar,
+  encerradosEnElAbismo,
   estacionAlAzar,
   decidirEnemigo,
   envenenarConBola,
@@ -801,8 +802,13 @@ function Pelea({
       return 'sigue';
     }
     for (const e of b.current.enemigos.filter(vivo)) {
-      if (!b.current.heroes.some(vivo)) break;
+      if (!b.current.heroes.some(enCampo)) break;
       await actuarEnemigo(e);
+    }
+    // Si los que quedan están desaparecidos, se pierde ya, antes de que el destierro descuente y vuelvan.
+    {
+      const r = resultado(b.current, d);
+      if (r === 'pierde' || r === 'empate') return r;
     }
     // Lo que tenía cada uno antes de que bajen los turnos (para anunciar arriba lo que se terminó).
     const antesDelFin = fotoEstados([...b.current.heroes, ...b.current.enemigos]);
@@ -1023,6 +1029,8 @@ function Pelea({
           return salir(() => (fin.current.onPerdonar ?? fin.current.onGanar)(varsFinales()));
         }
         if (r === 'pierde') {
+          // Los desaparecidos que quedaron se pierden en el abismo.
+          for (const h of encerradosEnElAbismo(b.current)) await decir(fmt(t('batalla.abismo_para_siempre'), { quien: h.nombre }));
           // El jefe que gana puede quedarse con otra cara (Nikki, llorando).
           const j = b.current.enemigos.find((e) => vivo(e) && e.clon === undefined && d.enemigos[e.clave].al_ganar);
           if (j) void animar(j.id, d.enemigos[j.clave].al_ganar as Anim);

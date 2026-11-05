@@ -5,7 +5,7 @@ import { crearCebo, crearLuchador, dano, disponibles, eligeAtaque, eligeEspecial
 import { conBomba, ganaBomba } from '../src/engine/torneo';
 import type { Vars } from '../src/engine/types';
 import { BATALLAS, FICHAS, SUELTOS_EN_VENTA, copiasLibres, sueltosQueTengo } from '../src/engine/batallas';
-import { ESTACIONES, EXPLOSION_CEBO, aplicarEstacion, aplicarEstado, desterrar, estacionAlAzar, autodestruir, decidirEnemigo, estadoInicial, finDeTurno, paralizarA, ponerBomba, reaccionCebo, resolverGolpe, resultado, tickBomba, type EstadoPelea } from '../src/engine/turnos';
+import { ESTACIONES, EXPLOSION_CEBO, encerradosEnElAbismo, aplicarEstacion, aplicarEstado, desterrar, estacionAlAzar, autodestruir, decidirEnemigo, estadoInicial, finDeTurno, paralizarA, ponerBomba, reaccionCebo, resolverGolpe, resultado, tickBomba, type EstadoPelea } from '../src/engine/turnos';
 
 const D = BATALLAS.bastion as DatosBatalla;
 const fijo = (n: number) => () => n;
@@ -381,5 +381,21 @@ describe('los especiales del Rey (Capítulo 3)', () => {
     s.heroes[1].ps = 0;
     s.heroes[2].ps = 0;
     for (const a of [0, 0.5, 0.99]) expect(eligeEspecial(e, rey, s.heroes, [e], fijo(a))?.especial?.nombre).toBe('Espada de las estaciones');
+  });
+
+  it('si caen los demás y el que queda está desaparecido, se pierde: queda encerrado en el abismo', () => {
+    const s = estadoInicial(D3);
+    const rey = crearLuchador('r', 'rey', 'enemigo', D3.enemigos.rey, 20);
+    s.enemigos = [rey];
+    const [a, b, c] = s.heroes;
+    expect(desterrar(s, a, [2, 3])).toBeGreaterThan(0);
+    b.ps = 0;
+    expect(resultado(s, D3)).toBeNull();
+    c.ps = 0;
+    expect(resultado(s, D3)).toBe('pierde');
+    expect(encerradosEnElAbismo(s)).toEqual([a]);
+    // Sin nadie en el campo, el Rey no tiene a quién atacar: espera.
+    rey.carga = 100;
+    expect(decidirEnemigo(s, D3, rey).tipo).toBe('nada');
   });
 });

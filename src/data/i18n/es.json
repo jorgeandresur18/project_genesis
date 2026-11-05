@@ -467,6 +467,7 @@
   "batalla.destierro": "La grieta se traga a {quien}: desaparecido por {n} turnos.",
   "batalla.destierro_no": "La grieta se cierra sin tragarse a nadie.",
   "batalla.sigue_desterrado": "{quien} sigue desaparecido.",
+  "batalla.abismo_para_siempre": "La grieta se cierra para siempre. {quien} queda encerrado en el abismo.",
   "batalla.fin_desterrado": "{quien} vuelve a aparecer.",
   "batalla.tag_desterrado": "desaparecido",
   "batalla.fin_dormido": "{quien} se despierta.",

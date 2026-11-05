@@ -467,6 +467,7 @@
   "batalla.destierro": "The rift swallows {quien}: missing for {n} turns.",
   "batalla.destierro_no": "The rift closes without swallowing anyone.",
   "batalla.sigue_desterrado": "{quien} is still missing.",
+  "batalla.abismo_para_siempre": "The rift closes forever. {quien} is trapped in the abyss.",
   "batalla.fin_desterrado": "{quien} reappears.",
   "batalla.tag_desterrado": "missing",
   "batalla.fin_dormido": "{quien} wakes up.",

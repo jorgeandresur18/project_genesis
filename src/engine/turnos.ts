@@ -194,6 +194,7 @@ export function decidirEnemigo(
   }
   const en = d.enemigos[e.clave];
   const hs = estado.heroes.filter(enCampo);
+  if (!hs.length) return { tipo: 'nada' };
   const esp = en.especial;
   const bola = en.bola_toxica;
   const rematado = bola && estado.remate ? estado.heroes.find((x) => x.id === estado.remate && vivo(x)) : undefined;
@@ -484,6 +485,9 @@ export function resultado(estado: EstadoPelea, d: DatosBatalla): 'empate' | 'pie
   const jefe = estado.enemigos.find((e) => d.enemigos[e.clave].jefe && e.clon === undefined);
   const retira = !!jefe && seRetira(jefe, d.enemigos[jefe.clave]);
   if (!estado.heroes.some(vivo)) return retira || !estado.enemigos.some(vivo) ? 'empate' : 'pierde';
+  // Cayeron todos los demás y los que quedan están desaparecidos: se pierde, y quedan encerrados en el abismo para
+  // siempre (decisión del autor, 2026-11-05). Si no queda ningún rival, la pelea sigue hasta que vuelvan.
+  if (!estado.heroes.some(enCampo) && estado.enemigos.some(vivo) && !retira) return 'pierde';
   return retira ? 'gana' : null;
 }
 
@@ -574,3 +578,6 @@ export function desterrar(estado: EstadoPelea, x: Luchador, [min, max]: [number,
   estado.cansados.delete(x.id);
   return n;
 }
+
+/** Los que se pierden en el abismo: desaparecidos cuando la pelea se pierde porque no quedó nadie más en el campo. */
+export const encerradosEnElAbismo = (estado: EstadoPelea) => estado.heroes.filter((h) => vivo(h) && h.desterrado > 0);
