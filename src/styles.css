@@ -2495,7 +2495,8 @@ button.kingdom-item:hover .kingdom-frame img { transform: scale(1.06) rotate(-6d
 .batalla-extra.def { color: #8fa9cf; }
 .batalla-menu, .batalla-tarjeta { border: 1px solid var(--n-borde); outline: 3px solid #000; box-shadow: 0 0 0 4px var(--n-borde); background: rgba(8, 8, 11, 0.92); }
 .batalla-menu { display: flex; flex-direction: column; min-width: 12rem; min-height: 7.5rem; padding: 0.5rem; }
-.batalla-menu.apagado { opacity: 0.45; }
+.batalla-menu.apagado { opacity: 0.45; pointer-events: none; }
+.batalla-menu.apagado button:disabled { opacity: 1; cursor: default; }
 .batalla-menu button { display: flex; justify-content: space-between; gap: 1rem; padding: 0.3rem 0.5rem 0.3rem 1.2rem; border: 0; background: none; color: var(--n-texto); font: inherit; font-size: 1.1rem; text-align: left; }
 .batalla-menu button small { color: var(--n-tenue); font-size: 0.9rem; }
 .batalla-menu button.sel { position: relative; background: rgba(232, 226, 212, 0.08); }

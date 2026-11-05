@@ -2422,6 +2422,14 @@ function Pelea({
                 {o.extra && <small>{o.extra}</small>}
               </button>
             ))}
+          {/* Mientras no es el turno de elegir: los comandos a la vista, más transparentes y sin poder usarlos
+              (el cuadro no se queda vacío; pedido del autor). */}
+          {!enMenu &&
+            comandos.map((c) => (
+              <button key={c} type="button" disabled tabIndex={-1} aria-hidden>
+                {c}
+              </button>
+            ))}
         </div>
         <div className="batalla-grupo">
           {b.current.heroes.map((h) => (
