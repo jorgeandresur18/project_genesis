@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
@@ -10,6 +11,8 @@ export default defineConfig({
     // un archivo grande que se está guardando (EBUSY en Windows) tumba el servidor.
     watch: { ignored: ['**/docs/**', '**/*.psb', '**/*.psd'] },
   },
+  // Vitest: las pruebas de siempre. Las de navegador (tests/e2e, con Playwright) se corren aparte con `npm run e2e`.
+  test: { exclude: ['**/node_modules/**', 'tests/e2e/**'] },
   build: {
     rollupOptions: {
       output: {

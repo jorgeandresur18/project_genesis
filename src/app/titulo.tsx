@@ -3,6 +3,7 @@ import { useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { useStore } from '../engine/store';
 import { ProbadorSprites } from '../components/ProbadorSprites';
 import { Batalla } from '../components/Batalla';
+import { progresoDeVars, type Progreso } from '../engine/batalla';
 import easterEgg from '../data/easter_egg.json';
 import { NewDot } from '../components/CgGallery';
 import { useGalleryState } from '../engine/gallery';
@@ -55,6 +56,18 @@ export function TitleScreen({ open, intro, onEgg }: TitleProps) {
   const [hit, setHit] = useState(0);
   // Demo de batalla para probar: ?batalla=demo en la dirección (al terminar, vuelve al título).
   const [demoBatalla, setDemoBatalla] = useState(() => new URLSearchParams(location.search).get('batalla'));
+  // Para probar con lo de una partida (niveles, cassettes, lo equipado): ?batalla=demo&vars={"nivel_jair":6,…}, con las
+  // variables de la partida en JSON (las pruebas en navegador, tests/e2e, lo usan). Si no se entiende, se ignora.
+  const [demoProgreso] = useState<Progreso | undefined>(() => {
+    const crudo = new URLSearchParams(location.search).get('vars');
+    if (!crudo) return undefined;
+    try {
+      const v = JSON.parse(crudo);
+      return v && typeof v === 'object' && !Array.isArray(v) ? progresoDeVars(v) : undefined;
+    } catch {
+      return undefined;
+    }
+  });
   // Probador de sprites (herramienta del autor): ?sprites en la dirección.
   const [probador, setProbador] = useState(() => new URLSearchParams(location.search).has('sprites'));
   const newGame = useStore((s) => s.newGame);
@@ -191,7 +204,7 @@ export function TitleScreen({ open, intro, onEgg }: TitleProps) {
       <SecretoAviso />
       {config.version && <span className="title-version">{t('titulo.version', { v: config.version })}</span>}
       {probador && <ProbadorSprites onCerrar={() => setProbador(false)} />}
-      {demoBatalla && <Batalla key={demoBatalla} id={demoBatalla} onGanar={() => setDemoBatalla(null)} onPerder={() => setDemoBatalla(null)} />}
+      {demoBatalla && <Batalla key={demoBatalla} id={demoBatalla} progreso={demoProgreso} onGanar={() => setDemoBatalla(null)} onPerder={() => setDemoBatalla(null)} />}
     </div>
   );
 }

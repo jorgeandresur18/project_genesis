@@ -11,13 +11,13 @@ que se movió a `src/engine/turnos.ts`.
 
 ## 1. Antes de probar: juntar las dos computadoras
 
-- [ ] En la carpeta del proyecto: `git checkout desarrollo` y `git status`.
-- [ ] Revisar si quedó algo sin subir de la noche del 3 de noviembre: `git log --branches --not --remotes`. El autor
+- [x] En la carpeta del proyecto: `git checkout desarrollo` y `git status`. *(4 nov, computadora principal)*
+- [x] Revisar si quedó algo sin subir de la noche del 3 de noviembre: `git log --branches --not --remotes`. **Nada:** `desarrollo` estaba igual que en GitHub; lo único local es la rama `respaldo-historial-2026-11-02`. El autor
       recuerda cambios de cerca de las 23:00, pero en GitHub lo último de esa noche es de las 22:44.
-- [ ] Si hay cambios sin guardar, hacer un commit con ellos.
-- [ ] `git pull`. Si dice `CONFLICT`, Claude ayuda a elegir qué se queda (lo más probable: `BITACORA.md` y
+- [x] Si hay cambios sin guardar, hacer un commit con ellos. *(No había: solo el material de arte suelto, que nunca estuvo en git.)*
+- [x] `git pull` (33 commits, sin conflictos). Si dice `CONFLICT`, Claude ayuda a elegir qué se queda (lo más probable: `BITACORA.md` y
       `CRONOGRAMA.md`). Nunca `push --force`.
-- [ ] `npm install` y `npm test` (deben pasar todas) y `npm run dev`.
+- [x] `npm install` y `npm test` (deben pasar todas: 195) y `npm run dev`.
 
 ## 2. Las peleas (se cambió cómo está armado el código, no cómo se juega)
 
@@ -146,6 +146,6 @@ En la segunda computadora, con un navegador automático sin ventana y sin sonido
 - Cebos sueño, tóxico y caliente, con su efecto; cebo explosivo; autodestrucción; la bomba, que explota.
 - Exportar, importar en otro espacio y el aviso con un archivo que no es una partida.
 
-**Para revisar primero:** las dos pruebas de cebos de estado (sueño, frío y paralizante; tóxico, confuso y caliente) marcaron 30 segundos sin cambios. Lo más probable es que sea el script, que insistía en poner un cebo cuando ya había uno en pie, pero **no está confirmado**. Probar a mano: poner un cebo, intentar poner otro y seguir la pelea.
+**Confirmado (4 nov, principal, con `tests/e2e/cebos.spec.ts`): poner un cebo con otro en pie no traba la pelea.** Sale «Ya hay un cebo…», el menú sigue respondiendo y la pelea avanza. Los 30 s eran el script, que insistía sin leer el aviso. *Antes decía:* las dos pruebas de cebos de estado (sueño, frío y paralizante; tóxico, confuso y caliente) marcaron 30 segundos sin cambios. Lo más probable es que sea el script, que insistía en poner un cebo cuando ya había uno en pie, pero **no está confirmado**. Probar a mano: poner un cebo, intentar poner otro y seguir la pelea.
 
 **No se llegó a probar en navegador:** el empate, un héroe dormido o congelado, la tienda, la ropa y el premio del torneo.

@@ -23,3 +23,7 @@ docs/*Proyecto_Genesis_Documento_Narrativo*.md
 # Material de referencia con derechos de terceros (desensamblados de juegos): solo para leer, nunca se publica.
 docs/*source code*.txt
 __pycache__/
+
+# Resultados de las pruebas en navegador (Playwright)
+test-results/
+playwright-report/
