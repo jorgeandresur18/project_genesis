@@ -139,7 +139,8 @@ computadora de Jorge: ver `docs/PRUEBAS_EN_CASA.md`).
    la tabla): revisarlos cuando quiera.
 7. **Capítulo 2:** las decisiones de abajo («Decisiones pendientes del autor») y las preguntas de
    `docs/guion/cap03_plan.md`.
-8. **Arte (cuando toque):** si quiere el mosaico de la censura más grueso en los archivos; si la mano de abajo de espalda
+8. **Boringram en los Capítulos 2 y 3 (lo hace el autor):** hacer más eventos de Boringram (posts, historias, pensamientos de Jair) para el Capítulo 2 y el 3. Anotado el 2026-11-05.
+9. **Arte (cuando toque):** si quiere el mosaico de la censura más grueso en los archivos; si la mano de abajo de espalda
    queda como está.
 
 **Para la noche (computadora de Jorge), lo que falta probar:** la segunda revisión de las peleas del Bastión, Nikki y el hangar con las reglas
