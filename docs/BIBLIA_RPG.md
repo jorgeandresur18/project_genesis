@@ -609,7 +609,7 @@ del estado (provisional, con filtros):
 | Cebo sueño | Dormido | Lila (propuesta) | 90 |
 | Cebo explosivo | Le quita al que lo atacó el 25 % de su vida máxima y a su dueño el 10 % (calculado por Claude, por encargo del autor) | Rojo | 120 |
 
-**Multicebo** (genérico, especial; cassette de Boringplace, 150 tokens, propuesta): con la barra llena, en vez de golpear deja un cebo normal (sin efecto) delante de cada héroe en pie; cada uno reemplaza el que ese héroe tenía. `TODO`: qué hace con un solo héroe en pie.
+**Multicebo** (genérico, especial; cassette de Boringplace, 150 tokens, propuesta): con la barra llena, en vez de golpear deja un cebo normal (sin efecto) delante de cada héroe en pie; cada uno reemplaza el que ese héroe tenía. Con un solo héroe en pie, pone un solo cebo: es un desperdicio a propósito (decisión del autor, 2026-11-04).
 
 **Autodestrucción** (genérica; 200 tokens, 1 uso por pelea): el que la usa cae y todos los demás del campo (compañeros,
 rivales y cebos) pierden el 50 % de su vida máxima (propuesta).
