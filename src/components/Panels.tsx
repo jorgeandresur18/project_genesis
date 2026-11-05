@@ -483,38 +483,51 @@ function CompletionMeter() {
 /** La parte de «Conoce más» a la que va una sección (el juego o el autor); la advertencia no tiene. */
 const parteDe = (s: object) => ('parte' in s ? (s.parte as string) : undefined);
 
-/** Una canción (o disco) de «Conoce más». Sin `spotify`, el botón busca la canción en Spotify. */
+/** Una canción (o disco) de «Conoce más». Sin `spotify`, el vínculo busca la canción en Spotify. */
 type CancionConoce = { personaje?: string; cancion: string; banda: string; nota?: string; spotify?: string };
 
 /** Un bloque de texto de «Conoce más»: párrafos, una lista de canciones y su cierre. */
 type BloqueConoceData = { parrafos: string[]; canciones?: CancionConoce[]; cierre?: string[] };
 
+/**
+ * Un vínculo de canción: el nombre en color, que abre Spotify (decisión del autor: las canciones van como vínculos en el
+ * texto, sin listas ni botones).
+ */
+function VinculoCancion({ href, children }: { href: string; children: ReactNode }) {
+  return (
+    <a className="about-vinculo" href={href} target="_blank" rel="noopener noreferrer">
+      {children}
+    </a>
+  );
+}
+
+/** Un párrafo con vínculos escritos como `[texto](https://…)` (en los JSON de «Conoce más»). */
+function conVinculos(texto: string): ReactNode[] {
+  return texto.split(/(\[[^\]]+\]\(https?:\/\/[^)\s]+\))/).map((parte, i) => {
+    const m = parte.match(/^\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)$/);
+    return m ? <VinculoCancion key={i} href={m[2]}>{m[1]}</VinculoCancion> : parte;
+  });
+}
+
 function BloqueConoce({ b }: { b: object }) {
-  const t = useT();
   const { parrafos, canciones, cierre } = b as BloqueConoceData;
   return (
     <>
       {parrafos.map((p, i) => (
-        <p key={i}>{p}</p>
+        <p key={i}>{conVinculos(p)}</p>
       ))}
-      {/* Cada canción con su botón para escucharla en Spotify. */}
+      {/* La canción de cada personaje: su nombre es el vínculo a Spotify. */}
       {canciones?.map((c) => (
-        <div key={c.cancion} className="about-cancion">
-          <p>
-            {c.personaje && <b>{c.personaje}:</b>} «{c.cancion}», {c.banda}. {c.nota}
-          </p>
-          <a
-            className="about-spotify"
-            href={c.spotify ?? `https://open.spotify.com/search/${encodeURIComponent(`${c.cancion} ${c.banda}`)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            ▶ {t('conoce.escuchar')}
-          </a>
-        </div>
+        <p key={c.cancion} className="about-cancion">
+          {c.personaje && <b>{c.personaje}:</b>}{' '}
+          <VinculoCancion href={c.spotify ?? `https://open.spotify.com/search/${encodeURIComponent(`${c.cancion} ${c.banda}`)}`}>
+            «{c.cancion}»
+          </VinculoCancion>
+          , {c.banda}. {c.nota}
+        </p>
       ))}
       {cierre?.map((p, i) => (
-        <p key={`c${i}`}>{p}</p>
+        <p key={`c${i}`}>{conVinculos(p)}</p>
       ))}
     </>
   );
