@@ -1,0 +1,5162 @@
+{
+  "ruta": "base",
+  "chapter": 3,
+  "title": "Sin DÓNDE ir",
+  "title_en": "NoWHERE",
+  "estado": "borrador",
+  "nota": "Borrador del Capítulo 3 escrito por Claude con las decisiones del autor del 5 de noviembre de 2026 (docs/guion/cap03_plan.md): la fortaleza del Rey piso por piso, la espada que se recupera en el arsenal, el Rey con yelmo, THE NEXUS dicho por el Rey, el DELETE sin WHERE que se escribe solo, alt_1 y el despertar. Peleas y enemigos de relleno: el autor va a crear los suyos. No es canon hasta que el autor lo apruebe.",
+  "scenes": [
+    {
+      "scene_id": "cap03_calabozo_01",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/fria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/preocupada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Huele a óxido, a humedad y a algo que alguna vez fue comida."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_calabozo_02",
+      "transicion": "negro_lento"
+    },
+    {
+      "scene_id": "cap03_calabozo_02",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/fria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/preocupada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> Sesión restaurada. Usuario: no registrado. Ubicación: fortaleza. Nivel: −3."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_calabozo_03"
+    },
+    {
+      "scene_id": "cap03_calabozo_03",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/fria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/preocupada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "Nivel menos tres. Hasta el calabozo tiene sótano."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_calabozo_04"
+    },
+    {
+      "scene_id": "cap03_calabozo_04",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/sospecha.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/preocupada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "Nos quitaron la espada. Y mis pistolas. Revisaron hasta las botas."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_calabozo_05"
+    },
+    {
+      "scene_id": "cap03_calabozo_05",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/sospecha.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/enojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Rikka",
+        "text": "A mí me quitaron la daga y el orgullo. La daga me dolió más."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_calabozo_06"
+    },
+    {
+      "scene_id": "cap03_calabozo_06",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/sospecha.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/enojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "La espada. La DELETE. Era lo único que…"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_calabozo_07"
+    },
+    {
+      "scene_id": "cap03_calabozo_07",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/fria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/enojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "Era lo único que teníamos, sí. Gracias por el resumen."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_calabozo_08"
+    },
+    {
+      "scene_id": "cap03_calabozo_08",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/fria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/enojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Por el pasillo pasan dos guardias. Uno silba. El otro carga algo largo envuelto en tela, lejos del cuerpo, como si quemara."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_calabozo_09"
+    },
+    {
+      "scene_id": "cap03_calabozo_09",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/fria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/enojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Guardia",
+        "text": "Al arsenal del piso cinco. El Rey dice que nadie la toque hasta que él la vea."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_calabozo_10"
+    },
+    {
+      "scene_id": "cap03_calabozo_10",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/fria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/sorprendida.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Rikka",
+        "text": "Piso cinco. Nuestra espada está en el piso cinco."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_calabozo_11"
+    },
+    {
+      "scene_id": "cap03_calabozo_11",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/sabelotodo.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/fria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/sorprendida.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "Y nosotros en el menos tres. Ocho pisos. Como subir a la oficina el día que se cae el ascensor."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_calabozo_12"
+    },
+    {
+      "scene_id": "cap03_calabozo_12",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/sabelotodo.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/burla.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/sorprendida.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "Con la diferencia de que en tu oficina nadie te dispara."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_calabozo_13"
+    },
+    {
+      "scene_id": "cap03_calabozo_13",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/burla.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/sorprendida.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "En mi oficina me mandan correos. Es peor. Al menos un disparo se termina."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_calabozo_14"
+    },
+    {
+      "scene_id": "cap03_calabozo_14",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Rikka",
+        "text": "Jair. ¿Cuál es el plan?"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_calabozo_15"
+    },
+    {
+      "scene_id": "cap03_calabozo_15",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Las dos lo miran. Nadie le pidió nunca un plan para algo que no fuera un sprint de dos semanas."
+      },
+      "choices": [
+        {
+          "text": "Esperar al guardia y atacarlo cuando abra",
+          "next": "cap03_ataque_01"
+        },
+        {
+          "text": "Que Cami fuerce la cerradura",
+          "next": "cap03_cerradura_01"
+        },
+        {
+          "text": "Hablar con el guardia",
+          "next": "cap03_charla_01"
+        },
+        {
+          "text": "Pedir que te lleven ante el Rey",
+          "next": "cap03_rendicion_01"
+        }
+      ],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": null
+    },
+    {
+      "scene_id": "cap03_ataque_01",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/orgulloso.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "Cuando abra para traer la comida, saltamos encima."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_ataque_02"
+    },
+    {
+      "scene_id": "cap03_ataque_02",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/orgulloso.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/burla.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "¿Tú vas a saltar encima de alguien? Quiero verlo."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_ataque_03"
+    },
+    {
+      "scene_id": "cap03_ataque_03",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/orgulloso.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/burla.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "La comida llega. La puerta se abre. Jair salta. Es más un tropiezo con intenciones, pero el guardia termina en el piso."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_ataque_04"
+    },
+    {
+      "scene_id": "cap03_ataque_04",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/orgulloso.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/burla.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Guardia",
+        "text": "¡Se escapan! ¡Los del piso de arriba, bajen!"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_pelea_calabozo_01"
+    },
+    {
+      "scene_id": "cap03_cerradura_01",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/base.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/sonrojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "Rikka. Una horquilla."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_cerradura_02"
+    },
+    {
+      "scene_id": "cap03_cerradura_02",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/base.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/sonrojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Rikka",
+        "text": "¿De mi peinado? Es de la ceremonia de la Primavera. Tiene siglos."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_cerradura_03"
+    },
+    {
+      "scene_id": "cap03_cerradura_03",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/base.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/fria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/sonrojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "Entonces ya cumplió."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_cerradura_04"
+    },
+    {
+      "scene_id": "cap03_cerradura_04",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/base.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/fria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/sonrojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Cami trabaja la cerradura con la paciencia de alguien que ya estuvo encerrada antes. Clic."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_cerradura_05"
+    },
+    {
+      "scene_id": "cap03_cerradura_05",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/fria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/sorprendida.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "El clic suena más fuerte de lo que debería. Al fondo del pasillo, alguien deja de silbar."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_pelea_calabozo_01"
+    },
+    {
+      "scene_id": "cap03_charla_01",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/sabelotodo.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/sospecha.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/preocupada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "Disculpa. Una consulta rápida. ¿Ustedes tienen un protocolo de escalamiento?"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_charla_02"
+    },
+    {
+      "scene_id": "cap03_charla_02",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/sabelotodo.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/sospecha.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/preocupada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Guardia",
+        "text": "¿Un qué?"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_charla_03"
+    },
+    {
+      "scene_id": "cap03_charla_03",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/sabelotodo.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/sospecha.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/preocupada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "Si un prisionero tiene una queja, ¿a quién se la manda? ¿Hay un ticket, un formulario, alguien de recursos humanos?"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_charla_04"
+    },
+    {
+      "scene_id": "cap03_charla_04",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/sabelotodo.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/sospecha.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/preocupada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Guardia",
+        "text": "Hay un garrote."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_charla_05"
+    },
+    {
+      "scene_id": "cap03_charla_05",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/burla.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/preocupada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "Perfecto. Muy claro el proceso."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_charla_06"
+    },
+    {
+      "scene_id": "cap03_charla_06",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/burla.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/preocupada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "El guardia abre la celda para demostrarle el proceso. Cami no lo deja terminar la demostración."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_pelea_calabozo_01"
+    },
+    {
+      "scene_id": "cap03_rendicion_01",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/verguenza1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/impactada.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "¡Guardia! Quiero hablar con el Rey. Seguro podemos negociar."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_rendicion_02"
+    },
+    {
+      "scene_id": "cap03_rendicion_02",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/verguenza1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/impactada.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "Jair, no."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_rendicion_03"
+    },
+    {
+      "scene_id": "cap03_rendicion_03",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/verguenza1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/impactada.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Se lo llevan solo. A las dos las dejan en la celda, porque el Rey no las pidió todavía."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_rendicion_04"
+    },
+    {
+      "scene_id": "cap03_rendicion_04",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/verguenza1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/impactada.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> Usuario entregado voluntariamente. Prioridad: baja. Tiempo de respuesta estimado: indefinido."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_rendicion_05"
+    },
+    {
+      "scene_id": "cap03_rendicion_05",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/verguenza1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/impactada.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Lo sientan en una sala de espera. Hay una máquina que da números. Le toca el 4.096."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_rendicion_06"
+    },
+    {
+      "scene_id": "cap03_rendicion_06",
+      "chapter": 3,
+      "background": "PANTALLA:negro",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": null,
+        "text": "Ticket cerrado"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": null,
+      "ending": "bad_cap03_rendicion"
+    },
+    {
+      "scene_id": "cap03_pelea_calabozo_01",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/furia.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/enojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Bajan por la escalera de caracol: dos, cuatro, seis guardias. Y detrás, alguien con una capa más cara."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_escaleras_01",
+      "batalla": "cap03_calabozo",
+      "batalla_derrota": "cap03_bad_calabozo_01"
+    },
+    {
+      "scene_id": "cap03_bad_calabozo_01",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/dolor.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Los arrastran de vuelta a la celda. Esta vez, con cadenas."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_bad_calabozo_02"
+    },
+    {
+      "scene_id": "cap03_bad_calabozo_02",
+      "chapter": 3,
+      "background": "PLACEHOLDER:calabozo_fortaleza",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/dolor.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> Intento de fuga registrado. Reintentos disponibles: 0."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_bad_calabozo_03"
+    },
+    {
+      "scene_id": "cap03_bad_calabozo_03",
+      "chapter": 3,
+      "background": "PANTALLA:negro",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": null,
+        "text": "Reintento fallido"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": null,
+      "ending": "bad_cap03_calabozo"
+    },
+    {
+      "scene_id": "cap03_escaleras_01",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_escaleras",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/base.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "La escalera sube en espiral por dentro de la torre. Cada descanso tiene un estandarte con el escudo del Rey: una corona encima de una tabla."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": "audio/musica/serene.mp3",
+      "ui_effect": null,
+      "next": "cap03_escaleras_02"
+    },
+    {
+      "scene_id": "cap03_escaleras_02",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_escaleras",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/base.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "¿Una tabla? ¿Su escudo es una tabla?"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_escaleras_03"
+    },
+    {
+      "scene_id": "cap03_escaleras_03",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_escaleras",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Rikka",
+        "text": "Dicen que ahí anota todo lo que conquista. Reinos, dimensiones, gente. Si estás en su tabla, le perteneces."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_escaleras_04"
+    },
+    {
+      "scene_id": "cap03_escaleras_04",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_escaleras",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/sabelotodo.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "Una base de datos con corona. Lo más aterrador que vi en mi vida."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_escaleras_05"
+    },
+    {
+      "scene_id": "cap03_escaleras_05",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_escaleras",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/sabelotodo.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/sospecha.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "¿Y nosotros estamos en esa tabla?"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_escaleras_06"
+    },
+    {
+      "scene_id": "cap03_escaleras_06",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_escaleras",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/sabelotodo.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/sospecha.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Rikka",
+        "text": "No lo sé. Espero que no."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_escaleras_07"
+    },
+    {
+      "scene_id": "cap03_escaleras_07",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_escaleras",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/sabelotodo.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/sospecha.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "En el piso −1 hay una puerta de hierro con un cartel: «Montacargas. Solo personal autorizado»."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_escaleras_08"
+    },
+    {
+      "scene_id": "cap03_escaleras_08",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_escaleras",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/orgulloso.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/sospecha.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "Un montacargas. Nos ahorra seis pisos."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_escaleras_09"
+    },
+    {
+      "scene_id": "cap03_escaleras_09",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_escaleras",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/orgulloso.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/fria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/preocupada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "Nos ahorra seis pisos o la vida entera. Mira las cuerdas."
+      },
+      "choices": [
+        {
+          "text": "Seguir por la escalera",
+          "next": "cap03_cuarteles_01"
+        },
+        {
+          "text": "Tomar el montacargas",
+          "next": "cap03_montacargas_01"
+        }
+      ],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": null
+    },
+    {
+      "scene_id": "cap03_montacargas_01",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_escaleras",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/orgulloso.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/impactada.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/sorprendida.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "Las cuerdas aguantan. Todo aguanta hasta que no."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_montacargas_02"
+    },
+    {
+      "scene_id": "cap03_montacargas_02",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_escaleras",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/orgulloso.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/impactada.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/sorprendida.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Suben un piso. Dos. En el tercero, algo cruje con el sonido exacto de una decisión mal tomada."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_montacargas_03"
+    },
+    {
+      "scene_id": "cap03_montacargas_03",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_escaleras",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/orgulloso.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/impactada.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/sorprendida.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> Último mantenimiento: hace 512 años."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_montacargas_04"
+    },
+    {
+      "scene_id": "cap03_montacargas_04",
+      "chapter": 3,
+      "background": "PANTALLA:negro",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": null,
+        "text": "Sin mantenimiento"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": null,
+      "ending": "bad_cap03_montacargas"
+    },
+    {
+      "scene_id": "cap03_cuarteles_01",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_cuarteles",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "El piso uno son los cuarteles. Literas, armaduras colgadas, olor a sudor de varios siglos. Y soldados. Muchos."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_cuarteles_02"
+    },
+    {
+      "scene_id": "cap03_cuarteles_02",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_cuarteles",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> Alerta: prisioneros fuera de su celda. Todas las unidades, al piso uno."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_cuarteles_03"
+    },
+    {
+      "scene_id": "cap03_cuarteles_03",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_cuarteles",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/burla.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "Qué bueno. Ahora vienen todos juntos y no tenemos que buscarlos."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_cuarteles_04"
+    },
+    {
+      "scene_id": "cap03_cuarteles_04",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_cuarteles",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/burla.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/orgullosa.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Rikka",
+        "text": "Sin mi daga peleo con los puños. Una sacerdotisa de la Primavera también aprende eso."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_cuarteles_05"
+    },
+    {
+      "scene_id": "cap03_cuarteles_05",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_cuarteles",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/burla.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/orgullosa.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "Yo aprendí a hacer capturas de pantalla. No sé si sirve."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_biblioteca_01",
+      "batalla": "cap03_cuarteles",
+      "batalla_derrota": "cap03_bad_cuarteles_01"
+    },
+    {
+      "scene_id": "cap03_bad_cuarteles_01",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_cuarteles",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/dolor.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Eran demasiados. Siempre son demasiados."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_bad_cuarteles_02"
+    },
+    {
+      "scene_id": "cap03_bad_cuarteles_02",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_cuarteles",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/dolor.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> Bajas en el bando enemigo: aceptables."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_bad_cuarteles_03"
+    },
+    {
+      "scene_id": "cap03_bad_cuarteles_03",
+      "chapter": 3,
+      "background": "PANTALLA:negro",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": null,
+        "text": "Bajas aceptables"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": null,
+      "ending": "bad_cap03_cuarteles"
+    },
+    {
+      "scene_id": "cap03_biblioteca_01",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_biblioteca_oscura",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/preocupada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "El piso tres es una biblioteca. O lo era: los estantes están llenos de libros en blanco, y la tinta se juntó en el piso como un charco negro."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_biblioteca_02"
+    },
+    {
+      "scene_id": "cap03_biblioteca_02",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_biblioteca_oscura",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/impactada.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/preocupada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "Esto ya lo vi. En el Bastión. La cosa de tinta que se arrastraba."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_biblioteca_03"
+    },
+    {
+      "scene_id": "cap03_biblioteca_03",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_biblioteca_oscura",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/impactada.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/preocupada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "El charco se levanta. Tiene forma de algo que alguna vez quiso ser una persona."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_biblioteca_04"
+    },
+    {
+      "scene_id": "cap03_biblioteca_04",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_biblioteca_oscura",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/impactada.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/preocupada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> Contenido sin registrar detectado. Asignando forma: sombra."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_biblioteca_05"
+    },
+    {
+      "scene_id": "cap03_biblioteca_05",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_biblioteca_oscura",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/furia.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/enojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Rikka",
+        "text": "¿Por qué un rey tiene esto en su biblioteca?"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_biblioteca_06"
+    },
+    {
+      "scene_id": "cap03_biblioteca_06",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_biblioteca_oscura",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/furia.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/enojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "Porque es lo que pasa con los libros que nadie termina de escribir."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_biblioteca_07"
+    },
+    {
+      "scene_id": "cap03_biblioteca_07",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_biblioteca_oscura",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/furia.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/enojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "No sabe por qué lo dijo. Le suena a algo que ya pensó antes, mirando una carpeta llena de borradores."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_arsenal_01",
+      "batalla": "cap03_sombras",
+      "batalla_derrota": "cap03_bad_sombras_01"
+    },
+    {
+      "scene_id": "cap03_bad_sombras_01",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_biblioteca_oscura",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/dolor.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "La tinta los cubre. Primero los pies, después todo lo demás."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_bad_sombras_02"
+    },
+    {
+      "scene_id": "cap03_bad_sombras_02",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_biblioteca_oscura",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/dolor.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> Modo oscuro activado. No se puede desactivar."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_bad_sombras_03"
+    },
+    {
+      "scene_id": "cap03_bad_sombras_03",
+      "chapter": 3,
+      "background": "PANTALLA:negro",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": null,
+        "text": "Modo oscuro"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": null,
+      "ending": "bad_cap03_sombras"
+    },
+    {
+      "scene_id": "cap03_arsenal_01",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_arsenal",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/base.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "El piso cinco. El arsenal. Paredes enteras de armas: hachas, lanzas, armaduras vacías que parecen mirarlos."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_arsenal_02"
+    },
+    {
+      "scene_id": "cap03_arsenal_02",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_arsenal",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/orgulloso.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/sorprendida.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Rikka",
+        "text": "Mira, Jair. Trofeos. Son armas de los reinos que el Rey conquistó."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_arsenal_03"
+    },
+    {
+      "scene_id": "cap03_arsenal_03",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_arsenal",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/orgulloso.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/sorprendida.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "En el centro, sobre un pedestal, la tela. Debajo, una empuñadura que zumba bajito, como un servidor en un cuarto cerrado."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_arsenal_04"
+    },
+    {
+      "scene_id": "cap03_arsenal_04",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_arsenal",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/orgulloso.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/sorprendida.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "La DELETE."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_arsenal_05"
+    },
+    {
+      "scene_id": "cap03_arsenal_05",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_arsenal",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/orgulloso.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/sospecha.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/sorprendida.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Al lado del pedestal hay un hacha dorada enorme. Brilla mucho más. Tiene pinta de arma legendaria."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_arsenal_06"
+    },
+    {
+      "scene_id": "cap03_arsenal_06",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_arsenal",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/orgulloso.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/sospecha.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/sorprendida.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "Ni se te ocurra."
+      },
+      "choices": [
+        {
+          "text": "Ir directo por la espada",
+          "next": "cap03_pelea_arsenal_01"
+        },
+        {
+          "text": "Agarrar el hacha dorada",
+          "next": "cap03_trofeo_01"
+        }
+      ],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": null
+    },
+    {
+      "scene_id": "cap03_trofeo_01",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_arsenal",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/orgulloso.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/impactada.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/sorprendida.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "Solo quiero ver cuánto pesa."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_trofeo_02"
+    },
+    {
+      "scene_id": "cap03_trofeo_02",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_arsenal",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/orgulloso.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/impactada.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/sorprendida.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Pesa más de lo que parece. Pesa, sobre todo, la maldición que tiene encima."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_trofeo_03"
+    },
+    {
+      "scene_id": "cap03_trofeo_03",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_arsenal",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/orgulloso.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/impactada.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/sorprendida.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> Objeto no compatible con el usuario. Garantía: anulada."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_trofeo_04"
+    },
+    {
+      "scene_id": "cap03_trofeo_04",
+      "chapter": 3,
+      "background": "PANTALLA:negro",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": null,
+        "text": "Garantía anulada"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": null,
+      "ending": "bad_cap03_trofeo"
+    },
+    {
+      "scene_id": "cap03_pelea_arsenal_01",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_arsenal",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/base.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/furia.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/enojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Jair estira la mano hacia la espada. Una voz desde la puerta lo detiene."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_pelea_arsenal_02"
+    },
+    {
+      "scene_id": "cap03_pelea_arsenal_02",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_arsenal",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/base.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/furia.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/enojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Capitán",
+        "text": "Nadie toca eso hasta que la vea el Rey. Órdenes."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_pelea_arsenal_03"
+    },
+    {
+      "scene_id": "cap03_pelea_arsenal_03",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_arsenal",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/base.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/furia.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/enojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "Qué lástima. Nosotros no recibimos órdenes de nadie."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_espada_01",
+      "batalla": "cap03_arsenal",
+      "batalla_derrota": "cap03_bad_arsenal_01"
+    },
+    {
+      "scene_id": "cap03_bad_arsenal_01",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_arsenal",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/dolor.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "La espada sigue en el pedestal. Tan cerca."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_bad_arsenal_02"
+    },
+    {
+      "scene_id": "cap03_bad_arsenal_02",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_arsenal",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/dolor.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> Acceso denegado. Permisos insuficientes."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_bad_arsenal_03"
+    },
+    {
+      "scene_id": "cap03_bad_arsenal_03",
+      "chapter": 3,
+      "background": "PANTALLA:negro",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": null,
+        "text": "Acceso denegado"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": null,
+      "ending": "bad_cap03_arsenal"
+    },
+    {
+      "scene_id": "cap03_espada_01",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_arsenal",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/base.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Jair toma la espada. El zumbido se apaga, como si lo hubiera estado esperando."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_espada_02"
+    },
+    {
+      "scene_id": "cap03_espada_02",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_arsenal",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/base.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> Herramienta: DELETE. Propietario: usuario. Sesión del Oráculo: todavía activa."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_espada_03"
+    },
+    {
+      "scene_id": "cap03_espada_03",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_arsenal",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/orgulloso.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/sonrojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Rikka",
+        "text": "Te queda bien. Como si fuera tuya."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_espada_04"
+    },
+    {
+      "scene_id": "cap03_espada_04",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_arsenal",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/verguenza1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/burla.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/sonrojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "Le queda como a un cajero con una katana. Pero sirve."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_espada_05"
+    },
+    {
+      "scene_id": "cap03_espada_05",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_arsenal",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "Arriba está el trono. Y el Rey."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_espada_06"
+    },
+    {
+      "scene_id": "cap03_espada_06",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_arsenal",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "Y el que me quitó a mis padres."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_espada_07"
+    },
+    {
+      "scene_id": "cap03_espada_07",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_arsenal",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Nadie dice nada más. Suben."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_trono_01"
+    },
+    {
+      "scene_id": "cap03_trono_01",
+      "chapter": 3,
+      "background": "PLACEHOLDER:sala_del_trono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "rey",
+          "sprite": "PLACEHOLDER:rey_yelmo",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "La sala del trono es enorme y casi vacía. Al fondo, en un trono de metal y raíces de la Primavera, alguien los espera con un yelmo cerrado."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": "silencio",
+      "ui_effect": null,
+      "next": "cap03_trono_02"
+    },
+    {
+      "scene_id": "cap03_trono_02",
+      "chapter": 3,
+      "background": "PLACEHOLDER:sala_del_trono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "rey",
+          "sprite": "PLACEHOLDER:rey_yelmo",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Rey Malvado",
+        "text": "Llegaron solos. Me ahorran los guardias."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_trono_03"
+    },
+    {
+      "scene_id": "cap03_trono_03",
+      "chapter": 3,
+      "background": "PLACEHOLDER:sala_del_trono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "rey",
+          "sprite": "PLACEHOLDER:rey_yelmo",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Rey Malvado",
+        "text": "Tú. El que no está en ninguna tabla. Y tú, la de azul: la llave."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_trono_04"
+    },
+    {
+      "scene_id": "cap03_trono_04",
+      "chapter": 3,
+      "background": "PLACEHOLDER:sala_del_trono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/furia.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "¿La llave de qué?"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_trono_05"
+    },
+    {
+      "scene_id": "cap03_trono_05",
+      "chapter": 3,
+      "background": "PLACEHOLDER:sala_del_trono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "rey",
+          "sprite": "PLACEHOLDER:rey_yelmo",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Rey Malvado",
+        "text": "Del NEXUS. THE NEXUS: todos los mundos que conocen, cosidos uno con otro. Las estaciones, el espacio, las islas. Son un solo lugar con muchas puertas."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_trono_06"
+    },
+    {
+      "scene_id": "cap03_trono_06",
+      "chapter": 3,
+      "background": "PLACEHOLDER:sala_del_trono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "rey",
+          "sprite": "PLACEHOLDER:rey_yelmo",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Rey Malvado",
+        "text": "Y tú abres las puertas, niña. Por eso te busqué. Por eso tuve que llevarme a tus padres."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_trono_07"
+    },
+    {
+      "scene_id": "cap03_trono_07",
+      "chapter": 3,
+      "background": "PLACEHOLDER:sala_del_trono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/furia.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/enojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Rikka",
+        "text": "Tú eras el rey de la Primavera. Mi gente te quería. ¿Qué te pasó?"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_trono_08"
+    },
+    {
+      "scene_id": "cap03_trono_08",
+      "chapter": 3,
+      "background": "PLACEHOLDER:sala_del_trono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "rey",
+          "sprite": "PLACEHOLDER:rey_yelmo",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/enojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Rey Malvado",
+        "text": "Me mejoraron, sacerdotisa. Alguien escribió encima de lo que yo era. Ahora veo más lejos que cualquier rey."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_trono_09"
+    },
+    {
+      "scene_id": "cap03_trono_09",
+      "chapter": 3,
+      "background": "PLACEHOLDER:sala_del_trono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "rey",
+          "sprite": "PLACEHOLDER:rey_yelmo",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/enojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Rey Malvado",
+        "text": "Y lo que veo es esto: con la llave y con él, puedo llegar adonde ninguna puerta llega. A su mundo."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_trono_10"
+    },
+    {
+      "scene_id": "cap03_trono_10",
+      "chapter": 3,
+      "background": "PLACEHOLDER:sala_del_trono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "rey",
+          "sprite": "PLACEHOLDER:rey_yelmo",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/enojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "El yelmo gira hacia Jair. Por un segundo, Jair tiene la impresión absurda de que debajo hay alguien conocido."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_trono_11"
+    },
+    {
+      "scene_id": "cap03_trono_11",
+      "chapter": 3,
+      "background": "PLACEHOLDER:sala_del_trono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "rey",
+          "sprite": "PLACEHOLDER:rey_yelmo",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/enojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "No vas a llegar a ningún lado. Tenemos tu espada."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_trono_12"
+    },
+    {
+      "scene_id": "cap03_trono_12",
+      "chapter": 3,
+      "background": "PLACEHOLDER:sala_del_trono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "rey",
+          "sprite": "PLACEHOLDER:rey_yelmo",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/enojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Rey Malvado",
+        "text": "Tienen una espada. Veamos si saben usarla."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_gigante_01",
+      "batalla": "cap03_rey",
+      "batalla_derrota": "cap03_bad_rey_01"
+    },
+    {
+      "scene_id": "cap03_gigante_01",
+      "chapter": 3,
+      "background": "PLACEHOLDER:sala_del_trono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "rey",
+          "sprite": "PLACEHOLDER:rey_gigante",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/preocupada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "El Rey cae de rodillas. Y en vez de rendirse, crece."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": "flash",
+      "next": "cap03_gigante_02"
+    },
+    {
+      "scene_id": "cap03_gigante_02",
+      "chapter": 3,
+      "background": "PLACEHOLDER:sala_del_trono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "rey",
+          "sprite": "PLACEHOLDER:rey_gigante",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/preocupada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "El yelmo toca el techo. Las paredes de la sala se corren para hacerle lugar, como si la fortaleza entera fuera parte de su cuerpo."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_gigante_03"
+    },
+    {
+      "scene_id": "cap03_gigante_03",
+      "chapter": 3,
+      "background": "PLACEHOLDER:sala_del_trono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "rey",
+          "sprite": "PLACEHOLDER:rey_gigante",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/preocupada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> Advertencia: entidad excede los límites del mapa."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_gigante_04"
+    },
+    {
+      "scene_id": "cap03_gigante_04",
+      "chapter": 3,
+      "background": "PLACEHOLDER:sala_del_trono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/impactada.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/preocupada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "Esto no es justo. Esto no es nada justo."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_delete_01",
+      "batalla": "cap03_rey_gigante",
+      "batalla_derrota": "cap03_bad_rey_01"
+    },
+    {
+      "scene_id": "cap03_bad_rey_01",
+      "chapter": 3,
+      "background": "PLACEHOLDER:sala_del_trono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "rey",
+          "sprite": "PLACEHOLDER:rey_yelmo",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Rey Malvado",
+        "text": "Ya lo sabía. No saben usarla."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_bad_rey_02"
+    },
+    {
+      "scene_id": "cap03_bad_rey_02",
+      "chapter": 3,
+      "background": "PLACEHOLDER:sala_del_trono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "rey",
+          "sprite": "PLACEHOLDER:rey_yelmo",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> Sesión finalizada por el administrador."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_bad_rey_03"
+    },
+    {
+      "scene_id": "cap03_bad_rey_03",
+      "chapter": 3,
+      "background": "PANTALLA:negro",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": null,
+        "text": "Fin de la sesión"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": null,
+      "ending": "bad_cap03_rey"
+    },
+    {
+      "scene_id": "cap03_delete_01",
+      "chapter": 3,
+      "background": "PLACEHOLDER:sala_del_trono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "rey",
+          "sprite": "PLACEHOLDER:rey_gigante",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/preocupada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "El Rey gigante levanta una mano del tamaño de una casa. Debajo están Cami y Rikka, en el piso, sin poder moverse."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_delete_02"
+    },
+    {
+      "scene_id": "cap03_delete_02",
+      "chapter": 3,
+      "background": "PLACEHOLDER:sala_del_trono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/dolor.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Rikka",
+        "text": "¡Jair!"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_delete_03"
+    },
+    {
+      "scene_id": "cap03_delete_03",
+      "chapter": 3,
+      "background": "PLACEHOLDER:sala_del_trono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/dolor.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "No hay tiempo para pensar. Jair corre, salta con una agilidad que no tiene, y clava la espada en el pecho del Rey."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_delete_04"
+    },
+    {
+      "scene_id": "cap03_delete_04",
+      "chapter": 3,
+      "background": "PANTALLA:negro",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> DELETE"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": "flash",
+      "next": "cap03_delete_05"
+    },
+    {
+      "scene_id": "cap03_delete_05",
+      "chapter": 3,
+      "background": "PANTALLA:negro",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> DELETE FROM"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_delete_06"
+    },
+    {
+      "scene_id": "cap03_delete_06",
+      "chapter": 3,
+      "background": "PANTALLA:negro",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> DELETE FROM tabla_del_rey"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_delete_07"
+    },
+    {
+      "scene_id": "cap03_delete_07",
+      "chapter": 3,
+      "background": "PANTALLA:negro",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> DELETE FROM tabla_del_rey;"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_delete_08"
+    },
+    {
+      "scene_id": "cap03_delete_08",
+      "chapter": 3,
+      "background": "PANTALLA:negro",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": null,
+        "text": "Jair mira la línea. Algo le falta. Lo sabe como se saben estas cosas: un segundo tarde."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_delete_09"
+    },
+    {
+      "scene_id": "cap03_delete_09",
+      "chapter": 3,
+      "background": "PANTALLA:negro",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "El WHERE."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_delete_10"
+    },
+    {
+      "scene_id": "cap03_delete_10",
+      "chapter": 3,
+      "background": "PANTALLA:negro",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "Me faltó el WHERE."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_delete_11"
+    },
+    {
+      "scene_id": "cap03_delete_11",
+      "chapter": 3,
+      "background": "PANTALLA:negro",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> Ejecutando sentencia. Registros afectados: todos."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_delete_12"
+    },
+    {
+      "scene_id": "cap03_delete_12",
+      "chapter": 3,
+      "background": "PLACEHOLDER:sala_del_trono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "rey",
+          "sprite": "PLACEHOLDER:rey_gigante",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Rey Malvado",
+        "text": "¿Qué hiciste, ingeniero?"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_delete_13"
+    },
+    {
+      "scene_id": "cap03_delete_13",
+      "chapter": 3,
+      "background": "PLACEHOLDER:sala_del_trono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "rey",
+          "sprite": "PLACEHOLDER:rey_gigante",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "El Rey se deshace desde los pies, en cuadros de colores, como una imagen que no terminó de cargar. Detrás de él, la sala. Detrás de la sala, la fortaleza. Detrás de la fortaleza, todo."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_delete_14"
+    },
+    {
+      "scene_id": "cap03_delete_14",
+      "chapter": 3,
+      "background": "PLACEHOLDER:sala_del_trono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "rey",
+          "sprite": "PLACEHOLDER:rey_gigante",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> Eliminando: Primavera. Invierno. Otoño. Verano. Federación. Resistencia. Islas. Espacio dimensional."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_delete_15"
+    },
+    {
+      "scene_id": "cap03_delete_15",
+      "chapter": 3,
+      "background": "PLACEHOLDER:sala_del_trono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "rey",
+          "sprite": "PLACEHOLDER:rey_gigante",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "No, no, no. Ctrl+Z. ¡Ctrl+Z!"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_delete_16"
+    },
+    {
+      "scene_id": "cap03_delete_16",
+      "chapter": 3,
+      "background": "PLACEHOLDER:sala_del_trono",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "rey",
+          "sprite": "PLACEHOLDER:rey_gigante",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> Esta acción no se puede deshacer."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_vacio_01"
+    },
+    {
+      "scene_id": "cap03_vacio_01",
+      "chapter": 3,
+      "background": "PLACEHOLDER:vacio_blanco",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/impactada.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Blanco. Ni piso, ni cielo, ni horizonte. Solo blanco, y tres personas paradas en él."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_vacio_02",
+      "transicion": "blanco"
+    },
+    {
+      "scene_id": "cap03_vacio_02",
+      "chapter": 3,
+      "background": "PLACEHOLDER:vacio_blanco",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/impactada.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "¿Seguimos… aquí?"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_vacio_03"
+    },
+    {
+      "scene_id": "cap03_vacio_03",
+      "chapter": 3,
+      "background": "PLACEHOLDER:vacio_blanco",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/impactada.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Rikka",
+        "text": "Mi reino. Mis hermanas. La Primavera."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_vacio_04"
+    },
+    {
+      "scene_id": "cap03_vacio_04",
+      "chapter": 3,
+      "background": "PLACEHOLDER:vacio_blanco",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/impactada.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Rikka no llora. Mira el blanco como se mira un lugar donde hubo una casa."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_vacio_05"
+    },
+    {
+      "scene_id": "cap03_vacio_05",
+      "chapter": 3,
+      "background": "PLACEHOLDER:vacio_blanco",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/impactada.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> Registros restantes: 3."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_vacio_06"
+    },
+    {
+      "scene_id": "cap03_vacio_06",
+      "chapter": 3,
+      "background": "PLACEHOLDER:vacio_blanco",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "Tres. Somos nosotros. Ustedes deberían haber… La tabla entera…"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_vacio_07"
+    },
+    {
+      "scene_id": "cap03_vacio_07",
+      "chapter": 3,
+      "background": "PLACEHOLDER:vacio_blanco",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "No sé por qué seguimos. No me importa. ¿Cómo salimos de aquí?"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_vacio_08"
+    },
+    {
+      "scene_id": "cap03_vacio_08",
+      "chapter": 3,
+      "background": "PLACEHOLDER:vacio_blanco",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Jair se acuerda de la Grieta. Del ruido que hizo cuando Cami estaba cerca. De cómo se abrió cuando él quiso irse."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_vacio_09"
+    },
+    {
+      "scene_id": "cap03_vacio_09",
+      "chapter": 3,
+      "background": "PLACEHOLDER:vacio_blanco",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "Tú abres las puertas. Lo dijo él."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_vacio_10"
+    },
+    {
+      "scene_id": "cap03_vacio_10",
+      "chapter": 3,
+      "background": "PLACEHOLDER:vacio_blanco",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/sospecha.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/preocupada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "¿Y tú qué eres? ¿El que gira la llave?"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_vacio_11"
+    },
+    {
+      "scene_id": "cap03_vacio_11",
+      "chapter": 3,
+      "background": "PLACEHOLDER:vacio_blanco",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/sospecha.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/preocupada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "Supongo. Dame la mano."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_vacio_12"
+    },
+    {
+      "scene_id": "cap03_vacio_12",
+      "chapter": 3,
+      "background": "PLACEHOLDER:vacio_blanco",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/sospecha.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/preocupada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Ella se la da. Esta vez, Jair no espera que pase algo: decide que pase."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": "luz_carga",
+      "next": "cap03_vacio_13"
+    },
+    {
+      "scene_id": "cap03_vacio_13",
+      "chapter": 3,
+      "background": "PLACEHOLDER:vacio_blanco",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/sospecha.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/preocupada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> Llave: activada a voluntad. Paso: abierto. Destino: usuario."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_vacio_14"
+    },
+    {
+      "scene_id": "cap03_vacio_14",
+      "chapter": 3,
+      "background": "PLACEHOLDER:vacio_blanco",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/sospecha.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/preocupada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Frente a ellos se abre una grieta. Del otro lado se ve un cuarto chico, una computadora encendida y una silla con alguien dormido."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_vacio_15"
+    },
+    {
+      "scene_id": "cap03_vacio_15",
+      "chapter": 3,
+      "background": "PLACEHOLDER:vacio_blanco",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/preocupada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Jair entiende que puede cruzar. Y entiende, también, que nadie le dijo que ellas pudieran hacerlo."
+      },
+      "choices": [
+        {
+          "text": "Cruzar solo",
+          "next": "cap03_solo_01"
+        },
+        {
+          "text": "Cruzar con las dos",
+          "next": "cap03_despertar_01"
+        }
+      ],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": null
+    },
+    {
+      "scene_id": "cap03_solo_01",
+      "chapter": 3,
+      "background": "PLACEHOLDER:vacio_blanco",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/impactada.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "Lo siento."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_solo_02"
+    },
+    {
+      "scene_id": "cap03_solo_02",
+      "chapter": 3,
+      "background": "PLACEHOLDER:vacio_blanco",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/impactada.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/triste.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "No espera respuesta. Cruza. Detrás, la grieta se cierra sobre dos caras que no alcanza a mirar."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_solo_03"
+    },
+    {
+      "scene_id": "cap03_solo_03",
+      "chapter": 3,
+      "background": "PLACEHOLDER:departamento_manana",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Jair despierta frente a la computadora. Le duele el cuello. El cuarto huele a encierro."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_solo_04",
+      "transicion": "blanco"
+    },
+    {
+      "scene_id": "cap03_solo_04",
+      "chapter": 3,
+      "background": "PLACEHOLDER:pc_genesis_restaurar",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> GENESIS: se detectó la eliminación de todos los registros. Se puede restaurar."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_solo_05"
+    },
+    {
+      "scene_id": "cap03_solo_05",
+      "chapter": 3,
+      "background": "PLACEHOLDER:pc_genesis_restaurar",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> Completa: 8 exabytes. Tiempo estimado: 8.112 años. Compactada: 5 petabytes. Tiempo estimado: 6 meses."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_solo_06"
+    },
+    {
+      "scene_id": "cap03_solo_06",
+      "chapter": 3,
+      "background": "PLACEHOLDER:pc_genesis_restaurar",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": null,
+        "text": "Hay tres botones: «Completa», «Compactada» y «Cancelar»."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_solo_07"
+    },
+    {
+      "scene_id": "cap03_solo_07",
+      "chapter": 3,
+      "background": "PLACEHOLDER:pc_genesis_restaurar",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": null,
+        "text": "Jair mueve el mouse. El cursor se queda un rato encima de «Compactada»."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_solo_08"
+    },
+    {
+      "scene_id": "cap03_solo_08",
+      "chapter": 3,
+      "background": "PLACEHOLDER:pc_genesis_restaurar",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": null,
+        "text": "Hace clic en «Cancelar»."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_solo_09"
+    },
+    {
+      "scene_id": "cap03_solo_09",
+      "chapter": 3,
+      "background": "PLACEHOLDER:departamento_manana",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Se ducha. Se viste. Llega tarde al trabajo y nadie le pregunta nada. Esa noche no se queda despierto. La siguiente, tampoco."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_solo_10"
+    },
+    {
+      "scene_id": "cap03_solo_10",
+      "chapter": 3,
+      "background": "PANTALLA:negro",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": null,
+        "text": "Cancelar"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": null,
+      "ending": "alt_1"
+    },
+    {
+      "scene_id": "cap03_despertar_01",
+      "chapter": 3,
+      "background": "PLACEHOLDER:vacio_blanco",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/preocupada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "Vamos. Las dos."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_despertar_02"
+    },
+    {
+      "scene_id": "cap03_despertar_02",
+      "chapter": 3,
+      "background": "PLACEHOLDER:vacio_blanco",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/preocupada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Rikka",
+        "text": "¿Adónde?"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_despertar_03"
+    },
+    {
+      "scene_id": "cap03_despertar_03",
+      "chapter": 3,
+      "background": "PLACEHOLDER:vacio_blanco",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/preocupada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "A mi casa. Les advierto que es chica."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_despertar_04"
+    },
+    {
+      "scene_id": "cap03_despertar_04",
+      "chapter": 3,
+      "background": "PLACEHOLDER:departamento_manana",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Jair despierta frente a la computadora, con la cara pegada al teclado. Tiene la marca de las teclas en la mejilla."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": "silencio",
+      "ui_effect": null,
+      "next": "cap03_despertar_05",
+      "transicion": "blanco"
+    },
+    {
+      "scene_id": "cap03_despertar_05",
+      "chapter": 3,
+      "background": "PLACEHOLDER:departamento_manana",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "¿Me quedé dormido? Qué sueño más largo."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_despertar_06"
+    },
+    {
+      "scene_id": "cap03_despertar_06",
+      "chapter": 3,
+      "background": "PLACEHOLDER:departamento_manana",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "La pantalla está en negro. En la mesa, el celular vibra."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_despertar_07"
+    },
+    {
+      "scene_id": "cap03_despertar_07",
+      "chapter": 3,
+      "background": "PLACEHOLDER:departamento_manana",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Son las 9:36. Entraba a las nueve."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_despertar_08"
+    },
+    {
+      "scene_id": "cap03_despertar_08",
+      "chapter": 3,
+      "background": "PLACEHOLDER:departamento_manana",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "No. No, no, no. Tarde otra vez."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_despertar_09"
+    },
+    {
+      "scene_id": "cap03_despertar_09",
+      "chapter": 3,
+      "background": "PLACEHOLDER:departamento_manana",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> GENESIS: migración completada. 2 entidades movidas a la tabla «jair»."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_despertar_10"
+    },
+    {
+      "scene_id": "cap03_despertar_10",
+      "chapter": 3,
+      "background": "PLACEHOLDER:departamento_manana",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "¿Migración de qué?"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_despertar_11"
+    },
+    {
+      "scene_id": "cap03_despertar_11",
+      "chapter": 3,
+      "background": "PLACEHOLDER:departamento_manana",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Detrás de él, alguien respira. Y alguien más contesta, en voz baja, algo sobre el olor del cuarto."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_despertar_12"
+    },
+    {
+      "scene_id": "cap03_despertar_12",
+      "chapter": 3,
+      "background": "PLACEHOLDER:departamento_manana",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Jair se da vuelta despacio."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_despertar_13"
+    },
+    {
+      "scene_id": "cap03_despertar_13",
+      "chapter": 3,
+      "background": "PLACEHOLDER:departamento_manana",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/sospecha.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/sorprendida.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Cami y Rikka están en su cuarto."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap03_despertar_14"
+    },
+    {
+      "scene_id": "cap03_despertar_14",
+      "chapter": 3,
+      "background": "PLACEHOLDER:departamento_manana",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/sospecha.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/sorprendida.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "Así que esta es tu casa. Qué lindo: un dios con el cuarto desordenado."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": null,
+      "fin_capitulo": 3
+    }
+  ]
+}

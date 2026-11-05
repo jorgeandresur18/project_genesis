@@ -1,0 +1,161 @@
+{
+  "titulo": "THE KING",
+  "fondo": "PLACEHOLDER:sala_del_trono",
+  "heroes": [
+    "jair",
+    "cami",
+    "rikka"
+  ],
+  "personajes": {
+    "jair": {
+      "nivel": 10
+    },
+    "cami": {
+      "nivel": 17
+    },
+    "rikka": {
+      "nivel": 13
+    }
+  },
+  "enemigos": [
+    "soldado",
+    "rey"
+  ],
+  "horda": {
+    "enemigo": "soldado",
+    "al_inicio": 2,
+    "niveles": [
+      15,
+      15
+    ]
+  },
+  "jefe": {
+    "enemigo": "rey",
+    "nivel": 20
+  },
+  "botin": {
+    "probabilidad": 0.6,
+    "objetos": [
+      "atq",
+      "def",
+      "vida",
+      "vida",
+      "carga",
+      "revivir"
+    ]
+  },
+  "esquivar": 0.5,
+  "hablar": 0.4,
+  "huir": false,
+  "dialogos": {
+    "hablar_ok": [
+      {
+        "quien": "Voz",
+        "texto": "{objetivo} se queda pensando. Pierde su próximo ataque."
+      }
+    ],
+    "hablar_no": [
+      {
+        "quien": "Voz",
+        "texto": "{objetivo} no le hace caso."
+      }
+    ],
+    "esquiva_ok": [
+      {
+        "quien": "Voz",
+        "texto": "¡{quien} lo esquiva!"
+      }
+    ],
+    "botin": [
+      {
+        "quien": "Voz",
+        "texto": "Al {objetivo} se le cae algo: {objeto}. Va a la mochila."
+      }
+    ],
+    "ayuda": [
+      {
+        "quien": "Voz",
+        "texto": "Algo cae del techo y rebota en el piso: {objeto}. Nadie pregunta de dónde. Va a la mochila."
+      }
+    ],
+    "inicio": [
+      {
+        "quien": "Voz",
+        "texto": "> La guardia real protege a su Rey."
+      }
+    ],
+    "refuerzos": [
+      {
+        "quien": "Voz",
+        "texto": "> Refuerzos en camino."
+      }
+    ],
+    "jefe": [
+      {
+        "quien": "Voz",
+        "texto": "> El Rey Malvado se levanta del trono."
+      }
+    ],
+    "jefe_huye": [
+      {
+        "quien": "Voz",
+        "texto": "> El enemigo retrocede."
+      }
+    ],
+    "victoria": [
+      {
+        "quien": "Voz",
+        "texto": "> El Rey cae de rodillas."
+      }
+    ],
+    "derrota": [
+      {
+        "quien": "Voz",
+        "texto": "> Los héroes cayeron."
+      }
+    ],
+    "huir_no": [
+      {
+        "quien": "Voz",
+        "texto": "> No hay salida. Solo hacia arriba."
+      }
+    ],
+    "huir": [
+      {
+        "quien": "Voz",
+        "texto": "> Huyen."
+      }
+    ],
+    "descanso": [
+      {
+        "quien": "Voz",
+        "texto": "> Respiran un segundo."
+      }
+    ],
+    "cae_jair": [
+      {
+        "quien": "Voz",
+        "texto": "> El usuario cayó. Que alguien lo levante."
+      }
+    ]
+  },
+  "objetos": [
+    "atq",
+    "def",
+    "vida",
+    "carga",
+    "caramelo_rancio",
+    "revivir",
+    "veneno_ratas",
+    "condon"
+  ],
+  "ayuda": {
+    "umbral": 0.35,
+    "cae": 0.3,
+    "objeto": "vida",
+    "critico": 0.1
+  },
+  "musica_jefe": "audio/musica/combate_arcade.mp3",
+  "musica": "audio/musica/combate_arcade.mp3",
+  "_nota": "Pelea de relleno del Capítulo 3 (Claude, 2026-11-05): los enemigos y el balance son provisorios; el autor va a crear los suyos."
+}

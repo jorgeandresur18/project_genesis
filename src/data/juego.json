@@ -5,7 +5,7 @@
   "musica_bootcamp": null,
   "version": "1.2.0-dev",
   "payfoe_activo": true,
-  "capitulo_maximo": 2,
+  "capitulo_maximo": 3,
   "torneo_activo": true,
   "demo_publica": {
     "capitulo_maximo": 1,

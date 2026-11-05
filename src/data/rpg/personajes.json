@@ -611,6 +611,132 @@
       "escala": 1.34,
       "sonido": "disparo",
       "cae_en_cebo": 0.3
+    },
+    "rey": {
+      "nombre": "Rey Malvado",
+      "sprite": "batalla/capitan",
+      "jefe": true,
+      "huye_a": 0.3,
+      "base": {
+        "ps": 60,
+        "atq": 7,
+        "def": 6,
+        "vel": 7
+      },
+      "crece": {
+        "ps": 8,
+        "atq": 0.9,
+        "def": 0.8,
+        "vel": 0.3
+      },
+      "distancia": true,
+      "color_disparo": "#ff3b3b",
+      "ataques": [
+        {
+          "nombre": "Ráfaga de blaster",
+          "poder": 4,
+          "balas": [
+            3,
+            5
+          ],
+          "usos": 20,
+          "texto": "El capitán apunta sin apuro y suelta una ráfaga: rayos rojos, uno detrás de otro, hacia {objetivo}."
+        },
+        {
+          "nombre": "Barrido rojo",
+          "poder": 3,
+          "balas": [
+            3,
+            5
+          ],
+          "objetivo": "todos",
+          "usos": 10,
+          "texto": "El capitán barre el hangar con el blaster: rayos rojos para todos."
+        }
+      ],
+      "especial": {
+        "nombre": "Cañón de blaster",
+        "poder": 24,
+        "golpes": 1,
+        "objetivo": "uno",
+        "color": "#ff2a2a",
+        "ojos": [
+          58,
+          27,
+          30,
+          15
+        ],
+        "posicion": "objetivo",
+        "canon": true,
+        "texto": "El capitán hinca una rodilla. El blaster zumba, se calienta, se pone blanco en la punta. Apunta a {objetivo}."
+      },
+      "escala": 1.34,
+      "sonido": "disparo",
+      "cae_en_cebo": 0.3,
+      "_nota": "Ficha provisional (Claude, 2026-11-05): usa la hoja del Capitán hasta que exista el sprite de THE KING."
+    },
+    "rey_gigante": {
+      "nombre": "Rey Malvado (gigante)",
+      "sprite": "batalla/capitan",
+      "jefe": true,
+      "huye_a": 0.3,
+      "base": {
+        "ps": 80,
+        "atq": 7,
+        "def": 6,
+        "vel": 7
+      },
+      "crece": {
+        "ps": 8,
+        "atq": 0.9,
+        "def": 0.8,
+        "vel": 0.3
+      },
+      "distancia": true,
+      "color_disparo": "#ff3b3b",
+      "ataques": [
+        {
+          "nombre": "Ráfaga de blaster",
+          "poder": 4,
+          "balas": [
+            3,
+            5
+          ],
+          "usos": 20,
+          "texto": "El capitán apunta sin apuro y suelta una ráfaga: rayos rojos, uno detrás de otro, hacia {objetivo}."
+        },
+        {
+          "nombre": "Barrido rojo",
+          "poder": 3,
+          "balas": [
+            3,
+            5
+          ],
+          "objetivo": "todos",
+          "usos": 10,
+          "texto": "El capitán barre el hangar con el blaster: rayos rojos para todos."
+        }
+      ],
+      "especial": {
+        "nombre": "Cañón de blaster",
+        "poder": 24,
+        "golpes": 1,
+        "objetivo": "uno",
+        "color": "#ff2a2a",
+        "ojos": [
+          58,
+          27,
+          30,
+          15
+        ],
+        "posicion": "objetivo",
+        "canon": true,
+        "texto": "El capitán hinca una rodilla. El blaster zumba, se calienta, se pone blanco en la punta. Apunta a {objetivo}."
+      },
+      "escala": 2.0100000000000002,
+      "sonido": "disparo",
+      "cae_en_cebo": 0.3,
+      "_nota": "Ficha provisional (Claude, 2026-11-05): usa la hoja del Capitán hasta que exista el sprite de THE KING."
     }
   },
   "objetos": {
@@ -682,25 +808,160 @@
       "tipo": "permanente",
       "icono": "objetos/caramelo_dulce"
     },
-    "revivir_plus": { "nombre": "Elixit++", "tipo": "curacion", "revive": 1, "texto": "{quien} se toma el Elixit++ y vuelve a pararse con toda la vida: +{n} PS.", "icono": "objetos/elixit_plus" },
-    "condon_spartan": { "nombre": "Condón Spartan", "tipo": "tactico", "objetivo": "equipo", "protege": 1, "texto": "Le dan a {quien} un condón Spartan. El próximo golpe no le hace nada a nadie del equipo.", "icono": "objetos/condon_spartan" },
-    "hepatol": { "nombre": "Hepatol", "tipo": "curacion", "quita_veneno": true, "texto": "{quien} se toma el Hepatol. Se le va el veneno.", "icono": "objetos/hepatol" },
-    "galleta_clasica": { "nombre": "Galleta clásica", "tipo": "curacion", "ps": 20, "texto": "{quien} se come una galleta clásica: +{n} PS.", "icono": "objetos/galleta_clasica" },
-    "galleta_arcoiris": { "nombre": "Galleta arcoíris", "tipo": "curacion", "objetivo": "equipo", "ps": 20, "quita_estado": true, "texto": "{quien} comparte la galleta arcoíris: +{n} PS y se le va un estado.", "icono": "objetos/galleta_arcoiris" },
-    "galleta_brownie": { "nombre": "Galleta brownie", "tipo": "curacion", "ps": 50, "quita_estado": true, "texto": "{quien} se come una galleta brownie: +{n} PS y se le va un estado.", "icono": "objetos/galleta_brownie" },
-    "galleta_red_velvet": { "nombre": "Galleta red velvet", "tipo": "curacion", "ps": 35, "quita_estado": true, "texto": "{quien} se come una galleta red velvet: +{n} PS y se le va un estado.", "icono": "objetos/galleta_red_velvet" },
-    "pastelillo_herbal": { "nombre": "Pastelillo herbal", "tipo": "curacion", "cura_toda": true, "confunde_al_comer": 3, "texto": "{quien} se come un pastelillo herbal: +{n} PS. Toda la vida de vuelta… y el mundo se pone raro. Queda confundido.", "icono": "objetos/pastelillo_herbal" },
-    "cebidol": { "nombre": "CeBiDol", "tipo": "permanente", "atq": 2, "def": 2, "texto": "{quien} se toma un CeBiDol. Ataque +2 y defensa +2 para siempre. En el prospecto dice «consulte a su médico». Nadie tiene médico.", "icono": "objetos/cebidol" },
-    "pastillas_felices": { "nombre": "Pastillas felices", "tipo": "tactico", "objetivo": "rival", "confunde": 3, "texto": "Le dan pastillas felices a {quien}. Sonríe, se tambalea y ya no sabe para qué lado pelear.", "icono": "objetos/pastillas_felices" },
-    "flor_pureza": { "nombre": "Flor de pureza", "tipo": "equipo", "espacio": "amuleto", "sin_confusion": true, "texto": "Amuleto. No se puede confundir.", "icono": "objetos/flor_pureza" },
-    "gorro_navidad": { "nombre": "Gorro de navidad", "tipo": "equipo", "espacio": "cabeza", "critico": 0.05, "texto": "Cabeza. +5 % de crítico.", "icono": "objetos/gorro_navidad" },
-    "chaqueta_cuero": { "nombre": "Chaqueta de cuero", "tipo": "equipo", "espacio": "traje", "def": 4, "texto": "Traje. +4 DEF.", "icono": "objetos/chaqueta_cuero" },
-    "chaqueta_jean": { "nombre": "Chaqueta jean", "tipo": "equipo", "espacio": "traje", "def": 2, "vel": 2, "texto": "Traje. +2 DEF, +2 VEL.", "icono": "objetos/chaqueta_jean" },
-    "traje_azul": { "nombre": "Traje de combate azul", "tipo": "equipo", "espacio": "traje", "def": 6, "texto": "Traje. +6 DEF.", "icono": "objetos/traje_azul" },
-    "traje_rojo": { "nombre": "Traje de combate rojo", "tipo": "equipo", "espacio": "traje", "def": 4, "atq": 3, "texto": "Traje. +4 DEF, +3 ATQ.", "icono": "objetos/traje_rojo" },
-    "prendas_sacerdotisa": { "nombre": "Prendas de sacerdotisa", "tipo": "equipo", "espacio": "traje", "def": 5, "resiste_veneno": true, "texto": "Traje. +5 DEF, resiste el veneno.", "icono": "objetos/prendas_sacerdotisa" },
-    "zapatillas_buenas": { "nombre": "Zapatillas buenas", "tipo": "equipo", "espacio": "pies", "vel": 3, "texto": "Pies. +3 VEL.", "icono": "objetos/zapatillas_buenas" },
-    "zapatos_plataforma": { "nombre": "Zapatos de plataforma", "tipo": "equipo", "espacio": "pies", "def": 2, "vel": -1, "texto": "Pies. +2 DEF, −1 VEL.", "icono": "objetos/zapatos_plataforma" }
+    "revivir_plus": {
+      "nombre": "Elixit++",
+      "tipo": "curacion",
+      "revive": 1,
+      "texto": "{quien} se toma el Elixit++ y vuelve a pararse con toda la vida: +{n} PS.",
+      "icono": "objetos/elixit_plus"
+    },
+    "condon_spartan": {
+      "nombre": "Condón Spartan",
+      "tipo": "tactico",
+      "objetivo": "equipo",
+      "protege": 1,
+      "texto": "Le dan a {quien} un condón Spartan. El próximo golpe no le hace nada a nadie del equipo.",
+      "icono": "objetos/condon_spartan"
+    },
+    "hepatol": {
+      "nombre": "Hepatol",
+      "tipo": "curacion",
+      "quita_veneno": true,
+      "texto": "{quien} se toma el Hepatol. Se le va el veneno.",
+      "icono": "objetos/hepatol"
+    },
+    "galleta_clasica": {
+      "nombre": "Galleta clásica",
+      "tipo": "curacion",
+      "ps": 20,
+      "texto": "{quien} se come una galleta clásica: +{n} PS.",
+      "icono": "objetos/galleta_clasica"
+    },
+    "galleta_arcoiris": {
+      "nombre": "Galleta arcoíris",
+      "tipo": "curacion",
+      "objetivo": "equipo",
+      "ps": 20,
+      "quita_estado": true,
+      "texto": "{quien} comparte la galleta arcoíris: +{n} PS y se le va un estado.",
+      "icono": "objetos/galleta_arcoiris"
+    },
+    "galleta_brownie": {
+      "nombre": "Galleta brownie",
+      "tipo": "curacion",
+      "ps": 50,
+      "quita_estado": true,
+      "texto": "{quien} se come una galleta brownie: +{n} PS y se le va un estado.",
+      "icono": "objetos/galleta_brownie"
+    },
+    "galleta_red_velvet": {
+      "nombre": "Galleta red velvet",
+      "tipo": "curacion",
+      "ps": 35,
+      "quita_estado": true,
+      "texto": "{quien} se come una galleta red velvet: +{n} PS y se le va un estado.",
+      "icono": "objetos/galleta_red_velvet"
+    },
+    "pastelillo_herbal": {
+      "nombre": "Pastelillo herbal",
+      "tipo": "curacion",
+      "cura_toda": true,
+      "confunde_al_comer": 3,
+      "texto": "{quien} se come un pastelillo herbal: +{n} PS. Toda la vida de vuelta… y el mundo se pone raro. Queda confundido.",
+      "icono": "objetos/pastelillo_herbal"
+    },
+    "cebidol": {
+      "nombre": "CeBiDol",
+      "tipo": "permanente",
+      "atq": 2,
+      "def": 2,
+      "texto": "{quien} se toma un CeBiDol. Ataque +2 y defensa +2 para siempre. En el prospecto dice «consulte a su médico». Nadie tiene médico.",
+      "icono": "objetos/cebidol"
+    },
+    "pastillas_felices": {
+      "nombre": "Pastillas felices",
+      "tipo": "tactico",
+      "objetivo": "rival",
+      "confunde": 3,
+      "texto": "Le dan pastillas felices a {quien}. Sonríe, se tambalea y ya no sabe para qué lado pelear.",
+      "icono": "objetos/pastillas_felices"
+    },
+    "flor_pureza": {
+      "nombre": "Flor de pureza",
+      "tipo": "equipo",
+      "espacio": "amuleto",
+      "sin_confusion": true,
+      "texto": "Amuleto. No se puede confundir.",
+      "icono": "objetos/flor_pureza"
+    },
+    "gorro_navidad": {
+      "nombre": "Gorro de navidad",
+      "tipo": "equipo",
+      "espacio": "cabeza",
+      "critico": 0.05,
+      "texto": "Cabeza. +5 % de crítico.",
+      "icono": "objetos/gorro_navidad"
+    },
+    "chaqueta_cuero": {
+      "nombre": "Chaqueta de cuero",
+      "tipo": "equipo",
+      "espacio": "traje",
+      "def": 4,
+      "texto": "Traje. +4 DEF.",
+      "icono": "objetos/chaqueta_cuero"
+    },
+    "chaqueta_jean": {
+      "nombre": "Chaqueta jean",
+      "tipo": "equipo",
+      "espacio": "traje",
+      "def": 2,
+      "vel": 2,
+      "texto": "Traje. +2 DEF, +2 VEL.",
+      "icono": "objetos/chaqueta_jean"
+    },
+    "traje_azul": {
+      "nombre": "Traje de combate azul",
+      "tipo": "equipo",
+      "espacio": "traje",
+      "def": 6,
+      "texto": "Traje. +6 DEF.",
+      "icono": "objetos/traje_azul"
+    },
+    "traje_rojo": {
+      "nombre": "Traje de combate rojo",
+      "tipo": "equipo",
+      "espacio": "traje",
+      "def": 4,
+      "atq": 3,
+      "texto": "Traje. +4 DEF, +3 ATQ.",
+      "icono": "objetos/traje_rojo"
+    },
+    "prendas_sacerdotisa": {
+      "nombre": "Prendas de sacerdotisa",
+      "tipo": "equipo",
+      "espacio": "traje",
+      "def": 5,
+      "resiste_veneno": true,
+      "texto": "Traje. +5 DEF, resiste el veneno.",
+      "icono": "objetos/prendas_sacerdotisa"
+    },
+    "zapatillas_buenas": {
+      "nombre": "Zapatillas buenas",
+      "tipo": "equipo",
+      "espacio": "pies",
+      "vel": 3,
+      "texto": "Pies. +3 VEL.",
+      "icono": "objetos/zapatillas_buenas"
+    },
+    "zapatos_plataforma": {
+      "nombre": "Zapatos de plataforma",
+      "tipo": "equipo",
+      "espacio": "pies",
+      "def": 2,
+      "vel": -1,
+      "texto": "Pies. +2 DEF, −1 VEL.",
+      "icono": "objetos/zapatos_plataforma"
+    }
   },
   "retratos": {
     "Jair": "batalla/retratos/jair",
@@ -806,9 +1067,17 @@
         "golpes": 0,
         "objetivo": "todos",
         "color": "#ff5a36",
-        "ojos": [0, 0, 1, 1],
+        "ojos": [
+          0,
+          0,
+          1,
+          1
+        ],
         "posicion": "objetivo",
-        "bomba": { "turnos": 5, "vida": 0.9 },
+        "bomba": {
+          "turnos": 5,
+          "vida": 0.9
+        },
         "texto": "{quien} deja una bomba en medio del campo. Explota en 5 turnos. [Relleno]"
       }
     },
@@ -820,7 +1089,12 @@
         "golpes": 0,
         "objetivo": "todos",
         "color": "#d8d8d8",
-        "ojos": [0, 0, 1, 1],
+        "ojos": [
+          0,
+          0,
+          1,
+          1
+        ],
         "posicion": "objetivo",
         "multicebo": true,
         "texto": "{quien} se concentra y el campo se llena de copias en blanco y negro: una delante de cada uno. [Relleno]"
