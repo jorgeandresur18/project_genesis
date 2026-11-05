@@ -1266,7 +1266,7 @@ function Pelea({
         }
         const marca = o.niveles
           ? `NV +${n}`
-          : o.ps || o.revive
+          : o.ps || o.cura_toda || o.revive
             ? `+${n}`
             : o.atq
               ? `ATQ +${n}`
@@ -1284,7 +1284,7 @@ function Pelea({
         numero(a.id, marca, contra ? 'falla' : 'cura');
         const cambio = (o.atq ?? 0) + (o.def ?? 0) + (o.niveles ?? 0);
         if (cambio) efecto(a.id, cambio > 0 ? 'sube-stat' : 'baja-stat', 1300);
-        else if (o.ps || o.revive) efecto(a.id, 'cura', 1300);
+        else if (o.ps || o.cura_toda || o.revive) efecto(a.id, 'cura', 1300);
         luz(a.id, o.veneno ? '#7dff6a' : o.protege ? '#8fd3ff' : contra ? '#ff6fae' : '#9dffb0');
       }
       playChip(contra ? 'cambio' : 'vida');
@@ -2115,6 +2115,8 @@ function Pelea({
       o.cura_estados && t('batalla.desc.obj_cura_estados'),
       t(`batalla.desc.a_${objetivoDe(o)}`),
       o.ps && fmt(t('batalla.desc.obj_ps'), { n: o.ps }),
+      o.cura_toda && t('batalla.desc.obj_cura_toda'),
+      o.confunde_al_comer && fmt(t('batalla.desc.obj_confunde_al_comer'), { n: o.confunde_al_comer }),
       o.atq && fmt(t('batalla.desc.obj_atq'), { n: o.atq }),
       o.def && fmt(t('batalla.desc.obj_def'), { n: o.def }),
       o.carga && t('batalla.desc.obj_carga'),

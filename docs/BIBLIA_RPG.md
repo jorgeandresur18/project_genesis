@@ -457,6 +457,8 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
 | condón barato | Condón barato | táctico | Protege a un aliado de 1 golpe. Descripción: «Condón barato, sin marca». |
 | condón Spartan | Condón Spartan | táctico | Protege a todo el equipo de 1 golpe |
 | medicamento para el hígado | Hepatol | curación | Quita el veneno |
+| pastelillo herbal | Pastelillo herbal | curación | Cura toda la vida, pero confunde 3 turnos a quien se lo come (pedido del autor, 2026-11-05; precio propuesto: 90) |
+| pastillas felices | Pastillas felices | táctico | A un rival: lo confunde 3 turnos (pedido del autor, 2026-11-05; precio propuesto: 45) |
 | galleta clásica | Galleta clásica | curación | +20 PS |
 | galleta con grageas | Galleta arcoíris | curación | +20 PS a todo el equipo y quita un estado |
 | galleta brownie | Galleta brownie | curación | +50 PS y quita un estado |

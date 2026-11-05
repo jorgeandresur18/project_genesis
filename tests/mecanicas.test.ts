@@ -265,3 +265,29 @@ describe('el empate', () => {
     expect(resultado(s, d)).toBe('empate');
   });
 });
+
+describe('objetos nuevos (pedido del autor, 2026-11-05)', () => {
+  const objetos = FICHAS.objetos as Record<string, Parameters<typeof usarObjeto>[0]>;
+  it('el pastelillo herbal cura toda la vida pero confunde a quien se lo come', () => {
+    const h = crearLuchador('h', 'jair', 'heroe', FICHAS.heroes.jair as unknown as Heroe, 5);
+    h.ps = 3;
+    const n = usarObjeto(objetos.pastelillo_herbal, h);
+    expect(h.ps).toBe(h.psMax);
+    expect(n).toBe(h.psMax - 3);
+    expect(h.confundido).toBe(3);
+  });
+  it('las pastillas felices van a un rival y lo confunden', () => {
+    const o = objetos.pastillas_felices;
+    expect(o.objetivo).toBe('rival');
+    const e = crearLuchador('e', 'soldado', 'enemigo', FICHAS.enemigos.soldado, 5);
+    usarObjeto(o, e);
+    expect(e.confundido).toBe(3);
+  });
+  it('los dos se venden en Boringplace y tienen su dibujo', async () => {
+    const tienda = (await import('../src/data/boringplace.json')).default.tienda.map((x: { objeto: string }) => x.objeto);
+    for (const id of ['pastelillo_herbal', 'pastillas_felices']) {
+      expect(tienda).toContain(id);
+      expect(objetos[id].icono).toBe(`objetos/${id}`);
+    }
+  });
+});

@@ -275,6 +275,8 @@
   "batalla.desc.a_uno": "a un rival",
   "batalla.desc.a_todos": "a todos los rivales",
   "batalla.desc.obj_ps": "Cura {n} PS.",
+  "batalla.desc.obj_cura_toda": "Cura toda la vida.",
+  "batalla.desc.obj_confunde_al_comer": "Pero confunde {n} turnos a quien lo come.",
   "batalla.desc.obj_atq": "Ataque +{n} hasta el final de la pelea.",
   "batalla.desc.obj_def": "Defensa +{n} hasta el final de la pelea.",
   "batalla.desc.obj_carga": "Llena la barra del especial de golpe.",

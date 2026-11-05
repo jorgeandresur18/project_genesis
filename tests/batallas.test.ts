@@ -81,7 +81,7 @@ describe('batallas por turnos', () => {
       expect(d.horda.al_inicio).toBeLessThanOrEqual(d.horda.niveles.length);
       for (const k of d.botin.objetos) expect(d.objetos[k], `botín ${k}`).toBeTruthy();
       for (const [k, o] of Object.entries(d.objetos)) {
-        expect(o.atq || o.def || o.ps || o.carga || o.niveles || o.revive || o.veneno || o.protege || o.confunde || o.paraliza || o.cura_estados || o.quita_veneno, k).toBeTruthy();
+        expect(o.atq || o.def || o.ps || o.cura_toda || o.carga || o.niveles || o.revive || o.veneno || o.protege || o.confunde || o.paraliza || o.cura_estados || o.quita_veneno, k).toBeTruthy();
         // Cada objeto se guarda en la partida: su variable tiene que estar declarada.
         expect(variables, `mochila_${k}`).toHaveProperty(`mochila_${k}`);
       }

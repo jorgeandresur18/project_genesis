@@ -318,6 +318,16 @@
       "descripcion": "+35 PS y quita un estado."
     },
     {
+      "objeto": "pastelillo_herbal",
+      "precio": 90,
+      "descripcion": "Cura toda la vida, pero confunde 3 turnos a quien se lo come. Receta de la casa. No pregunten qué hierba."
+    },
+    {
+      "objeto": "pastillas_felices",
+      "precio": 45,
+      "descripcion": "Para un rival: lo confunde 3 turnos. Felicidad en cápsulas, sin receta y sin garantía."
+    },
+    {
       "objeto": "caramelo_dulce",
       "precio": 250,
       "descripcion": "Sube 1 nivel para siempre. Se vende uno por capítulo.",

@@ -204,6 +204,12 @@
       "descripcion": "+35 HP and removes one status."
     },
     {
+      "descripcion": "Restores all HP, but confuses whoever eats it for 3 turns. House recipe. Don't ask which herb."
+    },
+    {
+      "descripcion": "For a rival: confuses them for 3 turns. Happiness in capsules, no prescription, no guarantee."
+    },
+    {
       "descripcion": "Permanently raises 1 level. One per chapter."
     },
     {

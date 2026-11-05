@@ -275,6 +275,8 @@
   "batalla.desc.a_uno": "one enemy",
   "batalla.desc.a_todos": "all enemies",
   "batalla.desc.obj_ps": "Heals {n} HP.",
+  "batalla.desc.obj_cura_toda": "Restores all HP.",
+  "batalla.desc.obj_confunde_al_comer": "But confuses whoever eats it for {n} turns.",
   "batalla.desc.obj_atq": "Attack +{n} until the end of the fight.",
   "batalla.desc.obj_def": "Defense +{n} until the end of the fight.",
   "batalla.desc.obj_carga": "Fills the special bar at once.",
