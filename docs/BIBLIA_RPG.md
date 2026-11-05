@@ -626,9 +626,9 @@ la arena). **En el torneo** (decisión del autor): la primera vez que se gana ca
 cae, quedó por retirarse. **En la historia es perder:** lleva a la misma escena que la derrota, su bad end (decisión del
 autor). En el torneo también cuenta como perder; en la arena, los caídos se levantan.
 
-**El estado «desaparecido»** (pedido del autor, 2026-11-05): lo causa un ataque que **banea** al rival del juego por un rato, como la Tajada del abismo. Durante esos turnos no actúa y nadie lo puede elegir, golpear ni curar (tampoco lo alcanzan la bomba ni la autodestrucción); sus otros estados quedan en pausa. Vuelve solo, desde el turno siguiente al que desaparece. **Nunca hace desaparecer al último héroe en pie.** En el código: `desterrado` (`desterrar` en `turnos.ts`, `enCampo` en `batalla.ts`).
+**El estado «desaparecido»** (pedido del autor, 2026-11-05): lo causa un ataque que **banea** al rival del juego por un rato, como la Tajada del abismo. Durante esos turnos no actúa y nadie lo puede elegir, golpear ni curar (tampoco lo alcanzan la bomba ni la autodestrucción); sus otros estados quedan en pausa. Vuelve solo, desde el turno siguiente al que desaparece. **Nunca hace desaparecer al último héroe en pie.** Pero si después caen todos los demás y solo queda alguien desaparecido, **se pierde**: queda encerrado en el abismo para siempre (decisión del autor, 2026-11-05). Vale en todas las peleas: la historia, el torneo (quedas eliminado) y la arena. En el código: `desterrado` (`desterrar` en `turnos.ts`, `enCampo` en `batalla.ts`).
 
-**Los especiales del Rey Malvado** (decisión del autor, 2026-11-05; Capítulo 3, en `cap03_rey` y `cap03_rey_gigante`), los dos con la barra llena, uno al azar:
+**Los especiales del Rey Malvado** (decisión del autor, 2026-11-05; Capítulo 3, en `cap03_rey`; la ficha `rey_gigante` queda para el Capítulo 6), los dos con la barra llena, uno al azar:
 
 - **Espada de las estaciones:** golpes fuertes y, a cada blanco que queda en pie, una estación al azar: primavera envenena, verano quema, otoño paraliza e invierno congela (sin acumular, y respetando el turno libre).
 - **Tajada del abismo:** un corte que abre una grieta: un rival al azar queda **desaparecido** de 2 a 3 turnos. Es para peleas contra varios: si el rival tiene un solo héroe en pie, el Rey no la elige.
@@ -658,8 +658,7 @@ Los números (poder y golpes) son propuesta de Claude, sin balancear.
 
 Detalle completo en `docs/BATALLA_FINAL.md`.
 
-- **Capítulo 3:** pelea contra el Rey solo en su forma **THE KING** (en un momento crece y se vuelve gigante, sin ser
-  otra fase), **con la cara oculta**. Termina con el DELETE sin WHERE.
+- **Capítulo 3:** pelea contra el Rey solo en su forma **THE KING**, en su forma normal (la gigante queda para el Capítulo 6; decisión del autor, 2026-11-05), **con la cara oculta**. Termina con el DELETE sin WHERE.
 - **Capítulo 6, rama que lleva al 7A (la batalla final del juego):** **cinco fases**, cada una con su sprite y su forma de pelear:
   THE KING → THE WATCHER → THE TRIAD → THE CATACLYSM → THE VOID.
 - **Capítulo 6, rama que lleva al 7B:** THE KING, más fuerte que en el Capítulo 3; no se transforma. Rikka y Cami no logran fusionarse (conflicto de fusión), así que no hay AnothergIrl en esa pelea.

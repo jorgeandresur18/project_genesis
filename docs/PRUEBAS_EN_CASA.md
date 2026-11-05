@@ -157,7 +157,7 @@ En la segunda computadora, con un navegador automático sin ventana y sin sonido
 Se juega con `npm run dev`: al terminar el Capítulo 2, «Continuar» sigue al 3 (o `?escena=cap03_calabozo_01`). Claude ya jugó sus peleas sin ventana (sin errores) y la prueba de rutas recorre todo el capítulo.
 
 - [ ] **Leerlo:** ¿la historia y el tono van bien? Es un borrador para corregir.
-- [ ] **Las peleas** (calabozo, cuarteles, biblioteca, arsenal, el Rey y el Rey gigante): son de relleno y sin balance. El Rey usa el dibujo del Capitán hasta que exista el suyo.
+- [ ] **Las peleas** (calabozo, cuarteles, biblioteca, arsenal y el Rey): son de relleno y sin balance. El Rey usa el dibujo del Capitán hasta que exista el suyo.
 - [ ] **Los especiales del Rey** (`?batalla=cap03_rey`): la Espada de las estaciones (dice qué estación cae) y la Tajada del abismo (el héroe casi desaparece de la pantalla, con la etiqueta «desaparecido», y vuelve a los 2 o 3 turnos). Claude ya los vio funcionar sin ventana; falta ver cómo se ven.
 - [ ] **El momento del DELETE:** la sentencia letra por letra. ¿Tiene el peso que buscas?
 - [ ] **El final «Cancelar»** (cruzar solo) y el despertar.

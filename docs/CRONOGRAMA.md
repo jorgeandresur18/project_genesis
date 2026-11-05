@@ -98,9 +98,9 @@ La misma proyección, para mirarla en el navegador: `docs/proyeccion.html`.
 - [ ] **PayFoe y el Torneo Genesis** (pedido del autor el 2026-11-03; diseño en `BIBLIA_RPG.md`, sección 17), en partes: (1) ~~PayFoe y la transferencia~~, (2) ~~el torneo y sus copas~~ y (3) ~~Nikki campeona~~ **hechos el 2026-11-03 (de relleno)**; falta (4): los desbloqueables a la venta y la versión sin censura de 1.000.000, y los seis ataques de Nikki.
 
 ## Semanas 3 y 4 (17–30 de noviembre): el Capítulo 3
-- [x] **Borrador del Capítulo 3** (2026-11-05, computadora del trabajo: `src/data/chapters/cap03.json`, 168 escenas, 6 peleas de relleno, 8 bad ends y `alt_1`). Falta: los enemigos y el arte del autor, el balance de las peleas, la pasada de diálogos. Antes decía: **Escribir el guion del Capítulo 3** desde el canon (`docs/guion/cap03_plan.md`: lo decidido y las 13 preguntas): el Rey Malvado, la espada DELETE, el DELETE sin WHERE, el regreso (`alt_1`: volver solo) y el despertar con Cami y Rikka en el cuarto.
+- [x] **Borrador del Capítulo 3** (2026-11-05, computadora del trabajo: `src/data/chapters/cap03.json`, 168 escenas, 5 peleas de relleno, 8 bad ends y `alt_1`). Falta: los enemigos y el arte del autor, el balance de las peleas, la pasada de diálogos. Antes decía: **Escribir el guion del Capítulo 3** desde el canon (`docs/guion/cap03_plan.md`: lo decidido y las 13 preguntas): el Rey Malvado, la espada DELETE, el DELETE sin WHERE, el regreso (`alt_1`: volver solo) y el despertar con Cami y Rikka en el cuarto.
 - [ ] **Resolver antes de escribir:** las decisiones pendientes del Capítulo 3 (ver abajo).
-- [ ] **La pelea contra el Rey Malvado del Capítulo 3:** solo THE KING (y su forma gigante), con la cara oculta, hasta el DELETE sin WHERE. *Pesada:* su sprite (el autor todavía no lo hizo). La batalla de las cinco manifestaciones es del Capítulo 6, rama del 7A (`docs/BATALLA_FINAL.md`).
+- [ ] **La pelea contra el Rey Malvado del Capítulo 3:** solo THE KING, en su forma normal (la gigante, en el Capítulo 6), con la cara oculta, hasta el DELETE sin WHERE. *Pesada:* su sprite (el autor todavía no lo hizo). La batalla de las cinco manifestaciones es del Capítulo 6, rama del 7A (`docs/BATALLA_FINAL.md`).
 - [ ] *Liviana:* fondos y CG del Capítulo 3.
 - [ ] *Media:* la notificación de la migración en el celular de Jair.
 
@@ -163,7 +163,7 @@ Se responden cuando toque su semana; mientras, no se inventan.
 - El nombre del plato de la resaca.
 
 **Capítulo 3**
-- Cómo es la pelea final del Capítulo 6 (la del Capítulo 3 ya tiene su forma: THE KING y su versión gigante).
+- Cómo es la pelea final del Capítulo 6 (la del Capítulo 3 ya tiene su forma: THE KING, sin la versión gigante, que queda para el Capítulo 6).
 
 **Capítulo 4**
 - Los demás amigos nuevos (Lady y Jordan ya están).

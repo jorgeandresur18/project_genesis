@@ -7,7 +7,7 @@ análisis», que son paralelismos, no influencias confirmadas).
 ## Decisiones del autor (2026-11-03)
 
 - **Dónde pasa cada cosa:**
-  - **Capítulo 3:** el Rey sale **solo en su fase THE KING** (incluida su versión gigante), **con la cara oculta**
+  - **Capítulo 3:** el Rey sale **solo en su fase THE KING**, en su forma normal (la versión gigante queda para el Capítulo 6; decidido por el autor el 2026-11-05), **con la cara oculta**
     (la revelación sigue en el Capítulo 6). Termina con el **DELETE sin WHERE**. La cara se oculta con un **yelmo cerrado** que no se quita, ni en su forma gigante (decidido por el autor el 2026-11-05).
   - **Capítulo 6:** el Rey **se materializa** (y se revela su cara, la de Jair). Desde ahí puede tomar las otras
     formas.

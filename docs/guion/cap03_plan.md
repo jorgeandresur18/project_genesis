@@ -12,7 +12,7 @@ lleva y la pantalla del Oráculo queda con la línea «Sesión activa. No cierre
 | Orden | Qué pasa | Dónde está |
 |---|---|---|
 | 1 | Jair, Cami y Rikka llegan ante el Rey Malvado. Quiere gobernar todas las dimensiones y para eso necesita a Jair y a Cami, la llave. | CANON |
-| 2 | La pelea, solo contra **THE KING**, que en un momento se vuelve gigante (sigue siendo la misma fase). **La cara, oculta:** se revela en el Capítulo 6. | BATALLA_FINAL |
+| 2 | La pelea, solo contra **THE KING**, en su forma normal (la gigante queda para el Capítulo 6; decisión del autor del 5 de noviembre). **La cara, oculta:** se revela en el Capítulo 6. | BATALLA_FINAL |
 | 3 | Jair usa la espada contra el Rey. Al atravesar a alguien, la espada escribe y ejecuta una sentencia parecida a SQL. **Jair olvida el `WHERE`.** | CANON |
 | 4 | El borrado alcanza toda la tabla del Rey: él y todas las dimensiones que conquistó. El universo del juego queda borrado. | CANON |
 | 5 | Cami y Rikka sobreviven: sin saberlo, Jair migró sus entidades a su propia tabla (nunca se dice en voz alta hasta que llega la notificación). | CANON |
@@ -32,7 +32,7 @@ Con esto se escribió el borrador (`src/data/chapters/cap03.json`, guion legible
 - **Las casi 3 horas se llenan con peleas:** es uno de los capítulos más RPG del juego (hordas de soldados, capitanes, sombras y enemigos nuevos que el autor va a crear). Hoy son peleas de relleno con los enemigos que ya existen.
 - **La espada:** se la quitan y la recuperan en el arsenal del piso 5.
 - **Dónde:** la fortaleza del Rey, piso por piso. **Estructura:** escape del calabozo y ascenso hasta el trono.
-- **El DELETE:** la sentencia se escribe sola. **El olvido:** la presión del momento (el Rey gigante va a aplastar a Cami y a Rikka).
+- **El DELETE:** la sentencia se escribe sola. **El olvido:** la presión del momento (el Rey alza la espada sobre Cami y Rikka).
 - **La cara:** un yelmo cerrado. **THE NEXUS:** lo dice el Rey, en la sala del trono.
 - **Bad ends:** perder contra el Rey, perder en los pisos y malas decisiones del escape (8 en el borrador).
 - **Decidido por Claude, siguiendo el canon:** la notificación de la migración llega en la última escena, al despertar; `alt_1` se llama «Cancelar» (nombre provisional).
