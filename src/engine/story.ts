@@ -2,6 +2,7 @@ import type { EndingInfo, GameConfig, Scene, StoryFile, VarDecl } from './types'
 import variablesJson from '../data/variables.json';
 import registroJson from '../data/registro_finales.json';
 import juegoJson from '../data/juego.json';
+import { MODO_TODO } from './modo';
 
 // Toda la narrativa se carga desde src/data. Los componentes nunca contienen texto de historia.
 const modules = import.meta.glob<StoryFile>(
@@ -17,10 +18,10 @@ export const variables = variablesJson as VarDecl;
 export const endings = registroJson as EndingInfo[];
 /**
  * La configuración del juego. En lo que se compila para publicar (`import.meta.env.PROD`) se le aplica `demo_publica`
- * (lo de más adelante, apagado); en el servidor de desarrollo y en las pruebas, todo prendido.
+ * (lo de más adelante, apagado), salvo en /all; en el servidor de desarrollo y en las pruebas, todo prendido.
  */
 const base = juegoJson as GameConfig;
-export const config: GameConfig = import.meta.env.PROD && base.demo_publica ? { ...base, ...base.demo_publica } : base;
+export const config: GameConfig = import.meta.env.PROD && !MODO_TODO && base.demo_publica ? { ...base, ...base.demo_publica } : base;
 
 export const scenes = new Map<string, Scene>();
 for (const file of storyFiles) {
