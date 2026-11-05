@@ -1,4 +1,5 @@
 import { leerPartida, nombreArchivo, textoExportado } from '../engine/partidaArchivo';
+import { assetUrl } from '../engine/assets';
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { CHAPTER_END, SAVE_SLOTS, TEXT_SPEED_INSTANT, canSaveGame, useStore, type SaveSlot } from '../engine/store';
@@ -596,6 +597,8 @@ export function AboutPanel({ onClose }: { onClose: () => void }) {
               rel="noopener noreferrer"
             >
               {l.texto}
+              {/* La donación: amarilla, con el logo de PayPal (pedido del autor). */}
+              {'destacado' in l && l.destacado && <img src={assetUrl('marca/paypal.webp')} alt="PayPal" draggable={false} />}
             </a>
           ))}
         </div>

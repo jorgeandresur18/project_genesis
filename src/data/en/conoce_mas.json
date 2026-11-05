@@ -227,6 +227,13 @@
           "cierre": [
             "And there's a personal story behind «un x100to»: it's a song I used to listen to with someone while we drank. I don't know if it's the song, those nights or the company, but it ended up tied to that memory. Some songs, when you hear them again, take you straight back to a moment in your life. This is one of them."
           ]
+        },
+        {
+          "parrafos": [
+            "Ecuadorian music is an influence too. The biggest one is Lolabúm, whom I have followed since their beginnings. I prefer the dirty, lo-fi aesthetic of their first two albums, and to me [«Tristes Trópicos»](https://open.spotify.com/album/5Db5UP6d1ccr8UvILSxv0L) is their masterpiece. Go listen to it.",
+            "From their album Se busca Phantasma de buena presencia para puesto a tiempo completo en Latinoamérica, my picks are [«16 Phantasmas»](https://open.spotify.com/search/16%20Phantasmas%20Lolab%C3%BAm), [«Tócame»](https://open.spotify.com/search/T%C3%B3came%20Lolab%C3%BAm) and [«Novedades ecuatorianas»](https://open.spotify.com/search/Novedades%20ecuatorianas%20Lolab%C3%BAm). There is another one I remember especially well, [«Erre erre erre»](https://open.spotify.com/track/6FIcTt8sxhLpX5SmJpUaWk): it always made me think of the first levels of Cuphead. I even pictured an edit with gameplay from the game and the song in the background, though I never got around to making it.",
+            "From Letelefono I like [«Empate»](https://open.spotify.com/track/11E92FQUOcQhCEaNGjRSR7) and [«La Favorita»](https://open.spotify.com/track/6uayRkYG58XPw8u7Kg6lq1), for both the music and the aesthetic. La Máquina Camaleón and Alkaloides round out the list."
+          ]
         }
       ]
     },
@@ -234,21 +241,20 @@
       "titulo": "A personal note",
       "parte": "autor",
       "parrafos": [
-        "I made this game during a time stuck in a precarious job. I am a software engineer and I have not been able to land a better job: I interviewed at good companies and did not get into any of them. PROJECT GENESIS was born as a way to let off steam.",
-        "I studied Software Engineering after going through another degree that, to be honest, I never wanted to study. I did it at a public university and, to this day, I have no fucking idea what I was thinking. Maybe I just wanted to feel like I was doing something with my life. That's how five years of my life went by.",
-        "At least I had my own business and could cover my expenses and a few whims. So why did I decide to study Software Engineering? For the same reason everyone does: to get a degree, put something in front of my name and feed that fragile ego we all carry around.",
-        "Because, let's be honest, being called «engineer» always carries some weight, even if you're a shitty professional. The degree doesn't mean you're good at what you do, but damn, it feeds the ego.",
-        "I would come home from work and get to it, partly just to have something to do instead of spending my nights drinking beer and smoking cheap cigarettes. I poured hours into it, especially Chapter 1: across one Friday, Saturday and Sunday I slept about six hours in total, two a night. I was going through something I am not sure was depression: I did not feel like going out anywhere and, instead of going out, I would rather sit down and work on this, even if it was with a beer in my hand. I used the holidays to keep going, even though my legs hurt from so many hours pressed against the chair. And I kept going.",
-        "And no, I am not writing this to make you feel sorry for me. I just wanted to share it, so you can see how much weight I am putting into this.",
-        "I apologize for the shameless use of artificial intelligence in the sprites: it is what I had at hand. AI is here to stay, and without it this would never have been possible for a single person. I am not a game developer: my thing is web development, building SaaS software that, more than solving problems, prevents them.",
+        "I made this game while stuck in a precarious job. I am a software engineer and I have not managed to land anything better: I interviewed at good companies and did not get into any of them. PROJECT GENESIS started as a way to vent.",
+        "I came to Software Engineering after going through another degree that, to be honest, I never wanted to study. I did it at a public university and to this day I have no fucking idea what I was thinking. Maybe I just wanted to feel like I was doing something with my life. That is how five years slipped away.",
+        "At least I had my own business, which covered my expenses and a few whims. So why did I go into Software Engineering? For the same reason almost everyone does: to get a degree, put something in front of my name and feed that fragile ego we all carry around.",
+        "Because, let's admit it, being called «engineer» carries weight, even if you are a shitty professional. The degree does not say you are good at what you do, but it sure inflates your pride.",
+        "I would come home from work and sit down to make progress, partly just to have something to do instead of spending my nights on beer and cheap cigarettes. I poured hours into it, especially Chapter 1: between one Friday and Sunday I slept about six hours in total, two per night. I was going through something I am not sure was depression: I did not feel like going out, and instead I preferred to sit and work on the game, even with a beer in my hand. I made the most of the holidays, even though my legs ached from so many hours in the chair. And I kept going.",
+        "And no, I am not telling you this so you will feel fucking sorry for me. I just wanted to share it, so you can see how much this project weighs for me.",
+        "I apologize for the shameless use of artificial intelligence in the sprites: it is what I had at hand. AI is here to stay, and without it this would never have been possible for one person. I am not a game developer: my thing is web development, building SaaS software that, rather than solving problems, avoids them.",
         "But I am still at it, and I hope I do not give up along the way. I promise that one day every sprite will be redrawn by artists.",
-        "While we are at it: my fondness for drinking has a dream. One day I want to go to Japan and lose consciousness in one of those tiny bars, the izakayas, with a Sapporo beer or some sake. And maybe end the night at an arcade playing the claw machines, completely drunk but happy.",
-        "I prefer craft beer: I like trying new kinds. Strong at night, light on a hot day. If you are ever in Guayaquil, Ecuador, I recommend the Cherusker bar, very close to the places where I have worked. I am already tired of going, but it is very popular and usually packed, and it is even better when there are cover band concerts.",
-        "I also have a few stories involving cannabis. I remember one afternoon in particular when I spent several hours with a friend drinking wine and smoking weed. The funny thing is that, for some reason, I never managed to experience what people call getting high. In my case, the effect always seemed to come down to getting sleepy.",
-        "A friend even made THC ice cream, but I didn't feel much that time either. At this point, I think a good craft beer between 7 and 9% alcohol has a much more noticeable effect on me than any of those experiences.",
-        "And one last recommendation: I really appreciate Ecuadorian bands, especially Lolabúm, whom I have followed since their beginnings. I prefer the dirtier, lo-fi aesthetic of their first two albums, and to me [«Tristes Trópicos»](https://open.spotify.com/album/5Db5UP6d1ccr8UvILSxv0L) is their masterpiece. Go listen to it.",
-        "From Lolabúm I like songs such as [«16 Phantasmas»](https://open.spotify.com/search/16%20Phantasmas%20Lolab%C3%BAm), [«Tócame»](https://open.spotify.com/search/T%C3%B3came%20Lolab%C3%BAm) and [«Novedades ecuatorianas»](https://open.spotify.com/search/Novedades%20ecuatorianas%20Lolab%C3%BAm), from their album Se busca Phantasma de buena presencia para puesto a tiempo completo en Latinoamérica. I especially remember [«Erre erre erre»](https://open.spotify.com/track/6FIcTt8sxhLpX5SmJpUaWk), a song that always made me think of the first levels of Cuphead. I even pictured an edit with gameplay from the game and the song in the background, though I never got around to making it.",
-        "Letelefono is also part of my taste: I especially like [«Empate»](https://open.spotify.com/track/11E92FQUOcQhCEaNGjRSR7) and [«La Favorita»](https://open.spotify.com/track/6uayRkYG58XPw8u7Kg6lq1), for both their music and their aesthetic. And other bands like La Máquina Camaleón and Alkaloides."
+        "While we are at it: my fondness for drinking has a dream. One day I want to go to Japan and lose consciousness in one of those tiny izakayas, with a Sapporo or a sake, and maybe end the night at an arcade, playing the claw machines, completely drunk but happy.",
+        "I prefer craft beer because I like trying new styles: strong at night, light on a hot day. If you are ever in Guayaquil, Ecuador, I recommend the Cherusker bar, very close to the places where I have worked. I got tired of going, but it is very popular, it tends to fill up and it is best when tribute bands are playing.",
+        "I also have a few stories involving cannabis. I remember one afternoon in particular with a friend: several hours of wine and weed. The funny thing is that I never managed what people call getting high; for me, the effect always ended in sleep.",
+        "A friend even made THC ice cream and I did not feel much that time either. At this point, I think a good craft beer between 7 and 9% alcohol hits me harder than any of those experiences.",
+        "This note ended up long, dense and far too personal. I wanted to talk about a lot of things, even if they seem to have nothing to do with each other. I am an engineer, not a writer, so forgive the mess.",
+        "Although, come to think of it, they do connect: the job that does not fulfill me, the sleepless nights, the beers, the songs and the urge to escape all ended up, one way or another, inside this game. If you made it this far, thank you. You now know more about me than many of my coworkers do."
       ]
     },
     {
@@ -271,11 +277,7 @@
       "en_diploma": true
     },
     {
-      "texto": "LinkedIn",
-      "url": "https://www.linkedin.com/in/jorge-andres-urgiles-ruiz/"
-    },
-    {
-      "texto": "Donate with PayPal",
+      "texto": "Donate",
       "url": "https://paypal.me/jorgeandresur",
       "destacado": true
     }

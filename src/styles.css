@@ -548,7 +548,9 @@ input, textarea { -webkit-user-select: text; user-select: text; }
   background: var(--box-2);
 }
 .about-link:hover { border-color: var(--text); }
-.about-link-main { background: linear-gradient(90deg, #22d3ee, #8b5cf6); color: #05070d; border-color: transparent; font-weight: 700; }
+.about-link-main { display: inline-flex; align-items: center; gap: 0.5rem; background: #ffc439; color: #111; border-color: transparent; font-weight: 700; }
+.about-link-main:hover { border-color: transparent; filter: brightness(1.05); }
+.about-link-main img { height: 1.25rem; width: auto; }
 
 /* Personajes que se miran: volteo en espejo. */
 .sprite { transition: transform 0.25s ease, height 0.45s ease, width 0.45s ease, max-width 0.45s ease; }
@@ -650,6 +652,8 @@ input, textarea { -webkit-user-select: text; user-select: text; }
   75% { scale: 1.04 1.01; }
 }
 .emblema-reaccion.emblema-grito::after { content: none; }
+/* A la derecha de su cara: la colita apunta hacia la izquierda (hacia ella). */
+.emblema-reaccion.globo-der::after { right: auto; left: -0.45rem; border: 0.5rem solid transparent; border-right-color: #fff; border-left: 0; }
 .emblema-reaccion.emblema-grito { top: 0; left: 50%; translate: -50% 0; background: #ff3d6e; color: #fff; font-size: clamp(1.1rem, 2.6vw, 1.7rem); letter-spacing: 0.04em; animation: emblema-reaccion 2.4s ease both, grito-tiembla 0.09s linear infinite; }
 /* El grito: tiembla todo, la cámara se acerca a su cara y una luz blanca lo tapa antes de la imagen secreta. */
 .stage-grito { animation: grito-tiembla 0.08s linear 18; }
