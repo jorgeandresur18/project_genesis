@@ -119,6 +119,16 @@ La misma proyección, para mirarla en el navegador: `docs/proyeccion.html`.
 
 ---
 
+## Ideas anotadas (por diseñar)
+
+**Dos Boringram (idea del autor, 2026-11-05).** Hoy hay uno solo: lo que muestra depende de las escenas vistas en *cualquier* partida (`snapshots`), así que al empezar de nuevo ya aparecen publicaciones del futuro.
+- **El de la historia** (el que se abre jugando): va ligado a la partida en curso: solo lo que desbloquearon las escenas por las que pasó *esta* partida (su `history`), en el orden en que ocurren, con la hora y la batería de ese momento.
+- **El del menú**: el archivo de todo lo que ya desbloqueaste y viste, en todas las partidas (como hoy).
+- **PayFoe y las compras (propuesta de Claude, a confirmar):**
+  - En la historia, Boringplace vende con los **tokens de la partida** y lo comprado va a **su mochila** (consumibles, cassettes, ropa: cosas que sirven en las peleas de esa partida). La tarjeta de PayFoe sigue arriba, para pasar tokens de la partida a la billetera.
+  - En el menú no hay partida abierta (no hay mochila ni tokens): la tienda vende solo con **PayFoe** y solo cosas de todo el juego (los desbloqueables a la venta, sprites o imágenes de la galería, la entrada al torneo). Lo de las peleas no se vende ahí, o se guarda en un «cofre» que llega a la próxima partida que cargues (a decidir).
+  - Así PayFoe es la cuenta de todo el juego y los tokens son el dinero de cada partida, como ya está en `BIBLIA_RPG.md` (sección 17).
+
 ## Decisiones pendientes del autor
 Se responden cuando toque su semana; mientras, no se inventan.
 
