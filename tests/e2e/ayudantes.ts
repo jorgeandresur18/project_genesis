@@ -31,7 +31,14 @@ export async function turnoDe(page: Page): Promise<string | null> {
 export async function hastaElMenu(page: Page, ms = 30_000) {
   const fin = Date.now() + ms;
   while (Date.now() < fin) {
-    if ((await menuActivo(page).count()) > 0) return;
+    if ((await menuActivo(page).count()) > 0) {
+      // Enter pasa los mensajes, pero si el menú apareció justo ahí, también eligió «Atacar»: se vuelve a los comandos.
+      await page.waitForTimeout(150);
+      const enSubmenu = (await menuActivo(page).filter({ hasText: 'Atacar' }).count()) === 0;
+      const volver = menuActivo(page).filter({ hasText: 'Volver' }).first();
+      if (enSubmenu && (await volver.count()) > 0) await volver.click();
+      return;
+    }
     await page.keyboard.press('Enter');
     await page.waitForTimeout(150);
   }

@@ -9,6 +9,7 @@ docs/*.pdf
 docs/imagenes/
 
 # Archivos de trabajo de arte: demasiado pesados para GitHub (límite de 100 MB).
+*.psd
 docs/sprites/*.psd
 docs/sprites/*.psb
 
