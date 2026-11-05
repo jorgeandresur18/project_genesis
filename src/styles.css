@@ -3659,10 +3659,14 @@ button.cassette:hover .cassette-imagen { transform: translateY(-2px) rotate(-3de
 
 @media (prefers-reduced-motion: reduce) { .pecho-grupo.rebota, .nalgada-onda, .nalgada-zas { animation-duration: 0.01s; } .nalgada-mano, .mano-apunta { animation-duration: 0.01s; } }
 
-/* El grito en la galería (tocar demasiado a Rikka): tiembla todo, la cámara se acerca a su cara y una luz blanca lo
-   tapa antes de volver al inicio. Igual que el de la escena. */
-.viewer-grito { animation: grito-tiembla 0.08s linear 22; overflow: hidden; }
-.viewer-grito > img, .viewer-grito > .fondo-capas { transform-origin: 50% 20%; animation: grito-zoom 2s cubic-bezier(0.6, 0, 0.8, 0.4) forwards; }
-.viewer-grito-texto { left: 50%; top: 4%; translate: -50% 0; z-index: 6; }
-.viewer-grito-blanco { position: fixed; z-index: 60; animation: grito-blanco 2s ease-in forwards; }
-@media (prefers-reduced-motion: reduce) { .viewer-grito, .viewer-grito > img, .viewer-grito > .fondo-capas { animation: none; } }
+/* El grito en la galería (tocar demasiado a Rikka): lento y dramático. Primero un silencio quieto, después tiembla cada
+   vez más, la cámara se acerca despacio a su cara, el grito crece y una luz blanca lo tapa antes de volver al inicio. */
+.viewer-grito { overflow: hidden; animation: grito-tiembla-suave 0.1s linear 0.5s 12, grito-tiembla 0.07s linear 1.7s 30; }
+.viewer-grito > img, .viewer-grito > .fondo-capas { transform-origin: 50% 22%; animation: grito-zoom-lento 3.6s cubic-bezier(0.55, 0, 0.75, 0.2) forwards; }
+.viewer-grito .viewer-grito-texto.emblema-reaccion { left: 0; right: 0; margin-inline: auto; width: max-content; top: 4%; translate: none; z-index: 6; transform-origin: 50% 50%; animation: grito-texto 3.6s ease-out both, grito-tiembla 0.09s linear 1.2s infinite; }
+.viewer-grito-blanco { position: fixed; z-index: 60; animation: grito-blanco-lento 3.9s ease-in forwards; }
+@keyframes grito-tiembla-suave { 0%, 100% { translate: 0 0; } 25% { translate: -0.12rem 0.08rem; } 50% { translate: 0.1rem -0.1rem; } 75% { translate: -0.08rem -0.1rem; } }
+@keyframes grito-zoom-lento { 0%, 12% { scale: 1; } 100% { scale: 2.8; } }
+@keyframes grito-texto { 0% { opacity: 0; scale: 0.4; } 10% { opacity: 1; scale: 1.15; } 18% { scale: 1; } 100% { scale: 1.6; } }
+@keyframes grito-blanco-lento { 0%, 62% { opacity: 0; } 100% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .viewer-grito, .viewer-grito > img, .viewer-grito > .fondo-capas, .viewer-grito-texto { animation: none; } }

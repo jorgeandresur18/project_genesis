@@ -611,7 +611,9 @@ export function usarObjeto(o: Objeto, h: Luchador, d?: { base: Stats; crece: Sta
 export const tipoDe = (o: Objeto): TipoObjeto =>
   o.tipo ?? (o.niveles ? 'permanente' : o.ps || o.cura_toda || o.revive || o.cura_estados || o.quita_veneno ? 'curacion' : o.veneno || o.protege || o.confunde || o.paraliza ? 'tactico' : 'mejora');
 /** Lo que se puede usar en una pelea (el equipo y la colección, no). */
-export const usableEnPelea = (o: Objeto) => !['equipo', 'coleccion'].includes(tipoDe(o));
+export const usableEnPelea = (o: Objeto) => !['equipo', 'coleccion'].includes(tipoDe(o)) && !esRefuerzo(o);
+/** Un permanente que sube estadísticas para siempre (el CeBiDol): solo se toma fuera de las peleas. */
+export const esRefuerzo = (o: Objeto) => tipoDe(o) === 'permanente' && !o.niveles && !!(o.atq || o.def);
 /** A quién se aplica un objeto. */
 export const objetivoDe = (o: Objeto): ObjetivoObjeto => o.objetivo ?? 'aliado';
 
@@ -835,6 +837,8 @@ export interface Progreso {
   monedas?: number;
   /** Lo que lleva puesto cada héroe, por espacio (`puesto_<héroe>_<espacio>`; ver engine/equipo.ts). */
   puestos?: Record<string, Record<string, string>>;
+  /** Lo que suben para siempre los permanentes como el CeBiDol (`refuerzo_atq_<héroe>`, `refuerzo_def_<héroe>`). */
+  refuerzos?: Record<string, { atq: number; def: number }>;
 }
 
 /** Monedas que da un enemigo al caer (según su nivel) y el jefe al retirarse (por nivel). */
@@ -859,6 +863,8 @@ export function progresoDeVars(vars: Vars): Progreso {
     if (typeof v !== 'number') continue;
     const nivel = k.match(/^nivel_(.+)$/);
     if (nivel && v > 0) p.heroes[nivel[1]] = { nivel: v, xp: typeof vars[`xp_${nivel[1]}`] === 'number' ? (vars[`xp_${nivel[1]}`] as number) : 0 };
+    const ref = k.match(/^refuerzo_(atq|def)_(.+)$/);
+    if (ref && v) ((p.refuerzos ??= {})[ref[2]] ??= { atq: 0, def: 0 })[ref[1] as 'atq' | 'def'] = v;
     const cas = k.match(/^cassette_(.+)$/);
     if (cas && v > 0) (p.cassettes ??= {})[cas[1]] = v;
     const obj = k.match(/^mochila_(.+)$/);

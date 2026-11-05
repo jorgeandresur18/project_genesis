@@ -119,6 +119,30 @@ La misma proyección, para mirarla en el navegador: `docs/proyeccion.html`.
 
 ---
 
+## Para mañana (6 de noviembre, desde la computadora del trabajo: nada que requiera probar)
+
+Decisiones y datos que solo puede dar el autor; Claude los aplica sin pedir pruebas (las pruebas, de noche, en la
+computadora de Jorge: ver `docs/PRUEBAS_EN_CASA.md`).
+
+1. **Los enlaces de Lolabúm** que faltan: «16 Phantasmas», «Tócame» y «Novedades ecuatorianas» (hoy abren la búsqueda
+   de Spotify).
+2. **¿El repositorio pasa a privado?** (hoy es público).
+3. **Mirar la CI de la 1.1.0** en GitHub → Actions y que Vercel la haya publicado (solo mirar, no probar).
+4. **Boringram del menú:** si en el menú se pueden comprar objetos de pelea con PayFoe, ¿llegan a la próxima partida
+   («cofre») o no se venden ahí? (ver «Ideas anotadas»).
+5. **Estados (opcionales):** ¿a los jefes les duran menos dormido, congelado y paralizado? ¿un golpe despierta al
+   dormido? ¿subirle al veneno o bajarle al quemado contra jefes?
+6. **Precios** propuestos por Claude (pastelillo herbal 90, pastillas felices 45, CeBiDol 400, Multicebo 150 y los de
+   la tabla): revisarlos cuando quiera.
+7. **Capítulo 2:** las decisiones de abajo («Decisiones pendientes del autor») y las preguntas de
+   `docs/guion/cap03_plan.md`.
+8. **Arte (cuando toque):** si quiere el mosaico de la censura más grueso en los archivos; si la mano de abajo de espalda
+   queda como está.
+
+**Para la noche (computadora de Jorge), lo que falta probar:** las peleas del Bastión, Nikki y el hangar con las reglas
+nuevas (veneno y quemadura desde el turno siguiente, turno libre, quemar de Jair, saltos al esquivar); la galería de
+Rikka (manos, nalgadas, la marca a las 7, el grito a los 30); el CeBiDol desde Equipo; y la demo publicada 1.1.0.
+
 ## Ideas anotadas (por diseñar)
 
 **Dos Boringram (idea del autor, 2026-11-05).** Hoy hay uno solo: lo que muestra depende de las escenas vistas en *cualquier* partida (`snapshots`), así que al empezar de nuevo ya aparecen publicaciones del futuro.

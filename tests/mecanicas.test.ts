@@ -291,3 +291,26 @@ describe('objetos nuevos (pedido del autor, 2026-11-05)', () => {
     }
   });
 });
+
+describe('el CeBiDol (pedido del autor, 2026-11-05)', () => {
+  it('fuera de las peleas sube ATQ y DEF para siempre, se gasta y no se usa en una pelea', async () => {
+    const { usarPermanente } = await import('../src/engine/equipo');
+    const { progresoDeVars, usableEnPelea } = await import('../src/engine/batalla');
+    const o = (FICHAS.objetos as Record<string, Parameters<typeof usarObjeto>[0]>).cebidol;
+    expect(usableEnPelea(o)).toBe(false);
+    const v = usarPermanente({ mochila_cebidol: 2 }, 'cebidol', 'jair', 5, o)!;
+    expect(v).toMatchObject({ refuerzo_atq_jair: 2, refuerzo_def_jair: 2, mochila_cebidol: 1 });
+    const v2 = usarPermanente(v, 'cebidol', 'jair', 5, o)!;
+    expect(progresoDeVars(v2).refuerzos?.jair).toEqual({ atq: 4, def: 4 });
+    expect(usarPermanente(v2, 'cebidol', 'jair', 5, o)).toBeNull();
+  });
+  it('lo subido se suma al empezar la pelea', async () => {
+    const { estadoInicial } = await import('../src/engine/turnos');
+    const { progresoDeVars } = await import('../src/engine/batalla');
+    const d = BATALLAS.bastion;
+    const sin = estadoInicial(d, progresoDeVars({ nivel_jair: 5 })).heroes.find((h) => h.clave === 'jair')!;
+    const con = estadoInicial(d, progresoDeVars({ nivel_jair: 5, refuerzo_atq_jair: 2, refuerzo_def_jair: 2 })).heroes.find((h) => h.clave === 'jair')!;
+    expect(con.extra - sin.extra).toBe(2);
+    expect(con.extraDef - sin.extraDef).toBe(2);
+  });
+});

@@ -44,8 +44,10 @@ interface Texts {
 const TOQUES_PARA_PASAR = 8;
 /** Tocarla demasiado (sin ropa, de frente o de espalda): el grito, y de vuelta al inicio. */
 const TOQUES_PARA_GRITO = 30;
-const GRITO_MS = 2100;
-const SPRITE_GRITO = 'rikka/desbloqueable_espalda_asustada_ultima_grito';
+const GRITO_MS = 3900;
+const GRITO_FRENTE = 'rikka/desbloqueable_frente_asustada';
+const GRITO_ESPALDA = 'rikka/desbloqueable_espalda_asustada_ultima_grito';
+const GRITO_VISTIENDOSE = 'rikka/desbloqueable_vistiendose_muy_avergonzada';
 const PASAR_MS = 2600;
 const useTexts = () => localized(galeriaEs, galeriaEn, useLang()) as unknown as Texts;
 
@@ -603,11 +605,14 @@ function Characters({ onSalir }: { onSalir: () => void }) {
           sprite
           quejaDe={(i) => (texts.quejas[flat[i].id] ? flat[i].id : null)}
           grito={(i) => {
-            // Rikka sin ropa (de frente o de espalda): tocarla demasiado termina en el grito (pedido del autor).
+            // Rikka en las termas: tocarla demasiado termina en el grito (pedido del autor).
             const c = flat[i];
-            if (c.id !== 'rikka' || !/^desbloqueable_(frente|espalda)/.test(c.expr)) return null;
-            const capa = capaDeSprite(SPRITE_GRITO);
-            const src = assetUrl(`sprites/${SPRITE_GRITO}.webp`);
+            if (c.id !== 'rikka' || !/^desbloqueable_(frente|espalda|vistiendose)/.test(c.expr)) return null;
+            // Sin darse vuelta: de frente, su cara de grito de frente; de espalda, la de espalda; vistiéndose («Termas
+            // apretadísimo»), la más sonrojada.
+            const cual = c.expr.startsWith('desbloqueable_frente') ? GRITO_FRENTE : c.expr.startsWith('desbloqueable_vistiendose') ? GRITO_VISTIENDOSE : GRITO_ESPALDA;
+            const capa = capaDeSprite(cual);
+            const src = assetUrl(`sprites/${cual}.webp`);
             return { src, capas: capa && <CapasFondo capa={capa} src={src} contener fijos /> };
           }}
           onGrito={onSalir}

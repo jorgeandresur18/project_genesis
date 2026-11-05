@@ -91,7 +91,12 @@ export function estadoInicial(d: DatosBatalla, progreso?: Progreso): EstadoPelea
   return {
     heroes: d.heroes.map((k) => {
       const h = crearLuchador(k, k, 'heroe', d.personajes[k], progreso?.heroes[k]?.nivel || d.personajes[k].nivel, progreso?.heroes[k]?.xp ?? 0);
-      // Lo que lleva puesto (va en `extra` para que subir de nivel no lo borre).
+      // Lo que subió para siempre (el CeBiDol) y lo que lleva puesto: van en `extra` para que subir de nivel no lo borre.
+      const ref = progreso?.refuerzos?.[k];
+      if (ref) {
+        h.extra += ref.atq;
+        h.extraDef += ref.def;
+      }
       const ropa = puestosDe(progreso, k);
       if (ropa.length) {
         const { atq, def, ...resto } = bonos(ropa, FICHAS.objetos);

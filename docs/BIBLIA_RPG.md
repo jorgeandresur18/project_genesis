@@ -459,6 +459,7 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
 | medicamento para el hígado | Hepatol | curación | Quita el veneno |
 | pastelillo herbal | Pastelillo herbal | curación | Cura toda la vida, pero confunde 3 turnos a quien se lo come (pedido del autor, 2026-11-05; precio propuesto: 90) |
 | pastillas felices | Pastillas felices | táctico | A un rival: lo confunde 3 turnos (pedido del autor, 2026-11-05; precio propuesto: 45) |
+| CeBiDol | CeBiDol | permanente | +2 ATQ y +2 DEF para siempre; se toma fuera de las peleas, desde Equipo (pedido del autor, 2026-11-05; precio propuesto: 400, uno por capítulo) |
 | galleta clásica | Galleta clásica | curación | +20 PS |
 | galleta con grageas | Galleta arcoíris | curación | +20 PS a todo el equipo y quita un estado |
 | galleta brownie | Galleta brownie | curación | +50 PS y quita un estado |

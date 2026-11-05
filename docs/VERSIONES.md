@@ -5,7 +5,8 @@ Qué trae cada versión. La que está en curso lleva `-dev` y todavía no se pub
 
 ## 1.2.0-dev (en curso, rama `desarrollo`; sin publicar)
 
-- **Galería, Rikka:** si la tocas demasiado (30 veces en sus sprites sin ropa, de frente o de espalda), grita con su sprite del grito: tiembla todo, zoom a su cara, luz blanca y de vuelta a la pantalla de inicio.
+- **Galería, Rikka:** si la tocas demasiado (30 veces en las termas, de frente, de espalda o vistiéndose), grita sin darse vuelta: tiembla todo, zoom lento a su cara, luz blanca y de vuelta a la pantalla de inicio.
+- **CeBiDol:** +2 ATQ y +2 DEF para siempre, fuera de las peleas (Boringplace, 400 tokens, uno por capítulo).
 
 ## 1.1.0 (publicada el 5 de noviembre de 2026; etiqueta `v1.1.0`)
 

@@ -161,8 +161,9 @@ export function EquipoPanel({ onClose, soloVer = false, grupo }: { onClose: () =
             const nivel = progreso.heroes[k]?.nivel || h.nivel;
             const xp = progreso.heroes[k]?.xp ?? 0;
             const s = statsEn(h.base, h.crece, nivel);
-            // Con lo que lleva puesto.
+            // Con lo que lleva puesto y lo que subió para siempre (el CeBiDol).
             const b = bonos(puestosDe(progreso, k), FICHAS.objetos);
+            const ref = progreso.refuerzos?.[k] ?? { atq: 0, def: 0 };
             return (
               <article key={k} className="equipo-ficha" style={{ '--c': h.especial?.color ?? '#e8e2d4' } as CSSProperties}>
                 <div className="equipo-sprite">
@@ -176,9 +177,9 @@ export function EquipoPanel({ onClose, soloVer = false, grupo }: { onClose: () =
                     <dt>PS</dt>
                     <dd>{s.ps}</dd>
                     <dt>ATQ</dt>
-                    <dd>{s.atq + b.atq}</dd>
+                    <dd>{s.atq + b.atq + ref.atq}</dd>
                     <dt>DEF</dt>
-                    <dd>{s.def + b.def}</dd>
+                    <dd>{s.def + b.def + ref.def}</dd>
                     <dt>VEL</dt>
                     <dd>{s.vel + b.vel}</dd>
                     <dt>XP</dt>
@@ -235,7 +236,7 @@ export function EquipoPanel({ onClose, soloVer = false, grupo }: { onClose: () =
                 <span className="equipo-tipo">{t(`equipo.tipo_${tipoDe(o)}`)}</span>
                 <p>{o.texto.replace(/\{quien\}/g, t('equipo.alguien')).replace(/\{n\}/g, '…')}</p>
                 {/* Fuera de las peleas: la ropa se pone y los caramelos se comen. */}
-                {!soloVer && (esEquipo(o) || (tipoDe(o) === 'permanente' && !!o.niveles)) && (
+                {!soloVer && (esEquipo(o) || (tipoDe(o) === 'permanente' && !!(o.niveles || o.atq || o.def))) && (
                   <div className="equipo-acciones">
                     {equipo.map((h) => (
                       <button

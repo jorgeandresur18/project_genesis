@@ -13,6 +13,7 @@
     "condon_spartan": { "nombre": "Spartan Condom", "texto": "{quien} gets a Spartan condom. The next hit does nothing to anyone in the party." },
     "hepatol": { "nombre": "Hepatol", "texto": "{quien} takes the Hepatol. The poison goes away." },
     "pastelillo_herbal": { "nombre": "Herbal Brownie", "texto": "{quien} eats an herbal brownie: +{n} HP. All their health is back… and the world gets weird. They're confused." },
+    "cebidol": { "nombre": "CeBiDol", "texto": "{quien} takes a CeBiDol. Attack +2 and defense +2 for good. The leaflet says \"consult your doctor\". Nobody has a doctor." },
     "pastillas_felices": { "nombre": "Happy Pills", "texto": "Someone gives {quien} happy pills. They smile, wobble and no longer know which side to fight for." },
     "galleta_clasica": { "nombre": "Classic Cookie", "texto": "{quien} eats a classic cookie: +{n} HP." },
     "galleta_arcoiris": { "nombre": "Rainbow Cookie", "texto": "{quien} shares the rainbow cookie: +{n} HP and one status goes away." },

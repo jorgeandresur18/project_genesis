@@ -328,6 +328,12 @@
       "descripcion": "Para un rival: lo confunde 3 turnos. Felicidad en cápsulas, sin receta y sin garantía."
     },
     {
+      "objeto": "cebidol",
+      "precio": 400,
+      "descripcion": "Ataque +2 y defensa +2 para siempre. Se toma fuera de las peleas, desde Equipo. Se vende uno por capítulo.",
+      "stock_por_capitulo": 1
+    },
+    {
       "objeto": "caramelo_dulce",
       "precio": 250,
       "descripcion": "Sube 1 nivel para siempre. Se vende uno por capítulo.",

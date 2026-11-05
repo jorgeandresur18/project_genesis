@@ -64,8 +64,21 @@ export function bonos(ids: string[] = [], objetos: Record<string, Objeto>) {
 /** Lo que lleva puesto cada héroe, según el progreso de la partida. */
 export const puestosDe = (p: Progreso | undefined, heroe: string) => Object.values(p?.puestos?.[heroe] ?? {});
 
-/** Un permanente fuera de la pelea (un caramelo): sube los niveles, la experiencia vuelve a 0 y se gasta. */
+/**
+ * Un permanente fuera de la pelea: un caramelo sube los niveles (la experiencia vuelve a 0); el CeBiDol sube ataque y
+ * defensa para siempre (`refuerzo_atq_<héroe>`, `refuerzo_def_<héroe>`). Se gasta uno.
+ */
 export function usarPermanente(vars: Vars, id: string, heroe: string, nivelActual: number, o?: Objeto): Vars | null {
-  if (!o?.niveles || tipoDe(o) !== 'permanente' || cantidad(vars, id) <= 0) return null;
+  if (!o || tipoDe(o) !== 'permanente' || cantidad(vars, id) <= 0) return null;
+  if (!o.niveles) {
+    if (!o.atq && !o.def) return null;
+    const n = (k: string) => (typeof vars[k] === 'number' ? (vars[k] as number) : 0);
+    return {
+      ...vars,
+      [`refuerzo_atq_${heroe}`]: n(`refuerzo_atq_${heroe}`) + (o.atq ?? 0),
+      [`refuerzo_def_${heroe}`]: n(`refuerzo_def_${heroe}`) + (o.def ?? 0),
+      [`mochila_${id}`]: cantidad(vars, id) - 1,
+    };
+  }
   return { ...vars, [`nivel_${heroe}`]: nivelActual + o.niveles, [`xp_${heroe}`]: 0, [`mochila_${id}`]: cantidad(vars, id) - 1 };
 }

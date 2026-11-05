@@ -63,6 +63,12 @@ Pregunta antes de decidir cualquier cosa de historia. Preferir una pregunta cort
 
 Para trabajar desde cualquier computadora. El detalle de cada sesión está en `docs/BITACORA.md`.
 
+**Las dos computadoras (decisión del autor, 2026-11-05)**
+- La **computadora de Jorge** (la principal, en casa): ahí el autor prueba el juego, solo de noche.
+- La **computadora del trabajo**: ahí no se le pide al autor que pruebe nada. Lo que haya que probar se anota en
+  `docs/PRUEBAS_EN_CASA.md` para la noche. Claude sí corre sus propias pruebas automáticas (`npm test`, rutas, e2e).
+- Lo pendiente para el día siguiente está en `docs/CRONOGRAMA.md`, «Para mañana».
+
 **Cómo prefiere trabajar el autor**
 - **Arte al final:** hasta cerrar la lógica se trabaja con textos de Claude (borrador) y placeholders; no se bloquea
   nada esperando arte ni corrección de diálogos. Las decisiones de historia igual se preguntan.

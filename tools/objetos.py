@@ -31,6 +31,7 @@ ARCHIVOS = {
     'galleta red velvet': 'galleta_red_velvet',
     'pastelillo herbal': 'pastelillo_herbal',
     'pastillas felices': 'pastillas_felices',
+    'CeBiDol': 'cebidol',
     'flor de pureza': 'flor_pureza',
     'gorro de navidad': 'gorro_navidad',
     'chaqueta de cuero': 'chaqueta_cuero',
