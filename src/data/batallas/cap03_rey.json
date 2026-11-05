@@ -18,20 +18,20 @@
     }
   },
   "enemigos": [
-    "soldado",
+    "caballero",
     "rey"
   ],
   "horda": {
-    "enemigo": "soldado",
+    "enemigo": "caballero",
     "al_inicio": 2,
     "niveles": [
-      15,
-      15
+      20,
+      20
     ]
   },
   "jefe": {
     "enemigo": "rey",
-    "nivel": 20
+    "nivel": 24
   },
   "botin": {
     "probabilidad": 0.6,

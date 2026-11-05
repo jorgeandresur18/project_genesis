@@ -55,7 +55,7 @@ Duración objetivo: 1 h 30 min (como el Capítulo 1, que tiene unos 82.600 carac
 | --- | --- | --- |
 | Mike | base, emocionado, asustado | Niño de la ciudadela, espada de madera. `TODO(canon)`: edad y aspecto |
 | Nora | base, curiosa, asustada | Niña de la ciudadela, canasta de flores. `TODO(canon)`: edad y aspecto |
-| Caballero estacional | base | Armadura en cuatro colores (rosa, verde, ocre, blanco). Puede ser uno genérico |
+| Caballero estacional | base | Uno por reino, con la armadura de su cultura (decisión del autor, 2026-11-05): Primavera samurái (hecho), Verano polinesia, Otoño celta, Invierno siberiana. Salen cuando la historia visita cada reino |
 | Vendedor | base | Vendedor del mercado; opcional (puede quedar sin sprite) |
 
 **Expresiones que faltan de personajes ya hechos:** Rikka **enojada**, Rikka **tierna** (con los niños), Rikka **triste** (cuando habla de lo que perdió), Cami **seria** (hoy usa la base) y Cami **dolor** (hoy usa cansada).

@@ -19,21 +19,21 @@
   },
   "enemigos": [
     "soldado",
-    "capitan"
+    "intendente"
   ],
   "horda": {
     "enemigo": "soldado",
     "al_inicio": 2,
     "niveles": [
-      13,
-      13,
-      15,
-      15
+      16,
+      16,
+      17,
+      17
     ]
   },
   "jefe": {
-    "enemigo": "capitan",
-    "nivel": 17
+    "enemigo": "intendente",
+    "nivel": 18
   },
   "botin": {
     "probabilidad": 0.6,

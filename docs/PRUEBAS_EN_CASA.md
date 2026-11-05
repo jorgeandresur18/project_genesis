@@ -161,3 +161,5 @@ Se juega con `npm run dev`: al terminar el Capítulo 2, «Continuar» sigue al 3
 - [ ] **Los especiales del Rey** (`?batalla=cap03_rey`): la Espada de las estaciones (dice qué estación cae) y la Tajada del abismo (el héroe casi desaparece de la pantalla, con la etiqueta «desaparecido», y vuelve a los 2 o 3 turnos). Claude ya los vio funcionar sin ventana; falta ver cómo se ven.
 - [ ] **El momento del DELETE:** la sentencia letra por letra. ¿Tiene el peso que buscas?
 - [ ] **El final «Cancelar»** (cruzar solo) y el despertar.
+- [ ] **La torre del Capítulo 3** (`/cap3`): los caminos (cloacas, bodegas o montacargas; comedor o forja; celdas o patio; salón o galería) y los descansos. Las peleas nuevas abren con `?batalla=cap03_cloacas_1` y las demás de `src/data/batallas/cap03_*`. Están sin balancear: anotar cuáles se sienten largas o injustas.
+

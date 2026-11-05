@@ -49,6 +49,10 @@ Muertes o fracasos tempranos, estilo Shiny Days. No cuentan entre los 12 finales
 | `bad_cap03_trofeo` | Garantía anulada | 3 | En el arsenal, «Agarrar el hacha dorada» | Borrador |
 | `bad_cap03_arsenal` | Acceso denegado | 3 | Perder la pelea del arsenal | Borrador |
 | `bad_cap03_rey` | Fin de la sesión | 3 | Perder contra el Rey Malvado | Borrador |
+| `bad_cap03_subsuelo` | Fuga de memoria | 3 | Perder en las cloacas o las bodegas | Borrador |
+| `bad_cap03_piso2` | Hora del almuerzo | 3 | Perder en el comedor o la forja | Borrador |
+| `bad_cap03_prision` | Cadena perpetua | 3 | Perder en las celdas o el patio | Borrador |
+| `bad_cap03_guardia` | Escolta denegada | 3 | Perder contra la guardia real (salón o galería) | Borrador |
 
 Los nombres son propuestas por confirmar. El Capítulo 2 tiene 10: dos en la taberna y el desayuno de la resaca, cuatro en la pelea del almacén del molino (la trampa, Rikka con el traje rojo y el modo berserk) y cuatro en la captura de la torre del Oráculo.
 
