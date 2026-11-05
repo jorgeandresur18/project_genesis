@@ -36,6 +36,7 @@
     "Cebo sueño": { "nombre": "Sleepy Decoy", "texto": "{quien} leaves a copy of themselves. Whoever hits it falls asleep. [Filler]" },
     "Cebo explosivo": { "nombre": "Explosive Decoy", "texto": "{quien} leaves a copy of themselves. It blows up in the face of whoever hits it; its owner gets some too. [Filler]" },
     "Autodestrucción": { "nombre": "Self-Destruct", "texto": "{quien} presses the button nobody should press. [Filler]" },
+    "Multicebo": { "nombre": "Multi-Decoy", "texto": "{quien} focuses and the field fills with black-and-white copies: one in front of each of them. [Filler]" },
     "Bomba del día del juicio": { "nombre": "Doomsday Bomb", "texto": "{quien} leaves a bomb in the middle of the field. It goes off in 5 turns. [Filler]" },
     "Piedra": { "nombre": "Rock", "texto": "{quien} picks a rock off the floor and throws it at {objetivo}. Cutting-edge technology. [Filler: test cassette]" },
     "Grito de guerra": { "nombre": "War Cry", "texto": "{quien} yells something nobody understands. Feels invincible. Isn't. [Filler: test cassette]" },

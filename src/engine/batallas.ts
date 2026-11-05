@@ -64,9 +64,14 @@ export const BATALLAS: Record<string, DatosBatalla> = Object.fromEntries(
   }),
 );
 
-/** Los cassettes sueltos que se venden en Boringplace (la bomba no: se gana). */
+/**
+ * Los cassettes sueltos que se venden en Boringplace (la bomba no: se gana). Los de especial (el Multicebo) van con su
+ * especial en `ataque`, para que la tienda muestre su nombre y su texto igual.
+ */
 export const SUELTOS_EN_VENTA = Object.fromEntries(
-  Object.entries(FICHAS.sueltos).filter(([, c]) => c.ataque && c.precio !== undefined),
+  Object.entries(FICHAS.sueltos)
+    .filter(([, c]) => (c.ataque || c.especial) && c.precio !== undefined)
+    .map(([id, c]) => [id, { ...c, ataque: (c.ataque ?? c.especial) as Ataque }]),
 ) as Record<string, { precio: number; ataque: Ataque }>;
 
 /** Lo que se vende al vender un cassette suelto: la mitad de lo que cuesta. */

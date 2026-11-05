@@ -95,6 +95,11 @@ export interface Especial {
    * 0,1 (pedido del autor, 2026-11-04: a veces le salen puños de fuego sin querer).
    */
   quema?: number;
+  /**
+   * El Multicebo (cassette de especial genérico, se compra en Boringplace; pedido del autor, 2026-11-04): en vez de
+   * golpear, deja un cebo normal (sin efecto) delante de cada héroe en pie. Cada uno reemplaza el que ese héroe tenía.
+   */
+  multicebo?: boolean;
 }
 export interface Heroe {
   nombre: string;

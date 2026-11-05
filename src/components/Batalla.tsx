@@ -548,19 +548,23 @@ function Pelea({
   /** El Cebo: una copia del héroe en blanco y negro, delante de él. No hace nada. */
   const dejarCebo = async (h: Luchador, a: Ataque) => {
     await decir(fmt(a.texto, { quien: h.nombre }));
+    ponerCebo(h, a.cebo_efecto);
+    await decir(fmt(t('batalla.cebo_aparece'), { quien: h.nombre }));
+  };
+  /** Pone el cebo de `h` delante de él (el que tenía, se va). */
+  const ponerCebo = (h: Luchador, efectoCebo?: Ataque['cebo_efecto']) => {
     const f = figuras.current.get(h.id);
     // Relativo a la fila de los héroes (con la cuadrícula, el padre de la figura es su casilla).
     const lado = f?.closest('.batalla-lado')?.getBoundingClientRect();
     const r = f?.getBoundingClientRect();
     // Uno solo por héroe: el viejo se va.
     b.current.cebos = b.current.cebos.filter((x) => x.de !== h.id && vivo(x.l));
-    const k = crearCebo(h, `${h.id}-cebo-${Date.now()}`, a.cebo_efecto);
+    const k = crearCebo(h, `${h.id}-cebo-${Date.now()}`, efectoCebo);
     // El turno en que aparece cuenta (los enemigos ya pueden pegarle).
     b.current.cebos.push({ l: k, de: h.id, x: r && lado ? r.left - lado.left - r.width * 0.45 : 0, y: r && lado ? r.top - lado.top : 0, turnos: CEBO_TURNOS });
     efecto(k.id, 'aparece-cebo', 700);
     playChip('cambio');
     forzar();
-    await decir(fmt(t('batalla.cebo_aparece'), { quien: h.nombre }));
   };
   /** Si el héroe ya tiene un cebo en pie (no puede poner otro). */
   const tieneCebo = (h: Luchador) => b.current.cebos.some((x) => x.de === h.id && vivo(x.l));
@@ -1299,6 +1303,14 @@ function Pelea({
     }
     if (c.tipo === 'especial') {
       const esp = equipados(d.personajes[h.clave], h.nivel, progreso?.equipo?.[h.clave], sueltosQueTengo(progreso?.cassettes), progreso?.especialesGanados).especiales[c.cual] ?? d.personajes[h.clave].especial!;
+      // El Multicebo: no golpea; un cebo normal delante de cada héroe en pie.
+      if (esp.multicebo) {
+        h.carga = 0;
+        await avisar(esp, d.personajes[h.clave].sprite, true);
+        await decir(fmt(esp.texto, { quien: h.nombre }));
+        for (const x of b.current.heroes.filter(vivo)) ponerCebo(x);
+        return decir(t('batalla.multicebo_aparece'));
+      }
       // La bomba: no golpea, queda en el campo.
       if (esp.bomba) {
         if (!ponerBomba(b.current, h, esp.bomba)) return decir(t('batalla.bomba_ya'));
@@ -2141,7 +2153,7 @@ function Pelea({
                     texto: `★ ${especial.nombre}`,
                     extra: especialListo(heroe) ? t('batalla.especial_listo') : `${Math.floor(heroe.carga)}%`,
                     clase: especialListo(heroe) ? 'especial listo' : 'especial',
-                    desc: fmt(t('batalla.desc.especial'), {
+                    desc: fmt(t(especial.multicebo ? 'batalla.desc.multicebo' : 'batalla.desc.especial'), {
                       poder: especial.poder,
                       golpes: especial.golpes,
                       n: aprox(especial.poder) * especial.golpes,

@@ -56,7 +56,8 @@ describe('cassettes sueltos', () => {
     const variables = (await import('../src/data/variables.json')).default as Record<string, unknown>;
     for (const [id, c] of Object.entries(SUELTOS_EN_VENTA)) {
       expect(c.precio, id).toBeGreaterThan(0);
-      expect(c.ataque.usos, id).toBeGreaterThan(0);
+      // Los especiales (el Multicebo) no tienen usos: se gastan con la barra.
+      if (!('golpes' in c.ataque)) expect(c.ataque.usos, id).toBeGreaterThan(0);
     }
     // También los que no se venden (la bomba del día del juicio, que se gana).
     for (const id of Object.keys(FICHAS.sueltos)) expect(variables, id).toHaveProperty(`cassette_${id}`);

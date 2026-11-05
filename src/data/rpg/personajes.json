@@ -809,6 +809,20 @@
         "texto": "{quien} deja una bomba en medio del campo. Explota en 5 turnos. [Relleno]"
       }
     },
+    "multicebo": {
+      "precio": 150,
+      "especial": {
+        "nombre": "Multicebo",
+        "poder": 0,
+        "golpes": 0,
+        "objetivo": "todos",
+        "color": "#d8d8d8",
+        "ojos": [0, 0, 1, 1],
+        "posicion": "objetivo",
+        "multicebo": true,
+        "texto": "{quien} se concentra y el campo se llena de copias en blanco y negro: una delante de cada uno. [Relleno]"
+      }
+    },
     "piedra": {
       "precio": 40,
       "ataque": {
