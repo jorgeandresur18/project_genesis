@@ -90,6 +90,11 @@ export interface Especial {
    * derrotado) y, si sigue vivo, se levanta (el especial de la sombra: un ataque sorpresa desde el piso).
    */
   levanta?: boolean;
+  /**
+   * Probabilidad de quemar a quien recibe el especial (una tirada por uso, no por golpe): la Ráfaga de puños de Jair,
+   * 0,1 (pedido del autor, 2026-11-04: a veces le salen puños de fuego sin querer).
+   */
+  quema?: number;
 }
 export interface Heroe {
   nombre: string;
@@ -422,7 +427,10 @@ export interface Luchador {
   protegido: number;
   /** Cuántas veces usó cada ataque con usos limitados en esta pelea (por nombre). */
   usados?: Record<string, number>;
-  /** Acaba de salir de una parálisis: este turno no se lo puede volver a paralizar. */
+  /**
+   * El turno libre: acaba de salir de una parálisis, del sueño o del hielo, y este turno no se le puede poner ninguno
+   * de los tres (decisión del autor, 2026-11-04; antes valía solo para la parálisis). El nombre quedó de entonces.
+   */
   inmuneParalisis?: number;
   /** Lo que da el equipo además de ATQ y DEF (esos van en `extra` y `extraDef`). */
   equipo?: { vel: number; critico: number; sinConfusion: boolean; resisteVeneno: boolean };
@@ -535,10 +543,10 @@ export function subirNiveles(l: Luchador, d: { base: Stats; crece: Stats }, n: n
 export function usarObjeto(o: Objeto, h: Luchador, d?: { base: Stats; crece: Stats }): number {
   // Dormido, congelado o paralizado: pierde su turno, así que el objeto se lo da un compañero (los que van contra un rival, no lo sacan).
   if (!o.veneno && !o.confunde && !o.paraliza) {
+    // Al salir de cualquiera de los tres, un turno libre (nadie queda bloqueado toda la pelea).
+    if (noActua(h)) h.inmuneParalisis = 1;
     h.dormido = 0;
     h.congelado = 0;
-    // Al salir de una parálisis, un turno de respiro (nadie queda bloqueado toda la pelea).
-    if (h.paralizado) h.inmuneParalisis = 1;
     h.paralizado = 0;
   }
   if (o.quita_veneno) h.envenenado = null;
@@ -693,7 +701,7 @@ export const seConfunde = (l: Luchador, azar: () => number = Math.random) =>
 export function eligeAtaque(ataques: Ataque[], heroes: Luchador[], azar: () => number = Math.random): { ataque: Ataque; blancos: Luchador[] } | null {
   const vivos = heroes.filter((h) => h.ps > 0);
   const libres = (a: Ataque) =>
-    a.paraliza ? vivos.filter((h) => !h.paralizado && !h.inmuneParalisis) : a.confunde ? vivos.filter((h) => !h.confundido && !h.equipo?.sinConfusion) : vivos;
+    a.paraliza ? vivos.filter((h) => !noActua(h) && !h.inmuneParalisis) : a.confunde ? vivos.filter((h) => !h.confundido && !h.equipo?.sinConfusion) : vivos;
   const posibles = ataques.filter((a) => libres(a).length > 0);
   if (!posibles.length) return null;
   const total = posibles.reduce((n, a) => n + (a.peso ?? 1), 0);
@@ -707,7 +715,10 @@ export function eligeAtaque(ataques: Ataque[], heroes: Luchador[], azar: () => n
  * Los estados no se acumulan: el que ya está paralizado, confundido o envenenado no puede volver a caer en eso
  * (tampoco el que acaba de salir de una parálisis: un turno de respiro). Devuelve el estado que ya tiene, si lo tiene.
  */
-export function yaTiene(l: Luchador, efecto: { paraliza?: number; confunde?: number; veneno?: unknown }): 'paralizado' | 'confundido' | 'envenenado' | null {
+export function yaTiene(l: Luchador, efecto: { paraliza?: number; confunde?: number; veneno?: unknown }): 'paralizado' | 'confundido' | 'envenenado' | 'dormido' | 'congelado' | null {
+  // Paralizar: tampoco al que duerme o está congelado (no se pasa de uno a otro), ni en su turno libre.
+  if (efecto.paraliza && l.dormido > 0) return 'dormido';
+  if (efecto.paraliza && l.congelado > 0) return 'congelado';
   if (efecto.paraliza && (l.paralizado > 0 || l.inmuneParalisis)) return 'paralizado';
   if (efecto.confunde && l.confundido > 0) return 'confundido';
   if (efecto.veneno && l.envenenado) return 'envenenado';

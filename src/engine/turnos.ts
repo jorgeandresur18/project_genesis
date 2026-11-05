@@ -21,6 +21,7 @@ import {
   repartirRafagas,
   seConfunde,
   seRetira,
+  noActua,
   turnosDormido,
   vanPerdiendo,
   vivo,
@@ -229,7 +230,7 @@ export function decidirEnemigo(
 
 /**
  * Al final del turno: nadie sigue esquivando y bajan los estados. La parálisis se cuenta por turnos en que no pudo
- * actuar (la de este turno, recién desde el siguiente) y, al terminar, deja un turno de respiro; la confusión baja
+ * actuar (la de este turno, recién desde el siguiente) y, al terminar (como el sueño y el hielo), deja un turno libre; la confusión baja
  * igual (la de este turno, desde el siguiente).
  */
 export function finDeTurno(estado: EstadoPelea) {
@@ -238,8 +239,8 @@ export function finDeTurno(estado: EstadoPelea) {
     if (h.inmuneParalisis) h.inmuneParalisis--;
     if (h.paralizado && !estado.paralizadoRecien.includes(h.id) && --h.paralizado === 0) h.inmuneParalisis = 1;
     if (h.confundido && !estado.confundidoRecien.includes(h.id)) h.confundido--;
-    if (h.congelado && !estado.estadoRecien.includes(`${h.id}/congelado`)) h.congelado--;
-    if (h.dormido && !estado.estadoRecien.includes(`${h.id}/dormido`)) h.dormido--;
+    if (h.congelado && !estado.estadoRecien.includes(`${h.id}/congelado`) && --h.congelado === 0) h.inmuneParalisis = 1;
+    if (h.dormido && !estado.estadoRecien.includes(`${h.id}/dormido`) && --h.dormido === 0) h.inmuneParalisis = 1;
   });
   estado.paralizadoRecien = [];
   estado.confundidoRecien = [];
@@ -369,6 +370,8 @@ function limpiarEstados(x: Luchador) {
 /** Quema, congela o duerme (no se acumula: al que ya lo está no le hace nada). Devuelve si se aplicó. */
 export function aplicarEstado(estado: EstadoPelea, x: Luchador, cual: 'quemado' | 'congelado' | 'dormido', azar: () => number = Math.random): boolean {
   if (x[cual] > 0) return false;
+  // Dormir o congelar: no al que ya no puede actuar (no se pasa de uno a otro) ni en su turno libre.
+  if (cual !== 'quemado' && (noActua(x) || x.inmuneParalisis)) return false;
   if (cual === 'quemado') x.quemado = QUEMADO.turnos;
   if (cual !== 'quemado') x[cual] = turnosDormido(azar, estaSolo(estado, x));
   if (cual !== 'quemado') estado.estadoRecien.push(`${x.id}/${cual}`);
@@ -510,3 +513,12 @@ export function estadosTerminados(antes: Map<string, EstadoQueTermina[]>, ls: Lu
  */
 export const sufreAlFinal = (antes: Map<string, EstadoQueTermina[]>, l: Luchador, estado: 'envenenado' | 'quemado') =>
   !!antes.get(l.id)?.includes(estado);
+
+/**
+ * Un especial que a veces quema (`quema`): una sola tirada por uso. Si sale, quema a los blancos que siguen de pie
+ * (no a los cebos ni a los que ya están quemados). Devuelve a quiénes quemó.
+ */
+export function quemarConEspecial(estado: EstadoPelea, e: Especial, blancos: Luchador[], azar: () => number = Math.random): Luchador[] {
+  if (!e.quema || azar() >= e.quema) return [];
+  return [...new Set(blancos)].filter((x) => vivo(x) && !x.cebo && aplicarEstado(estado, x, 'quemado', azar));
+}

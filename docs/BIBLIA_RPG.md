@@ -587,9 +587,11 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
 Código: `src/engine/turnos.ts` y `src/engine/batalla.ts`; pruebas: `tests/mecanicas.test.ts`. La simulación del balance
 no las usa (ni los cebos), porque ningún jugador simulado las elige.
 
-**Dormido, congelado y paralizado** (la misma mecánica, decisión del autor; solo cambian el nombre y el color): **pierde su turno.** Dura de 2 a 4 turnos, al azar. Solo sale antes si **un compañero usa un objeto en él** (cualquiera que no sea para un rival); un golpe no lo saca. Al salir de una parálisis queda un turno de respiro, para que nadie quede bloqueado toda la pelea. El número de `paraliza` en los datos ya no decide cuánto dura.
+**Dormido, congelado y paralizado** (la misma mecánica, decisión del autor; solo cambian el nombre y el color): **pierde su turno.** Dura de 2 a 4 turnos, al azar. Solo sale antes si **un compañero usa un objeto en él** (cualquiera que no sea para un rival); un golpe no lo saca. **Turno libre** (decisión del autor, 2026-11-04; antes era solo para la parálisis): al salir de cualquiera de los tres, sea porque se cumplieron los turnos o por un objeto, tiene un turno en que no se le puede poner ninguno de los tres, así que actúa seguro; y mientras tiene uno, no se le puede poner otro (no se pasa del sueño al hielo ni a la parálisis). Así nadie queda bloqueado toda la pelea, ni con los cebos. El número de `paraliza` en los datos ya no decide cuánto dura.
 
 **En el 1 vs 1** (propuesta de Claude, a pedido del autor): sin un compañero de pie que lo saque, al héroe le dura de 1 a 2 turnos y se le pasa solo. Vale también si sus compañeros cayeron. A los rivales les dura siempre de 2 a 4.
+
+**La Ráfaga de puños de Jair quema a veces** (pedido del autor, 2026-11-04): 10 % por cada uso del especial (una tirada, no una por golpe); «¡Los puños salieron en llamas!». Campo `quema` del especial.
 
 **Quemado** (el de la sección 15, ya hecho): pierde el 5 % de su vida máxima cada turno y pega a la mitad, 3 turnos. Como el veneno, el primer daño llega al final del turno siguiente al que lo quemaron.
 

@@ -398,6 +398,7 @@
   "batalla.empate": "It's a draw! Nobody's left standing.",
   "batalla.sigue_congelado": "{quien} is still frozen.",
   "batalla.sigue_dormido": "{quien} is still asleep.",
+  "batalla.especial_quema": "The fists came out on fire! {quien} is burned.",
   "batalla.quemadura": "{quien} loses {n} from the burn.",
   "batalla.tag_quemado": "burned",
   "batalla.tag_congelado": "frozen",

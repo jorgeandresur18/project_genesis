@@ -1,7 +1,7 @@
 // La lógica de turnos sin dibujo (src/engine/turnos.ts; etapa 2 de partir Batalla.tsx): el estado con que empieza
 // la pelea, qué decide cada enemigo, los cebos y el fin del turno.
 import { describe, expect, it } from 'vitest';
-import { CARGA, crearCebo, crearLuchador, type DatosBatalla, type Luchador } from '../src/engine/batalla';
+import { CARGA, crearCebo, crearLuchador, yaTiene, type DatosBatalla, type Luchador } from '../src/engine/batalla';
 import { BATALLAS } from '../src/engine/batallas';
 import {
   blancoDelCanon,
@@ -14,6 +14,8 @@ import {
   finDeTurno,
   fotoEstados,
   sufreAlFinal,
+  quemarConEspecial,
+  aplicarEstado,
   golpesDelCanon,
   hacerClon,
   llegaRefuerzo,
@@ -288,5 +290,39 @@ describe('veneno y quemadura: desde el turno siguiente', () => {
     expect(sufreAlFinal(alEmpezar, nuevo, 'quemado')).toBe(false);
     // Al turno siguiente, ya le toca.
     expect(sufreAlFinal(fotoEstados([nuevo]), nuevo, 'envenenado')).toBe(true);
+  });
+});
+
+describe('turno libre al salir de dormido, congelado o paralizado', () => {
+  it('al despertarse no se lo puede volver a dormir, congelar ni paralizar ese turno; después, sí', () => {
+    const d = D('bastion');
+    const s = estadoInicial(d);
+    const e = enemigo(d, Object.keys(d.enemigos)[0]);
+    s.enemigos = [e];
+    expect(aplicarEstado(s, e, 'dormido', fijo(0))).toBe(true);
+    // Dormido: no se le pone otro de los tres encima.
+    expect(aplicarEstado(s, e, 'congelado', fijo(0))).toBe(false);
+    expect(yaTiene(e, { paraliza: 1 })).toBe('dormido');
+    finDeTurno(s); // el turno en que lo durmieron no cuenta
+    while (e.dormido) finDeTurno(s);
+    expect(e.inmuneParalisis).toBe(1);
+    expect(aplicarEstado(s, e, 'dormido', fijo(0))).toBe(false);
+    expect(aplicarEstado(s, e, 'congelado', fijo(0))).toBe(false);
+    expect(yaTiene(e, { paraliza: 1 })).toBe('paralizado');
+    finDeTurno(s); // pasó su turno libre
+    expect(aplicarEstado(s, e, 'congelado', fijo(0))).toBe(true);
+  });
+});
+
+describe('la Ráfaga de puños de Jair a veces quema', () => {
+  it('con 10 %: una tirada por uso; quema al blanco si sale, nada si no', () => {
+    const d = D('bastion');
+    const s = estadoInicial(d);
+    const esp = d.personajes.jair.especial!;
+    expect(esp.quema).toBe(0.1);
+    const e = enemigo(d, Object.keys(d.enemigos)[0]);
+    expect(quemarConEspecial(s, esp, [e], fijo(0.5))).toEqual([]);
+    expect(quemarConEspecial(s, esp, [e], fijo(0.05))).toEqual([e]);
+    expect(e.quemado).toBeGreaterThan(0);
   });
 });

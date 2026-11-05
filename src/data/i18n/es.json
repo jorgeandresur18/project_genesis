@@ -398,6 +398,7 @@
   "batalla.empate": "¡Empate! No queda nadie en pie.",
   "batalla.sigue_congelado": "{quien} sigue congelado.",
   "batalla.sigue_dormido": "{quien} sigue dormido.",
+  "batalla.especial_quema": "¡Los puños salieron en llamas! {quien} se quema.",
   "batalla.quemadura": "{quien} pierde {n} por la quemadura.",
   "batalla.tag_quemado": "quemado",
   "batalla.tag_congelado": "congelado",

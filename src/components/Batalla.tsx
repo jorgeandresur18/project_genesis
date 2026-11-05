@@ -68,6 +68,7 @@ import {
   finDeTurno,
   fotoEstados,
   sufreAlFinal,
+  quemarConEspecial,
   type EstadoQueTermina,
   estadosTerminados,
   golpesDelCanon,
@@ -1817,6 +1818,12 @@ function Pelea({
       await espera(500);
     }
     await decir(fmt(t('batalla.especial_total'), { quien: l.nombre, n: total }));
+    // Algunos especiales a veces queman (Jair: puños de fuego sin querer).
+    for (const x of quemarConEspecial(b.current, e, blancos)) {
+      luz(x.id, '#ff8a3c');
+      forzar();
+      await decir(fmt(t('batalla.especial_quema'), { quien: x.nombre }));
+    }
     for (const b of blancos) {
       if (vivo(b) || b.cebo) continue;
       if (b.lado === 'enemigo') await alCaer(b);

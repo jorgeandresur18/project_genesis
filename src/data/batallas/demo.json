@@ -14,6 +14,7 @@
           "nombre": "Ráfaga de puños",
           "poder": 7,
           "golpes": 6,
+          "quema": 0.1,
           "objetivo": "uno",
           "color": "#ff8a1f",
           "ojos": [
