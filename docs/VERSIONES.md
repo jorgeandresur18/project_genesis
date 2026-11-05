@@ -3,6 +3,8 @@
 Qué trae cada versión. La que está en curso lleva `-dev` y todavía no se publicó. Cómo se numeran y cómo se publica:
 `docs/METODOLOGIA.md`.
 
+## 1.2.0-dev (en curso, rama `desarrollo`; sin publicar)
+
 ## 1.1.3 (publicada el 5 de noviembre de 2026; etiqueta `v1.1.3`)
 
 - **Conoce más, la nota personal:** una advertencia al principio, subtítulos y la parte de las relaciones del autor.
