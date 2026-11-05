@@ -129,7 +129,7 @@ Al elegir a quién atacar, el elegido brilla, tiene un anillo dorado a los pies 
 | **En el aire** | Mientras dura el especial que lo levantó. | Arriba, en la pose de golpeado; al terminar cae con su sprite de derrotado y, si sigue vivo, se levanta. |
 | **Caído** | 0 PS. No actúa. Se puede revivir. | Su fila «derrotado» (tirado, respirando) o, si no la tiene, la pose de golpeado. |
 | **Confundido** (el beso de Nikki) | Durante 3 turnos, al atacar (ataque o especial) puede pegarse a sí mismo: 40 % el primer turno, 30 % el segundo y 20 % el tercero (`CONFUSION`). Hablar, esquivar y los objetos funcionan normal. Se le va al caer. | Tres corazones chicos que dan vueltas alrededor de la cabeza como un carrusel (delante, más grandes y nítidos; detrás, más chicos y tenues; desaparecen al caer); «confusión» en su tarjeta. |
-| **Envenenado** | Pierde PS al final de cada turno, unos turnos (un jefe nunca baja de 1). | Humo morado que le sale del cuerpo y sube; «veneno» en su tarjeta. |
+| **Envenenado** | Pierde PS al final de cada turno, unos turnos (un jefe nunca baja de 1). El primer daño llega al final del turno siguiente al que lo envenenaron (decisión del autor, 2026-11-04). | Humo morado que le sale del cuerpo y sube; «veneno» en su tarjeta. |
 | **Protegido** | Los próximos golpes (según el objeto) no le hacen daño: «BLOQUEA». | Un aura celeste suave alrededor del cuerpo, que respira; «protegido» en su tarjeta. |
 | **Distraído** (por Hablar) | Pierde su próximo ataque. | — |
 
@@ -591,7 +591,7 @@ no las usa (ni los cebos), porque ningún jugador simulado las elige.
 
 **En el 1 vs 1** (propuesta de Claude, a pedido del autor): sin un compañero de pie que lo saque, al héroe le dura de 1 a 2 turnos y se le pasa solo. Vale también si sus compañeros cayeron. A los rivales les dura siempre de 2 a 4.
 
-**Quemado** (el de la sección 15, ya hecho): pierde el 5 % de su vida máxima cada turno y pega a la mitad, 3 turnos.
+**Quemado** (el de la sección 15, ya hecho): pierde el 5 % de su vida máxima cada turno y pega a la mitad, 3 turnos. Como el veneno, el primer daño llega al final del turno siguiente al que lo quemaron.
 
 **Los cebos con efecto** (genéricos: cassettes grises en Boringplace, 5 usos). Funcionan como el Cebo, pero **al golpearlos
 le causan el estado a quien los golpeó** (al terminar el ataque; si ya lo tiene, no se acumula). El sprite toma el color

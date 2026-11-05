@@ -44,6 +44,8 @@ import {
   poderBarrido,
   resolverGolpe,
   sumarEnemigo,
+  fotoEstados,
+  sufreAlFinal,
 } from '../src/engine/turnos';
 
 /** Los golpes del cañón salen de la hoja del Capitán, como en el juego. */
@@ -174,6 +176,7 @@ function pelea(D: DatosBatalla, listo: boolean) {
 
   for (let turno = 0; turno < 300; turno++) {
     const disp = disponibles(hs, D.personajes, s.actuaron);
+    const alEmpezar = fotoEstados([...hs, ...s.enemigos]);
     s.actuaron = [];
     for (const h of disp) {
       if (!vivo(h)) continue;
@@ -191,7 +194,7 @@ function pelea(D: DatosBatalla, listo: boolean) {
     }
     finDeTurno(s);
     if (!hs.some(vivo)) return { s, gana: false };
-    for (const l of [...hs, ...s.enemigos].filter((x) => vivo(x) && x.envenenado)) {
+    for (const l of [...hs, ...s.enemigos].filter((x) => vivo(x) && x.envenenado && sufreAlFinal(alEmpezar, x, 'envenenado'))) {
       tickVeneno(l, l.lado === 'enemigo' && !!D.enemigos[l.clave]?.jefe && l.clon === undefined);
       if (!vivo(l) && l.lado === 'enemigo') cae(l);
     }

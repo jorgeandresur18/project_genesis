@@ -13,6 +13,7 @@ import {
   estadosTerminados,
   finDeTurno,
   fotoEstados,
+  sufreAlFinal,
   golpesDelCanon,
   hacerClon,
   llegaRefuerzo,
@@ -270,5 +271,22 @@ describe('aviso de fin de estado', () => {
     b.paralizado = 0; // se le pasa, pero cayó
     b.ps = 0;
     expect(estadosTerminados(antes, [a, b]).map((x) => [x.l.id, x.estado])).toEqual([[a.id, 'dormido']]);
+  });
+});
+
+describe('veneno y quemadura: desde el turno siguiente', () => {
+  it('al que lo envenenan o queman durante el turno no le baja la vida al final de ese turno', () => {
+    const d = D('bastion');
+    const ya = enemigo(d, Object.keys(d.enemigos)[0]);
+    const nuevo = { ...enemigo(d, Object.keys(d.enemigos)[0]), id: 'nuevo' };
+    ya.envenenado = { danio: 3, turnos: 3 };
+    const alEmpezar = fotoEstados([ya, nuevo]);
+    nuevo.envenenado = { danio: 3, turnos: 3 };
+    nuevo.quemado = 3;
+    expect(sufreAlFinal(alEmpezar, ya, 'envenenado')).toBe(true);
+    expect(sufreAlFinal(alEmpezar, nuevo, 'envenenado')).toBe(false);
+    expect(sufreAlFinal(alEmpezar, nuevo, 'quemado')).toBe(false);
+    // Al turno siguiente, ya le toca.
+    expect(sufreAlFinal(fotoEstados([nuevo]), nuevo, 'envenenado')).toBe(true);
   });
 });

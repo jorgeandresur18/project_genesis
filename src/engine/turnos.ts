@@ -502,3 +502,11 @@ export function estadosTerminados(antes: Map<string, EstadoQueTermina[]>, ls: Lu
   }
   return out;
 }
+
+/**
+ * Veneno y quemadura: el daño de fin de turno solo le toca al que ya lo tenía cuando empezó el turno (decisión del
+ * autor, 2026-11-04). Al que lo envenenan o queman durante el turno, el primer daño le llega al final del siguiente;
+ * cuántas veces pierde vida no cambia. `antes` es la foto (`fotoEstados`) del comienzo del turno.
+ */
+export const sufreAlFinal = (antes: Map<string, EstadoQueTermina[]>, l: Luchador, estado: 'envenenado' | 'quemado') =>
+  !!antes.get(l.id)?.includes(estado);

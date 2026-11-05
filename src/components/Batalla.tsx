@@ -67,6 +67,8 @@ import {
   evaporarClones,
   finDeTurno,
   fotoEstados,
+  sufreAlFinal,
+  type EstadoQueTermina,
   estadosTerminados,
   golpesDelCanon,
   hacerClon,
@@ -720,6 +722,8 @@ function Pelea({
 
   /** Un turno: eligen los héroes que pueden actuar, actúan en ese orden y después atacan los enemigos. */
   const turno = async (): Promise<'sigue' | 'gana' | 'huye' | 'pierde' | 'perdona' | 'empate'> => {
+    // Quién ya estaba envenenado o quemado al empezar: solo a esos les baja la vida al final de este turno.
+    const alEmpezar = fotoEstados([...b.current.heroes, ...b.current.enemigos]);
     const opciones = disponibles(b.current.heroes, d.personajes, b.current.actuaron);
     b.current.descansan = b.current.heroes.filter((h) => vivo(h) && !opciones.includes(h)).map((h) => h.id);
     forzar();
@@ -801,7 +805,7 @@ function Pelea({
     };
     let fin = terminada();
     if (fin) return fin;
-    await venenos();
+    await venenos(alEmpezar);
     fin = terminada();
     if (fin) return fin;
     await avisarFinEstados(antesDelFin);
@@ -845,8 +849,8 @@ function Pelea({
     }
   };
   /** El veneno al final del turno: cada envenenado pierde PS (los enemigos que caen, caen). */
-  const venenos = async () => {
-    for (const l of [...b.current.heroes, ...b.current.enemigos].filter((x) => vivo(x) && x.envenenado)) {
+  const venenos = async (alEmpezar: Map<string, EstadoQueTermina[]>) => {
+    for (const l of [...b.current.heroes, ...b.current.enemigos].filter((x) => vivo(x) && x.envenenado && sufreAlFinal(alEmpezar, x, 'envenenado'))) {
       const n = tickVeneno(l, l.lado === 'enemigo' && !!d.enemigos[l.clave]?.jefe && l.clon === undefined);
       if (!n) continue;
       numero(l.id, String(n), 'dano');
@@ -859,7 +863,7 @@ function Pelea({
       if (l.lado === 'enemigo') await alCaer(l);
       else await decir(fmt(t('batalla.cae'), { quien: l.nombre }));
     }
-    for (const l of [...b.current.heroes, ...b.current.enemigos].filter((x) => vivo(x) && x.quemado)) {
+    for (const l of [...b.current.heroes, ...b.current.enemigos].filter((x) => vivo(x) && x.quemado && sufreAlFinal(alEmpezar, x, 'quemado'))) {
       const n = tickQuemado(l, l.lado === 'enemigo' && !!d.enemigos[l.clave]?.jefe && l.clon === undefined);
       if (!n) continue;
       numero(l.id, String(n), 'dano');
