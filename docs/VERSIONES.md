@@ -6,6 +6,9 @@ Qué trae cada versión. La que está en curso lleva `-dev` y todavía no se pub
 ## 1.2.0-dev (en curso, rama `desarrollo`; sin publicar)
 
 - **Galería, Rikka:** si la tocas demasiado (30 veces en las termas, de frente, de espalda o vistiéndose), grita sin darse vuelta: tiembla todo, zoom lento a su cara, luz blanca y de vuelta a la pantalla de inicio.
+- **Advertencia de contenido:** «Alcohol y drogas» en un solo tema.
+- **Lo publicado, más cerrado:** los atajos `/all` y `?galeria=todo` solo funcionan en desarrollo.
+- **Después del grito de Rikka,** un degradado de blanco al título, que vuelve a empezar.
 - **CeBiDol:** +2 ATQ y +2 DEF para siempre, fuera de las peleas (Boringplace, 400 tokens, uno por capítulo).
 
 ## 1.1.0 (publicada el 5 de noviembre de 2026; etiqueta `v1.1.0`)

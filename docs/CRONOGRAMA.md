@@ -124,6 +124,10 @@ La misma proyección, para mirarla en el navegador: `docs/proyeccion.html`.
 Decisiones y datos que solo puede dar el autor; Claude los aplica sin pedir pruebas (las pruebas, de noche, en la
 computadora de Jorge: ver `docs/PRUEBAS_EN_CASA.md`).
 
+0. **¿Publicar la 1.1.1 en `main`?** Lleva dos cosas que sí deben verse en Vercel: la advertencia «Alcohol y drogas»
+   (lo publicado ya habla del cannabis en Conoce más) y los atajos `/all` y `?galeria=todo` apagados en lo publicado
+   (se saltaban el Capítulo 2 y los secretos de Rikka). Están en `desarrollo`; falta la orden del autor. Si usa `/all`
+   en Vercel para revisar, avisar antes.
 1. **Los enlaces de Lolabúm** que faltan: «16 Phantasmas», «Tócame» y «Novedades ecuatorianas» (hoy abren la búsqueda
    de Spotify).
 2. **¿El repositorio pasa a privado?** (hoy es público).
