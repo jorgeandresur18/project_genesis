@@ -491,7 +491,7 @@ function Pelea({
     efecto(k.id, 'aparece', 900);
     playChip('vortice');
     forzar();
-    await decir(fmt(t('batalla.clon_aparece'), { quien: e.nombre, n: c.turnos }));
+    await decir(fmt(t('batalla.clon_aparece'), { quien: e.nombre, clon: c.nombre_clon, n: c.turnos }));
     const r = c.reacciones?.length ? azar(c.reacciones) : null;
     if (r) await decir(r.texto, r.quien === 'Voz' ? undefined : r.quien);
   };

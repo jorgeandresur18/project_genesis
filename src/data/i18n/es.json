@@ -284,7 +284,7 @@
   "batalla.desc.objetivo": "Nivel {nivel} · {ps}/{max} PS · ATQ {atq} · DEF {def} · VEL {vel}",
   "batalla.nadie_caido": "No hay nadie caído para revivir.",
   "batalla.desc.obj_revive": "Revive a un compañero caído con el {n} % de su vida.",
-  "batalla.clon_aparece": "{quien} le da una parte de su vida a su sombra: el clon dura {n} turnos.",
+  "batalla.clon_aparece": "{quien} le da una parte de su vida a {clon}: dura {n} turnos.",
   "batalla.clon_se_va": "{quien} se evapora.",
   "batalla.clon_cae": "{quien} se deshace en humo.",
   "batalla.clon_no_escucha": "{quien} no escucha. Es solo una sombra.",

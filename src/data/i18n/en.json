@@ -284,7 +284,7 @@
   "batalla.desc.objetivo": "Level {nivel} · {ps}/{max} HP · ATK {atq} · DEF {def} · SPD {vel}",
   "batalla.nadie_caido": "Nobody is down to revive.",
   "batalla.desc.obj_revive": "Revives a fallen ally with {n} % of their HP.",
-  "batalla.clon_aparece": "{quien} gives part of their life to their shadow: the clone lasts {n} turns.",
+  "batalla.clon_aparece": "{quien} gives part of their life to {clon}: it lasts {n} turns.",
   "batalla.clon_se_va": "{quien} evaporates.",
   "batalla.clon_cae": "{quien} dissolves into smoke.",
   "batalla.clon_no_escucha": "{quien} does not listen. It is just a shadow.",
