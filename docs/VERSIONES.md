@@ -3,6 +3,8 @@
 Qué trae cada versión. La que está en curso lleva `-dev` y todavía no se publicó. Cómo se numeran y cómo se publica:
 `docs/METODOLOGIA.md`.
 
+## 1.2.0-dev (en curso, rama `desarrollo`; sin publicar)
+
 ## 1.1.2 (publicada el 5 de noviembre de 2026; etiqueta `v1.1.2`)
 
 - **Atajos de prueba con PIN:** en lo publicado, `?batalla`, `?vars`, `?sprites`, `?cuadricula`, `?escena`, `?bootcamp`, `?juego`, `?nivel` y `/capN` de un capítulo sin publicar piden el PIN, como `/all`.
