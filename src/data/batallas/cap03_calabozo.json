@@ -25,25 +25,25 @@
     "enemigo": "soldado",
     "al_inicio": 2,
     "niveles": [
-      8,
-      8,
-      9,
-      9
+      14,
+      14,
+      15,
+      15
     ]
   },
   "jefe": {
     "enemigo": "capitan",
-    "nivel": 11
+    "nivel": 16
   },
   "botin": {
     "probabilidad": 0.6,
     "objetos": [
+      "vida",
+      "vida",
+      "galleta_clasica",
       "atq",
       "def",
-      "vida",
-      "vida",
-      "carga",
-      "revivir"
+      "carga"
     ]
   },
   "esquivar": 0.5,
@@ -149,7 +149,8 @@
     "caramelo_rancio",
     "revivir",
     "veneno_ratas",
-    "condon"
+    "condon",
+    "galleta_clasica"
   ],
   "ayuda": {
     "umbral": 0.35,

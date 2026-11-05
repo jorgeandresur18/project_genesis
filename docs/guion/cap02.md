@@ -892,6 +892,18 @@
 > ♪ música: adventure1
 `p2_049` — Al día siguiente llegan a la ciudadela del Otoño: casas de piedra cubiertas de hiedra roja, piedras talladas con espirales en cada esquina, humo de chimeneas y olor a manzana asada y a hojas mojadas.
 
+`p2_049g01` — En la puerta de la ciudadela, dos guardias del Otoño: armaduras de bronce con espirales grabadas, torques al cuello, escudos redondos y cascos con alas de cuervo.
+
+`p2_049g02` **Guardia del Otoño:** ¿Nombre y motivo de la visita?
+
+`p2_049g03` **Rikka:** Soy la sacerdotisa de la Primavera.
+
+`p2_049g04` — El guardia la mira de arriba abajo y después le mira la espalda: el traje rojo, ajustado, sin el emblema de la Primavera.
+
+`p2_049g05` **Guardia del Otoño:** Claro. Y yo soy el Rey del Invierno. Pasen, pero no se metan en problemas.
+
+`p2_049g06` **Cami:** Sin el kimono no eres nadie. Bienvenida a mi vida.
+
 `p2_050` **Rikka:** Preguntemos si alguien vio mis prendas. Un kimono rojo con flores bordadas, una faja morada, un collar de…
 
 `p2_051` **Cami:** Nadie va a entender esa descripción. Todos los kimonos son rojos para la gente que no usa kimono.
@@ -1135,6 +1147,8 @@
 
 ### bosque_otono
 
+`p2_084v` **Voz:** Entidad 01: modo armored guardado. Recarga: necesaria. Nuevo cassette disponible: Armored. [Relleno: se equipa desde Equipo como un especial de Cami]
+
 > ♪ música: serene
 `p2_085` — Se detienen lejos, en un claro del bosque, entre robles rojos. La armadura de Cami se repliega sola, placa por placa, y las luces se apagan una por una. Debajo queda su traje azul de siempre.
 
@@ -1186,6 +1200,14 @@
 `t_a01` — Dos días después, el otoño se acaba de golpe, como una página que alguien arrancó. Del otro lado empieza la nieve: el reino del Invierno.
 
 `t_a02` **Jair:** (Mi ciudad tiene una sola estación: «hace calor». Aquí tienen cuatro y ninguna me queda bien.)
+
+`t_a02g01` — Una patrulla del Invierno sale de entre la nieve: armaduras de escamas bajo abrigos de piel, gorros de piel con orejeras, hachas largas y la barba blanca de escarcha.
+
+`t_a02g02` **Guardia del Invierno:** Gente del sur. Se nota en cómo tiemblan.
+
+`t_a02g03` **Jair:** Yo tiemblo profesionalmente. Es lo único que hago bien.
+
+`t_a02g04` — El guardia ve el emblema de la Primavera en la espalda de Rikka, se golpea el pecho con el puño y los deja pasar sin una palabra más.
 
 `t_ai01` — El frío llega de golpe. A Jair le castañetean los dientes con un ritmo que casi podría bailarse.
 
@@ -1859,6 +1881,14 @@
 ### playa_verano
 
 `ve_003` — El reino del Verano los recibe con una playa infinita: arena blanca, agua turquesa y palmeras que se inclinan como si también estuvieran cansadas.
+
+`ve_003g01` — En la orilla, guardias del Verano: armaduras tejidas de fibra de coco, cascos de plumas, lanzas con dientes de tiburón y tatuajes que les cubren los brazos.
+
+`ve_003g02` — Los miran pasar sin decir nada. Rikka les sostiene la mirada hasta que quedan atrás.
+
+`ve_003g03` **Cami:** No les caes bien.
+
+`ve_003g04` **Rikka:** La Primavera y el Verano no se caen bien desde hace mucho. Es una historia larga.
 
 `ve_004` **Rikka:** El Verano… Hace tanto que no venía.
 

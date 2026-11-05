@@ -8,13 +8,13 @@
   ],
   "personajes": {
     "jair": {
-      "nivel": 10
+      "nivel": 13
     },
     "cami": {
-      "nivel": 17
+      "nivel": 18
     },
     "rikka": {
-      "nivel": 13
+      "nivel": 15
     }
   },
   "enemigos": [
@@ -25,23 +25,24 @@
     "enemigo": "caballero",
     "al_inicio": 2,
     "niveles": [
-      19,
-      20
+      18,
+      18
     ]
   },
   "jefe": {
     "enemigo": "comandante",
-    "nivel": 21
+    "nivel": 20
   },
   "botin": {
     "probabilidad": 0.6,
     "objetos": [
+      "galleta_red_velvet",
+      "galleta_brownie",
+      "hepatol",
       "atq",
-      "def",
-      "vida",
-      "vida",
       "carga",
-      "revivir"
+      "revivir",
+      "revivir_plus"
     ]
   },
   "esquivar": 0.5,
@@ -147,7 +148,11 @@
     "caramelo_rancio",
     "revivir",
     "veneno_ratas",
-    "condon"
+    "condon",
+    "galleta_red_velvet",
+    "galleta_brownie",
+    "hepatol",
+    "revivir_plus"
   ],
   "ayuda": {
     "umbral": 0.35,

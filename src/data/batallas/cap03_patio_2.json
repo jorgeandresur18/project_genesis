@@ -8,13 +8,13 @@
   ],
   "personajes": {
     "jair": {
-      "nivel": 10
+      "nivel": 12
     },
     "cami": {
       "nivel": 17
     },
     "rikka": {
-      "nivel": 13
+      "nivel": 14
     }
   },
   "enemigos": [
@@ -26,7 +26,7 @@
     "al_inicio": 2,
     "niveles": [
       16,
-      17
+      16
     ]
   },
   "jefe": {
@@ -36,10 +36,11 @@
   "botin": {
     "probabilidad": 0.6,
     "objetos": [
+      "galleta_arcoiris",
+      "galleta_red_velvet",
+      "hepatol",
       "atq",
       "def",
-      "vida",
-      "vida",
       "carga",
       "revivir"
     ]
@@ -147,7 +148,10 @@
     "caramelo_rancio",
     "revivir",
     "veneno_ratas",
-    "condon"
+    "condon",
+    "galleta_arcoiris",
+    "galleta_red_velvet",
+    "hepatol"
   ],
   "ayuda": {
     "umbral": 0.35,

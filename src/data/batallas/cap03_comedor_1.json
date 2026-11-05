@@ -8,13 +8,13 @@
   ],
   "personajes": {
     "jair": {
-      "nivel": 10
+      "nivel": 11
     },
     "cami": {
-      "nivel": 17
+      "nivel": 18
     },
     "rikka": {
-      "nivel": 13
+      "nivel": 14
     }
   },
   "enemigos": [
@@ -25,25 +25,27 @@
     "enemigo": "cocinero",
     "al_inicio": 2,
     "niveles": [
-      12,
-      12,
       13,
-      13
+      13,
+      14,
+      14
     ]
   },
   "jefe": {
     "enemigo": "chef",
-    "nivel": 14
+    "nivel": 15
   },
   "botin": {
     "probabilidad": 0.6,
     "objetos": [
+      "vida",
+      "galleta_clasica",
+      "galleta_arcoiris",
       "atq",
       "def",
-      "vida",
-      "vida",
       "carga",
-      "revivir"
+      "revivir",
+      "galleta_brownie"
     ]
   },
   "esquivar": 0.5,
@@ -149,7 +151,10 @@
     "caramelo_rancio",
     "revivir",
     "veneno_ratas",
-    "condon"
+    "condon",
+    "galleta_clasica",
+    "galleta_arcoiris",
+    "galleta_brownie"
   ],
   "ayuda": {
     "umbral": 0.35,

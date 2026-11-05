@@ -25,27 +25,27 @@
     "enemigo": "bicho",
     "al_inicio": 3,
     "niveles": [
-      9,
-      9,
-      9,
-      10,
-      10,
-      10
+      11,
+      11,
+      11,
+      12,
+      12,
+      12
     ]
   },
   "jefe": {
     "enemigo": "reina_bichos",
-    "nivel": 11
+    "nivel": 13
   },
   "botin": {
     "probabilidad": 0.6,
     "objetos": [
+      "vida",
+      "vida",
+      "galleta_clasica",
       "atq",
       "def",
-      "vida",
-      "vida",
-      "carga",
-      "revivir"
+      "carga"
     ]
   },
   "esquivar": 0.5,
@@ -151,7 +151,8 @@
     "caramelo_rancio",
     "revivir",
     "veneno_ratas",
-    "condon"
+    "condon",
+    "galleta_clasica"
   ],
   "ayuda": {
     "umbral": 0.35,

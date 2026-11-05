@@ -4432,6 +4432,160 @@
       "conditions": [],
       "audio": null,
       "ui_effect": null,
+      "next": "cap03_descanso1_cofre"
+    },
+    {
+      "scene_id": "cap03_descanso1_cofre",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_descanso",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/sonrojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "dialogue": {
+        "speaker": null,
+        "text": "Debajo de la escalera hay tres cajas de provisiones de la tropa, con candados oxidados. Les alcanza el tiempo para forzar una sola."
+      },
+      "choices": [
+        {
+          "text": "La caja de agua sin gas (3)",
+          "next": "cap03_descanso1_cofre_a",
+          "add": {
+            "mochila_vida": 3
+          }
+        },
+        {
+          "text": "La caja de Furia Roja (2)",
+          "next": "cap03_descanso1_cofre_b",
+          "add": {
+            "mochila_atq": 2
+          }
+        },
+        {
+          "text": "La caja de galletas arcoíris (2)",
+          "next": "cap03_descanso1_cofre_c",
+          "add": {
+            "mochila_galleta_arcoiris": 2
+          }
+        }
+      ],
+      "next": null
+    },
+    {
+      "scene_id": "cap03_descanso1_cofre_a",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_descanso",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/sonrojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> Objeto obtenido: Agua sin gas ×3. Va a la mochila."
+      },
+      "choices": [],
+      "next": "cap03_biblioteca_entrada_01"
+    },
+    {
+      "scene_id": "cap03_descanso1_cofre_b",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_descanso",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/sonrojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> Objeto obtenido: Furia Roja ×2. Va a la mochila."
+      },
+      "choices": [],
+      "next": "cap03_biblioteca_entrada_01"
+    },
+    {
+      "scene_id": "cap03_descanso1_cofre_c",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_descanso",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/sonrojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> Objeto obtenido: Galleta arcoíris ×2. Va a la mochila."
+      },
+      "choices": [],
       "next": "cap03_biblioteca_entrada_01"
     },
     {
@@ -5294,6 +5448,160 @@
       "conditions": [],
       "audio": null,
       "ui_effect": null,
+      "next": "cap03_descanso2_cofre"
+    },
+    {
+      "scene_id": "cap03_descanso2_cofre",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_descanso",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/fria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "dialogue": {
+        "speaker": null,
+        "text": "Entre las antorchas hay tres cofres con el sello del Rey. Cami fuerza uno antes de que alguien los oiga."
+      },
+      "choices": [
+        {
+          "text": "El de la cruz rosada: Elixit (2)",
+          "next": "cap03_descanso2_cofre_a",
+          "add": {
+            "mochila_revivir": 2
+          }
+        },
+        {
+          "text": "El que tintinea: monedas (200)",
+          "next": "cap03_descanso2_cofre_b",
+          "add": {
+            "monedas": 200
+          }
+        },
+        {
+          "text": "El que suena a lata: 4Low-Co (2)",
+          "next": "cap03_descanso2_cofre_c",
+          "add": {
+            "mochila_carga": 2
+          }
+        }
+      ],
+      "next": null
+    },
+    {
+      "scene_id": "cap03_descanso2_cofre_a",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_descanso",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/fria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> Objeto obtenido: Elixit ×2. Va a la mochila."
+      },
+      "choices": [],
+      "next": "cap03_arsenal_01"
+    },
+    {
+      "scene_id": "cap03_descanso2_cofre_b",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_descanso",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/fria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> Objeto obtenido: 200 monedas. Va a la mochila."
+      },
+      "choices": [],
+      "next": "cap03_arsenal_01"
+    },
+    {
+      "scene_id": "cap03_descanso2_cofre_c",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_descanso",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/fria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/seria.webp",
+          "pos": "derecha"
+        }
+      ],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> Objeto obtenido: 4Low-Co ×2. Va a la mochila."
+      },
+      "choices": [],
       "next": "cap03_arsenal_01"
     },
     {
@@ -5923,6 +6231,160 @@
       "conditions": [],
       "audio": null,
       "ui_effect": null,
+      "next": "cap03_descanso3_cofre"
+    },
+    {
+      "scene_id": "cap03_descanso3_cofre",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_descanso",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/verguenza1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/burla.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/sonrojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "dialogue": {
+        "speaker": null,
+        "text": "Junto a la puerta del trono hay un altar de ofrendas para el Rey. Rikka dice que tomar una no es robar: es recuperar."
+      },
+      "choices": [
+        {
+          "text": "Elixit++ (1)",
+          "next": "cap03_descanso3_cofre_a",
+          "add": {
+            "mochila_revivir_plus": 1
+          }
+        },
+        {
+          "text": "Caramelo dulce (1)",
+          "next": "cap03_descanso3_cofre_b",
+          "add": {
+            "mochila_caramelo_dulce": 1
+          }
+        },
+        {
+          "text": "Galletas brownie (3)",
+          "next": "cap03_descanso3_cofre_c",
+          "add": {
+            "mochila_galleta_brownie": 3
+          }
+        }
+      ],
+      "next": null
+    },
+    {
+      "scene_id": "cap03_descanso3_cofre_a",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_descanso",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/verguenza1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/burla.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/sonrojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> Objeto obtenido: Elixit++ ×1. Va a la mochila."
+      },
+      "choices": [],
+      "next": "cap03_trono_01"
+    },
+    {
+      "scene_id": "cap03_descanso3_cofre_b",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_descanso",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/verguenza1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/burla.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/sonrojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> Objeto obtenido: Caramelo dulce ×1. Va a la mochila."
+      },
+      "choices": [],
+      "next": "cap03_trono_01"
+    },
+    {
+      "scene_id": "cap03_descanso3_cofre_c",
+      "chapter": 3,
+      "background": "PLACEHOLDER:fortaleza_descanso",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/verguenza1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/burla.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/sonrojada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "dialogue": {
+        "speaker": "Voz",
+        "text": "> Objeto obtenido: Galleta brownie ×3. Va a la mochila."
+      },
+      "choices": [],
       "next": "cap03_trono_01"
     },
     {
