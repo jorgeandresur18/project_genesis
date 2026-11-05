@@ -3608,12 +3608,12 @@ button.cassette:hover .cassette-imagen { transform: translateY(-2px) rotate(-3de
 /* La nalgada: lo que se toca (la cola), la mano de Cami que entra rápido, el destello del golpe, la onda y la marca. */
 .nalgada-toque { position: absolute; padding: 0; border: 0; background: none; cursor: pointer; pointer-events: auto; border-radius: 45%; }
 .nalgada-toque:focus-visible { outline: 2px solid #ff7ac0; }
-.nalgada-mano { position: absolute; pointer-events: none; user-select: none; transform-origin: 50% 100%; animation: nalgada-mano 0.75s cubic-bezier(0.2, 0.9, 0.3, 1) both; }
+.nalgada-mano { position: absolute; pointer-events: none; user-select: none; transform-origin: 50% 100%; animation: nalgada-mano 0.9s cubic-bezier(0.2, 0.9, 0.3, 1) both; }
 /* Entra desde su lado (--dir: -1 el izquierdo, 1 el derecho), pega y se va. */
 @keyframes nalgada-mano {
   0% { opacity: 0; transform: translate(calc(var(--dir, 1) * 45%), -25%) rotate(calc(var(--dir, 1) * 30deg)); }
   15% { opacity: 1; transform: none; }
-  45% { opacity: 1; transform: translate(0, 2%) rotate(calc(var(--dir, 1) * -2deg)); }
+  60% { opacity: 1; transform: translate(0, 2%) rotate(calc(var(--dir, 1) * -2deg)); }
   100% { opacity: 0; transform: translate(calc(var(--dir, 1) * 40%), -15%) rotate(calc(var(--dir, 1) * 22deg)); }
 }
 .nalgada-zas {
@@ -3628,14 +3628,16 @@ button.cassette:hover .cassette-imagen { transform: translateY(-2px) rotate(-3de
   animation: nalgada-zas 0.38s ease-out 0.1s both;
 }
 @keyframes nalgada-zas { from { opacity: 1; scale: 0.2; rotate: 0deg; } 40% { opacity: 1; } to { opacity: 0; scale: 1.25; rotate: 20deg; } }
-.nalgada-onda { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; user-select: none; animation: nalgada-onda 0.7s linear 0.1s both; }
+.nalgada-onda { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; user-select: none; animation: nalgada-onda 0.8s linear 0.1s both; }
+/* Más pronunciado (pedido del autor): se aplasta con el golpe y rebota unas veces, cada vez menos. */
 @keyframes nalgada-onda {
   0%, 100% { scale: 1; }
-  12% { scale: 1.035 0.965; }
-  30% { scale: 0.98 1.025; }
-  48% { scale: 1.015 0.988; }
-  66% { scale: 0.994 1.008; }
-  84% { scale: 1.003 0.997; }
+  10% { scale: 1.085 0.91; }
+  26% { scale: 0.94 1.07; }
+  42% { scale: 1.045 0.96; }
+  58% { scale: 0.975 1.025; }
+  74% { scale: 1.012 0.99; }
+  88% { scale: 0.996 1.004; }
 }
 .nalgada-marca {
   position: absolute;
@@ -3643,13 +3645,13 @@ button.cassette:hover .cassette-imagen { transform: translateY(-2px) rotate(-3de
   user-select: none;
   mix-blend-mode: multiply;
   opacity: 0;
-  animation: nalgada-marca 2.6s ease both;
+  animation: nalgada-marca 3.4s linear both;
 }
-/* Sutil: se forma de a poco, queda un momento y se va rápido. */
+/* Sutil: aparece lento (la opacidad sube de a poco), queda un momento y se va rápido. */
 @keyframes nalgada-marca {
-  0% { opacity: 0; }
-  30% { opacity: 0.5; }
-  82% { opacity: 0.5; }
+  0% { opacity: 0; animation-timing-function: ease-in; }
+  50% { opacity: 0.5; }
+  86% { opacity: 0.5; animation-timing-function: ease-out; }
   100% { opacity: 0; }
 }
 

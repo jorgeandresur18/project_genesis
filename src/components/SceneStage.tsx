@@ -371,9 +371,12 @@ const mascaraPecho = (e: Emblema, proporcion: number) =>
 /** Cuánto hay que mantener apretado para que sea de los dos lados a la vez. */
 const MANTENER_MS = 450;
 /** Cuánto dura la marca roja de la nalgada (igual que su animación en styles.css). */
-const MARCA_MS = 2600;
+const MARCA_MS = 3400;
+/** La marca roja sale recién después de tantas nalgadas seguidas en ese lado (pedido del autor), sin dejar pasar más que esto entre una y otra. */
+const NALGADAS_PARA_MARCA = 7;
+const RACHA_MS = 2500;
 /** Cuánto dura cada acción de las manos (y hasta cuándo no se puede repetir). */
-const DURA: Record<Accion['tipo'], number> = { pecho: 1100, nalgada: 800, apunta: 900 };
+const DURA: Record<Accion['tipo'], number> = { pecho: 1100, nalgada: 950, apunta: 900 };
 const ladoDe = (a: Accion) => ('lado' in a ? a.lado : 'izq');
 const caja = (m: Mano): CSSProperties => ({ left: `${m.x}%`, top: `${m.y}%`, width: `${m.w}%`, height: `${m.h}%` });
 
@@ -409,6 +412,8 @@ function EmblemasTocables({
   const [vivas, setVivas] = useState<Record<number, number>>({});
   const [marcas, setMarcas] = useState<Record<string, number>>({});
   const vez = useRef(0);
+  /** Nalgadas seguidas en cada lado (cuántas y cuándo fue la última). */
+  const rachas = useRef<Record<string, { n: number; t: number }>>({});
   const apretado = useRef<{ timer: ReturnType<typeof setTimeout>; hecho: boolean } | null>(null);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   useEffect(() => {
@@ -441,8 +446,18 @@ function EmblemasTocables({
         setTimeout(() => {
           playChip('cachetada');
           if (!manos?.marca) return;
-          // La marca se forma suave, queda un momento y se va rápido (pedido del autor).
-          const lados = libres.map((i) => ladoDe(acciones[i]));
+          // Cada lado cuenta sus nalgadas seguidas (las de las dos manos cuentan en los dos); la marca sale recién
+          // a la séptima seguida y aparece lento, queda un momento y se va rápido (pedido del autor).
+          const ahora = Date.now();
+          const lados = libres
+            .map((i) => ladoDe(acciones[i]))
+            .filter((l) => {
+              const r = rachas.current[l];
+              const n = r && ahora - r.t < RACHA_MS ? r.n + 1 : 1;
+              rachas.current[l] = { n, t: ahora };
+              return n >= NALGADAS_PARA_MARCA;
+            });
+          if (!lados.length) return;
           setMarcas((m) => ({ ...m, ...Object.fromEntries(lados.map((l) => [l, n])) }));
           timers.current.push(
             setTimeout(
@@ -574,7 +589,7 @@ function EmblemasTocables({
         if (a.tipo !== 'nalgada') return null;
         const m = a.mano;
         const palma = { x: m.x + m.w / 2, y: m.y + m.h * 0.42 };
-        const mascaraOnda = `radial-gradient(ellipse ${m.w * 0.62}% ${m.h * 0.62}% at ${palma.x}% ${palma.y}%, #000 50%, transparent 100%)`;
+        const mascaraOnda = `radial-gradient(ellipse ${m.w * 0.75}% ${m.h * 0.72}% at ${palma.x}% ${palma.y}%, #000 50%, transparent 100%)`;
         const n = vivas[i];
         return (
           <Fragment key={`nalgada-${i}`}>

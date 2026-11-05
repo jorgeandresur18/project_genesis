@@ -145,9 +145,9 @@ async function exportarMarca(mano, sprite, nombre) {
   const mw = img.info.width, mh = img.info.height;
   const palma = new Float32Array(bw * bh);
   for (let y = 0; y < mh; y++) {
-    // Solo la palma y los dedos: la parte de abajo (la base de la mano y el puño) se desvanece.
+    // La palma entera (con el pulgar) y los dedos: solo la muñeca y el puño, abajo, se desvanecen.
     const t = y / mh;
-    const corte = t < 0.42 ? 1 : t > 0.62 ? 0 : 1 - (t - 0.42) / 0.2;
+    const corte = t < 0.74 ? 1 : t > 0.86 ? 0 : 1 - (t - 0.74) / 0.12;
     for (let x = 0; x < mw; x++) palma[(y + M) * bw + x + M] = (img.data[(y * mw + x) * 4 + 3] / 255) * corte;
   }
   // El cuerpo, un poco hacia adentro: el alfa del sprite difuminado y con un umbral alto.
