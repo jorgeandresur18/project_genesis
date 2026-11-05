@@ -3554,3 +3554,13 @@ button.cassette:hover .cassette-imagen { transform: translateY(-2px) rotate(-3de
 @keyframes corazonVictoria { 0% { opacity: 0; transform: translate(0, 0) scale(0.2); } 20% { opacity: 1; transform: translate(4px, -2px) scale(0.55); } 70% { opacity: 1; transform: translate(18px, -6px) scale(0.5); } 100% { opacity: 0; transform: translate(26px, -9px) scale(0.35); } }
 @keyframes brilloCorazon { 0%, 15% { opacity: 0; scale: 0.3; } 40% { opacity: 1; scale: 1.3; } 100% { opacity: 0; scale: 0.4; } }
 @media (prefers-reduced-motion: reduce) { .corazon-victoria, .corazon-victoria::before, .corazon-victoria::after { animation-duration: 0.01s; } }
+
+/* Saltar con una hoja sin fila «salto» (la sombra, el Capitán, Nikki): el sprite sube y baja, y la sombra del piso
+   se achica mientras está en el aire. Al esquivar, una vez; al ganar, en bucle. */
+.batalla-sprite.salto-codigo { animation: salto-codigo 0.55s cubic-bezier(0.3, 0, 0.7, 1) both; }
+.batalla-sprite.salto-codigo.en-bucle { animation-iteration-count: infinite; animation-delay: 0.1s; }
+.batalla-figura:has(.salto-codigo) .batalla-sombra { animation: salto-codigo-sombra 0.55s cubic-bezier(0.3, 0, 0.7, 1) both; }
+.batalla-figura:has(.salto-codigo.en-bucle) .batalla-sombra { animation-iteration-count: infinite; animation-delay: 0.1s; }
+@keyframes salto-codigo { 0%, 100% { transform: translateY(0); } 45%, 55% { transform: translateY(-24%); } }
+@keyframes salto-codigo-sombra { 0%, 100% { scale: 1; opacity: 1; } 45%, 55% { scale: 0.6; opacity: 0.55; } }
+@media (prefers-reduced-motion: reduce) { .batalla-sprite.salto-codigo, .batalla-figura:has(.salto-codigo) .batalla-sombra { animation-duration: 0.01s; animation-iteration-count: 1; } }

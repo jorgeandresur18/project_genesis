@@ -195,15 +195,20 @@ export function SpriteHoja({
   }, [paso, corazonVictoria]);
   const origenCorazon =
     (hoja && 'animations' in hoja ? hoja.corazon_victoria : undefined) ?? (corazonVictoria?.pista ? Object.values(corazonVictoria.pista)[0] : undefined);
+  // Saltar (al esquivar, o al ganar sin fila de victoria) con una hoja que no tiene la fila «salto» (la sombra, el
+  // Capitán, Nikki, las imágenes quietas): el salto lo hace el código, el sprite sube y baja, y la sombra se achica.
+  const saltaCodigo = (anim === 'salto' || (anim === 'victoria' && !anims?.victoria)) && !anims?.salto;
+  const claseSalto = saltaCodigo ? ` salto-codigo${anim === 'victoria' ? ' en-bucle' : ''}` : '';
   if (!hoja) return <span className="batalla-sprite" />;
   if (!('animations' in hoja)) {
     const [w, h] = hoja.cuadro;
-    return <span className="batalla-sprite" style={{ width: w, height: h, backgroundImage: `url(${BASE}${src}.png)` }} />;
+    return <span key={vez} className={`batalla-sprite${claseSalto}`} style={{ width: w, height: h, backgroundImage: `url(${BASE}${src}.png)` }} />;
   }
   if (!a) return <span className="batalla-sprite" />;
   return (
     <span
-      className="batalla-sprite"
+      key={saltaCodigo ? vez : undefined}
+      className={`batalla-sprite${claseSalto}`}
       style={
         {
           width: hoja.frameWidth,
