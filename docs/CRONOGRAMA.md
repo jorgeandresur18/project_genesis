@@ -30,7 +30,7 @@ El RPG, Boringram y el arte se hacen **para el capítulo que toca**, no por adel
 |---|---|
 | Capítulo 1 | **Lógica cerrada** (2026-11-03). Completo y jugable; tiene el RPG (bar, Bastión, hangar). Diálogos y arte, al final. |
 | Capítulo 2 | Borrador avanzado en `cap02.json`, **enlazado** al Capítulo 1 (2026-11-03: «Continuar» en la pantalla de fin). Coherencia revisada. Faltan la historia de sus peleas y el arte. |
-| Capítulo 3 | Canon escrito en `docs/CANON.md`; **no hay guion**. |
+| Capítulo 3 | **Borrador jugable** (2026-11-05): torre de 9 pisos con caminos que se cruzan, 23 peleas equilibradas con el simulador, cofres en los descansos, 12 bad ends y `alt_1`. Faltan los enemigos del autor y el arte. |
 | Capítulo 4 | Borrador del autor (17 escenas) en `docs/CANON.md`; sin guion. |
 | Capítulos 5 a 7 | Esquema en el canon. |
 | RPG | Ficha única por personaje, varios especiales, ataques intercambiables con cassettes, ataques nuevos y sueltos, Torneo Genesis y PayFoe (de relleno). Faltan: olvidar ataques, la regla anti-farmeo y sacar de `Batalla.tsx` los turnos de los héroes (los de los enemigos ya están en `engine/turnos.ts`). |
@@ -99,6 +99,8 @@ La misma proyección, para mirarla en el navegador: `docs/proyeccion.html`.
 
 ## Semanas 3 y 4 (17–30 de noviembre): el Capítulo 3
 - [x] **Borrador del Capítulo 3** (2026-11-05, computadora del trabajo: `src/data/chapters/cap03.json`, 168 escenas, 5 peleas de relleno, 8 bad ends y `alt_1`). Falta: los enemigos y el arte del autor, el balance de las peleas, la pasada de diálogos. Antes decía: **Escribir el guion del Capítulo 3** desde el canon (`docs/guion/cap03_plan.md`: lo decidido y las 13 preguntas): el Rey Malvado, la espada DELETE, el DELETE sin WHERE, el regreso (`alt_1`: volver solo) y el despertar con Cami y Rikka en el cuarto.
+- [x] **La torre del Capítulo 3** (2026-11-05): 9 pisos, 23 peleas (~15 por partida), enemigos provisionales, guardias de las estaciones (presos y al servicio del Rey), cofres en los descansos, botín por piso y equilibrio en cadena (`tests/torre_ajuste.test.ts`).
+- [ ] **Los enemigos del autor para la torre** (hoy fichas provisionales; ideas en la bitácora del 5 de noviembre). Después, reequilibrar con `TORRE=1 AJUSTAR=1`.
 - [ ] **Resolver antes de escribir:** las decisiones pendientes del Capítulo 3 (ver abajo).
 - [ ] **La pelea contra el Rey Malvado del Capítulo 3:** solo THE KING, en su forma normal (la gigante, en el Capítulo 6), con la cara oculta, hasta el DELETE sin WHERE. *Pesada:* su sprite (el autor todavía no lo hizo). La batalla de las cinco manifestaciones es del Capítulo 6, rama del 7A (`docs/BATALLA_FINAL.md`).
 - [ ] *Liviana:* fondos y CG del Capítulo 3.
