@@ -64,6 +64,14 @@
     }
   },
   "igualar_piel": {
+    "cami": {
+      "base": "base",
+      "sprites": [
+        "toalla_base",
+        "toalla_molesta",
+        "toalla_orgullosa"
+      ]
+    },
     "rikka": {
       "base": "base",
       "sprites": [

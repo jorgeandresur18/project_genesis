@@ -4,98 +4,108 @@
   "sprites": {
     "rikka/desbloqueable_vistiendose": [
       {
-        "x": 23.04,
-        "y": 58.89,
-        "w": 6.08
+        "x": 33.26,
+        "y": 48.72,
+        "w": 4.39,
+        "zona": "pecho"
       }
     ],
     "rikka/desbloqueable_vistiendose_muy_avergonzada": [
       {
-        "x": 23.04,
-        "y": 58.89,
-        "w": 6.08
+        "x": 33.26,
+        "y": 48.72,
+        "w": 4.39,
+        "zona": "pecho"
       }
     ],
     "rikka/desbloqueable_frente": [
       {
-        "x": 28.66,
-        "y": 58.57,
-        "w": 7.24
+        "x": 37.31,
+        "y": 48.48,
+        "w": 5.21,
+        "zona": "pecho"
       },
       {
-        "x": 56.0,
-        "y": 58.57,
-        "w": 7.24
+        "x": 57.06,
+        "y": 48.48,
+        "w": 5.21,
+        "zona": "pecho"
       },
       {
-        "x": 46.4,
-        "y": 94.95,
-        "w": 21.0
+        "x": 50.01,
+        "y": 79.74,
+        "w": 7.7
       }
     ],
     "rikka/desbloqueable_frente_asustada": [
       {
-        "x": 28.66,
-        "y": 58.57,
-        "w": 7.24
+        "x": 37.31,
+        "y": 48.48,
+        "w": 5.21,
+        "zona": "pecho"
       },
       {
-        "x": 56.0,
-        "y": 58.57,
-        "w": 7.24
+        "x": 57.06,
+        "y": 48.48,
+        "w": 5.21,
+        "zona": "pecho"
       },
       {
-        "x": 46.4,
-        "y": 94.95,
-        "w": 21.0
+        "x": 50.01,
+        "y": 79.74,
+        "w": 7.7
       }
     ],
     "rikka/desbloqueable_espalda": [
       {
-        "x": 24.7,
-        "y": 59.07,
-        "w": 6.08
+        "x": 34.46,
+        "y": 48.85,
+        "w": 4.39,
+        "zona": "pecho"
       },
       {
-        "x": 58.8,
-        "y": 98.1,
-        "w": 11.2
+        "x": 55.91,
+        "y": 79.67,
+        "w": 4.39
       }
     ],
     "rikka/desbloqueable_espalda_asustada": [
       {
-        "x": 24.7,
-        "y": 59.07,
-        "w": 6.08
+        "x": 34.46,
+        "y": 48.85,
+        "w": 4.39,
+        "zona": "pecho"
       },
       {
-        "x": 58.8,
-        "y": 98.1,
-        "w": 11.2
+        "x": 55.91,
+        "y": 79.67,
+        "w": 4.39
       }
     ],
     "rikka/desbloqueable_espalda_asustada2": [
       {
-        "x": 24.7,
-        "y": 59.07,
-        "w": 6.08
+        "x": 34.46,
+        "y": 48.85,
+        "w": 4.39,
+        "zona": "pecho"
       },
       {
-        "x": 58.8,
-        "y": 98.1,
-        "w": 11.2
+        "x": 55.91,
+        "y": 79.67,
+        "w": 4.39
       }
     ],
     "rikka/desbloqueable_espalda_asustada_ultima_grito": [
       {
-        "x": 24.7,
-        "y": 59.07,
-        "w": 6.08
+        "x": 34.46,
+        "y": 48.85,
+        "w": 4.39,
+        "zona": "pecho"
       },
       {
-        "x": 58.8,
-        "y": 98.1,
-        "w": 11.2
+        "x": 55.91,
+        "y": 79.67,
+        "w": 4.39
       }
     ]
   },
@@ -119,7 +129,12 @@
           "y": 70.62,
           "w": 3.52
         }
-      ]
+      ],
+      "cara": {
+        "x": 68,
+        "y": 22,
+        "lado": "der"
+      }
     }
   },
   "secuencias": [
@@ -183,5 +198,179 @@
         }
       ]
     }
-  ]
+  ],
+  "manos": {
+    "vistiendose": {
+      "sprites": [
+        "rikka/desbloqueable_vistiendose",
+        "rikka/desbloqueable_vistiendose_muy_avergonzada"
+      ],
+      "marca": false,
+      "acciones": [
+        {
+          "tipo": "nalgada",
+          "lado": "izq",
+          "mano": {
+            "imagen": "sprites/rikka/manos/vistiendose_nalgada_izq",
+            "x": 36.14,
+            "y": 70.97,
+            "w": 16.28,
+            "h": 14.9
+          }
+        },
+        {
+          "tipo": "nalgada",
+          "lado": "der",
+          "mano": {
+            "imagen": "sprites/rikka/manos/vistiendose_nalgada_der",
+            "x": 59.03,
+            "y": 70.41,
+            "w": 15.68,
+            "h": 15.67
+          }
+        },
+        {
+          "tipo": "pecho",
+          "emblema": 0,
+          "abierta": {
+            "imagen": "sprites/rikka/manos/vistiendose_pecho0_abierta",
+            "x": 19.37,
+            "y": 41.01,
+            "w": 19.89,
+            "h": 10.97
+          },
+          "cerrada": {
+            "imagen": "sprites/rikka/manos/vistiendose_pecho0_cerrada",
+            "x": 19.31,
+            "y": 41.5,
+            "w": 20.03,
+            "h": 10.93
+          },
+          "lado": "izq"
+        }
+      ],
+      "cara": {
+        "x": 36,
+        "y": 26
+      }
+    },
+    "frente": {
+      "sprites": [
+        "rikka/desbloqueable_frente",
+        "rikka/desbloqueable_frente_asustada"
+      ],
+      "marca": true,
+      "acciones": [
+        {
+          "tipo": "apunta",
+          "emblema": 2,
+          "mano": {
+            "imagen": "sprites/rikka/manos/frente_apunta",
+            "x": 43.85,
+            "y": 78.36,
+            "w": 13.5,
+            "h": 16.31
+          }
+        },
+        {
+          "tipo": "pecho",
+          "emblema": 1,
+          "abierta": {
+            "imagen": "sprites/rikka/manos/frente_pecho0_abierta",
+            "x": 54.45,
+            "y": 42.3,
+            "w": 19.89,
+            "h": 10.97
+          },
+          "cerrada": {
+            "imagen": "sprites/rikka/manos/frente_pecho0_cerrada",
+            "x": 54.39,
+            "y": 42.79,
+            "w": 20.03,
+            "h": 10.93
+          },
+          "lado": "der"
+        },
+        {
+          "tipo": "pecho",
+          "emblema": 0,
+          "abierta": {
+            "imagen": "sprites/rikka/manos/frente_pecho1_abierta",
+            "x": 21.85,
+            "y": 41.92,
+            "w": 19.89,
+            "h": 10.97
+          },
+          "cerrada": {
+            "imagen": "sprites/rikka/manos/frente_pecho1_cerrada",
+            "x": 21.79,
+            "y": 42.41,
+            "w": 20.03,
+            "h": 10.93
+          },
+          "lado": "izq"
+        }
+      ],
+      "cara": {
+        "x": 33,
+        "y": 26
+      }
+    },
+    "espalda": {
+      "sprites": [
+        "rikka/desbloqueable_espalda",
+        "rikka/desbloqueable_espalda_asustada",
+        "rikka/desbloqueable_espalda_asustada2",
+        "rikka/desbloqueable_espalda_asustada_ultima_grito"
+      ],
+      "marca": true,
+      "acciones": [
+        {
+          "tipo": "nalgada",
+          "lado": "izq",
+          "mano": {
+            "imagen": "sprites/rikka/manos/espalda_nalgada_izq",
+            "x": 36.47,
+            "y": 67.45,
+            "w": 16.28,
+            "h": 14.9
+          }
+        },
+        {
+          "tipo": "nalgada",
+          "lado": "der",
+          "mano": {
+            "imagen": "sprites/rikka/manos/espalda_nalgada_der",
+            "x": 59.97,
+            "y": 68.05,
+            "w": 15.68,
+            "h": 15.67
+          }
+        },
+        {
+          "tipo": "pecho",
+          "emblema": 0,
+          "abierta": {
+            "imagen": "sprites/rikka/manos/espalda_pecho0_abierta",
+            "x": 19.37,
+            "y": 41.01,
+            "w": 19.89,
+            "h": 10.97
+          },
+          "cerrada": {
+            "imagen": "sprites/rikka/manos/espalda_pecho0_cerrada",
+            "x": 19.31,
+            "y": 41.5,
+            "w": 20.03,
+            "h": 10.93
+          },
+          "lado": "izq"
+        }
+      ],
+      "cara": {
+        "x": 35,
+        "y": 26
+      }
+    }
+  }
 }

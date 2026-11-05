@@ -610,7 +610,88 @@
         "Condenada por toda la eternidad a que alguien haga clic donde no debe. Así termina la Primavera.",
         "Si sigues, le pido al vapor que vuelva. El vapor sí me respeta.",
         "Sé que vas a volver a hacerlo. Lo sé. Ya me resigné. Casi."
-      ]
+      ],
+      "zonas": {
+        "pecho_izq": [
+          "¡El izquierdo! Ese queda encima del corazón. Ahora late raro y es tu culpa.",
+          "En el templo me enseñaron a guardar la pureza. Nadie me enseñó a guardarla de un cursor.",
+          "¿Así saludan en tu mundo? Porque en el mío eso es un compromiso de por vida.",
+          "Quinientos años sin que nadie se atreviera… y llega un clic y se atreve."
+        ],
+        "pecho_der": [
+          "¡El derecho tampoco! ¿Los vas a probar todos como si fueran fruta del mercado?",
+          "Ese lado lo estaba guardando para… para una ocasión. No para esta.",
+          "Si sigues apretando, voy a tener que rezar. Y rezo muy fuerte.",
+          "¡Ay! ¿Por qué me pongo roja si ni siquiera sé quién eres?"
+        ],
+        "pechos": [
+          "¡¿Los dos a la vez?! Ni en los rituales de la cosecha se agarra con tanta confianza.",
+          "¡Suelta! ¡Son de la Primavera, no son… no son para apretar!",
+          "Con las dos manos… Esto ya es una ceremonia y nadie me invitó.",
+          "Si Jair viera esto, se desmaya. Si me viera Cami, me cobra."
+        ],
+        "nalga_izq": [
+          "¡Ay! En mi reino una nalgada es una declaración de guerra. …O de amor. Nunca supe cuál.",
+          "¡Esa mano pica! ¿Cami, otra vez? Reconozco el guante.",
+          "Me vas a dejar marcada y después lo tengo que explicar en el templo.",
+          "¡Oye! Que sea sacerdotisa no quiere decir que sea un tambor."
+        ],
+        "nalga_der": [
+          "¡El otro lado también! Por lo menos eres parejo. Eso es… casi justo.",
+          "¡Ay! ¡Eso se escuchó en todo el reino!",
+          "Una nalgada más y te cobro. Por fin alguien que me paga a mí.",
+          "Mi abuela decía que el que pega, quiere. Mi abuela no conocía las galerías."
+        ],
+        "nalgas": [
+          "¡¿Las dos?! ¡¿Al mismo tiempo?! ¡Eso no es una nalgada, es un aplauso!",
+          "¡Kya! Ahora no me voy a poder sentar en quinientos años más.",
+          "Con las dos manos… Esto lo vas a confesar en el templo. De rodillas.",
+          "¡Muy bien, ya basta! ¡Mi pureza no se mide en palmadas!"
+        ],
+        "abajo": [
+          "¡Ahí no! Ahí no ha llegado ni la Primavera.",
+          "¡Ese emblema está ahí por algo! ¡Por algo muy sagrado!",
+          "¿Me estás señalando? ¡No se señala! ¡Y menos ahí!",
+          "Si vuelves a apuntar ahí, la katana sale de donde la tenga escondida."
+        ]
+      },
+      "zonas_novela": {
+        "pecho_izq": [
+          "¡Ah! …Algo me rozó el pecho. Un pétalo. Tuvo que ser un pétalo muy atrevido.",
+          "¿Una gota tibia? Qué gotas tan… cariñosas tienen estas termas.",
+          "El corazón me late rapidísimo. Es el agua caliente. Es solo el agua caliente."
+        ],
+        "pecho_der": [
+          "¡Ay! ¿El vapor me está tocando? ¿El vapor puede hacer eso?",
+          "Siento cosquillas justo… justo ahí. Debe ser un espíritu del agua muy maleducado.",
+          "Si eres un espíritu, que sepas que estoy consagrada. …Casi."
+        ],
+        "pechos": [
+          "¡¿Los dos?! ¡Ningún pétalo cae así de parejo!",
+          "¡Kya! ¡Alguien me está…! No. No hay nadie. Respira, Rikka.",
+          "Esto no es el viento. El viento no tiene dedos."
+        ],
+        "nalga_izq": [
+          "¡Ay! ¡Algo me dio una palmada! ¿Las piedras de aquí son así de confianzudas?",
+          "¡¿Cami?! Si es una broma de tu planeta, no la entiendo y me arde.",
+          "Me quedó un calorcito raro. No me gusta. …No mucho."
+        ],
+        "nalga_der": [
+          "¡Del otro lado también! ¡Quien sea tiene muy buena puntería!",
+          "¡Ay! Mañana me voy a tener que sentar de lado.",
+          "Juro por la Primavera que si te encuentro, me caso contigo. Para castigarte."
+        ],
+        "nalgas": [
+          "¡¿Las dos al mismo tiempo?! ¡Esto lo hace alguien con dos manos y cero vergüenza!",
+          "¡Kya! ¡Sonó como un aplauso! ¡¿Me están aplaudiendo?!",
+          "Ya entendí: las termas están embrujadas. Embrujadas por un pervertido."
+        ],
+        "abajo": [
+          "¡No, no, no! Ahí no llega ni el agua caliente sin permiso.",
+          "¡Eso fue demasiado cerca! Ahí guardo… ahí guardo mi pureza.",
+          "¿Me están señalando? ¡Sé que me están señalando!"
+        ]
+      }
     }
   }
 }

@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
+import { Fragment, useEffect, useRef, useState, type CSSProperties, type MouseEvent as RMouseEvent, type PointerEvent as RPointerEvent, type ReactNode } from 'react';
 import { lightOf, type Character, type Scene, type Vapor } from '../engine/types';
 import { playChip } from '../engine/sound';
 import glitch from '../effects/glitch.module.css';
@@ -6,6 +6,9 @@ import { assetUrl, isPlaceholder, screenOf } from '../engine/assets';
 import { CodeScreen } from './CodeScreen';
 import volteadas from '../data/volteadas.json';
 import emblemas from '../data/emblemas_18.json';
+import galeriaEs from '../data/galeria.json';
+import galeriaEn from '../data/en/galeria.json';
+import { localized, useLang } from '../engine/i18n';
 import { flippedCharacters } from '../engine/facing';
 import { BASE_CANVAS, canvasHeight, statureOf, widthFactor } from '../engine/stature';
 import { useReinos } from '../engine/reinos';
@@ -98,7 +101,7 @@ export function SceneStage({ scene, effects, speakers, lines, children }: Props)
               <Emblemas
                 sprite={sprite}
                 reaccion={toques.reaccionDe(c.id)}
-                onToque={() => toques.tocar(c)}
+                onToque={(zona) => toques.tocar(c, zona)}
                 className={`sprite sprite-${c.pos} ${flipped.has(c.id) && !mirrored ? 'sprite-flip' : ''}`}
                 style={{
                   height: `${SPRITE_HEIGHT * size(c.id)}%`,
@@ -120,14 +123,51 @@ export function SceneStage({ scene, effects, speakers, lines, children }: Props)
   );
 }
 
-type Emblema = { x: number; y: number; w: number };
+/** Un emblema (centro y ancho en % de la imagen). `pecho`: al tocarlo, el pecho rebota de arriba abajo. */
+type Emblema = { x: number; y: number; w: number; zona?: 'pecho' };
+/** Una mano de Cami: su imagen y su caja (en % del sprite). */
+type Mano = { imagen: string; x: number; y: number; w: number; h: number };
+/** Lo que hace cada mano (ver EmblemasTocables). */
+type Accion =
+  | { tipo: 'nalgada'; lado: 'izq' | 'der'; mano: Mano }
+  | { tipo: 'pecho'; lado: 'izq' | 'der'; emblema: number; abierta: Mano; cerrada: Mano }
+  | { tipo: 'apunta'; emblema: number; mano: Mano };
+/** Las manos de un grupo de sprites secretos; `marca`: si la nalgada deja la marca roja (no con el pantalón puesto). */
+interface Manos {
+  sprites: string[];
+  marca: boolean;
+  /** Dónde está su cara: el globo de lo que dice sale pegado a ella. */
+  cara?: Cara;
+  acciones: Accion[];
+}
+/** El costado de la cara (en % de la imagen) donde se pega el globo: a la izquierda (o a la derecha, `lado: 'der'`). */
+type Cara = { x: number; y: number; lado?: 'izq' | 'der' };
+/** El globo de lo que dice el personaje, pegado a su cara (sin taparla). */
+export function GloboCara({ cara, texto, grito = false }: { cara?: Cara; texto: string; grito?: boolean }) {
+  const der = cara?.lado === 'der';
+  return (
+    <span
+      className={`emblema-reaccion ${grito ? 'emblema-grito' : der ? 'globo-der' : ''}`}
+      style={cara && !grito ? { left: `${cara.x}%`, top: `${cara.y}%`, translate: der ? '0 -50%' : '-100% -50%' } : undefined}
+      role="status"
+    >
+      {texto}
+    </span>
+  );
+}
+/** Dónde se tocó (para lo que dice el personaje). */
+export type Zona = 'pecho_izq' | 'pecho_der' | 'pechos' | 'nalga_izq' | 'nalga_der' | 'nalgas' | 'abajo' | 'emblema';
 /** Lo que va encima de una imagen secreta: sus emblemas, su proporción (ancho / alto) y el vapor de la galería. */
 export interface Capa {
   proporcion: number;
   vapor?: Vapor;
   emblemas: Emblema[];
+  manos?: Manos;
+  cara?: Cara;
 }
 const EMBLEMAS = emblemas.sprites as Record<string, Emblema[]>;
+const MANOS = Object.values(emblemas.manos) as Manos[];
+const manosDe = (clave: string): Manos | undefined => MANOS.find((m) => m.sprites.includes(clave));
 const FONDOS = emblemas.fondos as Record<string, Capa>;
 interface Paso {
   /** Se dispara al llegar a esta cantidad de toques. */
@@ -152,7 +192,7 @@ const spriteRef = (s: string) => `sprites/${s}.webp`;
 const claveSprite = (ref: string) => ref.match(/^sprites\/([^/]+\/[^/.]+)\.webp$/)?.[1] ?? null;
 /** Los emblemas y la proporción de un sprite secreto (para la galería). */
 export const capaDeSprite = (clave: string): Capa | null =>
-  EMBLEMAS[clave] ? { proporcion: 3 / 4, vapor: 'medio', emblemas: EMBLEMAS[clave] } : null;
+  EMBLEMAS[clave] ? { proporcion: 3 / 4, vapor: 'medio', emblemas: EMBLEMAS[clave], manos: manosDe(clave), cara: manosDe(clave)?.cara } : null;
 export const capaDeFondo = (fondo: string): Capa | null => FONDOS[fondo] ?? null;
 export const esSpriteSecreto = (clave: string) => clave in EMBLEMAS;
 // Cuánto tarda en darse vuelta después del susto, cuánto entre la cara de susto y el grito, y cuánto dura el grito.
@@ -178,7 +218,22 @@ const reiniciar = () => {
  * llegar a la cantidad de un paso cambia el sprite del personaje o lo que dice, hasta el grito, que salta a
  * `toques_salida` con las variables de `toques_set`.
  */
+/** Lo que dice cada personaje en la novela según dónde lo tocaron (galeria.json, «quejas» → «zonas_novela»). */
+type ZonasNovela = Record<string, Record<string, string[]> | undefined>;
+const zonasDe = (g: typeof galeriaEs): ZonasNovela =>
+  Object.fromEntries(Object.entries(g.quejas as Record<string, { zonas_novela?: Record<string, string[]> }>).map(([k, v]) => [k, v.zonas_novela]));
+/** Una línea distinta cada vez, sin repetir hasta usarlas todas. */
+const usadas = new Map<string, number[]>();
+function siguienteDe(clave: string, lineas: string[]): string {
+  let quedan = usadas.get(clave)?.filter((i) => i < lineas.length) ?? [];
+  if (!quedan.length) quedan = lineas.map((_, i) => i).sort(() => Math.random() - 0.5);
+  const i = quedan.shift()!;
+  usadas.set(clave, quedan);
+  return lineas[i];
+}
+
 function useToques(scene: Scene) {
+  const zonasNovela = zonasDe(useLang() === 'en' ? (localized(galeriaEs, galeriaEn, 'en') as typeof galeriaEs) : galeriaEs);
   const [, refrescar] = useState(0);
   const [reaccion, setReaccion] = useState<Dice | null>(null);
   /** La escena donde terminó la secuencia (ya no se cuentan toques) y si fue con grito (luz blanca). */
@@ -194,7 +249,7 @@ function useToques(scene: Scene) {
   }, []);
   useEffect(() => {
     if (!reaccion) return;
-    const timer = setTimeout(() => setReaccion(null), 2400);
+    const timer = setTimeout(() => setReaccion(null), reaccion.grito ? 2400 : 3200);
     return () => clearTimeout(timer);
   }, [reaccion]);
   const escena = scene.scene_id;
@@ -214,12 +269,18 @@ function useToques(scene: Scene) {
       const i = secuenciaDe(c);
       return i >= 0 ? quedo[i] : null;
     },
-    tocar: (c: Character) => {
+    tocar: (c: Character, zona?: Zona) => {
       const i = secuenciaDe(c);
       if (i < 0 || grito === escena) return;
       const n = ++cuenta[i];
       const p = SECUENCIAS[i].pasos.find((x) => x.toques === n);
-      if (!p) return;
+      // Sin un paso de la escena en este toque: lo que dice según dónde la tocaron (pedido del autor, 2026-11-04).
+      // Ella no ve a nadie: cree que es un pétalo, el vapor o Cami.
+      if (!p) {
+        const lineas = zona ? zonasNovela[c.id]?.[zona] : undefined;
+        if (lineas?.length) setReaccion({ id: c.id, texto: siguienteDe(`${c.id}:${zona}`, lineas), n });
+        return;
+      }
       if (p.sprite) quedo[i] = spriteRef(p.sprite);
       if (p.reaccion) setReaccion({ id: c.id, texto: p.reaccion, n });
       refrescar((r) => r + 1);
@@ -267,7 +328,7 @@ function Emblemas({
 }: {
   sprite: string;
   reaccion: Dice | null;
-  onToque: () => void;
+  onToque: (zona: Zona) => void;
   className: string;
   style: CSSProperties;
 }) {
@@ -282,12 +343,8 @@ function Emblemas({
   return (
     <div className={`${className} sprite-emblemas`} style={style}>
       <div className="sprite-emblemas-caja">
-        <EmblemasTocables lista={lista} clave={clave} src={assetUrl(sprite)} proporcion={3 / 4} onToque={onToque} />
-        {reaccion && (
-          <span key={reaccion.n} className={`emblema-reaccion ${reaccion.grito ? 'emblema-grito' : ''}`} role="status">
-            {reaccion.texto}
-          </span>
-        )}
+        <EmblemasTocables lista={lista} clave={clave} src={assetUrl(sprite)} proporcion={3 / 4} onToque={onToque} manos={manosDe(clave)} />
+        {reaccion && <GloboCara key={reaccion.n} cara={manosDe(clave)?.cara} texto={reaccion.texto} grito={reaccion.grito} />}
       </div>
     </div>
   );
@@ -297,9 +354,26 @@ function Emblemas({
 const mascara = (e: Emblema, proporcion: number) =>
   `radial-gradient(ellipse ${e.w * 1.5}% ${e.w * 1.5 * proporcion}% at ${e.x}% ${e.y}%, #000 45%, transparent 100%)`;
 
+/** Un pecho (su emblema): una elipse alrededor, con el borde difuminado (en % de la caja). */
+const mascaraPecho = (e: Emblema, proporcion: number) =>
+  `radial-gradient(ellipse ${e.w * 2.1}% ${e.w * 1.9 * proporcion}% at ${e.x}% ${e.y + e.w * 0.2 * proporcion}%, #000 55%, transparent 100%)`;
+/** Cuánto hay que mantener apretado para que sea de los dos lados a la vez. */
+const MANTENER_MS = 450;
+/** Cuánto dura la marca roja de la nalgada (igual que su animación en styles.css). */
+const MARCA_MS = 2600;
+/** Cuánto dura cada acción de las manos (y hasta cuándo no se puede repetir). */
+const DURA: Record<Accion['tipo'], number> = { pecho: 1100, nalgada: 800, apunta: 900 };
+const ladoDe = (a: Accion) => ('lado' in a ? a.lado : 'izq');
+const caja = (m: Mano): CSSProperties => ({ left: `${m.x}%`, top: `${m.y}%`, width: `${m.w}%`, height: `${m.h}%` });
+
 /**
- * Los emblemas de una imagen, dentro de una caja del mismo tamaño que la imagen. Al tocar uno rebota él y la
- * parte de la imagen que tapa: una copia de la imagen recortada en círculo que rebota encima.
+ * Los emblemas de una imagen, dentro de una caja del mismo tamaño que la imagen. Al tocar uno rebota él y la parte de
+ * la imagen que tapa (una copia recortada que rebota encima). Con las manos de Cami (`manos`, pedido del autor,
+ * 2026-11-04), cada zona tiene su acción, solo en su lugar:
+ * - Un pecho: entra la mano abierta, se cierra un poco y ese pecho sube y baja unas veces, cada vez menos.
+ * - Un glúteo: la mano entra rápido y pega (destello, onda en ese lado y, si `marca`, la marca roja de una mano).
+ * - El emblema de abajo: la mano que apunta hace «clic» (se agranda un poquito) y el emblema rebota.
+ * Mantener apretado un pecho o un glúteo hace los dos lados a la vez. Cada toque avisa su zona (`onToque`).
  */
 function EmblemasTocables({
   lista,
@@ -308,31 +382,167 @@ function EmblemasTocables({
   proporcion,
   onToque,
   fijos = false,
+  manos,
 }: {
   lista: Emblema[];
   clave: string;
   src: string;
   proporcion: number;
-  onToque?: () => void;
+  onToque?: (zona: Zona) => void;
   /** Solo la censura, sin tocarse (las miniaturas de la galería). */
   fijos?: boolean;
+  manos?: Manos;
 }) {
   const [rebota, setRebota] = useState<{ i: number; n: number } | null>(null);
+  /** Las acciones de las manos que se están viendo (índice en `manos.acciones` -> vez). */
+  const [vivas, setVivas] = useState<Record<number, number>>({});
+  const [marcas, setMarcas] = useState<Record<string, number>>({});
+  const vez = useRef(0);
+  const apretado = useRef<{ timer: ReturnType<typeof setTimeout>; hecho: boolean } | null>(null);
+  const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
+  useEffect(() => {
+    const lista = timers.current;
+    return () => lista.forEach(clearTimeout);
+  }, []);
   useEffect(() => {
     if (!rebota) return;
     const timer = setTimeout(() => setRebota(null), 650);
     return () => clearTimeout(timer);
   }, [rebota]);
-  const zona = rebota && lista[rebota.i];
   if (fijos)
     return lista.map((e, i) => (
       <span key={`${clave}-${i}`} className="emblema-18 fijo" style={{ left: `${e.x}%`, top: `${e.y}%`, width: `${e.w}%` }} aria-hidden>
         <img src={assetUrl(emblemas.emblema)} alt="" draggable={false} />
       </span>
     ));
+  const acciones = manos?.acciones ?? [];
+  const accionDe = (i: number) => acciones.findIndex((a) => a.tipo !== 'nalgada' && a.emblema === i);
+
+  /** Hace las acciones `is` (una o las dos de un tipo) y avisa la zona. */
+  const hacer = (is: number[]) => {
+    const libres = is.filter((i) => vivas[i] === undefined);
+    if (!libres.length) return;
+    const n = ++vez.current;
+    setVivas((v) => ({ ...v, ...Object.fromEntries(libres.map((i) => [i, n])) }));
+    const a = acciones[libres[0]];
+    if (a.tipo === 'nalgada') {
+      timers.current.push(
+        setTimeout(() => {
+          playChip('cachetada');
+          if (!manos?.marca) return;
+          // La marca se forma suave, queda un momento y se va rápido (pedido del autor).
+          const lados = libres.map((i) => ladoDe(acciones[i]));
+          setMarcas((m) => ({ ...m, ...Object.fromEntries(lados.map((l) => [l, n])) }));
+          timers.current.push(
+            setTimeout(
+              () =>
+                setMarcas((m) => {
+                  const sigue = { ...m };
+                  for (const l of lados) if (sigue[l] === n) delete sigue[l];
+                  return sigue;
+                }),
+              MARCA_MS,
+            ),
+          );
+        }, 110),
+      );
+    } else if (a.tipo === 'pecho') timers.current.push(setTimeout(() => playChip('boing'), 280));
+    else {
+      playChip('boing');
+      setRebota((r) => ({ i: a.emblema, n: (r?.n ?? 0) + 1 }));
+    }
+    timers.current.push(
+      setTimeout(
+        () =>
+          setVivas((v) => {
+            const sigue = { ...v };
+            for (const i of libres) if (sigue[i] === n) delete sigue[i];
+            return sigue;
+          }),
+        DURA[a.tipo],
+      ),
+    );
+    const zona: Zona =
+      a.tipo === 'apunta' ? 'abajo' : libres.length > 1 ? (a.tipo === 'pecho' ? 'pechos' : 'nalgas') : `${a.tipo === 'pecho' ? 'pecho' : 'nalga'}_${a.lado}`;
+    onToque?.(zona);
+  };
+  /** Los del mismo tipo (los dos pechos o los dos glúteos). */
+  const pares = (i: number) => acciones.map((x, j) => (x.tipo === acciones[i].tipo ? j : -1)).filter((j) => j >= 0);
+  /** Tocar (una) o mantener apretado (las dos del mismo tipo). La que apunta no tiene par. */
+  const pulsar = (i: number) => ({
+    onPointerDown: (ev: RPointerEvent) => {
+      ev.stopPropagation();
+      if (acciones[i].tipo === 'apunta') return hacer([i]);
+      const p = {
+        hecho: false,
+        timer: setTimeout(() => {
+          p.hecho = true;
+          hacer(pares(i));
+        }, MANTENER_MS),
+      };
+      apretado.current = p;
+    },
+    onPointerUp: (ev: RPointerEvent) => {
+      ev.stopPropagation();
+      const p = apretado.current;
+      apretado.current = null;
+      if (!p) return;
+      clearTimeout(p.timer);
+      if (!p.hecho) hacer([i]);
+    },
+    onPointerLeave: () => {
+      const p = apretado.current;
+      if (p && !p.hecho) clearTimeout(p.timer);
+      apretado.current = null;
+    },
+    onClick: (ev: RMouseEvent) => {
+      ev.stopPropagation();
+      // Con el teclado (Enter): una sola.
+      if (ev.detail === 0) hacer([i]);
+    },
+  });
+
+  const boton = (e: Emblema, i: number) => {
+    const a = accionDe(i);
+    return (
+      <button
+        key={`${clave}-${i}`}
+        type="button"
+        className={`emblema-18 ${rebota?.i === i && acciones[a]?.tipo !== 'pecho' ? 'rebota' : ''}`}
+        style={{ left: `${e.x}%`, top: `${e.y}%`, width: `${e.w}%` }}
+        {...(a >= 0
+          ? pulsar(a)
+          : {
+              onClick: (ev: RMouseEvent) => {
+                ev.stopPropagation();
+                // Hasta que no termina el rebote, no se puede volver a tocar.
+                if (rebota) return;
+                playChip('boing');
+                setRebota((r) => ({ i, n: (r?.n ?? 0) + 1 }));
+                onToque?.('emblema');
+              },
+            })}
+        aria-label="+18"
+      >
+        <img src={assetUrl(emblemas.emblema)} alt="" draggable={false} />
+        {/* El brillo metálico: una franja de luz que cruza el emblema, recortada con su misma forma. */}
+        <span
+          className="emblema-brillo"
+          style={{
+            maskImage: `url(${assetUrl(emblemas.emblema)})`,
+            WebkitMaskImage: `url(${assetUrl(emblemas.emblema)})`,
+            animationDelay: `${i * 0.45}s`,
+          }}
+          aria-hidden
+        />
+      </button>
+    );
+  };
+  const zonaRebota = rebota ? lista[rebota.i] : undefined;
+  const conPecho = new Set(acciones.flatMap((a) => (a.tipo === 'pecho' ? [a.emblema] : [])));
   return (
     <>
-      {rebota && zona && (
+      {rebota && zonaRebota && !conPecho.has(rebota.i) && (
         <img
           key={`zona-${rebota.n}`}
           className="emblema-zona"
@@ -341,41 +551,106 @@ function EmblemasTocables({
           draggable={false}
           aria-hidden
           style={{
-            maskImage: mascara(zona, proporcion),
-            WebkitMaskImage: mascara(zona, proporcion),
-            transformOrigin: `${zona.x}% ${zona.y}%`,
+            maskImage: mascara(zonaRebota, proporcion),
+            WebkitMaskImage: mascara(zonaRebota, proporcion),
+            transformOrigin: `${zonaRebota.x}% ${zonaRebota.y}%`,
           }}
         />
       )}
-      {lista.map((e, i) => (
-        <button
-          key={`${clave}-${i}`}
-          type="button"
-          className={`emblema-18 ${rebota?.i === i ? 'rebota' : ''}`}
-          style={{ left: `${e.x}%`, top: `${e.y}%`, width: `${e.w}%` }}
-          onClick={(ev) => {
-            ev.stopPropagation();
-            // Hasta que no termina el rebote, no se puede volver a tocar.
-            if (rebota) return;
-            playChip('boing');
-            setRebota((r) => ({ i, n: (r?.n ?? 0) + 1 }));
-            onToque?.();
-          }}
-          aria-label="+18"
-        >
-          <img src={assetUrl(emblemas.emblema)} alt="" draggable={false} />
-          {/* El brillo metálico: una franja de luz que cruza el emblema, recortada con su misma forma. */}
-          <span
-            className="emblema-brillo"
-            style={{
-              maskImage: `url(${assetUrl(emblemas.emblema)})`,
-              WebkitMaskImage: `url(${assetUrl(emblemas.emblema)})`,
-              animationDelay: `${i * 0.45}s`,
-            }}
-            aria-hidden
-          />
-        </button>
-      ))}
+      {acciones.map((a, i) => {
+        if (a.tipo !== 'nalgada') return null;
+        const m = a.mano;
+        const palma = { x: m.x + m.w / 2, y: m.y + m.h * 0.42 };
+        // La marca: la silueta de la mano entera (pulgar incluido) en su lugar, recortada por el sprite (no se sale del
+        // cuerpo). Ocupa toda la caja: la mano va con su tamaño y posición; el sprite, entero.
+        const mascaraMarca = `url(${assetUrl(`${m.imagen}.webp`)}), url(${src})`;
+        const posMarca = `${(m.x / (100 - m.w)) * 100}% ${(m.y / (100 - m.h)) * 100}%, 0 0`;
+        const tamMarca = `${m.w}% ${m.h}%, 100% 100%`;
+        const mascaraOnda = `radial-gradient(ellipse ${m.w * 0.62}% ${m.h * 0.62}% at ${palma.x}% ${palma.y}%, #000 50%, transparent 100%)`;
+        const n = vivas[i];
+        return (
+          <Fragment key={`nalgada-${i}`}>
+            {marcas[a.lado] && (
+              <span
+                key={`marca-${marcas[a.lado]}`}
+                className="nalgada-marca"
+                style={{ maskImage: mascaraMarca, WebkitMaskImage: mascaraMarca, maskPosition: posMarca, WebkitMaskPosition: posMarca, maskSize: tamMarca, WebkitMaskSize: tamMarca }}
+                aria-hidden
+              />
+            )}
+            {n !== undefined && (
+              <>
+                <img
+                  key={`onda-${n}`}
+                  className="nalgada-onda"
+                  src={src}
+                  alt=""
+                  draggable={false}
+                  aria-hidden
+                  style={{ maskImage: mascaraOnda, WebkitMaskImage: mascaraOnda, transformOrigin: `${palma.x}% ${palma.y}%` }}
+                />
+                <span key={`zas-${n}`} className="nalgada-zas" style={{ left: `${palma.x}%`, top: `${palma.y}%`, width: `${m.w * 0.8}%` }} aria-hidden />
+                <img
+                  key={`mano-${n}`}
+                  className="nalgada-mano"
+                  src={assetUrl(`${m.imagen}.webp`)}
+                  alt=""
+                  draggable={false}
+                  aria-hidden
+                  style={{ ...caja(m), '--dir': a.lado === 'izq' ? -1 : 1 } as CSSProperties}
+                />
+              </>
+            )}
+            <button type="button" className="nalgada-toque" style={caja(m)} {...pulsar(i)} aria-label={a.lado === 'izq' ? '←' : '→'} />
+          </Fragment>
+        );
+      })}
+      {/* Las manos de los pechos y la que apunta: debajo de los emblemas (pedido del autor). */}
+      {acciones.map((a, i) =>
+        a.tipo === 'pecho' && vivas[i] !== undefined ? (
+          <Fragment key={`manos-pecho-${i}`}>
+            <img key={`abierta-${vivas[i]}`} className="mano-pecho abierta" src={assetUrl(`${a.abierta.imagen}.webp`)} alt="" draggable={false} aria-hidden style={caja(a.abierta)} />
+            <img key={`cerrada-${vivas[i]}`} className="mano-pecho cerrada" src={assetUrl(`${a.cerrada.imagen}.webp`)} alt="" draggable={false} aria-hidden style={caja(a.cerrada)} />
+          </Fragment>
+        ) : null,
+      )}
+      {acciones.map((a, i) =>
+        a.tipo === 'apunta' && vivas[i] !== undefined ? (
+          <img key={`apunta-${vivas[i]}`} className="mano-apunta" src={assetUrl(`${a.mano.imagen}.webp`)} alt="" draggable={false} aria-hidden style={caja(a.mano)} />
+        ) : null,
+      )}
+      {/* Cada pecho: la copia del sprite y su emblema suben y bajan juntos; las manos van antes (debajo de los emblemas). */}
+      {acciones.map((a, i) => {
+        if (a.tipo !== 'pecho') return null;
+        const e = lista[a.emblema];
+        if (!e) return null;
+        const n = vivas[i];
+        return (
+          <Fragment key={`pecho-${i}`}>
+            <div key={n !== undefined ? `grupo-${n}` : 'grupo'} className={`pecho-grupo ${n !== undefined ? 'rebota' : ''}`}>
+              {n !== undefined && (
+                <img
+                  className="pecho-zona"
+                  src={src}
+                  alt=""
+                  draggable={false}
+                  aria-hidden
+                  style={{ maskImage: mascaraPecho(e, proporcion), WebkitMaskImage: mascaraPecho(e, proporcion) }}
+                />
+              )}
+              <button
+                type="button"
+                className="pecho-toque"
+                style={{ left: `${e.x}%`, top: `${e.y}%`, width: `${e.w * 3.4}%` }}
+                {...pulsar(i)}
+                aria-label={a.lado === 'izq' ? '←' : '→'}
+              />
+              {boton(e, a.emblema)}
+            </div>
+          </Fragment>
+        );
+      })}
+      {lista.map((e, i) => (conPecho.has(i) ? null : boton(e, i)))}
     </>
   );
 }
@@ -391,6 +666,7 @@ export function CapasFondo({
   vapor = false,
   fijos = false,
   onToque,
+  dice,
 }: {
   capa: Capa;
   src: string;
@@ -398,14 +674,22 @@ export function CapasFondo({
   vapor?: boolean;
   /** Solo la censura, sin tocarse (las miniaturas). */
   fijos?: boolean;
-  /** Al tocar un emblema (en la galería, el personaje se queja). */
-  onToque?: () => void;
+  /** Al tocar un emblema o una zona (en la galería, el personaje se queja según dónde). */
+  onToque?: (zona: Zona) => void;
+  /** Lo que dice (la queja de la galería), pegado a su cara. */
+  dice?: { texto: string; n: number } | null;
 }) {
   return (
     <div className={`fondo-capas ${contener ? 'fondo-capas-contener' : ''}`}>
       <div className="fondo-capas-caja" style={{ '--r': capa.proporcion } as CSSProperties}>
-        <EmblemasTocables lista={capa.emblemas} clave={src} src={src} proporcion={capa.proporcion} onToque={onToque} fijos={fijos} />
+        <EmblemasTocables lista={capa.emblemas} clave={src} src={src} proporcion={capa.proporcion} onToque={onToque} fijos={fijos} manos={capa.manos} />
       </div>
+      {/* El globo, en una caja igual pero sin recortar (la de las manos recorta lo que se sale de la imagen). */}
+      {dice && (
+        <div className="fondo-capas-caja fondo-capas-globo" style={{ '--r': capa.proporcion } as CSSProperties}>
+          <GloboCara key={dice.n} cara={capa.cara} texto={dice.texto} />
+        </div>
+      )}
       {/* El vapor va encima de todo (también de la zona que rebota, si no quedaba un círculo sin niebla) y ocupa
           todo el ancho; no bloquea los toques. */}
       {vapor && capa.vapor && <VaporTermal nivel={capa.vapor} />}

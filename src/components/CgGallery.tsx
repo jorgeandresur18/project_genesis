@@ -9,6 +9,7 @@ import {
   CGS,
   CHARACTERS,
   DIMENSIONS,
+  SPRITES_SECRETOS,
   TOTAL_PLACES,
   TOTAL_SPRITES,
   TODOS_RPG,
@@ -23,9 +24,9 @@ import { reinoKey, useReinos, type Reino } from '../engine/reinos';
 import { BASE_CANVAS, canvasHeight, statureOf, widthFactor } from '../engine/stature';
 import type { Character } from '../engine/types';
 import { Panel } from './Panels';
-import { playCancel, playChip, playSelect, startTyping, stopTyping } from '../engine/sound';
+import { playCancel, playSelect, startTyping, stopTyping } from '../engine/sound';
 import { NoData } from './NoData';
-import { CapasFondo, capaDeFondo, capaDeSprite } from './SceneStage';
+import { CapasFondo, capaDeFondo, capaDeSprite, type Zona } from './SceneStage';
 import { SpriteHoja, type Hoja } from './batalla/sprites';
 import { colorBalas, useEfectosSprite } from './EfectosSprite';
 import { BATALLAS } from '../engine/batallas';
@@ -36,9 +37,12 @@ interface Texts {
   personajes: Record<string, string>;
   sprites: Record<string, { nombre: string; info: string }>;
   rpg: Record<string, { personaje: string; nombre: string; info: string }>;
-  quejas: Record<string, { imagenes: string[]; lineas: string[] }>;
+  quejas: Record<string, { imagenes: string[]; lineas: string[]; zonas?: Record<string, string[]>; zonas_novela?: Record<string, string[]> }>;
   lugares: Record<string, { nombre: string; fondos: Record<string, { nombre: string; info: string; reino?: string }> }>;
 }
+/** Toques en un sprite secreto para que pase solo al siguiente, y cuánto espera (que alcance a leer lo que dice). */
+const TOQUES_PARA_PASAR = 8;
+const PASAR_MS = 2600;
 const useTexts = () => localized(galeriaEs, galeriaEn, useLang()) as unknown as Texts;
 
 /** Bolita que parpadea sobre lo recién desbloqueado (hasta abrirlo en el visor). */
@@ -235,9 +239,9 @@ function Images() {
       {open !== null && (
         <Viewer
           quejaDe={(i) => Object.entries(texts.quejas).find(([, q]) => q.imagenes.includes(unlocked[i]))?.[0] ?? null}
-          capas={(i, vapor, alTocar) => {
+          capas={(i, vapor, alTocar, dice) => {
             const capa = capaDeFondo(`fondos/${unlocked[i]}`);
-            return capa && <CapasFondo capa={capa} src={assetUrl(`fondos/${unlocked[i]}.webp`)} contener vapor={vapor} onToque={alTocar} />;
+            return capa && <CapasFondo capa={capa} src={assetUrl(`fondos/${unlocked[i]}.webp`)} contener vapor={vapor} onToque={alTocar} dice={dice} />;
           }}
           src={(i) => assetUrl(`fondos/${unlocked[i]}.webp`)}
           label={(i) => texts.titulos[unlocked[i]] ?? unlocked[i]}
@@ -594,6 +598,17 @@ function Characters() {
         <Viewer
           sprite
           quejaDe={(i) => (texts.quejas[flat[i].id] ? flat[i].id : null)}
+          siguiente={(i) => {
+            // Con todos sus secretos desbloqueados, tocarla mucho pasa sola al siguiente secreto (pedido del autor).
+            const c = flat[i];
+            const todos = SPRITES_SECRETOS.get(c.id) ?? [];
+            if (!capaDeSprite(`${c.id}/${c.expr}`) || g.secretSprites(c.id).length < todos.length) return null;
+            for (let k = 1; k < flat.length; k++) {
+              const j = (i + k) % flat.length;
+              if (flat[j].id === c.id && capaDeSprite(`${flat[j].id}/${flat[j].expr}`)) return j;
+            }
+            return null;
+          }}
           contenido={(i) => {
             const r = flat[i].rpg;
             return r ? <SpriteRpgVista r={r} accion={accion} /> : null;
@@ -602,10 +617,10 @@ function Characters() {
             const r = flat[i].rpg;
             return r ? <AccionesRpg r={r} accion={accion} onAccion={setAccion} /> : null;
           }}
-          capas={(i, vapor, alTocar) => {
+          capas={(i, vapor, alTocar, dice) => {
             const capa = capaDeSprite(`${flat[i].id}/${flat[i].expr}`);
             const src = assetUrl(`sprites/${flat[i].id}/${flat[i].expr}.webp`);
-            return capa && <CapasFondo capa={capa} src={src} contener vapor={vapor} onToque={alTocar} />;
+            return capa && <CapasFondo capa={capa} src={src} contener vapor={vapor} onToque={alTocar} dice={dice} />;
           }}
           src={(i) => assetUrl(`sprites/${flat[i].id}/${flat[i].expr}.webp`)}
           label={(i) =>
@@ -651,6 +666,7 @@ function Viewer({
   contenido,
   ficha,
   quejaDe,
+  siguiente,
 }: {
   src: (i: number) => string;
   label: (i: number) => string;
@@ -667,13 +683,15 @@ function Viewer({
   /** Versión completa de la imagen (botón «Ver completo»), o null si no tiene. */
   whole?: (i: number) => string | null;
   /** Animación encima de la imagen (p. ej. los emblemas +18 y el vapor de una imagen secreta); `alTocar`: al tocar un emblema. */
-  capas?: (i: number, vapor: boolean, alTocar: () => void) => ReactNode;
+  capas?: (i: number, vapor: boolean, alTocar: (zona?: Zona) => void, dice: { texto: string; n: number } | null) => ReactNode;
   /** En lugar de la imagen (p. ej. un sprite del combate animado). */
   contenido?: (i: number) => ReactNode;
   /** Algo más dentro de la ficha (p. ej. las acciones del sprite del combate). */
   ficha?: (i: number) => ReactNode;
   /** Al tocar un emblema: quién se queja (su id en «quejas» de galeria.json), o null si no dice nada. */
   quejaDe?: (i: number) => string | null;
+  /** Adónde pasa sola después de tocarla mucho (otro sprite secreto), o null si no pasa. */
+  siguiente?: (i: number) => number | null;
 }) {
   const t = useT();
   const [showInfo, setShowInfo] = useState(false);
@@ -683,22 +701,41 @@ function Viewer({
   const [vapor, setVapor] = useState(true);
   /** El menú de abajo, oculto (para ver el sprite entero); se vuelve a mostrar con el botón chico o tocando la imagen. */
   const [sinMenu, setSinMenu] = useState(false);
-  const capasActuales = capas?.(index, vapor, () => tocar()) ?? null;
+  const [queja, setQueja] = useState<{ texto: string; n: number } | null>(null);
+  const capasActuales = capas?.(index, vapor, (zona) => tocar(zona), queja) ?? null;
   const propio = contenido?.(index) ?? null;
   const texts = useTexts();
-  const [queja, setQueja] = useState<{ texto: string; n: number } | null>(null);
   useEffect(() => {
     if (!queja) return;
     const timer = setTimeout(() => setQueja(null), 3600);
     return () => clearTimeout(timer);
   }, [queja]);
-  useEffect(() => setQueja(null), [index]);
-  const tocar = () => {
+  // Cuántas veces la tocaron en este sprite (para pasar sola al siguiente) y si ya va a pasar.
+  const toquesAqui = useRef(0);
+  const pasando = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => {
+    setQueja(null);
+    toquesAqui.current = 0;
+    return () => {
+      if (pasando.current) clearTimeout(pasando.current);
+      pasando.current = null;
+    };
+  }, [index]);
+  const tocar = (zona?: string) => {
     const quien = quejaDe?.(index);
-    const lineas = quien ? texts.quejas[quien]?.lineas : undefined;
+    const q = quien ? texts.quejas[quien] : undefined;
+    // Según dónde la tocaron (las manos), o las de siempre.
+    const porZona = zona ? q?.zonas?.[zona] : undefined;
+    const lineas = porZona?.length ? porZona : q?.lineas;
     if (!quien || !lineas?.length) return;
-    playChip('boing');
-    setQueja({ texto: siguienteQueja(quien, lineas), n: Math.random() });
+    setQueja({ texto: siguienteQueja(porZona?.length ? `${quien}:${zona}` : quien, lineas), n: Math.random() });
+    // Tocarla mucho: después de que dice lo suyo, pasa sola al siguiente sprite (no al instante).
+    const sig = siguiente?.(index);
+    if (sig === null || sig === undefined || pasando.current || ++toquesAqui.current < TOQUES_PARA_PASAR) return;
+    pasando.current = setTimeout(() => {
+      pasando.current = null;
+      onIndex(sig);
+    }, PASAR_MS);
   };
   const extraFicha = ficha?.(index) ?? null;
   // Volumen (solo el pixel art del combate): se inclina un poco hacia el mouse (o el dedo), como una chapa.
@@ -739,7 +776,8 @@ function Viewer({
           onPointerLeave={() => setGiro({ x: 0, y: 0 })}
         >
           {/* Lo que dice el personaje cuando le tocan los emblemas (Rikka, en lo secreto). */}
-          {queja && (
+          {/* Con capas (los secretos), el globo sale pegado a su cara, dentro de ellas. */}
+          {queja && !capasActuales && (
             <span key={queja.n} className="viewer-queja" role="status">
               {queja.texto}
             </span>

@@ -571,7 +571,88 @@
         "Condemned for all eternity to someone clicking where they should not. That is how Spring ends.",
         "Keep going and I will ask the steam to come back. The steam respects me.",
         "I know you are going to do it again. I know. I have accepted it. Almost."
-      ]
+      ],
+      "zonas": {
+        "pecho_izq": [
+          "The left one! That one sits over my heart. Now it's beating funny and it's your fault.",
+          "At the temple they taught me to guard my purity. Nobody taught me to guard it from a cursor.",
+          "Is that how people say hello in your world? Because in mine that's a lifelong commitment.",
+          "Five hundred years and nobody dared… and then a click comes along and dares."
+        ],
+        "pecho_der": [
+          "Not the right one either! Are you going to try them all like fruit at the market?",
+          "I was saving that side for… for an occasion. Not this one.",
+          "If you keep squeezing, I'll have to pray. And I pray very loudly.",
+          "Ow! Why am I blushing when I don't even know who you are?"
+        ],
+        "pechos": [
+          "Both at once?! Not even the harvest rituals grab with that much confidence.",
+          "Let go! They belong to Spring, they're not… they're not for squeezing!",
+          "With both hands… This is a ceremony now and nobody invited me.",
+          "If Jair saw this, he'd faint. If Cami saw this, she'd charge me."
+        ],
+        "nalga_izq": [
+          "Ow! In my kingdom a spank is a declaration of war. …Or of love. I never knew which.",
+          "That hand stings! Cami, again? I recognize the glove.",
+          "You're going to leave a mark and then I'll have to explain it at the temple.",
+          "Hey! Being a priestess doesn't make me a drum."
+        ],
+        "nalga_der": [
+          "The other side too! At least you're even. That's… almost fair.",
+          "Ow! The whole kingdom heard that!",
+          "One more spank and I'll charge you. Finally, someone paying me.",
+          "My grandmother said whoever hits you loves you. My grandmother never saw a gallery."
+        ],
+        "nalgas": [
+          "Both?! At the same time?! That's not a spank, that's applause!",
+          "Kya! Now I won't be able to sit down for another five hundred years.",
+          "With both hands… You'll confess this at the temple. On your knees.",
+          "All right, that's enough! My purity isn't measured in slaps!"
+        ],
+        "abajo": [
+          "Not there! Not even Spring has made it there.",
+          "That emblem is there for a reason! A very sacred reason!",
+          "Are you pointing at me? Don't point! Especially not there!",
+          "Point there again and the katana comes out of wherever I've hidden it."
+        ]
+      },
+      "zonas_novela": {
+        "pecho_izq": [
+          "Ah! …Something brushed my chest. A petal. It must have been a very bold petal.",
+          "A warm drop? The drops in these hot springs are so… affectionate.",
+          "My heart is racing. It's the hot water. It's only the hot water."
+        ],
+        "pecho_der": [
+          "Ow! Is the steam touching me? Can steam do that?",
+          "It tickles right… right there. Must be a very rude water spirit.",
+          "If you're a spirit, you should know I'm consecrated. …Almost."
+        ],
+        "pechos": [
+          "Both?! No petal falls that evenly!",
+          "Kya! Someone is…! No. There's nobody. Breathe, Rikka.",
+          "This isn't the wind. The wind doesn't have fingers."
+        ],
+        "nalga_izq": [
+          "Ow! Something slapped me! Are the rocks around here this forward?",
+          "Cami?! If this is a joke from your planet, I don't get it and it stings.",
+          "It left a strange warmth. I don't like it. …Not much."
+        ],
+        "nalga_der": [
+          "The other side too! Whoever it is has very good aim!",
+          "Ow! Tomorrow I'll have to sit sideways.",
+          "I swear by Spring, if I find you, I'll marry you. As punishment."
+        ],
+        "nalgas": [
+          "Both at the same time?! Whoever's doing this has two hands and zero shame!",
+          "Kya! That sounded like applause! Is someone applauding me?!",
+          "I get it now: these hot springs are haunted. Haunted by a pervert."
+        ],
+        "abajo": [
+          "No, no, no! Not even the hot water goes there without permission.",
+          "That was way too close! That's where I keep… where I keep my purity.",
+          "Are you pointing at me? I know you're pointing at me!"
+        ]
+      }
     }
   }
 }

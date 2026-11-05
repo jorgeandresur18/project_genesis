@@ -115,7 +115,10 @@ def main():
             a = np.array(Image.open(ruta).convert('RGBA'))
             m = piel_grande(a)
             lab = a_lab(a[m][:, :3].astype(float))
-            corrimiento = objetivo - lab.mean(axis=0)
+            # Relleno contra relleno (2026-11-04): antes se comparaba el promedio de la piel (con sombras y brillos)
+            # con el relleno del base, y el relleno de los sprites con mucha piel quedaba más claro y amarillo.
+            # Los «:luz» (el traje) siguen como antes, con el promedio: así quedaron aprobados.
+            corrimiento = objetivo - (lab.mean(axis=0) if modo == 'luz' else tono(a))
             if modo == 'luz':
                 corrimiento = np.array([corrimiento[0], 0.0, 0.0])
             if np.abs(corrimiento).max() < 2.5:
