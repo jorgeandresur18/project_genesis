@@ -30,6 +30,7 @@ Qué trae cada versión. La que está en curso lleva `-dev` y todavía no se pub
 - **Hangar más justo:** el Capitán baja de nivel 12 a 10 (su cañón da 9 golpes; el jugador atento ganaba ~32 %, ahora ~73 %).
 - **RPG ordenado:** una sola ficha por personaje, `Batalla.tsx` partido (el dibujo y, desde el 4 de noviembre, la
   lógica de turnos de los enemigos en `engine/turnos.ts`), varios especiales con una barra.
+- **Pelea más clara:** el cuadro de opciones no queda vacío fuera de tu turno; la caja de diálogo mide lo que el retrato; aviso cuando a alguien se le pasa un estado.
 
 ## 1.0.0 — Demo 1.0 (publicada el 3 de noviembre de 2026; etiqueta `v1.0.0`)
 

@@ -471,3 +471,34 @@ export function resultado(estado: EstadoPelea, d: DatosBatalla): 'empate' | 'pie
   if (!estado.heroes.some(vivo)) return retira || !estado.enemigos.some(vivo) ? 'empate' : 'pierde';
   return retira ? 'gana' : null;
 }
+
+/** Los estados que se anuncian cuando terminan (arriba, con su mensaje: «… se despierta»). */
+export type EstadoQueTermina = 'paralizado' | 'dormido' | 'congelado' | 'confundido' | 'envenenado' | 'quemado';
+
+/** Los estados que tiene ahora un luchador. */
+export const estadosActivos = (l: Luchador): EstadoQueTermina[] =>
+  [
+    l.paralizado > 0 && 'paralizado',
+    l.dormido > 0 && 'dormido',
+    l.congelado > 0 && 'congelado',
+    l.confundido > 0 && 'confundido',
+    !!l.envenenado && 'envenenado',
+    l.quemado > 0 && 'quemado',
+  ].filter((x): x is EstadoQueTermina => !!x);
+
+/** Qué estados tiene cada uno en este momento (para comparar después). */
+export const fotoEstados = (ls: Luchador[]) => new Map(ls.map((l) => [l.id, estadosActivos(l)]));
+
+/**
+ * Los estados que se terminaron desde la foto: por los turnos (la parálisis, el sueño) o por un objeto. Solo de los que
+ * siguen en pie (si alguien cayó, no hace falta decir que se le pasó el veneno).
+ */
+export function estadosTerminados(antes: Map<string, EstadoQueTermina[]>, ls: Luchador[]): { l: Luchador; estado: EstadoQueTermina }[] {
+  const out: { l: Luchador; estado: EstadoQueTermina }[] = [];
+  for (const l of ls) {
+    if (!vivo(l)) continue;
+    const ahora = estadosActivos(l);
+    for (const estado of antes.get(l.id) ?? []) if (!ahora.includes(estado)) out.push({ l, estado });
+  }
+  return out;
+}

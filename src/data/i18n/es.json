@@ -451,5 +451,11 @@
   "torneo.otra": "Volver al torneo",
   "extras.torneo": "Torneo Genesis",
   "extras.torneo_desc": "Peleas por tokens. Se abre al terminar el Capítulo 1.",
-  "galeria.accion.victoria": "Victoria"
+  "galeria.accion.victoria": "Victoria",
+  "batalla.fin_paralizado": "{quien} vuelve a moverse: se le pasó la parálisis.",
+  "batalla.fin_dormido": "{quien} se despierta.",
+  "batalla.fin_congelado": "{quien} se descongela.",
+  "batalla.fin_confundido": "{quien} sale de la confusión.",
+  "batalla.fin_envenenado": "A {quien} se le pasó el veneno.",
+  "batalla.fin_quemado": "A {quien} se le apagan las quemaduras."
 }

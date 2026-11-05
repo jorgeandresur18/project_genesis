@@ -66,6 +66,8 @@ import {
   estadoInicial,
   evaporarClones,
   finDeTurno,
+  fotoEstados,
+  estadosTerminados,
   golpesDelCanon,
   hacerClon,
   llegaRefuerzo,
@@ -788,6 +790,8 @@ function Pelea({
       if (!b.current.heroes.some(vivo)) break;
       await actuarEnemigo(e);
     }
+    // Lo que tenía cada uno antes de que bajen los turnos (para anunciar arriba lo que se terminó).
+    const antesDelFin = fotoEstados([...b.current.heroes, ...b.current.enemigos]);
     finDeTurno(b.current);
     forzar();
     // Sin héroes: pierden, o empatan si tampoco quedó nadie del otro lado.
@@ -800,6 +804,7 @@ function Pelea({
     await venenos();
     fin = terminada();
     if (fin) return fin;
+    await avisarFinEstados(antesDelFin);
     await explotarBomba();
     fin = terminada();
     if (fin) return fin;
@@ -828,6 +833,17 @@ function Pelea({
     await decir(fmt(t('batalla.arena_revive'), { quien: [...heroes, ...rivales].map((x) => x.nombre).join(', ') }));
   };
 
+  /**
+   * Avisa arriba los estados que se terminaron desde `antes` (por los turnos o por un objeto): «Jair se despierta»,
+   * «A Cami se le pasó el veneno»… (pedido del autor).
+   */
+  const avisarFinEstados = async (antes: ReturnType<typeof fotoEstados>) => {
+    for (const { l, estado } of estadosTerminados(antes, [...b.current.heroes, ...b.current.enemigos])) {
+      luz(l.id, '#e8f4ff');
+      forzar();
+      await decir(fmt(t(`batalla.fin_${estado}`), { quien: l.nombre }));
+    }
+  };
   /** El veneno al final del turno: cada envenenado pierde PS (los enemigos que caen, caen). */
   const venenos = async () => {
     for (const l of [...b.current.heroes, ...b.current.enemigos].filter((x) => vivo(x) && x.envenenado)) {
@@ -1229,6 +1245,8 @@ function Pelea({
       // A los que ya lo tienen no les hace nada.
       blancos.splice(0, blancos.length, ...blancos.filter((_, i) => !yaEstan[i]));
       const contra = destino === 'rival' || destino === 'rivales';
+      // Para avisar después si el objeto le sacó un estado a alguien.
+      const antesDelObjeto = fotoEstados(blancos);
       let n = 0;
       for (const a of blancos) {
         n = usarObjeto(o, a, a.lado === 'heroe' ? d.personajes[a.clave] : undefined);
@@ -1262,7 +1280,8 @@ function Pelea({
       }
       playChip(contra ? 'cambio' : 'vida');
       forzar();
-      return decir(fmt(o.texto, { quien: blancos.map((x) => x.nombre).join(' y '), n }));
+      await decir(fmt(o.texto, { quien: blancos.map((x) => x.nombre).join(' y '), n }));
+      return avisarFinEstados(antesDelObjeto);
     }
     if ((c.tipo === 'atacar' || c.tipo === 'especial') && seConfunde(h)) {
       cargar(h, CARGA.atacar);
@@ -2406,7 +2425,7 @@ function Pelea({
       </div>
       {fogonazo && <div key={fogonazo.key} className="batalla-fogonazo" style={{ '--c': fogonazo.color } as CSSProperties} aria-hidden />}
       {aviso && <AvisoEspecial key={aviso.key} e={aviso.e} sprite={aviso.sprite} heroe={aviso.heroe} />}
-      <div className="batalla-abajo">
+      <div className={`batalla-abajo ${habla ? 'hablando' : ''}`}>
         <div className={`batalla-menu ${enMenu ? '' : 'apagado'}`} aria-label={t('batalla.comandos')}>
           {/* Al lado (encima) del menú: qué hace la opción elegida. */}
           {enMenu && lista[menu.i]?.desc && (

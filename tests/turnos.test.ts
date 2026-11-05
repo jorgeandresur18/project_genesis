@@ -10,7 +10,9 @@ import {
   envenenarConBola,
   estadoInicial,
   evaporarClones,
+  estadosTerminados,
   finDeTurno,
+  fotoEstados,
   golpesDelCanon,
   hacerClon,
   llegaRefuerzo,
@@ -252,5 +254,21 @@ describe('reglas compartidas con el simulador', () => {
     expect(blancoDelCanon(s.heroes, a, false)).toBe(a);
     a.ps = 0;
     expect(blancoDelCanon(s.heroes, a, true)).toBeNull();
+  });
+});
+
+describe('aviso de fin de estado', () => {
+  it('dice qué estados se le pasaron a cada uno (por turnos o por un objeto), y no a los caídos', () => {
+    const d = D('bastion');
+    const a = enemigo(d, Object.keys(d.enemigos)[0]);
+    const b = { ...enemigo(d, Object.keys(d.enemigos)[0]), id: 'otro' };
+    a.dormido = 1;
+    a.quemado = 2;
+    b.paralizado = 1;
+    const antes = fotoEstados([a, b]);
+    a.dormido = 0; // se despierta
+    b.paralizado = 0; // se le pasa, pero cayó
+    b.ps = 0;
+    expect(estadosTerminados(antes, [a, b]).map((x) => [x.l.id, x.estado])).toEqual([[a.id, 'dormido']]);
   });
 });
