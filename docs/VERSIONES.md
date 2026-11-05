@@ -5,6 +5,8 @@ Qué trae cada versión. La que está en curso lleva `-dev` y todavía no se pub
 
 ## 1.2.0-dev (en curso, rama `desarrollo`; sin publicar)
 
+- **Atajos de prueba con PIN:** en lo publicado, `?batalla`, `?vars`, `?sprites`, `?cuadricula`, `?escena`, `?bootcamp`, `?juego`, `?nivel` y `/capN` de un capítulo sin publicar piden el PIN, como `/all`.
+
 ## 1.1.1 (publicada el 5 de noviembre de 2026; etiqueta `v1.1.1`)
 
 **Sigue apagado en lo publicado** (`demo_publica`): el Capítulo 2, el Torneo, PayFoe y la tienda nueva, con lo nuevo de ella (como el CeBiDol).
