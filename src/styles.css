@@ -3658,3 +3658,11 @@ button.cassette:hover .cassette-imagen { transform: translateY(-2px) rotate(-3de
 }
 
 @media (prefers-reduced-motion: reduce) { .pecho-grupo.rebota, .nalgada-onda, .nalgada-zas { animation-duration: 0.01s; } .nalgada-mano, .mano-apunta { animation-duration: 0.01s; } }
+
+/* El grito en la galería (tocar demasiado a Rikka): tiembla todo, la cámara se acerca a su cara y una luz blanca lo
+   tapa antes de volver al inicio. Igual que el de la escena. */
+.viewer-grito { animation: grito-tiembla 0.08s linear 22; overflow: hidden; }
+.viewer-grito > img, .viewer-grito > .fondo-capas { transform-origin: 50% 20%; animation: grito-zoom 2s cubic-bezier(0.6, 0, 0.8, 0.4) forwards; }
+.viewer-grito-texto { left: 50%; top: 4%; translate: -50% 0; z-index: 6; }
+.viewer-grito-blanco { position: fixed; z-index: 60; animation: grito-blanco 2s ease-in forwards; }
+@media (prefers-reduced-motion: reduce) { .viewer-grito, .viewer-grito > img, .viewer-grito > .fondo-capas { animation: none; } }

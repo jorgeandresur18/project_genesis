@@ -24,7 +24,7 @@ import { reinoKey, useReinos, type Reino } from '../engine/reinos';
 import { BASE_CANVAS, canvasHeight, statureOf, widthFactor } from '../engine/stature';
 import type { Character } from '../engine/types';
 import { Panel } from './Panels';
-import { playCancel, playSelect, startTyping, stopTyping } from '../engine/sound';
+import { playCancel, playChip, playSelect, startTyping, stopTyping } from '../engine/sound';
 import { NoData } from './NoData';
 import { CapasFondo, capaDeFondo, capaDeSprite, type Zona } from './SceneStage';
 import { SpriteHoja, type Hoja } from './batalla/sprites';
@@ -42,6 +42,10 @@ interface Texts {
 }
 /** Toques en un sprite secreto para que pase solo al siguiente, y cuánto espera (que alcance a leer lo que dice). */
 const TOQUES_PARA_PASAR = 8;
+/** Tocarla demasiado (sin ropa, de frente o de espalda): el grito, y de vuelta al inicio. */
+const TOQUES_PARA_GRITO = 30;
+const GRITO_MS = 2100;
+const SPRITE_GRITO = 'rikka/desbloqueable_espalda_asustada_ultima_grito';
 const PASAR_MS = 2600;
 const useTexts = () => localized(galeriaEs, galeriaEn, useLang()) as unknown as Texts;
 
@@ -103,7 +107,7 @@ export function CgGallery({ onClose }: { onClose: () => void }) {
         active={tab}
         onTab={(k) => pick(k as Tab)}
       >
-        {tab === 'imagenes' ? <Images /> : tab === 'personajes' ? <Characters /> : tab === 'pixel' ? <PixelArt /> : <Places />}
+        {tab === 'imagenes' ? <Images /> : tab === 'personajes' ? <Characters onSalir={onClose} /> : tab === 'pixel' ? <PixelArt /> : <Places />}
       </TermWindow>
     </Panel>
   );
@@ -423,7 +427,7 @@ const OTHERS = CHARACTERS.filter((c) => !galeriaEs.principales.includes(c.id));
  * Pestañas: Todos, una por personaje principal con su color, y Varios. Un personaje que todavía no
  * apareció en la historia se llama «???».
  */
-function Characters() {
+function Characters({ onSalir }: { onSalir: () => void }) {
   const t = useT();
   const texts = useTexts();
   const g = useGalleryState();
@@ -598,6 +602,15 @@ function Characters() {
         <Viewer
           sprite
           quejaDe={(i) => (texts.quejas[flat[i].id] ? flat[i].id : null)}
+          grito={(i) => {
+            // Rikka sin ropa (de frente o de espalda): tocarla demasiado termina en el grito (pedido del autor).
+            const c = flat[i];
+            if (c.id !== 'rikka' || !/^desbloqueable_(frente|espalda)/.test(c.expr)) return null;
+            const capa = capaDeSprite(SPRITE_GRITO);
+            const src = assetUrl(`sprites/${SPRITE_GRITO}.webp`);
+            return { src, capas: capa && <CapasFondo capa={capa} src={src} contener fijos /> };
+          }}
+          onGrito={onSalir}
           siguiente={(i) => {
             // Con todos sus secretos desbloqueados, tocarla mucho pasa sola al siguiente secreto (pedido del autor).
             const c = flat[i];
@@ -667,6 +680,8 @@ function Viewer({
   ficha,
   quejaDe,
   siguiente,
+  grito,
+  onGrito,
 }: {
   src: (i: number) => string;
   label: (i: number) => string;
@@ -692,6 +707,10 @@ function Viewer({
   quejaDe?: (i: number) => string | null;
   /** Adónde pasa sola después de tocarla mucho (otro sprite secreto), o null si no pasa. */
   siguiente?: (i: number) => number | null;
+  /** Si tocarla demasiado termina en el grito: el sprite del grito y sus capas (la censura), o null. */
+  grito?: (i: number) => { src: string; capas: ReactNode } | null;
+  /** Después del grito: vuelve a la pantalla de inicio. */
+  onGrito?: () => void;
 }) {
   const t = useT();
   const [showInfo, setShowInfo] = useState(false);
@@ -724,7 +743,22 @@ function Viewer({
       pasando.current = null;
     };
   }, [index]);
+  // El grito: tantos toques en total en sus sprites sin ropa (aunque cambie de sprite).
+  const toquesGrito = useRef(0);
+  const [gritando, setGritando] = useState<{ src: string; capas: ReactNode } | null>(null);
   const tocar = (zona?: string) => {
+    if (gritando) return;
+    const g = grito?.(index);
+    if (g && ++toquesGrito.current >= TOQUES_PARA_GRITO) {
+      // Muy dramático: el sprite del grito, tiembla todo, zoom a su cara, luz blanca y de vuelta al inicio.
+      if (pasando.current) clearTimeout(pasando.current);
+      pasando.current = null;
+      setQueja(null);
+      setGritando(g);
+      playChip('grito');
+      setTimeout(() => onGrito?.(), GRITO_MS);
+      return;
+    }
     const quien = quejaDe?.(index);
     const q = quien ? texts.quejas[quien] : undefined;
     // Según dónde la tocaron (las manos), o las de siempre.
@@ -776,7 +810,7 @@ function Viewer({
       )}
       <div className="viewer-main">
         <div
-          className={`viewer-stage ${propio ? 'viewer-volumen' : sprite ? 'viewer-profundidad' : ''}`}
+          className={`viewer-stage ${propio ? 'viewer-volumen' : sprite ? 'viewer-profundidad' : ''} ${gritando ? 'viewer-grito' : ''}`}
           style={propio ? ({ '--gx': giro.x, '--gy': giro.y } as CSSProperties) : undefined}
           onPointerMove={inclinar}
           onPointerLeave={() => setGiro({ x: 0, y: 0 })}
@@ -788,7 +822,16 @@ function Viewer({
               {queja.texto}
             </span>
           )}
-          {propio ?? (
+          {gritando ? (
+            <>
+              <img key="grito" src={gritando.src} alt="" draggable={false} />
+              {gritando.capas}
+              <span className="emblema-reaccion emblema-grito viewer-grito-texto" role="status">
+                {t('galeria.grito_rikka')}
+              </span>
+            </>
+          ) : null}
+          {gritando ? null : propio ?? (
             <img
               key={`${index}-${full}`}
               className={wholeSrc ? (full ? 'viewer-whole' : 'viewer-part') : ''}
@@ -797,8 +840,9 @@ function Viewer({
               draggable={false}
             />
           )}
-          {!propio && capasActuales}
+          {!propio && !gritando && capasActuales}
         </div>
+        {gritando && <div className="grito-blanco viewer-grito-blanco" aria-hidden />}
         {showInfo && (
           <TermWindow
             className="info-window"

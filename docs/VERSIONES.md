@@ -3,6 +3,10 @@
 Qué trae cada versión. La que está en curso lleva `-dev` y todavía no se publicó. Cómo se numeran y cómo se publica:
 `docs/METODOLOGIA.md`.
 
+## 1.2.0-dev (en curso, rama `desarrollo`; sin publicar)
+
+- **Galería, Rikka:** si la tocas demasiado (30 veces en sus sprites sin ropa, de frente o de espalda), grita con su sprite del grito: tiembla todo, zoom a su cara, luz blanca y de vuelta a la pantalla de inicio.
+
 ## 1.1.0 (publicada el 5 de noviembre de 2026; etiqueta `v1.1.0`)
 
 **Qué se publica (decisión del autor):** lo del Capítulo 1 y lo general (balance de las peleas, estados, Conoce más,
