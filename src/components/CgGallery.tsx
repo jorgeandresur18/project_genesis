@@ -45,9 +45,15 @@ const TOQUES_PARA_PASAR = 8;
 /** Tocarla demasiado (sin ropa, de frente o de espalda): el grito, y de vuelta al inicio. */
 const TOQUES_PARA_GRITO = 30;
 const GRITO_MS = 3900;
-const GRITO_FRENTE = 'rikka/desbloqueable_frente_asustada';
-const GRITO_ESPALDA = 'rikka/desbloqueable_espalda_asustada_ultima_grito';
-const GRITO_VISTIENDOSE = 'rikka/desbloqueable_vistiendose_muy_avergonzada';
+/** Los grupos de las termas (de frente, de espalda sin ropa, de espalda con el traje) y el grito de cada uno. */
+type GrupoTermas = 'frente' | 'espalda' | 'vistiendose';
+const grupoTermas = (expr: string): GrupoTermas | null =>
+  expr.startsWith('desbloqueable_frente') ? 'frente' : expr.startsWith('desbloqueable_vistiendose') ? 'vistiendose' : expr.startsWith('desbloqueable_espalda') ? 'espalda' : null;
+const GRITOS: Record<GrupoTermas, string> = {
+  frente: 'rikka/desbloqueable_frente_asustada',
+  espalda: 'rikka/desbloqueable_espalda_asustada',
+  vistiendose: 'rikka/desbloqueable_vistiendose_muy_avergonzada',
+};
 const PASAR_MS = 2600;
 const useTexts = () => localized(galeriaEs, galeriaEn, useLang()) as unknown as Texts;
 
@@ -605,25 +611,27 @@ function Characters({ onSalir }: { onSalir: () => void }) {
           sprite
           quejaDe={(i) => (texts.quejas[flat[i].id] ? flat[i].id : null)}
           grito={(i) => {
-            // Rikka en las termas: tocarla demasiado termina en el grito (pedido del autor).
+            // Rikka en las termas: tocarla demasiado termina en el grito de su grupo, sin darse vuelta (pedido del
+            // autor): de frente, «Termas: algo la tocó»; de espalda, «Termas: el grito»; con el traje, «Termas: apretadísimo».
             const c = flat[i];
-            if (c.id !== 'rikka' || !/^desbloqueable_(frente|espalda|vistiendose)/.test(c.expr)) return null;
-            // Sin darse vuelta: de frente, su cara de grito de frente; de espalda, la de espalda; vistiéndose («Termas
-            // apretadísimo»), la más sonrojada.
-            const cual = c.expr.startsWith('desbloqueable_frente') ? GRITO_FRENTE : c.expr.startsWith('desbloqueable_vistiendose') ? GRITO_VISTIENDOSE : GRITO_ESPALDA;
+            const grupo = c.id === 'rikka' ? grupoTermas(c.expr) : null;
+            if (!grupo) return null;
+            const cual = GRITOS[grupo];
             const capa = capaDeSprite(cual);
             const src = assetUrl(`sprites/${cual}.webp`);
             return { src, capas: capa && <CapasFondo capa={capa} src={src} contener fijos /> };
           }}
           onGrito={onSalir}
           siguiente={(i) => {
-            // Con todos sus secretos desbloqueados, tocarla mucho pasa sola al siguiente secreto (pedido del autor).
+            // Con todos sus secretos desbloqueados, tocarla mucho pasa sola al siguiente, pero solo entre los de su
+            // mismo grupo (de frente, de espalda o con el traje): no se da vuelta (pedido del autor).
             const c = flat[i];
             const todos = SPRITES_SECRETOS.get(c.id) ?? [];
             if (!capaDeSprite(`${c.id}/${c.expr}`) || g.secretSprites(c.id).length < todos.length) return null;
+            const grupo = grupoTermas(c.expr);
             for (let k = 1; k < flat.length; k++) {
               const j = (i + k) % flat.length;
-              if (flat[j].id === c.id && capaDeSprite(`${flat[j].id}/${flat[j].expr}`)) return j;
+              if (flat[j].id === c.id && capaDeSprite(`${flat[j].id}/${flat[j].expr}`) && grupoTermas(flat[j].expr) === grupo) return j === i ? null : j;
             }
             return null;
           }}
@@ -739,17 +747,22 @@ function Viewer({
   const pasando = useRef<ReturnType<typeof setTimeout> | null>(null);
   /** Lo que dice al pasar sola al siguiente sprite (se muestra apenas cambia). */
   const alPasar = useRef<string | null>(null);
+  // El grito: los toques en las termas; siguen si pasa sola de sprite, vuelven a cero si el jugador cambia.
+  const toquesGrito = useRef(0);
+  /** Si el cambio de sprite lo hizo ella sola (tocarla mucho): ahí la cuenta del grito sigue. */
+  const pasoSola = useRef(false);
   useEffect(() => {
     setQueja(alPasar.current ? { texto: alPasar.current, n: Math.random() } : null);
     alPasar.current = null;
     toquesAqui.current = 0;
+    // Si el jugador cambia de sprite, la cuenta del grito vuelve a empezar (pedido del autor).
+    if (!pasoSola.current) toquesGrito.current = 0;
+    pasoSola.current = false;
     return () => {
       if (pasando.current) clearTimeout(pasando.current);
       pasando.current = null;
     };
   }, [index]);
-  // El grito: tantos toques en total en sus sprites sin ropa (aunque cambie de sprite).
-  const toquesGrito = useRef(0);
   const [gritando, setGritando] = useState<{ src: string; capas: ReactNode } | null>(null);
   const tocar = (zona?: string) => {
     if (gritando) return;
@@ -779,6 +792,7 @@ function Viewer({
       // Al cambiar, lanza un comentario (pedido del autor).
       const dice = q?.al_pasar;
       if (dice?.length) alPasar.current = siguienteQueja(`${quien}:al_pasar`, dice);
+      pasoSola.current = true;
       onIndex(sig);
     }, PASAR_MS);
   };
