@@ -123,7 +123,7 @@ export function Boringplace({ onArticulo, onToast }: { onArticulo: (id: string) 
             );
           })}
           {/* Los cassettes sueltos (docs/BIBLIA_RPG.md, sección 18): grises, los puede usar cualquiera. */}
-          {Object.entries(SUELTOS_EN_VENTA).map(([id, c]) => (
+          {!config.tienda_solo && Object.entries(SUELTOS_EN_VENTA).map(([id, c]) => (
             <button key={`c-${id}`} className={s.tarjeta} onClick={() => onArticulo(`${ID_CASSETTE}${id}`)}>
               <FotoObjeto icono="objetos/cassette_generico" color={GRIS_CASSETTE} />
               <span className={s.nombre}>{ataqueEn(lang, c.ataque).nombre}</span>

@@ -15,7 +15,12 @@ export const storyFiles: StoryFile[] = Object.keys(modules)
 
 export const variables = variablesJson as VarDecl;
 export const endings = registroJson as EndingInfo[];
-export const config = juegoJson as GameConfig;
+/**
+ * La configuración del juego. En lo que se compila para publicar (`import.meta.env.PROD`) se le aplica `demo_publica`
+ * (lo de más adelante, apagado); en el servidor de desarrollo y en las pruebas, todo prendido.
+ */
+const base = juegoJson as GameConfig;
+export const config: GameConfig = import.meta.env.PROD && base.demo_publica ? { ...base, ...base.demo_publica } : base;
 
 export const scenes = new Map<string, Scene>();
 for (const file of storyFiles) {

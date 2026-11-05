@@ -58,3 +58,44 @@ npm run test:routes
 ## Cuando dudes
 
 Pregunta antes de decidir cualquier cosa de historia. Preferir una pregunta corta a una invención.
+
+## Lo que conviene saber (al día con el 5 de noviembre de 2026)
+
+Para trabajar desde cualquier computadora. El detalle de cada sesión está en `docs/BITACORA.md`.
+
+**Cómo prefiere trabajar el autor**
+- **Arte al final:** hasta cerrar la lógica se trabaja con textos de Claude (borrador) y placeholders; no se bloquea
+  nada esperando arte ni corrección de diálogos. Las decisiones de historia igual se preguntan.
+- **Retoques mínimos:** en un retoque de arte, tocar solo lo pedido (el dibujo del autor es la base) y mostrar una vista
+  previa antes de aplicar. Nada de rellenos con «puntitos» (dithering).
+- Escribe rápido y con faltas de ortografía: leer la intención. Si una frase es ambigua (un «no» que falta, por
+  ejemplo), preguntar antes de rehacer algo grande.
+- Los precios de la tienda que propone Claude quedan como propuesta: el autor los revisa después.
+
+**Publicar (`main`, Vercel)**
+- En lo que se compila para publicar se aplica `demo_publica` de `src/data/juego.json`: lo de más adelante queda
+  apagado (hoy: Capítulo 2, Torneo Genesis, PayFoe y la tienda nueva; la tienda vende solo lo del Capítulo 1). En
+  `npm run dev` y en las pruebas está todo prendido. Para publicar algo nuevo, se cambia ese bloque. Ver
+  `docs/METODOLOGIA.md`.
+
+**Pruebas**
+- `npm test` (Vitest, unas 200), `npm run test:routes` (antes de cada commit), `npm run lint`, `npx tsc --noEmit -p .`.
+- `npm run e2e`: Playwright en un navegador sin ventana (`tests/e2e/`, ayudantes en `tests/e2e/ayudantes.ts`).
+- Para probar a mano: `?batalla=<id>&vars={json}` abre una pelea con lo de una partida (niveles, mochila, cassettes);
+  `?galeria=todo` abre la galería completa; `?sprites` abre el probador de sprites.
+
+**Herramientas de arte** (`tools/`)
+- `npm run sprites` (PSB/PSD → `public/sprites`, y después `igualar_piel.py`).
+- Desbloqueables de Rikka: `node --max-old-space-size=14000 tools/desbloqueables_rikka.mjs`, luego
+  `python -I -X utf8 tools/igualar_piel.py` y `python -I -X utf8 tools/censura_sprites.py` (el mosaico). Sale del PSD
+  «desbloqueables rikka mas grande.psd» (sprites, emblemas, manos de Cami con su máscara de capa, marcas de la
+  nalgada). **El PSD sin censura nunca se sube.** En Windows, los scripts de Python van con `-X utf8`.
+- `igualar_piel.py` compara el color de relleno de la piel con el del sprite base (los «:luz», como el traje, solo la luz).
+- `tools/objetos.py`: los dibujos de los objetos (`docs/sprites de prueba/objetos/` → `public/objetos/`).
+
+**Dónde está cada cosa nueva**
+- Reglas de las peleas: `docs/BIBLIA_RPG.md` (estados, turno libre al salir de dormido/congelado/paralizado, veneno y
+  quemadura desde el turno siguiente, cebos, Multicebo, objetos). Lógica sin dibujo en `src/engine/turnos.ts`.
+- Escena secreta y galería de Rikka: `src/data/emblemas_18.json` (emblemas, manos, caras) y las frases por zona en
+  `src/data/galeria.json` (`quejas.rikka`: `zonas`, `zonas_novela`, `al_pasar`).
+- Ideas anotadas sin hacer (por ejemplo, los dos Boringram): `docs/CRONOGRAMA.md`, «Ideas anotadas».

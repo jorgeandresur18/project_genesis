@@ -3,7 +3,14 @@
 Qué trae cada versión. La que está en curso lleva `-dev` y todavía no se publicó. Cómo se numeran y cómo se publica:
 `docs/METODOLOGIA.md`.
 
-## 1.1.0-dev (en curso, rama `desarrollo`; sin publicar)
+## 1.1.0 (publicada el 5 de noviembre de 2026; etiqueta `v1.1.0`)
+
+**Qué se publica (decisión del autor):** lo del Capítulo 1 y lo general (balance de las peleas, estados, Conoce más,
+galería, guardado seguro, exportar partidas, inglés). **Queda apagado** en lo publicado (`demo_publica` en
+`juego.json`): el Capítulo 2 (y con él sus peleas y la escena secreta de Rikka), el Torneo Genesis, PayFoe y la tienda
+nueva (la tienda vende lo mismo que en la 1.0: vida, ataque, defensa, carga, revivir, veneno para ratas y condón; sin
+cassettes sueltos ni comprar desde el título). Todo eso sigue en el código y se prende al publicar el Capítulo 2.
+
 
 - **Robustez:** guardado seguro (se recupera de un guardado corrupto y nunca rompe el juego), pantalla de error dentro
   del juego, ESLint y CI en GitHub.

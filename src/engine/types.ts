@@ -197,4 +197,13 @@ export interface GameConfig {
   capitulo_maximo?: number;
   /** PayFoe se ve en Boringplace (apagado hasta que haya algo que comprar con él; ver docs/BIBLIA_RPG.md, sección 17). */
   payfoe_activo?: boolean;
+  /** El Torneo Genesis se ve en Extras. */
+  torneo_activo?: boolean;
+  /** Si está, la tienda de Boringplace vende solo estos objetos, sin cassettes sueltos ni comprar desde el título. */
+  tienda_solo?: string[];
+  /**
+   * Lo que cambia en la versión publicada (la que se compila para Vercel): lo de más adelante queda apagado. En el
+   * servidor de desarrollo y en las pruebas no se aplica: ahí está todo prendido. Ver docs/METODOLOGIA.md.
+   */
+  demo_publica?: Partial<Omit<GameConfig, 'demo_publica'>>;
 }

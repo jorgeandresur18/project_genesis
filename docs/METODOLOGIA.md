@@ -70,6 +70,10 @@ para las otras.
 
 1. En `desarrollo`: sacar el `-dev` de la versión (`1.1.0-dev` → `1.1.0`) en `juego.json` y `package.json`, y cerrar
    su entrada en `docs/VERSIONES.md` con la fecha.
+   - Revisar `demo_publica` en `juego.json`: es lo que cambia en lo publicado (lo de más adelante, apagado: hasta qué
+     capítulo se juega, el torneo, PayFoe, qué vende la tienda). Se aplica solo en lo que se compila
+     (`import.meta.env.PROD`); en `npm run dev` y en las pruebas está todo prendido. Para comprobarlo:
+     `npm run build` y `npx vite preview`.
 2. Que la CI esté en verde.
 3. Pasar `desarrollo` a `main` (merge) y subir `main`: ahí Vercel publica la demo.
 4. Etiquetar (`git tag -a v1.1.0`) y subir la etiqueta.

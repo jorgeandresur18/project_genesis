@@ -418,7 +418,8 @@ export function ExtrasPanel({
   const entries = [
     { id: 'gallery' as const, cmd: 'galeria', label: t('extras.galeria'), desc: t('extras.galeria_desc') },
     { id: 'endings' as const, cmd: 'finales', label: t('extras.finales'), desc: t('extras.finales_desc') },
-    { id: 'torneo' as const, cmd: 'torneo', label: t('extras.torneo'), desc: t('extras.torneo_desc') },
+    // El torneo, apagado en la demo publicada (`torneo_activo` en juego.json).
+    ...(config.torneo_activo === false ? [] : [{ id: 'torneo' as const, cmd: 'torneo', label: t('extras.torneo'), desc: t('extras.torneo_desc') }]),
   ];
   return (
     <Panel title={t('extras.titulo')} onClose={onClose}>

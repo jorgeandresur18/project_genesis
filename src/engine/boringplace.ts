@@ -4,7 +4,7 @@
 // - Se abre al visitar la escena de «desbloqueo» (al ganar la pelea del Bastión); antes no hay nadie vendiendo nada.
 // - «Tienda»: los objetos de las peleas, con precio en monedas; lo de la mochila se vende a la mitad.
 import { useStore } from './store';
-import { scenes } from './story';
+import { config, scenes } from './story';
 import { partidaParaComprar } from './tienda';
 import { useLang } from './i18n';
 import dataEs from '../data/boringplace.json';
@@ -88,7 +88,8 @@ export function usePartidaTienda() {
   const saves = useStore((st) => st.saves);
   const slotCompra = useStore((st) => st.slotCompra);
   const slot = partidaParaComprar(saves, slotCompra);
-  const guardada = !game && slot >= 0 ? saves[slot] : null;
+  // Comprar desde el título para una partida guardada: no en la demo publicada (`tienda_solo`).
+  const guardada = !game && slot >= 0 && !config.tienda_solo ? saves[slot] : null;
   const sceneId = game?.sceneId ?? guardada?.sceneId;
   return {
     vars: game?.vars ?? guardada?.vars,
@@ -113,6 +114,7 @@ export function useBoringplace() {
     abierto,
     ajenos: articulos.filter((a) => !a.de_jair),
     deJair: articulos.filter((a) => a.de_jair),
-    tienda: abierto ? data.tienda.filter((x) => OBJETOS_TIENDA.has(x.objeto)) : [],
+    // En la demo publicada, solo lo de la tienda del Capítulo 1 (`tienda_solo` en juego.json).
+    tienda: abierto ? data.tienda.filter((x) => OBJETOS_TIENDA.has(x.objeto) && (!config.tienda_solo || config.tienda_solo.includes(x.objeto))) : [],
   };
 }

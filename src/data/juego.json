@@ -1,9 +1,24 @@
 {
-  "nota": "«musica_bootcamp»: el tema del Bootcamp Genesis (TODO: falta el archivo; mientras sea null, suena el del título). «payfoe_activo»: PayFoe se ve en Boringplace (se prendió con el Torneo Genesis, que paga sus premios en PayFoe). «capitulo_maximo»: hasta qué capítulo se puede jugar; al terminar el anterior, «Continuar» sigue a ese (2: el Capítulo 1 sigue al 2; en la demo 1.0 era 1).",
+  "nota": "«musica_bootcamp»: el tema del Bootcamp Genesis (TODO: falta el archivo; mientras sea null, suena el del título). «payfoe_activo»: PayFoe se ve en Boringplace (se prendió con el Torneo Genesis, que paga sus premios en PayFoe). «capitulo_maximo»: hasta qué capítulo se puede jugar; al terminar el anterior, «Continuar» sigue a ese (2: el Capítulo 1 sigue al 2; en la demo 1.0 era 1). «torneo_activo»: el Torneo Genesis se ve en Extras. «tienda_solo»: si está, la tienda vende solo esos objetos (sin cassettes sueltos ni comprar desde el título). «demo_publica»: lo que cambia en la versión publicada (lo de más adelante, apagado); en el servidor de desarrollo y en las pruebas no se aplica.",
   "inicio": "cap01_001",
   "musica_titulo": "audio/musica/into_the_ciberse.mp3",
   "musica_bootcamp": null,
-  "version": "1.1.0-dev",
+  "version": "1.1.0",
   "payfoe_activo": true,
-  "capitulo_maximo": 2
+  "capitulo_maximo": 2,
+  "torneo_activo": true,
+  "demo_publica": {
+    "capitulo_maximo": 1,
+    "payfoe_activo": false,
+    "torneo_activo": false,
+    "tienda_solo": [
+      "vida",
+      "atq",
+      "def",
+      "carga",
+      "revivir",
+      "veneno_ratas",
+      "condon"
+    ]
+  }
 }
