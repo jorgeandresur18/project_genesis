@@ -41,6 +41,14 @@ Muertes o fracasos tempranos, estilo Shiny Days. No cuentan entre los 12 finales
 | `bad_cap02_vacio` | Valor nulo | 2 | Al bajar la torre, «Saltar al vacío del centro de la torre» | Borrador |
 | `bad_cap02_soborno` | Fondos insuficientes | 2 | Al bajar la torre, «Ofrecerle tus ahorros al guardia» | Borrador |
 | `bad_cap02_muerto` | Zarigüeya | 2 | Al bajar la torre, «Hacerte el muerto» | Borrador |
+| `bad_cap03_rendicion` | Ticket cerrado | 3 | En el calabozo, «Pedir que te lleven ante el Rey» | Borrador |
+| `bad_cap03_calabozo` | Reintento fallido | 3 | Perder la pelea del calabozo | Borrador |
+| `bad_cap03_montacargas` | Sin mantenimiento | 3 | En la escalera, «Tomar el montacargas» | Borrador |
+| `bad_cap03_cuarteles` | Bajas aceptables | 3 | Perder la pelea de los cuarteles | Borrador |
+| `bad_cap03_sombras` | Modo oscuro | 3 | Perder la pelea de la biblioteca oscura | Borrador |
+| `bad_cap03_trofeo` | Garantía anulada | 3 | En el arsenal, «Agarrar el hacha dorada» | Borrador |
+| `bad_cap03_arsenal` | Acceso denegado | 3 | Perder la pelea del arsenal | Borrador |
+| `bad_cap03_rey` | Fin de la sesión | 3 | Perder contra el Rey Malvado (normal o gigante) | Borrador |
 
 Los nombres son propuestas por confirmar. El Capítulo 2 tiene 10: dos en la taberna y el desayuno de la resaca, cuatro en la pelea del almacén del molino (la trampa, Rikka con el traje rojo y el modo berserk) y cuatro en la captura de la torre del Oráculo.
 

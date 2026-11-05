@@ -8,8 +8,7 @@ análisis», que son paralelismos, no influencias confirmadas).
 
 - **Dónde pasa cada cosa:**
   - **Capítulo 3:** el Rey sale **solo en su fase THE KING** (incluida su versión gigante), **con la cara oculta**
-    (la revelación sigue en el Capítulo 6). Termina con el **DELETE sin WHERE**. Cómo se oculta la cara (yelmo,
-    máscara, sombra): `[PENDIENTE]`.
+    (la revelación sigue en el Capítulo 6). Termina con el **DELETE sin WHERE**. La cara se oculta con un **yelmo cerrado** que no se quita, ni en su forma gigante (decidido por el autor el 2026-11-05).
   - **Capítulo 6:** el Rey **se materializa** (y se revela su cara, la de Jair). Desde ahí puede tomar las otras
     formas.
   - **Capítulo 6, rama que lleva al 7A** (el Capítulo 7 son solo los epílogos): **la batalla final del juego son las

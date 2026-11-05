@@ -151,3 +151,12 @@ En la segunda computadora, con un navegador automático sin ventana y sin sonido
 **Confirmado (4 nov, principal, con `tests/e2e/cebos.spec.ts`): poner un cebo con otro en pie no traba la pelea.** Sale «Ya hay un cebo…», el menú sigue respondiendo y la pelea avanza. Los 30 s eran el script, que insistía sin leer el aviso. *Antes decía:* las dos pruebas de cebos de estado (sueño, frío y paralizante; tóxico, confuso y caliente) marcaron 30 segundos sin cambios. Lo más probable es que sea el script, que insistía en poner un cebo cuando ya había uno en pie, pero **no está confirmado**. Probar a mano: poner un cebo, intentar poner otro y seguir la pelea.
 
 **No se llegó a probar en navegador:** el empate, un héroe dormido o congelado, la tienda, la ropa y el premio del torneo.
+
+## 10. El Capítulo 3, en borrador (nuevo, 5 de noviembre)
+
+Se juega con `npm run dev`: al terminar el Capítulo 2, «Continuar» sigue al 3 (o `?escena=cap03_calabozo_01`). Claude ya jugó sus peleas sin ventana (sin errores) y la prueba de rutas recorre todo el capítulo.
+
+- [ ] **Leerlo:** ¿la historia y el tono van bien? Es un borrador para corregir.
+- [ ] **Las peleas** (calabozo, cuarteles, biblioteca, arsenal, el Rey y el Rey gigante): son de relleno y sin balance. El Rey usa el dibujo del Capitán hasta que exista el suyo.
+- [ ] **El momento del DELETE:** la sentencia letra por letra. ¿Tiene el peso que buscas?
+- [ ] **El final «Cancelar»** (cruzar solo) y el despertar.

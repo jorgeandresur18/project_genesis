@@ -25,7 +25,19 @@ lleva y la pantalla del Oráculo queda con la línea «Sesión activa. No cierre
 **Duración:** de 2 h 30 min a 3 h. **No va en este capítulo:** la restauración (8.112 años o 6 meses), el asombro de ellas ante
 el departamento y que Rikka entienda que Jair es el Gran Ingeniero: todo eso es del Capítulo 4.
 
-## Lo que falta decidir
+## Lo que decidió el autor (5 de noviembre de 2026)
+
+Con esto se escribió el borrador (`src/data/chapters/cap03.json`, guion legible en `docs/guion/cap03.md`):
+
+- **Las casi 3 horas se llenan con peleas:** es uno de los capítulos más RPG del juego (hordas de soldados, capitanes, sombras y enemigos nuevos que el autor va a crear). Hoy son peleas de relleno con los enemigos que ya existen.
+- **La espada:** se la quitan y la recuperan en el arsenal del piso 5.
+- **Dónde:** la fortaleza del Rey, piso por piso. **Estructura:** escape del calabozo y ascenso hasta el trono.
+- **El DELETE:** la sentencia se escribe sola. **El olvido:** la presión del momento (el Rey gigante va a aplastar a Cami y a Rikka).
+- **La cara:** un yelmo cerrado. **THE NEXUS:** lo dice el Rey, en la sala del trono.
+- **Bad ends:** perder contra el Rey, perder en los pisos y malas decisiones del escape (8 en el borrador).
+- **Decidido por Claude, siguiendo el canon:** la notificación de la migración llega en la última escena, al despertar; `alt_1` se llama «Cancelar» (nombre provisional).
+
+## Lo que quedaba por decidir (antes de las respuestas)
 
 Ordenado de lo que más frena el guion a lo que menos. La primera es la más importante.
 
