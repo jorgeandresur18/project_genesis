@@ -768,7 +768,7 @@ la probabilidad de ganar a lo sumo unos 3 a 5 puntos). En `npm run dev` se puede
 - **Copia:** su ataque toma **el daño y el efecto del último ataque que le pegó el rival** (estado, veneno,
   parálisis, etc.), pero **la animación es siempre la misma: Lady golpeando**. Así no hay que dibujar a Lady haciendo
   cada ataque.
--  (para construir): qué hace si todavía nadie le pegó (propuesta: un golpe simple y débil); si copia
+- `[PENDIENTE]` (para construir): qué hace si todavía nadie le pegó (propuesta: un golpe simple y débil); si copia
   también los especiales del rival o solo sus ataques; si los ataques raros (ráfagas, balas, cebo, autodestrucción) se
   copian como un golpe con su mismo daño total.
 
