@@ -262,7 +262,7 @@
   "equipo_peleadores": {
     "_nota": "Lo que lleva puesto cada peleador en el torneo (decisión del autor, 2026-11-06: en el torneo pueden llevar objetos y amuletos; armado por Claude según su estilo). Cuenta igual que el equipo de una partida.",
     "jair": [
-      "lentes_lectura"
+      "lentes_programador"
     ],
     "cami": [
       "placa_piloto"

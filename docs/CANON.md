@@ -93,7 +93,7 @@ Género y tono por etapas `[CANON]`: el Capítulo 1 es un isekai adulto (humor n
 - **Jair no es una IA:** es humano. Que su nombre tenga solo las vocales A e I viene del agente de IA del autor, no de la regla de las vocales; el efecto `ai_vowels` no lo incluye. `[CANON]`
 - Ingeniero de software, 30 años. Se graduó de la universidad hace un año. `[CANON]` Trabaja en una empresa de internet. Vida precaria: le deben sueldo, gana poco. Aun así tiene dinero ahorrado y le obsesiona ahorrar; es importante, pero **nunca se dice la cifra**. `[CANON]`
 - Cobarde pero no cruel. Siempre sonrojado, en pánico o cansado; nunca posa como héroe.
-- Aspecto: lentes, camisa negra estampada de manga corta, pantalón beige.
+- Aspecto: lentes (sus **lentes de programador**, de luz azul; en el RPG, su prenda propia: dicho por el autor el 2026-11-06), camisa negra estampada de manga corta, pantalón beige.
 - Quiere los beneficios emocionales de una relación sin aceptar la autonomía de la otra persona; se relaciona con lo que necesita que los demás sean. Usa a Cami como «perro de ataque» para pelear lo que él evita. Comprenderlo no es absolverlo. `[CANON]`
 - Puede entender su problema sin estar dispuesto a cambiar. En el fondo sigue deseando a Ari. `[CANON]`
 

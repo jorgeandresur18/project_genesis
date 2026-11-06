@@ -188,6 +188,10 @@
     "pantuflas_divan": {
       "nombre": "Couch Slippers",
       "texto": "Feet. +50% damage against a confused target. Soft steps, hard questions."
+    },
+    "lentes_programador": {
+      "nombre": "Programmer Glasses",
+      "texto": "Head. +5% crit and +1 DEF. Blue-light filter: bugs show up from a mile away. Your own problems, not so much."
     }
   },
   "ataques": {

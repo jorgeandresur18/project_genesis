@@ -2577,6 +2577,14 @@
       "espacio": "pies",
       "dano_confundido": 0.5,
       "texto": "Pies. +50 % de daño contra el confundido. Pasos suaves, preguntas duras."
+    },
+    "lentes_programador": {
+      "nombre": "Lentes de programador",
+      "tipo": "equipo",
+      "espacio": "cabeza",
+      "critico": 0.05,
+      "def": 1,
+      "texto": "Cabeza. +5 % de crítico y +1 DEF. Filtro de luz azul: los bugs se ven de lejos. Los problemas propios, no."
     }
   },
   "retratos": {
