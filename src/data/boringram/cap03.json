@@ -1,0 +1,43 @@
+{
+  "nota": "Boringram del Capítulo 3. Los recuerdos de Noodle (idea del autor, 2026-11-06): hace 8 años, la fiesta en que Jair reencontró a Nikki. Llega cuando el celular vibra al despertar. Borrador de Claude.",
+  "publicaciones": [
+    {
+      "id": "jair_recuerdo_fiesta",
+      "autor": "jair",
+      "tipo": "foto",
+      "imagen": "PLACEHOLDER:recuerdo_fiesta",
+      "texto": "no me acuerdo de la mitad de la noche. la otra mitad valió la pena",
+      "likes": 12,
+      "comentarios": [
+        {
+          "usuario": "nikki",
+          "texto": "cual mitad 🙄"
+        }
+      ],
+      "desbloqueo": "cap03_despertar_06",
+      "cuando": "-2922 03:40",
+      "_nota": "Recuerdo de Noodle (borrador de Claude, 2026-11-06): la historia de Jair y Nikki contada de a poco."
+    },
+    {
+      "id": "jair_recuerdo_fiesta_hoy",
+      "autor": "jair",
+      "tipo": "texto",
+      "texto": "hace 8 años fui a una fiesta a hablar con una chica y salí con el boringram de otra",
+      "likes": 7,
+      "comentarios": [],
+      "desbloqueo": "cap03_despertar_06",
+      "cuando": "0 09:37"
+    }
+  ],
+  "notificaciones": [
+    {
+      "id": "recuerdo_fiesta",
+      "app": "Noodle Fotos",
+      "icono": "🖼",
+      "titulo": "¿Recuerdas esta noche?",
+      "texto": "Hace 8 años. Esa noche, nikki empezó a seguirte.",
+      "desbloqueo": "cap03_despertar_06",
+      "cuando": "0 09:36"
+    }
+  ]
+}

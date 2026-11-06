@@ -293,6 +293,8 @@ export function useBoringram() {
       let prev = '';
       const mensajes = c.mensajes
         .filter((m) => open(m) && minutos(m.cuando) <= ahora)
+        // Por fecha: los recuerdos de Noodle suman mensajes de hace años (orden estable si coinciden).
+        .sort((x, y) => minutos(x.cuando) - minutos(y.cuando))
         .map((m) => {
           const t = minutos(m.cuando);
           const dia = dayLabel(t);

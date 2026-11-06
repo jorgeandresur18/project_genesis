@@ -207,3 +207,10 @@ primero. Las pruebas automáticas y el simulador ya lo usan (el equilibrio no se
 - [ ] **La galería de Rikka** (`?galeria=todo` › Personajes › «Termas:»): las manos del jugador (no las de Cami), las tres del mismo tamaño; el sprite grande, con las piernas justo en el borde de abajo y un poco de margen arriba; el globo oscuro a la izquierda de la cara.
 - [ ] **Jordy** (antes Jordan) en Boringram del Capítulo 2 y en el torneo: que diga «Jordy» en todos lados.
 
+## 16. Los recuerdos de Noodle en Boringram (nuevo, 6 de noviembre)
+
+Jugar el Capítulo 2 hasta la taberna y el 3 hasta el despertar (o `?escena=cap02_p2_049`, `?escena=cap02_t_bc01` y `?escena=cap03_despertar_01`), y abrir Boringram.
+
+- [ ] Llegan los avisos de **Noodle Fotos** («¿Recuerdas esto?»): en el Otoño (hace 14 años), al cargar el celular en la taberna (hace 13) y al despertar (hace 8, la fiesta).
+- [ ] Se ven las fotos de Nikki de antes (cuadros grises por ahora), los pensamientos de Jair y, en el chat con Nikki, los mensajes de hace 14 años («estas muy guapa en tu foto 😍» / «gracias jejeje») **arriba de todo**, antes de «nunca te vayas de mi vida».
+

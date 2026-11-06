@@ -198,6 +198,57 @@
       "comentarios": [],
       "desbloqueo": "cap02_p2_003",
       "cuando": "0 03:02"
+    },
+    {
+      "id": "nikki_recuerdo_colegio",
+      "autor": "nikki",
+      "tipo": "foto",
+      "imagen": "PLACEHOLDER:recuerdo_nikki_colegio",
+      "texto": "ultimo año y ya extraño esto 🎀",
+      "likes": 96,
+      "te_gusta": true,
+      "comentarios": [],
+      "desbloqueo": "cap02_p2_054",
+      "cuando": "-5114 18:20",
+      "_nota": "Recuerdo de Noodle (borrador de Claude, 2026-11-06): la historia de Jair y Nikki contada de a poco."
+    },
+    {
+      "id": "jair_recuerdo_colegio",
+      "autor": "jair",
+      "tipo": "texto",
+      "texto": "noodle me recordó que hace 14 años le escribí «estás muy guapa» a alguien que no me seguía. noodle, nadie te pidió nada",
+      "likes": 3,
+      "comentarios": [],
+      "desbloqueo": "cap02_p2_054",
+      "cuando": "0 03:48"
+    },
+    {
+      "id": "nikki_recuerdo_amigos",
+      "autor": "nikki",
+      "tipo": "foto",
+      "imagen": "PLACEHOLDER:recuerdo_nikki_amigos",
+      "texto": "con los del colegio de al lado. los mejores 🤪",
+      "likes": 143,
+      "te_gusta": true,
+      "comentarios": [
+        {
+          "usuario": "jair",
+          "texto": "y yo? 😅"
+        }
+      ],
+      "desbloqueo": "cap02_t_bc07",
+      "cuando": "-4749 16:10",
+      "_nota": "Recuerdo de Noodle (borrador de Claude, 2026-11-06): la historia de Jair y Nikki contada de a poco."
+    },
+    {
+      "id": "jair_recuerdo_amigos",
+      "autor": "jair",
+      "tipo": "texto",
+      "texto": "otro recuerdo de noodle: una foto de hace 13 años con mis compañeros del colegio. yo no salgo. nunca salía",
+      "likes": 5,
+      "comentarios": [],
+      "desbloqueo": "cap02_t_bc07",
+      "cuando": "0 05:14"
     }
   ],
   "destacadas": [
@@ -247,6 +298,24 @@
       "texto": "Se detuvieron las apps en segundo plano. Tus sueños también.",
       "desbloqueo": "cap02_p2_010",
       "cuando": "0 03:12"
+    },
+    {
+      "id": "recuerdo_colegio",
+      "app": "Noodle Fotos",
+      "icono": "🖼",
+      "titulo": "¿Recuerdas esto?",
+      "texto": "Hace 14 años, un día como hoy. Toca para verlo.",
+      "desbloqueo": "cap02_p2_054",
+      "cuando": "0 03:47"
+    },
+    {
+      "id": "recuerdo_amigos",
+      "app": "Noodle Fotos",
+      "icono": "🖼",
+      "titulo": "Tus recuerdos",
+      "texto": "Hace 13 años. Alguien sale muy feliz en esta foto (no eres tú).",
+      "desbloqueo": "cap02_t_bc07",
+      "cuando": "0 05:12"
     }
   ],
   "chats": [
@@ -324,6 +393,25 @@
           "texto": "Detectamos un inicio de sesión desde otra dimensión. Si no fuiste tú, ignora este mensaje. Si fuiste tú, también.",
           "desbloqueo": "cap02_p2_010",
           "cuando": "0 03:11"
+        }
+      ]
+    },
+    {
+      "id": "nikki",
+      "perfil": "nikki",
+      "estado": "Activa {hace}",
+      "mensajes": [
+        {
+          "de": "yo",
+          "texto": "estas muy guapa en tu foto 😍",
+          "desbloqueo": "cap02_p2_054",
+          "cuando": "-5114 21:40"
+        },
+        {
+          "de": "ella",
+          "texto": "gracias jejeje",
+          "desbloqueo": "cap02_p2_054",
+          "cuando": "-5113 11:02"
         }
       ]
     }

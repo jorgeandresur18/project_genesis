@@ -45,6 +45,23 @@
     },
     {
       "texto": "Day 3 in another dimension. Did side quests for bread. They paid better than the office."
+    },
+    {
+      "texto": "senior year and I already miss this 🎀"
+    },
+    {
+      "texto": "noodle reminded me that 14 years ago I wrote «you look so pretty» to someone who didn't follow me. noodle, nobody asked you"
+    },
+    {
+      "texto": "with the guys from the school next door. the best 🤪",
+      "comentarios": [
+        {
+          "texto": "what about me? 😅"
+        }
+      ]
+    },
+    {
+      "texto": "another noodle memory: a photo from 13 years ago with my classmates. i'm not in it. i was never in them"
     }
   ],
   "destacadas": [
@@ -71,6 +88,16 @@
       "app": "System",
       "titulo": "Battery saver on",
       "texto": "Background apps stopped. So did your dreams."
+    },
+    {
+      "app": "Noodle Photos",
+      "titulo": "Remember this?",
+      "texto": "14 years ago, on a day like today. Tap to see it."
+    },
+    {
+      "app": "Noodle Photos",
+      "titulo": "Your memories",
+      "texto": "13 years ago. Someone looks very happy in this photo (not you)."
     }
   ],
   "chats": [
@@ -113,6 +140,17 @@
       "mensajes": [
         {
           "texto": "We detected a login from another dimension. If it wasn't you, ignore this message. If it was you, same."
+        }
+      ]
+    },
+    {
+      "estado": "Active {hace}",
+      "mensajes": [
+        {
+          "texto": "you look so pretty in your photo 😍"
+        },
+        {
+          "texto": "thanks hehehe"
         }
       ]
     }

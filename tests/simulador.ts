@@ -103,7 +103,11 @@ function pelea(D: DatosBatalla, listo: boolean, esencias: boolean) {
     const e = [...vivos].sort((a, b) => a.ps - b.ps)[0];
     const eq = equipados(D.personajes[h.clave], h.nivel);
     const esp = especialListo(h) ? eq.especiales[0] : undefined;
-    const ataque = eq.ataques.find((a: Ataque) => a.poder > 0 && !a.confunde && !a.paraliza && !a.cebo && !a.cura && !a.alMismo && quedan(h, a) > 0);
+    // El atento primero duerme, confunde o paraliza al rival que todavía se mueve (Maggie, el beso de Nikki) y le pega
+    // mientras no se mueve; el descuidado solo pega.
+    const quieto = (x: Luchador) => x.dormido > 0 || x.confundido > 0 || x.paralizado > 0 || x.congelado > 0;
+    const deEstado = listo && !quieto(e) ? eq.ataques.find((a: Ataque) => (a.confunde || a.paraliza || a.deja) && !a.cebo && quedan(h, a) > 0) : undefined;
+    const ataque = deEstado ?? eq.ataques.find((a: Ataque) => a.poder > 0 && !a.confunde && !a.paraliza && !a.cebo && !a.cura && !a.alMismo && quedan(h, a) > 0);
     // Sin usos ni especial no puede atacar: esquiva.
     if (!esp && !ataque) {
       h.esquivando = true;
@@ -127,6 +131,15 @@ function pelea(D: DatosBatalla, listo: boolean, esencias: boolean) {
     gastarUso(h, ataque!);
     const blancos = ataque!.objetivo === 'todos' ? vivos : [e];
     cargar(h, CARGA.atacar);
+    // Los que no hacen daño: solo el estado (si no falla).
+    if (ataque!.confunde || ataque!.paraliza) {
+      for (const b of blancos) {
+        if (falla(D, h, b)) continue;
+        if (ataque!.confunde) confundirA(s, b, ataque!.confunde);
+        else paralizarA(s, b);
+      }
+      return;
+    }
     for (const b of blancos) if (!falla(D, h, b)) {
       resolverGolpe(s, D, h, b, ataque!.poder);
       dejarEstado(s, b, ataque!.deja);
