@@ -264,3 +264,4 @@ En el Torneo (`npm run dev`, desde Extras):
   si el golpe copiado dejaba uno).
 - Se ve rosada (la hoja de Jair con filtro): es provisional hasta que tenga arte.
 - También está la **KJPoper** (amarilla): su «Grito de fan» confunde y «Barra coordinada» pega a todos.
+- (Conoce más) La sección nueva «El cine, los actores y los directores», después de la de música latinoamericana, con su subtítulo; y la línea de cine de «Las influencias». En inglés también.
