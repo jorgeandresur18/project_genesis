@@ -146,9 +146,11 @@ describe('batallas por turnos', () => {
     for (const k of Object.keys(vars)) expect(variables, k).toHaveProperty(k);
     // Lo que se gastó queda en 0.
     expect(vars.mochila_def).toBe(0);
-    expect(progresoDeVars({ ...variables, ...vars })).toEqual(p);
+    // Rikka empieza con su flor puesta (decisión del autor, 2026-11-05).
+    const flor = { puestos: { rikka: { amuleto: 'flor_pureza' } } };
+    expect(progresoDeVars({ ...variables, ...vars })).toEqual({ ...p, ...flor });
     // Sin pelear todavía (nivel 0), se usan los niveles del .json y la mochila está vacía.
-    expect(progresoDeVars(variables)).toEqual({ heroes: {}, mochila: {} });
+    expect(progresoDeVars(variables)).toEqual({ heroes: {}, mochila: {}, ...flor });
   });
 
   it('el daño nunca es menor que 1 y los potenciadores lo suben', () => {

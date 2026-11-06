@@ -436,7 +436,8 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
   Excepción: el **gorro de navidad**, que se compra en la tienda.
 - **Jair empieza sin nada equipado.** **Nikki** lleva la chaqueta de cuero y los zapatos de plataforma.
 - De quién es el resto (propuesta): Cami, el traje de combate azul; Rikka, el traje de combate rojo, las prendas de
-  sacerdotisa y la flor de pureza.
+  sacerdotisa y la flor de pureza. **Decidido (2026-11-05):** la flor de pureza es la flor azul del pelo de Rikka, y Rikka **empieza la
+  partida con ella puesta** en el amuleto (`puesto_rikka_amuleto` en `variables.json`); se puede cambiar desde Equipo.
 - **Se compran en Boringplace:** el gorro de navidad, la chaqueta jean y las zapatillas buenas.
 
 **Hecho (2026-11-04):** todos los consumibles de esta tabla (`src/data/rpg/personajes.json`), a la venta en Boringplace (precios propuestos por Claude). Se pueden usar en cualquier pelea. **Decisión del autor:** Hepatol quita solo el veneno; la galleta clásica solo sube vida; arcoíris, brownie y red velvet suben vida y quitan un estado (propuesta de Claude: el veneno, si no la quemadura y, si no, la confusión).
