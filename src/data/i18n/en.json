@@ -461,7 +461,7 @@
   "torneo.bomba": "You won the Doomsday Bomb ({n})! Which save does it go to?",
   "torneo.bomba_sin_partida": "Save a game to receive it; it'll wait for you here.",
   "torneo.mochila": "Tournament bag",
-  "torneo.mochila_vacia": "Empty. Fill it by buying in Boringplace with PayFoe or with what you bring from your games when you finish a chapter. It only works in the tournament.",
+  "torneo.mochila_vacia": "Empty. Nobody hands you anything in the tournament: you fight only with what you bring. Fill it by buying in Boringplace with PayFoe or with what you bring from your games when you finish a chapter.",
   "torneo.restaurar": "Default gear",
   "torneo.otra": "Back to the tournament",
   "extras.torneo": "Genesis Tournament",

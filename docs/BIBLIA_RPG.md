@@ -817,6 +817,6 @@ Detalle completo en `docs/BATALLA_FINAL.md`.
 **La mochila del torneo** (decisiones del autor, 2026-11-06; `src/engine/mochilaTorneo.ts`):
 - **Se llena** comprando en el Boringplace del menú con PayFoe (objetos de pelea y ropa; los permanentes siguen siendo para la partida guardada) y con objetos de las partidas, al terminar cada capítulo: solo los que se gastan, **hasta 5 por capítulo** (anotado fuera de la partida: cargar un guardado viejo no lo reinicia). Lo que pasa al torneo no vuelve.
 - **Tope:** 9 de cada objeto que se gasta y 3 de cada prenda (puestas o no).
-- **En cada ronda** se entra con la mochila fija de siempre (2 aguas y un Elixit) más la del torneo; se gasta primero la fija y lo usado de más se descuenta al terminar, se gane o se pierda.
+- **En cada ronda nadie regala nada** (decisión del autor, 2026-11-06): se pelea solo con lo de la mochila del torneo (antes se regalaban 2 aguas y un Elixit por ronda). Hay que ir preparado. Lo usado se descuenta al terminar, se gane o se pierda. Sin objetos, los factores de los jefes y del Rey se reajustaron (Rey ~78 %, jefes ~42–47 % de promedio; algunos desparejos entre copas, como el Alcaide en Bronce).
 - **El equipo de los peleadores:** vienen equipados de fábrica; el jugador lo deja o lo cambia con ropa de su mochila. **Lo de fábrica que se saca no se lo queda el jugador** (ni prendas ni amuletos); lo comprado vuelve a la mochila. «Equipo de fábrica» lo devuelve como venía.
 

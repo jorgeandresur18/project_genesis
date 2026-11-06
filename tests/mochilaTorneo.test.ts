@@ -39,7 +39,8 @@ describe('el equipo de los peleadores del torneo', () => {
 });
 
 describe('la mochila en las rondas', () => {
-  it('entra con la fija de cada pelea más la del torneo; se gasta primero la fija', () => {
+  it('entra solo con la mochila del torneo (nadie regala nada) y lo usado se descuenta', () => {
+    expect(TORNEO.mochila).toEqual({});
     const m = { mochila: { vida: 2, revivir_plus: 1 } };
     const antes = mochilaDeRonda(m);
     expect(antes.vida).toBe((TORNEO.mochila.vida ?? 0) + 2);

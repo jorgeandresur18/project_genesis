@@ -98,8 +98,8 @@ export function restaurarEquipo(m: EstadoMochila, k: string): EstadoMochila {
 }
 
 /**
- * Después de una ronda: lo que se gastó de la mochila. En cada pelea hay además una mochila fija (`TORNEO.mochila`),
- * que se gasta primero; lo que se usó de más sale de la mochila del torneo.
+ * Después de una ronda: lo que se gastó sale de la mochila del torneo. Nadie regala nada (decisión del autor,
+ * 2026-11-06): se pelea solo con lo que se lleva (`TORNEO.mochila` quedó vacía; si algún día vuelve, se gasta primero).
  */
 export function gastarEnRonda(m: EstadoMochila, antes: Record<string, number>, despues: Record<string, number>): EstadoMochila {
   let mochila = m.mochila ?? {};
@@ -109,7 +109,7 @@ export function gastarEnRonda(m: EstadoMochila, antes: Record<string, number>, d
   }
   return { ...m, mochila };
 }
-/** La mochila con que entra a una ronda: la fija de cada pelea más la del torneo (solo lo que se gasta). */
+/** La mochila con que entra a una ronda: la del torneo (solo lo que se gasta). */
 export function mochilaDeRonda(m: EstadoMochila): Record<string, number> {
   const out: Record<string, number> = { ...TORNEO.mochila };
   for (const [id, n] of Object.entries(m.mochila ?? {})) if (esGastable(FICHAS.objetos[id])) out[id] = (out[id] ?? 0) + n;

@@ -108,10 +108,7 @@
     "por_defensa": 2,
     "huye_a": 0.1
   },
-  "mochila": {
-    "vida": 2,
-    "revivir": 1
-  },
+  "mochila": {},
   "dialogos": {
     "inicio": [
       {
@@ -228,35 +225,35 @@
     "_nota": "Los jefes de la torre como peleadores del jugador (decisión del autor, 2026-11-06): conservan sus ataques y su especial, pero pelean con la vida, el ataque, la defensa y la velocidad (y su crecimiento) del héroe de su estilo, por la fuerza que dice factor. Sin esto eran fichas de jefe, hechas para enfrentar a tres héroes (Comandante ×3 ganaba la final de la Copa Leyenda el 99 %).",
     "reina_bichos": {
       "heroe": "maggie",
-      "factor": 1.1
+      "factor": 1.14
     },
     "jefe_bodega": {
       "heroe": "jair",
-      "factor": 1.23
+      "factor": 1.31
     },
     "sargento": {
       "heroe": "jordy",
-      "factor": 0.88
+      "factor": 0.86
     },
     "chef": {
       "heroe": "rikka",
-      "factor": 1.33
+      "factor": 1.38
     },
     "maestro_herrero": {
       "heroe": "billy",
-      "factor": 1.08
+      "factor": 1.16
     },
     "alcaide": {
       "heroe": "billy",
-      "factor": 1.01
+      "factor": 1.05
     },
     "intendente": {
       "heroe": "cami",
-      "factor": 1.32
+      "factor": 1.4
     },
     "comandante": {
       "heroe": "billy",
-      "factor": 1.08
+      "factor": 1.11
     },
     "nikki": {
       "heroe": "rikka",
@@ -264,7 +261,7 @@
     },
     "rey": {
       "heroe": "billy",
-      "factor": 1.07
+      "factor": 1.15
     }
   },
   "equipo_peleadores": {
@@ -351,5 +348,6 @@
       1.1
     ],
     "nivel_companeros": 0.75
-  }
+  },
+  "_nota_mochila": "En el torneo nadie regala nada (decisión del autor, 2026-11-06): cada peleador usa solo lo de la mochila del torneo (comprado con PayFoe o traído de las partidas). Antes se regalaban 2 aguas y un Elixit por ronda."
 }
