@@ -33,7 +33,29 @@ export function applyChoice(choice: Choice, vars: Vars): Vars {
   for (const [k, n] of Object.entries(choice.add ?? {})) {
     out[k] = ((out[k] as number) ?? 0) + n;
   }
+  if (choice.equipo) cambiarRopa(out, choice.equipo);
   return out;
+}
+
+/** Saca una prenda de la partida: de la mochila y de quien la lleve puesta. */
+function sacarPrenda(vars: Vars, id: string) {
+  vars[`mochila_${id}`] = 0;
+  for (const [k, v] of Object.entries(vars)) if (v === id && /^puesto_.+_(cabeza|traje|pies|amuleto)$/.test(k)) vars[k] = '';
+}
+
+/** Los cambios de ropa de una opción (`equipo`), sobre `vars` (ya copiada). */
+function cambiarRopa(vars: Vars, equipo: NonNullable<Choice['equipo']>) {
+  for (const id of equipo.quita ?? []) sacarPrenda(vars, id);
+  for (const [heroe, espacios] of Object.entries(equipo.viste ?? {})) {
+    for (const [espacio, id] of Object.entries(espacios)) {
+      const k = `puesto_${heroe}_${espacio}`;
+      const antes = vars[k];
+      if (antes === id) continue;
+      sacarPrenda(vars, id);
+      if (typeof antes === 'string' && antes) vars[`mochila_${antes}`] = ((vars[`mochila_${antes}`] as number) || 0) + 1;
+      vars[k] = id;
+    }
+  }
 }
 
 export function visibleChoices(scene: Scene, vars: Vars): Choice[] {

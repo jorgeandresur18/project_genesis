@@ -9747,15 +9747,45 @@
           "next": "cap02_p2_029b01",
           "add": {
             "confianza_rikka": 1
+          },
+          "equipo": {
+            "quita": [
+              "prendas_sacerdotisa"
+            ],
+            "viste": {
+              "rikka": {
+                "traje": "traje_rojo"
+              }
+            }
           }
         },
         {
           "text": "Hacerle un comentario atrevido",
-          "next": "cap02_p2_029a01"
+          "next": "cap02_p2_029a01",
+          "equipo": {
+            "quita": [
+              "prendas_sacerdotisa"
+            ],
+            "viste": {
+              "rikka": {
+                "traje": "traje_rojo"
+              }
+            }
+          }
         },
         {
           "text": "Quedarte callado",
-          "next": "cap02_p2_029c01"
+          "next": "cap02_p2_029c01",
+          "equipo": {
+            "quita": [
+              "prendas_sacerdotisa"
+            ],
+            "viste": {
+              "rikka": {
+                "traje": "traje_rojo"
+              }
+            }
+          }
         }
       ],
       "conditions": [],
@@ -9797,15 +9827,45 @@
           "next": "cap02_p2_029b01",
           "add": {
             "confianza_rikka": 1
+          },
+          "equipo": {
+            "quita": [
+              "prendas_sacerdotisa"
+            ],
+            "viste": {
+              "rikka": {
+                "traje": "traje_rojo"
+              }
+            }
           }
         },
         {
           "text": "Hacerle un comentario atrevido",
-          "next": "cap02_p2_029a01"
+          "next": "cap02_p2_029a01",
+          "equipo": {
+            "quita": [
+              "prendas_sacerdotisa"
+            ],
+            "viste": {
+              "rikka": {
+                "traje": "traje_rojo"
+              }
+            }
+          }
         },
         {
           "text": "Quedarte callado",
-          "next": "cap02_p2_029c01"
+          "next": "cap02_p2_029c01",
+          "equipo": {
+            "quita": [
+              "prendas_sacerdotisa"
+            ],
+            "viste": {
+              "rikka": {
+                "traje": "traje_rojo"
+              }
+            }
+          }
         }
       ],
       "conditions": [],

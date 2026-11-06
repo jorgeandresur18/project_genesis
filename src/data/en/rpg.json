@@ -35,6 +35,7 @@
     "galleta_red_velvet": { "nombre": "Red Velvet Cookie", "texto": "{quien} eats a red velvet cookie: +{n} HP and one status goes away." },
     "caramelo_dulce": { "nombre": "Sweet Candy", "texto": "{quien} eats the sweet candy. Raises {n} level." },
     "flor_pureza": { "nombre": "Flower of Purity", "texto": "Charm. Can't be confused." },
+    "placa_piloto": { "nombre": "Pilot's Tag", "texto": "Charm. +5% crit. A pilot's eye: knows where to hit." },
     "gorro_navidad": { "nombre": "Christmas Hat", "texto": "Head. +5% critical chance." },
     "chaqueta_cuero": { "nombre": "Leather Jacket", "texto": "Outfit. +4 DEF." },
     "chaqueta_jean": { "nombre": "Denim Jacket", "texto": "Outfit. +2 DEF, +2 SPD." },

@@ -42,6 +42,12 @@ export interface Choice {
   set?: Vars;
   /** Suma a variables numéricas (p. ej. confianza). */
   add?: Record<string, number>;
+  /**
+   * Cambios de ropa que pide la historia (docs/BIBLIA_RPG.md, sección 15): `quita` saca esas prendas de la partida (de la
+   * mochila y de quien las lleve; p. ej. Nail roba las prendas de Rikka) y `viste` le pone a un héroe una prenda en un
+   * espacio (lo que tenía ahí vuelve a la mochila).
+   */
+  equipo?: { quita?: string[]; viste?: Record<string, Record<string, string>> };
   /** Opción tachada: se ve, pero no se puede elegir (efecto locked_choice). */
   locked?: boolean;
   /** Si no se cumplen, la opción no se muestra. */

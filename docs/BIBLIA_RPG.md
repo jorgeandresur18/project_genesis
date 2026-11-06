@@ -438,9 +438,10 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
 - De quién es el resto (propuesta): Cami, el traje de combate azul; Rikka, el traje de combate rojo, las prendas de
   sacerdotisa y la flor de pureza. **Decidido (2026-11-05):** la flor de pureza es la flor azul del pelo de Rikka, y Rikka **empieza la
   partida con ella puesta** en el amuleto (`puesto_rikka_amuleto` en `variables.json`); se puede cambiar desde Equipo.
-  También empiezan puestas las **prendas de sacerdotisa** de Rikka y el **traje de combate azul** de Cami. **Jair empieza
-  sin nada** («el único desnudo es Jair»). Por decidir: el amuleto de Cami y qué pasa con las prendas cuando Nail se las
-  roba en las termas (Capítulo 2).
+  También empiezan puestas las **prendas de sacerdotisa** de Rikka y el **traje de combate azul** y la **placa de piloto** (amuleto,
+  +5 % de crítico) de Cami. **Jair empieza sin nada** («el único desnudo es Jair»). **En las termas (Capítulo 2)**, cuando
+  Nail roba las prendas, desaparecen de la partida (de la mochila o de quien las lleve) y Rikka queda con el **traje de
+  combate rojo** puesto (lo que tuviera en el traje vuelve a la mochila): lo hace la decisión de esa escena con `equipo`.
 - **Se compran en Boringplace:** el gorro de navidad, la chaqueta jean y las zapatillas buenas.
 
 **Hecho (2026-11-04):** todos los consumibles de esta tabla (`src/data/rpg/personajes.json`), a la venta en Boringplace (precios propuestos por Claude). Se pueden usar en cualquier pelea. **Decisión del autor:** Hepatol quita solo el veneno; la galleta clásica solo sube vida; arcoíris, brownie y red velvet suben vida y quitan un estado (propuesta de Claude: el veneno, si no la quemadura y, si no, la confusión).

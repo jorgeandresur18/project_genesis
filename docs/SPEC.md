@@ -82,6 +82,7 @@ Campos: `scene_id` único; `background` o `video_fondo` (Shining Days como refer
 - **`conditions` de opción:** si no se cumplen, la opción no se muestra.
 - **`next`:** un `scene_id`, `null`, o una lista de ramas `[{ "conditions": [...], "to": "id" }, { "to": "id_por_defecto" }]`; gana la primera que se cumple.
 - **`set`** asigna valores; **`add`** suma a variables numéricas (`{ "confianza_rikka": 1 }`).
+- **`equipo`** (en una opción): cambios de ropa que pide la historia. `quita` saca prendas de la partida (de la mochila y de quien las lleve) y `viste` pone una prenda (`{ "rikka": { "traje": "traje_rojo" } }`; lo que había vuelve a la mochila). Hoy: el robo de Nail en las termas (`engine/logic.ts`, `applyChoice`).
 - **`ending`:** ID de final del registro. La escena cierra la partida y no puede tener `next` ni `choices`.
 - Una escena usa `choices` o `next`, nunca ambos.
 - Archivo por pieza o capítulo: `{ "ruta", "chapter", "title", "scenes": [...] }`.

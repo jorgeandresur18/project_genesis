@@ -2017,6 +2017,13 @@
       "texto": "Amuleto. No se puede confundir.",
       "icono": "objetos/flor_pureza"
     },
+    "placa_piloto": {
+      "nombre": "Placa de piloto",
+      "tipo": "equipo",
+      "espacio": "amuleto",
+      "critico": 0.05,
+      "texto": "Amuleto. +5 % de crítico. Ojo de piloto: no falla dónde pega."
+    },
     "gorro_navidad": {
       "nombre": "Gorro de navidad",
       "tipo": "equipo",

@@ -1,3 +1,4 @@
+import { applyChoice } from '../src/engine/logic';
 // El equipo (la ropa: docs/BIBLIA_RPG.md, secciones 14 y 15) y los permanentes fuera de las peleas (src/engine/equipo.ts).
 import { describe, expect, it } from 'vitest';
 import { eligeAtaque, progresoDeVars, tickVeneno, usableEnPelea, type Ataque, type DatosBatalla } from '../src/engine/batalla';
@@ -9,9 +10,9 @@ const O = FICHAS.objetos;
 const D = BATALLAS.bastion as DatosBatalla;
 
 describe('el equipo de la biblia', () => {
-  it('las 17 prendas (9 de la biblia y 8 de la propuesta del 2026-11-05) tienen su espacio, se equipan y no se usan en la pelea', () => {
+  it('las 18 prendas (9 de la biblia, 8 de la propuesta del 2026-11-05 y la placa de piloto de Cami) tienen su espacio, se equipan y no se usan en la pelea', () => {
     const ropa = Object.values(O).filter((o) => o.tipo === 'equipo');
-    expect(ropa).toHaveLength(17);
+    expect(ropa).toHaveLength(18);
     for (const o of ropa) {
       expect(esEquipo(o), o.nombre).toBe(true);
       expect(usableEnPelea(o), o.nombre).toBe(false);
@@ -124,8 +125,34 @@ describe('Rikka empieza con su flor (decisión del autor, 2026-11-05)', () => {
     expect(variables.puesto_rikka_amuleto).toBe('flor_pureza');
     expect(variables.puesto_rikka_traje).toBe('prendas_sacerdotisa');
     expect(variables.puesto_cami_traje).toBe('traje_azul');
+    expect(variables.puesto_cami_amuleto).toBe('placa_piloto');
+    expect(bonos(['placa_piloto'], O).critico).toBeCloseTo(0.05);
     expect(quienLleva(variables as never, 'flor_pureza')).toEqual({ heroe: 'rikka', espacio: 'amuleto' });
     const p = progresoDeVars(variables as never);
     expect(bonos(Object.values(p.puestos?.rikka ?? {}), O).sinConfusion).toBe(true);
+  });
+});
+
+describe('Nail roba las prendas en las termas (decisión del autor, 2026-11-05)', () => {
+  const robo = { text: '', next: 'x', equipo: { quita: ['prendas_sacerdotisa'], viste: { rikka: { traje: 'traje_rojo' } } } };
+  it('Rikka queda con el traje rojo puesto y las prendas desaparecen', () => {
+    const v = applyChoice(robo, { puesto_rikka_traje: 'prendas_sacerdotisa', mochila_prendas_sacerdotisa: 0, mochila_traje_rojo: 0 });
+    expect(v.puesto_rikka_traje).toBe('traje_rojo');
+    expect(v.mochila_prendas_sacerdotisa).toBe(0);
+    expect(quienLleva(v, 'prendas_sacerdotisa')).toBeNull();
+  });
+  it('si las llevaba otro o tenía otra cosa, igual se las roban y lo de Rikka vuelve a la mochila', () => {
+    const v = applyChoice(robo, { puesto_cami_traje: 'prendas_sacerdotisa', puesto_rikka_traje: 'chaqueta_jean', mochila_chaqueta_jean: 0 });
+    expect(v.puesto_cami_traje).toBe('');
+    expect(v.puesto_rikka_traje).toBe('traje_rojo');
+    expect(v.mochila_chaqueta_jean).toBe(1);
+  });
+  it('las tres opciones de la escena del traje (y su versión perturbada) hacen el cambio', async () => {
+    const cap = (await import('../src/data/chapters/cap02.json')).default as { scenes: { scene_id: string; choices: { equipo?: unknown }[] }[] };
+    for (const id of ['cap02_p2_029', 'cap02_p2_029_p']) {
+      const e = cap.scenes.find((x) => x.scene_id === id)!;
+      expect(e.choices.length).toBe(3);
+      for (const c of e.choices) expect(c.equipo).toEqual(robo.equipo);
+    }
   });
 });
