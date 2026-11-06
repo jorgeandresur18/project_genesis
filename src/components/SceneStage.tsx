@@ -682,6 +682,7 @@ export function CapasFondo({
   contener = false,
   vapor = false,
   fijos = false,
+  soloGlobo = false,
   onToque,
   dice,
 }: {
@@ -695,12 +696,16 @@ export function CapasFondo({
   onToque?: (zona: Zona) => void;
   /** Lo que dice (la queja de la galería), pegado a su cara. */
   dice?: { texto: string; n: number } | null;
+  /** Solo el globo, sin los emblemas: para ponerlo encima del vapor del visor de la galería. */
+  soloGlobo?: boolean;
 }) {
   return (
     <div className={`fondo-capas ${contener ? 'fondo-capas-contener' : ''}`}>
-      <div className="fondo-capas-caja" style={{ '--r': capa.proporcion } as CSSProperties}>
-        <EmblemasTocables lista={capa.emblemas} clave={src} src={src} proporcion={capa.proporcion} onToque={onToque} fijos={fijos} manos={capa.manos} />
-      </div>
+      {!soloGlobo && (
+        <div className="fondo-capas-caja" style={{ '--r': capa.proporcion } as CSSProperties}>
+          <EmblemasTocables lista={capa.emblemas} clave={src} src={src} proporcion={capa.proporcion} onToque={onToque} fijos={fijos} manos={capa.manos} />
+        </div>
+      )}
       {/* El globo, en una caja igual pero sin recortar (la de las manos recorta lo que se sale de la imagen). */}
       {dice && (
         <div className="fondo-capas-caja fondo-capas-globo" style={{ '--r': capa.proporcion } as CSSProperties}>

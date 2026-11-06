@@ -645,11 +645,17 @@ function Characters() {
             const r = flat[i].rpg;
             return r ? <AccionesRpg r={r} accion={accion} onAccion={setAccion} /> : null;
           }}
-          capas={(i, _vapor, alTocar, dice) => {
+          capas={(i, _vapor, alTocar) => {
             const capa = capaDeSprite(`${flat[i].id}/${flat[i].expr}`);
             const src = assetUrl(`sprites/${flat[i].id}/${flat[i].expr}.webp`);
-            // El vapor de los sprites va aparte (`vaporDe`), fijo: si no, con el zoom y el temblor del grito se le ve el borde.
-            return capa && <CapasFondo capa={capa} src={src} contener onToque={alTocar} dice={dice} />;
+            // El vapor (`vaporDe`) y el globo (`globo`) van aparte: el vapor, fijo (si no, con el zoom y el temblor del grito
+            // se le ve el borde); el globo, encima del vapor.
+            return capa && <CapasFondo capa={capa} src={src} contener onToque={alTocar} />;
+          }}
+          globo={(i, dice) => {
+            const capa = capaDeSprite(`${flat[i].id}/${flat[i].expr}`);
+            const src = assetUrl(`sprites/${flat[i].id}/${flat[i].expr}.webp`);
+            return capa && dice && <CapasFondo capa={capa} src={src} contener soloGlobo dice={dice} />;
           }}
           vaporDe={(i) => capaDeSprite(`${flat[i].id}/${flat[i].expr}`)?.vapor ?? null}
           src={(i) => assetUrl(`sprites/${flat[i].id}/${flat[i].expr}.webp`)}
@@ -699,6 +705,7 @@ function Viewer({
   siguiente,
   grito,
   vaporDe,
+  globo,
   onGrito,
 }: {
   src: (i: number) => string;
@@ -732,6 +739,8 @@ function Viewer({
    * igual cuando empieza), o null si no tiene.
    */
   vaporDe?: (i: number) => Vapor | null;
+  /** Lo que dice (el globo pegado a su cara), en una capa aparte encima del vapor. */
+  globo?: (i: number, dice: { texto: string; n: number } | null) => ReactNode;
   /** Después del grito: vuelve a la pantalla de inicio. */
   onGrito?: () => void;
 }) {
@@ -838,8 +847,6 @@ function Viewer({
         </button>
       )}
       <div className="viewer-main">
-        {/* El escenario y, encima, el vapor fijo (en una caja propia para que el vapor cubra justo el escenario). */}
-        <div className="viewer-stage-caja">
         <div
           className={`viewer-stage ${propio ? 'viewer-volumen' : sprite ? 'viewer-profundidad' : ''} ${gritando ? 'viewer-grito' : ''}`}
           style={propio ? ({ '--gx': giro.x, '--gy': giro.y } as CSSProperties) : undefined}
@@ -854,13 +861,11 @@ function Viewer({
             </span>
           )}
           {gritando ? (
-            <>
+            // Lo que hace zoom y tiembla: solo la imagen y su censura (el vapor y el texto, no).
+            <div className="viewer-zoom">
               <img key="grito" src={gritando.src} alt="" draggable={false} />
               {gritando.capas}
-              <span className="emblema-reaccion emblema-grito viewer-grito-texto" role="status">
-                {t('galeria.grito_rikka')}
-              </span>
-            </>
+            </div>
           ) : null}
           {gritando ? null : propio ?? (
             <img
@@ -872,13 +877,20 @@ function Viewer({
             />
           )}
           {!propio && !gritando && capasActuales}
-        </div>
-        {/* El vapor del sprite secreto: fijo encima del escenario (fuera de lo que hace zoom y tiembla en el grito). */}
-        {vapor && !propio && vaporDe?.(index) && (
-          <div className="viewer-vapor" aria-hidden>
-            <VaporTermal nivel={vaporDe(index)!} />
-          </div>
-        )}
+          {/* El vapor del sprite secreto: fijo (no hace zoom ni tiembla en el grito) y llena todo el recuadro del visor,
+              hasta sus líneas. Encima de la imagen y debajo de los globos, el menú, la ficha y el botón del menú. */}
+          {vapor && !propio && vaporDe?.(index) && (
+            <div className="viewer-vapor" aria-hidden>
+              <VaporTermal nivel={vaporDe(index)!} />
+            </div>
+          )}
+          {/* Lo que dice, encima del vapor. */}
+          {!propio && !gritando && globo?.(index, queja)}
+          {gritando && (
+            <span className="emblema-reaccion emblema-grito viewer-grito-texto" role="status">
+              {t('galeria.grito_rikka')}
+            </span>
+          )}
         </div>
         {/* La luz blanca cubre toda la pantalla desde el principio (pedido del autor): va directo al body, porque dentro
             de la ventana (que tiene transform) «fixed» se queda en la ventana. */}

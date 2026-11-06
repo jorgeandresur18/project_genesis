@@ -1230,11 +1230,10 @@ img.sprite.sprite-swap { animation: sprite-swap-in 180ms ease-out; }
 /* La imagen y la ficha van lado a lado: la imagen se achica para caber, nunca se corta. */
 .viewer-main { flex: 1; min-height: 0; display: flex; gap: 1rem; }
 .viewer-stage { flex: 1; min-width: 0; min-height: 0; display: flex; }
-/* La caja del escenario y su vapor fijo (los sprites secretos): el vapor no hace zoom ni tiembla con el grito. Va
-   encima del sprite pero debajo de la barra del menú (2), la ficha (3) y el botón del menú (4). */
-.viewer-stage-caja { position: relative; flex: 1; min-width: 0; min-height: 0; display: flex; }
-.viewer-vapor { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
-.gallery-viewer-sprite .viewer-vapor { bottom: -4.6rem; }
+/* El vapor fijo de los sprites secretos: dentro del escenario, pero llena todo el recuadro del visor (el escenario
+   está a 1rem de sus líneas arriba y a los costados; abajo ya llega). No hace zoom ni tiembla con el grito. Encima del
+   sprite y debajo de los globos, la barra del menú (2), la ficha (3) y el botón del menú (4). */
+.viewer-vapor { position: absolute; inset: -1rem -1rem 0; pointer-events: none; overflow: hidden; border-radius: 0.6rem; }
 .viewer-stage img { flex: 1; min-width: 0; min-height: 0; width: 100%; height: 100%; object-fit: contain; }
 .gallery-viewer-bar {
   position: absolute;
@@ -3669,8 +3668,9 @@ button.cassette:hover .cassette-imagen { transform: translateY(-2px) rotate(-3de
 
 /* El grito en la galería (tocar demasiado a Rikka): lento y dramático. Primero un silencio quieto, después tiembla cada
    vez más, la cámara se acerca despacio a su cara, el grito crece y una luz blanca lo tapa antes de volver al inicio. */
-.viewer-grito { overflow: hidden; animation: grito-tiembla-suave 0.1s linear 0.5s 12, grito-tiembla 0.07s linear 1.7s 30; }
-.viewer-grito > img, .viewer-grito > .fondo-capas { transform-origin: 50% 22%; animation: grito-zoom-lento 3.6s cubic-bezier(0.55, 0, 0.75, 0.2) forwards; }
+/* El grito: tiembla y hace zoom solo la imagen con su censura (`.viewer-zoom`, recortada al escenario); el vapor y el texto no. */
+.viewer-zoom { position: absolute; inset: 0; display: flex; overflow: hidden; animation: grito-tiembla-suave 0.1s linear 0.5s 12, grito-tiembla 0.07s linear 1.7s 30; }
+.viewer-zoom > img, .viewer-zoom > .fondo-capas { transform-origin: 50% 22%; animation: grito-zoom-lento 3.6s cubic-bezier(0.55, 0, 0.75, 0.2) forwards; }
 .viewer-grito .viewer-grito-texto.emblema-reaccion { left: 0; right: 0; margin-inline: auto; width: max-content; top: 4%; translate: none; z-index: 6; transform-origin: 50% 50%; animation: grito-texto 3.6s ease-out both, grito-tiembla 0.09s linear 1.2s infinite; }
 /* Al final, toda la pantalla blanca (por encima de todo) y de vuelta al menú inicial. */
 .viewer-grito-blanco { position: fixed; inset: 0; z-index: 9999; background: #fff; pointer-events: all; animation: grito-blanco-lento 3.9s ease-in forwards; }
@@ -3678,7 +3678,7 @@ button.cassette:hover .cassette-imagen { transform: translateY(-2px) rotate(-3de
 @keyframes grito-zoom-lento { 0%, 12% { scale: 1; } 100% { scale: 2.8; } }
 @keyframes grito-texto { 0% { opacity: 0; scale: 0.4; } 10% { opacity: 1; scale: 1.15; } 18% { scale: 1; } 100% { scale: 1.6; } }
 @keyframes grito-blanco-lento { 0%, 55% { opacity: 0; } 88%, 100% { opacity: 1; } }
-@media (prefers-reduced-motion: reduce) { .viewer-grito, .viewer-grito > img, .viewer-grito > .fondo-capas, .viewer-grito-texto { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .viewer-zoom, .viewer-zoom > img, .viewer-zoom > .fondo-capas, .viewer-grito-texto { animation: none; } }
 
 /* Después del grito: la pantalla blanca se disuelve sobre el título, que vuelve a empezar. */
 .grito-al-titulo { position: fixed; inset: 0; z-index: 9999; background: #fff; pointer-events: none; animation: grito-al-titulo 1.8s ease-out forwards; }
