@@ -8,6 +8,19 @@ Qué trae cada versión. La que está en curso lleva `-dev` y todavía no se pub
 - **El Rey Malvado y sus especiales:** Espada de las estaciones (una estación al azar: veneno, quemadura, parálisis o congelado) y Tajada del abismo, con el estado nuevo **desaparecido**.
 - **Capítulo 3 en borrador** («Sin DÓNDE ir»): la fortaleza del Rey piso por piso, 5 peleas de relleno, el DELETE sin WHERE, el final «Cancelar» y el despertar con Cami y Rikka. Se juega en desarrollo después del Capítulo 2; apagado en lo publicado.
 
+## 1.1.4 (publicada el 6 de noviembre de 2026; etiqueta `v1.1.4`)
+
+**Sigue apagado en lo publicado** (`demo_publica`): los Capítulos 2 y 3, el Torneo, PayFoe y la tienda nueva.
+
+- **La velocidad decide el orden del turno:** el más rápido actúa primero (héroes y enemigos mezclados); esquivar, objetos, protegerse y cebos siempre primero. Una barra arriba muestra el orden con retratos. En el bar, Nikki está ebria y es más lenta.
+- **La esencia:** cada personaje de las peleas tiene un pequeño plus oculto, distinto en cada partida.
+- **Ropa de inicio:** Rikka empieza con sus prendas de sacerdotisa y la flor de pureza; Cami, con el traje de combate azul y la placa de piloto (+5 % de crítico). El tobillo de Cami pesa solo en el Capítulo 1.
+- **Las peleas en inglés:** con el juego en inglés, los enemigos, sus ataques, los diálogos y las charlas también salen en inglés (lo equipado no se pierde al cambiar de idioma).
+- **La demo muestra solo lo publicado:** la galería, los finales, el porcentaje, el mapa y Boringram, solo del Capítulo 1.
+- **El menú principal** ya no se puede tocar antes de aparecer; **cajas de texto y globos** más elegantes.
+- **Conoce más:** los enlaces de Spotify de Lolabúm («16 Phantasmas», «Tócame», «Novedades ecuatorianas»).
+- **Boringram:** la IA se llama siempre Cloudy (sin el apodo).
+
 ## 1.1.3 (publicada el 5 de noviembre de 2026; etiqueta `v1.1.3`)
 
 - **Conoce más, la nota personal:** una advertencia al principio, subtítulos y la parte de las relaciones del autor.
@@ -21,7 +34,6 @@ Qué trae cada versión. La que está en curso lleva `-dev` y todavía no se pub
 **Sigue apagado en lo publicado** (`demo_publica`): el Capítulo 2, el Torneo, PayFoe y la tienda nueva, con lo nuevo de ella (como el CeBiDol).
 
 - **Galería, Rikka:** si la tocas demasiado (30 veces en las termas, de frente, de espalda o vistiéndose), grita sin darse vuelta: tiembla todo, zoom lento a su cara, luz blanca y de vuelta a la pantalla de inicio.
-- **La velocidad decide el orden del turno:** el más rápido actúa primero (héroes y enemigos mezclados); esquivar, objetos, protegerse y cebos siempre primero. En el bar, Nikki está ebria y es más lenta.
 - **Advertencia de contenido:** «Alcohol y drogas» en un solo tema.
 - **Lo publicado, más cerrado:** `?galeria=todo` solo funciona en desarrollo, y `/all` pide un PIN del autor; con él, prende todo, para probar desde el celular o cualquier PC.
 - **Después del grito de Rikka,** un degradado de blanco al título, que vuelve a empezar.
