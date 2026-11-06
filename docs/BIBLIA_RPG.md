@@ -761,16 +761,22 @@ la pelea. En el torneo, una semilla nueva al empezar cada torneo, que dura hasta
 **Pruebas:** el simulador la sortea igual que el juego, para medir el equilibrio con esencias reales (la meta: que mueva
 la probabilidad de ganar a lo sumo unos 3 a 5 puntos). En `npm run dev` se puede ver, para probarla; en lo publicado, no.
 
-## 22. Lady y la copia (decidido por el autor el 2026-11-06; por construir)
+## 22. Lady y la copia (decidido por el autor el 2026-11-06; **hecha** el mismo día)
 
 - **Lady pelea** en el Capítulo 4, en la convención de KJ-pop, contra las hordas de **KJPopers** (las fans). Después se
-  desbloquea para el torneo, como los demás.
-- **Copia:** su ataque toma **el daño y el efecto del último ataque que le pegó el rival** (estado, veneno,
-  parálisis, etc.), pero **la animación es siempre la misma: Lady golpeando**. Así no hay que dibujar a Lady haciendo
-  cada ataque.
-- `[PENDIENTE]` (para construir): qué hace si todavía nadie le pegó (propuesta: un golpe simple y débil); si copia
-  también los especiales del rival o solo sus ataques; si los ataques raros (ráfagas, balas, cebo, autodestrucción) se
-  copian como un golpe con su mismo daño total.
+  desbloquea para el torneo, como los demás (hoy, en desarrollo; su pelea de la historia todavía no existe).
+- **Copia** («Copia de fan»): toma **el daño y el efecto del último ataque que le pegó el rival** (estado, veneno,
+  parálisis, confusión, a uno o a todos), pero **la animación es siempre la misma: Lady golpeando**. El nombre, el texto
+  y los usos son los suyos.
+- **Si todavía nadie le pegó:** es un golpe simple y débil (poder 6).
+- **Solo ataques, no especiales.**
+- **Lo raro se copia como un golpe con el mismo daño:** la ráfaga de balas, con las balas de en medio juntas; la de la
+  sombra, como una sola. Un cebo, una cura, algo sobre sí mismo o una autodestrucción no se copian (golpe simple).
+- Si Lady es rival en el torneo, también copia lo último que le pegaron los héroes.
+- Código: `ataqueCopiado` en `src/engine/batalla.ts`; lo último que le pegaron, en `Luchador.copiado`. Pruebas:
+  `tests/lady.test.ts`. Su ficha (con la hoja de Jair y un filtro rosado, hasta que haya arte) en
+  `src/data/rpg/personajes.json`: «Copia de fan», «Barra luminosa», «Canto de estadio» (a todos, para las hordas) y el
+  especial «Fancam». Textos y números: borrador de Claude.
 
 ## 16. Pendientes e ideas
 

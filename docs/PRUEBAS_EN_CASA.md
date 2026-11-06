@@ -256,3 +256,10 @@ En el Torneo (`npm run dev`, desde Extras):
 - Con el juego en inglés, lo mismo (The Owl).
 - (Capítulo 2) En el celular, cerca de las 4:48, la notificación de Glitch: «milka está en vivo». Se lee completa.
 - (Capítulo 3, al despertar) En Boringram, la publicación de Ari sobre la convención y su perfil `ari.cosplay` (foto en placeholder).
+
+## 22. Lady en el torneo (nuevo, 6 de noviembre; en `npm run dev`)
+
+- Elegir a Lady. Antes de que le peguen, «Copia de fan» dice que es un golpe simple. Después de recibir un golpe, el
+  menú dice qué va a copiar y con cuánto poder; al usarlo, Lady golpea con su animación y hace ese daño (y el estado,
+  si el golpe copiado dejaba uno).
+- Se ve rosada (la hoja de Jair con filtro): es provisional hasta que tenga arte.

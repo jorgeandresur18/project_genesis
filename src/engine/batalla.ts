@@ -21,6 +21,12 @@ export interface Deja {
   prob: number;
 }
 export interface Ataque {
+  /**
+   * Copia (Lady; decisión del autor, 2026-11-06): toma el daño y el efecto del último ataque que le pegó el rival, con
+   * su misma animación de golpe. Si todavía nadie le pegó, es este mismo ataque (un golpe simple y débil). Ver
+   * `ataqueCopiado`.
+   */
+  copia?: boolean;
   /** Si pega, a veces deja un estado (ver `Deja`). */
   deja?: Deja;
   /** No hace daño: paraliza al blanco tantos turnos (la parálisis de pesadilla de la sombra). */
@@ -503,6 +509,8 @@ export interface Luchador {
   protegido: number;
   /** Cuántas veces usó cada ataque con usos limitados en esta pelea (por nombre). */
   usados?: Record<string, number>;
+  /** El último ataque (no especial) que le pegó un rival: lo que copia Lady (ver `ataqueCopiado`). */
+  copiado?: Ataque;
   /**
    * El turno libre: acaba de salir de una parálisis, del sueño o del hielo, y este turno no se le puede poner ninguno
    * de los tres (decisión del autor, 2026-11-04; antes valía solo para la parálisis). El nombre quedó de entonces.
@@ -983,5 +991,30 @@ export function varsDeProgreso(p: Progreso, objetos: string[]): Vars {
     // También los que se gastaron (quedan en 0).
     ...Object.fromEntries(objetos.map((k) => [`mochila_${k}`, p.mochila[k] ?? 0])),
     ...(p.monedas !== undefined ? { monedas: p.monedas } : {}),
+  };
+}
+
+/**
+ * Lo que hace la copia de Lady (docs/BIBLIA_RPG.md, sección 22): el daño y el efecto del último ataque que le pegó el
+ * rival, pero con su nombre, su texto y su animación. Solo ataques, no especiales. Lo que no es un golpe simple se copia
+ * como un golpe con el mismo daño: la ráfaga de balas, con las balas de en medio juntas; la de la sombra, como una sola.
+ * Si lo último no se puede copiar (un cebo, una cura, algo sobre sí mismo) o nadie le pegó todavía, es su golpe simple.
+ */
+export function ataqueCopiado(base: Ataque, copiado?: Ataque): Ataque {
+  if (!base.copia || !copiado || copiado.cebo || copiado.cura || copiado.alMismo || copiado.autodestruccion || copiado.copia) return base;
+  const golpes = copiado.balas ? Math.round((copiado.balas[0] + copiado.balas[1]) / 2) : 1;
+  return {
+    nombre: base.nombre,
+    nombre_es: base.nombre_es,
+    texto: base.texto,
+    anim: base.anim,
+    usos: base.usos,
+    copia: true,
+    poder: copiado.poder * golpes,
+    objetivo: copiado.objetivo,
+    ...(copiado.deja ? { deja: copiado.deja } : {}),
+    ...(copiado.paraliza ? { paraliza: copiado.paraliza } : {}),
+    ...(copiado.confunde ? { confunde: copiado.confunde } : {}),
+    ...(copiado.aplica?.veneno ? { aplica: { veneno: copiado.aplica.veneno } } : {}),
   };
 }

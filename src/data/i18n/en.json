@@ -297,6 +297,8 @@
   "batalla.aprende": "{quien} learned a new move: {ataque}.",
   "batalla.cebo_aparece": "The copy does nothing. It just stands there. With luck, someone hits it instead.",
   "batalla.cebo_cae": "{quien} (the decoy) falls apart at the first hit. It did its only job.",
+  "batalla.desc.copia": "Copies «{ataque}», the last thing that hit her: {poder} power and the same effect, with her own punch.",
+  "batalla.desc.copia_nada": "Copies the last attack that hits her. Nobody has hit her yet: it is a plain punch ({poder} power).",
   "batalla.desc.cebo": "Leaves a black-and-white copy of yourself. It does nothing: sometimes the enemy hits it instead of you, and it falls apart at the first hit. The most useless move there is, except for sneaking out of work if your boss does not notice.",
   "batalla.cebo_se_va": "{quien} (the decoy) evaporates. Nobody paid it any attention.",
   "batalla.sin_blanco": "Nobody left to use it on. The item goes back to the backpack.",

@@ -62,9 +62,9 @@ export interface DatosTorneo {
 }
 
 export const TORNEO = datos as unknown as DatosTorneo;
-export const HEROES_TORNEO = ['jair', 'cami', 'rikka', 'jordy', 'billy', 'maggie', 'influencer', 'otaku'];
+export const HEROES_TORNEO = ['jair', 'cami', 'rikka', 'jordy', 'billy', 'maggie', 'influencer', 'otaku', 'lady'];
 /** Ya no se usa para desbloquear (ver `peleadorAbierto`): los peleadores que todavía no salen en la historia. */
-export const LIBRES_TORNEO = ['jordy', 'billy', 'maggie', 'influencer', 'otaku'];
+export const LIBRES_TORNEO = ['jordy', 'billy', 'maggie', 'influencer', 'otaku', 'lady'];
 /** Nikki también pelea en el torneo, desde el inicio (pedido del autor, 2026-11-05). */
 export const NIKKI_PELEADORA = 'nikki';
 /** El Rey Malvado como peleador: al terminar el Capítulo 6, solo THE KING (decisión del autor, 2026-11-06). */

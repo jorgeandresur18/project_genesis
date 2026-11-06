@@ -398,6 +398,22 @@
     "Tajo de primavera": {
       "nombre": "Spring Slash",
       "texto": "{quien} draws in the blink of an eye. Five hundred years of practice in a single cut."
+    },
+    "Copia de fan": {
+      "nombre": "Fan Copy",
+      "texto": "{quien} learned the choreography by heart and gives {objetivo} back exactly what they got. [Filler: Claude draft, no sprites of their own]"
+    },
+    "Barra luminosa": {
+      "nombre": "Lightstick",
+      "texto": "{quien} hits {objetivo} with the official lightstick, limited edition. [Filler: Claude draft, no sprites of their own]"
+    },
+    "Canto de estadio": {
+      "nombre": "Stadium Chant",
+      "texto": "{quien} screams the band's chant so loud it hurts everyone. [Filler: Claude draft, no sprites of their own]"
+    },
+    "Fancam": {
+      "nombre": "Fancam",
+      "texto": "{quien} pulls out her phone, films vertically and charges forward like she's in the front row. [Filler: Claude draft, no sprites of their own]"
     }
   }
 }

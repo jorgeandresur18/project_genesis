@@ -297,7 +297,8 @@
     "nikki": [
       "zapatos_plataforma"
     ],
-    "rey": []
+    "rey": [],
+    "lady": []
   },
   "desbloqueo_peleadores": {
     "_nota": "Cuándo se puede elegir cada peleador (decisión del autor, 2026-11-06): después de su pelea RPG en la historia (alguna escena con esa pelea, visitada en cualquier partida). «libre»: desde el inicio; null: todavía no (su pelea no existe). Los jefes de la torre, al vencerlos (aparte).",
@@ -318,7 +319,8 @@
     "otaku": null,
     "maggie": "libre",
     "rey": null,
-    "_todo": "TODO(canon): las peleas del Capítulo 4 de Jordy (entrenamiento con Jair), Billy (con Jair contra los influencers), el influencer y el otaku; el final del Capítulo 6 para el Rey Malvado; Maggie es exclusiva del torneo (¿se desbloquea con algo?)."
+    "_todo": "TODO(canon): las peleas del Capítulo 4 de Jordy (entrenamiento con Jair), Billy (con Jair contra los influencers), el influencer, el otaku y Lady (contra las KJPopers en la convención); el final del Capítulo 6 para el Rey Malvado; Maggie es exclusiva del torneo (¿se desbloquea con algo?).",
+    "lady": null
   },
   "rivales": {
     "_nota": "Rivales variados (pedido del autor, 2026-11-06): cada ronda, salvo la gran final, sortea su rival (el jefe de la ronda) y, en dobles y triples, sus compañeros. Sale distinto en cada torneo (la semilla del torneo). Los personajes pelean como en manos del jugador, pero un poco más bajos de nivel en las primeras rondas (`nivel_por_ronda`, sobre el nivel de la copa).",

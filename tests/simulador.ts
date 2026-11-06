@@ -31,6 +31,7 @@ import {
   type Ataque,
   type DatosBatalla,
   type Luchador,
+  ataqueCopiado,
 } from '../src/engine/batalla';
 import {
   aplicarEstacion,
@@ -131,20 +132,22 @@ function pelea(D: DatosBatalla, listo: boolean, esencias: boolean) {
       return;
     }
     gastarUso(h, ataque!);
-    const blancos = ataque!.objetivo === 'todos' ? vivos : [e];
+    const copia = ataqueCopiado(ataque!, h.copiado);
+    const blancos = copia.objetivo === 'todos' ? vivos : [e];
     cargar(h, CARGA.atacar);
     // Los que no hacen daño: solo el estado (si no falla).
-    if (ataque!.confunde || ataque!.paraliza) {
+    if (copia.confunde || copia.paraliza) {
       for (const b of blancos) {
         if (falla(D, h, b)) continue;
-        if (ataque!.confunde) confundirA(s, b, ataque!.confunde);
+        if (copia.confunde) confundirA(s, b, copia.confunde);
         else paralizarA(s, b);
       }
       return;
     }
     for (const b of blancos) if (!falla(D, h, b)) {
-      resolverGolpe(s, D, h, b, ataque!.poder);
-      dejarEstado(s, b, ataque!.deja);
+      resolverGolpe(s, D, h, b, copia.poder);
+      dejarEstado(s, b, copia.deja);
+      if (copia.aplica?.veneno && vivo(b) && !b.envenenado) b.envenenado = { ...copia.aplica.veneno };
     }
     blancos.filter((b) => !vivo(b)).forEach(cae);
   };
@@ -194,6 +197,7 @@ function pelea(D: DatosBatalla, listo: boolean, esencias: boolean) {
       if (a.confunde || a.paraliza) {
         for (const h of r.blancos) {
           if (esquiva(D, h, e)) continue;
+          h.copiado = a;
           if (a.confunde) confundirA(s, h, a.confunde);
           else paralizarA(s, h);
         }
@@ -203,7 +207,10 @@ function pelea(D: DatosBatalla, listo: boolean, esencias: boolean) {
       const n = a.balas ? a.balas[0] + Math.floor(Math.random() * (a.balas[1] - a.balas[0] + 1)) : r.blancos.length;
       for (let k = 0; k < n; k++) {
         const h = r.blancos[k % r.blancos.length];
-        if (vivo(h) && !falla(D, e, h) && !esquiva(D, h, e)) resolverGolpe(s, D, e, h, a.poder);
+        if (vivo(h) && !falla(D, e, h) && !esquiva(D, h, e)) {
+          resolverGolpe(s, D, e, h, a.poder);
+          h.copiado = a;
+        }
       }
     }
   };

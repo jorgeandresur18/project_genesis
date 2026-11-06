@@ -52,6 +52,7 @@ import {
   type Luchador,
   type Objeto,
   type Progreso,
+  ataqueCopiado,
 } from '../engine/batalla';
 import charlasJson from '../data/charlas_batalla.json';
 import fondosJson from '../data/fondos_batalla.json';
@@ -1471,8 +1472,10 @@ function Pelea({
       return lineas(funciona ? 'hablar_ok' : 'hablar_no', { objetivo: e.nombre });
     }
     if (c.tipo !== 'atacar') return;
-    const ataque = equipados(d.personajes[h.clave], h.nivel, progreso?.equipo?.[h.clave], sueltosQueTengo(progreso?.cassettes).map((a) => ataqueHeroeEn(lang, a)), progreso?.especialesGanados).ataques[c.ataque];
-    gastarUso(h, ataque);
+    const elegido = equipados(d.personajes[h.clave], h.nivel, progreso?.equipo?.[h.clave], sueltosQueTengo(progreso?.cassettes).map((a) => ataqueHeroeEn(lang, a)), progreso?.especialesGanados).ataques[c.ataque];
+    gastarUso(h, elegido);
+    // La copia de Lady: el daño y el efecto de lo último que le pegaron, con su animación (BIBLIA_RPG, sección 22).
+    const ataque = ataqueCopiado(elegido, h.copiado);
     if (ataque.cebo) return dejarCebo(h, ataque);
     if (ataque.autodestruccion) {
       await decir(fmt(ataque.texto, { quien: h.nombre }));
@@ -1522,6 +1525,7 @@ function Pelea({
         }
         bajoEspecial.current.add(x.id);
         await golpear(h, x, ataque.poder);
+        x.copiado = ataque;
       }
       await espera(450);
       soltar(blancos);
@@ -1540,6 +1544,7 @@ function Pelea({
     }
     if (ataque.confunde) {
       cargar(h, CARGA.atacar);
+      e.copiado = ataque;
       return besar(h, ataque, [e]);
     }
     if (ataque.paraliza) {
@@ -1548,6 +1553,7 @@ function Pelea({
       playChip('paralisis');
       luz(e.id, '#a64dff', true);
       await espera(800);
+      e.copiado = ataque;
       return paralizar(e);
     }
     const deLejos = !!d.personajes[h.clave].distancia;
@@ -1578,6 +1584,7 @@ function Pelea({
     }
     bajoEspecial.current.add(e.id);
     const { n, critico, bloqueado } = await golpear(h, e, ataque.poder);
+    e.copiado = ataque;
     await espera(450);
     if (!deLejos) await deslizar(h.id, null);
     soltar([e]);
@@ -2029,9 +2036,13 @@ function Pelea({
       return limpiarCebos();
     }
     if (decision.tipo === 'nada') return;
-    const { ataque: a, blancos } = decision;
+    const { blancos } = decision;
+    const a = ataqueCopiado(decision.ataque, e.copiado);
     await decir(fmt(a.texto, { quien: e.nombre, objetivo: blancos.map((x) => x.nombre).join(' y ') }));
-    if (a.confunde) return besar(e, a, blancos);
+    if (a.confunde) {
+      blancos.forEach((h) => (h.copiado = a));
+      return besar(e, a, blancos);
+    }
     if (a.paraliza) {
       setOscuro(true);
       playChip('paralisis');
@@ -2046,11 +2057,16 @@ function Pelea({
           continue;
         }
         await paralizar(h);
+        h.copiado = a;
       }
       return;
     }
     const hoja = (await cargarHoja(d.enemigos[e.clave].sprite)) as Hoja;
-    if (a.balas && 'animations' in hoja && hoja.disparos?.ataque) return rafaga(e, a, blancos, hoja);
+    if (a.balas && 'animations' in hoja && hoja.disparos?.ataque) {
+      await rafaga(e, a, blancos, hoja);
+      blancos.forEach((h) => (h.copiado = a));
+      return;
+    }
     const proy = 'animations' in hoja ? hoja.proyectil : undefined;
     // De lejos (la sombra): se queda en su lugar y la media luna sale volando, pasa por cada blanco y se va.
     let llegadas: number[] | null = null;
@@ -2101,7 +2117,13 @@ function Pelea({
       if (!proy && !deLejos) playChip(sonidoDe(e));
       bajoEspecial.current.add(h.id);
       const { n, bloqueado } = await golpear(e, h, a.poder);
+      h.copiado = a;
       if (blancos.length === 1) await decir(fmt(t(bloqueado ? 'batalla.protegido_bloquea' : 'batalla.recibe'), { quien: h.nombre, n }));
+      // La copia de un rival Lady también deja el estado o el veneno de lo que copió.
+      if (a.copia && !bloqueado && vivo(h)) {
+        if (a.aplica?.veneno) usarObjeto(a.aplica as unknown as Objeto, h);
+        await avisarEstado(h, dejarEstado(b.current, h, a.deja));
+      }
     }
     if (blancos.length === 1 && !proy && !deLejos) await deslizar(e.id, null);
     else await espera(500);
@@ -2278,7 +2300,11 @@ function Pelea({
               extra: a.usos !== undefined ? `${quedan(heroe!, a)}/${a.usos}` : `${a.poder}`,
               clase: (a.cebo && tieneCebo(heroe!)) || quedan(heroe!, a) <= 0 ? 'especial' : '',
               desc:
-                (a.cebo
+                (a.copia
+                  ? heroe?.copiado && ataqueCopiado(a, heroe.copiado) !== a
+                    ? fmt(t('batalla.desc.copia'), { ataque: heroe.copiado.nombre, poder: ataqueCopiado(a, heroe.copiado).poder })
+                    : fmt(t('batalla.desc.copia_nada'), { poder: a.poder })
+                  : a.cebo
                   ? t('batalla.desc.cebo')
                   : a.cura
                     ? fmt(t('batalla.desc.cura'), { n: Math.round(a.cura * 100) })

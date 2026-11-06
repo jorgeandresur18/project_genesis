@@ -641,6 +641,69 @@
       },
       "escala": 1.05,
       "sonido": "puno"
+    },
+    "lady": {
+      "nombre": "Lady",
+      "sprite": "batalla/jair",
+      "filtro": "hue-rotate(290deg) saturate(1.5) brightness(1.05)",
+      "seguido": true,
+      "_nota": "Lady (compañera de tesis de Jair, fan del KJ-pop): pelea contra las KJPopers en el Capítulo 4 (decisión del autor, 2026-11-06). Su copia: docs/BIBLIA_RPG.md, sección 22. Hoja de Jair con filtro hasta que tenga arte.",
+      "base": {
+        "ps": 27,
+        "atq": 6,
+        "def": 3,
+        "vel": 10
+      },
+      "crece": {
+        "ps": 5.2,
+        "atq": 1.1,
+        "def": 0.5,
+        "vel": 0.6
+      },
+      "ataques": [
+        {
+          "nombre": "Copia de fan",
+          "poder": 6,
+          "copia": true,
+          "usos": 15,
+          "texto": "{quien} se aprendió la coreografía de memoria y le devuelve a {objetivo} lo mismo que le hicieron. [Relleno: borrador de Claude, sin sprites propios]"
+        },
+        {
+          "nombre": "Barra luminosa",
+          "poder": 11,
+          "usos": 20,
+          "texto": "{quien} le da a {objetivo} con la barra luminosa oficial, edición limitada. [Relleno: borrador de Claude, sin sprites propios]"
+        },
+        {
+          "nombre": "Canto de estadio",
+          "poder": 5,
+          "objetivo": "todos",
+          "usos": 8,
+          "texto": "{quien} grita el canto de la banda tan fuerte que les duele a todos. [Relleno: borrador de Claude, sin sprites propios]"
+        }
+      ],
+      "hablar": [
+        "¿Y tú eres fan de verdad o solo de las fotos?",
+        "Me sé tu coreografía mejor que tú.",
+        "Esto es por la gira que cancelaron."
+      ],
+      "especial": {
+        "nombre": "Fancam",
+        "poder": 6,
+        "golpes": 5,
+        "objetivo": "todos",
+        "posicion": "objetivo",
+        "color": "#ff6fb5",
+        "ojos": [
+          50,
+          37,
+          27,
+          13
+        ],
+        "texto": "{quien} saca el celular, graba en vertical y se lanza al frente como si fuera la primera fila. [Relleno: borrador de Claude, sin sprites propios]"
+      },
+      "escala": 1,
+      "sonido": "puno"
     }
   },
   "enemigos": {
