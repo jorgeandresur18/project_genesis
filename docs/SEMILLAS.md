@@ -29,6 +29,14 @@ el capítulo más largo en peleas: ahí el jugador puede olvidar las pistas ante
 tres** es lo concreto del mundo real: **Ari y Milka no aparecen nunca**, ni de pasada. Cuando Cami y Rikka las busquen
 en la convención, el jugador no las va a reconocer.
 
+## Lo que decidió el autor (2026-11-06)
+
+- **Sashi** es la sacerdotisa del Verano: aparece sin nombre en los recuerdos de Rikka en la playa (`ve_034`).
+- **Milka:** una notificación de su transmisión en vivo en el Capítulo 2, «para los que no pueden dormir» (chiste por la hora). **Hecho:** `milka_en_vivo` en `src/data/boringram/cap02.json` (4:48 de la mañana; la plataforma, «Glitch», es nombre propuesto por Claude).
+- **Ari** se referencia en la convención del Capítulo 4. Todo más sutil.
+- **C (el orgullo):** sí, pero sutil, sin explicarlo.
+- **F (el retrato):** todavía no. En su lugar, en el Capítulo 3, una publicación en Boringram: alguien anuncia que no irá a la convención porque el lugar no tiene buena ventilación y se concentra el olor a axila y cebolla (ya le pasó el año pasado).
+
 ## Propuestas (para elegir)
 
 ### Capítulo 1 (el prólogo; para la pasada de diálogos de la noche)

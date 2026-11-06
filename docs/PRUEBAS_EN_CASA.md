@@ -254,3 +254,4 @@ En el Torneo (`npm run dev`, desde Extras):
 - La llamada de la refrigeradora: el chiste nuevo de la carne y la leche (`o08`, `o08b`, `o09`) se lee bien seguido.
 - La historia de Nikki en Boringram dice «La Lechuza»; el correo del repositorio dice «granja-bots-final-final-v2».
 - Con el juego en inglés, lo mismo (The Owl).
+- (Capítulo 2) En el celular, cerca de las 4:48, la notificación de Glitch: «milka está en vivo». Se lee completa.
