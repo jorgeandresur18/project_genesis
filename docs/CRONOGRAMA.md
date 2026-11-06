@@ -164,7 +164,7 @@ abajo de espaldas) cuando toque.
 
 ## Ideas anotadas (por diseñar)
 
-- **Boringram: cómo se conocieron Jair y Nikki** (del autor, 2026-11-06): desbloqueables que cuentan su vida de antes (el colegio, los «me gusta» sin respuesta, la fiesta a los 22, el primer beso). Falta decidir qué publicaciones son y cuándo se desbloquean (el Boringram de los capítulos lo hace el autor).
+- **Boringram: cómo se conocieron Jair y Nikki** (del autor, 2026-11-06): desbloqueables que cuentan su vida de antes (el colegio, los «me gusta» sin respuesta, la fiesta a los 22, el primer beso). Falta decidir qué publicaciones son y cuándo se desbloquean (el Boringram de los capítulos lo hace el autor). **Forma (idea del autor):** como los recuerdos de las fotos: un aviso de Noodle en el celular de Jair, «¿Recuerdas esta foto? Hace N años, un día como hoy», que va contando la historia poco a poco. Propuesta de Claude, por aprobar, en la bitácora del 6 de noviembre.
 
 **Escena secreta de Jordy en el Capítulo 4 (recomendación, idea del autor del 6 de noviembre; no es canon):** al
 completar el juego al 100 %, en el Capítulo 4 se podría desbloquear una escena extra parecida a la de Rikka en las
