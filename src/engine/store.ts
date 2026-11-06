@@ -174,6 +174,12 @@ interface Store {
   error: string | null;
   /** El texto de la línea actual ya terminó de escribirse (efecto máquina de escribir). */
   textDone: boolean;
+  /**
+   * Lo que dice el personaje secreto al tocarlo en una escena con globo (las termas desde la ráfaga): reemplaza el texto
+   * del globo del diálogo (un solo globo; pedido del autor, 2026-11-05). Solo vale en su escena. No se guarda.
+   */
+  reaccionGlobo: { escena: string; quien: string; texto: string; n: number } | null;
+  setReaccionGlobo: (r: Store['reaccionGlobo']) => void;
 
   /** Partida nueva desde el inicio (o desde `start`, para probar un capítulo en borrador). */
   newGame: (start?: string) => void;
@@ -392,6 +398,8 @@ export const useStore = create<Store>()(
         speed: 2,
         error: null,
         textDone: false,
+        reaccionGlobo: null,
+        setReaccionGlobo: (r) => set({ reaccionGlobo: r }),
 
         newGame: (start) => goTo(start && scenes.has(start) ? start : config.inicio, { ...variables, partida_id: nuevoIdPartida() }, []),
 

@@ -28,6 +28,8 @@ export interface Character {
   pos: 'izquierda' | 'centro' | 'derecha';
   /** Fuerza hacia dónde mira; si no está, el motor lo decide (ver engine/facing.ts). */
   mira?: 'izquierda' | 'derecha';
+  /** Más grande o más chico en esta escena (1 = su estatura; p. ej. Rikka en la escena secreta de las termas, 1,15). */
+  escala?: number;
 }
 
 export interface Dialogue {
@@ -100,6 +102,11 @@ export interface Scene {
    * ni para la galería (si contara, el 100 % sería imposible).
    */
   secreto?: boolean;
+  /**
+   * La línea va en un globo al lado de la cara (con «Seguir»), no en la caja de diálogo, y recién en estas escenas se
+   * puede tocar al personaje secreto (las termas desde la ráfaga; pedido del autor, 2026-11-05).
+   */
+  globo?: boolean;
   /** Al entrar en la escena: cambios de ropa (como `equipo` de una opción; p. ej. Rikka vuelve a sus prendas). */
   equipo?: Choice['equipo'];
   /**

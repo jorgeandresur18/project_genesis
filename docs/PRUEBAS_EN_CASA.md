@@ -198,3 +198,9 @@ primero. Las pruebas automáticas y el simulador ya lo usan (el equilibrio no se
 - [ ] **El torneo en Triple:** que salgan 3 rivales de entrada (el jefe de la ronda con dos soldados) y que la final con Nikki se sienta difícil pero ganable (ahora ~28 % con buen juego).
 - [ ] **Los nuevos del torneo** (con `?galeria=todo`): elegir a Jordan, Billy, Maggi y Nikki. Que se vean (con la hoja prestada y otro color), que el puño de Jordan a veces paralice, la hipnosis de Maggi duerma y su Sesión de grupo deje dormidos o confundidos.
 - [ ] **Influencer y otaku en el torneo:** que el influencer muestre «+1 seguidor» al hacer un crítico o derribar a alguien y que pegue más; que el otaku duerma con la explicación del lore.
+
+## 15. La escena secreta de las termas y las cajas de texto (nuevo, 6 de noviembre)
+
+- [ ] **La caja de diálogo nueva** en cualquier escena: que se lea bien en el celular y con el modo Retro CRT.
+- [ ] **Las termas** (`?escena=cap02_p2_s01`): Rikka más grande; antes de la ráfaga no se la puede tocar; desde la ráfaga, un solo globo que cambia al tocarla, las manos del jugador (pecho desde afuera, nalgada, la que apunta) y el «¡¡KYAAAH!!» arriba.
+- [ ] **Después del grito:** la imagen secreta, el fundido a negro lento, y Cami y Jair diciendo que está pálida con Rikka callada.

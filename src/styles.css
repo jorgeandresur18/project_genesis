@@ -202,11 +202,14 @@ input, textarea { -webkit-user-select: text; user-select: text; }
   transform: translateX(-50%);
   width: min(58rem, calc(100% - 2rem));
   min-height: 8.5rem;
-  padding: 1.35rem 1.5rem 3.3rem;
-  background: linear-gradient(180deg, rgba(18, 18, 22, var(--box-alpha, 0.88)), rgba(8, 8, 10, var(--box-alpha, 0.88)));
-  border: 1px solid rgba(214, 218, 226, 0.22);
-  border-radius: 0.7rem;
-  box-shadow: 0 0.8rem 2.4rem rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  padding: 1.5rem 1.7rem 3.3rem;
+  /* Vidrio oscuro con un leve reflejo del color de quien habla (más elegante, pedido del autor 2026-11-05). */
+  background:
+    radial-gradient(120% 140% at 0% 0%, color-mix(in srgb, var(--speaker, #d9dde4) 7%, transparent), transparent 55%),
+    linear-gradient(180deg, rgba(22, 22, 28, var(--box-alpha, 0.88)), rgba(9, 9, 12, var(--box-alpha, 0.88)));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  box-shadow: 0 1.2rem 3rem rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.07);
   backdrop-filter: blur(calc((1 - var(--box-alpha, 0.88)) * 14px));
   cursor: pointer;
   /* Por encima del oscurecido de las decisiones: la pregunta suele estar aquí. */
@@ -217,31 +220,65 @@ input, textarea { -webkit-user-select: text; user-select: text; }
   content: '';
   position: absolute;
   top: -1px;
-  left: 1.2rem;
-  right: 1.2rem;
-  height: 2px;
-  border-radius: 2px;
-  background: linear-gradient(90deg, var(--speaker, #d9dde4), transparent 70%);
-  opacity: 0.9;
+  left: 1.4rem;
+  right: 1.4rem;
+  height: 1px;
+  border-radius: 1px;
+  background: linear-gradient(90deg, transparent, var(--speaker, #d9dde4) 12%, transparent 78%);
+  box-shadow: 0 0 0.6rem var(--speaker, #d9dde4);
+  opacity: 0.85;
 }
 .dialog-narration::before { background: linear-gradient(90deg, transparent, rgba(217, 221, 228, 0.6), transparent); }
+/* En globo (las termas desde la ráfaga; pedido del autor, 2026-11-05): una caja compacta a la izquierda de su cara, con la
+   colita hacia ella; deja ver el cuerpo para tocarla. La narración, igual pero sin colita. */
+.dialog.dialog-globo {
+  left: 4%;
+  right: auto;
+  top: 13%;
+  bottom: auto;
+  transform: none;
+  width: min(26rem, 38%);
+  min-height: 0;
+  padding: 1.15rem 1.25rem 3rem;
+  border-radius: 1rem;
+  animation: dialogo-globo 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.dialog.dialog-globo.dialog-has-speaker::after {
+  content: '';
+  position: absolute;
+  right: -0.6rem;
+  top: 2.2rem;
+  border: 0.6rem solid transparent;
+  border-left-color: color-mix(in srgb, var(--speaker, #d9dde4) 35%, #16151a);
+  border-right: 0;
+}
+.dialog.dialog-globo .dialog-text { font-size: calc(1rem * var(--text-scale, 1)); }
+.dialog.dialog-globo .dialog-advance { right: 0.75rem; bottom: 0.6rem; padding: 0.35rem 1.05rem; font-size: 0.85rem; }
+@keyframes dialogo-globo { from { opacity: 0; translate: 0 0.4rem; scale: 0.97; } }
+/* Lo que dice al tocarla: entra con un pequeño salto, cada vez. */
+.dialog-reaccion { animation: dialogo-reaccion 0.3s ease-out both; }
+@keyframes dialogo-reaccion { from { opacity: 0; translate: 0 0.25rem; } }
+@media (max-width: 700px) { .dialog.dialog-globo { left: 2%; width: 46%; top: 8%; } }
+@media (prefers-reduced-motion: reduce) { .dialog.dialog-globo { animation: none; } }
 .dialog-speaker {
   position: absolute;
   top: 0;
   left: 1.3rem;
   transform: translateY(-55%);
-  padding: 0.35rem 1.15rem 0.38rem;
+  padding: 0.32rem 1.2rem 0.34rem;
   font-family: 'Montserrat', sans-serif;
-  font-size: calc(1.12rem * var(--text-scale, 1));
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-size: calc(0.95rem * var(--text-scale, 1));
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   color: #0b0b0d;
-  background: var(--speaker, #c9ced6);
-  border-radius: 0.4rem;
-  box-shadow: 0 0 1rem color-mix(in srgb, var(--speaker, #c9ced6) 45%, transparent), 0 0.3rem 0.8rem rgba(0, 0, 0, 0.4);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--speaker, #c9ced6) 82%, #fff), var(--speaker, #c9ced6));
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  box-shadow: 0 0 1.2rem color-mix(in srgb, var(--speaker, #c9ced6) 35%, transparent), 0 0.35rem 0.9rem rgba(0, 0, 0, 0.45);
 }
 .dialog-speaker-mono { font-family: ui-monospace, Consolas, monospace; letter-spacing: 0.12em; }
-.dialog-text { line-height: 1.6; font-size: calc(1.08rem * var(--text-scale, 1)); color: #eef0f4; }
+.dialog-text { line-height: 1.65; letter-spacing: 0.01em; font-size: calc(1.08rem * var(--text-scale, 1)); color: #eef0f4; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); }
 .dialog-narration .dialog-text { color: #dfe2e8; }
 .dialog-thought { font-style: italic; color: #b9bfca; }
 .dialog-mono { font-family: ui-monospace, Consolas, monospace; color: color-mix(in srgb, var(--speaker) 70%, #fff); }
@@ -628,18 +665,27 @@ input, textarea { -webkit-user-select: text; user-select: text; }
   translate: -100% 0;
   width: max-content;
   max-width: min(17em, 60vw);
-  padding: 0.45rem 0.85rem;
-  border-radius: 0.8rem;
-  background: #fff;
-  color: #1a1a1f;
-  font-weight: 700;
+  padding: 0.6rem 1.1rem;
+  /* El estilo del juego (el vidrio oscuro de la caja de diálogo) con el color de Rikka en claro (pedido del autor,
+     2026-11-05): borde, brillo y un filo arriba. Más ancho que alto (ver GloboCara). */
+  --globo: color-mix(in srgb, #ef4f5c 62%, #fff);
+  border-radius: 0.9rem;
+  background:
+    radial-gradient(120% 160% at 0% 0%, color-mix(in srgb, var(--globo) 14%, transparent), transparent 60%),
+    linear-gradient(180deg, rgba(24, 22, 28, 0.94), rgba(10, 9, 12, 0.94));
+  border: 1px solid color-mix(in srgb, var(--globo) 55%, transparent);
+  color: #fbeff1;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   font-size: clamp(0.8rem, 1.6vw, 1.05rem);
-  line-height: 1.3;
-  box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.45);
+  line-height: 1.4;
+  text-align: left;
+  overflow-wrap: break-word;
+  box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.5), 0 0 1.1rem color-mix(in srgb, var(--globo) 22%, transparent), inset 0 1px 0 rgba(255, 255, 255, 0.07);
   pointer-events: none;
   animation: emblema-reaccion 3.2s ease both;
 }
-.emblema-reaccion::after { content: ''; position: absolute; right: -0.45rem; top: 50%; translate: 0 -50%; border: 0.5rem solid transparent; border-left-color: #fff; border-right: 0; }
+.emblema-reaccion::after { content: ''; position: absolute; right: -0.5rem; top: 50%; translate: 0 -50%; border: 0.5rem solid transparent; border-left-color: color-mix(in srgb, var(--globo) 60%, #18161c); border-right: 0; }
 .sprite-flip .emblema-reaccion { scale: -1 1; }
 @keyframes emblema-reaccion { from { opacity: 0; transform: translateY(0.5rem); } 10%, 85% { opacity: 1; transform: none; } to { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .emblema-18 img, .emblema-brillo, .emblema-18::after { animation: none; } }
@@ -653,8 +699,8 @@ input, textarea { -webkit-user-select: text; user-select: text; }
 }
 .emblema-reaccion.emblema-grito::after { content: none; }
 /* A la derecha de su cara: la colita apunta hacia la izquierda (hacia ella). */
-.emblema-reaccion.globo-der::after { right: auto; left: -0.45rem; border: 0.5rem solid transparent; border-right-color: #fff; border-left: 0; }
-.emblema-reaccion.emblema-grito { top: 0; left: 50%; translate: -50% 0; background: #ff3d6e; color: #fff; font-size: clamp(1.1rem, 2.6vw, 1.7rem); letter-spacing: 0.04em; animation: emblema-reaccion 2.4s ease both, grito-tiembla 0.09s linear infinite; }
+.emblema-reaccion.globo-der::after { right: auto; left: -0.5rem; border: 0.5rem solid transparent; border-right-color: color-mix(in srgb, var(--globo) 60%, #18161c); border-left: 0; }
+.emblema-reaccion.emblema-grito { top: 0; left: 50%; translate: -50% 0; padding: 0.5rem 1.3rem; background: linear-gradient(180deg, #ff6694, #ff2f68); border: 2px solid rgba(255, 255, 255, 0.85); border-radius: 1.2rem; color: #fff; font-weight: 800; text-shadow: 0 2px 0 rgba(140, 0, 40, 0.45); box-shadow: 0 0 1.6rem rgba(255, 60, 110, 0.55), 0 0.6rem 1.4rem rgba(0, 0, 0, 0.45); font-size: clamp(1.1rem, 2.6vw, 1.7rem); letter-spacing: 0.06em; animation: emblema-reaccion 2.4s ease both, grito-tiembla 0.09s linear infinite; }
 /* El grito: tiembla todo, la cámara se acerca a su cara y una luz blanca lo tapa antes de la imagen secreta. */
 .stage-grito { animation: grito-tiembla 0.08s linear 18; }
 .stage-grito .stage-characters { transform-origin: 50% 22%; animation: grito-zoom 1.9s cubic-bezier(0.6, 0, 0.8, 0.4) forwards; }
@@ -666,8 +712,8 @@ input, textarea { -webkit-user-select: text; user-select: text; }
 /* Emblemas encima de una imagen secreta: la caja sigue a la imagen, recortada (cover) en el escenario o entera
    (contain) en el visor de la galería. --r: ancho / alto de la imagen. */
 .fondo-capas { position: absolute; inset: 0; container-type: size; pointer-events: none; overflow: hidden; }
-.fondo-capas-caja { position: absolute; left: 50%; top: 50%; translate: -50% -50%; aspect-ratio: var(--r); width: max(100cqw, calc(100cqh * var(--r))); }
-.fondo-capas-contener .fondo-capas-caja { width: min(100cqw, calc(100cqh * var(--r))); overflow: hidden; }
+.fondo-capas-caja { --caja-w: max(100cqw, calc(100cqh * var(--r))); position: absolute; left: 50%; top: 50%; translate: -50% -50%; aspect-ratio: var(--r); width: var(--caja-w); }
+.fondo-capas-contener .fondo-capas-caja { --caja-w: min(100cqw, calc(100cqh * var(--r))); overflow: hidden; }
 .fondo-capas-contener .fondo-capas-globo { overflow: visible; }
 .fondo-capas .emblema-18 { pointer-events: auto; }
 .viewer-stage { position: relative; }
@@ -2677,24 +2723,30 @@ button.sprite-item:hover .sprite-rpg-mini { transform: rotateY(-12deg) rotateX(5
   z-index: 5;
   translate: -50% 0;
   max-width: min(32rem, 86%);
-  padding: 0.6rem 1rem;
+  padding: 0.6rem 1.1rem;
+  --globo: color-mix(in srgb, #ef4f5c 62%, #fff);
   border-radius: 0.9rem;
-  background: #fff;
-  color: #1a1a1f;
-  font-weight: 700;
+  background:
+    radial-gradient(120% 160% at 0% 0%, color-mix(in srgb, var(--globo) 14%, transparent), transparent 60%),
+    linear-gradient(180deg, rgba(24, 22, 28, 0.94), rgba(10, 9, 12, 0.94));
+  border: 1px solid color-mix(in srgb, var(--globo) 55%, transparent);
+  color: #fbeff1;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   font-size: clamp(0.85rem, 1.7vw, 1.05rem);
-  line-height: 1.35;
+  line-height: 1.4;
   text-align: center;
-  box-shadow: 0 0.5rem 1.4rem rgba(0, 0, 0, 0.5);
+  overflow-wrap: break-word;
+  box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.5), 0 0 1.1rem color-mix(in srgb, var(--globo) 22%, transparent), inset 0 1px 0 rgba(255, 255, 255, 0.07);
   pointer-events: none;
   animation: emblema-reaccion 3.6s ease both;
 }
-.viewer-queja::after { content: ''; position: absolute; left: 50%; bottom: -0.45rem; translate: -50% 0; border: 0.5rem solid transparent; border-top-color: #fff; border-bottom: 0; }
+.viewer-queja::after { content: ''; position: absolute; left: 50%; bottom: -0.45rem; translate: -50% 0; border: 0.5rem solid transparent; border-top-color: color-mix(in srgb, var(--globo) 60%, #18161c); border-bottom: 0; }
 /* En los sprites, a su izquierda; en la imagen secreta, a la derecha (ella está en el medio): sin taparla. */
 .gallery-viewer-sprite .viewer-queja { left: 3%; right: auto; top: 30%; translate: none; max-width: min(19rem, 30%); text-align: left; }
-.gallery-viewer-sprite .viewer-queja::after { left: auto; right: -0.45rem; top: 50%; bottom: auto; translate: 0 -50%; border: 0.5rem solid transparent; border-left-color: #fff; border-right: 0; }
+.gallery-viewer-sprite .viewer-queja::after { left: auto; right: -0.45rem; top: 50%; bottom: auto; translate: 0 -50%; border: 0.5rem solid transparent; border-left-color: color-mix(in srgb, var(--globo) 60%, #18161c); border-right: 0; }
 .gallery-viewer:not(.gallery-viewer-sprite) .viewer-queja { left: auto; right: 2%; top: 30%; translate: none; max-width: min(17rem, 17%); text-align: left; }
-.gallery-viewer:not(.gallery-viewer-sprite) .viewer-queja::after { left: -0.45rem; top: 50%; bottom: auto; translate: 0 -50%; border: 0.5rem solid transparent; border-right-color: #fff; border-left: 0; }
+.gallery-viewer:not(.gallery-viewer-sprite) .viewer-queja::after { left: -0.45rem; top: 50%; bottom: auto; translate: 0 -50%; border: 0.5rem solid transparent; border-right-color: color-mix(in srgb, var(--globo) 60%, #18161c); border-left: 0; }
 
 /* El aro del turno va detrás del personaje (se corta donde está el sprite), no dibujado encima de los pies. */
 .batalla-figura { isolation: isolate; }
@@ -3712,3 +3764,10 @@ button.cassette:hover .cassette-imagen { transform: translateY(-2px) rotate(-3de
 .batalla-orden li.hecho { opacity: 0.35; }
 .batalla-orden li i { position: absolute; top: -0.55rem; left: -0.35rem; font-size: 0.7rem; font-style: normal; text-shadow: 0 0 3px #000; }
 @media (max-width: 700px), (max-height: 500px) { .batalla-orden { top: 0.3rem; right: 2.8rem; gap: 0.2rem; padding: 0.2rem; } .batalla-orden li { width: 1.4rem; height: 1.4rem; } }
+
+/* En la novela, el globo de la cara se mide contra la ventana (la caja del sprite es el contenedor más cercano y daba
+   globos angostos): hasta 24em o el 36 % del ancho, más ancho que alto (pedido del autor, 2026-11-05). */
+.sprite-emblemas-caja .emblema-reaccion:not(.emblema-grito) { max-width: min(24em, 36vw) !important; }
+
+/* El «¡¡KYAAAH!!» de la novela: arriba al centro de la pantalla, encima del vapor y fuera del zoom del grito. */
+.stage-grito-texto.emblema-reaccion { position: absolute; top: 6%; left: 0; right: 0; margin-inline: auto; width: max-content; translate: none; z-index: 8; max-width: 90%; }

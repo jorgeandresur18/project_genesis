@@ -22,13 +22,17 @@ interface Props {
   /** Hay decisiones en pantalla: el botón de avanzar no se muestra (se elige en el menú). */
   hasChoices: boolean;
   onAdvance: () => void;
+  /** En un globo al lado de la cara (las escenas con `globo`), no en la caja de abajo. */
+  globo?: boolean;
+  /** Lo que dice al tocarla (en globo): reemplaza el texto de la línea mientras no se siga. */
+  reaccion?: { quien: string; texto: string; n: number } | null;
 }
 
 /**
  * Caja de diálogo con efecto máquina de escribir. Se monta de nuevo en cada escena (key = scene_id),
  * así que siempre empieza desde cero. Al terminar marca `textDone` en el estado global.
  */
-export function DialogBox({ dialogue, aiVowels, hasChoices, onAdvance }: Props) {
+export function DialogBox({ dialogue, aiVowels, hasChoices, onAdvance, globo = false, reaccion = null }: Props) {
   const textDone = useStore((s) => s.textDone);
   const setTextDone = useStore((s) => s.setTextDone);
   const speed = useStore((s) => s.settings.textSpeed);
@@ -63,21 +67,23 @@ export function DialogBox({ dialogue, aiVowels, hasChoices, onAdvance }: Props) 
   }, [textDone, speed, text, setTextDone]);
 
   if (!dialogue) return null;
-  const visible = textDone ? text : text.slice(0, count);
+  // Al tocarla (en globo): su reacción ocupa el globo, entera, con su nombre.
+  if (reaccion) dialogue = { speaker: reaccion.quien, text: reaccion.texto };
+  const visible = reaccion ? reaccion.texto : textDone ? text : text.slice(0, count);
   const render = (t: string) => (aiVowels ? highlightAiVowels(t) : t);
   const who = dialogue.speaker ? speakerStyle(dialogue.speaker) : null;
   // Los pensamientos van entre paréntesis: en cursiva, para distinguirlos de lo que se dice en voz alta.
   const thought = /^\(.*\)$/s.test(text.trim());
   return (
     <div
-      className={`dialog ${who ? 'dialog-has-speaker' : 'dialog-narration'}`}
+      className={`dialog ${who ? 'dialog-has-speaker' : 'dialog-narration'} ${globo ? 'dialog-globo' : ''}`}
       style={who ? ({ '--speaker': who.color } as CSSProperties) : undefined}
     >
       {dialogue.speaker && <div className={`dialog-speaker ${who?.mono ? 'dialog-speaker-mono' : ''}`}>{render(dialogue.speaker)}</div>}
-      <div className={`dialog-text ${thought ? 'dialog-thought' : ''} ${who?.mono ? 'dialog-mono' : ''}`}>
+      <div key={reaccion?.n} className={`dialog-text ${thought && !reaccion ? 'dialog-thought' : ''} ${who?.mono ? 'dialog-mono' : ''} ${reaccion ? 'dialog-reaccion' : ''}`}>
         {render(visible)}
         {/* El resto del texto ocupa su lugar sin verse, para que la caja no cambie de tamaño al escribir. */}
-        {!textDone && <span className="dialog-hidden">{text.slice(count)}</span>}
+        {!textDone && !reaccion && <span className="dialog-hidden">{text.slice(count)}</span>}
       </div>
       {/* Deja claro dónde tocar: mientras se escribe, completa el texto; al terminar, pasa al siguiente. */}
       {!(hasChoices && textDone) && (

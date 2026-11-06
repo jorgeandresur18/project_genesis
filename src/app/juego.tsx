@@ -126,6 +126,7 @@ export function Game({ open, paused, onTitle }: { open: (o: Overlay) => void; pa
   const speed = useStore((s) => s.speed);
   const canGoBack = useStore((s) => (s.game?.trail?.length ?? 0) > 0);
   const error = useStore((s) => s.error);
+  const reaccionGlobo = useStore((s) => s.reaccionGlobo);
   const [menuOpen, setMenuOpen] = useState(false);
   // Ocultar la caja y los botones para mirar la imagen (tecla H o botón «Ocultar»; cualquier clic la devuelve).
   const [uiHidden, setUiHidden] = useState(false);
@@ -428,6 +429,8 @@ export function Game({ open, paused, onTitle }: { open: (o: Overlay) => void; pa
           aiVowels={!reduceEffects && effectsOf(shown).includes('ai_vowels')}
           hasChoices={waitingChoice}
           onAdvance={advanceIfReady}
+          globo={!!shown.globo}
+          reaccion={shown.globo && reaccionGlobo?.escena === shown.scene_id ? reaccionGlobo : null}
         />
       )}
       <div

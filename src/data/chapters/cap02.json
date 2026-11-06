@@ -9289,7 +9289,8 @@
         {
           "id": "rikka",
           "sprite": "sprites/rikka/desbloqueable_frente.webp",
-          "pos": "centro"
+          "pos": "centro",
+          "escala": 1.15
         }
       ],
       "dialogue": {
@@ -9318,7 +9319,8 @@
         {
           "id": "rikka",
           "sprite": "sprites/rikka/desbloqueable_frente.webp",
-          "pos": "centro"
+          "pos": "centro",
+          "escala": 1.15
         }
       ],
       "dialogue": {
@@ -9347,7 +9349,8 @@
         {
           "id": "rikka",
           "sprite": "sprites/rikka/desbloqueable_frente.webp",
-          "pos": "centro"
+          "pos": "centro",
+          "escala": 1.15
         }
       ],
       "dialogue": {
@@ -9376,7 +9379,8 @@
         {
           "id": "rikka",
           "sprite": "sprites/rikka/desbloqueable_frente.webp",
-          "pos": "centro"
+          "pos": "centro",
+          "escala": 1.15
         }
       ],
       "dialogue": {
@@ -9405,7 +9409,8 @@
         {
           "id": "rikka",
           "sprite": "sprites/rikka/desbloqueable_frente.webp",
-          "pos": "centro"
+          "pos": "centro",
+          "escala": 1.15
         }
       ],
       "dialogue": {
@@ -9422,7 +9427,8 @@
       "toques_salida": "cap02_p2_s20",
       "toques_set": {
         "rikka_perturbada": true
-      }
+      },
+      "globo": true
     },
     {
       "scene_id": "cap02_p2_s06",
@@ -9434,7 +9440,8 @@
         {
           "id": "rikka",
           "sprite": "sprites/rikka/desbloqueable_frente.webp",
-          "pos": "centro"
+          "pos": "centro",
+          "escala": 1.15
         }
       ],
       "dialogue": {
@@ -9451,7 +9458,8 @@
       "toques_salida": "cap02_p2_s20",
       "toques_set": {
         "rikka_perturbada": true
-      }
+      },
+      "globo": true
     },
     {
       "scene_id": "cap02_p2_s07",
@@ -9463,7 +9471,8 @@
         {
           "id": "rikka",
           "sprite": "sprites/rikka/desbloqueable_frente.webp",
-          "pos": "centro"
+          "pos": "centro",
+          "escala": 1.15
         }
       ],
       "dialogue": {
@@ -9480,7 +9489,8 @@
       "toques_salida": "cap02_p2_s20",
       "toques_set": {
         "rikka_perturbada": true
-      }
+      },
+      "globo": true
     },
     {
       "scene_id": "cap02_p2_s08",
@@ -9492,7 +9502,8 @@
         {
           "id": "rikka",
           "sprite": "sprites/rikka/desbloqueable_frente.webp",
-          "pos": "centro"
+          "pos": "centro",
+          "escala": 1.15
         }
       ],
       "dialogue": {
@@ -9509,7 +9520,8 @@
       "toques_salida": "cap02_p2_s20",
       "toques_set": {
         "rikka_perturbada": true
-      }
+      },
+      "globo": true
     },
     {
       "scene_id": "cap02_p2_s09",
@@ -9521,7 +9533,8 @@
         {
           "id": "rikka",
           "sprite": "sprites/rikka/desbloqueable_vistiendose.webp",
-          "pos": "centro"
+          "pos": "centro",
+          "escala": 1.15
         }
       ],
       "dialogue": {
@@ -9535,7 +9548,8 @@
       "next": "cap02_p2_s10",
       "secreto": true,
       "vapor": "medio",
-      "toques_salida": "cap02_p2_028"
+      "toques_salida": "cap02_p2_028",
+      "globo": true
     },
     {
       "scene_id": "cap02_p2_s10",
@@ -9547,7 +9561,8 @@
         {
           "id": "rikka",
           "sprite": "sprites/rikka/desbloqueable_vistiendose.webp",
-          "pos": "centro"
+          "pos": "centro",
+          "escala": 1.15
         }
       ],
       "dialogue": {
@@ -9561,7 +9576,8 @@
       "next": "cap02_p2_s11",
       "secreto": true,
       "vapor": "medio",
-      "toques_salida": "cap02_p2_028"
+      "toques_salida": "cap02_p2_028",
+      "globo": true
     },
     {
       "scene_id": "cap02_p2_s11",
@@ -9573,7 +9589,8 @@
         {
           "id": "rikka",
           "sprite": "sprites/rikka/desbloqueable_vistiendose_muy_avergonzada.webp",
-          "pos": "centro"
+          "pos": "centro",
+          "escala": 1.15
         }
       ],
       "dialogue": {
@@ -9587,7 +9604,8 @@
       "next": "cap02_p2_028",
       "secreto": true,
       "vapor": "espeso",
-      "toques_salida": "cap02_p2_028"
+      "toques_salida": "cap02_p2_028",
+      "globo": true
     },
     {
       "scene_id": "cap02_p2_s20",
@@ -9706,13 +9724,81 @@
               "value": true
             }
           ],
-          "to": "cap02_p2_029_p"
+          "to": "cap02_p2_029_pa"
         },
         {
           "to": "cap02_p2_029"
         }
       ],
-      "transicion": "negro"
+      "transicion": "negro_lento"
+    },
+    {
+      "scene_id": "cap02_p2_029_pa",
+      "chapter": 2,
+      "background": "PLACEHOLDER:aguas_termales",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/base.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/traje_avergonzada_asustada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "¿Rikka? Estás pálida. Más que de costumbre, y mira que eres de porcelana."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap02_p2_029_pb",
+      "secreto": true
+    },
+    {
+      "scene_id": "cap02_p2_029_pb",
+      "chapter": 2,
+      "background": "PLACEHOLDER:aguas_termales",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/base.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "rikka",
+          "sprite": "sprites/rikka/traje_avergonzada_asustada.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "Parece que hubiera visto un fantasma. ¿Pasó algo detrás de la roca?"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap02_p2_029_p",
+      "secreto": true
     },
     {
       "scene_id": "cap02_p2_029_p",
@@ -9733,13 +9819,13 @@
         },
         {
           "id": "rikka",
-          "sprite": "sprites/rikka/traje_avergonzada_ropa.webp",
+          "sprite": "sprites/rikka/traje_avergonzada_asustada.webp",
           "pos": "derecha"
         }
       ],
       "dialogue": {
-        "speaker": "Rikka",
-        "text": "Esta ropa es indecente. Se pega a todo… No me miren. Hoy nadie me mira, ¿está claro?"
+        "speaker": null,
+        "text": "Rikka no contesta. Abraza el traje contra el cuerpo y se queda mirando el agua, como si algo pudiera salir de ahí otra vez."
       },
       "choices": [
         {

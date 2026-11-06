@@ -44,7 +44,8 @@ export function SceneStage({ scene, effects, speakers, lines, children }: Props)
   // Todos a la misma escala; si hay alguien más alto que 1,65 m (un enemigo), la «cámara» se aleja para que entre entero.
   const heights = new Map(scene.characters.map((c) => [c.id, canvasHeight(statureOf(c))]));
   const camera = BASE_CANVAS / Math.max(BASE_CANVAS, ...heights.values());
-  const size = (id: string) => (heights.get(id)! / BASE_CANVAS) * camera;
+  const escalas = new Map(scene.characters.map((c) => [c.id, c.escala ?? 1]));
+  const size = (id: string) => (heights.get(id)! / BASE_CANVAS) * camera * escalas.get(id)!;
   const screen = scene.background && !scene.video_fondo ? screenOf(scene.background) : null;
   const toques = useToques(scene);
 
@@ -100,6 +101,7 @@ export function SceneStage({ scene, effects, speakers, lines, children }: Props)
               />
               <Emblemas
                 sprite={sprite}
+                tocable={!!scene.globo}
                 reaccion={toques.reaccionDe(c.id)}
                 onToque={(zona) => toques.tocar(c, zona)}
                 className={`sprite sprite-${c.pos} ${flipped.has(c.id) && !mirrored ? 'sprite-flip' : ''}`}
@@ -112,6 +114,11 @@ export function SceneStage({ scene, effects, speakers, lines, children }: Props)
           );
         })}
       </div>
+      {toques.gritoDice && (
+        <span key={toques.gritoDice.n} className="emblema-reaccion emblema-grito stage-grito-texto" role="status">
+          {toques.gritoDice.texto}
+        </span>
+      )}
       {/* El mismo vapor sigue de una escena a otra: al cambiar de nivel se espesa o se abre de a poco. */}
       {scene.vapor && <VaporTermal nivel={scene.vapor} />}
       {light && <div key={`${scene.scene_id}-${light}`} className={`light-fx light-${light}`} aria-hidden />}
@@ -154,9 +161,10 @@ export function GloboCara({ cara, texto, grito = false }: { cara?: Cara; texto: 
               left: `${cara.x}%`,
               top: `${cara.y}%`,
               translate: der ? '0 -50%' : '-100% -50%',
-              // Que no se salga de la imagen (p. ej. con la ficha de información abierta, la imagen se achica): usa el
-              // espacio libre a su lado y, si es poco, ocupa más renglones.
-              maxWidth: `min(17em, max(7em, ${der ? 98 - cara.x : cara.x - 2}%))`,
+              // Que no se salga del escenario: usa todo el espacio libre a su lado (no solo el de la imagen; la caja
+              // mide `--caja-w` y está centrada en el escenario, que es el contenedor: 100cqw), así queda más ancho que
+              // alto (pedido del autor, 2026-11-05). Si el espacio es poco, ocupa más renglones.
+              maxWidth: `min(24em, max(8em, calc((100cqw - var(--caja-w)) / 2 + var(--caja-w) * ${(der ? 100 - cara.x : cara.x) / 100} - 1.2rem)))`,
             }
           : undefined
       }
@@ -179,6 +187,12 @@ export interface Capa {
 const EMBLEMAS = emblemas.sprites as Record<string, Emblema[]>;
 const MANOS = Object.values(emblemas.manos) as Manos[];
 const manosDe = (clave: string): Manos | undefined => MANOS.find((m) => m.sprites.includes(clave));
+/**
+ * Las manos del jugador (en la novela; las de Cami quedan en la galería): las mismas acciones con la palma, la mano que
+ * agarra y la que apunta (pedido del autor, 2026-11-05; las genera tools/manos_jugador.py).
+ */
+const MANOS_JUGADOR = Object.values((emblemas as { manos_jugador?: Record<string, Manos> }).manos_jugador ?? {});
+const manosJugadorDe = (clave: string): Manos | undefined => MANOS_JUGADOR.find((m) => m.sprites.includes(clave)) ?? manosDe(clave);
 const FONDOS = emblemas.fondos as Record<string, Capa>;
 interface Paso {
   /** Se dispara al llegar a esta cantidad de toques. */
@@ -273,27 +287,36 @@ function useToques(scene: Scene) {
     return scene.secreto && clave ? SECUENCIAS.findIndex((s) => s.personaje === c.id && s.sprites.includes(clave)) : -1;
   };
   const despues = (ms: number, fn: () => void) => timers.current.push(setTimeout(fn, ms));
+  // Con el diálogo en globo, lo que dice al tocarla cambia el texto de ese mismo globo (uno solo); si no, su globo.
+  const decir = (d: Dice) => {
+    if (!scene.globo) return setReaccion(d);
+    const quien = scene.characters.find((x) => x.id === d.id)?.id ?? d.id;
+    useStore.getState().setReaccionGlobo({ escena, quien: quien.charAt(0).toUpperCase() + quien.slice(1), texto: d.texto, n: d.n });
+  };
   return {
     grito: grito === escena && gritando,
-    reaccionDe: (id: string) => (reaccion?.id === id ? reaccion : null),
+    /** El grito («¡¡KYAAAH!!»): va arriba de la pantalla, fuera del zoom (pegado al sprite quedaba fuera de cuadro). */
+    gritoDice: reaccion?.grito ? reaccion : null,
+    reaccionDe: (id: string) => (reaccion?.id === id && !reaccion.grito ? reaccion : null),
     spriteDe: (c: Character) => {
       const i = secuenciaDe(c);
       return i >= 0 ? quedo[i] : null;
     },
     tocar: (c: Character, zona?: Zona) => {
       const i = secuenciaDe(c);
-      if (i < 0 || grito === escena) return;
+      // Recién se la puede tocar desde la ráfaga (las escenas con `globo`).
+      if (i < 0 || grito === escena || !scene.globo) return;
       const n = ++cuenta[i];
       const p = SECUENCIAS[i].pasos.find((x) => x.toques === n);
       // Sin un paso de la escena en este toque: lo que dice según dónde la tocaron (pedido del autor, 2026-11-04).
       // Ella no ve a nadie: cree que es un pétalo, el vapor o Cami.
       if (!p) {
         const lineas = zona ? zonasNovela[c.id]?.[zona] : undefined;
-        if (lineas?.length) setReaccion({ id: c.id, texto: siguienteDe(`${c.id}:${zona}`, lineas), n });
+        if (lineas?.length) decir({ id: c.id, texto: siguienteDe(`${c.id}:${zona}`, lineas), n });
         return;
       }
       if (p.sprite) quedo[i] = spriteRef(p.sprite);
-      if (p.reaccion) setReaccion({ id: c.id, texto: p.reaccion, n });
+      if (p.reaccion) decir({ id: c.id, texto: p.reaccion, n });
       refrescar((r) => r + 1);
       if (p.salir && scene.toques_salida) {
         setGrito(escena);
@@ -332,12 +355,15 @@ function useToques(scene: Scene) {
  */
 function Emblemas({
   sprite,
+  tocable,
   reaccion,
   onToque,
   className,
   style,
 }: {
   sprite: string;
+  /** Si se la puede tocar (las escenas con `globo`); si no, los emblemas quedan fijos. */
+  tocable: boolean;
   reaccion: Dice | null;
   onToque: (zona: Zona) => void;
   className: string;
@@ -354,12 +380,18 @@ function Emblemas({
   return (
     <div className={`${className} sprite-emblemas`} style={style}>
       <div className="sprite-emblemas-caja">
-        <EmblemasTocables lista={lista} clave={clave} src={assetUrl(sprite)} proporcion={3 / 4} onToque={onToque} manos={manosDe(clave)} />
-        {reaccion && <GloboCara key={reaccion.n} cara={manosDe(clave)?.cara} texto={reaccion.texto} grito={reaccion.grito} />}
+        <EmblemasTocables lista={lista} clave={clave} src={assetUrl(sprite)} proporcion={3 / 4} onToque={onToque} manos={manosJugadorDe(clave)} fijos={!tocable} />
+        {reaccion && <GloboCara key={reaccion.n} cara={tocable ? alOtroLado(manosDe(clave)?.cara) : manosDe(clave)?.cara} texto={reaccion.texto} grito={reaccion.grito} />}
       </div>
     </div>
   );
 }
+
+/**
+ * Con el diálogo en globo (a la izquierda de su cara), lo que dice al tocarla va del otro lado, a la derecha de la
+ * cara, para no encimarse.
+ */
+const alOtroLado = (cara?: Cara): Cara | undefined => (cara ? { ...cara, x: 100 - cara.x, lado: 'der' } : cara);
 
 /** Círculo un poco más grande que el emblema, con el borde difuminado (en % de una caja de esa proporción). */
 const mascara = (e: Emblema, proporcion: number) =>
