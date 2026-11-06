@@ -209,6 +209,19 @@ Sashi y Aylin **no existen** en la línea original.
 5. La rivalidad: Cami en Dulce Frío, el beso, Nikki y Rikka en el bar y lo que sigue; termina con el descubrimiento de quiénes son realmente (1 h 30 min). Se mantienen 7 capítulos (decidido por el autor el 2026-11-02): así Génesis++ sigue siendo la versión alternativa del Capítulo 5.
 6. Consecuencias del descubrimiento; se abren las dos ramas (hacia el 7A o el 7B) y se juegan en este capítulo. Se revela la cara del Rey Malvado. En la rama del 7A: la fusión de Rikka y Cami en AnothergIrl y la batalla final de las cinco manifestaciones. En la rama del 7B, la fusión falla por un conflicto de fusión entre las dos.
 7. Los dos epílogos (A o B, según el Capítulo 6). Detalle: «Capítulos 4 a 7» más abajo.
+
+**Cuánta novela y cuánta pelea hay en cada capítulo** (dicho por el autor el 2026-11-06): `[CANON]`
+
+| Capítulo | Novela y pelea |
+| --- | --- |
+| 1 | Mucho diálogo, pocas peleas |
+| 2 | Equilibrado entre novela y RPG |
+| 3 | El de más peleas |
+| 4 | Como el 1: mucho diálogo, pocas peleas |
+| 5 | Casi sin peleas: más novela |
+| 6 | Equilibrado, tirando a peleas |
+| 7 (epílogos) | Pura novela |
+
 7A. Epílogo de la rama del colapso del mundo real con el de la IA y de la fusión de Rikka y Cami en The AnothergIrl, que pasa en el Capítulo 6 (`final_canon_2`). El nombre se escribe así, **AnothergIrl**: con la A y la I en mayúscula. `[CANON]` `TODO(canon)`: confirmar si las mayúsculas forman «AI» a propósito (como la regla de las vocales).
 7B. Epílogo tras el salto temporal: Cami vuelve con Jair (`final_canon_1`).
 
