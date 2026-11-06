@@ -255,3 +255,4 @@ En el Torneo (`npm run dev`, desde Extras):
 - La historia de Nikki en Boringram dice «La Lechuza»; el correo del repositorio dice «granja-bots-final-final-v2».
 - Con el juego en inglés, lo mismo (The Owl).
 - (Capítulo 2) En el celular, cerca de las 4:48, la notificación de Glitch: «milka está en vivo». Se lee completa.
+- (Capítulo 3, al despertar) En Boringram, la publicación de Ari sobre la convención y su perfil `ari.cosplay` (foto en placeholder).

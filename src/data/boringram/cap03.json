@@ -27,6 +27,26 @@
       "comentarios": [],
       "desbloqueo": "cap03_despertar_06",
       "cuando": "0 09:37"
+    },
+    {
+      "id": "ari_convencion",
+      "autor": "ari",
+      "tipo": "texto",
+      "texto": "el año pasado esa convención olía a axila y cebolla. cero ventilación. juré no volver. pero ya firmé contrato, así que ahí estaré, sonriendo 🙂 traigan desodorante, se los suplico",
+      "likes": 18400,
+      "comentarios": [
+        {
+          "usuario": "fan_de_ari",
+          "texto": "te vamos a ver igual reina 😍"
+        },
+        {
+          "usuario": "ari",
+          "texto": "con desodorante."
+        }
+      ],
+      "desbloqueo": "cap03_despertar_06",
+      "cuando": "0 09:12",
+      "_nota": "Semilla de Ari (pedido del autor, 2026-11-06): no quiere ir a la convención del Capítulo 5, donde Cami y Rikka la ven, pero ya firmó contrato. Borrador de Claude."
     }
   ],
   "notificaciones": [

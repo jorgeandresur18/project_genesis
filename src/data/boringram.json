@@ -38,6 +38,17 @@
       "seguidos": 380,
       "te_sigue": true,
       "desbloqueo": "cap02_t_bp28"
+    },
+    "ari": {
+      "usuario": "ari.cosplay",
+      "nombre": "Ari",
+      "foto": "PLACEHOLDER:ari_perfil",
+      "bio": "cosplayer · 35 · firmas y fotos en convenciones (con costo) · no respondo DMs",
+      "publicaciones": 1873,
+      "seguidores": 412000,
+      "seguidos": 31,
+      "desbloqueo": "cap03_despertar_06",
+      "_nota": "Ari (Arianni): la chica real del mundo de la historia en la que se basa Rikka; personaje ficticio. Semilla pedida por el autor, 2026-11-06. Usuario y bio propuestos por Claude."
     }
   },
   "publicaciones": [
