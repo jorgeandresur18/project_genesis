@@ -128,13 +128,11 @@ que Claude hace solo, con sus pruebas automáticas (`npm test`, rutas, simulador
 anota en `docs/PRUEBAS_EN_CASA.md` para la noche.
 
 **Decisiones del autor (respuesta corta):**
-1. **Publicar en `main`:** ¿se sube ya lo de la demo (solo el Capítulo 1 en los desbloqueables, el menú que no se toca
-   antes de aparecer, los enlaces de Lolabúm, las cajas de texto nuevas) o se espera a probarlo de noche? Publicar en
-   tandas, por el límite de Vercel.
+1. ~~Publicar en `main`~~ **Hecho:** publicada la 1.1.4 (6 de noviembre, orden del autor).
 2. **Jefes de la torre como peleadores del torneo:** hoy están muy por encima de los héroes (Comandante ×3 gana la
    final de la Copa Leyenda el 99 %). Propuesta de Claude: que peleen con números de héroe (sus ataques y su especial,
    con la vida y la defensa de un héroe de su estilo). ¿Sí?
-3. **Billy, demasiado fuerte** (100 % en la final individual): ¿se le baja junto con lo anterior?
+3. ~~Billy, demasiado fuerte~~ **Hecho** (6 de noviembre): un poco más fuerte que el resto (~7 puntos sobre Jordy en las finales), sin que se note tanto.
 4. **Cuándo se desbloquean Jordy y Billy** en el torneo (hoy, desde ya; `TODO(canon)`).
 5. **Peleadores nuevos que propuso Claude:** Nail (roba potenciadores), Lady (copia el último ataque), Mike y Nora
    (dúo), Tzai (controla a un rival un turno) y GENESIS (cambia una regla; toca el canon). ¿Cuáles?

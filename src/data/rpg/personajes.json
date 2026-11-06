@@ -359,15 +359,15 @@
       "filtro": "sepia(0.7) saturate(1.6) hue-rotate(-25deg) brightness(1.05)",
       "seguido": true,
       "base": {
-        "ps": 46,
-        "atq": 8,
-        "def": 6,
+        "ps": 25,
+        "atq": 4,
+        "def": 3,
         "vel": 4
       },
       "crece": {
-        "ps": 8,
-        "atq": 1.25,
-        "def": 0.9,
+        "ps": 6.8,
+        "atq": 1.06,
+        "def": 0.77,
         "vel": 0.2
       },
       "ataques": [
@@ -494,7 +494,7 @@
         },
         "texto": "{quien} junta a todos los rivales en un círculo de sillas invisible. Las ondas llegan a todos a la vez. [Relleno: borrador de Claude, sin sprites propios]"
       },
-      "escala": 1.0,
+      "escala": 1,
       "sonido": "cachetada"
     },
     "influencer": {

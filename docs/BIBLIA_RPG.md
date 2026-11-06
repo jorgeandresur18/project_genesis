@@ -673,7 +673,7 @@ Comparados con Jair (`base` PS 30, ATQ 5, DEF 3, VEL 8; sube por nivel PS 6, ATQ
 |---|---|---|---|---|---|
 | **Jair** (para comparar) | 30 (+6) | 5 (+1) | 3 (+0,6) | 8 (+0,5) | — |
 | **Jordy** | 28 (+5,5) | 7 (+1,2) | 2 (+0,4) | 11 (+0,6) | Pega más y antes que Jair, pero aguanta menos. |
-| **Billy** | 46 (+8) | 8 (+1,25) | 6 (+0,9) | 4 (+0,2) | El tanque: aguanta mucho y pega fuerte con su cuchillo-espada gigante, pero casi siempre actúa último. |
+| **Billy** | 25 (+6,8) | 4 (+1,06) | 3 (+0,77) | 4 (+0,2) | El tanque: aguanta mucho y pega fuerte con su cuchillo-espada gigante, pero casi siempre actúa último. |
 | **Maggi** | 26 (+4,5) | 3 (+0,5) | 2 (+0,4) | 13 (+0,7) | Muy veloz, casi no golpea y es frágil: su fuerza son los estados (dormir y confundir). |
 
 **Ataques (nombres y efectos de borrador):**
@@ -713,7 +713,7 @@ también peleadores del torneo, desde ya (borrador; sprites prestados: la hoja d
 - **Otaku**: Foto sin permiso (a veces paraliza), Explicación del lore (a veces duerme), Abrazo de almohada (se
   protege) y el especial *Técnica prohibida del episodio 400* (a veces confunde).
 - Simulación en simple (final, atento): los dos a la par de Jair (~32–73 %). **Simulación en simple (final, atento):**
-Billy 100 % (demasiado: por balancear), Jordy 66–77 %, Maggi y Nikki ~0 % (el simulador no usa dormir ni confundir:
+Billy ~76–90 % (equilibrado el 2026-11-06: el autor quiere que haya peleadores un poco más fuertes, sin que se note tanto; Billy es uno, apenas por encima de Jordy y el que más aguanta), Jordy 63–76 %, Maggi y Nikki ~0 % (el simulador no usa dormir ni confundir:
 las subestima).
 
 **Arte que haría falta** (para la fase de arte): las hojas de pelea de Jordy, Billy y Maggi (reposo, ataque, daño,

@@ -59,3 +59,17 @@ describe('balance de la torre del Capítulo 3 (con los niveles de cada pelea; pa
     expect(sim(BATALLAS.cap03_rey, true, 600).gana).toBeLessThan(0.95);
   });
 });
+
+describe('balance del torneo: Billy, un poco más fuerte (pedido del autor, 2026-11-06)', () => {
+  it('en las finales en simple, Billy le gana a Jordy por poco y no las gana casi siempre', async () => {
+    const { TORNEO, armarRonda } = await import('../src/engine/torneo');
+    const m = TORNEO.modalidades.find((x) => x.peleadores === 1)!;
+    const final = TORNEO.rondas.length - 1;
+    const media = (h: string) => TORNEO.copas.reduce((s, c) => s + sim(armarRonda(c, final, m, [h]), true, 400).gana, 0) / TORNEO.copas.length;
+    const billy = media('billy');
+    const jordy = media('jordy');
+    console.log('torneo', JSON.stringify({ billy, jordy }));
+    expect(billy).toBeGreaterThan(jordy - 0.03);
+    expect(billy).toBeLessThan(0.92);
+  });
+});
