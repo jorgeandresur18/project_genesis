@@ -188,3 +188,8 @@ primero. Las pruebas automáticas y el simulador ya lo usan (el equilibrio no se
 
 - [ ] **La esencia:** no se ve en el juego. Para mirarla, abrir la consola del navegador (F12) al empezar una pelea: sale «[esencias]» con la de cada héroe. Que en otra partida salgan otras.
 - [ ] **El torneo** (Extras › Torneo Genesis, con `?galeria=todo` para tener todo abierto): elegir tres veces el mismo personaje, o un jefe de la torre (el Sargento, la reina…), y pelear. Que sus ataques y su especial funcionen.
+
+## 14. La ropa de inicio y el robo de Nail (nuevo, 5 de noviembre, noche)
+
+- [ ] **Partida nueva › Equipo:** Rikka con la flor y las prendas de sacerdotisa; Cami con el traje azul y la placa de piloto; Jair sin nada.
+- [ ] **Las termas del Capítulo 2** (después de la decisión del traje): en Equipo, Rikka con el traje rojo y las prendas ya no están en ninguna parte.
