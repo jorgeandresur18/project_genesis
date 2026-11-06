@@ -9,9 +9,9 @@ const O = FICHAS.objetos;
 const D = BATALLAS.bastion as DatosBatalla;
 
 describe('el equipo de la biblia', () => {
-  it('las 9 prendas tienen su espacio, se equipan y no se usan en la pelea', () => {
+  it('las 17 prendas (9 de la biblia y 8 de la propuesta del 2026-11-05) tienen su espacio, se equipan y no se usan en la pelea', () => {
     const ropa = Object.values(O).filter((o) => o.tipo === 'equipo');
-    expect(ropa).toHaveLength(9);
+    expect(ropa).toHaveLength(17);
     for (const o of ropa) {
       expect(esEquipo(o), o.nombre).toBe(true);
       expect(usableEnPelea(o), o.nombre).toBe(false);

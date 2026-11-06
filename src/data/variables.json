@@ -91,5 +91,19 @@
   "refuerzo_atq_cami": 0,
   "refuerzo_def_cami": 0,
   "refuerzo_atq_rikka": 0,
-  "refuerzo_def_rikka": 0
+  "refuerzo_def_rikka": 0,
+  "mochila_gorra_repartidor": 0,
+  "mochila_casco_obra": 0,
+  "mochila_lentes_lectura": 0,
+  "mochila_vincha_anime": 0,
+  "mochila_camisa_oficina": 0,
+  "mochila_delantal_billy": 0,
+  "mochila_chanclas": 0,
+  "mochila_botas_seguridad": 0,
+  "mochila_cafe_maquina": 0,
+  "mochila_botiquin_oficina": 0,
+  "mochila_antidoto_universal": 0,
+  "mochila_proteina": 0,
+  "mochila_crema_antiarrugas": 0,
+  "mochila_caramelo_acido": 0
 }

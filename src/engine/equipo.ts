@@ -80,5 +80,8 @@ export function usarPermanente(vars: Vars, id: string, heroe: string, nivelActua
       [`mochila_${id}`]: cantidad(vars, id) - 1,
     };
   }
-  return { ...vars, [`nivel_${heroe}`]: nivelActual + o.niveles, [`xp_${heroe}`]: 0, [`mochila_${id}`]: cantidad(vars, id) - 1 };
+  // El caramelo ácido baja un nivel, pero nunca por debajo del 1 (en el 1 no se gasta).
+  const nuevo = Math.max(1, nivelActual + o.niveles);
+  if (nuevo === nivelActual) return null;
+  return { ...vars, [`nivel_${heroe}`]: nuevo, [`xp_${heroe}`]: 0, [`mochila_${id}`]: cantidad(vars, id) - 1 };
 }

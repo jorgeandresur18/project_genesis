@@ -1,4 +1,5 @@
 // Los consumibles de la tabla del autor, el stock por capítulo y comprar desde el título (docs/BIBLIA_RPG.md, secciones 14 y 15).
+import { existsSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { crearLuchador, usarObjeto, type Heroe } from '../src/engine/batalla';
 import { BATALLAS, FICHAS } from '../src/engine/batallas';
@@ -60,10 +61,11 @@ describe('los consumibles', () => {
     }
   });
 
-  it('la tienda vende lo que existe, con su dibujo, y tiene los mismos artículos en inglés', () => {
+  it('la tienda vende lo que existe, con su dibujo si lo tiene, y tiene los mismos artículos en inglés', () => {
+    // Los nuevos del 2026-11-05 van sin dibujo hasta la fase de arte (greyboxing): la tienda muestra el recuadro de su color.
     for (const x of tiendaEs.tienda) {
       expect(O[x.objeto], x.objeto).toBeTruthy();
-      expect(O[x.objeto].icono, x.objeto).toBeTruthy();
+      if (O[x.objeto].icono) expect(existsSync(`public/${O[x.objeto].icono}.webp`), x.objeto).toBe(true);
     }
     expect(tiendaEn.tienda).toHaveLength(tiendaEs.tienda.length);
   });

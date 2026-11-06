@@ -217,6 +217,48 @@
     },
     {
       "descripcion": "Permanently raises 10 levels. One per chapter."
+    },
+    {
+      "descripcion": "For the head. +2 SPD. Gets there fast; still gets there late. Equip it from Equipment."
+    },
+    {
+      "descripcion": "For the head. +4 DEF, −1 SPD. Safety first, except in the paycheck."
+    },
+    {
+      "descripcion": "For the head. +5% crit. For spotting other people's mistakes."
+    },
+    {
+      "descripcion": "For the head. +3 ATK. Yells the attack's name louder."
+    },
+    {
+      "descripcion": "Outfit. +2 ATK, +2 DEF. Monday's armor."
+    },
+    {
+      "descripcion": "Outfit. +5 DEF, −2 SPD. A tank, like Billy. Smells like the grill."
+    },
+    {
+      "descripcion": "For the feet. +4 SPD, −2 DEF. Comfort over dignity."
+    },
+    {
+      "descripcion": "For the feet. +3 DEF, −1 SPD. Steel toe."
+    },
+    {
+      "descripcion": "Fills the special bar a little and wakes up an ally. Tastes like cardboard, works."
+    },
+    {
+      "descripcion": "+30 HP to the whole party. Expired band-aids included."
+    },
+    {
+      "descripcion": "Removes every status: poison, burn, confusion, paralysis, sleep and ice."
+    },
+    {
+      "descripcion": "Attack +2 for good. Taken outside of fights, from Equipment. One sold per chapter."
+    },
+    {
+      "descripcion": "Defense +2 for good. Used outside of fights, from Equipment. One sold per chapter."
+    },
+    {
+      "descripcion": "Drops 1 level for good (to level down on purpose). Outside of fights. One sold per chapter."
     }
   ]
 }

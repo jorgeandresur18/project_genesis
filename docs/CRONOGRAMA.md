@@ -151,6 +151,10 @@ Rikka (manos, nalgadas, la marca a las 7, el grito a los 30); el CeBiDol desde E
 
 ## Ideas anotadas (por diseñar)
 
+**Arte pendiente de objetos:** los 14 agregados el 5 de noviembre (gorra de repartidor, casco de obra, lentes de lectura, vincha de anime, camisa de oficina, delantal de Billy's, chanclas, botas de seguridad, café de máquina, botiquín de oficina, antídoto universal, proteína, crema antiarrugas, caramelo ácido) van sin dibujo: la tienda muestra el recuadro de su color. Cuando haya dibujos, `tools/objetos.py`.
+
+**Por decidir (objetos con mecánicas nuevas, 🔧 en `OBJETOS_PROPUESTA.txt`):** audífonos, hoodie de hackatón, uniforme de Dulce Frío, chaleco reflectivo, medias de la suerte, pendrive de GENESIS, gafete, llavero de Boringplace, amuleto del Invierno, Turbo Vatio, cerveza de 9 %, hielo, spray de pimienta, bomba de humo, granada de confeti, cupón 2×1, multivitamínico, bebida isotónica, curso online y libro de autoayuda.
+
 **Por construir (diseño aprobado):** la **esencia** (`BIBLIA_RPG.md`, sección 21) y el **torneo con los 8 jefes de la torre y personajes repetidos** (sección 17).
 
 **Dos Boringram (idea del autor, 2026-11-05).** Hoy hay uno solo: lo que muestra depende de las escenas vistas en *cualquier* partida (`snapshots`), así que al empezar de nuevo ya aparecen publicaciones del futuro.

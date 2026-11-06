@@ -399,3 +399,27 @@ describe('los especiales del Rey (Capítulo 3)', () => {
     expect(decidirEnemigo(s, D3, rey).tipo).toBe('nada');
   });
 });
+
+describe('objetos nuevos de la propuesta (los que ya sabe hacer el juego, 2026-11-05)', () => {
+  const objetos = FICHAS.objetos as Record<string, Parameters<typeof usarObjeto>[0] & { espacio?: string }>;
+  it('están los 14, con su efecto', () => {
+    const ids = ['gorra_repartidor', 'casco_obra', 'lentes_lectura', 'vincha_anime', 'camisa_oficina', 'delantal_billy', 'chanclas', 'botas_seguridad', 'cafe_maquina', 'botiquin_oficina', 'antidoto_universal', 'proteina', 'crema_antiarrugas', 'caramelo_acido'];
+    for (const k of ids) expect(objetos[k], k).toBeDefined();
+    expect(['gorra_repartidor', 'casco_obra', 'lentes_lectura', 'vincha_anime'].every((k) => objetos[k].espacio === 'cabeza')).toBe(true);
+  });
+  it('la proteína y la crema suben para siempre; el caramelo ácido baja un nivel (nunca del 1) y no va en las peleas', async () => {
+    const { usarPermanente } = await import('../src/engine/equipo');
+    const { usableEnPelea } = await import('../src/engine/batalla');
+    expect(usarPermanente({ mochila_proteina: 1 }, 'proteina', 'jair', 5, objetos.proteina)).toMatchObject({ refuerzo_atq_jair: 2 });
+    expect(usarPermanente({ mochila_crema_antiarrugas: 1 }, 'crema_antiarrugas', 'jair', 5, objetos.crema_antiarrugas)).toMatchObject({ refuerzo_def_jair: 2 });
+    expect(usarPermanente({ mochila_caramelo_acido: 1 }, 'caramelo_acido', 'jair', 5, objetos.caramelo_acido)).toMatchObject({ nivel_jair: 4 });
+    expect(usarPermanente({ mochila_caramelo_acido: 1 }, 'caramelo_acido', 'jair', 1, objetos.caramelo_acido)).toBeNull();
+    expect(usableEnPelea(objetos.caramelo_acido)).toBe(false);
+  });
+  it('el antídoto universal saca todos los estados', () => {
+    const h = crearLuchador('h', 'jair', 'heroe', FICHAS.heroes.jair as unknown as Heroe, 5);
+    Object.assign(h, { confundido: 2, quemado: 2, paralizado: 2, dormido: 2, congelado: 2, envenenado: { danio: 3, turnos: 2 } });
+    usarObjeto(objetos.antidoto_universal, h);
+    expect([h.confundido, h.quemado, h.paralizado, h.dormido, h.congelado, h.envenenado]).toEqual([0, 0, 0, 0, 0, null]);
+  });
+});

@@ -344,6 +344,79 @@
       "precio": 1500,
       "descripcion": "Sube 10 niveles para siempre. Se vende uno por capítulo.",
       "stock_por_capitulo": 1
+    },
+    {
+      "objeto": "gorra_repartidor",
+      "precio": 70,
+      "descripcion": "Para la cabeza. +2 VEL. Llega rápido; igual llega tarde. Se equipa desde Equipo."
+    },
+    {
+      "objeto": "casco_obra",
+      "precio": 90,
+      "descripcion": "Para la cabeza. +4 DEF, −1 VEL. Seguridad ante todo, menos en el sueldo."
+    },
+    {
+      "objeto": "lentes_lectura",
+      "precio": 110,
+      "descripcion": "Para la cabeza. +5 % de crítico. Para ver los errores ajenos."
+    },
+    {
+      "objeto": "vincha_anime",
+      "precio": 100,
+      "descripcion": "Para la cabeza. +3 ATQ. Grita el nombre del ataque más fuerte."
+    },
+    {
+      "objeto": "camisa_oficina",
+      "precio": 85,
+      "descripcion": "Traje. +2 ATQ, +2 DEF. La armadura del lunes."
+    },
+    {
+      "objeto": "delantal_billy",
+      "precio": 120,
+      "descripcion": "Traje. +5 DEF, −2 VEL. Tanque, como Billy. Huele a parrilla."
+    },
+    {
+      "objeto": "chanclas",
+      "precio": 50,
+      "descripcion": "Para los pies. +4 VEL, −2 DEF. Comodidad sobre dignidad."
+    },
+    {
+      "objeto": "botas_seguridad",
+      "precio": 75,
+      "descripcion": "Para los pies. +3 DEF, −1 VEL. Puntera de acero."
+    },
+    {
+      "objeto": "cafe_maquina",
+      "precio": 35,
+      "descripcion": "Llena un poco la barra del especial y despierta a un aliado. Sabe a cartón, funciona."
+    },
+    {
+      "objeto": "botiquin_oficina",
+      "precio": 70,
+      "descripcion": "+30 PS a todo el equipo. Con curitas vencidas."
+    },
+    {
+      "objeto": "antidoto_universal",
+      "precio": 60,
+      "descripcion": "Saca todos los estados: veneno, quemadura, confusión, parálisis, sueño y hielo."
+    },
+    {
+      "objeto": "proteina",
+      "precio": 400,
+      "descripcion": "Ataque +2 para siempre. Se toma fuera de las peleas, desde Equipo. Se vende una por capítulo.",
+      "stock_por_capitulo": 1
+    },
+    {
+      "objeto": "crema_antiarrugas",
+      "precio": 400,
+      "descripcion": "Defensa +2 para siempre. Se usa fuera de las peleas, desde Equipo. Se vende una por capítulo.",
+      "stock_por_capitulo": 1
+    },
+    {
+      "objeto": "caramelo_acido",
+      "precio": 100,
+      "descripcion": "Baja 1 nivel para siempre (sirve para bajar de nivel a propósito). Fuera de las peleas. Se vende uno por capítulo.",
+      "stock_por_capitulo": 1
     }
   ]
 }

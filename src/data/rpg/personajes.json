@@ -2084,6 +2084,104 @@
       "vel": -1,
       "texto": "Pies. +2 DEF, −1 VEL.",
       "icono": "objetos/zapatos_plataforma"
+    },
+    "gorra_repartidor": {
+      "nombre": "Gorra de repartidor",
+      "tipo": "equipo",
+      "espacio": "cabeza",
+      "vel": 2,
+      "texto": "Cabeza. +2 VEL. Llega rápido; igual llega tarde."
+    },
+    "casco_obra": {
+      "nombre": "Casco de obra",
+      "tipo": "equipo",
+      "espacio": "cabeza",
+      "def": 4,
+      "vel": -1,
+      "texto": "Cabeza. +4 DEF, −1 VEL. Seguridad ante todo, menos en el sueldo."
+    },
+    "lentes_lectura": {
+      "nombre": "Lentes de lectura",
+      "tipo": "equipo",
+      "espacio": "cabeza",
+      "critico": 0.05,
+      "texto": "Cabeza. +5 % de crítico. Para ver los errores ajenos."
+    },
+    "vincha_anime": {
+      "nombre": "Vincha de anime",
+      "tipo": "equipo",
+      "espacio": "cabeza",
+      "atq": 3,
+      "texto": "Cabeza. +3 ATQ. Grita el nombre del ataque más fuerte."
+    },
+    "camisa_oficina": {
+      "nombre": "Camisa de oficina con mancha de café",
+      "tipo": "equipo",
+      "espacio": "traje",
+      "atq": 2,
+      "def": 2,
+      "texto": "Traje. +2 ATQ, +2 DEF. La armadura del lunes."
+    },
+    "delantal_billy": {
+      "nombre": "Delantal de Billy's Beef & Beer",
+      "tipo": "equipo",
+      "espacio": "traje",
+      "def": 5,
+      "vel": -2,
+      "texto": "Traje. +5 DEF, −2 VEL. Tanque, como Billy."
+    },
+    "chanclas": {
+      "nombre": "Chanclas",
+      "tipo": "equipo",
+      "espacio": "pies",
+      "vel": 4,
+      "def": -2,
+      "texto": "Pies. +4 VEL, −2 DEF. Comodidad sobre dignidad."
+    },
+    "botas_seguridad": {
+      "nombre": "Botas de seguridad",
+      "tipo": "equipo",
+      "espacio": "pies",
+      "def": 3,
+      "vel": -1,
+      "texto": "Pies. +3 DEF, −1 VEL. Puntera de acero."
+    },
+    "cafe_maquina": {
+      "nombre": "Café de máquina",
+      "tipo": "mejora",
+      "carga": 15,
+      "texto": "{quien} se toma un café de máquina. Sabe a cartón, pero funciona: barra +{n}."
+    },
+    "botiquin_oficina": {
+      "nombre": "Botiquín de oficina",
+      "tipo": "curacion",
+      "objetivo": "equipo",
+      "ps": 30,
+      "texto": "{quien} abre el botiquín de la oficina: curitas vencidas y algo de fe. +{n} PS."
+    },
+    "antidoto_universal": {
+      "nombre": "Antídoto universal",
+      "tipo": "curacion",
+      "cura_estados": true,
+      "texto": "{quien} se toma el antídoto universal. Universal según la etiqueta: se le van los estados."
+    },
+    "proteina": {
+      "nombre": "Proteína «Smart Flab»",
+      "tipo": "permanente",
+      "atq": 2,
+      "texto": "{quien} se toma la proteína Smart Flab sabor vainilla. Ataque +2 para siempre."
+    },
+    "crema_antiarrugas": {
+      "nombre": "Crema antiarrugas",
+      "tipo": "permanente",
+      "def": 2,
+      "texto": "{quien} se pone la crema antiarrugas. Piel de acero: defensa +2 para siempre."
+    },
+    "caramelo_acido": {
+      "nombre": "Caramelo ácido",
+      "tipo": "permanente",
+      "niveles": -1,
+      "texto": "{quien} se come el caramelo ácido. Le baja un nivel. Nadie sabe por qué alguien querría esto."
     }
   },
   "retratos": {

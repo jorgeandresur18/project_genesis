@@ -460,6 +460,13 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
 | pastelillo herbal | Pastelillo herbal | curación | Cura toda la vida, pero confunde 3 turnos a quien se lo come (pedido del autor, 2026-11-05; precio propuesto: 90) |
 | pastillas felices | Pastillas felices | táctico | A un rival: lo confunde 3 turnos (pedido del autor, 2026-11-05; precio propuesto: 45) |
 | CeBiDol | CeBiDol | permanente | +2 ATQ y +2 DEF para siempre; se toma fuera de las peleas, desde Equipo (pedido del autor, 2026-11-05; precio propuesto: 400, uno por capítulo) |
+| Café de máquina | Café de máquina | mejora | +15 de barra y despierta a un aliado (propuesta de Claude, agregada el 2026-11-05; precio propuesto: 35) |
+| Botiquín de oficina | Botiquín de oficina | curación | +30 PS a todo el equipo (70) |
+| Antídoto universal | Antídoto universal | curación | Saca todos los estados (60) |
+| Proteína «Smart Flab» | Proteína «Smart Flab» | permanente | +2 ATQ para siempre, fuera de las peleas (400, una por capítulo) |
+| Crema antiarrugas | Crema antiarrugas | permanente | +2 DEF para siempre, fuera de las peleas (400, una por capítulo) |
+| Caramelo ácido | Caramelo ácido | permanente | −1 nivel para siempre (nunca del 1), fuera de las peleas (100, uno por capítulo) |
+| Equipo nuevo | (8 prendas) | equipo | Cabeza: gorra de repartidor (+2 VEL, 70), casco de obra (+4 DEF −1 VEL, 90), lentes de lectura (+5 % crítico, 110), vincha de anime (+3 ATQ, 100). Traje: camisa de oficina con mancha de café (+2 ATQ +2 DEF, 85), delantal de Billy's Beef & Beer (+5 DEF −2 VEL, 120). Pies: chanclas (+4 VEL −2 DEF, 50), botas de seguridad (+3 DEF −1 VEL, 75). |
 | galleta clásica | Galleta clásica | curación | +20 PS |
 | galleta con grageas | Galleta arcoíris | curación | +20 PS a todo el equipo y quita un estado |
 | galleta brownie | Galleta brownie | curación | +50 PS y quita un estado |

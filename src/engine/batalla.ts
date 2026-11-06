@@ -652,7 +652,7 @@ export function usarObjeto(o: Objeto, h: Luchador, d?: { base: Stats; crece: Sta
 export const tipoDe = (o: Objeto): TipoObjeto =>
   o.tipo ?? (o.niveles ? 'permanente' : o.ps || o.cura_toda || o.revive || o.cura_estados || o.quita_veneno ? 'curacion' : o.veneno || o.protege || o.confunde || o.paraliza ? 'tactico' : 'mejora');
 /** Lo que se puede usar en una pelea (el equipo y la colección, no). */
-export const usableEnPelea = (o: Objeto) => !['equipo', 'coleccion'].includes(tipoDe(o)) && !esRefuerzo(o);
+export const usableEnPelea = (o: Objeto) => !['equipo', 'coleccion'].includes(tipoDe(o)) && !esRefuerzo(o) && !((o.niveles ?? 0) < 0);
 /** Un permanente que sube estadísticas para siempre (el CeBiDol): solo se toma fuera de las peleas. */
 export const esRefuerzo = (o: Objeto) => tipoDe(o) === 'permanente' && !o.niveles && !!(o.atq || o.def);
 /** A quién se aplica un objeto. */
