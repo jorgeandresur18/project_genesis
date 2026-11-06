@@ -9,7 +9,7 @@ Generado por `node tools/condensar.mjs proponer cap01 cap01_001 cap01_g1_007` (C
 - [x] `cap01_001 + cap01_003` — narración
   - Viernes, cinco y media de la tarde. El calor de la oficina tiene la consistencia de una sopa.
   - El aire acondicionado lleva tres meses «en mantenimiento». Igual que la quincena.
-  - → Viernes, cinco y media de la tarde. El calor de la oficina tiene la consistencia de una sopa. El aire acondicionado lleva tres meses «en mantenimiento». Igual que la quincena.
+  - → Viernes, cinco y media de la tarde. El calor de la oficina tiene a todos de mal humor y con el trasero sudado pegado a la silla. El aire acondicionado lleva tres meses «en mantenimiento». Igual que la quincena.
 
 - [x] `cap01_008 + cap01_009` — Jair
   - «Se va». Como si el sueldo fuera un bus que se pasó de parada.
@@ -120,6 +120,108 @@ Generado por `node tools/condensar.mjs proponer cap01 cap01_001 cap01_g1_007` (C
   - Equipo: el pago se corre para el otro viernes. ¡Ánimo, que aquí somos familia!
   - → Equipo: el pago se va para el otro viernes. ¡Ánimo, que aquí somos familia!
 
+- [x] `cap01_005` (segunda tanda del autor)
+  - antes: Joven, lo apagué, lo prendí y le recé. Sigue sin internet.
+  - → Joven, lo apagué, lo prendí y hasta lo hice bendecir por un sacerdote. Sigue sin internet. ¿Qué necesita, un exorcismo?
+
+- [x] `cap01_006` (segunda tanda del autor)
+  - antes: (Treinta años. Ingeniero de software. Y mi trabajo es pedirle a la gente que desenchufe cosas.)
+  - → (Treinta años. Ingeniero de software. Y mi trabajo es pedirle a la gente que desenchufe cosas y las vuelva a enchufar.)
+
+- [x] `cap01_o05` (segunda tanda del autor)
+  - antes: Es inteligente. Lo dice en la caja. Pero no se conecta. Y yo pagué por inteligente.
+  - → Es inteligente. Lo dice en la caja. Pero no se conecta. Y yo pagué por una inteligente, no por una simple refrigeradora.
+
+- [x] `cap01_o08` (segunda tanda del autor)
+  - antes: Joven, si la apago se me daña la carne.
+  - → Joven, si la apago se me dañan la carne y la leche.
+
+- [x] `cap01_o09` (segunda tanda del autor)
+  - antes: Entonces le recomiendo elegir entre la carne y el internet.
+  - → Entonces le recomiendo elegir entre la carne, la leche o el internet.
+
+- [x] `cap01_o10` (segunda tanda del autor)
+  - antes: ¿Y por qué tengo que elegir?
+  - → ¿Y por qué diablos tengo que elegir?
+
+- [x] `cap01_o13` (segunda tanda del autor)
+  - antes: ¿Y me van a llamar de verdad?
+  - → ¿Y de verdad me van a llamar, o es solo una excusa para no atender mi problema?
+
+- [x] `cap01_o15` (segunda tanda del autor)
+  - antes: Que tenga un buen día.
+  - → Que tenga un buen día, señora.
+
+- [x] `cap01_o16` (segunda tanda del autor)
+  - antes: Cuelga. En la pantalla, la cola de llamadas en espera marca treinta y dos. El reloj marca las cinco y cuarenta. El aire acondicionado no marca nada.
+  - → Cuelga. En la pantalla, la cola de llamadas en espera marca treinta y dos. El reloj marca las cinco y cuarenta. El aire acondicionado no marca nada: ni el termómetro le funciona.
+
+- [x] `cap01_o17` (segunda tanda del autor)
+  - antes: En el escritorio de al lado, un compañero come un sánduche frío con la mirada perdida en una hoja de cálculo. Lleva tres semanas sin decir una frase completa. Jair lo envidia un poco.
+  - → En el escritorio de al lado, un compañero come un sánduche frío con la mirada perdida en una hoja de cálculo. Lleva tres semanas con la misma hoja. Jair lo envidia un poco: sabe que solo finge trabajar.
+
+- [x] `cap01_o18` (segunda tanda del autor)
+  - antes: (Tengo una carrera. Sé programar en seis lenguajes. Sé montar un servidor desde cero. Y estoy aquí, generando tickets para refrigeradoras.)
+  - → (Tengo una carrera. Sé programar en Coffee, en Cobra y en ese lenguaje que tiene un elefante de mascota. Sé montar un servidor desde cero. Y estoy aquí, generando tickets para refrigeradoras.)
+
+- [x] `cap01_o21` (segunda tanda del autor)
+  - antes: Saca el celular y, por costumbre, abre Geekdump: la página donde los programadores del mundo suben sus proyectos para que otros programadores los ignoren.
+  - → Saca el celular y, por costumbre, abre Geekdump: la página donde los programadores del mundo suben sus proyectos para que otros programadores los ignoren. O se los roben.
+
+- [x] `cap01_o23` (segunda tanda del autor)
+  - antes: (Tres repositorios. «dragones-rpg»: archivado. «nave-espacial-WIP»: archivado. «granja-final-final-v2»: tan abandonado que el README tiene telarañas.)
+  - → (Tres repositorios. «seriesgratis-rpg»: archivado. «cripto-tokens-WIP»: archivado. «granja-bots-final-final-v2»: tan abandonado que el README tiene telarañas.)
+
+- [x] `cap01_010` (segunda tanda del autor)
+  - antes: Jair marca la salida a las 18:00:00 exactas. Es la única rebeldía que se permite.
+  - → Jair marca la salida a las 18:00:00 exactas. Es la única rebeldía que se permite. Total, las horas extra no se las pagan.
+
+- [x] `cap01_011` (segunda tanda del autor)
+  - antes: Afuera la ciudad huele a asfalto caliente y a fritura. El sol ya se fue, pero el calor se queda, como un pariente que no capta indirectas.
+  - → Afuera la ciudad huele a asfalto caliente y a orina fermentada. El sol ya se fue, pero el calor se queda, como un tipo que no capta indirectas.
+
+- [x] `cap01_017` (segunda tanda del autor)
+  - antes: Me dijiste que si entraba me ibas a cobrar doble.
+  - → Me dijiste que si entraba me ibas a vetar del local.
+
+- [x] `cap01_018` (segunda tanda del autor)
+  - antes: Y te iba a cobrar doble. Eso no quita que entraras.
+  - → Sí, pero eso no significa que tengas que hacerme caso al pie de la letra. Podías entrar y comprarme un helado triple.
+
+- [x] `cap01_019` (segunda tanda del autor)
+  - antes: Oye. Hoy fue un día de mierda. Vamos por una. Una sola. Lo juro por mi delantal.
+  - → Oye. Hoy fue un día de mierda. Vamos por una cerveza. Una sola. Lo juro por mi delantal.
+
+- [x] `cap01_020a4` (segunda tanda del autor)
+  - antes: ¿Qué? Así sí me invitan una cerveza. Con uniforme lo único que me piden es el baño.
+  - → ¿Qué? Así sí me invitan una cerveza. Con uniforme lo único que me piden es que les preste el baño.
+
+- [x] `cap01_020b2` (segunda tanda del autor)
+  - antes: ...Ya. Otro día.
+  - → ...Ya. Otro día. Creo que yo también estoy cansada.
+
+- [x] `cap01_020b4` (segunda tanda del autor)
+  - antes: (Otro día. Siempre hay otro día. Es lo bueno de vivir en bucle.)
+  - → (Otro día. Siempre hay otro día. Es lo bueno de vivir en un bucle eterno.)
+
+- [x] `cap01_020b5` (segunda tanda del autor)
+  - antes: Jair toma el bus. Llega a su casa a las siete y diez, sobrio, con hambre y con la sensación de haber esquivado algo, sin saber si era un problema o una oportunidad.
+  - → Jair toma el bus. Llega a su casa a las siete y diez, sobrio, con hambre y con la sensación de haber esquivado algo, sin saber si era un problema o la oportunidad de que algo cambiara en su vida.
+
+- [x] `cap01_021` (segunda tanda del autor)
+  - antes: El bar queda a dos cuadras. Se llama El Último. Nadie recuerda si es por la hora o por la clientela.
+  - → El bar queda a dos cuadras. Se llama La Lechuza. Nadie sabe si es porque abre las veinticuatro horas o por los depredadores que van a cazar presas jóvenes e ingenuas, como lechuzas tras un ratón.
+
+- [x] `cap01_g5m_011h2` (la historia de Nikki en Boringram): el bar ahora se llama La Lechuza.
+  - → Jair la abre. Nikki en La Lechuza, con una cerveza en la mano y las mejillas rojas, sonriéndole al celular. Encima, en letras blancas: «una sola».
+
+- [ ] `cap01_020a` **⚠ choca con el canon** (Capítulo 4, escena 3: Jair *había olvidado* que el sábado también trabaja; si aquí ya lo dice, allá no puede olvidarlo). Elige una y márcala [x]:
+  - antes: Una. Mañana... bueno, mañana es sábado. Una.
+  - → Una. Mañana... bueno, mañana es sábado. Creo que no me toca trabajar. Una.
+  - (la tuya, corregida: Una. Mañana... bueno, mañana es sábado y tengo que trabajar, aunque preferiría que no fuera así.)
+
+> Al aplicar el nombre del bar también cambian `docs/CANON.md` (Boringram) y el correo de `src/data/pantallas.json` (`[granja-final-final-v2]` → `[granja-bots-final-final-v2]`).
+
 ## Guion completo del Capítulo 1, combinado
 
 > Así quedaría todo el Capítulo 1 con las fusiones marcadas [x] y los cambios de arriba ya puestos (**el juego no
@@ -142,13 +244,13 @@ Generado por `node tools/condensar.mjs proponer cap01 cap01_001 cap01_g1_007` (C
 #### fondos/oficina_dia.webp
 
 > ♪ música: afterwork
-`001` — Viernes, cinco y media de la tarde. El calor de la oficina tiene la consistencia de una sopa. El aire acondicionado lleva tres meses «en mantenimiento». Igual que la quincena. <!-- condensado (propuesta de Claude, sin cambios del autor) -->
+`001` — Viernes, cinco y media de la tarde. El calor de la oficina tiene a todos de mal humor y con el trasero sudado pegado a la silla. El aire acondicionado lleva tres meses «en mantenimiento». Igual que la quincena. <!-- ✎ CORREGIDO POR EL AUTOR -->
 
 `004` **Jair:** Gracias por llamar a soporte técnico, le habla Jair. ¿Ya probó apagando y prendiendo el módem?
 
-`005` **Cliente:** Joven, lo apagué, lo prendí y le recé. Sigue sin internet.
+`005` **Cliente:** Joven, lo apagué, lo prendí y hasta lo hice bendecir por un sacerdote. Sigue sin internet. ¿Qué necesita, un exorcismo? <!-- ✎ CORREGIDO POR EL AUTOR -->
 
-`006` **Jair:** (Treinta años. Ingeniero de software. Y mi trabajo es pedirle a la gente que desenchufe cosas.)
+`006` **Jair:** (Treinta años. Ingeniero de software. Y mi trabajo es pedirle a la gente que desenchufe cosas y las vuelva a enchufar.) <!-- ✎ CORREGIDO POR EL AUTOR -->
 
 `007` **Supervisor (chat):** Equipo: el pago se va para el otro viernes. ¡Ánimo, que aquí somos familia! <!-- ✎ CORREGIDO POR EL AUTOR -->
 
@@ -162,39 +264,39 @@ Generado por `node tools/condensar.mjs proponer cap01 cap01_001 cap01_g1_007` (C
 
 `o04` **Jair:** ¿Su... refrigeradora?
 
-`o05` **Cliente:** Es inteligente. Lo dice en la caja. Pero no se conecta. Y yo pagué por inteligente.
+`o05` **Cliente:** Es inteligente. Lo dice en la caja. Pero no se conecta. Y yo pagué por una inteligente, no por una simple refrigeradora. <!-- ✎ CORREGIDO POR EL AUTOR -->
 
 `o06` **Jair:** (Hasta las refrigeradoras tienen expectativas más altas que mi sueldo.) ¿Probó apagándola y prendiéndola? <!-- condensado (propuesta de Claude, sin cambios del autor) -->
 
-`o08` **Cliente:** Joven, si la apago se me daña la carne.
+`o08` **Cliente:** Joven, si la apago se me dañan la carne y la leche. <!-- ✎ CORREGIDO POR EL AUTOR -->
 
-`o09` **Jair:** Entonces le recomiendo elegir entre la carne y el internet.
+`o09` **Jair:** Entonces le recomiendo elegir entre la carne, la leche o el internet. <!-- ✎ CORREGIDO POR EL AUTOR -->
 
-`o10` **Cliente:** ¿Y por qué tengo que elegir?
+`o10` **Cliente:** ¿Y por qué diablos tengo que elegir? <!-- ✎ CORREGIDO POR EL AUTOR -->
 
 `o11` **Jair:** (Porque así funciona todo, señora.)
 
 `o12` **Jair:** Le voy a generar un ticket. Número cuatro, cuatro, siete, dos, uno. Un técnico la llamará en un plazo de tres a cinco días hábiles.
 
-`o13` **Cliente:** ¿Y me van a llamar de verdad?
+`o13` **Cliente:** ¿Y de verdad me van a llamar, o es solo una excusa para no atender mi problema? <!-- ✎ CORREGIDO POR EL AUTOR -->
 
 `o14` **Jair:** ...
 
-`o15` **Jair:** Que tenga un buen día.
+`o15` **Jair:** Que tenga un buen día, señora. <!-- ✎ CORREGIDO POR EL AUTOR -->
 
-`o16` — Cuelga. En la pantalla, la cola de llamadas en espera marca treinta y dos. El reloj marca las cinco y cuarenta. El aire acondicionado no marca nada.
+`o16` — Cuelga. En la pantalla, la cola de llamadas en espera marca treinta y dos. El reloj marca las cinco y cuarenta. El aire acondicionado no marca nada: ni el termómetro le funciona. <!-- ✎ CORREGIDO POR EL AUTOR -->
 
-`o17` — En el escritorio de al lado, un compañero come un sánduche frío con la mirada perdida en una hoja de cálculo. Lleva tres semanas sin decir una frase completa. Jair lo envidia un poco.
+`o17` — En el escritorio de al lado, un compañero come un sánduche frío con la mirada perdida en una hoja de cálculo. Lleva tres semanas con la misma hoja. Jair lo envidia un poco: sabe que solo finge trabajar. <!-- ✎ CORREGIDO POR EL AUTOR -->
 
-`o18` **Jair:** (Tengo una carrera. Sé programar en seis lenguajes. Sé montar un servidor desde cero. Y estoy aquí, generando tickets para refrigeradoras.)
+`o18` **Jair:** (Tengo una carrera. Sé programar en Coffee, en Cobra y en ese lenguaje que tiene un elefante de mascota. Sé montar un servidor desde cero. Y estoy aquí, generando tickets para refrigeradoras.) <!-- ✎ CORREGIDO POR EL AUTOR -->
 
 `o19` **Jair:** (Algún día voy a hacer algo grande. Algo mío. Totalmente mío. Algún día. Llevo diciendo «algún día» desde los veintidós. O desde mucho antes…) <!-- ✎ CORREGIDO POR EL AUTOR -->
 
-`o21` — Saca el celular y, por costumbre, abre Geekdump: la página donde los programadores del mundo suben sus proyectos para que otros programadores los ignoren.
+`o21` — Saca el celular y, por costumbre, abre Geekdump: la página donde los programadores del mundo suben sus proyectos para que otros programadores los ignoren. O se los roben. <!-- ✎ CORREGIDO POR EL AUTOR -->
 
 `o22` — Su perfil. Un calendario de cuadritos que deberían ser verdes. Todos grises. El último commit es de hace dos años y dice «fix: ahora sí».
 
-`o23` **Jair:** (Tres repositorios. «dragones-rpg»: archivado. «nave-espacial-WIP»: archivado. «granja-final-final-v2»: tan abandonado que el README tiene telarañas.)
+`o23` **Jair:** (Tres repositorios. «seriesgratis-rpg»: archivado. «cripto-tokens-WIP»: archivado. «granja-bots-final-final-v2»: tan abandonado que el README tiene telarañas.) <!-- ✎ CORREGIDO POR EL AUTOR -->
 
 `o24` — Cuatro estrellas en total. Una se la dio él mismo, desde una cuenta falsa. Las otras tres son bots.
 
@@ -202,12 +304,12 @@ Generado por `node tools/condensar.mjs proponer cap01 cap01_001 cap01_g1_007` (C
 
 `o26` **Jair:** (En Geekdump todos tienen un proyecto que va a cambiar el mundo. Yo tengo cuadritos grises y un «funciona en mi máquina».)
 
-`010` — Jair marca la salida a las 18:00:00 exactas. Es la única rebeldía que se permite.
+`010` — Jair marca la salida a las 18:00:00 exactas. Es la única rebeldía que se permite. Total, las horas extra no se las pagan. <!-- ✎ CORREGIDO POR EL AUTOR -->
 
 
 #### fondos/calle_noche.webp
 
-`011` — Afuera la ciudad huele a asfalto caliente y a fritura. El sol ya se fue, pero el calor se queda, como un pariente que no capta indirectas.
+`011` — Afuera la ciudad huele a asfalto caliente y a orina fermentada. El sol ya se fue, pero el calor se queda, como un tipo que no capta indirectas. <!-- ✎ CORREGIDO POR EL AUTOR -->
 
 
 #### fondos/dulce_frio_fachada.webp
@@ -222,18 +324,18 @@ Generado por `node tools/condensar.mjs proponer cap01 cap01_001 cap01_g1_007` (C
 
 `016` **Nikki:** Y en ocho años nunca entraste a comprarme un helado. Qué detalle.
 
-`017` **Jair:** Me dijiste que si entraba me ibas a cobrar doble.
+`017` **Jair:** Me dijiste que si entraba me ibas a vetar del local. <!-- ✎ CORREGIDO POR EL AUTOR -->
 
-`018` **Nikki:** Y te iba a cobrar doble. Eso no quita que entraras.
+`018` **Nikki:** Sí, pero eso no significa que tengas que hacerme caso al pie de la letra. Podías entrar y comprarme un helado triple. <!-- ✎ CORREGIDO POR EL AUTOR -->
 
-`019` **Nikki:** Oye. Hoy fue un día de mierda. Vamos por una. Una sola. Lo juro por mi delantal.
+`019` **Nikki:** Oye. Hoy fue un día de mierda. Vamos por una cerveza. Una sola. Lo juro por mi delantal. <!-- ✎ CORREGIDO POR EL AUTOR -->
 
 
 > **DECISIÓN**
 - `019#0` Aceptar ⟶ va a `020a`
 - `019#1` Decir que estás cansado ⟶ va a `020b` · noche = "sin_bar"
 
-`020a` **Jair:** Una. Mañana... bueno, mañana es sábado. Una.
+`020a` **Jair:** Una. Mañana... bueno, mañana es sábado y tengo que trabajar, aunque preferiría que no fuera así. <!-- ✎ CORREGIDO POR EL AUTOR · ⚠ choca con el canon: ver «Cambios sueltos» -->
 
 `020a1` **Nikki:** Dame dos minutos. No pienso entrar a un bar vestida de cono de fresa.
 
@@ -241,27 +343,27 @@ Generado por `node tools/condensar.mjs proponer cap01 cap01_001 cap01_g1_007` (C
 
 `020a3` — Sale a los cinco minutos, no a los dos: camiseta negra, pantalón negro, el pelo suelto. La gorra va hecha un rollo dentro de la mochila y el delantal asoma por el cierre, como si no quisiera quedarse.
 
-`020a4` **Nikki:** ¿Qué? Así sí me invitan una cerveza. Con uniforme lo único que me piden es el baño.
+`020a4` **Nikki:** ¿Qué? Así sí me invitan una cerveza. Con uniforme lo único que me piden es que les preste el baño. <!-- ✎ CORREGIDO POR EL AUTOR -->
 
 > ⤷ continúa en `021`
 
 `020b` **Jair:** Estoy muerto, Nikki. Otro día.
 
-`020b2` **Nikki:** ...Ya. Otro día.
+`020b2` **Nikki:** ...Ya. Otro día. Creo que yo también estoy cansada. <!-- ✎ CORREGIDO POR EL AUTOR -->
 
 > ♪ música: nightcity
 `020b3` — Lo dice con una de sus sonrisas de cartel, de las entrenadas. Termina de bajar la persiana y se va caminando hacia el otro lado, sola, con el delantal todavía puesto.
 
-`020b4` **Jair:** (Otro día. Siempre hay otro día. Es lo bueno de vivir en bucle.)
+`020b4` **Jair:** (Otro día. Siempre hay otro día. Es lo bueno de vivir en un bucle eterno.) <!-- ✎ CORREGIDO POR EL AUTOR -->
 
-`020b5` — Jair toma el bus. Llega a su casa a las siete y diez, sobrio, con hambre y con la sensación de haber esquivado algo, sin saber si era un problema o una oportunidad.
+`020b5` — Jair toma el bus. Llega a su casa a las siete y diez, sobrio, con hambre y con la sensación de haber esquivado algo, sin saber si era un problema o la oportunidad de que algo cambiara en su vida. <!-- ✎ CORREGIDO POR EL AUTOR -->
 
 > ⤷ continúa en `116`
 
 
 #### fondos/bar_noche.webp
 
-`021` — El bar queda a dos cuadras. Se llama El Último. Nadie recuerda si es por la hora o por la clientela.
+`021` — El bar queda a dos cuadras. Se llama La Lechuza. Nadie sabe si es porque abre las veinticuatro horas o por los depredadores que van a cazar presas jóvenes e ingenuas, como lechuzas tras un ratón. <!-- ✎ CORREGIDO POR EL AUTOR -->
 
 `022` — Luces de neón moradas, una rocola que solo toca canciones de despecho y una barra pegajosa que ha visto cosas.
 
@@ -2333,7 +2435,7 @@ Generado por `node tools/condensar.mjs proponer cap01 cap01_001 cap01_g1_007` (C
 
 #### PANTALLA:boringram_historia
 
-`g5m_011h2` — Jair la abre. Nikki en El Último, con una cerveza en la mano y las mejillas rojas, sonriéndole al celular. Encima, en letras blancas: «una sola».
+`g5m_011h2` — Jair la abre. Nikki en La Lechuza, con una cerveza en la mano y las mejillas rojas, sonriéndole al celular. Encima, en letras blancas: «una sola». <!-- cambia por el nombre nuevo del bar -->
 
 `g5m_011h3` **Jair:** («Una sola».)
 
