@@ -1,4 +1,4 @@
-import { applyChoice } from '../src/engine/logic';
+import { alEntrar, applyChoice } from '../src/engine/logic';
 // El equipo (la ropa: docs/BIBLIA_RPG.md, secciones 14 y 15) y los permanentes fuera de las peleas (src/engine/equipo.ts).
 import { describe, expect, it } from 'vitest';
 import { eligeAtaque, progresoDeVars, tickVeneno, usableEnPelea, type Ataque, type DatosBatalla } from '../src/engine/batalla';
@@ -154,5 +154,20 @@ describe('Nail roba las prendas en las termas (decisión del autor, 2026-11-05)'
       expect(e.choices.length).toBe(3);
       for (const c of e.choices) expect(c.equipo).toEqual(robo.equipo);
     }
+  });
+});
+
+describe('Rikka vende el traje rojo y vuelve a sus prendas (decisión del autor, 2026-11-05)', () => {
+  it('al volver con el kimono, el traje rojo desaparece y queda con las prendas de sacerdotisa', async () => {
+    const cap = (await import('../src/data/chapters/cap02.json')).default as unknown as { scenes: Parameters<typeof alEntrar>[0][] };
+    const e = cap.scenes.find((x) => x.scene_id === 'cap02_p2_092')!;
+    const v = alEntrar(e, { puesto_rikka_traje: 'traje_rojo', mochila_traje_rojo: 0, mochila_prendas_sacerdotisa: 0 });
+    expect(v.puesto_rikka_traje).toBe('prendas_sacerdotisa');
+    expect(quienLleva(v, 'traje_rojo')).toBeNull();
+    expect(v.mochila_traje_rojo).toBe(0);
+  });
+  it('desde ahí lo revenden en Boringplace', async () => {
+    const t = (await import('../src/data/boringplace.json')).default as { tienda: { objeto: string; desbloqueo?: string }[] };
+    expect(t.tienda.find((x) => x.objeto === 'traje_rojo')?.desbloqueo).toBe('cap02_p2_092');
   });
 });

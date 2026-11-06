@@ -1037,11 +1037,14 @@ img.sprite.sprite-swap { animation: sprite-swap-in 180ms ease-out; }
 .title-intro .title-tile { animation-delay: calc(2.65s + var(--i, 0) * 0.1s); }
 @keyframes title-veil { to { opacity: 0; } }
 @keyframes title-logo-in {
-  from { opacity: 0; transform: scale(0.92); filter: blur(14px); }
+  from { opacity: 0; transform: scale(0.92); filter: blur(14px); visibility: hidden; }
+  30% { visibility: hidden; }
   to { opacity: 1; transform: scale(1); filter: blur(0); }
 }
 @keyframes title-sheen { from { background-position: 120% 0; opacity: 1; } to { background-position: -20% 0; opacity: 1; } }
-@keyframes title-item-in { from { opacity: 0; transform: translateY(10px); } }
+/* Mientras esperan su turno no se ven, y tampoco se pueden tocar (visibility): recién al ir apareciendo (el 40 % de la
+   animación) se pueden tocar. Antes se les podía hacer clic invisibles. */
+@keyframes title-item-in { 0% { opacity: 0; transform: translateY(10px); visibility: hidden; } 40% { visibility: hidden; } }
 @media (prefers-reduced-motion: reduce) {
   .title-intro-velo::after, .title-intro .title-logo, .title-intro .title-logo::after, .title-intro .title-logo + p, .title-intro .title-primary, .title-intro .title-secondary, .title-intro .title-tile { animation: none; }
   .title-intro-velo::after, .title-intro .title-logo::after { display: none; }

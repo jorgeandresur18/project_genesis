@@ -14492,6 +14492,16 @@
     },
     {
       "scene_id": "cap02_p2_092",
+      "equipo": {
+        "quita": [
+          "traje_rojo"
+        ],
+        "viste": {
+          "rikka": {
+            "traje": "prendas_sacerdotisa"
+          }
+        }
+      },
       "chapter": 2,
       "background": "PLACEHOLDER:bosque_otono",
       "video_fondo": null,

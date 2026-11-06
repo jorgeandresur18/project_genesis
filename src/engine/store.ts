@@ -6,7 +6,7 @@ import { almacenSeguro, sanear } from './guardado';
 import { escribirEquipo } from './batalla';
 import type { Vars } from './types';
 import { config, scenes, variables } from './story';
-import { applyChoice, enterScene, resolveNext, visibleChoices } from './logic';
+import { applyChoice, enterScene, resolveNext, visibleChoices, alEntrar } from './logic';
 import { PAYFOE_INICIAL, acreditar, conGanados, nuevoIdPartida, transferir, type PayFoe } from './payfoe';
 
 export const SAVE_SLOTS = 6;
@@ -330,7 +330,7 @@ export const useStore = create<Store>()(
           set({ error: error ?? 'Error desconocido', mode: 'normal' });
           return;
         }
-        let nextVars = vars;
+        let nextVars = alEntrar(scene, vars);
         // La música vigente viaja en las variables, así suena bien al cargar o saltar desde el mapa.
         if (scene.audio) nextVars = { ...nextVars, _musica: scene.audio };
         const patch: Partial<Store> = {};

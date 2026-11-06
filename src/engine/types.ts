@@ -100,6 +100,8 @@ export interface Scene {
    * ni para la galería (si contara, el 100 % sería imposible).
    */
   secreto?: boolean;
+  /** Al entrar en la escena: cambios de ropa (como `equipo` de una opción; p. ej. Rikka vuelve a sus prendas). */
+  equipo?: Choice['equipo'];
   /**
    * Vapor de las termas encima de la escena (detrás del diálogo): «espeso» casi tapa la silueta, «medio» deja
    * ver, «ligero» apenas se nota y «rafaga» se lo lleva de golpe el viento (y queda ligero). Solo atmósfera: la

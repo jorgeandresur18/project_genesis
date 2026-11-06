@@ -417,6 +417,12 @@
       "precio": 100,
       "descripcion": "Baja 1 nivel para siempre (sirve para bajar de nivel a propósito). Fuera de las peleas. Se vende uno por capítulo.",
       "stock_por_capitulo": 1
+    },
+    {
+      "objeto": "traje_rojo",
+      "precio": 160,
+      "descripcion": "Traje. +4 DEF, +3 ATQ. Un traje de combate rojo que una sacerdotisa vendió en la ciudadela del Otoño. Ya lo están revendiendo.",
+      "desbloqueo": "cap02_p2_092"
     }
   ]
 }

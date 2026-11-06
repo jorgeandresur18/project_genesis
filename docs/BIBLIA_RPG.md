@@ -442,6 +442,8 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
   +5 % de crítico) de Cami. **Jair empieza sin nada** («el único desnudo es Jair»). **En las termas (Capítulo 2)**, cuando
   Nail roba las prendas, desaparecen de la partida (de la mochila o de quien las lleve) y Rikka queda con el **traje de
   combate rojo** puesto (lo que tuviera en el traje vuelve a la mochila): lo hace la decisión de esa escena con `equipo`.
+  Cuando Rikka vende el traje rojo y vuelve con su kimono (`cap02_p2_092`), se pone otra vez las prendas y el traje rojo
+  desaparece; desde ahí lo **revenden en Boringplace** (160 tokens, precio propuesto; `desbloqueo` de la fila de la tienda).
 - **Se compran en Boringplace:** el gorro de navidad, la chaqueta jean y las zapatillas buenas.
 
 **Hecho (2026-11-04):** todos los consumibles de esta tabla (`src/data/rpg/personajes.json`), a la venta en Boringplace (precios propuestos por Claude). Se pueden usar en cualquier pelea. **Decisión del autor:** Hepatol quita solo el veneno; la galleta clásica solo sube vida; arcoíris, brownie y red velvet suben vida y quitan un estado (propuesta de Claude: el veneno, si no la quemadura y, si no, la confusión).

@@ -39,7 +39,7 @@ export interface Articulo {
 export interface BoringplaceData {
   desbloqueo: string | null;
   /** Lo que se compra con monedas: la clave del objeto de las peleas y su precio (se vende a la mitad). */
-  tienda: { objeto: string; precio: number; descripcion: string; /** Cuántos se venden por capítulo (lo permanente); sin esto, sin límite. */ stock_por_capitulo?: number }[];
+  tienda: { objeto: string; precio: number; descripcion: string; /** Cuántos se venden por capítulo (lo permanente); sin esto, sin límite. */ stock_por_capitulo?: number; /** Escena desde la que se vende (como en los artículos). */ desbloqueo?: string }[];
   vacio: { titulo: string; texto: string };
   textos: Record<string, string>;
   articulos: Articulo[];
@@ -115,6 +115,6 @@ export function useBoringplace() {
     ajenos: articulos.filter((a) => !a.de_jair),
     deJair: articulos.filter((a) => a.de_jair),
     // En la demo publicada, solo lo de la tienda del Capítulo 1 (`tienda_solo` en juego.json).
-    tienda: abierto ? data.tienda.filter((x) => OBJETOS_TIENDA.has(x.objeto) && (!config.tienda_solo || config.tienda_solo.includes(x.objeto))) : [],
+    tienda: abierto ? data.tienda.filter((x) => OBJETOS_TIENDA.has(x.objeto) && open({ desbloqueo: x.desbloqueo ?? null }) && (!config.tienda_solo || config.tienda_solo.includes(x.objeto))) : [],
   };
 }

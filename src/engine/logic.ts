@@ -37,6 +37,14 @@ export function applyChoice(choice: Choice, vars: Vars): Vars {
   return out;
 }
 
+/** Las variables al entrar en una escena con `equipo` (una copia; sin `equipo`, las mismas). */
+export const alEntrar = (scene: Scene, vars: Vars): Vars => {
+  if (!scene.equipo) return vars;
+  const out = { ...vars };
+  cambiarRopa(out, scene.equipo);
+  return out;
+};
+
 /** Saca una prenda de la partida: de la mochila y de quien la lleve puesta. */
 function sacarPrenda(vars: Vars, id: string) {
   vars[`mochila_${id}`] = 0;
