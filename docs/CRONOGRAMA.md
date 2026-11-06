@@ -121,7 +121,37 @@ La misma proyección, para mirarla en el navegador: `docs/proyeccion.html`.
 
 ---
 
-## Para mañana (7 de noviembre, desde la computadora del trabajo: nada que requiera probar)
+## Esta noche y el fin de semana (6 al 8 de noviembre, en la computadora de Jorge)
+
+**Esta noche (viernes):**
+1. **Probar** `docs/PRUEBAS_EN_CASA.md`, secciones 16 a 22 (lo de hoy): los recuerdos de Noodle, el torneo con su
+   mochila y su preparación, los lentes de Jair, los estados, **el prólogo condensado (21)** y **Lady (22)**.
+2. **La pasada de diálogos y chistes del Capítulo 1 desde el bar** (en `docs/guion/cap01_condensado.md` o en
+   `docs/guion/cap01.md`): la regla de los dos mundos (`docs/TONO.md`) y la semilla del orgullo de Rikka, sutil, en
+   las instrucciones a GRAVITY (`docs/SEMILLAS.md`, propuesta C).
+
+**Sábado (jugar y decidir):**
+1. **Jugar el Capítulo 1 completo** con la pelea de práctica (el cabo rojizo) y la sombra de roca, y decidir **si las
+   dos van a la demo publicada** (hoy solo están en `desarrollo`).
+2. **Jugar los Capítulos 2 y 3** buscando lo que no calce. Contestar las preguntas de `docs/guion/cap03_plan.md` y las
+   del Capítulo 2 de «Decisiones pendientes del autor» (abajo).
+3. **Si todo está bien:** decir «publica» y Claude sube la 1.2.0 a `main` (con lo que se decida prender en
+   `demo_publica`).
+
+**Domingo (pensar lo que viene):**
+1. **Capítulo 4:** el nombre de la banda de KJ-pop; cuántas KJPopers distintas (para el arte); los demás amigos nuevos;
+   la pelea de Lady.
+2. **Capítulo 5:** cómo sigue después de la cuenta del bar hasta el descubrimiento (el resto ya está en el canon).
+3. **Capítulo 6, en ideas (sin dibujar):** AnothergIrl y las cinco manifestaciones. Son los diseños que más tiempo de
+   pensar necesitan.
+4. **Si queda tiempo, arte:** lo que falta del Capítulo 2 (`docs/guion/cap02_arte.md`), o las fotos de perfil de Ari y
+   de Lady (hoy en placeholder).
+
+**Respuestas cortas, cuando quiera:** el nombre «Glitch» para la plataforma de Milka y el usuario `ari.cosplay` (los
+propuso Claude); los peleadores nuevos del torneo (Nail, Mike y Nora, Tzai, GENESIS); los objetos de
+`OBJETOS_PROPUESTA.txt`; los precios; la orientación de Jair y Rikka.
+
+## Lo de antes (escrito para el 7 de noviembre, desde la computadora del trabajo)
 
 Allí el autor no puede abrir el juego. Son decisiones que solo puede dar él (con una respuesta corta alcanza) y trabajo
 que Claude hace solo, con sus pruebas automáticas (`npm test`, rutas, simulador). Lo que haya que mirar en pantalla se
@@ -159,7 +189,7 @@ anota en `docs/PRUEBAS_EN_CASA.md` para la noche.
 autor); el inglés de los Capítulos 2 y 3, cuando se cierren sus diálogos; el arte (mosaico más grueso, la mano de
 abajo de espaldas) cuando toque.
 
-**Para la noche (computadora de Jorge):** `docs/PRUEBAS_EN_CASA.md`, secciones 10 a 18.
+**Para la noche (computadora de Jorge):** `docs/PRUEBAS_EN_CASA.md`, secciones 10 a 22.
 
 ## Ideas anotadas (por diseñar)
 
@@ -210,8 +240,9 @@ Se responden cuando toque su semana; mientras, no se inventan.
 - Cuál es el adelanto en la primera convención.
 
 **Capítulo 5**
-- Por qué Cami besa a Jair a propósito.
-- Cómo sigue después de la cuenta del bar, y el medio hasta el descubrimiento.
+- ~~Por qué Cami besa a Jair a propósito~~ **Resuelto** (2026-11-06): siente algo por él y quiere darle celos a Nikki (`docs/CANON.md`).
+- Cómo sigue después de la cuenta del bar, y el medio hasta el descubrimiento (el final ya está: la convención con Ari y Milka y la vuelta a casa a esperar a Jair).
+- El nombre de la banda de KJ-pop (Capítulo 4).
 
 **Modo Retro CRT**
 - Rehacer el logo del televisor con letras propias (hoy imita el de una consola real).
