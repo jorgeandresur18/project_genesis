@@ -147,9 +147,9 @@ La misma proyección, para mirarla en el navegador: `docs/proyeccion.html`.
 4. **Si queda tiempo, arte:** lo que falta del Capítulo 2 (`docs/guion/cap02_arte.md`), o las fotos de perfil de Ari y
    de Lady (hoy en placeholder).
 
-**Respuestas cortas, cuando quiera:** el nombre «Glitch» para la plataforma de Milka y el usuario `ari.cosplay` (los
-propuso Claude); los peleadores nuevos del torneo (Nail, Mike y Nora, Tzai, GENESIS); los objetos de
-`OBJETOS_PROPUESTA.txt`; los precios; la orientación de Jair y Rikka.
+**Respondido el 6 de noviembre:** «Glitch» se queda; los peleadores nuevos del torneo son **Lady y la KJPoper** (hechas);
+Jair y Rikka, heterosexuales. **Quedan para que el autor los revise después:** los objetos de `OBJETOS_PROPUESTA.txt` y los
+precios de la tienda. (Los otros peleadores que propuso Claude, Nail, Mike y Nora, Tzai y GENESIS, no se eligieron.)
 
 ## Lo de antes (escrito para el 7 de noviembre, desde la computadora del trabajo)
 

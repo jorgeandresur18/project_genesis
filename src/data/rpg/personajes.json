@@ -704,6 +704,69 @@
       },
       "escala": 1,
       "sonido": "puno"
+    },
+    "kjpoper": {
+      "nombre": "KJPoper",
+      "sprite": "batalla/jair",
+      "filtro": "hue-rotate(45deg) saturate(1.8) brightness(1.1)",
+      "seguido": true,
+      "_nota": "Las KJPopers: las fans de la banda de KJ-pop, enemigas en hordas en la convención del Capítulo 4; en el torneo, una de ellas pelea (pedido del autor, 2026-11-06). Hoja de Jair con filtro amarillo hasta que tenga arte.",
+      "base": {
+        "ps": 24,
+        "atq": 6,
+        "def": 2,
+        "vel": 12
+      },
+      "crece": {
+        "ps": 4.8,
+        "atq": 1.1,
+        "def": 0.4,
+        "vel": 0.7
+      },
+      "ataques": [
+        {
+          "nombre": "Barra coordinada",
+          "poder": 6,
+          "objetivo": "todos",
+          "usos": 12,
+          "texto": "{quien} levanta la barra luminosa al mismo tiempo que otras cien y la baja sobre todos. [Relleno: borrador de Claude, sin sprites propios]"
+        },
+        {
+          "nombre": "Grito de fan",
+          "poder": 0,
+          "confunde": 2,
+          "usos": 4,
+          "texto": "{quien} le grita a {objetivo} el nombre del integrante favorito, en un tono que no existe. {objetivo} ya no sabe dónde está. [Relleno: borrador de Claude, sin sprites propios]"
+        },
+        {
+          "nombre": "Votación masiva",
+          "poder": 12,
+          "usos": 20,
+          "texto": "{quien} vota tantas veces por su grupo que el golpe le llega a {objetivo} en forma de notificación. [Relleno: borrador de Claude, sin sprites propios]"
+        }
+      ],
+      "hablar": [
+        "¿Cuál es tu integrante favorito? Respuesta incorrecta.",
+        "No es un culto. Es un fandom.",
+        "Lo sigo a todas partes. Bueno, a donde lo dejan ir."
+      ],
+      "especial": {
+        "nombre": "Primera fila",
+        "poder": 4,
+        "golpes": 8,
+        "objetivo": "todos",
+        "posicion": "objetivo",
+        "color": "#ffe14d",
+        "ojos": [
+          50,
+          37,
+          27,
+          13
+        ],
+        "texto": "{quien} empuja como si se abrieran las puertas del concierto, y detrás de ella llegan todas. [Relleno: borrador de Claude, sin sprites propios]"
+      },
+      "escala": 0.95,
+      "sonido": "puno"
     }
   },
   "enemigos": {

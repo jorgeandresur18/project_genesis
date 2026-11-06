@@ -414,6 +414,22 @@
     "Fancam": {
       "nombre": "Fancam",
       "texto": "{quien} pulls out her phone, films vertically and charges forward like she's in the front row. [Filler: Claude draft, no sprites of their own]"
+    },
+    "Barra coordinada": {
+      "nombre": "Synchronized Lightstick",
+      "texto": "{quien} raises the lightstick at the same time as a hundred others and brings it down on everyone. [Filler: Claude draft, no sprites of their own]"
+    },
+    "Grito de fan": {
+      "nombre": "Fan Scream",
+      "texto": "{quien} screams the name of her favorite member at {objetivo}, in a pitch that should not exist. {objetivo} no longer knows where they are. [Filler: Claude draft, no sprites of their own]"
+    },
+    "Votación masiva": {
+      "nombre": "Mass Voting",
+      "texto": "{quien} votes for her group so many times that the hit reaches {objetivo} as a notification. [Filler: Claude draft, no sprites of their own]"
+    },
+    "Primera fila": {
+      "nombre": "Front Row",
+      "texto": "{quien} shoves like the concert doors just opened, and all the others come in behind her. [Filler: Claude draft, no sprites of their own]"
     }
   }
 }

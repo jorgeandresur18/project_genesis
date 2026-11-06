@@ -9,7 +9,7 @@ Qué trae cada versión. La que está en curso lleva `-dev` y todavía no se pub
 - **PayFoe:** los tokens de la partida pasan a PayFoe al terminar cada capítulo (eligiendo cuántos); también objetos al torneo.
 - **Maggie:** sus cuatro objetos contra el dormido y el confundido. **Jair:** sus lentes de programador.
 - **Estados:** a los jefes les duran la mitad; un golpe despierta al dormido.
-- **Lady** (peleadora nueva del torneo, en desarrollo): su «Copia de fan» toma el daño y el efecto del último ataque que le pegaron.
+- **Lady y la KJPoper** (peleadoras nuevas del torneo, en desarrollo; la copia de Lady): su «Copia de fan» toma el daño y el efecto del último ataque que le pegaron.
 - **Capítulo 1:** el prólogo condensado y corregido por el autor (el bar se llama La Lechuza; el chiste de la carne y la leche).
 - **Boringram:** Milka en vivo a las 4:48 (Capítulo 2) y la publicación de Ari sobre la convención (Capítulo 3).
 - **Capítulo 1 (en prueba, no publicar sin el visto bueno del autor):** la pelea contra la sombra de roca en el claro.

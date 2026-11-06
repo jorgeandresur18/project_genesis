@@ -263,3 +263,4 @@ En el Torneo (`npm run dev`, desde Extras):
   menú dice qué va a copiar y con cuánto poder; al usarlo, Lady golpea con su animación y hace ese daño (y el estado,
   si el golpe copiado dejaba uno).
 - Se ve rosada (la hoja de Jair con filtro): es provisional hasta que tenga arte.
+- También está la **KJPoper** (amarilla): su «Grito de fan» confunde y «Barra coordinada» pega a todos.

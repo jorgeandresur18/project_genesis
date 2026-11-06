@@ -96,6 +96,7 @@ Género y tono por etapas `[CANON]`: el Capítulo 1 es un isekai adulto (humor n
 - Aspecto: lentes (sus **lentes de programador**, de luz azul; en el RPG, su prenda propia, que lleva puesta desde el inicio de cada partida: dicho por el autor el 2026-11-06), camisa negra estampada de manga corta, pantalón beige.
 - Quiere los beneficios emocionales de una relación sin aceptar la autonomía de la otra persona; se relaciona con lo que necesita que los demás sean. Usa a Cami como «perro de ataque» para pelear lo que él evita. Comprenderlo no es absolverlo. `[CANON]`
 - Puede entender su problema sin estar dispuesto a cambiar. En el fondo sigue deseando a Ari. `[CANON]`
+- **Orientación** (decisión del autor, 2026-11-06): **heterosexual.** `[CANON]`
 
 ### Nikki (Nicole)
 - 30 años, pelo negro. Amiga con derecho de Jair desde hace 8 años. **No viven juntos.** Nunca han logrado una relación estable aunque él se lo ha pedido. `[CANON]`
@@ -133,6 +134,7 @@ Género y tono por etapas `[CANON]`: el Capítulo 1 es un isekai adulto (humor n
 - Base real: Ari, diva y a veces hiriente en la vida real. Rikka es sumisa, empática y le da pánico el dinero.
 - **Es la protagonista original de GRAVITY**, con el lore y la historia más extensos. Que Cami tenga el arco más trágico no la desplaza. `[CANON]`
 - Para compensar su complejo de inferioridad, Jair le borró el orgullo y la hizo dócil y sumisa. `[CANON]`
+- **Orientación** (decisión del autor, 2026-11-06): **heterosexual.** `[CANON]`
 - Cuando conoce a Jair no es orgullosa: le quedan vestigios de orgullo que asoman a veces, sobre todo orgullo de su posición noble (familia del reino ancestral), no orgullo frente a él. `[CANON]`
 - **Su vínculo con Jair** (texto del autor: `docs/RIKKA.md`, 2026-11-02): **algo sin nombre**, con muy poco contacto físico. Empieza genuino y se vuelve dependencia: necesita sentirse **elegida**, y sus celos crecen mientras Jair responde con distancia, cinismo y apatía; los dos siguen volviendo. **Su forma de amar es completamente suya:** Jair le editó el orgullo, no el amor. `[CANON]`
 - **El quiebre:** el ciclo ocurre en la convivencia y se rompe con la caja de Pandora. Al descubrir que Jair le borró el orgullo, ya no confía en él como antes; algo se quiebra, pero **queda un remanente**. `[CANON]`
