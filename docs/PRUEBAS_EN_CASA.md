@@ -241,4 +241,5 @@ En el Torneo (`npm run dev`, desde Extras):
 - [ ] En el Torneo, al tocar «Empezar»: la **preparación** (la ropa de cada peleador y la mochila de combate: 4, 6 u 8 según la modalidad). Cambiar una prenda, «Equipo de fábrica», armar la mochila y «¡A pelear!». Al terminar, lo que sobró vuelve a la mochila.
 - [ ] Al terminar un capítulo con objetos en la mochila: «¿Quieres pasar objetos a la mochila del torneo?» (hasta 5).
 - [ ] En una ronda del torneo, usar algo de la mochila y ver que después baja.
+- [ ] **El rival se cura:** en una ronda del torneo, bajarle la vida a un rival y ver si se toma algo (texto del objeto y número verde).
 

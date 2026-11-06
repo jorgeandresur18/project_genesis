@@ -344,6 +344,8 @@ export interface DatosBatalla {
   musica_jefe?: string;
   /** Objetos con que empieza la mochila si tiene menos (p. ej. un revivir). */
   mochila_inicial?: Record<string, number>;
+  /** La mochila de combate del rival (el torneo): la usa para curar a los suyos cuando quedan bajos de vida. */
+  mochila_rival?: Record<string, number>;
   /**
    * Pelea de la vida real (el bar, antes de entrar a GENESIS): no cuentan los niveles ni la mochila del juego. Los
    * héroes pelean con el nivel del .json y la mochila vacía, y al terminar no se guarda nada de eso (solo el premio).

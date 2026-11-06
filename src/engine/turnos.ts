@@ -25,6 +25,7 @@ import {
   ponerEsencia,
   esenciaDe,
   turnosDormido,
+  usarObjeto,
   vanPerdiendo,
   enCampo,
   vivo,
@@ -61,6 +62,8 @@ export interface EstadoPelea {
   /** Las monedas de la partida (lo que traía más lo que se gana en esta pelea). */
   monedas: number;
   mochila: Record<string, number>;
+  /** La mochila de combate del rival (el torneo; ver `mochila_rival`). */
+  mochilaRival?: Record<string, number>;
   /** Cuántos de la horda ya salieron. */
   salieron: number;
   /** Los héroes que atacaron el turno anterior (los que no pueden repetir, descansan este). */
@@ -124,6 +127,7 @@ export function estadoInicial(d: DatosBatalla, progreso?: Progreso, semilla?: st
     }),
     enemigos: [],
     monedas: progreso?.monedas ?? 0,
+    mochilaRival: { ...(d.mochila_rival ?? {}) },
     mochila: Object.fromEntries(
       [...new Set([...Object.keys(progreso?.mochila ?? {}), ...Object.keys(d.mochila_inicial ?? {})])].map((k) => [
         k,
@@ -183,6 +187,8 @@ export type DecisionEnemigo =
   | { tipo: 'especial'; especial: Especial; blanco: Luchador }
   /** Un ataque normal (ya gastó el uso), contra `blancos` (ya repartidos o desviados). */
   | { tipo: 'ataque'; ataque: Ataque; blancos: Luchador[] }
+  /** Usó un objeto de su mochila de combate en un compañero (o en sí mismo): ya curó `n`. */
+  | { tipo: 'objeto'; objeto: string; blanco: Luchador; n: number }
   /** No le queda ningún ataque posible: espera. */
   | { tipo: 'nada' };
 
@@ -191,6 +197,21 @@ export type DecisionEnemigo =
  * la distracción, el remate o la traición y el uso del ataque) y devuelve lo que hay que mostrar.
  * `arena`: en la arena de prueba la Mega Bola sale al azar, aunque sea solo por traición.
  */
+/** Por debajo de esta parte de su vida, el rival piensa en curar a uno de los suyos (y lo hace a veces). */
+const CURA_RIVAL = { umbral: 0.35, probabilidad: 0.7 };
+function curaDelRival(estado: EstadoPelea, d: DatosBatalla, azar: () => number): DecisionEnemigo | null {
+  const bolsa = estado.mochilaRival;
+  if (!bolsa) return null;
+  const objeto = Object.keys(bolsa).find((k) => bolsa[k] > 0 && d.objetos[k] && (d.objetos[k].ps || d.objetos[k].cura_toda) && !d.objetos[k].revive);
+  if (!objeto) return null;
+  const bajos = estado.enemigos.filter((x) => vivo(x) && x.clon === undefined && !x.desterrado && x.ps < x.psMax * CURA_RIVAL.umbral);
+  if (!bajos.length || azar() >= CURA_RIVAL.probabilidad) return null;
+  const blanco = bajos.sort((a, b) => a.ps / a.psMax - b.ps / b.psMax)[0];
+  bolsa[objeto]--;
+  const n = usarObjeto(d.objetos[objeto], blanco);
+  return { tipo: 'objeto', objeto, blanco, n };
+}
+
 export function decidirEnemigo(
   estado: EstadoPelea,
   d: DatosBatalla,
@@ -210,6 +231,9 @@ export function decidirEnemigo(
   const en = d.enemigos[e.clave];
   const hs = estado.heroes.filter(enCampo);
   if (!hs.length) return { tipo: 'nada' };
+  // La mochila de combate del rival: si uno de los suyos quedó bajo de vida, a veces lo cura (como haría el jugador).
+  const cura = curaDelRival(estado, d, azar);
+  if (cura) return cura;
   const esp = en.especial;
   const bola = en.bola_toxica;
   const rematado = bola && estado.remate ? estado.heroes.find((x) => x.id === estado.remate && vivo(x)) : undefined;

@@ -56,6 +56,8 @@ export interface DatosTorneo {
   /** Qué pelea de la historia abre a cada peleador («libre»: desde el inicio; null: todavía no). */
   desbloqueo_peleadores: Record<string, string[] | string | null>;
   /** Los rivales que se sortean en cada ronda (salvo la gran final) y lo bajos que salen los personajes. */
+  /** Lo que puede llevar el rival en su mochila de combate, por copa. */
+  mochila_rival: Record<string, string[] | string>;
   rivales: { jefes: string[]; companeros: string[]; nivel_por_ronda: number[]; /** Los compañeros personajes, un poco más bajos (pegan más que un soldado). */ nivel_companeros?: number };
 }
 
@@ -234,6 +236,16 @@ export function armarRonda(
       nivelH = Math.max(1, Math.round(nivelRival * factor * (TORNEO.rivales.nivel_companeros ?? 1)));
     } else hordaK = h;
   }
+  // La mochila de combate del rival: del tamaño que da la modalidad, con lo que da la copa (sorteado con la semilla).
+  const opciones = TORNEO.mochila_rival[c.id];
+  const mochilaRival: Record<string, number> = {};
+  if (Array.isArray(opciones) && opciones.length) {
+    const azarM = azarDe(`${semilla ?? 'fijo'}|${c.id}|${m.id}|${ronda}|mochila`);
+    for (let i = 0; i < (m.mochila_combate ?? 4); i++) {
+      const k = semilla ? opciones[Math.floor(azarM() * opciones.length)] : opciones[i % opciones.length];
+      mochilaRival[k] = (mochilaRival[k] ?? 0) + 1;
+    }
+  }
   const reemplazar = (ls: Linea[]) =>
     ls.map((l) => ({ ...l, texto: l.texto.replace('{ronda}', `${c.nombre}, ${r.nombre}`).replace('{defensa}', String(defensas + 1)) }));
   const dialogos: Record<string, Linea[]> = { ...base.dialogos };
@@ -253,6 +265,7 @@ export function armarRonda(
     objetos: FICHAS.objetos,
     retratos: { ...FICHAS.retratos, 'Nikki, la campeona': FICHAS.retratos.Nikki, 'Soldado veterano': FICHAS.retratos.Soldado },
     mochila_inicial: bolsa?.mochila ?? TORNEO.mochila,
+    mochila_rival: mochilaRival,
     // Lo que lleva puesto cada peleador (decisión del autor, 2026-11-06: en el torneo sí hay objetos y amuletos).
     equipo_fijo: Object.fromEntries(heroes.map((k) => [k, bolsa?.equipo?.[k] ?? TORNEO.equipo_peleadores[k]]).filter((x): x is [string, string[]] => Array.isArray(x[1]))),
     huir: false,

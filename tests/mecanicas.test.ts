@@ -466,3 +466,21 @@ describe('a los jefes, dormido, congelado y paralizado les duran la mitad (decis
   });
 });
 
+
+describe('la mochila de combate del rival (decisión del autor, 2026-11-06)', () => {
+  it('cuando uno de los suyos queda bajo de vida, el rival gasta un objeto en curarlo', async () => {
+    const { TORNEO, armarRonda } = await import('../src/engine/torneo');
+    const d = armarRonda(TORNEO.copas[0], 0, TORNEO.modalidades[0], ['jair']);
+    expect(Object.values(d.mochila_rival ?? {}).reduce((a, b) => a + b, 0)).toBe(TORNEO.modalidades[0].mochila_combate);
+    const s = estadoInicial(d);
+    const { crearLuchador } = await import('../src/engine/batalla');
+    const rival = crearLuchador('r', d.jefe.enemigo, 'enemigo', d.enemigos[d.jefe.enemigo], 10);
+    s.enemigos = [rival];
+    rival.ps = 1;
+    const antes = Object.values(s.mochilaRival ?? {}).reduce((a, b) => a + b, 0);
+    const r = decidirEnemigo(s, d, rival, fijo(0));
+    expect(r.tipo).toBe('objeto');
+    expect(rival.ps).toBeGreaterThan(1);
+    expect(Object.values(s.mochilaRival ?? {}).reduce((a, b) => a + b, 0)).toBe(antes - 1);
+  });
+});

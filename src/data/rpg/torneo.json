@@ -352,5 +352,26 @@
     ],
     "nivel_companeros": 0.75
   },
-  "_nota_mochila": "En el torneo nadie regala nada (decisión del autor, 2026-11-06): cada peleador usa solo lo de la mochila del torneo (comprado con PayFoe o traído de las partidas). Antes se regalaban 2 aguas y un Elixit por ronda."
+  "_nota_mochila": "En el torneo nadie regala nada (decisión del autor, 2026-11-06): cada peleador usa solo lo de la mochila del torneo (comprado con PayFoe o traído de las partidas). Antes se regalaban 2 aguas y un Elixit por ronda.",
+  "mochila_rival": {
+    "_nota": "La mochila de combate del rival (decisión del autor, 2026-11-06): del mismo tamaño que la del jugador según la modalidad; se sortea (con la semilla del torneo) de lo que da cada copa. La usa para curar a los suyos cuando quedan bajos de vida.",
+    "bronce": [
+      "vida",
+      "galleta_clasica"
+    ],
+    "plata": [
+      "vida",
+      "galleta_clasica",
+      "galleta_arcoiris"
+    ],
+    "oro": [
+      "galleta_red_velvet",
+      "galleta_arcoiris",
+      "vida"
+    ],
+    "leyenda": [
+      "galleta_brownie",
+      "galleta_red_velvet"
+    ]
+  }
 }

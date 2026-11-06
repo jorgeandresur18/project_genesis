@@ -1990,6 +1990,15 @@ function Pelea({
       return;
     }
     if (decision.tipo === 'distraido') return decir(fmt(t('batalla.distraido'), { quien: e.nombre }));
+    // La mochila de combate del rival: curó a uno de los suyos.
+    if (decision.tipo === 'objeto') {
+      const o = d.objetos[decision.objeto];
+      luz(decision.blanco.id, '#7dff9a');
+      numero(decision.blanco.id, `+${decision.n}`, 'cura');
+      playChip('cambio');
+      forzar();
+      return decir(fmt(o.texto, { quien: decision.blanco.nombre, n: decision.n }));
+    }
     const hs = b.current.heroes.filter(enCampo);
     // Después de la Mega Bola de la traición: la cachetada que remata, que no falla aunque esquive.
     if (decision.tipo === 'remate') {
