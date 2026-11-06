@@ -12,7 +12,17 @@ export interface Stats {
 }
 /** Lo que hace un cebo con efecto al golpearlo. */
 export type EfectoCebo = 'paraliza' | 'veneno' | 'confunde' | 'quema' | 'congela' | 'duerme' | 'explota';
+/**
+ * Un golpe que además puede dejar un estado (docs/BIBLIA_RPG.md: el puño de Jordan paraliza, la hipnosis de Maggi
+ * duerme): con probabilidad `prob`, al blanco que sigue de pie. Con varios estados, sale uno al azar.
+ */
+export interface Deja {
+  estado: 'paralizado' | 'dormido' | 'confundido' | 'quemado' | Array<'paralizado' | 'dormido' | 'confundido' | 'quemado'>;
+  prob: number;
+}
 export interface Ataque {
+  /** Si pega, a veces deja un estado (ver `Deja`). */
+  deja?: Deja;
   /** No hace daño: paraliza al blanco tantos turnos (la parálisis de pesadilla de la sombra). */
   paraliza?: number;
   /** No hace daño: confunde al blanco tantos turnos (el beso de Nikki; ver CONFUSION). */
@@ -64,6 +74,8 @@ export interface Ataque {
  * objetivo es «todos», se reparten entre los enemigos de pie (si queda uno solo, van todos para él).
  */
 export interface Especial {
+  /** Al terminar, a veces deja un estado a cada blanco que sigue de pie (la sesión de grupo de Maggi; ver `Deja`). */
+  deja?: Deja;
   /** La Espada de las estaciones (el Rey): a cada blanco que queda en pie le cae una estación al azar (ver turnos.ts). */
   estaciones?: boolean;
   /** La Tajada del abismo (el Rey): destierra a un rival al azar entre [min, max] turnos (nunca al último en pie). */
@@ -144,6 +156,8 @@ export interface Heroe {
   hablar: string[];
   /** Lo que dice con «Hablar» si está confundido (incoherente). Sin esto, se le revuelven las palabras. */
   hablar_confundido?: string[];
+  /** Un filtro sobre su sprite (un placeholder hecho con la hoja de otro, mientras no tenga la suya: Jordan, Billy, Maggi). */
+  filtro?: string;
   /** Ataques que aprende al llegar a un nivel (Jair: el Cebo, en el 6). */
   aprende?: { nivel: number; ataque: Ataque }[];
   /** El sonido de sus golpes (ataque y especial). */

@@ -105,3 +105,40 @@ describe('el torneo: jefes de la torre y personajes repetidos (decisiones del au
     expect(s.heroes.every((h) => h.esencia)).toBe(true);
   });
 });
+
+describe('los nuevos peleadores del torneo (pedido del autor, 2026-11-05)', () => {
+  it('Jordan, Billy y Maggi tienen ficha, ataques y especial, y Nikki pelea como peleadora', async () => {
+    const { HEROES_TORNEO, LIBRES_TORNEO, NIKKI_PELEADORA, fichaPeleador } = await import('../src/engine/torneo');
+    for (const k of LIBRES_TORNEO) {
+      expect(HEROES_TORNEO, k).toContain(k);
+      const f = fichaPeleador(k);
+      expect(f.ataques.length, k).toBeGreaterThanOrEqual(3);
+      expect(f.especial, k).toBeDefined();
+      expect(f.seguido, k).toBe(true);
+    }
+    const n = fichaPeleador(NIKKI_PELEADORA);
+    expect(n.nombre).toBe('Nikki');
+    expect(n.ataques.map((a) => a.nombre)).toContain('Beso confusión');
+  });
+  it('una ronda en triple con Billy, Maggi y Nikki es una pelea válida', async () => {
+    const { estadoInicial } = await import('../src/engine/turnos');
+    const d = armarRonda(TORNEO.copas[0], 0, TORNEO.modalidades[2], ['billy', 'maggi', 'nikki'], 0, 't');
+    const s = estadoInicial(d, undefined, d.semilla_esencia);
+    expect(s.heroes.map((h) => h.clave)).toEqual(['billy', 'maggi', 'nikki']);
+  });
+});
+
+describe('golpes que dejan un estado (`deja`: el puño de Jordan, la hipnosis de Maggi)', () => {
+  it('con la probabilidad, deja el estado; sin ella, no; a uno caído o que ya lo tiene, tampoco', async () => {
+    const { dejarEstado, estadoInicial } = await import('../src/engine/turnos');
+    const d = armarRonda(TORNEO.copas[0], 0, TORNEO.modalidades[0], ['jordan']);
+    const s = estadoInicial(d);
+    const x = s.heroes[0];
+    expect(dejarEstado(s, x, { estado: 'dormido', prob: 0.5 }, () => 0.9)).toBeNull();
+    expect(dejarEstado(s, x, { estado: 'dormido', prob: 0.5 }, () => 0.1)).toBe('dormido');
+    expect(x.dormido).toBeGreaterThan(0);
+    expect(dejarEstado(s, x, { estado: 'dormido', prob: 1 }, () => 0.1)).toBeNull();
+    const y = { ...x, id: 'otro', dormido: 0, ps: 0 };
+    expect(dejarEstado(s, y, { estado: 'quemado', prob: 1 }, () => 0)).toBeNull();
+  });
+});

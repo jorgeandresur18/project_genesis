@@ -32,6 +32,7 @@ import {
   type Ataque,
   type DatosBatalla,
   type Enemigo,
+  type Deja,
   type Especial,
   type Luchador,
   type Progreso,
@@ -549,6 +550,27 @@ export function estadosTerminados(antes: Map<string, EstadoQueTermina[]>, ls: Lu
  */
 export const sufreAlFinal = (antes: Map<string, EstadoQueTermina[]>, l: Luchador, estado: 'envenenado' | 'quemado') =>
   !!antes.get(l.id)?.includes(estado);
+
+/**
+ * El estado que deja un golpe (`deja` de un ataque o de un especial): con su probabilidad, si el blanco sigue de pie,
+ * no es un cebo y no lo tiene ya. Paralizar y dormir respetan el turno libre. Devuelve el estado que quedó, o null.
+ */
+export function dejarEstado(estado: EstadoPelea, x: Luchador, deja: Deja | undefined, azar: () => number = Math.random): EstadoQueTermina | null {
+  if (!deja || !vivo(x) || x.cebo || azar() >= deja.prob) return null;
+  const lista = Array.isArray(deja.estado) ? deja.estado : [deja.estado];
+  const cual = lista[Math.min(lista.length - 1, Math.floor(azar() * lista.length))];
+  if (cual === 'paralizado') {
+    if (noActua(x) || x.inmuneParalisis) return null;
+    paralizarA(estado, x, azar);
+    return 'paralizado';
+  }
+  if (cual === 'confundido') {
+    if (x.confundido > 0 || x.equipo?.sinConfusion) return null;
+    confundirA(estado, x, 2);
+    return 'confundido';
+  }
+  return aplicarEstado(estado, x, cual, azar) ? cual : null;
+}
 
 /**
  * Un especial que a veces quema (`quema`): una sola tirada por uso. Si sale, quema a los blancos que siguen de pie

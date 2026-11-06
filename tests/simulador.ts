@@ -37,6 +37,7 @@ import {
   desterrar,
   estacionAlAzar,
   quemarConEspecial,
+  dejarEstado,
   confundirA,
   decidirEnemigo,
   envenenarConBola,
@@ -119,13 +120,17 @@ function pelea(D: DatosBatalla, listo: boolean, esencias: boolean) {
       h.carga = 0;
       const blancos = esp.objetivo === 'todos' ? vivos : [e];
       for (const b of golpesEspecial(esp, blancos)) if (vivo(b)) resolverGolpe(s, D, h, b, esp.poder);
+      for (const b of blancos) dejarEstado(s, b, esp.deja);
       blancos.filter((b) => !vivo(b)).forEach(cae);
       return;
     }
     gastarUso(h, ataque!);
     const blancos = ataque!.objetivo === 'todos' ? vivos : [e];
     cargar(h, CARGA.atacar);
-    for (const b of blancos) if (!falla(D, h, b)) resolverGolpe(s, D, h, b, ataque!.poder);
+    for (const b of blancos) if (!falla(D, h, b)) {
+      resolverGolpe(s, D, h, b, ataque!.poder);
+      dejarEstado(s, b, ataque!.deja);
+    }
     blancos.filter((b) => !vivo(b)).forEach(cae);
   };
   const actuarEnemigo = (e: Luchador) => {

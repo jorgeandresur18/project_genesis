@@ -49,14 +49,21 @@ export interface DatosTorneo {
 }
 
 export const TORNEO = datos as unknown as DatosTorneo;
-export const HEROES_TORNEO = ['jair', 'cami', 'rikka'];
+export const HEROES_TORNEO = ['jair', 'cami', 'rikka', 'jordan', 'billy', 'maggi'];
+/**
+ * Los que todavía no salen en la historia (Jordan y Billy son del Capítulo 4; Maggi es exclusiva del torneo): se
+ * pueden elegir desde ya (pedido del autor, 2026-11-05). TODO(canon): cuándo se desbloquean Jordan y Billy.
+ */
+export const LIBRES_TORNEO = ['jordan', 'billy', 'maggi'];
+/** Nikki también pelea en el torneo: se gana al vencerla en la gran final (pedido del autor, 2026-11-05). */
+export const NIKKI_PELEADORA = 'nikki';
 /**
  * Los jefes de los pisos de la torre del Capítulo 3: se pueden elegir en el torneo al vencerlos en la torre (decisión
  * del autor, 2026-11-05; los enemigos comunes, no).
  */
 export const JEFES_TORRE = ['reina_bichos', 'jefe_bodega', 'sargento', 'chef', 'maestro_herrero', 'alcaide', 'intendente', 'comandante'];
 
-/** Un jefe de la torre como peleador del jugador: sus números, sus ataques (sin lo que solo sabe hacer la máquina) y su especial. */
+/** Un jefe de la torre (o Nikki) como peleador del jugador: sus números, sus ataques (sin lo que solo sabe hacer la máquina) y su especial. */
 function jefeComoPeleador(k: string): Omit<Heroe, 'nivel'> {
   const e = FICHAS.enemigos[k];
   // Del ataque se quedan el golpe, a quién va y su efecto (confundir, paralizar); las ráfagas de balas son del dibujo de la máquina.

@@ -695,8 +695,15 @@ Comparados con Jair (`base` PS 30, ATQ 5, DEF 3, VEL 8; sube por nivel PS 6, ATQ
   - *Lectura del subconsciente:* lo **confunde**.
   - Especial *Sesión de grupo:* ondas a todos los rivales; cada uno puede quedar dormido o confundido.
 
-**Lo que haría falta en el motor:** un golpe que hace daño y **además** puede paralizar (hoy los ataques que paralizan no
-hacen daño) y un ataque que **duerme** a un rival (hoy dormir solo sale de los cebos). Lo demás ya existe.
+**Hecho en el motor (2026-11-05):** `deja` en un ataque o un especial: si pega, con su probabilidad deja un estado
+(paralizado, dormido, confundido o quemado; con una lista, uno al azar). `dejarEstado` en `engine/turnos.ts`.
+
+**En el torneo (pedido del autor, 2026-11-05):** Jordan, Billy y Maggi ya pelean en el Torneo Genesis con estas fichas
+(borrador, `heroes` de `personajes.json`), elegibles desde ya (`TODO(canon)`: cuándo se desbloquean Jordan y Billy). Sin
+hoja propia: usan la de otro con un filtro de color (Jordan la de Jair, Billy la del soldado, Maggi la de Rikka). Nikki
+también es peleadora: se gana al vencerla en la gran final de cualquier copa. **Simulación en simple (final, atento):**
+Billy 100 % (demasiado: por balancear), Jordan 66–77 %, Maggi y Nikki ~0 % (el simulador no usa dormir ni confundir:
+las subestima).
 
 **Arte que haría falta** (para la fase de arte): las hojas de pelea de Jordan, Billy y Maggi (reposo, ataque, daño,
 especial, derrotado) y sus retratos para la caja de diálogo; mientras tanto, placeholders (como el Rey con el dibujo

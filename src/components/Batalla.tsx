@@ -78,6 +78,7 @@ import {
   ordenDelTurno,
   sufreAlFinal,
   quemarConEspecial,
+  dejarEstado,
   type EstadoQueTermina,
   estadosTerminados,
   golpesDelCanon,
@@ -624,6 +625,15 @@ function Pelea({
       if (!bajoEspecial.current.delete(x.id)) continue;
       if (vivo(x) && !enElAire.current.has(x.id)) setAnims((m) => ({ ...m, [x.id]: 'idle' }));
     }
+  };
+  /** Avisa el estado que dejó un golpe (`dejarEstado`), con su luz. */
+  const avisarEstado = async (x: Luchador, cual: string | null) => {
+    if (!cual) return;
+    luz(x.id, cual === 'quemado' ? '#ff8a3c' : cual === 'confundido' ? '#ff6fae' : cual === 'dormido' ? '#7fb2ff' : '#a64dff', true);
+    playChip(cual === 'paralizado' ? 'paralisis' : 'boing');
+    forzar();
+    const n = cual === 'paralizado' ? x.paralizado : cual === 'confundido' ? x.confundido : cual === 'dormido' ? x.dormido : x.quemado;
+    await decir(fmt(t(cual === 'paralizado' ? 'batalla.paralizado' : cual === 'confundido' ? 'batalla.confundido' : 'batalla.golpe_deja'), { quien: x.nombre, n, estado: t(`batalla.estado_${cual}`) }));
   };
   const paralizar = async (x: Luchador) => {
     paralizarA(b.current, x);
@@ -1571,6 +1581,8 @@ function Pelea({
       forzar();
       await decir(fmt(t('batalla.envenena'), { quien: e.nombre }));
     }
+    // El estado que a veces deja el golpe (el puño de Jordan paraliza, la hipnosis de Maggi duerme).
+    if (!bloqueado) await avisarEstado(e, dejarEstado(b.current, e, ataque.deja));
     if (!vivo(e)) await alCaer(e);
   };
 
@@ -1947,6 +1959,8 @@ function Pelea({
       forzar();
       await decir(fmt(t('batalla.especial_quema'), { quien: x.nombre }));
     }
+    // El estado que a veces deja el especial a cada blanco (la sesión de grupo de Maggi).
+    for (const x of [...new Set(blancos)]) await avisarEstado(x, dejarEstado(b.current, x, e.deja));
     for (const b of blancos) {
       if (vivo(b) || b.cebo) continue;
       if (b.lado === 'enemigo') await alCaer(b);
@@ -2412,6 +2426,7 @@ function Pelea({
               refFigura={(el) => (el ? figuras.current.set(h.id, el) : figuras.current.delete(h.id))}
               sprite={d.personajes[h.clave].sprite}
               escala={d.personajes[h.clave].escala}
+              filtro={d.personajes[h.clave].filtro}
               heroe
               anim={
                 (anims[h.id] ?? 'idle') === 'idle' && vivo(h) && h.paralizado

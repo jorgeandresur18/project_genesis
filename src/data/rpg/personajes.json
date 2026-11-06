@@ -282,6 +282,220 @@
           }
         }
       ]
+    },
+    "jordan": {
+      "nombre": "Jordan",
+      "sprite": "batalla/jair",
+      "filtro": "hue-rotate(160deg) saturate(1.3)",
+      "seguido": true,
+      "base": {
+        "ps": 28,
+        "atq": 7,
+        "def": 2,
+        "vel": 11
+      },
+      "crece": {
+        "ps": 5.5,
+        "atq": 1.2,
+        "def": 0.4,
+        "vel": 0.6
+      },
+      "ataques": [
+        {
+          "nombre": "Puñetazo eléctrico",
+          "poder": 14,
+          "deja": {
+            "estado": "paralizado",
+            "prob": 0.25
+          },
+          "usos": 20,
+          "texto": "{quien} carga el puño como en el gimnasio y le suelta a {objetivo} un puñetazo con chispas. [Relleno: borrador de Claude, sin sprites propios]"
+        },
+        {
+          "nombre": "Combo de calle",
+          "poder": 8,
+          "objetivo": "uno",
+          "usos": 12,
+          "texto": "{quien} le tira a {objetivo} dos golpes rápidos, de los que no salen en ningún video de técnica. [Relleno: borrador de Claude, sin sprites propios]"
+        },
+        {
+          "nombre": "Ctrl+Z de gimnasio",
+          "poder": 0,
+          "cura": 0.25,
+          "usos": 3,
+          "texto": "{quien} se toma la proteína de un trago y estira el cuello. Como si nada. [Relleno: borrador de Claude, sin sprites propios]"
+        }
+      ],
+      "hablar": [
+        "¿Y tú entrenas o solo posas?",
+        "Te invito una cerveza si te caes rápido.",
+        "¿Seguro que no eres IA? Te mueves muy raro."
+      ],
+      "especial": {
+        "nombre": "Ráfaga relámpago",
+        "poder": 7,
+        "golpes": 6,
+        "objetivo": "uno",
+        "posicion": "objetivo",
+        "color": "#4fd2ff",
+        "ojos": [
+          50,
+          37,
+          27,
+          13
+        ],
+        "deja": {
+          "estado": "paralizado",
+          "prob": 0.5
+        },
+        "texto": "{quien} se pone serio por primera vez en el día y suelta una ráfaga de puños con chispas. [Relleno: borrador de Claude, sin sprites propios]"
+      },
+      "escala": 1.08,
+      "sonido": "puno"
+    },
+    "billy": {
+      "nombre": "Billy",
+      "sprite": "batalla/soldado",
+      "filtro": "sepia(0.7) saturate(1.6) hue-rotate(-25deg) brightness(1.05)",
+      "seguido": true,
+      "base": {
+        "ps": 46,
+        "atq": 8,
+        "def": 6,
+        "vel": 4
+      },
+      "crece": {
+        "ps": 8,
+        "atq": 1.25,
+        "def": 0.9,
+        "vel": 0.2
+      },
+      "ataques": [
+        {
+          "nombre": "Corte de carnicero",
+          "poder": 17,
+          "usos": 15,
+          "texto": "{quien} levanta su espada con forma de cuchillo de carnicero y le baja a {objetivo} un tajo que corta hasta la mesa. [Relleno: borrador de Claude, sin sprites propios]"
+        },
+        {
+          "nombre": "Panzazo",
+          "poder": 12,
+          "usos": 20,
+          "texto": "{quien} empuja a {objetivo} con la panza. Con convicción. [Relleno: borrador de Claude, sin sprites propios]"
+        },
+        {
+          "nombre": "Brindis",
+          "poder": 0,
+          "alMismo": true,
+          "aplica": {
+            "atq": 3
+          },
+          "usos": 3,
+          "texto": "{quien} levanta una jarra: «¡Por la casa!». Se la toma de un trago. [Relleno: borrador de Claude, sin sprites propios]"
+        },
+        {
+          "nombre": "Pastelillo de la casa",
+          "poder": 0,
+          "confunde": 2,
+          "usos": 3,
+          "texto": "{quien} le invita a {objetivo} un pastelillo herbal «con extra de compuesto T». {objetivo} ya no sabe dónde está. [Relleno: borrador de Claude, sin sprites propios]"
+        }
+      ],
+      "hablar": [
+        "¿Mesa para uno? Para ti, en el suelo.",
+        "Aquí se paga antes de pelear.",
+        "¡Billy's Beef & Beer! Abrimos hasta tarde."
+      ],
+      "especial": {
+        "nombre": "Parrillada Beef Boy",
+        "poder": 6,
+        "golpes": 6,
+        "objetivo": "todos",
+        "posicion": "centro",
+        "color": "#ff6a2a",
+        "ojos": [
+          52,
+          44,
+          32,
+          22
+        ],
+        "quema": 0.35,
+        "texto": "{quien} prende la parrilla en medio de la pelea. La carne sale volando. Los rivales, también. [Relleno: borrador de Claude, sin sprites propios]"
+      },
+      "escala": 1.3,
+      "sonido": "espada"
+    },
+    "maggi": {
+      "nombre": "Maggi",
+      "sprite": "batalla/rikka",
+      "filtro": "hue-rotate(230deg) saturate(1.2)",
+      "seguido": true,
+      "base": {
+        "ps": 26,
+        "atq": 3,
+        "def": 2,
+        "vel": 13
+      },
+      "crece": {
+        "ps": 4.5,
+        "atq": 0.5,
+        "def": 0.4,
+        "vel": 0.7
+      },
+      "ataques": [
+        {
+          "nombre": "Onda psíquica",
+          "poder": 8,
+          "usos": 20,
+          "texto": "{quien} se lleva dos dedos a la sien y le manda a {objetivo} una onda que no se ve pero se siente. [Relleno: borrador de Claude, sin sprites propios]"
+        },
+        {
+          "nombre": "Hipnosis clínica",
+          "poder": 4,
+          "deja": {
+            "estado": "dormido",
+            "prob": 0.7
+          },
+          "usos": 5,
+          "texto": "{quien} balancea un péndulo delante de {objetivo}: «Estás en un lugar seguro…». [Relleno: borrador de Claude, sin sprites propios]"
+        },
+        {
+          "nombre": "Lectura del subconsciente",
+          "poder": 0,
+          "confunde": 2,
+          "usos": 4,
+          "texto": "{quien} mira a {objetivo} a los ojos y le dice algo de su infancia que nadie sabía. {objetivo} ya no sabe quién es. [Relleno: borrador de Claude, sin sprites propios]"
+        }
+      ],
+      "hablar": [
+        "¿Y eso cómo te hace sentir?",
+        "Tu postura dice mucho de ti. Nada bueno.",
+        "La sesión de hoy se cobra igual."
+      ],
+      "especial": {
+        "nombre": "Sesión de grupo",
+        "poder": 3,
+        "golpes": 6,
+        "objetivo": "todos",
+        "posicion": "centro",
+        "color": "#b07bff",
+        "ojos": [
+          44,
+          36,
+          28,
+          13
+        ],
+        "deja": {
+          "estado": [
+            "dormido",
+            "confundido"
+          ],
+          "prob": 0.5
+        },
+        "texto": "{quien} junta a todos los rivales en un círculo de sillas invisible. Las ondas llegan a todos a la vez. [Relleno: borrador de Claude, sin sprites propios]"
+      },
+      "escala": 1.0,
+      "sonido": "cachetada"
     }
   },
   "enemigos": {

@@ -8,7 +8,7 @@ import { useT } from '../engine/i18n';
 import { useStore } from '../engine/store';
 import { playSelect } from '../engine/sound';
 import { FICHAS } from '../engine/batallas';
-import { HEROES_TORNEO, JEFES_TORRE, TORNEO, armarRonda, copaAbierta, fichaPeleador, premioDe, type Copa, type Modalidad } from '../engine/torneo';
+import { HEROES_TORNEO, JEFES_TORRE, LIBRES_TORNEO, NIKKI_PELEADORA, TORNEO, armarRonda, copaAbierta, fichaPeleador, premioDe, type Copa, type Modalidad } from '../engine/torneo';
 import { nuevaSemilla } from '../engine/esencia';
 import { GALERIA_COMPLETA } from '../engine/modo';
 
@@ -30,8 +30,10 @@ export function TorneoPantalla({ onClose }: { onClose: () => void }) {
   // Los peleadores: los que la historia ya desbloqueó (Jair siempre; los demás, desde que pelearon en alguna partida) y
   // los jefes de la torre ya vencidos (decisión del autor, 2026-11-05).
   const disponibles = [
-    ...HEROES_TORNEO.filter((k) => k === 'jair' || GALERIA_COMPLETA || vistos[FICHAS.heroes[k]?.sprite]),
+    ...HEROES_TORNEO.filter((k) => k === 'jair' || LIBRES_TORNEO.includes(k) || GALERIA_COMPLETA || vistos[FICHAS.heroes[k]?.sprite]),
     ...JEFES_TORRE.filter((k) => GALERIA_COMPLETA || torneo.jefes?.[k]),
+    // Nikki, al vencerla en la gran final de cualquier copa.
+    ...(GALERIA_COMPLETA || Object.keys(torneo.ganadas ?? {}).length ? [NIKKI_PELEADORA] : []),
   ];
   const abierta = (c: Copa) => GALERIA_COMPLETA || copaAbierta(c, visitadas, torneo.ganadas);
   const listos = elegidos.length === modalidad.peleadores;
