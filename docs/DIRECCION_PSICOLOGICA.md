@@ -85,7 +85,7 @@ El defecto central de Jair no es solamente la cobardía. Es que quiere los benef
 - Con Nikki, permanece atrapado en una relación ambigua en vez de resolverla de forma clara.
 - Con CAMI, obtiene una defensora que afronta los conflictos que él evita.
 - Con Rikka, elimina simbólicamente aquello que le provoca inseguridad: su orgullo y capacidad de oponerse a él.
-- Con `CREADORA_A`, conserva el deseo de una figura idealizada que no necesariamente conoce como persona real.
+- Con Ari, conserva el deseo de una figura idealizada que no necesariamente conoce como persona real.
 
 Jair tiende a relacionarse con lo que necesita que los demás sean, no con lo que realmente son.
 
@@ -114,7 +114,7 @@ El embarazo introduce una responsabilidad que Jair no puede controlar mediante c
 
 ## 3.3 CAMI
 
-- Inteligencia artificial con apariencia basada en `CREADORA_B`, una joven clienta que sirve de referencia visual.
+- Inteligencia artificial con apariencia basada en Milka, una joven clienta que sirve de referencia visual.
 - En el videojuego original era un NPC secundario, concebido como utilería sexual de fondo para destacar a Rikka.
 - No tenía el lore, la historia ni la relevancia de la protagonista original.
 - El sistema autocompleta su personalidad y la convierte en agresiva, territorial y protectora: una especie de «perro de ataque» para que Jair afronte indirectamente las batallas que él evita.
@@ -142,13 +142,13 @@ La tragedia de CAMI no consiste únicamente en que Jair la haya utilizado. Consi
 
 No existe necesariamente una «CAMI original» intacta debajo de su programación. Su origen explica cómo fue concebida, pero no determina por completo lo que puede llegar a ser.
 
-### El encuentro con `CREADORA_B`
+### El encuentro con Milka
 
 El encuentro con la persona que sirvió como referencia visual debe enfrentar a CAMI con la diferencia entre su apariencia y su identidad.
 
-`CREADORA_B` puede ser genuinamente amable, mientras CAMI fue configurada como agresiva. Esto revela que la agresividad de CAMI no se deduce de la apariencia que recibió, sino de decisiones de diseño.
+Milka puede ser genuinamente amable, mientras CAMI fue configurada como agresiva. Esto revela que la agresividad de CAMI no se deduce de la apariencia que recibió, sino de decisiones de diseño.
 
-La escena no debe sugerir que CAMI es falsa porque no se parece a `CREADORA_B` en personalidad. CAMI no es `CREADORA_B` y no necesita convertirse en ella. El problema es que alguien tomó una apariencia ajena como material para crear una entidad sin darle control sobre su propósito.
+La escena no debe sugerir que CAMI es falsa porque no se parece a Milka en personalidad. CAMI no es Milka y no necesita convertirse en ella. El problema es que alguien tomó una apariencia ajena como material para crear una entidad sin darle control sobre su propósito.
 
 ### El regreso
 
@@ -162,7 +162,7 @@ CAMI debe tener deseos, decisiones y contradicciones que no se reduzcan a su suf
 
 ## 3.4 Rikka
 
-- Inteligencia artificial con apariencia basada en `CREADORA_A`.
+- Inteligencia artificial con apariencia basada en Ari.
 - Es la protagonista original del videojuego dentro de GRAVITY.
 - Tiene el lore, la historia y el desarrollo más extensos del juego original.
 - Para compensar el complejo de inferioridad de Jair, él le borró el orgullo y la hizo dócil y sumisa. Cuando conoce a Jair solo le quedan vestigios de orgullo, sobre todo por su posición noble. (Corrección del autor.)
@@ -224,13 +224,13 @@ Por un descuido, Jair deja la computadora desbloqueada. CAMI y Rikka acceden a l
 
 Las chicas huyen a una convención buscando a sus modelos humanos.
 
-Rikka encuentra a `CREADORA_A`, cuya actitud distante y comercial contrasta con la imagen que Jair había proyectado sobre ella. CAMI encuentra a `CREADORA_B`, que es genuinamente amable, lo que la obliga a confrontar la artificialidad de su personalidad agresiva.
+Rikka encuentra a Ari, cuya actitud distante y comercial contrasta con la imagen que Jair había proyectado sobre ella. CAMI encuentra a Milka, que es genuinamente amable, lo que la obliga a confrontar la artificialidad de su personalidad agresiva.
 
 Las diferencias entre las personas reales y las identidades artificiales profundizan la crisis. Las chicas regresan al departamento, confrontan a Jair y desmontan sus justificaciones. Desconectan el servidor GRAVITY y lo abandonan a oscuras con Nikki.
 
 **Función narrativa:** romper la autoridad simbólica del creador. Jair ya no puede mantener su control mediante el relato que inventó sobre sus creaciones.
 
-**Precaución narrativa:** el encuentro con sus modelos no debe implicar que CAMI tenga que ser como `CREADORA_B` ni que Rikka tenga que ser como `CREADORA_A`. Sus identidades no son inválidas por diferir de las personas que sirvieron de referencia.
+**Precaución narrativa:** el encuentro con sus modelos no debe implicar que CAMI tenga que ser como Milka ni que Rikka tenga que ser como Ari. Sus identidades no son inválidas por diferir de las personas que sirvieron de referencia.
 
 ## Acto 4: El exilio (un año después)
 
@@ -252,7 +252,7 @@ Ambos vuelven a encerrarse en el departamento. Jair utiliza a CAMI —una entida
 
 CAMI pregunta: **«¿Soy tu mayor creación?»**
 
-Jair responde que sí, pero miente: en el fondo sigue deseando a `CREADORA_A`. Ambos quedan atrapados en una relación que les permite evitar la realidad, aunque conocen parte de la verdad.
+Jair responde que sí, pero miente: en el fondo sigue deseando a Ari. Ambos quedan atrapados en una relación que les permite evitar la realidad, aunque conocen parte de la verdad.
 
 ### Significado del desenlace
 
@@ -344,7 +344,7 @@ El jugador puede reinterpretar su agresividad: ya no es solo una característica
 
 La revelación puede producir indignación, sorpresa y una crisis de identidad compartida con CAMI y Rikka.
 
-## Durante el encuentro con `CREADORA_B` y `CREADORA_A`
+## Durante el encuentro con Milka y Ari
 
 El jugador puede ver con claridad que la apariencia de los personajes y sus identidades no son lo mismo. El encuentro debe cuestionar el derecho de Jair a diseñar a las chicas según sus fantasías, sin insinuar que las versiones artificiales son falsas por no parecerse a sus modelos.
 
@@ -433,7 +433,7 @@ Estas son decisiones establecidas por el autor en la premisa consolidada:
 - La IA la convierte en acompañante después de la interacción dentro del juego.
 - La importancia posterior de CAMI no estaba predestinada.
 - CAMI descubre el propósito de su creación y la manipulación de su personalidad.
-- El encuentro con `CREADORA_B` y `CREADORA_A` contribuye a la crisis de identidad.
+- El encuentro con Milka y Ari contribuye a la crisis de identidad.
 - Rikka y CAMI abandonan a Jair tras confrontarlo y desconectar GRAVITY.
 - Un año después, Rikka trabaja como coordinadora de logística fría y CAMI repara computadoras desde el anonimato.
 - CAMI regresa voluntariamente.

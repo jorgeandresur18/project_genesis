@@ -162,7 +162,7 @@ queda como un remanente.
 
 Propuestas de Claude al leer el documento; ninguna es canon hasta que el autor la apruebe. `[SUGERIDO]`
 
-- **Celos de sí misma:** Jair sigue en Boringram a `CREADORA_A` (la Rikka real, la que siempre le gustó más). Rikka
+- **Celos de sí misma:** Jair sigue en Boringram a Ari (la Rikka real, la que siempre le gustó más). Rikka
   lo ve dar likes y siente celos de la mujer de la que es copia, sin saberlo todavía. Tras la caja de Pandora, la
   escena se vuelve terrible en retrospectiva.
 - **La dependencia también es de dinero:** el dinero le da pánico; sin trabajo ni documentos, depende de Jair para

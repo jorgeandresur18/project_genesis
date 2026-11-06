@@ -127,7 +127,7 @@ Que la pregunta salga de ella importa: la necesidad de reconocimiento nace de Ca
 de Jair.
 
 **El «sí» es mentira, pero no es solo eso.** El jugador sabe que Jair miente: siempre le gustó más la Rikka real
-(`CREADORA_A`). Pero el «sí» también carga otras cosas, y para Cami queda ambiguo:
+(Ari). Pero el «sí» también carga otras cosas, y para Cami queda ambiguo:
 
 - **Apropiación:** la sigue mirando como quien la creó.
 - **Afecto:** puede haber algo genuino, aunque no lo diga.
