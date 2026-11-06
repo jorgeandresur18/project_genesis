@@ -102,3 +102,14 @@ describe('balance del torneo: Maggie, con sus objetos contra el dormido y el con
     expect(maggie).toBeLessThan(0.75);
   });
 });
+
+describe('balance de la sombra de roca (Capítulo 1, en prueba; pedido del autor, 2026-11-06)', () => {
+  // Una pelea que Cami avisa que no se tome: algo más difícil que el Bastión, pero ganable con cuidado.
+  it('el atento gana la mayoría (entre 70 % y 95 %) y el descuidado pierde casi siempre (menos de 55 %)', () => {
+    const r = informe(conRopa(BATALLAS.sombra_roca));
+    console.log('sombra_roca', JSON.stringify({ atento: r.atento.gana, descuidado: r.descuidado.gana }));
+    expect(r.atento.gana).toBeGreaterThan(0.7);
+    expect(r.atento.gana).toBeLessThan(0.95);
+    expect(r.descuidado.gana).toBeLessThan(0.55);
+  });
+});
