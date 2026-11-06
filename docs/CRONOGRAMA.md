@@ -110,7 +110,7 @@ La misma proyección, para mirarla en el navegador: `docs/proyeccion.html`.
 - [ ] **Escribir el guion del Capítulo 4** desde el borrador del autor (escenas 1 a 9: del despertar a «conseguí trabajo en el centro»).
 - [ ] **Pelea RPG con los otakus en la convención** (Cami). *Pesada:* sprites de los otakus. Es la primera pelea en el mundo real después del bar: ¿«vida real» como la de Nikki?
 - [ ] *Liviana:* fondos del mundo real del Capítulo 4 (departamento de día, la convención, las calles donde buscan trabajo).
-- [ ] *Liviana:* sprites nuevos: Lady (la compañera de tesis), Jordy, Billy, Maggi, amigos de Nikki, Cami con uniforme de Dulce Frío. Hojas de pelea de Jordy, Billy y Maggi (propuesta en `BIBLIA_RPG.md`, sección 20).
+- [ ] *Liviana:* sprites nuevos: Lady (la compañera de tesis), Jordy, Billy, Maggie, amigos de Nikki, Cami con uniforme de Dulce Frío. Hojas de pelea de Jordy, Billy y Maggie (propuesta en `BIBLIA_RPG.md`, sección 20).
 - [ ] *Media:* Boringram del Capítulo 4 (las fotos de la convención, lo que ven Lady, Jordy y Nikki).
 - [ ] **Pendientes del RPG que el Capítulo 4 pide:** la tienda desde el título y equiparse de verdad, si la historia lo necesita.
 
@@ -129,9 +129,9 @@ anota en `docs/PRUEBAS_EN_CASA.md` para la noche.
 
 **Decisiones del autor (respuesta corta):**
 1. ~~Publicar en `main`~~ **Hecho:** publicada la 1.1.4 (6 de noviembre, orden del autor).
-2. **Jefes de la torre como peleadores del torneo:** hoy están muy por encima de los héroes (Comandante ×3 gana la
+2. **Hecho** (6 de noviembre): los jefes pelean con números de héroe de su estilo (`estilo_jefes` en `torneo.json`). ~~**Jefes de la torre como peleadores del torneo:** hoy están muy por encima de los héroes (Comandante ×3 gana la
    final de la Copa Leyenda el 99 %). Propuesta de Claude: que peleen con números de héroe (sus ataques y su especial,
-   con la vida y la defensa de un héroe de su estilo). ¿Sí?
+   con la vida y la defensa de un héroe de su estilo). ¿Sí?~~
 3. ~~Billy, demasiado fuerte~~ **Hecho** (6 de noviembre): un poco más fuerte que el resto (~7 puntos sobre Jordy en las finales), sin que se note tanto.
 4. **Cuándo se desbloquean Jordy y Billy** en el torneo (hoy, desde ya; `TODO(canon)`).
 5. **Peleadores nuevos que propuso Claude:** Nail (roba potenciadores), Lady (copia el último ataque), Mike y Nora
@@ -151,7 +151,7 @@ anota en `docs/PRUEBAS_EN_CASA.md` para la noche.
 14. **La escena secreta de Jordy** (Capítulo 4, al 100 %): si se diseña, las preguntas de «Ideas anotadas».
 
 **Lo que Claude puede hacer solo (sin pruebas del autor):**
-- Que el simulador use dormir y confundir (hoy subestima a Maggi y a Nikki peleadora) y volver a medir el torneo.
+- Que el simulador use dormir y confundir (hoy subestima a Maggie y a Nikki peleadora) y volver a medir el torneo.
 - Hacer más estables las pruebas de balance que a veces fallan por azar (el Bastión y el Rey): más peleas simuladas o
   una semilla fija.
 - Lo que el autor decida de la lista de arriba (balance de los jefes, Billy, peleadores nuevos), con el simulador.

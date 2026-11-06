@@ -5362,7 +5362,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Ocho años y nunca has bailado conmigo."
+        "text": "Ocho años y no has vuelto a bailar conmigo. Desde aquella fiesta."
       },
       "choices": [],
       "conditions": [],
@@ -5390,7 +5390,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Ocho años y nunca he bailado con nadie. No es personal."
+        "text": "Esa vez estaba borracho. Bailar contigo fue lo único que me salió bien esa noche."
       },
       "choices": [],
       "conditions": [],

@@ -521,7 +521,7 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
   desbloqueó. **Decisiones del autor (2026-11-05):** se puede **repetir personaje** en el equipo (por ejemplo, tres
   Jair); los **8 jefes de los pisos de la torre del Capítulo 3** (la reina de los bichos, el jefe de bodega, el sargento,
   el chef, el maestro herrero, el alcaide, el intendente y el comandante) se pueden elegir como peleadores (al vencerlos
-  en la torre; los enemigos comunes, no); **Maggi** es exclusiva del torneo. **Hecho (2026-11-05):** los jefes se vuelven peleadores del
+  en la torre; los enemigos comunes, no); **Maggie** es exclusiva del torneo. **Hecho (2026-11-05):** los jefes se vuelven peleadores del
   jugador con sus ataques y su especial (sin las ráfagas de balas, que son del dibujo de la máquina; `fichaPeleador` en
   `engine/torneo.ts`) y frases para «Hablar» (`hablar_jefes` en `torneo.json`, borrador de Claude); se desbloquean al
   ganar su pelea en la torre, en cualquier partida (`torneo.jefes` en el guardado). Los repetidos tienen
@@ -666,7 +666,7 @@ Los números (poder y golpes) son propuesta de Claude, sin balancear.
 Lo que contó el autor está en `docs/CANON.md` (Capítulo 4, punto 5). Esto es la propuesta de cómo pelean: números y
 ataques de borrador. **Dónde pelean** (decidido por el autor el 2026-11-05): **Jordy**, como rival en peleas de
 entrenamiento contra Jair; **Billy**, del lado de Jair (héroe), los dos solos contra una horda de influencers
-aprovechados en su restaurante; **Maggi**, solo en el Torneo Genesis (exclusiva).
+aprovechados en su restaurante; **Maggie**, solo en el Torneo Genesis (exclusiva).
 Comparados con Jair (`base` PS 30, ATQ 5, DEF 3, VEL 8; sube por nivel PS 6, ATQ 1, DEF 0,6, VEL 0,5).
 
 | | PS | ATQ | DEF | VEL | Cómo se siente |
@@ -674,7 +674,7 @@ Comparados con Jair (`base` PS 30, ATQ 5, DEF 3, VEL 8; sube por nivel PS 6, ATQ
 | **Jair** (para comparar) | 30 (+6) | 5 (+1) | 3 (+0,6) | 8 (+0,5) | — |
 | **Jordy** | 28 (+5,5) | 7 (+1,2) | 2 (+0,4) | 11 (+0,6) | Pega más y antes que Jair, pero aguanta menos. |
 | **Billy** | 25 (+6,8) | 4 (+1,06) | 3 (+0,77) | 4 (+0,2) | El tanque: aguanta mucho y pega fuerte con su cuchillo-espada gigante, pero casi siempre actúa último. |
-| **Maggi** | 26 (+4,5) | 3 (+0,5) | 2 (+0,4) | 13 (+0,7) | Muy veloz, casi no golpea y es frágil: su fuerza son los estados (dormir y confundir). |
+| **Maggie** | 26 (+4,5) | 3 (+0,5) | 2 (+0,4) | 13 (+0,7) | Muy veloz, casi no golpea y es frágil: su fuerza son los estados (dormir y confundir). |
 
 **Ataques (nombres y efectos de borrador):**
 
@@ -689,7 +689,7 @@ Comparados con Jair (`base` PS 30, ATQ 5, DEF 3, VEL 8; sube por nivel PS 6, ATQ
   - *Brindis:* sube su ATQ hasta el final de la pelea (potenciarse).
   - *Pastelillo de la casa:* le da a un rival un pastelillo herbal «con extra de compuesto T»: lo **confunde** (el guiño al objeto de la tienda).
   - Especial *Parrillada Beef Boy:* a todos los rivales, con un poco de **quemadura**.
-- **Maggi** (ondas psíquicas e hipnosis clínica):
+- **Maggie** (ondas psíquicas e hipnosis clínica):
   - *Onda psíquica:* poder 8 a un rival (casi no hace daño).
   - *Hipnosis clínica:* lo **duerme** (como el cebo sueño).
   - *Lectura del subconsciente:* lo **confunde**.
@@ -698,9 +698,9 @@ Comparados con Jair (`base` PS 30, ATQ 5, DEF 3, VEL 8; sube por nivel PS 6, ATQ
 **Hecho en el motor (2026-11-05):** `deja` en un ataque o un especial: si pega, con su probabilidad deja un estado
 (paralizado, dormido, confundido o quemado; con una lista, uno al azar). `dejarEstado` en `engine/turnos.ts`.
 
-**En el torneo (pedido del autor, 2026-11-05):** Jordy, Billy y Maggi ya pelean en el Torneo Genesis con estas fichas
+**En el torneo (pedido del autor, 2026-11-05):** Jordy, Billy y Maggie ya pelean en el Torneo Genesis con estas fichas
 (borrador, `heroes` de `personajes.json`), elegibles desde ya (`TODO(canon)`: cuándo se desbloquean Jordy y Billy). Sin
-hoja propia: usan la de otro con un filtro de color (Jordy la de Jair, Billy la del soldado, Maggi la de Rikka). Nikki
+hoja propia: usan la de otro con un filtro de color (Jordy la de Jair, Billy la del soldado, Maggie la de Rikka). Nikki
 también es peleadora, **desde el inicio** (pedido del autor). Como peleadora tiene **5 ataques**; la Nikki campeona del
 torneo, 6 (`TODO`: hoy tiene 4: cachetada, revés, beso y la ráfaga; el quinto queda para mucho más adelante, anotado en el
 cronograma, «Ideas anotadas»).
@@ -713,10 +713,10 @@ también peleadores del torneo, desde ya (borrador; sprites prestados: la hoja d
 - **Otaku**: Foto sin permiso (a veces paraliza), Explicación del lore (a veces duerme), Abrazo de almohada (se
   protege) y el especial *Técnica prohibida del episodio 400* (a veces confunde).
 - Simulación en simple (final, atento): los dos a la par de Jair (~32–73 %). **Simulación en simple (final, atento):**
-Billy ~76–90 % (equilibrado el 2026-11-06: el autor quiere que haya peleadores un poco más fuertes, sin que se note tanto; Billy es uno, apenas por encima de Jordy y el que más aguanta), Jordy 63–76 %, Maggi y Nikki ~0 % (el simulador no usa dormir ni confundir:
+Billy ~76–90 % (equilibrado el 2026-11-06: el autor quiere que haya peleadores un poco más fuertes, sin que se note tanto; Billy es uno, apenas por encima de Jordy y el que más aguanta), Jordy 63–76 %, Maggie y Nikki ~0 % (el simulador no usa dormir ni confundir:
 las subestima).
 
-**Arte que haría falta** (para la fase de arte): las hojas de pelea de Jordy, Billy y Maggi (reposo, ataque, daño,
+**Arte que haría falta** (para la fase de arte): las hojas de pelea de Jordy, Billy y Maggie (reposo, ataque, daño,
 especial, derrotado) y sus retratos para la caja de diálogo; mientras tanto, placeholders (como el Rey con el dibujo
 del Capitán).
 
@@ -791,3 +791,6 @@ Detalle completo en `docs/BATALLA_FINAL.md`.
   no existe.
 
 **La torre del Capítulo 3 sube de dificultad poco a poco** (decisión del autor, 2026-11-05): el jugador atento gana ~95 % en el calabozo y cada piso un poco menos, hasta ~60 % contra el Rey; el jefe de cada piso es algo más duro que sus peleas. Se ajusta con `tests/torre_ajuste.test.ts`.
+
+**Los jefes de la torre en el torneo** (decisión del autor, 2026-11-06): conservan sus ataques y su especial, pero pelean con la vida, el ataque, la defensa y la velocidad de un héroe de su estilo, multiplicados por un factor (`estilo_jefes` en `src/data/rpg/torneo.json`): la reina, como Maggie; el jefe de bodega, como Jair; el sargento, como Jordy; el chef, como Rikka; el maestro herrero, el alcaide y el comandante, como Billy; el intendente, como Cami. Simulación (finales en simple, atento): los jefes ~40–45 %, el Comandante ~43 % (el jefe más fuerte), Billy ~80 % (el peleador más fuerte); tres Comandantes en triple ~34–71 % (antes 99 %).
+

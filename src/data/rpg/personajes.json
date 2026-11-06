@@ -425,8 +425,8 @@
       "escala": 1.3,
       "sonido": "espada"
     },
-    "maggi": {
-      "nombre": "Maggi",
+    "maggie": {
+      "nombre": "Maggie",
       "sprite": "batalla/rikka",
       "filtro": "hue-rotate(230deg) saturate(1.2)",
       "seguido": true,

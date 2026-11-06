@@ -13,7 +13,7 @@ export interface Stats {
 /** Lo que hace un cebo con efecto al golpearlo. */
 export type EfectoCebo = 'paraliza' | 'veneno' | 'confunde' | 'quema' | 'congela' | 'duerme' | 'explota';
 /**
- * Un golpe que además puede dejar un estado (docs/BIBLIA_RPG.md: el puño de Jordy paraliza, la hipnosis de Maggi
+ * Un golpe que además puede dejar un estado (docs/BIBLIA_RPG.md: el puño de Jordy paraliza, la hipnosis de Maggie
  * duerme): con probabilidad `prob`, al blanco que sigue de pie. Con varios estados, sale uno al azar.
  */
 export interface Deja {
@@ -74,7 +74,7 @@ export interface Ataque {
  * objetivo es «todos», se reparten entre los enemigos de pie (si queda uno solo, van todos para él).
  */
 export interface Especial {
-  /** Al terminar, a veces deja un estado a cada blanco que sigue de pie (la sesión de grupo de Maggi; ver `Deja`). */
+  /** Al terminar, a veces deja un estado a cada blanco que sigue de pie (la sesión de grupo de Maggie; ver `Deja`). */
   deja?: Deja;
   /** La Espada de las estaciones (el Rey): a cada blanco que queda en pie le cae una estación al azar (ver turnos.ts). */
   estaciones?: boolean;
@@ -156,7 +156,7 @@ export interface Heroe {
   hablar: string[];
   /** Lo que dice con «Hablar» si está confundido (incoherente). Sin esto, se le revuelven las palabras. */
   hablar_confundido?: string[];
-  /** Un filtro sobre su sprite (un placeholder hecho con la hoja de otro, mientras no tenga la suya: Jordy, Billy, Maggi). */
+  /** Un filtro sobre su sprite (un placeholder hecho con la hoja de otro, mientras no tenga la suya: Jordy, Billy, Maggie). */
   filtro?: string;
   /**
    * Seguidores (el influencer; pedido del autor, 2026-11-05): cada vez que se luce (un crítico o derribar a alguien)

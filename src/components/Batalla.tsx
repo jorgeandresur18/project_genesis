@@ -1584,7 +1584,7 @@ function Pelea({
       forzar();
       await decir(fmt(t('batalla.envenena'), { quien: e.nombre }));
     }
-    // El estado que a veces deja el golpe (el puño de Jordy paraliza, la hipnosis de Maggi duerme).
+    // El estado que a veces deja el golpe (el puño de Jordy paraliza, la hipnosis de Maggie duerme).
     if (!bloqueado) await avisarEstado(e, dejarEstado(b.current, e, ataque.deja));
     if (!vivo(e)) await alCaer(e);
   };
@@ -1962,7 +1962,7 @@ function Pelea({
       forzar();
       await decir(fmt(t('batalla.especial_quema'), { quien: x.nombre }));
     }
-    // El estado que a veces deja el especial a cada blanco (la sesión de grupo de Maggi).
+    // El estado que a veces deja el especial a cada blanco (la sesión de grupo de Maggie).
     for (const x of [...new Set(blancos)]) await avisarEstado(x, dejarEstado(b.current, x, e.deja));
     for (const b of blancos) {
       if (vivo(b) || b.cebo) continue;

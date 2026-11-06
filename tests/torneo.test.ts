@@ -107,7 +107,7 @@ describe('el torneo: jefes de la torre y personajes repetidos (decisiones del au
 });
 
 describe('los nuevos peleadores del torneo (pedido del autor, 2026-11-05)', () => {
-  it('Jordy, Billy y Maggi tienen ficha, ataques y especial, y Nikki pelea como peleadora', async () => {
+  it('Jordy, Billy y Maggie tienen ficha, ataques y especial, y Nikki pelea como peleadora', async () => {
     const { HEROES_TORNEO, LIBRES_TORNEO, NIKKI_PELEADORA, fichaPeleador } = await import('../src/engine/torneo');
     for (const k of LIBRES_TORNEO) {
       expect(HEROES_TORNEO, k).toContain(k);
@@ -120,15 +120,15 @@ describe('los nuevos peleadores del torneo (pedido del autor, 2026-11-05)', () =
     expect(n.nombre).toBe('Nikki');
     expect(n.ataques.map((a) => a.nombre)).toContain('Beso confusión');
   });
-  it('una ronda en triple con Billy, Maggi y Nikki es una pelea válida', async () => {
+  it('una ronda en triple con Billy, Maggie y Nikki es una pelea válida', async () => {
     const { estadoInicial } = await import('../src/engine/turnos');
-    const d = armarRonda(TORNEO.copas[0], 0, TORNEO.modalidades[2], ['billy', 'maggi', 'nikki'], 0, 't');
+    const d = armarRonda(TORNEO.copas[0], 0, TORNEO.modalidades[2], ['billy', 'maggie', 'nikki'], 0, 't');
     const s = estadoInicial(d, undefined, d.semilla_esencia);
-    expect(s.heroes.map((h) => h.clave)).toEqual(['billy', 'maggi', 'nikki']);
+    expect(s.heroes.map((h) => h.clave)).toEqual(['billy', 'maggie', 'nikki']);
   });
 });
 
-describe('golpes que dejan un estado (`deja`: el puño de Jordy, la hipnosis de Maggi)', () => {
+describe('golpes que dejan un estado (`deja`: el puño de Jordy, la hipnosis de Maggie)', () => {
   it('con la probabilidad, deja el estado; sin ella, no; a uno caído o que ya lo tiene, tampoco', async () => {
     const { dejarEstado, estadoInicial } = await import('../src/engine/turnos');
     const d = armarRonda(TORNEO.copas[0], 0, TORNEO.modalidades[0], ['jordy']);

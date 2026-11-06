@@ -731,12 +731,16 @@
 
 ### aguas_termales
 
-> ◐ transición: negro
+> ◐ transición: negro_lento
 `p2_028` — Un rato después Rikka sale de detrás de la roca con el traje rojo. Camina raro, como si el traje fuera a morderla.
 
-> ⤷ si rikka_perturbada == true → `p2_029_p` · si no → `p2_029`
+> ⤷ si rikka_perturbada == true → `p2_029_pa` · si no → `p2_029`
 
-`p2_029_p` **Rikka:** Esta ropa es indecente. Se pega a todo… No me miren. Hoy nadie me mira, ¿está claro?
+`p2_029_pa` **Cami:** ¿Rikka? Estás pálida. Más que de costumbre, y mira que eres de porcelana.
+
+`p2_029_pb` **Jair:** Parece que hubiera visto un fantasma. ¿Pasó algo detrás de la roca?
+
+`p2_029_p` — Rikka no contesta. Abraza el traje contra el cuerpo y se queda mirando el agua, como si algo pudiera salir de ahí otra vez.
 
 
 > **DECISIÓN**

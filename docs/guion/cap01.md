@@ -448,9 +448,9 @@
 
 `095r05` **Jair:** No bailo.
 
-`095r06` **Nikki:** Ocho años y nunca has bailado conmigo.
+`095r06` **Nikki:** Ocho años y no has vuelto a bailar conmigo. Desde aquella fiesta.
 
-`095r07` **Jair:** Ocho años y nunca he bailado con nadie. No es personal.
+`095r07` **Jair:** Esa vez estaba borracho. Bailar contigo fue lo único que me salió bien esa noche.
 
 `095r08` **Nikki:** Todo es personal, Jair. Hasta lo que no haces.
 

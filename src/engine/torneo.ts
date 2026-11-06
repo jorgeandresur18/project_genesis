@@ -3,7 +3,7 @@ import type { Vars } from './types';
 // rondas hasta la final contra Nikki (la campeona), premios en tokens que van a PayFoe. En cada copa todos pelean al
 // mismo nivel. Los datos (de relleno por ahora) están en src/data/rpg/torneo.json; aquí se arma cada ronda como una
 // pelea más para el componente de batalla.
-import type { DatosBatalla, Enemigo, Heroe } from './batalla';
+import type { DatosBatalla, Enemigo, Heroe, Stats } from './batalla';
 import { BATALLAS, FICHAS } from './batallas';
 import datos from '../data/rpg/torneo.json';
 
@@ -46,15 +46,17 @@ export interface DatosTorneo {
   dialogos: Record<string, Linea[]>;
   /** Lo que dicen los jefes de la torre al «Hablar» cuando los usa el jugador. */
   hablar_jefes: Record<string, string[] | string>;
+  /** Con qué números pelea cada jefe de la torre en manos del jugador: los del héroe de su estilo, por `factor`. */
+  estilo_jefes: Record<string, { heroe: string; factor: number } | string>;
 }
 
 export const TORNEO = datos as unknown as DatosTorneo;
-export const HEROES_TORNEO = ['jair', 'cami', 'rikka', 'jordy', 'billy', 'maggi', 'influencer', 'otaku'];
+export const HEROES_TORNEO = ['jair', 'cami', 'rikka', 'jordy', 'billy', 'maggie', 'influencer', 'otaku'];
 /**
- * Los que todavía no salen en la historia (Jordy y Billy son del Capítulo 4; Maggi es exclusiva del torneo): se
+ * Los que todavía no salen en la historia (Jordy y Billy son del Capítulo 4; Maggie es exclusiva del torneo): se
  * pueden elegir desde ya (pedido del autor, 2026-11-05). TODO(canon): cuándo se desbloquean Jordy y Billy.
  */
-export const LIBRES_TORNEO = ['jordy', 'billy', 'maggi', 'influencer', 'otaku'];
+export const LIBRES_TORNEO = ['jordy', 'billy', 'maggie', 'influencer', 'otaku'];
 /** Nikki también pelea en el torneo, desde el inicio (pedido del autor, 2026-11-05). */
 export const NIKKI_PELEADORA = 'nikki';
 /**
@@ -73,12 +75,19 @@ function jefeComoPeleador(k: string): Omit<Heroe, 'nivel'> {
   });
   const esp = e.especial ? { ...e.especial } : undefined;
   const hablar = TORNEO.hablar_jefes[k];
+  // Números de héroe (decisión del autor, 2026-11-06): la vida, el ataque, la defensa y la velocidad del héroe de su
+  // estilo, no los de jefe (hechos para pelear contra tres). Los ataques y el especial siguen siendo los suyos.
+  const estilo = TORNEO.estilo_jefes[k];
+  const comoHeroe = typeof estilo === 'object' ? FICHAS.heroes[estilo.heroe] : undefined;
+  const por = (x: Stats, n: number): Stats => ({ ps: x.ps * n, atq: x.atq * n, def: x.def * n, vel: x.vel });
+  const base = comoHeroe && typeof estilo === 'object' ? por(comoHeroe.base, estilo.factor) : e.base;
+  const crece = comoHeroe && typeof estilo === 'object' ? por(comoHeroe.crece, estilo.factor) : e.crece;
   return {
     nombre: e.nombre,
     sprite: e.sprite,
     seguido: true,
-    base: e.base,
-    crece: e.crece,
+    base,
+    crece,
     ataques,
     especial: esp,
     distancia: !!(e as Enemigo & { distancia?: unknown }).distancia,
