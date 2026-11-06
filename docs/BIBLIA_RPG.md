@@ -640,7 +640,9 @@ Los números (poder y golpes) son propuesta de Claude, sin balancear.
 ## 20. Los amigos de Jair en el Capítulo 4 (propuesta de Claude, por aprobar; 2026-11-05)
 
 Lo que contó el autor está en `docs/CANON.md` (Capítulo 4, punto 5). Esto es la propuesta de cómo pelean: números y
-ataques de borrador. **Falta decidir** si pelean del lado de Jair (héroes) o en contra (rivales), y en qué peleas.
+ataques de borrador. **Dónde pelean** (decidido por el autor el 2026-11-05): **Jordan**, como rival en peleas de
+entrenamiento contra Jair; **Billy**, del lado de Jair (héroe), los dos solos contra una horda de influencers
+aprovechados en su restaurante; **Maggi**, solo en el Torneo Genesis (exclusiva).
 Comparados con Jair (`base` PS 30, ATQ 5, DEF 3, VEL 8; sube por nivel PS 6, ATQ 1, DEF 0,6, VEL 0,5).
 
 | | PS | ATQ | DEF | VEL | Cómo se siente |
@@ -648,7 +650,7 @@ Comparados con Jair (`base` PS 30, ATQ 5, DEF 3, VEL 8; sube por nivel PS 6, ATQ
 | **Jair** (para comparar) | 30 (+6) | 5 (+1) | 3 (+0,6) | 8 (+0,5) | — |
 | **Jordan** | 28 (+5,5) | 7 (+1,2) | 2 (+0,4) | 11 (+0,6) | Pega más y antes que Jair, pero aguanta menos. |
 | **Billy** | 46 (+8) | 8 (+1,25) | 6 (+0,9) | 4 (+0,2) | El tanque: aguanta mucho y pega fuerte con su cuchillo-espada gigante, pero casi siempre actúa último. |
-| **Maggi** | 26 (+4,5) | 7 (+1,15) | 2 (+0,4) | 12 (+0,6) | Rápida y peligrosa, pero frágil. La que duerme y confunde. |
+| **Maggi** | 26 (+4,5) | 3 (+0,5) | 2 (+0,4) | 13 (+0,7) | Muy veloz, casi no golpea y es frágil: su fuerza son los estados (dormir y confundir). |
 
 **Ataques (nombres y efectos de borrador):**
 
@@ -664,7 +666,7 @@ Comparados con Jair (`base` PS 30, ATQ 5, DEF 3, VEL 8; sube por nivel PS 6, ATQ
   - *Pastelillo de la casa:* le da a un rival un pastelillo herbal «con extra de compuesto T»: lo **confunde** (el guiño al objeto de la tienda).
   - Especial *Parrillada Beef Boy:* a todos los rivales, con un poco de **quemadura**.
 - **Maggi** (ondas psíquicas e hipnosis clínica):
-  - *Onda psíquica:* poder 13 a un rival.
+  - *Onda psíquica:* poder 8 a un rival (casi no hace daño).
   - *Hipnosis clínica:* lo **duerme** (como el cebo sueño).
   - *Lectura del subconsciente:* lo **confunde**.
   - Especial *Sesión de grupo:* ondas a todos los rivales; cada uno puede quedar dormido o confundido.

@@ -25,15 +25,15 @@
     "enemigo": "soldado",
     "al_inicio": 2,
     "niveles": [
-      14,
-      14,
       15,
-      15
+      15,
+      16,
+      16
     ]
   },
   "jefe": {
     "enemigo": "capitan",
-    "nivel": 16
+    "nivel": 12
   },
   "botin": {
     "probabilidad": 0.6,

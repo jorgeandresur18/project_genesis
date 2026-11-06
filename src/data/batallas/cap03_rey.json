@@ -8,10 +8,10 @@
   ],
   "personajes": {
     "jair": {
-      "nivel": 12
+      "nivel": 11
     },
     "cami": {
-      "nivel": 18
+      "nivel": 17
     },
     "rikka": {
       "nivel": 15
@@ -31,7 +31,7 @@
   },
   "jefe": {
     "enemigo": "rey",
-    "nivel": 22
+    "nivel": 26
   },
   "botin": {
     "probabilidad": 0.6,

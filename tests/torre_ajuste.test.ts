@@ -36,32 +36,34 @@ const PLAN: Record<string, [number[], number]> = {
   cap03_galeria_1: [[17, 17, 18, 18], 19],
   cap03_salon_2: [[18, 18], 20],
   cap03_galeria_2: [[18, 18], 20],
-  cap03_rey: [[18, 18], 22],
+  cap03_rey: [[18, 18], 26],
 };
 // Qué se ajusta en cada pelea: la fuerza de esos enemigos (multiplica vida y ataque) o, si es «horda», cuántos salen.
-const PERILLA: Record<string, string[] | 'nivel'> = {
-  cap03_calabozo: 'nivel',
+// Los jefes no se inflan (decisión del autor, 2026-11-05): todos parten de la ficha del Capitán y suben un poco por piso;
+// en sus peleas se ajusta el nivel de toda la pelea. El Rey queda en el nivel 26 (un salto grande) y se ajusta su fuerza.
+const PERILLA: Record<string, string[] | 'nivel' | 'nivel_horda'> = {
+  cap03_calabozo: 'nivel_horda',
   cap03_cloacas_1: ['bicho'],
-  cap03_cloacas_2: ['reina_bichos'],
+  cap03_cloacas_2: 'nivel_horda',
   cap03_bodegas_1: ['bodeguero'],
-  cap03_bodegas_2: ['jefe_bodega'],
-  cap03_cuarteles: 'nivel',
-  cap03_cuarteles_2: ['sargento'],
+  cap03_bodegas_2: 'nivel_horda',
+  cap03_cuarteles: 'nivel_horda',
+  cap03_cuarteles_2: 'nivel_horda',
   cap03_comedor_1: ['cocinero'],
-  cap03_comedor_2: ['chef'],
+  cap03_comedor_2: 'nivel_horda',
   cap03_forja_1: ['herrero'],
-  cap03_forja_2: ['maestro_herrero'],
+  cap03_forja_2: 'nivel_horda',
   cap03_biblioteca_1: ['escriba'],
-  cap03_sombras: 'nivel',
+  cap03_sombras: 'nivel_horda',
   cap03_celdas_1: ['celador'],
-  cap03_celdas_2: ['alcaide', 'guardia_invierno'],
+  cap03_celdas_2: ['guardia_invierno'],
   cap03_patio_1: ['guardia_verano'],
   cap03_patio_2: ['guardia_otono'],
-  cap03_arsenal: ['intendente'],
+  cap03_arsenal: 'nivel_horda',
   cap03_salon_1: ['caballero'],
-  cap03_salon_2: ['comandante'],
-  cap03_galeria_1: 'nivel',
-  cap03_galeria_2: 'nivel',
+  cap03_salon_2: 'nivel_horda',
+  cap03_galeria_1: 'nivel_horda',
+  cap03_galeria_2: 'nivel_horda',
   cap03_rey: ['rey'],
 };
 const JEFES = new Set(['cap03_cloacas_2', 'cap03_bodegas_2', 'cap03_cuarteles_2', 'cap03_comedor_2', 'cap03_forja_2', 'cap03_celdas_2', 'cap03_patio_2', 'cap03_arsenal', 'cap03_salon_2', 'cap03_galeria_2']);
@@ -122,18 +124,19 @@ function ajustar(id: string) {
   const m = meta(id);
   const gana = () => sim(datos(id, nivelesH[id]), true, N).gana;
   const p = PERILLA[id];
-  if (p === 'nivel') {
+  if (p === 'nivel' || p === 'nivel_horda') {
+    // «nivel_horda»: el jefe queda en su nivel del plan (suben de a poco, piso a piso); se mueve solo la horda.
     let mejor = 0;
     let err = Infinity;
     for (let d = -4; d <= 10; d++) {
       B.horda.niveles = hn.map((n) => n + d);
-      B.jefe.nivel = jn + d;
+      B.jefe.nivel = p === 'nivel' ? jn + d : jn;
       const r = gana();
       if (Math.abs(r - m) < err) [err, mejor] = [Math.abs(r - m), d];
       if (r < m - 0.05) break;
     }
     B.horda.niveles = hn.map((n) => n + mejor);
-    B.jefe.nivel = jn + mejor;
+    B.jefe.nivel = p === 'nivel' ? jn + mejor : jn;
     return;
   }
   let lo = 0.3;

@@ -618,14 +618,14 @@
       "jefe": true,
       "huye_a": 0.3,
       "base": {
-        "ps": 73,
-        "atq": 7,
+        "ps": 59,
+        "atq": 6,
         "def": 6,
         "vel": 7
       },
       "crece": {
-        "ps": 9.7,
-        "atq": 1.09,
+        "ps": 7.9,
+        "atq": 0.88,
         "def": 0.8,
         "vel": 0.3
       },
@@ -784,14 +784,14 @@
       "nombre": "Bicho de memoria",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 12,
-        "atq": 3,
+        "ps": 22,
+        "atq": 5,
         "def": 3,
         "vel": 7
       },
       "crece": {
-        "ps": 4.1,
-        "atq": 0.41,
+        "ps": 7.4,
+        "atq": 0.74,
         "def": 0.6,
         "vel": 0.4
       },
@@ -842,14 +842,14 @@
       "nombre": "Bodeguero",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 7,
-        "atq": 2,
+        "ps": 31,
+        "atq": 9,
         "def": 6,
         "vel": 7
       },
       "crece": {
-        "ps": 1.6,
-        "atq": 0.16,
+        "ps": 7.3,
+        "atq": 0.73,
         "def": 0.6,
         "vel": 0.4
       },
@@ -892,14 +892,14 @@
       "nombre": "Cocinero de guerra",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 28,
-        "atq": 6,
+        "ps": 31,
+        "atq": 7,
         "def": 3,
         "vel": 7
       },
       "crece": {
-        "ps": 7,
-        "atq": 0.7,
+        "ps": 7.5,
+        "atq": 0.75,
         "def": 0.6,
         "vel": 0.4
       },
@@ -950,14 +950,14 @@
       "nombre": "Herrero",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 27,
-        "atq": 7,
+        "ps": 30,
+        "atq": 8,
         "def": 3,
         "vel": 7
       },
       "crece": {
-        "ps": 5.6,
-        "atq": 0.56,
+        "ps": 6.3,
+        "atq": 0.63,
         "def": 0.6,
         "vel": 0.4
       },
@@ -1000,14 +1000,14 @@
       "nombre": "Escriba de tinta",
       "sprite": "batalla/sombra",
       "base": {
-        "ps": 35,
+        "ps": 31,
         "atq": 9,
         "def": 6,
         "vel": 6
       },
       "crece": {
-        "ps": 12.5,
-        "atq": 1.42,
+        "ps": 11.3,
+        "atq": 1.28,
         "def": 0.8,
         "vel": 0.2
       },
@@ -1055,14 +1055,14 @@
       "nombre": "Celador",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 30,
-        "atq": 5,
+        "ps": 22,
+        "atq": 4,
         "def": 7,
         "vel": 7
       },
       "crece": {
-        "ps": 6,
-        "atq": 0.6,
+        "ps": 4.6,
+        "atq": 0.46,
         "def": 0.6,
         "vel": 0.4
       },
@@ -1105,14 +1105,14 @@
       "nombre": "Caballero de la tabla",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 19,
+        "ps": 21,
         "atq": 3,
         "def": 9,
         "vel": 7
       },
       "crece": {
-        "ps": 3.4,
-        "atq": 0.34,
+        "ps": 3.8,
+        "atq": 0.38,
         "def": 0.6,
         "vel": 0.4
       },
@@ -1157,14 +1157,14 @@
       "jefe": true,
       "huye_a": 0.3,
       "base": {
-        "ps": 149,
-        "atq": 19,
+        "ps": 49,
+        "atq": 7,
         "def": 6,
         "vel": 6
       },
       "crece": {
-        "ps": 23.9,
-        "atq": 2.69,
+        "ps": 8.5,
+        "atq": 0.95,
         "def": 0.8,
         "vel": 0.2
       },
@@ -1237,14 +1237,14 @@
       "jefe": true,
       "huye_a": 0.35,
       "base": {
-        "ps": 103,
-        "atq": 16,
+        "ps": 49,
+        "atq": 7,
         "def": 6,
         "vel": 7
       },
       "crece": {
-        "ps": 17.4,
-        "atq": 1.97,
+        "ps": 8.5,
+        "atq": 0.95,
         "def": 0.8,
         "vel": 0.3
       },
@@ -1306,14 +1306,14 @@
       "jefe": true,
       "huye_a": 0.35,
       "base": {
-        "ps": 86,
-        "atq": 12,
+        "ps": 52,
+        "atq": 8,
         "def": 6,
         "vel": 7
       },
       "crece": {
-        "ps": 13.6,
-        "atq": 1.52,
+        "ps": 9,
+        "atq": 1.01,
         "def": 0.8,
         "vel": 0.3
       },
@@ -1375,14 +1375,14 @@
       "jefe": true,
       "huye_a": 0.35,
       "base": {
-        "ps": 81,
-        "atq": 12,
+        "ps": 54,
+        "atq": 8,
         "def": 6,
         "vel": 7
       },
       "crece": {
-        "ps": 12.9,
-        "atq": 1.46,
+        "ps": 9.4,
+        "atq": 1.06,
         "def": 0.8,
         "vel": 0.3
       },
@@ -1454,14 +1454,14 @@
       "jefe": true,
       "huye_a": 0.35,
       "base": {
-        "ps": 89,
-        "atq": 14,
+        "ps": 54,
+        "atq": 8,
         "def": 6,
         "vel": 7
       },
       "crece": {
-        "ps": 13.2,
-        "atq": 1.49,
+        "ps": 9.4,
+        "atq": 1.06,
         "def": 0.8,
         "vel": 0.3
       },
@@ -1517,14 +1517,14 @@
       "jefe": true,
       "huye_a": 0.35,
       "base": {
-        "ps": 62,
-        "atq": 7,
+        "ps": 60,
+        "atq": 9,
         "def": 8,
         "vel": 7
       },
       "crece": {
-        "ps": 9,
-        "atq": 1.01,
+        "ps": 10.4,
+        "atq": 1.17,
         "def": 0.8,
         "vel": 0.3
       },
@@ -1586,14 +1586,14 @@
       "jefe": true,
       "huye_a": 0.35,
       "base": {
-        "ps": 73,
-        "atq": 9,
+        "ps": 63,
+        "atq": 10,
         "def": 6,
         "vel": 7
       },
       "crece": {
-        "ps": 10.1,
-        "atq": 1.13,
+        "ps": 10.9,
+        "atq": 1.22,
         "def": 0.8,
         "vel": 0.3
       },
@@ -1648,14 +1648,14 @@
       "jefe": true,
       "huye_a": 0.35,
       "base": {
-        "ps": 81,
-        "atq": 12,
+        "ps": 65,
+        "atq": 10,
         "def": 9,
         "vel": 7
       },
       "crece": {
-        "ps": 10.5,
-        "atq": 1.18,
+        "ps": 11.4,
+        "atq": 1.28,
         "def": 0.8,
         "vel": 0.3
       },
@@ -1715,14 +1715,14 @@
       "nombre": "Guardia del Verano",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 28,
-        "atq": 7,
+        "ps": 22,
+        "atq": 6,
         "def": 3,
         "vel": 7
       },
       "crece": {
-        "ps": 6.8,
-        "atq": 0.68,
+        "ps": 5.3,
+        "atq": 0.53,
         "def": 0.6,
         "vel": 0.4
       },
@@ -1765,14 +1765,14 @@
       "nombre": "Guardia del Otoño",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 32,
-        "atq": 8,
+        "ps": 25,
+        "atq": 7,
         "def": 8,
         "vel": 7
       },
       "crece": {
-        "ps": 6.9,
-        "atq": 0.69,
+        "ps": 5.5,
+        "atq": 0.55,
         "def": 0.6,
         "vel": 0.4
       },
@@ -1815,14 +1815,14 @@
       "nombre": "Guardia del Invierno",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 35,
-        "atq": 8,
+        "ps": 29,
+        "atq": 6,
         "def": 3,
         "vel": 7
       },
       "crece": {
-        "ps": 6.7,
-        "atq": 0.67,
+        "ps": 5.4,
+        "atq": 0.54,
         "def": 0.6,
         "vel": 0.4
       },

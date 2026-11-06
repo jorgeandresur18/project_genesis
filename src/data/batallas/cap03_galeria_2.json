@@ -8,13 +8,13 @@
   ],
   "personajes": {
     "jair": {
-      "nivel": 14
+      "nivel": 11
     },
     "cami": {
-      "nivel": 18
+      "nivel": 17
     },
     "rikka": {
-      "nivel": 16
+      "nivel": 15
     }
   },
   "enemigos": [
@@ -25,13 +25,13 @@
     "enemigo": "caballero",
     "al_inicio": 2,
     "niveles": [
-      19,
-      19
+      14,
+      14
     ]
   },
   "jefe": {
     "enemigo": "comandante",
-    "nivel": 21
+    "nivel": 20
   },
   "botin": {
     "probabilidad": 0.6,
