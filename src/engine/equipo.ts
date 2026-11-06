@@ -47,7 +47,7 @@ export function quitarEquipo(vars: Vars, heroe: string, espacio: Espacio): Vars 
 
 /** Lo que suma todo lo que lleva puesto. */
 export function bonos(ids: string[] = [], objetos: Record<string, Objeto>) {
-  const b = { atq: 0, def: 0, vel: 0, critico: 0, sinConfusion: false, resisteVeneno: false };
+  const b = { atq: 0, def: 0, vel: 0, critico: 0, sinConfusion: false, resisteVeneno: false, criticoDormido: 0, criticoConfundido: 0, danoDormido: 0, danoConfundido: 0 };
   for (const id of ids) {
     const o = objetos[id];
     if (!o) continue;
@@ -55,6 +55,10 @@ export function bonos(ids: string[] = [], objetos: Record<string, Objeto>) {
     b.def += o.def ?? 0;
     b.vel += o.vel ?? 0;
     b.critico += o.critico ?? 0;
+    b.criticoDormido += o.critico_dormido ?? 0;
+    b.criticoConfundido += o.critico_confundido ?? 0;
+    b.danoDormido += o.dano_dormido ?? 0;
+    b.danoConfundido += o.dano_confundido ?? 0;
     b.sinConfusion ||= !!o.sin_confusion;
     b.resisteVeneno ||= !!o.resiste_veneno;
   }

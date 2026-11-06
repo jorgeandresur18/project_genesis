@@ -113,7 +113,7 @@ export function estadoInicial(d: DatosBatalla, progreso?: Progreso, semilla?: st
         h.extra += ref.atq;
         h.extraDef += ref.def;
       }
-      const ropa = puestosDe(progreso, k);
+      const ropa = [...puestosDe(progreso, k), ...(d.equipo_fijo?.[k] ?? [])];
       if (ropa.length) {
         const { atq, def, ...resto } = bonos(ropa, FICHAS.objetos);
         h.extra += atq;
@@ -323,13 +323,19 @@ export function resolverGolpe(
   azar: () => number = Math.random,
 ): { n: number; critico: boolean; bloqueado?: boolean } {
   const ayuda = d.ayuda && atacante.lado === 'heroe' && vanPerdiendo(estado.heroes, d.ayuda.umbral) ? d.ayuda.critico : 0;
-  const extra = ayuda + (atacante.equipo?.critico ?? 0);
+  // Lo que lleva puesto contra el que duerme o está confundido (los objetos de Maggie).
+  const eq = atacante.equipo;
+  const dormido = defensor.dormido > 0;
+  const confundido = defensor.confundido > 0;
+  const extra = ayuda + (eq?.critico ?? 0) + (dormido ? (eq?.criticoDormido ?? 0) : 0) + (confundido ? (eq?.criticoConfundido ?? 0) : 0);
+  const masDano = 1 + (dormido ? (eq?.danoDormido ?? 0) : 0) + (confundido ? (eq?.danoConfundido ?? 0) : 0);
   if (defensor.protegido > 0 && atacante !== defensor) {
     defensor.protegido--;
     return { n: 0, critico: false, bloqueado: true };
   }
   const golpe = dano(atacante, defensor, poder, azar, extra);
-  const n = aMedias ? Math.max(1, Math.round(golpe.n / 2)) : golpe.n;
+  const conMas = Math.round(golpe.n * masDano);
+  const n = aMedias ? Math.max(1, Math.round(conMas / 2)) : conMas;
   cargar(defensor, CARGA.recibir);
   const jefe = defensor.lado === 'enemigo' ? d.enemigos[defensor.clave] : null;
   defensor.ps = Math.max(jefe?.huye_a && defensor.clon === undefined ? 1 : 0, defensor.ps - n);

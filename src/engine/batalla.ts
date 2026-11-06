@@ -284,6 +284,11 @@ export interface Objeto {
   sin_confusion?: boolean;
   /** El veneno le hace la mitad. */
   resiste_veneno?: boolean;
+  /** Contra el rival dormido o confundido: más probabilidad de crítico (0,85: 85 %) y más daño (0,5: +50 %). */
+  critico_dormido?: number;
+  critico_confundido?: number;
+  dano_dormido?: number;
+  dano_confundido?: number;
   /** Al usarlo ({quien}: en quién; {n}: cuánto). */
   texto: string;
 }
@@ -292,6 +297,8 @@ export interface Linea {
   texto: string;
 }
 export interface DatosBatalla {
+  /** Lo que lleva puesto cada uno sí o sí, además de lo de la partida (el torneo: el equipo armado de cada peleador). */
+  equipo_fijo?: Record<string, string[]>;
   /** La semilla de las esencias de esta pelea (el torneo la da; en la historia sale de la partida). */
   semilla_esencia?: string;
   titulo: string;
@@ -491,7 +498,7 @@ export interface Luchador {
    */
   inmuneParalisis?: number;
   /** Lo que da el equipo además de ATQ y DEF (esos van en `extra` y `extraDef`). */
-  equipo?: { vel: number; critico: number; sinConfusion: boolean; resisteVeneno: boolean };
+  equipo?: { vel: number; critico: number; sinConfusion: boolean; resisteVeneno: boolean; criticoDormido?: number; criticoConfundido?: number; danoDormido?: number; danoConfundido?: number };
   /** Su esencia (oculta; engine/esencia.ts): un pequeño plus que se suma a su base. */
   esencia?: Esencia;
 }

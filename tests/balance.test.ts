@@ -73,3 +73,15 @@ describe('balance del torneo: Billy, un poco más fuerte (pedido del autor, 2026
     expect(billy).toBeLessThan(0.92);
   });
 });
+
+describe('balance del torneo: Maggie, con sus objetos contra el dormido y el confundido (2026-11-06)', () => {
+  it('Maggie gana una parte razonable de las finales en simple (entre 30 % y 75 %)', async () => {
+    const { TORNEO, armarRonda } = await import('../src/engine/torneo');
+    const m = TORNEO.modalidades.find((x) => x.peleadores === 1)!;
+    const final = TORNEO.rondas.length - 1;
+    const maggie = TORNEO.copas.reduce((s, c) => s + sim(armarRonda(c, final, m, ['maggie']), true, 400).gana, 0) / TORNEO.copas.length;
+    console.log('maggie', maggie);
+    expect(maggie).toBeGreaterThan(0.3);
+    expect(maggie).toBeLessThan(0.75);
+  });
+});

@@ -423,6 +423,26 @@
       "precio": 160,
       "descripcion": "Traje. +4 DEF, +3 ATQ. Un traje de combate rojo que una sacerdotisa vendió en la ciudadela del Otoño. Ya lo están revendiendo.",
       "desbloqueo": "cap02_p2_092"
+    },
+    {
+      "objeto": "pendulo_hipnosis",
+      "precio": 220,
+      "descripcion": "Amuleto. Crítico casi seguro contra el que duerme. Vas a sentir mucho sueño… y un golpe."
+    },
+    {
+      "objeto": "libreta_sesiones",
+      "precio": 220,
+      "descripcion": "Para la cabeza. Crítico casi seguro contra el confundido. Anota todo. Lo usa en tu contra."
+    },
+    {
+      "objeto": "bata_psicologa",
+      "precio": 180,
+      "descripcion": "Traje. +2 DEF y +50 % de daño contra el que duerme."
+    },
+    {
+      "objeto": "pantuflas_divan",
+      "precio": 160,
+      "descripcion": "Para los pies. +50 % de daño contra el confundido."
     }
   ]
 }

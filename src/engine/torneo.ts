@@ -48,6 +48,8 @@ export interface DatosTorneo {
   hablar_jefes: Record<string, string[] | string>;
   /** Con qué números pelea cada jefe de la torre en manos del jugador: los del héroe de su estilo, por `factor`. */
   estilo_jefes: Record<string, { heroe: string; factor: number } | string>;
+  /** Lo que lleva puesto cada peleador (sus prendas y su amuleto). */
+  equipo_peleadores: Record<string, string[] | string>;
 }
 
 export const TORNEO = datos as unknown as DatosTorneo;
@@ -164,6 +166,8 @@ export function armarRonda(c: Copa, ronda: number, m: Modalidad, heroes: string[
     objetos: FICHAS.objetos,
     retratos: { ...FICHAS.retratos, 'Nikki, la campeona': FICHAS.retratos.Nikki, 'Soldado veterano': FICHAS.retratos.Soldado },
     mochila_inicial: TORNEO.mochila,
+    // Lo que lleva puesto cada peleador (decisión del autor, 2026-11-06: en el torneo sí hay objetos y amuletos).
+    equipo_fijo: Object.fromEntries(heroes.map((k) => [k, TORNEO.equipo_peleadores[k]]).filter((x): x is [string, string[]] => Array.isArray(x[1]))),
     huir: false,
     ayuda: undefined,
     premio: undefined,

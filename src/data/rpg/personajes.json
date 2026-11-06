@@ -431,15 +431,15 @@
       "filtro": "hue-rotate(230deg) saturate(1.2)",
       "seguido": true,
       "base": {
-        "ps": 26,
-        "atq": 3,
-        "def": 2,
+        "ps": 37,
+        "atq": 4,
+        "def": 3,
         "vel": 13
       },
       "crece": {
-        "ps": 4.5,
-        "atq": 0.5,
-        "def": 0.4,
+        "ps": 6.35,
+        "atq": 0.71,
+        "def": 0.56,
         "vel": 0.7
       },
       "ataques": [
@@ -2548,6 +2548,35 @@
       "tipo": "permanente",
       "niveles": -1,
       "texto": "{quien} se come el caramelo ácido. Le baja un nivel. Nadie sabe por qué alguien querría esto."
+    },
+    "pendulo_hipnosis": {
+      "nombre": "Péndulo de hipnosis",
+      "tipo": "equipo",
+      "espacio": "amuleto",
+      "critico_dormido": 0.85,
+      "texto": "Amuleto. Contra el que duerme, crítico casi seguro. Vas a sentir mucho sueño… y un golpe."
+    },
+    "libreta_sesiones": {
+      "nombre": "Libreta de sesiones",
+      "tipo": "equipo",
+      "espacio": "cabeza",
+      "critico_confundido": 0.85,
+      "texto": "Cabeza. Contra el confundido, crítico casi seguro. Anota todo lo que dices. Lo usa en tu contra."
+    },
+    "bata_psicologa": {
+      "nombre": "Bata de psicóloga",
+      "tipo": "equipo",
+      "espacio": "traje",
+      "def": 2,
+      "dano_dormido": 0.5,
+      "texto": "Traje. +2 DEF y +50 % de daño contra el que duerme. Los sueños también se cobran."
+    },
+    "pantuflas_divan": {
+      "nombre": "Pantuflas del diván",
+      "tipo": "equipo",
+      "espacio": "pies",
+      "dano_confundido": 0.5,
+      "texto": "Pies. +50 % de daño contra el confundido. Pasos suaves, preguntas duras."
     }
   },
   "retratos": {

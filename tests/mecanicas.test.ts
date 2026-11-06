@@ -423,3 +423,23 @@ describe('objetos nuevos de la propuesta (los que ya sabe hacer el juego, 2026-1
     expect([h.confundido, h.quemado, h.paralizado, h.dormido, h.congelado, h.envenenado]).toEqual([0, 0, 0, 0, 0, null]);
   });
 });
+
+describe('los objetos de Maggie: contra el dormido y el confundido (idea del autor, 2026-11-06)', () => {
+  it('con el péndulo, el golpe al que duerme es crítico casi siempre; despierto, casi nunca', async () => {
+    const { BATALLAS } = await import('../src/engine/batallas');
+    const { estadoInicial, resolverGolpe } = await import('../src/engine/turnos');
+    const D = { ...BATALLAS.bastion, equipo_fijo: { jair: ['pendulo_hipnosis', 'bata_psicologa'] } };
+    const criticos = (dormido: boolean) => {
+      let n = 0;
+      for (let i = 0; i < 400; i++) {
+        const s = estadoInicial(D);
+        const jair = s.heroes.find((h) => h.clave === 'jair')!;
+        const e = { ...jair, id: 'x', lado: 'enemigo' as const, ps: 9999, psMax: 9999, dormido: dormido ? 2 : 0, equipo: undefined };
+        if (resolverGolpe(s, D, jair, e, 5).critico) n++;
+      }
+      return n / 400;
+    };
+    expect(criticos(true)).toBeGreaterThan(0.85);
+    expect(criticos(false)).toBeLessThan(0.3);
+  });
+});

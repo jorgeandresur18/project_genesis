@@ -262,6 +262,18 @@
     },
     {
       "descripcion": "Outfit. +4 DEF, +3 ATK. A red combat suit a priestess sold in the Autumn citadel. Someone's already reselling it."
+    },
+    {
+      "descripcion": "Amulet. Near-certain crit against a sleeping target. You're getting very sleepy… and hit."
+    },
+    {
+      "descripcion": "For the head. Near-certain crit against a confused target. Writes everything down. Uses it against you."
+    },
+    {
+      "descripcion": "Outfit. +2 DEF and +50% damage against a sleeping target."
+    },
+    {
+      "descripcion": "For the feet. +50% damage against a confused target."
     }
   ]
 }

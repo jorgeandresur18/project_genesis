@@ -214,3 +214,11 @@ Jugar el Capítulo 2 hasta la taberna y el 3 hasta el despertar (o `?escena=cap0
 - [ ] Llegan los avisos de **Noodle Fotos** («¿Recuerdas esto?»): en el Otoño (hace 14 años), al cargar el celular en la taberna (hace 13) y al despertar (hace 8, la fiesta).
 - [ ] Se ven las fotos de Nikki de antes (cuadros grises por ahora), los pensamientos de Jair y, en el chat con Nikki, los mensajes de hace 14 años («estas muy guapa en tu foto 😍» / «gracias jejeje») **arriba de todo**, antes de «nunca te vayas de mi vida».
 
+## 17. El torneo con equipo y Maggie (nuevo, 6 de noviembre)
+
+En el Torneo (`npm run dev`, desde Extras):
+
+- [ ] Elegir a **Maggie**: dormir o confundir al rival y pegarle. ¿Se notan los críticos (casi siempre) contra el dormido?
+- [ ] Que los peleadores se sientan parejos, con Billy apenas por encima.
+- [ ] En Boringplace aparecen los cuatro objetos de Maggie (no en la demo publicada).
+
