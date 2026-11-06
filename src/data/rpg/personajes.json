@@ -2219,6 +2219,70 @@
       "sonido": "espada",
       "cae_en_cebo": 0.85,
       "_nota": "Enemigo provisional del Capítulo 3 (Claude, 2026-11-05): guardia estacional al servicio del Rey. Usa la hoja del soldado hasta que el autor haga el suyo."
+    },
+    "sombra_roca": {
+      "nombre": "Monstruo de sombras (de roca)",
+      "sprite": "batalla/sombra",
+      "jefe": true,
+      "huye_a": 0.3,
+      "base": {
+        "ps": 40,
+        "atq": 6,
+        "def": 10,
+        "vel": 4
+      },
+      "crece": {
+        "ps": 8,
+        "atq": 0.9,
+        "def": 1,
+        "vel": 0.2
+      },
+      "ataques": [
+        {
+          "nombre": "Puño de roca",
+          "poder": 7,
+          "usos": 20,
+          "texto": "El monstruo baja el brazo de piedra sobre {objetivo}. La nieve salta."
+        },
+        {
+          "nombre": "Avalancha",
+          "poder": 3,
+          "usos": 8,
+          "objetivo": "todos",
+          "texto": "El monstruo golpea el suelo y una ola de nieve y piedras les cae a todos."
+        },
+        {
+          "nombre": "Grieta en la nieve",
+          "poder": 0,
+          "usos": 3,
+          "paraliza": 1,
+          "texto": "El suelo se parte bajo {objetivo}, que se queda atascado en la grieta."
+        }
+      ],
+      "escala": 1.54,
+      "especial": {
+        "nombre": "Desprendimiento",
+        "poder": 6,
+        "golpes": 3,
+        "objetivo": "uno",
+        "color": "#a64dff",
+        "ojos": [
+          84,
+          112,
+          26,
+          13
+        ],
+        "texto": "Las rocas del monstruo se sueltan todas a la vez y caen sobre {objetivo}. Después vuelven a pegarse a la tinta, como si nada.",
+        "posicion": "objetivo",
+        "pantalla": "oscura",
+        "levanta": true
+      },
+      "sonido": "tajada",
+      "al_retirarse": "retirada",
+      "sale_atras": true,
+      "cae_en_cebo": 0.35,
+      "_nota": "La sombra cubierta de rocas del otoño (Capítulo 1, el claro de las cuatro estaciones). Usa la hoja de la sombra con un filtro gris hasta que el autor haga la suya (en la novela ya existe sprites/monstruo_sombras/armored).",
+      "filtro": "grayscale(0.85) brightness(0.85) contrast(1.15)"
     }
   },
   "objetos": {

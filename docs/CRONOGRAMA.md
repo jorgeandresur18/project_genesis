@@ -164,6 +164,8 @@ abajo de espaldas) cuando toque.
 
 ## Ideas anotadas (por diseñar)
 
+- **La sombra de roca (Capítulo 1, en prueba):** la pelea del claro de las cuatro estaciones está hecha en `desarrollo`, pero el autor la quiere pensar: **antes de publicar en `main`, preguntarle si va** (si no, se quita la pelea de `cap01_g7b_022c6` y vuelve la muerte directa).
+
 - **Boringram: cómo se conocieron Jair y Nikki** (del autor, 2026-11-06): desbloqueables que cuentan su vida de antes (el colegio, los «me gusta» sin respuesta, la fiesta a los 22, el primer beso). Falta decidir qué publicaciones son y cuándo se desbloquean (el Boringram de los capítulos lo hace el autor). **Forma (idea del autor):** como los recuerdos de las fotos: un aviso de Noodle en el celular de Jair, «¿Recuerdas esta foto? Hace N años, un día como hoy», que va contando la historia poco a poco. **Hechos** (6 de noviembre): Capítulo 2, el colegio (hace 14 años) y la foto con sus compañeros (13); Capítulo 3, la fiesta (8). **Faltan**, cuando existan sus capítulos: el primer mensaje de Nikki (Capítulo 4) y la primera salida, la noche del beso (Capítulo 5). «Nunca te vayas de mi vida» ya está en el Capítulo 1.
 
 **Escena secreta de Jordy en el Capítulo 4 (recomendación, idea del autor del 6 de noviembre; no es canon):** al

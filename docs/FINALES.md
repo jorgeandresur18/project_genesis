@@ -29,7 +29,7 @@ Muertes o fracasos tempranos, estilo Shiny Days. No cuentan entre los 12 finales
 | `bad_cap01_bastion` | Partida no guardada | 1 | Perder la pelea del Bastión (`batalla: "bastion"`, después de la máquina expendedora): los soldados los archivan | Borrador |
 | `bad_cap01_hangar` | Recurso decorativo | 1 | Camino alternativo: en el hangar, «Probar la nave grande» enciende la alarma; perder la pelea del hangar (`batalla: "hangar"`, soldados y el Capitán enmascarado): el cañón del capitán | Borrador |
 | `bad_cap01_capitan` | Un solo turno | 1 | Frente al capitán en el núcleo de la Grieta, «Pelear contra el capitán» | Borrador |
-| `bad_cap01_acorazado` | Valiente, por una vez | 1 | En el invierno, frente al monstruo acorazado, «Enfrentar al monstruo» | Borrador |
+| `bad_cap01_acorazado` | Valiente, por una vez | 1 | En el invierno, «Enfrentar al monstruo» y perder la pelea contra la sombra de roca (en prueba desde el 2026-11-06; antes era muerte directa) | Borrador |
 | `bad_cap01_nikki` | Cachetadas infinitas | 1 | Desde la primera partida (cambio del autor del 2026-11-01): en el bar, «Propasarte» cuando Nikki pide el beso, y perder la pelea contra ella (`batalla: "nikki"`): Nikki llora sola sobre él y le grita idiota por morirse e irse de su vida. Cuenta para el 100 % | Borrador |
 | `bad_cap02_prendas` | Lavandería sagrada | 2 | En la trampa del molino, «Agarrar primero las prendas de Rikka» | Borrador |
 | `bad_cap02_hidromiel` | Hidromiel de la casa | 2 | En la taberna, cuando Cami dice «Bebe y no hagas cuentas», «Tomarte la jarra entera de un trago» | Borrador |

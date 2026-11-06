@@ -3010,6 +3010,8 @@
 
 `g7b_022c6` **Voz:** Comando no reconocido.
 
+> ⤷ continúa en `g7b_022v01`
+
 `g7b_022c7` — El monstruo no frena. Ni siquiera parece notar que Jair está ahí hasta que lo tiene encima.
 
 `g7b_022c8` — Lo último que Jair ve es el cielo blanco del invierno, y a Cami gritándole algo que no alcanza a oír, como la Voz cuando habla muy bajito.
@@ -3025,7 +3027,26 @@
 
 ---
 
+### fondos/claro_cuatro_estaciones.webp
+
+`g7b_022v01` — Las rocas se le caen a pedazos. Debajo asoma la tinta, brillante, como una herida que no sangra.
+
+`g7b_022v02` **Cami:** ¡Al arroyo! ¡Llévalo al hielo!
+
+
 ### fondos/bosque_invierno.webp
+
+`g7b_022v03` — Jair corre hacia el arroyo congelado. El monstruo lo sigue, furioso, y pisa la orilla.
+
+`g7b_022v04` — Apoya una pata de tinta sobre el hielo. Y la tinta se congela.
+
+`g7b_022v05` — La escarcha le sube por el cuerpo, entre las rocas, hasta dejarlo quieto: una estatua de hielo negro y piedra.
+
+`g7b_022v06` **Cami:** Le pegaste a un monstruo de piedra. Con manos de oficinista.
+
+`g7b_022v07` **Jair:** Y lo terminó el hielo. Como siempre: yo empiezo el trabajo y alguien más lo termina.
+
+> ⤷ continúa en `g7b_024`
 
 `g7b_023a` — Jair sale del sendero y se lanza sobre el arroyo congelado. El hielo cruje. Resbala. Cae de espaldas, protegiendo a Cami con el cuerpo, y se desliza por la superficie como un pingüino con lentes.
 

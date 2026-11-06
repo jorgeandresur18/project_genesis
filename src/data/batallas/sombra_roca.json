@@ -1,0 +1,161 @@
+{
+  "titulo": "El claro de las cuatro estaciones",
+  "fondo": "PLACEHOLDER:claro_cuatro_estaciones",
+  "heroes": [
+    "jair",
+    "cami"
+  ],
+  "personajes": {
+    "jair": {
+      "nivel": 6
+    },
+    "cami": {
+      "nivel": 15,
+      "seguido": false
+    }
+  },
+  "enemigos": [
+    "sombra_roca"
+  ],
+  "horda": {
+    "enemigo": "sombra_roca",
+    "al_inicio": 0,
+    "niveles": []
+  },
+  "jefe": {
+    "enemigo": "sombra_roca",
+    "nivel": 20
+  },
+  "botin": {
+    "probabilidad": 0.6,
+    "objetos": [
+      "atq",
+      "def",
+      "vida",
+      "vida",
+      "carga",
+      "revivir"
+    ]
+  },
+  "esquivar": 0.5,
+  "hablar": 0.4,
+  "huir": false,
+  "dialogos": {
+    "inicio": [
+      {
+        "quien": "Voz",
+        "texto": "Entidad hostil: la de la tinta. Ahora con piedras del otoño encima."
+      },
+      {
+        "quien": "Cami",
+        "texto": "¡Te dije lo del hielo! …Bueno. Desde aquí también disparo."
+      }
+    ],
+    "refuerzos": [
+      {
+        "quien": "Voz",
+        "texto": "El soldado pide refuerzos por radio antes de caer. Llega otro, idéntico."
+      }
+    ],
+    "jefe": [
+      {
+        "quien": "Cami",
+        "texto": "¡Es el de la tinta! Y ahora con piedras encima. ¡Pégale donde no tenga!"
+      }
+    ],
+    "jefe_huye": [
+      {
+        "quien": "Voz",
+        "texto": "Las rocas se le caen a pedazos. El monstruo retrocede hacia el arroyo, herido."
+      }
+    ],
+    "victoria": [
+      {
+        "quien": "Jair",
+        "texto": "(Le pegué a un monstruo de piedra. Con manos de oficinista. Nadie me va a creer.)"
+      }
+    ],
+    "derrota": [
+      {
+        "quien": "Voz",
+        "texto": "Comando no reconocido."
+      }
+    ],
+    "huir_no": [
+      {
+        "quien": "Cami",
+        "texto": "¿Ahora quieres correr? Tarde. Era antes, por el hielo."
+      }
+    ],
+    "huir": [
+      {
+        "quien": "Voz",
+        "texto": "No hay adónde correr. Solo el hielo."
+      }
+    ],
+    "descanso": [
+      {
+        "quien": "Cami",
+        "texto": "Dame un segundo… El tobillo."
+      }
+    ],
+    "cae_jair": [
+      {
+        "quien": "Cami",
+        "texto": "¿Jair? ¡Jair! Genial. Ahora tengo que hacer todo yo, como siempre."
+      }
+    ],
+    "hablar_ok": [
+      {
+        "quien": "Voz",
+        "texto": "{objetivo} se queda pensando. Pierde su próximo ataque."
+      }
+    ],
+    "hablar_no": [
+      {
+        "quien": "Voz",
+        "texto": "{objetivo} no le hace caso."
+      }
+    ],
+    "esquiva_ok": [
+      {
+        "quien": "Voz",
+        "texto": "¡{quien} lo esquiva!"
+      }
+    ],
+    "botin": [
+      {
+        "quien": "Voz",
+        "texto": "Al {objetivo} se le cae algo: {objeto}. Va a la mochila."
+      }
+    ],
+    "ayuda": [
+      {
+        "quien": "Voz",
+        "texto": "Algo cae del techo y rebota en el piso: {objeto}. Nadie pregunta de dónde. Va a la mochila."
+      }
+    ]
+  },
+  "objetos": [
+    "atq",
+    "def",
+    "vida",
+    "carga",
+    "caramelo_rancio",
+    "revivir",
+    "veneno_ratas",
+    "condon"
+  ],
+  "ayuda": {
+    "umbral": 0.35,
+    "cae": 0.3,
+    "objeto": "vida",
+    "critico": 0.1
+  },
+  "musica_jefe": "audio/musica/combate_arcade.mp3",
+  "mochila_inicial": {
+    "revivir": 1
+  },
+  "musica": "audio/musica/combate_arcade.mp3",
+  "_nota": "Pelea nueva del Capítulo 1 (pedido del autor, 2026-11-06), en desarrollo: el autor la quiere pensar antes de publicarla."
+}

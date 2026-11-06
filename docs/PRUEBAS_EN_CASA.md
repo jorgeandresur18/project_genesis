@@ -226,4 +226,5 @@ En el Torneo (`npm run dev`, desde Extras):
 
 - [ ] Jair empieza con sus lentes de programador puestos (Equipo).
 - [ ] El Bastión (la sombra ahora es nivel 15) y el hangar (el Capitán, nivel 11): ¿se sienten como antes de la ropa de inicio, ni regalados ni imposibles?
+- [ ] **La sombra de roca** (`?escena=cap01_g7b_020` o jugando hasta el claro): elegir «Enfrentar al monstruo». La pelea (la sombra en gris, con filtro: hoja provisional), perderla (el final malo de siempre) y ganarla (se congela en el arroyo y sigue la historia). ¿Va o no va?
 
