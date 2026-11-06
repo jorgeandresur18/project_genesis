@@ -682,6 +682,45 @@ hacen daño) y un ataque que **duerme** a un rival (hoy dormir solo sale de los 
 especial, derrotado) y sus retratos para la caja de diálogo; mientras tanto, placeholders (como el Rey con el dibujo
 del Capitán).
 
+## 21. La esencia (idea del autor, diseño aprobado el 2026-11-05; por construir)
+
+Un rasgo **oculto** de cada personaje de las peleas: un **pequeño plus** que se suma a su base. **Nunca se muestra** en
+el juego (ni en Equipo ni en las fichas); es un cálculo interno, por probabilidad.
+
+**Decisiones del autor:**
+- **Todos los personajes de las peleas** tienen esencia. En la historia, los **genéricos** (los de la horda) tienen una
+  esencia **baja, que casi no se nota**; los **principales** (los héroes, los amigos del héroe y los jefes importantes,
+  los que tienen `jefe`) tienen una esencia de verdad.
+- **Una sola** esencia por personaje.
+- **No hay esencias malas:** siempre suma.
+- **En cada partida, esencias diferentes.** En el torneo, diferentes cada vez que empieza un torneo.
+- No va al canon: es solo una mecánica.
+
+**Los tipos** (cualquier personaje puede tener cualquiera; propuesta de Claude):
+
+| Esencia | Plus |
+|---|---|
+| Fuerza | +3 a +8 % de ATQ |
+| Firmeza | +3 a +8 % de DEF |
+| Vitalidad | +4 a +10 % de PS |
+| Rapidez | +3 a +8 % de VEL (decide el orden del turno) |
+| Reflejos | +2 a +5 puntos de probabilidad de esquivar |
+| Puntería | +2 a +4 puntos de crítico y un poco menos de fallar |
+| Concentración | la barra del especial se llena entre 5 y 12 % más rápido |
+| Temple | los estados le duran un poco menos (o una pequeña probabilidad de no recibirlos) |
+
+**Cuánto** (propuesta): los principales sortean el escalón: **común** 70 % (la parte baja del rango), **rara** 25 % (la
+media) y **excepcional** 5 % (la alta). Los genéricos, siempre la mitad del mínimo (casi no se nota). Los porcentajes se
+aplican sobre los números de su nivel.
+
+**Cómo se sortea** (propuesta): en la historia, con una semilla fija por partida y personaje (el número propio de cada
+partida, el mismo que usa PayFoe): es la misma toda la partida aunque se guarde y se cargue, y otra partida da otra; las
+partidas viejas la sacan la primera vez que pelean. Los enemigos, con la semilla de la partida, el enemigo y su lugar en
+la pelea. En el torneo, una semilla nueva al empezar cada torneo, que dura hasta ganarlo o quedar eliminado.
+
+**Pruebas:** el simulador la sortea igual que el juego, para medir el equilibrio con esencias reales (la meta: que mueva
+la probabilidad de ganar a lo sumo unos 3 a 5 puntos). En `npm run dev` se puede ver, para probarla; en lo publicado, no.
+
 ## 16. Pendientes e ideas
 
 | Tema | Estado |

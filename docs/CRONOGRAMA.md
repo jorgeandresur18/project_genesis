@@ -151,6 +151,8 @@ Rikka (manos, nalgadas, la marca a las 7, el grito a los 30); el CeBiDol desde E
 
 ## Ideas anotadas (por diseñar)
 
+**Por construir (diseño aprobado):** la **esencia** (`BIBLIA_RPG.md`, sección 21) y el **torneo con los 8 jefes de la torre y personajes repetidos** (sección 17).
+
 **Dos Boringram (idea del autor, 2026-11-05).** Hoy hay uno solo: lo que muestra depende de las escenas vistas en *cualquier* partida (`snapshots`), así que al empezar de nuevo ya aparecen publicaciones del futuro.
 - **El de la historia** (el que se abre jugando): va ligado a la partida en curso: solo lo que desbloquearon las escenas por las que pasó *esta* partida (su `history`), en el orden en que ocurren, con la hora y la batería de ese momento.
 - **El del menú**: el archivo de todo lo que ya desbloqueaste y viste, en todas las partidas (como hoy).
