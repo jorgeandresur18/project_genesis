@@ -291,7 +291,30 @@
       ],
       "dialogue": {
         "speaker": "Cliente",
-        "text": "Joven, si la apago se me dañan la carne y la leche."
+        "text": "Joven, si la apago se me dañan la carne y la leche. Y esta «inteligente» me las junta en el mismo compartimento. La anterior las tenía separadas."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_o08b"
+    },
+    {
+      "scene_id": "cap01_o08b",
+      "chapter": 1,
+      "background": "fondos/oficina_dia.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "centro"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "¿Y cuál es el problema? Ni que fuera pecado. Y si lo es, ya se la bendijo un sacerdote: de seguro sus creencias se lo permiten, estimada."
       },
       "choices": [],
       "conditions": [],
@@ -314,7 +337,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Entonces le recomiendo elegir entre la carne, la leche o el internet."
+        "text": "Igual le recomiendo elegir entre la carne, la leche o el internet."
       },
       "choices": [],
       "conditions": [],

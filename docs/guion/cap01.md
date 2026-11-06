@@ -37,9 +37,11 @@
 
 `o06` **Jair:** (Hasta las refrigeradoras tienen expectativas más altas que mi sueldo.) ¿Probó apagándola y prendiéndola?
 
-`o08` **Cliente:** Joven, si la apago se me dañan la carne y la leche.
+`o08` **Cliente:** Joven, si la apago se me dañan la carne y la leche. Y esta «inteligente» me las junta en el mismo compartimento. La anterior las tenía separadas.
 
-`o09` **Jair:** Entonces le recomiendo elegir entre la carne, la leche o el internet.
+`o08b` **Jair:** ¿Y cuál es el problema? Ni que fuera pecado. Y si lo es, ya se la bendijo un sacerdote: de seguro sus creencias se lo permiten, estimada.
+
+`o09` **Jair:** Igual le recomiendo elegir entre la carne, la leche o el internet.
 
 `o10` **Cliente:** ¿Y por qué diablos tengo que elegir?
 
