@@ -715,7 +715,7 @@ export function CapasFondo({
 }
 
 /** Vapor de las termas: nubes que suben y se mecen; el nivel cambia lo espeso (ver `vapor` en la escena). */
-function VaporTermal({ nivel }: { nivel: Vapor }) {
+export function VaporTermal({ nivel }: { nivel: Vapor }) {
   return (
     <div className={`vapor vapor-${nivel}`} aria-hidden>
       {Array.from({ length: 10 }, (_, i) => (

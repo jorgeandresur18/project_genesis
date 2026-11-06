@@ -23,11 +23,11 @@ import {
 } from '../engine/gallery';
 import { reinoKey, useReinos, type Reino } from '../engine/reinos';
 import { BASE_CANVAS, canvasHeight, statureOf, widthFactor } from '../engine/stature';
-import type { Character } from '../engine/types';
+import type { Character, Vapor } from '../engine/types';
 import { Panel } from './Panels';
 import { playCancel, playChip, playSelect, startTyping, stopTyping } from '../engine/sound';
 import { NoData } from './NoData';
-import { CapasFondo, capaDeFondo, capaDeSprite, type Zona } from './SceneStage';
+import { CapasFondo, VaporTermal, capaDeFondo, capaDeSprite, type Zona } from './SceneStage';
 import { SpriteHoja, type Hoja } from './batalla/sprites';
 import { colorBalas, useEfectosSprite } from './EfectosSprite';
 import { BATALLAS } from '../engine/batallas';
@@ -611,7 +611,7 @@ function Characters() {
         <Viewer
           sprite
           quejaDe={(i) => (texts.quejas[flat[i].id] ? flat[i].id : null)}
-          grito={(i, vapor) => {
+          grito={(i) => {
             // Rikka en las termas: tocarla demasiado termina en el grito de su grupo, sin darse vuelta (pedido del
             // autor): de frente, «Termas: algo la tocó»; de espalda, «Termas: el grito»; con el traje, «Termas: apretadísimo».
             const c = flat[i];
@@ -620,8 +620,8 @@ function Characters() {
             const cual = GRITOS[grupo];
             const capa = capaDeSprite(cual);
             const src = assetUrl(`sprites/${cual}.webp`);
-            // Con el vapor puesto, el grito también lo lleva (pedido del autor).
-            return { src, capas: capa && <CapasFondo capa={capa} src={src} contener fijos vapor={vapor} /> };
+            // Con el vapor puesto, el grito también lo lleva (pedido del autor): es la capa fija del visor (`vaporDe`).
+            return { src, capas: capa && <CapasFondo capa={capa} src={src} contener fijos /> };
           }}
           onGrito={() => window.dispatchEvent(new Event('genesis:grito'))}
           siguiente={(i) => {
@@ -645,11 +645,13 @@ function Characters() {
             const r = flat[i].rpg;
             return r ? <AccionesRpg r={r} accion={accion} onAccion={setAccion} /> : null;
           }}
-          capas={(i, vapor, alTocar, dice) => {
+          capas={(i, _vapor, alTocar, dice) => {
             const capa = capaDeSprite(`${flat[i].id}/${flat[i].expr}`);
             const src = assetUrl(`sprites/${flat[i].id}/${flat[i].expr}.webp`);
-            return capa && <CapasFondo capa={capa} src={src} contener vapor={vapor} onToque={alTocar} dice={dice} />;
+            // El vapor de los sprites va aparte (`vaporDe`), fijo: si no, con el zoom y el temblor del grito se le ve el borde.
+            return capa && <CapasFondo capa={capa} src={src} contener onToque={alTocar} dice={dice} />;
           }}
+          vaporDe={(i) => capaDeSprite(`${flat[i].id}/${flat[i].expr}`)?.vapor ?? null}
           src={(i) => assetUrl(`sprites/${flat[i].id}/${flat[i].expr}.webp`)}
           label={(i) =>
             `${texts.personajes[flat[i].id] ?? flat[i].id} · ${flat[i].rpg ? rpgNombre(flat[i].expr) : nameOf(flat[i].id, flat[i].expr)}`
@@ -696,6 +698,7 @@ function Viewer({
   quejaDe,
   siguiente,
   grito,
+  vaporDe,
   onGrito,
 }: {
   src: (i: number) => string;
@@ -723,7 +726,12 @@ function Viewer({
   /** Adónde pasa sola después de tocarla mucho (otro sprite secreto), o null si no pasa. */
   siguiente?: (i: number) => number | null;
   /** Si tocarla demasiado termina en el grito: el sprite del grito y sus capas (la censura), o null. */
-  grito?: (i: number, vapor: boolean) => { src: string; capas: ReactNode } | null;
+  grito?: (i: number) => { src: string; capas: ReactNode } | null;
+  /**
+   * El vapor de un sprite secreto, en una capa fija encima de la imagen (no hace zoom ni tiembla con el grito, y sigue
+   * igual cuando empieza), o null si no tiene.
+   */
+  vaporDe?: (i: number) => Vapor | null;
   /** Después del grito: vuelve a la pantalla de inicio. */
   onGrito?: () => void;
 }) {
@@ -768,7 +776,7 @@ function Viewer({
   const [gritando, setGritando] = useState<{ src: string; capas: ReactNode } | null>(null);
   const tocar = (zona?: string) => {
     if (gritando) return;
-    const g = grito?.(index, vapor);
+    const g = grito?.(index);
     if (g && ++toquesGrito.current >= TOQUES_PARA_GRITO) {
       // Muy dramático: el sprite del grito, tiembla todo, zoom a su cara, luz blanca y de vuelta al inicio.
       if (pasando.current) clearTimeout(pasando.current);
@@ -830,6 +838,8 @@ function Viewer({
         </button>
       )}
       <div className="viewer-main">
+        {/* El escenario y, encima, el vapor fijo (en una caja propia para que el vapor cubra justo el escenario). */}
+        <div className="viewer-stage-caja">
         <div
           className={`viewer-stage ${propio ? 'viewer-volumen' : sprite ? 'viewer-profundidad' : ''} ${gritando ? 'viewer-grito' : ''}`}
           style={propio ? ({ '--gx': giro.x, '--gy': giro.y } as CSSProperties) : undefined}
@@ -862,6 +872,13 @@ function Viewer({
             />
           )}
           {!propio && !gritando && capasActuales}
+        </div>
+        {/* El vapor del sprite secreto: fijo encima del escenario (fuera de lo que hace zoom y tiembla en el grito). */}
+        {vapor && !propio && vaporDe?.(index) && (
+          <div className="viewer-vapor" aria-hidden>
+            <VaporTermal nivel={vaporDe(index)!} />
+          </div>
+        )}
         </div>
         {/* La luz blanca cubre toda la pantalla desde el principio (pedido del autor): va directo al body, porque dentro
             de la ventana (que tiene transform) «fixed» se queda en la ventana. */}
