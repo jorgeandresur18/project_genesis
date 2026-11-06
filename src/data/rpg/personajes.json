@@ -1143,14 +1143,14 @@
       "nombre": "Bicho de memoria",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 24,
-        "atq": 5,
+        "ps": 28,
+        "atq": 6,
         "def": 3,
         "vel": 7
       },
       "crece": {
-        "ps": 8.1,
-        "atq": 0.81,
+        "ps": 9.6,
+        "atq": 0.96,
         "def": 0.6,
         "vel": 0.4
       },
@@ -1201,14 +1201,14 @@
       "nombre": "Bodeguero",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 33,
-        "atq": 10,
+        "ps": 38,
+        "atq": 12,
         "def": 6,
         "vel": 7
       },
       "crece": {
-        "ps": 7.8,
-        "atq": 0.78,
+        "ps": 9,
+        "atq": 0.9,
         "def": 0.6,
         "vel": 0.4
       },
@@ -1251,14 +1251,14 @@
       "nombre": "Cocinero de guerra",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 35,
-        "atq": 8,
+        "ps": 41,
+        "atq": 9,
         "def": 3,
         "vel": 7
       },
       "crece": {
-        "ps": 8.5,
-        "atq": 0.85,
+        "ps": 9.9,
+        "atq": 0.99,
         "def": 0.6,
         "vel": 0.4
       },
@@ -1309,14 +1309,14 @@
       "nombre": "Herrero",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 35,
-        "atq": 9,
+        "ps": 42,
+        "atq": 11,
         "def": 3,
         "vel": 7
       },
       "crece": {
-        "ps": 7.4,
-        "atq": 0.74,
+        "ps": 8.8,
+        "atq": 0.88,
         "def": 0.6,
         "vel": 0.4
       },
@@ -1359,14 +1359,14 @@
       "nombre": "Escriba de tinta",
       "sprite": "batalla/sombra",
       "base": {
-        "ps": 35,
-        "atq": 10,
+        "ps": 41,
+        "atq": 12,
         "def": 6,
         "vel": 6
       },
       "crece": {
-        "ps": 12.7,
-        "atq": 1.44,
+        "ps": 15,
+        "atq": 1.7,
         "def": 0.8,
         "vel": 0.2
       },
@@ -1414,14 +1414,14 @@
       "nombre": "Celador",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 28,
-        "atq": 6,
+        "ps": 35,
+        "atq": 8,
         "def": 7,
         "vel": 7
       },
       "crece": {
-        "ps": 5.7,
-        "atq": 0.57,
+        "ps": 7.1,
+        "atq": 0.71,
         "def": 0.6,
         "vel": 0.4
       },
@@ -1464,14 +1464,14 @@
       "nombre": "Caballero de la tabla",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 28,
-        "atq": 5,
+        "ps": 37,
+        "atq": 7,
         "def": 9,
         "vel": 7
       },
       "crece": {
-        "ps": 5,
-        "atq": 0.5,
+        "ps": 6.6,
+        "atq": 0.66,
         "def": 0.6,
         "vel": 0.4
       },
@@ -2074,14 +2074,14 @@
       "nombre": "Guardia del Verano",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 28,
-        "atq": 8,
+        "ps": 34,
+        "atq": 10,
         "def": 3,
         "vel": 7
       },
       "crece": {
-        "ps": 6.7,
-        "atq": 0.67,
+        "ps": 8.2,
+        "atq": 0.82,
         "def": 0.6,
         "vel": 0.4
       },
@@ -2124,14 +2124,14 @@
       "nombre": "Guardia del Otoño",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 29,
-        "atq": 9,
+        "ps": 40,
+        "atq": 13,
         "def": 8,
         "vel": 7
       },
       "crece": {
-        "ps": 6.4,
-        "atq": 0.64,
+        "ps": 8.9,
+        "atq": 0.89,
         "def": 0.6,
         "vel": 0.4
       },
@@ -2174,14 +2174,14 @@
       "nombre": "Guardia del Invierno",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 37,
-        "atq": 7,
+        "ps": 48,
+        "atq": 9,
         "def": 3,
         "vel": 7
       },
       "crece": {
-        "ps": 6.7,
-        "atq": 0.67,
+        "ps": 8.7,
+        "atq": 0.87,
         "def": 0.6,
         "vel": 0.4
       },

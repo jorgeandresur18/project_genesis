@@ -5,6 +5,7 @@
 // Sin usos en sus ataques, cualquiera de los dos esquiva. Decide al momento de actuar (en el juego se elige antes).
 // No se simula: pedirle perdón a Nikki (y por eso tampoco la traición), Hablar, los cebos ni revivir.
 import capitan from '../public/batalla/capitan.json';
+import variables from '../src/data/variables.json';
 import {
   CARGA,
   enCampo,
@@ -267,3 +268,16 @@ export function sim(D: DatosBatalla, listo: boolean, N = 2000, esencias = true) 
 
 /** Para calibrar a mano: los dos jugadores en una pelea. */
 export const informe = (D: DatosBatalla) => ({ descuidado: sim(D, false), atento: sim(D, true) });
+
+/**
+ * La ropa con que empieza cada partida (`puesto_<héroe>_<espacio>` de variables.json): Cami con su traje y su placa,
+ * Rikka con sus prendas y su flor, Jair con sus lentes. Las peleas de la historia se miden con ella puesta.
+ */
+export const ROPA_DE_INICIO: Record<string, string[]> = {};
+for (const [k, v] of Object.entries(variables as Record<string, unknown>)) {
+  const m = k.match(/^puesto_(.+)_(cabeza|traje|pies|amuleto)$/);
+  if (m && typeof v === 'string' && v) (ROPA_DE_INICIO[m[1]] ??= []).push(v);
+}
+/** La pelea con la ropa de inicio puesta (sin pisar el equipo fijo que ya traiga, como el del torneo). */
+export const conRopa = (D: DatosBatalla): DatosBatalla => (D.equipo_fijo ? D : { ...D, equipo_fijo: ROPA_DE_INICIO });
+

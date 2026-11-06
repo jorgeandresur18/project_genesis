@@ -222,3 +222,8 @@ En el Torneo (`npm run dev`, desde Extras):
 - [ ] Que los peleadores se sientan parejos, con Billy apenas por encima.
 - [ ] En Boringplace aparecen los cuatro objetos de Maggie (no en la demo publicada).
 
+## 18. El Capítulo 1 con los lentes de Jair y reajustado (nuevo, 6 de noviembre)
+
+- [ ] Jair empieza con sus lentes de programador puestos (Equipo).
+- [ ] El Bastión (la sombra ahora es nivel 15) y el hangar (el Capitán, nivel 11): ¿se sienten como antes de la ropa de inicio, ni regalados ni imposibles?
+

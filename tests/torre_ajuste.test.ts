@@ -6,7 +6,7 @@
 import fs from 'node:fs';
 import { it } from 'vitest';
 import { BATALLAS, FICHAS } from '../src/engine/batallas';
-import { sim } from './simulador';
+import { conRopa, sim } from './simulador';
 
 const RUTAS: Record<string, string[]> = {
   A: ['cap03_calabozo', 'cap03_cloacas_1', 'cap03_cloacas_2', 'cap03_cuarteles', 'cap03_cuarteles_2', 'cap03_comedor_1', 'cap03_comedor_2', 'cap03_biblioteca_1', 'cap03_sombras', 'cap03_celdas_1', 'cap03_celdas_2', 'cap03_arsenal', 'cap03_salon_1', 'cap03_salon_2', 'cap03_rey'],
@@ -90,7 +90,7 @@ const aplicarMult = (k: string, m: number) => {
   e.crece = { ...o.crece, ps: +(o.crece.ps * m).toFixed(1), atq: +(o.crece.atq * m).toFixed(2) };
 };
 const datos = (id: string, heroes: Record<string, number>) => {
-  const D = structuredClone(BATALLAS[id]);
+  const D = structuredClone(conRopa(BATALLAS[id]));
   for (const k of Object.keys(D.enemigos)) D.enemigos[k] = structuredClone(FICHAS.enemigos[k]);
   for (const k of Object.keys(D.personajes)) D.personajes[k].nivel = heroes[k] ?? D.personajes[k].nivel;
   return D;

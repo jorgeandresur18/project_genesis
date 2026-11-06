@@ -4,11 +4,12 @@
 // fácil o muy difícil. Para ver los números: `npx vitest run tests/balance.test.ts --disable-console-intercept`.
 import { describe, expect, it } from 'vitest';
 import { BATALLAS } from '../src/engine/batallas';
-import { informe, sim } from './simulador';
+import { conRopa, informe, sim } from './simulador';
 
 
 describe('balance del Bastión', () => {
-  const D = BATALLAS.bastion;
+  // Con la ropa de inicio (el traje y la placa de Cami, los lentes de Jair): así se juega de verdad.
+  const D = conRopa(BATALLAS.bastion);
   it('el jugador descuidado gana pocas veces (entre 10 % y 55 %)', () => {
     const r = sim(D, false);
     console.log('balance', JSON.stringify(informe(D)));
@@ -23,7 +24,7 @@ describe('balance del Bastión', () => {
 });
 
 describe('balance del hangar (camino alternativo del Capítulo 1)', () => {
-  const D = BATALLAS.hangar;
+  const D = conRopa(BATALLAS.hangar);
   // Más difícil que el Bastión (es el camino alternativo), pero ganable con cuidado. Jair llega del Bastión casi en el
   // mismo nivel (5,7 en promedio).
   // El cañón del Capitán da 9 golpes (el fuerte y 8 barridos): en nivel 12 el atento ganaba ~32 %; en 10, ~73 %
@@ -52,11 +53,11 @@ describe('balance de la torre del Capítulo 3 (con los niveles de cada pelea; pa
   it('el jugador atento gana todas las peleas de la torre más de la mitad de las veces (con margen: 45 % o más; la torre sube de dificultad piso a piso)', () => {
     // El Rey (la última, nivel 28) puede bajar a ~43 % con los niveles más bajos con que se llega; con los normales del
     // recorrido, ~58 % (la meta). Para él, el margen es 35 % (la simulación varía ±5; 2026-11-05, cuando Cami dejó de descansar fuera del Cap. 1).
-    const malas = torre.map((k) => [k, sim(BATALLAS[k], true, 400).gana] as const).filter(([k, g]) => g < (k === 'cap03_rey' ? 0.35 : 0.45));
+    const malas = torre.map((k) => [k, sim(conRopa(BATALLAS[k]), true, 400).gana] as const).filter(([k, g]) => g < (k === 'cap03_rey' ? 0.35 : 0.45));
     expect(malas).toEqual([]);
   });
   it('el Rey no se gana siempre (atento: menos de 95 %)', () => {
-    expect(sim(BATALLAS.cap03_rey, true, 600).gana).toBeLessThan(0.95);
+    expect(sim(conRopa(BATALLAS.cap03_rey), true, 600).gana).toBeLessThan(0.95);
   });
 });
 

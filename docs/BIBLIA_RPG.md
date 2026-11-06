@@ -800,3 +800,5 @@ Detalle completo en `docs/BATALLA_FINAL.md`.
 
 **El simulador** (2026-11-06): el jugador atento primero duerme, confunde o paraliza al rival que se mueve y le pega mientras no se mueve.
 
+**Ropa de inicio y balance** (2026-11-06): Jair empieza cada partida con sus lentes de programador (decisión del autor), como Cami (traje azul y placa) y Rikka (prendas y flor). La ropa de inicio de Cami había dejado el Capítulo 1 demasiado fácil sin que las pruebas lo notaran (simulaban sin ropa: el Bastión, descuidado ~100 %). Ahora las pruebas simulan con la ropa de inicio (`conRopa` en `tests/simulador.ts`) y se reajustó: **Bastión** soldados +2 y la sombra de 12 a 15 (descuidado ~44 %, atento ~100 %); **hangar** soldados +1 y el Capitán de 10 a 11 (descuidado ~32 %, atento ~70 %, como lo aprobó el autor). La torre del Capítulo 3 se reajustó con la ropa (solo las hordas, como decidió el autor); el Rey (nivel 28 fijo, sin ajuste) quedó en ~72–75 % con el jugador atento.
+

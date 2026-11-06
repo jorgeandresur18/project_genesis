@@ -8,7 +8,7 @@
   ],
   "personajes": {
     "jair": {
-      "nivel": 10
+      "nivel": 11
     },
     "cami": {
       "nivel": 17
@@ -25,12 +25,12 @@
     "enemigo": "soldado",
     "al_inicio": 3,
     "niveles": [
-      13,
-      13,
-      13,
-      14,
-      14,
-      14
+      16,
+      16,
+      16,
+      17,
+      17,
+      17
     ]
   },
   "jefe": {
