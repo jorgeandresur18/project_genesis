@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
+import { createPortal } from 'react-dom';
 import { TEXT_SPEED_INSTANT, useStore } from '../engine/store';
 import { assetUrl } from '../engine/assets';
 import galeriaEs from '../data/galeria.json';
@@ -610,7 +611,7 @@ function Characters() {
         <Viewer
           sprite
           quejaDe={(i) => (texts.quejas[flat[i].id] ? flat[i].id : null)}
-          grito={(i) => {
+          grito={(i, vapor) => {
             // Rikka en las termas: tocarla demasiado termina en el grito de su grupo, sin darse vuelta (pedido del
             // autor): de frente, «Termas: algo la tocó»; de espalda, «Termas: el grito»; con el traje, «Termas: apretadísimo».
             const c = flat[i];
@@ -619,7 +620,8 @@ function Characters() {
             const cual = GRITOS[grupo];
             const capa = capaDeSprite(cual);
             const src = assetUrl(`sprites/${cual}.webp`);
-            return { src, capas: capa && <CapasFondo capa={capa} src={src} contener fijos /> };
+            // Con el vapor puesto, el grito también lo lleva (pedido del autor).
+            return { src, capas: capa && <CapasFondo capa={capa} src={src} contener fijos vapor={vapor} /> };
           }}
           onGrito={() => window.dispatchEvent(new Event('genesis:grito'))}
           siguiente={(i) => {
@@ -721,7 +723,7 @@ function Viewer({
   /** Adónde pasa sola después de tocarla mucho (otro sprite secreto), o null si no pasa. */
   siguiente?: (i: number) => number | null;
   /** Si tocarla demasiado termina en el grito: el sprite del grito y sus capas (la censura), o null. */
-  grito?: (i: number) => { src: string; capas: ReactNode } | null;
+  grito?: (i: number, vapor: boolean) => { src: string; capas: ReactNode } | null;
   /** Después del grito: vuelve a la pantalla de inicio. */
   onGrito?: () => void;
 }) {
@@ -766,7 +768,7 @@ function Viewer({
   const [gritando, setGritando] = useState<{ src: string; capas: ReactNode } | null>(null);
   const tocar = (zona?: string) => {
     if (gritando) return;
-    const g = grito?.(index);
+    const g = grito?.(index, vapor);
     if (g && ++toquesGrito.current >= TOQUES_PARA_GRITO) {
       // Muy dramático: el sprite del grito, tiembla todo, zoom a su cara, luz blanca y de vuelta al inicio.
       if (pasando.current) clearTimeout(pasando.current);
@@ -861,7 +863,9 @@ function Viewer({
           )}
           {!propio && !gritando && capasActuales}
         </div>
-        {gritando && <div className="grito-blanco viewer-grito-blanco" aria-hidden />}
+        {/* La luz blanca cubre toda la pantalla desde el principio (pedido del autor): va directo al body, porque dentro
+            de la ventana (que tiene transform) «fixed» se queda en la ventana. */}
+        {gritando && createPortal(<div className="grito-blanco viewer-grito-blanco" aria-hidden />, document.body)}
         {showInfo && (
           <TermWindow
             className="info-window"
