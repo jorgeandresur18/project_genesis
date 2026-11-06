@@ -57,8 +57,12 @@ def lado(p: dict) -> float:
     return (tx - wx) * (py - wy) - (ty - wy) * (px - wx)
 
 
-def poner(img: Image.Image, nueva: dict, cami: dict, caja: dict, cami_tam: tuple):
-    """La mano nueva girada, escalada y movida sobre la de Cami. Devuelve la imagen y su caja (en % del sprite)."""
+def poner(img: Image.Image, nueva: dict, cami: dict, caja: dict, cami_tam: tuple, escala: float | None = None):
+    """
+    La mano nueva girada, escalada y movida sobre la de Cami. Devuelve la imagen, su caja (en % del sprite) y la escala
+    que le tocaba copiando a Cami (px del sprite por px del dibujo). Con `escala`, todas miden lo mismo: queda fija la
+    punta del dedo (sigue tocando el mismo lugar) y se acerca o aleja la muñeca.
+    """
     W = img.width
     pts = dict(nueva)
     if (lado(nueva) > 0) != (lado(cami) > 0):
@@ -74,7 +78,11 @@ def poner(img: Image.Image, nueva: dict, cami: dict, caja: dict, cami_tam: tuple
     a, b = np.array(pts['muneca'], float), np.array(pts['punta'], float)
     A, B = np.array(destino['muneca']), np.array(destino['punta'])
     s = np.linalg.norm(B - A) / np.linalg.norm(b - a)
-    th = math.atan2(B[1] - A[1], B[0] - A[0]) - math.atan2(b[1] - a[1], b[0] - a[0])
+    s_cami = s / CALIDAD
+    if escala is not None:
+        A = B + (A - B) * (escala * CALIDAD / s)
+        s = escala * CALIDAD
+    th =math.atan2(B[1] - A[1], B[0] - A[0]) - math.atan2(b[1] - a[1], b[0] - a[0])
     R = np.array([[math.cos(th), -math.sin(th)], [math.sin(th), math.cos(th)]]) * s
     c = img.getbbox()
     esquinas = np.array([[c[0], c[1]], [c[2], c[1]], [c[0], c[3]], [c[2], c[3]]], float)
@@ -99,7 +107,7 @@ def poner(img: Image.Image, nueva: dict, cami: dict, caja: dict, cami_tam: tuple
         'w': round(out.width / CALIDAD / SPRITE_W * 100, 2),
         'h': round(out.height / CALIDAD / SPRITE_H * 100, 2),
     }
-    return out, caja_out
+    return out, caja_out, s_cami
 
 
 def main():
@@ -108,6 +116,23 @@ def main():
     nuevas = {n: cargar(n) for n in NUEVAS}
     p = RAIZ / 'src/data/emblemas_18.json'
     e = json.loads(p.read_text(encoding='utf-8'))
+    # Primero, cuánto mediría cada mano copiando a Cami; después, todas con el promedio, para que midan lo mismo
+    # respecto del cuerpo de Rikka (pedido del autor, 2026-11-06: la del pecho salía un 14 % más grande).
+    escalas: list = []
+    armar(e, nuevas, destino, vista, None, escalas)
+    promedio = sum(escalas) / len(escalas)
+    jugador = armar(e, nuevas, destino, vista, promedio, None)
+    print(f'escala de las manos: {promedio:.4f} (px del sprite por px del dibujo)')
+    if vista:
+        (vista / 'manos_jugador.json').write_text(json.dumps(jugador, indent=2, ensure_ascii=False), encoding='utf-8')
+        return
+    e['manos_jugador'] = jugador
+    p.write_text(json.dumps(e, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+    print('manos del jugador listas')
+
+
+def armar(e: dict, nuevas: dict, destino: Path, vista, promedio, escalas):
+    """Las manos de cada acción. Sin `promedio`, solo anota en `escalas` cuánto mediría cada una copiando a Cami."""
     jugador = {}
     for grupo, g in e['manos'].items():
         acciones = []
@@ -124,7 +149,12 @@ def main():
             for clave, mano in partes:
                 cami = a[clave]
                 tam = Image.open(RAIZ / ('public/' + cami['imagen'] + '.webp')).size
-                img, caja = poner(nuevas[mano], NUEVAS[mano], puntos, cami, tam)
+                img, caja, s = poner(nuevas[mano], NUEVAS[mano], puntos, cami, tam, promedio)
+                if promedio is None:
+                    # Una por acción (el pecho tiene la abierta y la cerrada: si no, pesaría el doble).
+                    if clave != 'cerrada':
+                        escalas.append(s)
+                    continue
                 nombre = 'jugador_' + Path(cami['imagen']).name
                 if vista:
                     img.save(destino / (nombre + '.png'))
@@ -133,12 +163,7 @@ def main():
                 b[clave] = {'imagen': 'sprites/rikka/manos/' + nombre, **caja}
             acciones.append(b)
         jugador[grupo] = {**{k: v for k, v in g.items() if k != 'acciones'}, 'acciones': acciones}
-    if vista:
-        (vista / 'manos_jugador.json').write_text(json.dumps(jugador, indent=2, ensure_ascii=False), encoding='utf-8')
-        return
-    e['manos_jugador'] = jugador
-    p.write_text(json.dumps(e, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
-    print('manos del jugador listas')
+    return jugador
 
 
 if __name__ == '__main__':

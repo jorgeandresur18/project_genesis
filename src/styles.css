@@ -3771,3 +3771,8 @@ button.cassette:hover .cassette-imagen { transform: translateY(-2px) rotate(-3de
 
 /* El «¡¡KYAAAH!!» de la novela: arriba al centro de la pantalla, encima del vapor y fuera del zoom del grito. */
 .stage-grito-texto.emblema-reaccion { position: absolute; top: 6%; left: 0; right: 0; margin-inline: auto; width: max-content; translate: none; z-index: 8; max-width: 90%; }
+
+/* Los sprites secretos de Rikka en la galería, un poco más grandes (pedido del autor, 2026-11-06): la imagen y sus capas
+   (emblemas, manos, globo) crecen juntas desde la altura del pecho (así el emblema de abajo no queda detrás del menú). Con transform, que
+   se suma al zoom del grito (ese usa scale). El vapor no cambia. */
+.viewer-secreto > img, .viewer-secreto > .fondo-capas, .viewer-secreto .viewer-zoom > img, .viewer-secreto .viewer-zoom > .fondo-capas { transform: scale(1.1); transform-origin: 50% 30%; }

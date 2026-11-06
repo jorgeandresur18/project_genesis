@@ -848,7 +848,7 @@ function Viewer({
       )}
       <div className="viewer-main">
         <div
-          className={`viewer-stage ${propio ? 'viewer-volumen' : sprite ? 'viewer-profundidad' : ''} ${gritando ? 'viewer-grito' : ''}`}
+          className={`viewer-stage ${propio ? 'viewer-volumen' : sprite ? 'viewer-profundidad' : ''} ${gritando ? 'viewer-grito' : ''} ${!propio && vaporDe?.(index) ? 'viewer-secreto' : ''}`}
           style={propio ? ({ '--gx': giro.x, '--gy': giro.y } as CSSProperties) : undefined}
           onPointerMove={inclinar}
           onPointerLeave={() => setGiro({ x: 0, y: 0 })}
