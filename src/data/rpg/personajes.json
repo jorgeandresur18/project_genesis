@@ -618,14 +618,14 @@
       "jefe": true,
       "huye_a": 0.3,
       "base": {
-        "ps": 59,
-        "atq": 6,
+        "ps": 46,
+        "atq": 7,
         "def": 6,
         "vel": 7
       },
       "crece": {
-        "ps": 7.9,
-        "atq": 0.88,
+        "ps": 8,
+        "atq": 0.9,
         "def": 0.8,
         "vel": 0.3
       },
@@ -790,8 +790,8 @@
         "vel": 7
       },
       "crece": {
-        "ps": 7.4,
-        "atq": 0.74,
+        "ps": 7.5,
+        "atq": 0.75,
         "def": 0.6,
         "vel": 0.4
       },
@@ -848,8 +848,8 @@
         "vel": 7
       },
       "crece": {
-        "ps": 7.3,
-        "atq": 0.73,
+        "ps": 7.2,
+        "atq": 0.72,
         "def": 0.6,
         "vel": 0.4
       },
@@ -950,14 +950,14 @@
       "nombre": "Herrero",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 30,
+        "ps": 31,
         "atq": 8,
         "def": 3,
         "vel": 7
       },
       "crece": {
-        "ps": 6.3,
-        "atq": 0.63,
+        "ps": 6.6,
+        "atq": 0.66,
         "def": 0.6,
         "vel": 0.4
       },
@@ -1006,8 +1006,8 @@
         "vel": 6
       },
       "crece": {
-        "ps": 11.3,
-        "atq": 1.28,
+        "ps": 11.2,
+        "atq": 1.27,
         "def": 0.8,
         "vel": 0.2
       },
@@ -1055,14 +1055,14 @@
       "nombre": "Celador",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 22,
-        "atq": 4,
+        "ps": 25,
+        "atq": 5,
         "def": 7,
         "vel": 7
       },
       "crece": {
-        "ps": 4.6,
-        "atq": 0.46,
+        "ps": 5.2,
+        "atq": 0.52,
         "def": 0.6,
         "vel": 0.4
       },
@@ -1105,14 +1105,14 @@
       "nombre": "Caballero de la tabla",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 21,
-        "atq": 3,
+        "ps": 25,
+        "atq": 4,
         "def": 9,
         "vel": 7
       },
       "crece": {
-        "ps": 3.8,
-        "atq": 0.38,
+        "ps": 4.4,
+        "atq": 0.44,
         "def": 0.6,
         "vel": 0.4
       },
@@ -1157,14 +1157,14 @@
       "jefe": true,
       "huye_a": 0.3,
       "base": {
-        "ps": 49,
+        "ps": 47,
         "atq": 7,
         "def": 6,
         "vel": 6
       },
       "crece": {
-        "ps": 8.5,
-        "atq": 0.95,
+        "ps": 8.2,
+        "atq": 0.93,
         "def": 0.8,
         "vel": 0.2
       },
@@ -1237,14 +1237,14 @@
       "jefe": true,
       "huye_a": 0.35,
       "base": {
-        "ps": 49,
+        "ps": 47,
         "atq": 7,
         "def": 6,
         "vel": 7
       },
       "crece": {
-        "ps": 8.5,
-        "atq": 0.95,
+        "ps": 8.2,
+        "atq": 0.93,
         "def": 0.8,
         "vel": 0.3
       },
@@ -1306,14 +1306,14 @@
       "jefe": true,
       "huye_a": 0.35,
       "base": {
-        "ps": 52,
-        "atq": 8,
+        "ps": 49,
+        "atq": 7,
         "def": 6,
         "vel": 7
       },
       "crece": {
-        "ps": 9,
-        "atq": 1.01,
+        "ps": 8.5,
+        "atq": 0.95,
         "def": 0.8,
         "vel": 0.3
       },
@@ -1375,14 +1375,14 @@
       "jefe": true,
       "huye_a": 0.35,
       "base": {
-        "ps": 54,
+        "ps": 50,
         "atq": 8,
         "def": 6,
         "vel": 7
       },
       "crece": {
-        "ps": 9.4,
-        "atq": 1.06,
+        "ps": 8.7,
+        "atq": 0.98,
         "def": 0.8,
         "vel": 0.3
       },
@@ -1454,14 +1454,14 @@
       "jefe": true,
       "huye_a": 0.35,
       "base": {
-        "ps": 54,
+        "ps": 50,
         "atq": 8,
         "def": 6,
         "vel": 7
       },
       "crece": {
-        "ps": 9.4,
-        "atq": 1.06,
+        "ps": 8.7,
+        "atq": 0.98,
         "def": 0.8,
         "vel": 0.3
       },
@@ -1517,14 +1517,14 @@
       "jefe": true,
       "huye_a": 0.35,
       "base": {
-        "ps": 60,
-        "atq": 9,
+        "ps": 53,
+        "atq": 8,
         "def": 8,
         "vel": 7
       },
       "crece": {
-        "ps": 10.4,
-        "atq": 1.17,
+        "ps": 9.2,
+        "atq": 1.03,
         "def": 0.8,
         "vel": 0.3
       },
@@ -1586,14 +1586,14 @@
       "jefe": true,
       "huye_a": 0.35,
       "base": {
-        "ps": 63,
-        "atq": 10,
+        "ps": 54,
+        "atq": 8,
         "def": 6,
         "vel": 7
       },
       "crece": {
-        "ps": 10.9,
-        "atq": 1.22,
+        "ps": 9.4,
+        "atq": 1.06,
         "def": 0.8,
         "vel": 0.3
       },
@@ -1648,14 +1648,14 @@
       "jefe": true,
       "huye_a": 0.35,
       "base": {
-        "ps": 65,
-        "atq": 10,
+        "ps": 56,
+        "atq": 8,
         "def": 9,
         "vel": 7
       },
       "crece": {
-        "ps": 11.4,
-        "atq": 1.28,
+        "ps": 9.7,
+        "atq": 1.09,
         "def": 0.8,
         "vel": 0.3
       },
@@ -1715,14 +1715,14 @@
       "nombre": "Guardia del Verano",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 22,
-        "atq": 6,
+        "ps": 24,
+        "atq": 7,
         "def": 3,
         "vel": 7
       },
       "crece": {
-        "ps": 5.3,
-        "atq": 0.53,
+        "ps": 5.8,
+        "atq": 0.58,
         "def": 0.6,
         "vel": 0.4
       },
@@ -1765,14 +1765,14 @@
       "nombre": "Guardia del Otoño",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 25,
-        "atq": 7,
+        "ps": 27,
+        "atq": 8,
         "def": 8,
         "vel": 7
       },
       "crece": {
-        "ps": 5.5,
-        "atq": 0.55,
+        "ps": 5.9,
+        "atq": 0.59,
         "def": 0.6,
         "vel": 0.4
       },
@@ -1815,14 +1815,14 @@
       "nombre": "Guardia del Invierno",
       "sprite": "batalla/soldado",
       "base": {
-        "ps": 29,
+        "ps": 30,
         "atq": 6,
         "def": 3,
         "vel": 7
       },
       "crece": {
-        "ps": 5.4,
-        "atq": 0.54,
+        "ps": 5.5,
+        "atq": 0.55,
         "def": 0.6,
         "vel": 0.4
       },

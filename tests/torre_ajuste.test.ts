@@ -36,11 +36,12 @@ const PLAN: Record<string, [number[], number]> = {
   cap03_galeria_1: [[17, 17, 18, 18], 19],
   cap03_salon_2: [[18, 18], 20],
   cap03_galeria_2: [[18, 18], 20],
-  cap03_rey: [[18, 18], 26],
+  cap03_rey: [[], 26],
 };
 // Qué se ajusta en cada pelea: la fuerza de esos enemigos (multiplica vida y ataque) o, si es «horda», cuántos salen.
 // Los jefes no se inflan (decisión del autor, 2026-11-05): todos parten de la ficha del Capitán y suben un poco por piso;
-// en sus peleas se ajusta el nivel de toda la pelea. El Rey queda en el nivel 26 (un salto grande) y se ajusta su fuerza.
+// en sus peleas se ajusta solo el nivel de la horda. Al final pelean solo contra el Rey: nivel 26 (un salto grande), con
+// la ficha del Capitán (en el nivel 26 queda por encima del comandante del último piso), sin ajuste.
 const PERILLA: Record<string, string[] | 'nivel' | 'nivel_horda'> = {
   cap03_calabozo: 'nivel_horda',
   cap03_cloacas_1: ['bicho'],
@@ -64,7 +65,7 @@ const PERILLA: Record<string, string[] | 'nivel' | 'nivel_horda'> = {
   cap03_salon_2: 'nivel_horda',
   cap03_galeria_1: 'nivel_horda',
   cap03_galeria_2: 'nivel_horda',
-  cap03_rey: ['rey'],
+  cap03_rey: 'nivel_horda',
 };
 const JEFES = new Set(['cap03_cloacas_2', 'cap03_bodegas_2', 'cap03_cuarteles_2', 'cap03_comedor_2', 'cap03_forja_2', 'cap03_celdas_2', 'cap03_patio_2', 'cap03_arsenal', 'cap03_salon_2', 'cap03_galeria_2']);
 // La torre sube de dificultad poco a poco (decisión del autor, 2026-11-05): cuánto gana el jugador atento baja piso a

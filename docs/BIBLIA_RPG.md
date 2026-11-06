@@ -504,7 +504,11 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
 - **Se desbloquea al terminar el Capítulo 1** y se va abriendo más a medida que avanza la historia (más copas, más
   peleadores).
 - **Simple, doble y triple:** el tamaño de tu equipo (1, 2 o 3 peleadores). Los peleadores son los que la historia ya
-  desbloqueó.
+  desbloqueó. **Decisiones del autor (2026-11-05):** se puede **repetir personaje** en el equipo (por ejemplo, tres
+  Jair); los **8 jefes de los pisos de la torre del Capítulo 3** (la reina de los bichos, el jefe de bodega, el sargento,
+  el chef, el maestro herrero, el alcaide, el intendente y el comandante) se pueden elegir como peleadores (al vencerlos
+  en la torre; los enemigos comunes, no); **Maggi** es exclusiva del torneo. **Por hacer:** que el jugador pueda manejar
+  los ataques y especiales de esos jefes (hoy solo los usa la máquina) y que la pelea acepte dos peleadores iguales.
 - **Cuatro rondas** hasta la final. Si pierdes, quedas eliminado pero te llevas los tokens de las rondas ganadas. Entre
   rondas se recupera parte de la vida.
 - **Copas con dificultad creciente** (propuesta: Bronce → Plata → Oro → Leyenda); ganar una abre la siguiente y cada una

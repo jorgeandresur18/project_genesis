@@ -14,7 +14,7 @@
       "nivel": 17
     },
     "rikka": {
-      "nivel": 15
+      "nivel": 14
     }
   },
   "enemigos": [
@@ -23,11 +23,8 @@
   ],
   "horda": {
     "enemigo": "caballero",
-    "al_inicio": 2,
-    "niveles": [
-      18,
-      18
-    ]
+    "al_inicio": 0,
+    "niveles": []
   },
   "jefe": {
     "enemigo": "rey",
