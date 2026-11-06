@@ -421,3 +421,7 @@ Nota de continuidad del canon
 - La escala de THE VOID se describe como millones de años luz, con un trillón de ojos y un trillón de dientes.
 - Las referencias citadas son paralelismos identificados durante el análisis, no declaraciones de influencias confirmadas.
 - La motivación final de PROMPTMETHEUS es consumir toda la existencia, no gobernarla.
+
+## Cómo se ve el final (decisión del autor, 2026-11-05)
+
+El golpe final del Capítulo 6 va con **una animación en pixel art** dentro de la pelea (para la fase de arte: las filas nuevas de los sprites y el remate en el código). En cambio, la derrota del Rey del Capítulo 3 queda en la **novela visual** (Jair le clava la espada DELETE en la escena; la pelea termina cuando el Rey se retira).
