@@ -151,7 +151,7 @@ anota en `docs/PRUEBAS_EN_CASA.md` para la noche.
 14. **La escena secreta de Jordy** (Capítulo 4, al 100 %): si se diseña, las preguntas de «Ideas anotadas».
 
 **Lo que Claude puede hacer solo (sin pruebas del autor):**
-- Que el simulador use dormir y confundir (hoy subestima a Maggie y a Nikki peleadora) y volver a medir el torneo.
+- ~~Que el simulador use dormir y confundir~~ **Hecho** (6 de noviembre; Maggie ya es viable con sus objetos). Falta: **Nikki peleadora** (~1 %) y **el Rey de la torre** (~72–75 %, algo fácil): decisión del autor.
 - Hacer más estables las pruebas de balance que a veces fallan por azar (el Bastión y el Rey): más peleas simuladas o
   una semilla fija.
 - Lo que el autor decida de la lista de arriba (balance de los jefes, Billy, peleadores nuevos), con el simulador.
@@ -160,7 +160,7 @@ anota en `docs/PRUEBAS_EN_CASA.md` para la noche.
 autor); el inglés de los Capítulos 2 y 3, cuando se cierren sus diálogos; el arte (mosaico más grueso, la mano de
 abajo de espaldas) cuando toque.
 
-**Para la noche (computadora de Jorge):** `docs/PRUEBAS_EN_CASA.md`, secciones 10 a 15.
+**Para la noche (computadora de Jorge):** `docs/PRUEBAS_EN_CASA.md`, secciones 10 a 18.
 
 ## Ideas anotadas (por diseñar)
 
