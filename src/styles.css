@@ -3772,9 +3772,16 @@ button.cassette:hover .cassette-imagen { transform: translateY(-2px) rotate(-3de
 /* El «¡¡KYAAAH!!» de la novela: arriba al centro de la pantalla, encima del vapor y fuera del zoom del grito. */
 .stage-grito-texto.emblema-reaccion { position: absolute; top: 6%; left: 0; right: 0; margin-inline: auto; width: max-content; translate: none; z-index: 8; max-width: 90%; }
 
-/* Los sprites secretos de Rikka en la galería, un poco más grandes (pedido del autor, 2026-11-06): la imagen y sus capas
-   (emblemas, manos, globo) crecen juntas un 10 % y suben hasta que el pelo toca el borde de arriba de la caja (sin
-   espacio): el lienzo deja un 7,94 % vacío arriba (el menor de los sprites secretos; medido con su alfa) y el escenario
-   está 1rem por debajo del borde. Así se ve más del cuerpo abajo. Con transform, que se suma al zoom del grito (ese usa
-   scale). El vapor no cambia. */
-.viewer-secreto > img, .viewer-secreto > .fondo-capas, .viewer-secreto .viewer-zoom > img, .viewer-secreto .viewer-zoom > .fondo-capas { transform: translateY(calc(-1rem - 1.1 * 7.94%)) scale(1.1); transform-origin: 50% 0; }
+/* Los sprites secretos de Rikka en la galería llenan la caja de borde a borde (pedido del autor, 2026-11-06): el pelo toca
+   el borde de arriba y el corte de las piernas, el de abajo, sin espacios. El lienzo deja un 7,94 % vacío arriba (el
+   menor de los sprites secretos, medido con su alfa) y nada abajo; el escenario empieza 1rem por debajo del borde y
+   llega hasta el de abajo. La imagen y sus capas (emblemas, manos, globo) usan la misma caja, así quedan alineadas.
+   El vapor no cambia. */
+.viewer-secreto > img, .viewer-secreto > .fondo-capas, .viewer-secreto .viewer-zoom > img, .viewer-secreto .viewer-zoom > .fondo-capas {
+  position: absolute;
+  inset: auto 0;
+  width: 100%;
+  height: calc((100% + 1rem) / 0.9206);
+  top: calc(-1rem - (100% + 1rem) * 0.0794 / 0.9206);
+  flex: none;
+}
