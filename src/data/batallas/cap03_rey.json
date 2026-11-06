@@ -14,7 +14,7 @@
       "nivel": 17
     },
     "rikka": {
-      "nivel": 14
+      "nivel": 13
     }
   },
   "enemigos": [
@@ -28,7 +28,7 @@
   },
   "jefe": {
     "enemigo": "rey",
-    "nivel": 26
+    "nivel": 28
   },
   "botin": {
     "probabilidad": 0.6,

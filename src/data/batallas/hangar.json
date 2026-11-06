@@ -10,7 +10,8 @@
       "nivel": 5
     },
     "cami": {
-      "nivel": 15
+      "nivel": 15,
+      "seguido": false
     }
   },
   "enemigos": [

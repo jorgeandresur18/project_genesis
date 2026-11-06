@@ -25,9 +25,9 @@
     "enemigo": "soldado",
     "al_inicio": 2,
     "niveles": [
-      18,
-      18,
-      18
+      20,
+      20,
+      20
     ]
   },
   "jefe": {
