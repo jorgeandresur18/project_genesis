@@ -27,11 +27,13 @@ test('al terminar el capítulo se transfieren los tokens a PayFoe; antes, no', a
   expect(antes).toBe(0);
   // Fin del capítulo: el botón de PayFoe.
   await page.evaluate(() => (window as unknown as { __genesis: G }).__genesis.getState().advance());
-  const boton = page.getByRole('button', { name: /Transferir 120 tokens/ });
-  await expect(boton).toBeVisible({ timeout: 15_000 });
-  await boton.click();
-  await expect(page.getByText(/120 tokens en PayFoe/)).toBeVisible();
+  await expect(page.getByText(/Quieres pasar tus tokens a PayFoe/)).toBeVisible({ timeout: 15_000 });
+  await expect(page.getByText(/no vuelven a la partida/)).toBeVisible();
+  // Elegir cuántos: menos de todos (se puede guardar una parte para la historia).
+  await page.getByRole('button', { name: 'Menos' }).click();
+  await page.getByRole('button', { name: /Pasar 110 tokens/ }).click();
+  await expect(page.getByText(/110 tokens en PayFoe/)).toBeVisible();
   const saldo = await page.evaluate(() => (window as unknown as { __genesis: G }).__genesis.getState().payfoe.saldo);
-  expect(saldo).toBe(120);
+  expect(saldo).toBe(110);
   expect(errores).toEqual([]);
 });

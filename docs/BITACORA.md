@@ -488,4 +488,5 @@ de Rikka en la galería se ven enteros y grandes. CLAUDE.md, al día con el 6 de
 - **PayFoe al terminar cada capítulo (decisión del autor):** los tokens de la partida pasan a PayFoe en la pantalla de fin de capítulo («Transferir N tokens»); a mitad de capítulo ya no se puede (la billetera solo muestra cuánto se podrá pasar). Prueba en navegador nueva (`tests/e2e/payfoe.spec.ts`). En la demo publicada no se ve (PayFoe apagado).
 - **Las dos economías (propuesta de Claude, aceptada):** historia (tokens y mochila de cada partida) y menú/torneo (PayFoe y mochila del torneo, por construir); de la historia hacia afuera, sí; hacia la historia, solo premios contados.
 - **«Tokens», no «monedas» (corrección del autor):** el cofre de la torre decía «monedas (200)»; ahora «tokens». Las monedas de los reinos (Nail, la moneda de plata) son dinero del mundo de fantasía y quedan.
+- **PayFoe, con pregunta y cantidad (idea del autor):** al terminar el capítulo: «¿Quieres pasar tus tokens a PayFoe? ¿Cuántos?», con − / + / Todo, y el aviso «los tokens que pases a PayFoe no vuelven a la partida». Se puede pasar una parte y guardar el resto para la historia.
 

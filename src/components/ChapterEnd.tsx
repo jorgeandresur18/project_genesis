@@ -80,6 +80,10 @@ export function ChapterEnd({ chapter, lastScene, onSave, onTitle }: Props) {
   const payfoe = useStore((s) => s.payfoe);
   const puede = config.payfoe_activo && vars ? transferible(vars, payfoe) : 0;
   const [paso, setPaso] = useState<number | null>(null);
+  // Cuántos pasar (se elige; por defecto, todos).
+  const [cuantos, setCuantos] = useState<number | null>(null);
+  const cant = Math.min(cuantos ?? puede, puede);
+  const salto = Math.max(1, 10 ** Math.max(0, String(puede).length - 2));
   const diff = title && alt ? splitDiff(title, alt) : null;
   const word = sub === 'alt' || sub === 'glitch-out' ? diff?.b : diff?.a;
 
@@ -137,8 +141,23 @@ export function ChapterEnd({ chapter, lastScene, onSave, onTitle }: Props) {
             <p>{paso > 0 ? textos.payfoe.hecho.replace('{n}', String(paso)) : textos.payfoe.nada}</p>
           ) : puede > 0 ? (
             <>
-              <p>{textos.payfoe.texto.replace('{n}', String(puede))}</p>
-              <button onClick={click(() => setPaso(useStore.getState().transferirAPayfoe(puede)))}>{textos.payfoe.boton.replace('{n}', String(puede))}</button>
+              <p className="chapter-end-payfoe-pregunta">{textos.payfoe.pregunta}</p>
+              <small>{textos.payfoe.disponibles.replace('{n}', String(puede))}</small>
+              <div className="chapter-end-payfoe-cantidad">
+                <button aria-label={textos.payfoe.menos} disabled={cant <= 1} onClick={() => setCuantos(Math.max(1, cant - salto))}>
+                  −
+                </button>
+                <b>{cant}</b>
+                <button aria-label={textos.payfoe.mas} disabled={cant >= puede} onClick={() => setCuantos(Math.min(puede, cant + salto))}>
+                  +
+                </button>
+                <button disabled={cant >= puede} onClick={() => setCuantos(puede)}>
+                  {textos.payfoe.todo}
+                </button>
+              </div>
+              {/* Lo que pasa a PayFoe no vuelve a la partida (la regla de siempre: nunca al revés). */}
+              <small className="chapter-end-payfoe-aviso">{textos.payfoe.aviso}</small>
+              <button onClick={click(() => setPaso(useStore.getState().transferirAPayfoe(cant)))}>{textos.payfoe.boton.replace('{n}', String(cant))}</button>
             </>
           ) : (
             <p>{textos.payfoe.nada}</p>

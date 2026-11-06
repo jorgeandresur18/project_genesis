@@ -19,8 +19,13 @@
   "portada": "CAPÍTULO {n}",
   "payfoe": {
     "titulo": "PayFoe",
-    "texto": "Tokens ganados en esta partida que puedes pasar a PayFoe: {n}",
-    "boton": "Transferir {n} tokens",
+    "pregunta": "¿Quieres pasar tus tokens a PayFoe? ¿Cuántos?",
+    "disponibles": "Ganados en esta partida: {n}",
+    "aviso": "Ojo: los tokens que pases a PayFoe no vuelven a la partida.",
+    "boton": "Pasar {n} tokens",
+    "menos": "Menos",
+    "mas": "Más",
+    "todo": "Todo",
     "hecho": "Listo: {n} tokens en PayFoe. Úsalos bien. O no.",
     "nada": "No hay tokens nuevos para pasar a PayFoe."
   }

@@ -1001,6 +1001,11 @@ img.sprite.sprite-swap { animation: sprite-swap-in 180ms ease-out; }
 /* PayFoe al terminar el capítulo: los tokens de la partida pasan a la billetera del jugador (decisión del autor, 2026-11-06). */
 .chapter-end-payfoe { position: relative; z-index: 1; display: grid; justify-items: center; gap: 0.5rem; margin-bottom: 1.2rem; text-align: center; animation: chapter-fade-up 1s ease-out 2.2s both; }
 .chapter-end-payfoe p { margin: 0; opacity: 0.85; }
+.chapter-end-payfoe-pregunta { font-weight: 600; opacity: 1 !important; }
+.chapter-end-payfoe-cantidad { display: flex; align-items: center; gap: 0.5rem; }
+.chapter-end-payfoe-cantidad b { min-width: 3.5rem; font-size: 1.2rem; }
+.chapter-end-payfoe-cantidad button { min-width: 2.4rem; padding: 0.2rem 0.6rem; }
+.chapter-end-payfoe-aviso { color: #ffcf7a; }
 .chapter-end-menu button,
 .chapter-soon button {
   min-width: 10rem;

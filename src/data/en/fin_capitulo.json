@@ -12,8 +12,13 @@
   "portada": "CHAPTER {n}",
   "payfoe": {
     "titulo": "PayFoe",
-    "texto": "Tokens earned in this game that you can move to PayFoe: {n}",
-    "boton": "Transfer {n} tokens",
+    "pregunta": "Do you want to move your tokens to PayFoe? How many?",
+    "disponibles": "Earned in this game: {n}",
+    "aviso": "Heads up: tokens you move to PayFoe never come back to the game.",
+    "boton": "Move {n} tokens",
+    "menos": "Less",
+    "mas": "More",
+    "todo": "All",
     "hecho": "Done: {n} tokens in PayFoe. Use them wisely. Or not.",
     "nada": "No new tokens to move to PayFoe."
   }
