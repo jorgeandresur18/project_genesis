@@ -212,6 +212,8 @@ Sashi y Aylin **no existen** en la línea original.
 
 **Cuánta novela y cuánta pelea hay en cada capítulo** (dicho por el autor el 2026-11-06): `[CANON]`
 
+> Las duraciones de cada capítulo (1 h 30 min, 2 h…) son **estimadas** y pueden ir cambiando (autor, 2026-11-06).
+
 | Capítulo | Novela y pelea |
 | --- | --- |
 | 1 | Mucho diálogo, pocas peleas |
