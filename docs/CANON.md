@@ -211,6 +211,10 @@ Sashi y Aylin **no existen** en la línea original.
 7A. Epílogo de la rama del colapso del mundo real con el de la IA y de la fusión de Rikka y Cami en The AnothergIrl, que pasa en el Capítulo 6 (`final_canon_2`). El nombre se escribe así, **AnothergIrl**: con la A y la I en mayúscula. `[CANON]` `TODO(canon)`: confirmar si las mayúsculas forman «AI» a propósito (como la regla de las vocales).
 7B. Epílogo tras el salto temporal: Cami vuelve con Jair (`final_canon_1`).
 
+### La pelea de práctica (Capítulo 1, pedido del autor 2026-11-06) `[EN PRUEBA]`
+
+- Apenas Cami se presenta («Todos los nombres tienen vocales, imbécil», `cap01_g1_095`), uno de los soldados que ella desarmó se vuelve a armar y, al caer, llama a su cabo por radio. **Cami guía**: explica Atacar, Esquivar, Objetos (le pasa un agua de la Resistencia) y el especial. Da un poco de experiencia. Si se pierde, final malo «Reprobado» (`bad_cap01_practica`). Al ganar, el piso tiembla y sigue la historia (`cap01_g3_001`). Es fácil a propósito. En `desarrollo`: **no se publica hasta que el autor la apruebe**. Textos de borrador de Claude.
+
 ### La sombra de roca en el claro (Capítulo 1, pedido del autor 2026-11-06) `[EN PRUEBA]`
 
 - En el claro de las cuatro estaciones, **«Enfrentar al monstruo»** (`cap01_g7b_022`) ya no es una muerte directa: es una **pelea contra la sombra en su forma de roca** (la acorazada, con las piedras del otoño). Si se pierde, sigue el final malo de siempre, «Valiente, por una vez» (`bad_cap01_acorazado`); si se gana, el monstruo retrocede herido, pisa el hielo del arroyo y se congela, y la historia sigue como en los otros dos caminos (`cap01_g7b_024`). Está en `desarrollo` para que el autor la piense: **no se publica hasta que la apruebe**. Textos de borrador de Claude.

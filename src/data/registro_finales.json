@@ -5,6 +5,7 @@
   { "id": "final_cap01_correo", "nombre": "Spam", "pieza": "Juego base", "tipo": "Final temprano", "estado": "jugable", "nombre_en": "Spam" },
   { "id": "bad_cap01_huida", "nombre": "Nadie más se encarga", "pieza": "Juego base", "tipo": "Bad end", "estado": "jugable", "nombre_en": "Someone else will handle it" },
   { "id": "bad_cap01_escudo", "nombre": "Escudo humano", "pieza": "Juego base", "tipo": "Bad end", "estado": "jugable", "nombre_en": "Human shield" },
+  { "id": "bad_cap01_practica", "nombre": "Reprobado", "pieza": "Juego base", "tipo": "Bad end", "estado": "jugable", "nombre_en": "Failed the tutorial" },
   { "id": "bad_cap01_patrulla", "nombre": "Pendiente de revisión", "pieza": "Juego base", "tipo": "Bad end", "estado": "jugable", "nombre_en": "Pending review" },
   { "id": "bad_cap01_bastion", "nombre": "Partida no guardada", "pieza": "Juego base", "tipo": "Bad end", "estado": "jugable", "nombre_en": "Unsaved game" },
   { "id": "bad_cap01_hangar", "nombre": "Recurso decorativo", "pieza": "Juego base", "tipo": "Bad end", "estado": "jugable", "nombre_en": "Decorative asset" },

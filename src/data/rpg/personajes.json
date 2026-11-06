@@ -2283,6 +2283,71 @@
       "cae_en_cebo": 0.35,
       "_nota": "La sombra cubierta de rocas del otoño (Capítulo 1, el claro de las cuatro estaciones). Usa la hoja de la sombra con un filtro gris hasta que el autor haga la suya (en la novela ya existe sprites/monstruo_sombras/armored).",
       "filtro": "grayscale(0.85) brightness(0.85) contrast(1.15)"
+    },
+    "cabo": {
+      "nombre": "Cabo de la Federación",
+      "sprite": "batalla/soldado",
+      "base": {
+        "ps": 20,
+        "atq": 5,
+        "def": 3,
+        "vel": 7
+      },
+      "crece": {
+        "ps": 6,
+        "atq": 0.6,
+        "def": 0.6,
+        "vel": 0.4
+      },
+      "ataques": [
+        {
+          "nombre": "Tajo",
+          "poder": 4,
+          "usos": 20,
+          "texto": "El cabo lanza un tajo a {objetivo}. Lo aprendió en un curso de dos días."
+        },
+        {
+          "nombre": "Estocada",
+          "poder": 5,
+          "usos": 20,
+          "texto": "El cabo tira una estocada a {objetivo}, con más ganas que técnica."
+        }
+      ],
+      "responde": {
+        "quien": "Soldado",
+        "ok": [
+          "…¿Horas extra? No. No nos pagan horas extra.",
+          "El procedimiento no contempla esa pregunta. Procesando…",
+          "¿De verdad me queda bien? Nadie me lo había dicho."
+        ],
+        "no": [
+          "Negativo.",
+          "No estoy autorizado a conversar.",
+          "Entidad no registrada. Silencio."
+        ]
+      },
+      "especial": {
+        "nombre": "Embestida de cabo",
+        "poder": 4,
+        "golpes": 4,
+        "objetivo": "uno",
+        "color": "#d0213a",
+        "ojos": [
+          52,
+          44,
+          32,
+          22
+        ],
+        "texto": "El cabo se lanza sobre {objetivo} y golpea sin parar. Sin pausa. Con poca expresión.",
+        "posicion": "objetivo"
+      },
+      "escala": 1.15,
+      "sonido": "espada",
+      "cae_en_cebo": 0.85,
+      "_nota": "El refuerzo de la pelea de práctica del Capítulo 1 (pedido del autor, 2026-11-06). Usa la hoja del soldado con un filtro rojizo (pedido del autor: que se note su rango mayor) hasta que tenga la suya.",
+      "jefe": true,
+      "huye_a": 0.3,
+      "filtro": "sepia(1) saturate(4.5) hue-rotate(-42deg) brightness(0.82) contrast(1.15)"
     }
   },
   "objetos": {

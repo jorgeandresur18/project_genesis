@@ -244,4 +244,5 @@ En el Torneo (`npm run dev`, desde Extras):
 - [ ] **El rival usa su mochila:** en una ronda del torneo (mejor en Bronce o en triple), ver que se cura, se saca estados o se potencia (texto del objeto y número verde).
 - [ ] **En el torneo ya no se gana experiencia** ni caen tokens ni objetos al vencer a un rival.
 - [ ] **Las curas por porcentaje:** en una pelea, el agua cura el 30 % de la vida (en Jair, en el Capítulo 1, unos 16; en el torneo, mucho más). En Boringplace dice «+30 % de vida».
+- [ ] **La pelea de práctica** (`?escena=cap01_g1_086` o jugando hasta que Cami se presenta): Cami explica cada comando, el soldado llama a su cabo, el agua en la mochila. Al ganar, sigue «El piso tiembla». ¿Va o no va?
 

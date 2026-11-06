@@ -1303,6 +1303,33 @@
 
 `g1_095` **Cami:** Todos los nombres tienen vocales, imbécil.
 
+`tu01` — Detrás de Cami, uno de los soldados desarmados se vuelve a armar, pieza por pieza, como un mueble que se arma solo. Uno solo. Con el casco torcido.
+
+`tu02` **Cami:** Uno solo. Ya que estás, te doy tu primera clase.
+
+`tu03` **Jair:** ¿Clase de qué?
+
+`tu04` **Cami:** De no morirte. Aprobaste. Raspando.
+
+`tu05` **Jair:** (Mi primera evaluación de desempeño en años y es positiva. En un sueño. Contra un tipo con máscara.)
+
+> ⤷ continúa en `g3_001`
+
+`bad_tu01` — El cabo vuelve con la radio en la mano. Detrás de él, el pasillo se llena de pasos idénticos.
+
+`bad_tu02` **Cami:** Era la práctica, Jair. La práctica.
+
+
+### PANTALLA:negro
+
+`bad_tu03` — Reprobado.
+
+> **BAD END: Reprobado**
+
+---
+
+### fondos/pasillo_castillo.webp
+
 > ♪ silencio
 `g3_001` — El piso tiembla.
 

@@ -25,6 +25,7 @@ Muertes o fracasos tempranos, estilo Shiny Days. No cuentan entre los 12 finales
 | --- | --- | --- | --- | --- |
 | `bad_cap01_huida` | Nadie más se encarga | 1 | Al despertar, «Correr en dirección contraria» en vez de ir hacia la voz de Cami | Borrador |
 | `bad_cap01_escudo` | Escudo humano | 1 | Ante el monstruo, «Esconderte detrás de Cami» | Borrador |
+| `bad_cap01_practica` | Reprobado | 1 | Perder la pelea de práctica antes del Bastión (en prueba desde el 2026-11-06) | Borrador |
 | `bad_cap01_patrulla` | Pendiente de revisión | 1 | En la patrulla, «Cruzar ya» a destiempo | Borrador |
 | `bad_cap01_bastion` | Partida no guardada | 1 | Perder la pelea del Bastión (`batalla: "bastion"`, después de la máquina expendedora): los soldados los archivan | Borrador |
 | `bad_cap01_hangar` | Recurso decorativo | 1 | Camino alternativo: en el hangar, «Probar la nave grande» enciende la alarma; perder la pelea del hangar (`batalla: "hangar"`, soldados y el Capitán enmascarado): el cañón del capitán | Borrador |

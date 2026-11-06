@@ -113,3 +113,11 @@ describe('balance de la sombra de roca (Capítulo 1, en prueba; pedido del autor
     expect(r.descuidado.gana).toBeLessThan(0.55);
   });
 });
+
+describe('balance de la pelea de práctica (Capítulo 1, en prueba; pedido del autor, 2026-11-06)', () => {
+  it('es fácil (la gana casi cualquiera), pero se reciben golpes', () => {
+    const r = informe(conRopa(BATALLAS.guia));
+    expect(r.descuidado.gana).toBeGreaterThan(0.85);
+    expect(r.atento.vida).toBeLessThan(0.95);
+  });
+});

@@ -1,0 +1,195 @@
+{
+  "titulo": "Práctica en el pasillo",
+  "fondo": "batalla/fondos/bastion_ruinas",
+  "heroes": [
+    "jair",
+    "cami"
+  ],
+  "personajes": {
+    "jair": {
+      "nivel": 5
+    },
+    "cami": {
+      "nivel": 15,
+      "seguido": false
+    }
+  },
+  "enemigos": [
+    "soldado",
+    "cabo"
+  ],
+  "horda": {
+    "enemigo": "soldado",
+    "al_inicio": 1,
+    "niveles": [
+      10
+    ]
+  },
+  "jefe": {
+    "enemigo": "cabo",
+    "nivel": 11
+  },
+  "botin": {
+    "probabilidad": 0.6,
+    "objetos": [
+      "atq",
+      "def",
+      "vida",
+      "vida",
+      "carga",
+      "revivir"
+    ]
+  },
+  "esquivar": 0.5,
+  "hablar": 0.4,
+  "huir": false,
+  "dialogos": {
+    "inicio": [
+      {
+        "quien": "Voz",
+        "texto": "Entidad hostil: un soldado de la Federación. Uno solo."
+      },
+      {
+        "quien": "Cami",
+        "texto": "Uno solo. Perfecto para que aprendas. Te digo qué hacer y lo haces, ¿sí?"
+      },
+      {
+        "quien": "Cami",
+        "texto": "«Atacar»: le pegas. Para eso tienes manos. Elige a quién y listo."
+      },
+      {
+        "quien": "Cami",
+        "texto": "«Esquivar»: si ves venir algo grande, te agachas. A veces sale, a veces no."
+      },
+      {
+        "quien": "Cami",
+        "texto": "«Objetos»: te pasé un agua de la Resistencia, está en tu mochila. Si te duele, tómatela."
+      }
+    ],
+    "refuerzos": [
+      {
+        "quien": "Voz",
+        "texto": "Antes de caer, el soldado alcanza a apretar la radio. Llega otro."
+      },
+      {
+        "quien": "Cami",
+        "texto": "Llamó a su cabo. Claro que llamó a su cabo."
+      }
+    ],
+    "jefe": [
+      {
+        "quien": "Cami",
+        "texto": "Mira la barra debajo de tu nombre. Se llena peleando. Cuando brilla, en «Atacar» aparece tu especial. Úsalo."
+      },
+      {
+        "quien": "Cami",
+        "texto": "Y no te preocupes por mí: yo disparo un turno sí y uno no. Es el tobillo, no la puntería."
+      }
+    ],
+    "jefe_huye": [
+      {
+        "quien": "Voz",
+        "texto": "El cabo retrocede por el pasillo, apretando la radio. No va solo a ningún lado: va a buscar a todos."
+      }
+    ],
+    "victoria": [
+      {
+        "quien": "Cami",
+        "texto": "No estuvo mal. Para un oficinista."
+      }
+    ],
+    "derrota": [
+      {
+        "quien": "Voz",
+        "texto": "Usuario: incapacitado en el tutorial. Partida: no guardada."
+      }
+    ],
+    "huir_no": [
+      {
+        "quien": "Cami",
+        "texto": "Es uno. Uno. No vamos a correr de uno."
+      }
+    ],
+    "huir": [
+      {
+        "quien": "Voz",
+        "texto": "Escapan por un pasillo lateral."
+      }
+    ],
+    "descanso": [
+      {
+        "quien": "Cami",
+        "texto": "Dame un segundo… El tobillo."
+      }
+    ],
+    "cae_jair": [
+      {
+        "quien": "Cami",
+        "texto": "¿Jair? ¡Jair! Genial. Ahora tengo que hacer todo yo, como siempre."
+      }
+    ],
+    "hablar_ok": [
+      {
+        "quien": "Voz",
+        "texto": "{objetivo} se queda pensando. Pierde su próximo ataque."
+      }
+    ],
+    "hablar_no": [
+      {
+        "quien": "Voz",
+        "texto": "{objetivo} no le hace caso."
+      }
+    ],
+    "esquiva_ok": [
+      {
+        "quien": "Cami",
+        "texto": "Eso. Agacharse también es pelear."
+      }
+    ],
+    "botin": [
+      {
+        "quien": "Voz",
+        "texto": "Al {objetivo} se le cae algo: {objeto}. Va a la mochila."
+      }
+    ],
+    "ayuda": [
+      {
+        "quien": "Voz",
+        "texto": "Algo cae del techo y rebota en el piso: {objeto}. Nadie pregunta de dónde. Va a la mochila."
+      }
+    ]
+  },
+  "objetos": [
+    "atq",
+    "def",
+    "vida",
+    "carga",
+    "caramelo_rancio",
+    "revivir",
+    "veneno_ratas",
+    "condon"
+  ],
+  "fondo_proporcion": 1.7758,
+  "fondo_luces": [
+    [
+      24.6,
+      8.8
+    ],
+    [
+      72.8,
+      8.7
+    ]
+  ],
+  "ayuda": {
+    "umbral": 0.35,
+    "cae": 0.3,
+    "objeto": "vida",
+    "critico": 0.1
+  },
+  "musica_jefe": "audio/musica/combate_arcade.mp3",
+  "mochila_inicial": {
+    "vida": 1
+  },
+  "musica": "audio/musica/combate_arcade.mp3",
+  "_nota": "Pelea de práctica del Capítulo 1 (pedido del autor, 2026-11-06), en prueba: Cami explica los comandos. No se publica hasta que el autor la apruebe."
+}

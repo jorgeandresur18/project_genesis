@@ -13364,7 +13364,238 @@
       "conditions": [],
       "audio": null,
       "ui_effect": null,
+      "next": "cap01_tu01"
+    },
+    {
+      "scene_id": "cap01_tu01",
+      "chapter": 1,
+      "background": "fondos/pasillo_castillo.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/seria.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "soldado_enmascarado",
+          "sprite": "sprites/soldado_enmascarado/base.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "Detrás de Cami, uno de los soldados desarmados se vuelve a armar, pieza por pieza, como un mueble que se arma solo. Uno solo. Con el casco torcido."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_tu02"
+    },
+    {
+      "scene_id": "cap01_tu02",
+      "chapter": 1,
+      "background": "fondos/pasillo_castillo.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/burla.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "soldado_enmascarado",
+          "sprite": "sprites/soldado_enmascarado/base.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "Uno solo. Ya que estás, te doy tu primera clase."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_tu03"
+    },
+    {
+      "scene_id": "cap01_tu03",
+      "chapter": 1,
+      "background": "fondos/pasillo_castillo.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/asustado1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/burla.webp",
+          "pos": "centro"
+        },
+        {
+          "id": "soldado_enmascarado",
+          "sprite": "sprites/soldado_enmascarado/base.webp",
+          "pos": "derecha"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "¿Clase de qué?"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_tu04",
+      "batalla": "guia",
+      "batalla_derrota": "cap01_bad_tu01"
+    },
+    {
+      "scene_id": "cap01_tu04",
+      "chapter": 1,
+      "background": "fondos/pasillo_castillo.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/base.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/burla.webp",
+          "pos": "centro"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "De no morirte. Aprobaste. Raspando."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_tu05"
+    },
+    {
+      "scene_id": "cap01_tu05",
+      "chapter": 1,
+      "background": "fondos/pasillo_castillo.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/verguenza1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/burla.webp",
+          "pos": "centro"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Jair",
+        "text": "(Mi primera evaluación de desempeño en años y es positiva. En un sueño. Contra un tipo con máscara.)"
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
       "next": "cap01_g3_001"
+    },
+    {
+      "scene_id": "cap01_bad_tu01",
+      "chapter": 1,
+      "background": "fondos/pasillo_castillo.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/dolor.webp",
+          "pos": "centro"
+        }
+      ],
+      "dialogue": {
+        "speaker": null,
+        "text": "El cabo vuelve con la radio en la mano. Detrás de él, el pasillo se llena de pasos idénticos."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_bad_tu02"
+    },
+    {
+      "scene_id": "cap01_bad_tu02",
+      "chapter": 1,
+      "background": "fondos/pasillo_castillo.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/triste1.webp",
+          "pos": "izquierda"
+        },
+        {
+          "id": "cami",
+          "sprite": "sprites/cami/dolor.webp",
+          "pos": "centro"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cami",
+        "text": "Era la práctica, Jair. La práctica."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_bad_tu03"
+    },
+    {
+      "scene_id": "cap01_bad_tu03",
+      "chapter": 1,
+      "background": "PANTALLA:negro",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [],
+      "dialogue": {
+        "speaker": null,
+        "text": "Reprobado."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": null,
+      "ending": "bad_cap01_practica"
     },
     {
       "scene_id": "cap01_g3_001",
