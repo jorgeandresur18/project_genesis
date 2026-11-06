@@ -442,4 +442,4 @@ adelante (cronograma, «Ideas anotadas»).
 
 **Pendiente:** lo de «Para mañana» en el cronograma (decisiones, sin pruebas) y lo de la noche en
 `docs/PRUEBAS_EN_CASA.md` (secciones 10 a 15). Nada de esto está publicado en `main` todavía.
-
+- **Orientaciones (decisión del autor, 2026-11-06):** Cami es bisexual o pansexual de forma deliberada, como parte de su origen (utilería sexual de fondo en los edits de Rikka: de ahí su atracción retorcida por el cuerpo de Rikka). Nikki es más heterosexual que bisexual: lo que dice y hace con Rikka es estando ebria. Jair y Rikka no se fijaron (Claude propuso heterosexuales; falta que el autor lo confirme). En `docs/CANON.md`.

@@ -101,6 +101,7 @@ Género y tono por etapas `[CANON]`: el Capítulo 1 es un isekai adulto (humor n
 - 30 años, pelo negro. Amiga con derecho de Jair desde hace 8 años. **No viven juntos.** Nunca han logrado una relación estable aunque él se lo ha pedido. `[CANON]`
 - Le dice que se consiga novia, pero borracha le pide que al final termine con ella, que esté para ella y la bese. `[CANON]`
 - Lidia con el alcoholismo. `[CANON]` Mostrar consecuencias, no diagnosticarla con una escena ni reducirla a un chiste de alcohol.
+- **Orientación** (decisión del autor, 2026-11-06): **más heterosexual que bisexual.** Lo de «a veces me siento confundida… si realmente solo me gustan los chicos» y el intento de besar a Rikka (Capítulo 4) los dice y los hace **ebria**: no la definen. `[CANON]`
 - **Por qué Nikki tiene un ataque especial más** `[CANON]` (dicho por el autor el 2026-11-04): hasta ahora es el único personaje con 6 ataques (3 ataques y 3 especiales; lo normal son 5: 3 y 2). En una borrachera en el bar encontró un **caramelo premium** (dorado, muy bonito) y se lo comió; eso le dio un espacio más de especial.
 - La relación con Jair es codependiente y asfixiante; los dos obtienen algo de ella y por eso no la rompen. `[CANON]`
 - En el chat de Jair con Nikki hay un solo mensaje destacado, el único que él marcó con estrella: «nunca te vayas de mi vida», que ella le envió hace un año y medio. Jair suele leerlo y mirar su foto de perfil (una foto de fiesta de su Boringram, `public/fotos/nikki_boringram.webp`). Lo hace la noche del bar, cuando ella se va en el taxi. `[CANON]`
@@ -113,6 +114,7 @@ Género y tono por etapas `[CANON]`: el Capítulo 1 es un isekai adulto (humor n
 - Nació como edit de IA: acompañante en imágenes donde la protagonista es Rikka. **Cami siempre fue y es una utilería sexual de fondo**, un NPC secundario para resaltar a Rikka. `[CANON]`
 - Su encuentro con Jair dentro del juego es accidental; tras esa interacción, la IA la convierte en acompañante del héroe. Su importancia posterior no estaba predestinada: no es una protagonista secreta. `[CANON]`
 - El sistema autocompletó su personalidad: agresiva y territorial, para pelear las batallas que Jair evita. `[CANON]`
+- **Orientación** (decisión del autor, 2026-11-06): **bisexual o pansexual, de forma deliberada**, en toda la historia (no solo en el Bootcamp). Es **parte de su origen**: nació como utilería sexual de fondo en los edits donde la protagonista era Rikka; de ahí su **atracción retorcida por el cuerpo de Rikka** (el beso de la taberna, la nalgada de las termas). Que venga de cómo la crearon no la vuelve falsa: puede descubrirlo y decidir qué hace con eso (ver `docs/CAMI.md`). `[CANON]`
 - No es una víctima pasiva: tiene deseos, decisiones y contradicciones propias. `[CANON]`
 - **Su pasado es inventado** (texto del autor: `docs/CAMI.md`, 2026-11-02): la muerte de sus padres, la guerra y su vida en la Resistencia antes de Jair **nunca ocurrieron**. Son una biografía que la IA le agregó para darle una historia rápida y coherente cuando la volvió acompañante de Jair. Que su origen sea artificial no invalida sus emociones, deseos ni decisiones. A diferencia de Rikka, que tiene una historia vivida dentro de su universo. `[CANON]`
 - **Lo descubre cuando conoce su origen**, junto con la verdad de que la creó Jair (Capítulos 4 a 6). La escena exacta: `[PENDIENTE]`. `[CANON]`
@@ -387,7 +389,7 @@ Secuela: relata lo que ocurre después del Capítulo 7B, como un «Capítulo 8»
 
 ## 9b. Bootcamp Genesis (extra, no canon)
 
-Minijuego aparte (antes «Academia Genesis»): Jair es instructor de un bootcamp paródico de Coffee, de cero a «desarrollador explotado, con sobrepeso y propenso a diabetes tipo 2». Lo que pasa ahí no cuenta para la historia. Ahí Cami es abiertamente bisexual (solo en este extra; no se le atribuye a Rikka). Se abre al terminar el Capítulo 1 y sus niveles se desbloquean con la historia. Detalle: `docs/BOOTCAMP.md` y el documento del autor `docs/BOOTCAMP_ESPECIFICACION.md`.
+Minijuego aparte (antes «Academia Genesis»): Jair es instructor de un bootcamp paródico de Coffee, de cero a «desarrollador explotado, con sobrepeso y propenso a diabetes tipo 2». Lo que pasa ahí no cuenta para la historia. Ahí Cami es abiertamente bisexual (en la historia también lo es: ver su ficha; no se le atribuye a Rikka). Se abre al terminar el Capítulo 1 y sus niveles se desbloquean con la historia. Detalle: `docs/BOOTCAMP.md` y el documento del autor `docs/BOOTCAMP_ESPECIFICACION.md`.
 
 ## 10. Pendientes
 
