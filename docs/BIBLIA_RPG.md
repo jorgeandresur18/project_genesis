@@ -647,7 +647,7 @@ Comparados con Jair (`base` PS 30, ATQ 5, DEF 3, VEL 8; sube por nivel PS 6, ATQ
 |---|---|---|---|---|---|
 | **Jair** (para comparar) | 30 (+6) | 5 (+1) | 3 (+0,6) | 8 (+0,5) | — |
 | **Jordan** | 28 (+5,5) | 7 (+1,2) | 2 (+0,4) | 11 (+0,6) | Pega más y antes que Jair, pero aguanta menos. |
-| **Billy** | 46 (+8) | 7 (+1,1) | 6 (+0,9) | 4 (+0,2) | El tanque: aguanta mucho y pega bien, pero casi siempre actúa último. |
+| **Billy** | 46 (+8) | 8 (+1,25) | 6 (+0,9) | 4 (+0,2) | El tanque: aguanta mucho y pega fuerte con su cuchillo-espada gigante, pero casi siempre actúa último. |
 | **Maggi** | 26 (+4,5) | 7 (+1,15) | 2 (+0,4) | 12 (+0,6) | Rápida y peligrosa, pero frágil. La que duerme y confunde. |
 
 **Ataques (nombres y efectos de borrador):**
@@ -657,8 +657,9 @@ Comparados con Jair (`base` PS 30, ATQ 5, DEF 3, VEL 8; sube por nivel PS 6, ATQ
   - *Combo de calle:* dos golpes rápidos de poder 8.
   - *Ctrl+Z de gimnasio:* se cura un poco (como el Ctrl+Z de Jair).
   - Especial *Ráfaga relámpago:* varios golpes como la Ráfaga de Jair; el último paraliza.
-- **Billy** (carne, cerveza y su restaurante):
-  - *Panzazo:* poder 15, un golpe pesado.
+- **Billy** (carne, cerveza y su restaurante; pelea con una espada grande con forma de cuchillo de carnicero):
+  - *Corte de carnicero:* poder 17, un tajo pesado con la espada.
+  - *Panzazo:* poder 12, empuja con la panza.
   - *Brindis:* sube su ATQ hasta el final de la pelea (potenciarse).
   - *Pastelillo de la casa:* le da a un rival un pastelillo herbal «con extra de compuesto T»: lo **confunde** (el guiño al objeto de la tienda).
   - Especial *Parrillada Beef Boy:* a todos los rivales, con un poco de **quemadura**.
