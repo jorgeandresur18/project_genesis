@@ -693,7 +693,8 @@ export const useStore = create<Store>()(
         payfoe: PAYFOE_INICIAL,
         transferirAPayfoe: (n) => {
           const { game, payfoe } = get();
-          if (!game) return 0;
+          // Solo al terminar un capítulo (decisión del autor, 2026-11-06): en la pantalla de fin de capítulo.
+          if (!game || !game.finished?.startsWith(CHAPTER_END)) return 0;
           const r = transferir(game.vars, payfoe, n);
           if (r.transferido > 0 || r.vars.partida_id !== game.vars.partida_id) set({ game: { ...game, vars: r.vars }, payfoe: r.payfoe });
           return r.transferido;

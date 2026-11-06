@@ -504,7 +504,7 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
 | Desde el menú | No se ve | Se ve y se usa |
 
 - **PayFoe** es la parodia de PayPal (como Coffee de JavaScript y Oráculo de Oracle). La moneda son los **tokens**.
-- **Transferir:** dentro de una partida, se pueden pasar tokens de la partida a PayFoe. **Nunca al revés** (lo farmeado no
+- **Transferir:** **al terminar cada capítulo** (decisión del autor, 2026-11-06), en la pantalla de fin de capítulo, se pueden pasar los tokens ganados en la partida a PayFoe (antes se podía en cualquier momento, desde la billetera). En la billetera, dentro de la partida, se ve cuánto se podrá pasar. **Nunca al revés** (lo farmeado no
   facilita la historia).
 - **Contra la duplicación** (guardar, transferir, cargar el guardado viejo y volver a transferir): cada partida tiene un
   número (`partida_id`, al empezar) y un contador que solo sube, `tokens_ganados`. PayFoe anota cuánto recibió de cada
@@ -811,4 +811,6 @@ Detalle completo en `docs/BATALLA_FINAL.md`.
 **Pruebas de balance con semilla fija** (2026-11-06): `balance.test.ts` tira siempre los mismos dados; ya no falla por azar.
 
 **Rivales variados en el torneo** (pedido del autor, 2026-11-06): cada ronda, salvo la gran final (Nikki campeona), sortea su rival y, en dobles y triples, sus compañeros (`rivales` en `torneo.json`): soldados, el soldado veterano, el Capitán o un personaje (Jair, Cami, Rikka, Jordy, Billy, Maggie, el influencer, el otaku, Nikki). Sale distinto en cada torneo (la semilla del torneo). Los personajes rivales pelean con su ficha de peleador (sin cebos, curas ni bomba) y salen un poco más bajos de nivel (×0,8, ×0,9 y ×1,1 por ronda; los compañeros, además ×0,75), así la dificultad sube como con las rondas de siempre. Sin semilla (las pruebas), las rondas de siempre.
+
+**Las dos economías** (propuesta de Claude, aceptada por el autor el 2026-11-06): la **historia** (los tokens de cada partida, su mochila) y el **menú y el torneo** (PayFoe y la mochila del torneo, por construir). Lo de la historia puede salir hacia afuera (los tokens, al terminar cada capítulo); de afuera hacia la historia solo entran premios contados (la bomba del torneo; idea: un objeto por capítulo). Los objetos de pelea comprados en el Boringram del menú sirven solo para el torneo. **La moneda se llama «tokens»** (`monedas` es solo el nombre de la variable).
 

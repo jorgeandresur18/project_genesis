@@ -539,14 +539,14 @@
 
 > **DECISIÓN**
 - `descanso2_cofre#0` El de la cruz rosada: Elixit (2) ⟶ va a `descanso2_cofre_a` · mochila_revivir +2
-- `descanso2_cofre#1` El que tintinea: monedas (200) ⟶ va a `descanso2_cofre_b` · monedas +200
+- `descanso2_cofre#1` El que tintinea: tokens (200) ⟶ va a `descanso2_cofre_b` · monedas +200
 - `descanso2_cofre#2` El que suena a lata: 4Low-Co (2) ⟶ va a `descanso2_cofre_c` · mochila_carga +2
 
 `descanso2_cofre_a` **Voz:** > Objeto obtenido: Elixit ×2. Va a la mochila.
 
 > ⤷ continúa en `arsenal_01`
 
-`descanso2_cofre_b` **Voz:** > Objeto obtenido: 200 monedas. Va a la mochila.
+`descanso2_cofre_b` **Voz:** > Objeto obtenido: 200 tokens. Va a la mochila.
 
 > ⤷ continúa en `arsenal_01`
 

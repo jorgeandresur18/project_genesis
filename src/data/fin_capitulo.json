@@ -16,5 +16,12 @@
   "fondos_inicio": {
     "1": "fondos/bar_noche.webp"
   },
-  "portada": "CAPÍTULO {n}"
+  "portada": "CAPÍTULO {n}",
+  "payfoe": {
+    "titulo": "PayFoe",
+    "texto": "Tokens ganados en esta partida que puedes pasar a PayFoe: {n}",
+    "boton": "Transferir {n} tokens",
+    "hecho": "Listo: {n} tokens en PayFoe. Úsalos bien. O no.",
+    "nada": "No hay tokens nuevos para pasar a PayFoe."
+  }
 }

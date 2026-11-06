@@ -8,6 +8,7 @@ import textosEs from '../data/fin_capitulo.json';
 import textosEn from '../data/en/fin_capitulo.json';
 import { localized, useLang } from '../engine/i18n';
 import { assetUrl } from '../engine/assets';
+import { transferible } from '../engine/payfoe';
 
 interface Props {
   chapter: number;
@@ -74,6 +75,11 @@ export function ChapterEnd({ chapter, lastScene, onSave, onTitle }: Props) {
     );
     return () => timers.forEach(clearTimeout);
   }, [faded, alt, still]);
+  // PayFoe: al terminar cada capítulo se pueden pasar los tokens ganados en la partida (decisión del autor, 2026-11-06).
+  const vars = useStore((s) => s.game?.vars);
+  const payfoe = useStore((s) => s.payfoe);
+  const puede = config.payfoe_activo && vars ? transferible(vars, payfoe) : 0;
+  const [paso, setPaso] = useState<number | null>(null);
   const diff = title && alt ? splitDiff(title, alt) : null;
   const word = sub === 'alt' || sub === 'glitch-out' ? diff?.b : diff?.a;
 
@@ -125,6 +131,20 @@ export function ChapterEnd({ chapter, lastScene, onSave, onTitle }: Props) {
           </p>
         )}
       </div>
+      {config.payfoe_activo && vars && (
+        <div className="chapter-end-payfoe">
+          {paso !== null ? (
+            <p>{paso > 0 ? textos.payfoe.hecho.replace('{n}', String(paso)) : textos.payfoe.nada}</p>
+          ) : puede > 0 ? (
+            <>
+              <p>{textos.payfoe.texto.replace('{n}', String(puede))}</p>
+              <button onClick={click(() => setPaso(useStore.getState().transferirAPayfoe(puede)))}>{textos.payfoe.boton.replace('{n}', String(puede))}</button>
+            </>
+          ) : (
+            <p>{textos.payfoe.nada}</p>
+          )}
+        </div>
+      )}
       <nav className="chapter-end-menu">
         <button
           onClick={click(() => {

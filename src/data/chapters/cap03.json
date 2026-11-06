@@ -5489,7 +5489,7 @@
           }
         },
         {
-          "text": "El que tintinea: monedas (200)",
+          "text": "El que tintinea: tokens (200)",
           "next": "cap03_descanso2_cofre_b",
           "add": {
             "monedas": 200
@@ -5566,7 +5566,7 @@
       "ui_effect": null,
       "dialogue": {
         "speaker": "Voz",
-        "text": "> Objeto obtenido: 200 monedas. Va a la mochila."
+        "text": "> Objeto obtenido: 200 tokens. Va a la mochila."
       },
       "choices": [],
       "next": "cap03_arsenal_01"

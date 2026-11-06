@@ -21,6 +21,7 @@
     "billetera_partida_titulo": "This game's wallet",
     "transferible": "You can move {n} to PayFoe",
     "todo": "All",
+    "al_terminar_capitulo": "They move to PayFoe when you finish each chapter.",
     "billetera_sin_partida": "To transfer tokens from a game, load that game.",
     "uso_titulo": "What is PayFoe for?",
     "entendido": "Got it",

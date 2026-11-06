@@ -998,6 +998,9 @@ img.sprite.sprite-swap { animation: sprite-swap-in 180ms ease-out; }
   animation: chapter-fade-up 1.2s ease-out 1.6s both;
 }
 .chapter-end-menu { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem; animation: chapter-fade-up 1s ease-out 2.4s both; }
+/* PayFoe al terminar el capítulo: los tokens de la partida pasan a la billetera del jugador (decisión del autor, 2026-11-06). */
+.chapter-end-payfoe { position: relative; z-index: 1; display: grid; justify-items: center; gap: 0.5rem; margin-bottom: 1.2rem; text-align: center; animation: chapter-fade-up 1s ease-out 2.2s both; }
+.chapter-end-payfoe p { margin: 0; opacity: 0.85; }
 .chapter-end-menu button,
 .chapter-soon button {
   min-width: 10rem;

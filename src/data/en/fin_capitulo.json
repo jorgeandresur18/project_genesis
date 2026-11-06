@@ -9,5 +9,12 @@
     "texto": "Coming soon",
     "cerrar": "Close"
   },
-  "portada": "CHAPTER {n}"
+  "portada": "CHAPTER {n}",
+  "payfoe": {
+    "titulo": "PayFoe",
+    "texto": "Tokens earned in this game that you can move to PayFoe: {n}",
+    "boton": "Transfer {n} tokens",
+    "hecho": "Done: {n} tokens in PayFoe. Use them wisely. Or not.",
+    "nada": "No new tokens to move to PayFoe."
+  }
 }

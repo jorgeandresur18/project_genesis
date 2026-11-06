@@ -10,7 +10,7 @@ import { useLang } from '../engine/i18n';
 import { config } from '../engine/story';
 import { SUELTOS_EN_VENTA, copiasLibres, precioVentaCassette } from '../engine/batallas';
 import { progresoDeVars } from '../engine/batalla';
-import { TOPE_PAYFOE, transferible, type Movimiento } from '../engine/payfoe';
+import { transferible, type Movimiento } from '../engine/payfoe';
 import s from './Boringplace.module.css';
 import sb from './Boringram.module.css';
 
@@ -252,19 +252,15 @@ function TarjetaPayfoe({ onAbrir }: { onAbrir: () => void }) {
  * La billetera: el saldo de PayFoe, la billetera de la partida con la transferencia (cuánto pasar; nunca al revés) y
  * los últimos movimientos. El «?» de arriba explica para qué sirve, con chistes. El tope (999.999) nunca se muestra.
  */
-function BilleteraVista({ onBack, onToast }: { onBack: () => void; onToast: (texto: string) => void }) {
+function BilleteraVista({ onBack }: { onBack: () => void; onToast: (texto: string) => void }) {
   const tx = useBoringplace().data.textos;
   const f = useFormato();
   const lang = useLang();
   const payfoe = useStore((st) => st.payfoe);
   const vars = useStore((st) => st.game?.vars);
   const puede = vars ? transferible(vars, payfoe) : 0;
-  const [cuanto, setCuanto] = useState<number | null>(null);
   const [ayuda, setAyuda] = useState(false);
   const ayudaTextos = useBoringplace().data.ayuda_payfoe;
-  // Lo elegido no puede pasar de lo que se puede transferir (al transferir, baja).
-  const n = Math.min(cuanto ?? puede, puede);
-  const paso = Math.max(1, 10 ** Math.max(0, String(puede).length - 2));
   const fecha = (m: Movimiento) => new Date(m.fecha).toLocaleDateString(lang === 'en' ? 'en-US' : 'es-ES', { day: 'numeric', month: 'short' });
   return (
     <div className={`${sb.feed} ${s.conAyuda}`}>
@@ -321,33 +317,8 @@ function BilleteraVista({ onBack, onToast }: { onBack: () => void; onToast: (tex
               <Token chico /> <b>{f((vars.monedas as number | undefined) ?? 0)}</b>
               <small>{tx.transferible.replace('{n}', f(puede))}</small>
             </p>
-            {puede > 0 && (
-              <div className={s.cantidad}>
-                <span>{tx.cantidad}</span>
-                <button aria-label={tx.menos} disabled={n <= 1} onClick={() => setCuanto(Math.max(1, n - paso))}>
-                  −
-                </button>
-                <b>{f(n)}</b>
-                <button aria-label={tx.mas} disabled={n >= puede} onClick={() => setCuanto(Math.min(puede, n + paso))}>
-                  +
-                </button>
-                <button className={s.todo} disabled={n >= puede} onClick={() => setCuanto(puede)}>
-                  {tx.todo}
-                </button>
-              </div>
-            )}
-            <button
-              className={s.boton}
-              onClick={() => {
-                playSelect();
-                if (payfoe.saldo >= TOPE_PAYFOE) return onToast(tx.payfoe_tope);
-                const t = useStore.getState().transferirAPayfoe(n);
-                setCuanto(null);
-                onToast(t > 0 ? tx.transferido.replace('{n}', f(t)) : tx.nada_transferible);
-              }}
-            >
-              {tx.transferir.replace('{n}', f(n))}
-            </button>
+            {/* Se transfiere al terminar cada capítulo, en la pantalla de fin de capítulo (decisión del autor, 2026-11-06). */}
+            <p className={s.nota}>{tx.al_terminar_capitulo}</p>
           </section>
         ) : (
           <p className={s.nota}>{tx.billetera_sin_partida}</p>
