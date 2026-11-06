@@ -10,7 +10,7 @@
 // - Regla (del autor, 2026-11-03): en todos los desbloqueables, lo que ya está en la historia sale como casilla vacía
 //   («???») hasta descubrirlo, en el orden en que aparece en la historia. Lo que la historia todavía no usa, no sale.
 import { useStore } from './store';
-import { storyFiles } from './story';
+import { archivosPublicados as storyFiles } from './story';
 import galeria from '../data/galeria.json';
 import spriteConfig from '../../tools/sprites.config.json';
 import emblemas from '../data/emblemas_18.json';

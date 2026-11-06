@@ -1,4 +1,5 @@
 // Los cuatro reinos estacionales: emblema, ficha de la galería y carteles de lugar (src/data/reinos.json).
+import { escenaPublicada } from './story';
 import reinosEs from '../data/reinos.json';
 import reinosEn from '../data/en/reinos.json';
 import { localized, useLang } from './i18n';
@@ -40,9 +41,11 @@ export function useReinos() {
   const data = merged(useLang());
   const visited = useStore((s) => s.snapshots);
   const opened = useStore((s) => s.galleryOpened);
-  const unlocked = data.reinos.filter((r) => r.desbloqueo && (GALERIA_COMPLETA || visited[r.desbloqueo]));
+  // En la demo, solo los reinos de los capítulos publicados (los demás no salen ni como «???»).
+  const reinos = data.reinos.filter((r) => escenaPublicada(r.desbloqueo));
+  const unlocked = reinos.filter((r) => r.desbloqueo && (GALERIA_COMPLETA || visited[r.desbloqueo]));
   return {
-    reinos: data.reinos,
+    reinos,
     unlocked,
     isUnlocked: (r: Reino) => unlocked.includes(r),
     fresh: new Set(unlocked.filter((r) => !opened[reinoKey(r.id)]).map((r) => r.id)),

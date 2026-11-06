@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from 'react';
 import { useStore } from '../engine/store';
-import { BAD_END, config, endingName, getEnding, scenes, storyFiles, variables } from '../engine/story';
+import { BAD_END, capituloPublicado, config, endingName, getEnding, scenes, storyFiles, variables } from '../engine/story';
 import { useLang, useT } from '../engine/i18n';
 import { buildFlow, type FlowGroup, type FlowNode } from '../engine/flow';
 import mapa from '../data/mapa.json';
@@ -33,7 +33,7 @@ const sized = (flow: ReturnType<typeof buildFlow>) => ({
   width: flow.columns * (NODE_W + COL_GAP) - COL_GAP + PAD * 2,
   height: Math.max(...flow.nodes.map((n) => n.y)) + NODE_H + PAD * 2,
 });
-const CHAPTERS = [...new Set(storyFiles.map((f) => f.chapter))]
+const CHAPTERS = [...new Set(storyFiles.filter((f) => capituloPublicado(f.chapter)).map((f) => f.chapter))]
   .sort((a, b) => a - b)
   .map((chapter) => {
     const file = storyFiles.find((f) => f.chapter === chapter)!;

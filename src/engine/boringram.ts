@@ -5,6 +5,7 @@
 //   en el celular (galleryOpened, con claves «bor:…», igual que la galería).
 // - Hora: el celular sigue el mundo real (allá el tiempo corre 45 veces más lento que en el juego). Cada cosa
 //   tiene «cuando» («D HH:MM», D = días desde el sábado de la historia) y los «hace» se calculan contra el reloj.
+import { escenaPublicada } from './story';
 import { useStore } from './store';
 import { useLang } from './i18n';
 import dataEs from '../data/boringram.json';
@@ -373,10 +374,11 @@ export function useBoringramProgress() {
     (!x.desbloqueo || !!visited[x.desbloqueo]) && (!x.clave || !!opened[x.clave]);
   // Antes de que Jair mire su celular en la historia, no hay nada.
   const on = open(ES.perfiles[ES.yo]);
-  const count = <T extends { desbloqueo: string | null; clave?: string }>(list: T[]) => ({
-    got: on ? list.filter(open).length : 0,
-    total: list.length,
-  });
+  // En la demo, solo lo de los capítulos publicados.
+  const count = <T extends { desbloqueo: string | null; clave?: string }>(todo: T[]) => {
+    const list = todo.filter((x) => escenaPublicada(x.desbloqueo));
+    return { got: on ? list.filter(open).length : 0, total: list.length };
+  };
   return {
     publicaciones: count(ES.publicaciones.filter((p) => p.tipo !== 'texto')),
     pensamientos: count(ES.publicaciones.filter((p) => p.tipo === 'texto')),

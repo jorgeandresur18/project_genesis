@@ -1,7 +1,7 @@
 // El 100 % del juego: todo lo desbloqueable cuenta (decisión del autor; ver docs/SPEC.md). Cada tipo pesa lo mismo
 // (si no, las miles de escenas taparían a los finales).
 import { useStore } from './store';
-import { endings, storyFiles } from './story';
+import { endingsPublicados as endings, archivosPublicados as storyFiles } from './story';
 import { CGS, TOTAL_PLACES, TOTAL_SPRITES, useGalleryState } from './gallery';
 import { useBoringramProgress } from './boringram';
 import { useReinos } from './reinos';

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 
 import { createPortal } from 'react-dom';
 import { CHAPTER_END, SAVE_SLOTS, TEXT_SPEED_INSTANT, canSaveGame, useStore, type SaveSlot } from '../engine/store';
 import { choiceText, lineText, speakerName } from '../engine/storyText';
-import { BAD_END, config, endingName, endings, scenes } from '../engine/story';
+import { BAD_END, config, endingName, endingsPublicados as endings, scenes } from '../engine/story';
 import { detectLanguage, localized, useLang, useT } from '../engine/i18n';
 import conoceMasEs from '../data/conoce_mas.json';
 import borradoEs from '../data/borrado.json';

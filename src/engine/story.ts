@@ -28,6 +28,20 @@ for (const file of storyFiles) {
   for (const scene of file.scenes) scenes.set(scene.scene_id, scene);
 }
 
+/**
+ * Lo publicado (pedido del autor, 2026-11-05): en la demo (`capitulo_maximo` de `demo_publica`) los desbloqueables, el
+ * porcentaje, el mapa y los finales cuentan solo hasta ese capítulo; lo de más adelante no sale ni como «???». En
+ * desarrollo, `capitulo_maximo` cubre todo. Sin capítulo (p. ej. sin escena de desbloqueo): sí.
+ */
+export const capituloPublicado = (capitulo?: number | null) => !capitulo || capitulo <= (config.capitulo_maximo ?? Infinity);
+export const archivosPublicados: StoryFile[] = storyFiles.filter((f) => capituloPublicado(f.chapter));
+/** Si la escena es de un capítulo publicado (sin escena: sí). */
+export const escenaPublicada = (id?: string | null) => !id || capituloPublicado(scenes.get(id)?.chapter);
+const CAPITULO_DE_FINAL = new Map<string, number>();
+for (const file of storyFiles) for (const scene of file.scenes) if (scene.ending && !CAPITULO_DE_FINAL.has(scene.ending)) CAPITULO_DE_FINAL.set(scene.ending, file.chapter);
+/** Los finales de los capítulos publicados (los que no tienen escena todavía, también: se filtran por `estado`). */
+export const endingsPublicados: EndingInfo[] = endings.filter((e) => capituloPublicado(CAPITULO_DE_FINAL.get(e.id)));
+
 export function getScene(id: string): Scene {
   const scene = scenes.get(id);
   if (!scene) throw new Error(`Escena inexistente: ${id}`);
