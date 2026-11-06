@@ -1,3 +1,4 @@
+import { JEFES_TORRE } from '../engine/torneo';
 import { nuevaSemilla } from '../engine/esencia';
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
 import '@fontsource/press-start-2p/400.css';
@@ -1099,6 +1100,8 @@ function Pelea({
           await lineas('derrota');
           return salir(() => fin.current.onPerder());
         }
+        // Ganó: si era un jefe de la torre, queda para elegir en el torneo (en cualquier partida).
+        if (JEFES_TORRE.includes(d.jefe.enemigo)) useStore.getState().vencerJefe(d.jefe.enemigo);
         break;
       }
       const jefe = jefeSeRetira();

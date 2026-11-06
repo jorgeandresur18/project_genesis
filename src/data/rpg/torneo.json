@@ -183,5 +183,40 @@
         "texto": "[Relleno] ¿Otra vez tú? Ocho años perdiendo conmigo y no aprendes."
       }
     ]
+  },
+  "hablar_jefes": {
+    "_nota": "Lo que dicen los jefes de la torre del Capítulo 3 cuando el jugador los usa en el torneo y elige «Hablar» (borrador de Claude, 2026-11-05).",
+    "reina_bichos": [
+      "Mis crías tienen hambre. Y tú tienes cara de memoria libre.",
+      "Bzzz. Eso fue una amenaza en mi idioma."
+    ],
+    "jefe_bodega": [
+      "Tu ataque no cuadra con el inventario.",
+      "Todo lo que rompas se descuenta de tu sueldo."
+    ],
+    "sargento": [
+      "¡Firmes! Ah, no, tú no eres de mi tropa.",
+      "Cien flexiones si fallas el próximo golpe."
+    ],
+    "chef": [
+      "Hoy el plato del día eres tú.",
+      "Le falta sal a tu técnica."
+    ],
+    "maestro_herrero": [
+      "Te voy a templar como a una espada vieja.",
+      "Golpeo yunques más duros que tu cabeza."
+    ],
+    "alcaide": [
+      "Tengo una celda con tu nombre. Literal: ya la grabé.",
+      "Nadie sale de mi torre. Ni de este torneo."
+    ],
+    "intendente": [
+      "Firmaste el préstamo de esa arma, ¿no? Lo vas a pagar.",
+      "Tengo tres armas para cada error tuyo."
+    ],
+    "comandante": [
+      "La guardia real no se rinde. Se reorganiza.",
+      "Por la corona. Bueno, por el premio."
+    ]
   }
 }

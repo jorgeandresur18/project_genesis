@@ -8,7 +8,8 @@ import { useT } from '../engine/i18n';
 import { useStore } from '../engine/store';
 import { playSelect } from '../engine/sound';
 import { FICHAS } from '../engine/batallas';
-import { HEROES_TORNEO, TORNEO, armarRonda, copaAbierta, premioDe, type Copa, type Modalidad } from '../engine/torneo';
+import { HEROES_TORNEO, JEFES_TORRE, TORNEO, armarRonda, copaAbierta, fichaPeleador, premioDe, type Copa, type Modalidad } from '../engine/torneo';
+import { nuevaSemilla } from '../engine/esencia';
 import { GALERIA_COMPLETA } from '../engine/modo';
 
 type Fase = { paso: 'menu' } | { paso: 'pelea'; ronda: number } | { paso: 'ronda'; ronda: number; premio: number } | { paso: 'fin'; gano: boolean };
@@ -24,8 +25,14 @@ export function TorneoPantalla({ onClose }: { onClose: () => void }) {
   const [elegidos, setElegidos] = useState<string[]>(['jair']);
   const [fase, setFase] = useState<Fase>({ paso: 'menu' });
   const [ganado, setGanado] = useState(0);
-  // Los peleadores: los que la historia ya desbloqueó (Jair siempre; los demás, desde que pelearon en alguna partida).
-  const disponibles = HEROES_TORNEO.filter((k) => k === 'jair' || GALERIA_COMPLETA || vistos[FICHAS.heroes[k]?.sprite]);
+  // Las esencias de este torneo: se sortean al empezarlo (otro torneo, otras).
+  const [semilla, setSemilla] = useState(nuevaSemilla);
+  // Los peleadores: los que la historia ya desbloqueó (Jair siempre; los demás, desde que pelearon en alguna partida) y
+  // los jefes de la torre ya vencidos (decisión del autor, 2026-11-05).
+  const disponibles = [
+    ...HEROES_TORNEO.filter((k) => k === 'jair' || GALERIA_COMPLETA || vistos[FICHAS.heroes[k]?.sprite]),
+    ...JEFES_TORRE.filter((k) => GALERIA_COMPLETA || torneo.jefes?.[k]),
+  ];
   const abierta = (c: Copa) => GALERIA_COMPLETA || copaAbierta(c, visitadas, torneo.ganadas);
   const listos = elegidos.length === modalidad.peleadores;
 
@@ -35,7 +42,7 @@ export function TorneoPantalla({ onClose }: { onClose: () => void }) {
       <Batalla
         key={`${copa.id}-${fase.ronda}`}
         id="torneo"
-        datos={armarRonda(copa, fase.ronda, modalidad, elegidos, torneo.defensas)}
+        datos={armarRonda(copa, fase.ronda, modalidad, elegidos, torneo.defensas, semilla)}
         onGanar={() => {
           const entro = useStore.getState().premioTorneo(premioDe(copa, fase.ronda, modalidad));
           setGanado((g) => g + entro);
@@ -100,7 +107,6 @@ export function TorneoPantalla({ onClose }: { onClose: () => void }) {
                 <button
                   key={m.id}
                   className={modalidad.id === m.id ? 'active' : ''}
-                  disabled={m.peleadores > disponibles.length}
                   onClick={() => {
                     playSelect();
                     setModalidad(m);
@@ -114,22 +120,46 @@ export function TorneoPantalla({ onClose }: { onClose: () => void }) {
             </div>
             <h4>{t('torneo.equipo', { n: modalidad.peleadores })}</h4>
             <div className="torneo-opciones">
+              {/* Se puede repetir personaje (decisión del autor): tocar suma uno más al equipo. */}
               {disponibles.map((k) => {
-                const dentro = elegidos.includes(k);
+                const veces = elegidos.filter((x) => x === k).length;
                 return (
                   <button
                     key={k}
-                    className={dentro ? 'active' : ''}
+                    className={veces ? 'active' : ''}
+                    disabled={elegidos.length >= modalidad.peleadores}
                     onClick={() => {
                       playSelect();
-                      setElegidos((e) => (dentro ? e.filter((x) => x !== k) : e.length < modalidad.peleadores ? [...e, k] : e));
+                      setElegidos((e) => (e.length < modalidad.peleadores ? [...e, k] : e));
                     }}
                   >
-                    <b>{FICHAS.heroes[k].nombre}</b>
+                    <b>{fichaPeleador(k).nombre}</b>
+                    {veces > 1 && <small>×{veces}</small>}
                   </button>
                 );
               })}
             </div>
+            {elegidos.length > 0 && (
+              <>
+                <h4>{t('torneo.tu_equipo')}</h4>
+                <div className="torneo-opciones">
+                  {elegidos.map((k, i) => (
+                    <button
+                      key={`${k}-${i}`}
+                      className="active"
+                      onClick={() => {
+                        playSelect();
+                        setElegidos((e) => e.filter((_, j) => j !== i));
+                      }}
+                      aria-label={t('torneo.quitar', { nombre: fichaPeleador(k).nombre })}
+                    >
+                      <b>{fichaPeleador(k).nombre}</b>
+                      <small>✕</small>
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
             {copa && (
               <p className="muted">
                 {t('torneo.premios', { lista: copa.premios.map((_, i) => premioDe(copa, i, modalidad)).join(' · ') })}
@@ -141,6 +171,7 @@ export function TorneoPantalla({ onClose }: { onClose: () => void }) {
               onClick={() => {
                 playSelect();
                 setGanado(0);
+                setSemilla(nuevaSemilla());
                 setFase({ paso: 'pelea', ronda: 0 });
               }}
             >

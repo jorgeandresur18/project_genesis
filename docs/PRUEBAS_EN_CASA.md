@@ -183,3 +183,8 @@ primero. Las pruebas automáticas y el simulador ya lo usan (el equilibrio no se
 - [ ] **Una pelea con un enemigo más rápido** que alguno de los héroes (`?batalla=cap03_rey`: los caballeros empatan con Jair): que el orden se entienda y que esquivar funcione aunque el enemigo sea más rápido.
 - [ ] **Que nada se trabe:** dormir o paralizar a un héroe antes de que actúe (pierde la acción y su objeto vuelve a la mochila).
 - [ ] **La barra del orden** (arriba a la derecha): que se entienda quién va a actuar, que el ⚡ marque al que esquiva o usa un objeto, y que no tape nada en el celular.
+
+## 13. La esencia y el torneo nuevo (nuevo, 5 de noviembre, noche)
+
+- [ ] **La esencia:** no se ve en el juego. Para mirarla, abrir la consola del navegador (F12) al empezar una pelea: sale «[esencias]» con la de cada héroe. Que en otra partida salgan otras.
+- [ ] **El torneo** (Extras › Torneo Genesis, con `?galeria=todo` para tener todo abierto): elegir tres veces el mismo personaje, o un jefe de la torre (el Sargento, la reina…), y pelear. Que sus ataques y su especial funcionen.

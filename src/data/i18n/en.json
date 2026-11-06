@@ -442,6 +442,8 @@
   "torneo.ganada": "Won ×{n}",
   "torneo.modalidad": "Format",
   "torneo.peleadores": "{n} fighter(s)",
+  "torneo.tu_equipo": "Your team (tap to remove)",
+  "torneo.quitar": "Remove {nombre}",
   "torneo.equipo": "Your team (pick {n})",
   "torneo.premios": "Prize per round: {lista} tokens",
   "torneo.empezar": "Start",

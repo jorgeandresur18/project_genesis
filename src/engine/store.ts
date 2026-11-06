@@ -251,13 +251,22 @@ interface Store {
    * El Torneo Genesis (fuera de las partidas): cuántas veces se ganó cada copa y cuántas defensas del título lleva
    * Nikki (cada vez que se le gana, la campeona sube). Ver src/engine/torneo.ts.
    */
-  torneo: { ganadas: Record<string, number>; defensas: number; /** Bombas ganadas que todavía no se le dieron a una partida. */ bombas?: number };
+  torneo: {
+    ganadas: Record<string, number>;
+    defensas: number;
+    /** Bombas ganadas que todavía no se le dieron a una partida. */
+    bombas?: number;
+    /** Los jefes de la torre ya vencidos (en cualquier partida): se pueden elegir en el torneo. */
+    jefes?: Record<string, true>;
+  };
   /** Le da a una partida guardada una bomba ganada en el torneo. */
   darBombaAPartida: (slot: number) => void;
   /** Un premio del torneo a PayFoe (lo que pase del tope se pierde). Devuelve lo que entró. */
   premioTorneo: (n: number) => number;
   /** Se ganó una copa (la final contra Nikki): suma la copa y una defensa del título. */
   ganarCopa: (id: string) => void;
+  /** Un jefe de la torre vencido: queda para elegir en el torneo. */
+  vencerJefe: (clave: string) => void;
   /** Pasa tokens de la partida en curso a PayFoe (nunca al revés). Devuelve cuántos pasaron. */
   transferirAPayfoe: (n: number) => number;
   venderObjeto: (objeto: string, precio: number) => boolean;
@@ -657,6 +666,10 @@ export const useStore = create<Store>()(
           const r = acreditar(get().payfoe, n);
           set({ payfoe: r.payfoe });
           return n - r.perdido;
+        },
+        vencerJefe: (clave) => {
+          const t = get().torneo;
+          if (!t.jefes?.[clave]) set({ torneo: { ...t, jefes: { ...t.jefes, [clave]: true } } });
         },
         ganarCopa: (id) => {
           const t = get().torneo;

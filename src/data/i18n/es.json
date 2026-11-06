@@ -442,6 +442,8 @@
   "torneo.ganada": "Ganada ×{n}",
   "torneo.modalidad": "Modalidad",
   "torneo.peleadores": "{n} peleador(es)",
+  "torneo.tu_equipo": "Tu equipo (toca para quitar)",
+  "torneo.quitar": "Quitar a {nombre}",
   "torneo.equipo": "Tu equipo (elige {n})",
   "torneo.premios": "Premios por ronda: {lista} tokens",
   "torneo.empezar": "Empezar",

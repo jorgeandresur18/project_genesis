@@ -81,3 +81,25 @@ describe('balance del torneo (Copa Bronce, jugador atento)', () => {
     expect(final).toBeLessThan(0.97);
   }, 300000);
 });
+
+describe('el torneo: jefes de la torre y personajes repetidos (decisiones del autor, 2026-11-05)', () => {
+  it('los 8 jefes de la torre son peleadores con sus ataques (sin lo que solo hace la máquina) y su especial', async () => {
+    const { JEFES_TORRE, fichaPeleador } = await import('../src/engine/torneo');
+    expect(JEFES_TORRE).toHaveLength(8);
+    for (const k of JEFES_TORRE) {
+      const f = fichaPeleador(k);
+      expect(f.ataques.length, k).toBeGreaterThan(0);
+      expect(f.ataques.every((a) => !('balas' in a) && !('peso' in a)), k).toBe(true);
+      expect(f.especial, k).toBeDefined();
+      expect(f.hablar.length, k).toBeGreaterThan(0);
+    }
+  });
+  it('una ronda con el mismo personaje tres veces y con un jefe: cada uno con su identificador y con esencia', async () => {
+    const { TORNEO, armarRonda } = await import('../src/engine/torneo');
+    const { estadoInicial } = await import('../src/engine/turnos');
+    const d = armarRonda(TORNEO.copas[0], 0, TORNEO.modalidades[2], ['jair', 'jair', 'sargento'], 0, 'torneo-1');
+    const s = estadoInicial(d, undefined, d.semilla_esencia);
+    expect(s.heroes.map((h) => h.id)).toEqual(['jair', 'jair#2', 'sargento']);
+    expect(s.heroes.every((h) => h.esencia)).toBe(true);
+  });
+});

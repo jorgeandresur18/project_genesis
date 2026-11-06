@@ -44,10 +44,45 @@ export interface DatosTorneo {
   nikki: { nivel_extra: number; por_defensa: number; huye_a: number };
   mochila: Record<string, number>;
   dialogos: Record<string, Linea[]>;
+  /** Lo que dicen los jefes de la torre al «Hablar» cuando los usa el jugador. */
+  hablar_jefes: Record<string, string[] | string>;
 }
 
 export const TORNEO = datos as unknown as DatosTorneo;
 export const HEROES_TORNEO = ['jair', 'cami', 'rikka'];
+/**
+ * Los jefes de los pisos de la torre del Capítulo 3: se pueden elegir en el torneo al vencerlos en la torre (decisión
+ * del autor, 2026-11-05; los enemigos comunes, no).
+ */
+export const JEFES_TORRE = ['reina_bichos', 'jefe_bodega', 'sargento', 'chef', 'maestro_herrero', 'alcaide', 'intendente', 'comandante'];
+
+/** Un jefe de la torre como peleador del jugador: sus números, sus ataques (sin lo que solo sabe hacer la máquina) y su especial. */
+function jefeComoPeleador(k: string): Omit<Heroe, 'nivel'> {
+  const e = FICHAS.enemigos[k];
+  // Del ataque se quedan el golpe, a quién va y su efecto (confundir, paralizar); las ráfagas de balas son del dibujo de la máquina.
+  const ataques = e.ataques.map((a) => {
+    const { balas: _b, rafagas: _r, peso: _p, ...resto } = a as typeof a & { balas?: unknown; rafagas?: unknown };
+    return resto;
+  });
+  const esp = e.especial ? { ...e.especial } : undefined;
+  const hablar = TORNEO.hablar_jefes[k];
+  return {
+    nombre: e.nombre,
+    sprite: e.sprite,
+    seguido: true,
+    base: e.base,
+    crece: e.crece,
+    ataques,
+    especial: esp,
+    distancia: !!(e as Enemigo & { distancia?: unknown }).distancia,
+    escala: e.escala,
+    sonido: e.sonido,
+    hablar: Array.isArray(hablar) ? hablar : ['…'],
+  };
+}
+
+/** La ficha de cualquier peleador del torneo: un héroe o un jefe de la torre. */
+export const fichaPeleador = (k: string): Omit<Heroe, 'nivel'> => (FICHAS.heroes[k] ?? jefeComoPeleador(k)) as Omit<Heroe, 'nivel'>;
 
 /** Si una copa está abierta: por su escena de desbloqueo (visitada en alguna partida) o por haber ganado la anterior. */
 export function copaAbierta(c: Copa, visitadas: Record<string, unknown>, ganadas: Record<string, number>): boolean {
@@ -74,12 +109,13 @@ const nikkiCampeona = (): Enemigo => {
  * Una ronda del torneo como una pelea más: los héroes elegidos y los rivales, todos al nivel de la copa (Nikki, más:
  * es la campeona y sube con cada defensa del título).
  */
-export function armarRonda(c: Copa, ronda: number, m: Modalidad, heroes: string[], defensas = 0): DatosBatalla {
+export function armarRonda(c: Copa, ronda: number, m: Modalidad, heroes: string[], defensas = 0, semilla?: string): DatosBatalla {
   const r = TORNEO.rondas[ronda];
   const final = r.jefe === 'nikki';
   const base = final ? BATALLAS.nikki : BATALLAS.bastion;
   const personajes: Record<string, Heroe> = {};
-  for (const k of heroes) personajes[k] = { ...(FICHAS.heroes[k] as Heroe), nivel: c.nivel };
+  // Se puede repetir personaje (decisión del autor): la ficha es una sola por clave.
+  for (const k of heroes) personajes[k] = { ...(fichaPeleador(k) as Heroe), nivel: c.nivel };
   const enemigos: Record<string, Enemigo> = {
     soldado: FICHAS.enemigos.soldado,
     soldado_veterano: soldadoVeterano(),
@@ -97,6 +133,8 @@ export function armarRonda(c: Copa, ronda: number, m: Modalidad, heroes: string[
   return {
     ...base,
     titulo: `${c.nombre} · ${r.nombre}`,
+    // Las esencias: las de este torneo (otro torneo, otras).
+    semilla_esencia: semilla,
     heroes,
     personajes,
     enemigos,
