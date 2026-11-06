@@ -20,7 +20,7 @@ ATQ × poder ÷ 10 − DEF ÷ 2, y la velocidad decide el orden del turno.
 
 | Personaje | Nv 5 | Nv 10 | Nv 15 | Nv 20 | Sube por nivel | Donde aparece (nivel, pelea): sus números |
 |---|---|---|---|---|---|---|
-| **Jordan** *(propuesta)* | 50 / 12 / 4 / 13 | 78 / 18 / 6 / 16 | 105 / 24 / 8 / 19 | 133 / 30 / 10 / 22 | 5.5 / 1.2 / 0.4 / 0.6 | Capítulo 4 (por decidir) |
+| **Jordy** *(propuesta)* | 50 / 12 / 4 / 13 | 78 / 18 / 6 / 16 | 105 / 24 / 8 / 19 | 133 / 30 / 10 / 22 | 5.5 / 1.2 / 0.4 / 0.6 | Capítulo 4 (por decidir) |
 | **Billy** *(propuesta)* | 78 / 13 / 10 / 5 | 118 / 19 / 14 / 6 | 158 / 26 / 19 / 7 | 198 / 32 / 23 / 8 | 8 / 1.25 / 0.9 / 0.2 | Capítulo 4 (por decidir) |
 | **Maggi** *(propuesta)* | 44 / 5 / 4 / 16 | 67 / 8 / 6 / 19 | 89 / 10 / 8 / 23 | 112 / 13 / 10 / 26 | 4.5 / 0.5 / 0.4 / 0.7 | Capítulo 4 (por decidir) |
 

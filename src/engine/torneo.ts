@@ -49,12 +49,12 @@ export interface DatosTorneo {
 }
 
 export const TORNEO = datos as unknown as DatosTorneo;
-export const HEROES_TORNEO = ['jair', 'cami', 'rikka', 'jordan', 'billy', 'maggi', 'influencer', 'otaku'];
+export const HEROES_TORNEO = ['jair', 'cami', 'rikka', 'jordy', 'billy', 'maggi', 'influencer', 'otaku'];
 /**
- * Los que todavía no salen en la historia (Jordan y Billy son del Capítulo 4; Maggi es exclusiva del torneo): se
- * pueden elegir desde ya (pedido del autor, 2026-11-05). TODO(canon): cuándo se desbloquean Jordan y Billy.
+ * Los que todavía no salen en la historia (Jordy y Billy son del Capítulo 4; Maggi es exclusiva del torneo): se
+ * pueden elegir desde ya (pedido del autor, 2026-11-05). TODO(canon): cuándo se desbloquean Jordy y Billy.
  */
-export const LIBRES_TORNEO = ['jordan', 'billy', 'maggi', 'influencer', 'otaku'];
+export const LIBRES_TORNEO = ['jordy', 'billy', 'maggi', 'influencer', 'otaku'];
 /** Nikki también pelea en el torneo, desde el inicio (pedido del autor, 2026-11-05). */
 export const NIKKI_PELEADORA = 'nikki';
 /**

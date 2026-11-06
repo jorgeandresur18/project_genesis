@@ -664,7 +664,7 @@ Los números (poder y golpes) son propuesta de Claude, sin balancear.
 ## 20. Los amigos de Jair en el Capítulo 4 (propuesta de Claude, por aprobar; 2026-11-05)
 
 Lo que contó el autor está en `docs/CANON.md` (Capítulo 4, punto 5). Esto es la propuesta de cómo pelean: números y
-ataques de borrador. **Dónde pelean** (decidido por el autor el 2026-11-05): **Jordan**, como rival en peleas de
+ataques de borrador. **Dónde pelean** (decidido por el autor el 2026-11-05): **Jordy**, como rival en peleas de
 entrenamiento contra Jair; **Billy**, del lado de Jair (héroe), los dos solos contra una horda de influencers
 aprovechados en su restaurante; **Maggi**, solo en el Torneo Genesis (exclusiva).
 Comparados con Jair (`base` PS 30, ATQ 5, DEF 3, VEL 8; sube por nivel PS 6, ATQ 1, DEF 0,6, VEL 0,5).
@@ -672,13 +672,13 @@ Comparados con Jair (`base` PS 30, ATQ 5, DEF 3, VEL 8; sube por nivel PS 6, ATQ
 | | PS | ATQ | DEF | VEL | Cómo se siente |
 |---|---|---|---|---|---|
 | **Jair** (para comparar) | 30 (+6) | 5 (+1) | 3 (+0,6) | 8 (+0,5) | — |
-| **Jordan** | 28 (+5,5) | 7 (+1,2) | 2 (+0,4) | 11 (+0,6) | Pega más y antes que Jair, pero aguanta menos. |
+| **Jordy** | 28 (+5,5) | 7 (+1,2) | 2 (+0,4) | 11 (+0,6) | Pega más y antes que Jair, pero aguanta menos. |
 | **Billy** | 46 (+8) | 8 (+1,25) | 6 (+0,9) | 4 (+0,2) | El tanque: aguanta mucho y pega fuerte con su cuchillo-espada gigante, pero casi siempre actúa último. |
 | **Maggi** | 26 (+4,5) | 3 (+0,5) | 2 (+0,4) | 13 (+0,7) | Muy veloz, casi no golpea y es frágil: su fuerza son los estados (dormir y confundir). |
 
 **Ataques (nombres y efectos de borrador):**
 
-- **Jordan** (parecidos a los de Jair; su puño paraliza):
+- **Jordy** (parecidos a los de Jair; su puño paraliza):
   - *Puñetazo eléctrico:* poder 14, como el de Jair, y a veces (25 %) **paraliza**.
   - *Combo de calle:* dos golpes rápidos de poder 8.
   - *Ctrl+Z de gimnasio:* se cura un poco (como el Ctrl+Z de Jair).
@@ -698,9 +698,9 @@ Comparados con Jair (`base` PS 30, ATQ 5, DEF 3, VEL 8; sube por nivel PS 6, ATQ
 **Hecho en el motor (2026-11-05):** `deja` en un ataque o un especial: si pega, con su probabilidad deja un estado
 (paralizado, dormido, confundido o quemado; con una lista, uno al azar). `dejarEstado` en `engine/turnos.ts`.
 
-**En el torneo (pedido del autor, 2026-11-05):** Jordan, Billy y Maggi ya pelean en el Torneo Genesis con estas fichas
-(borrador, `heroes` de `personajes.json`), elegibles desde ya (`TODO(canon)`: cuándo se desbloquean Jordan y Billy). Sin
-hoja propia: usan la de otro con un filtro de color (Jordan la de Jair, Billy la del soldado, Maggi la de Rikka). Nikki
+**En el torneo (pedido del autor, 2026-11-05):** Jordy, Billy y Maggi ya pelean en el Torneo Genesis con estas fichas
+(borrador, `heroes` de `personajes.json`), elegibles desde ya (`TODO(canon)`: cuándo se desbloquean Jordy y Billy). Sin
+hoja propia: usan la de otro con un filtro de color (Jordy la de Jair, Billy la del soldado, Maggi la de Rikka). Nikki
 también es peleadora, **desde el inicio** (pedido del autor). Como peleadora tiene **5 ataques**; la Nikki campeona del
 torneo, 6 (`TODO`: hoy tiene 4: cachetada, revés, beso y la ráfaga; el quinto queda para mucho más adelante, anotado en el
 cronograma, «Ideas anotadas»).
@@ -713,10 +713,10 @@ también peleadores del torneo, desde ya (borrador; sprites prestados: la hoja d
 - **Otaku**: Foto sin permiso (a veces paraliza), Explicación del lore (a veces duerme), Abrazo de almohada (se
   protege) y el especial *Técnica prohibida del episodio 400* (a veces confunde).
 - Simulación en simple (final, atento): los dos a la par de Jair (~32–73 %). **Simulación en simple (final, atento):**
-Billy 100 % (demasiado: por balancear), Jordan 66–77 %, Maggi y Nikki ~0 % (el simulador no usa dormir ni confundir:
+Billy 100 % (demasiado: por balancear), Jordy 66–77 %, Maggi y Nikki ~0 % (el simulador no usa dormir ni confundir:
 las subestima).
 
-**Arte que haría falta** (para la fase de arte): las hojas de pelea de Jordan, Billy y Maggi (reposo, ataque, daño,
+**Arte que haría falta** (para la fase de arte): las hojas de pelea de Jordy, Billy y Maggi (reposo, ataque, daño,
 especial, derrotado) y sus retratos para la caja de diálogo; mientras tanto, placeholders (como el Rey con el dibujo
 del Capitán).
 

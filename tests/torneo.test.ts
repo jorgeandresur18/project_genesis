@@ -107,7 +107,7 @@ describe('el torneo: jefes de la torre y personajes repetidos (decisiones del au
 });
 
 describe('los nuevos peleadores del torneo (pedido del autor, 2026-11-05)', () => {
-  it('Jordan, Billy y Maggi tienen ficha, ataques y especial, y Nikki pelea como peleadora', async () => {
+  it('Jordy, Billy y Maggi tienen ficha, ataques y especial, y Nikki pelea como peleadora', async () => {
     const { HEROES_TORNEO, LIBRES_TORNEO, NIKKI_PELEADORA, fichaPeleador } = await import('../src/engine/torneo');
     for (const k of LIBRES_TORNEO) {
       expect(HEROES_TORNEO, k).toContain(k);
@@ -128,10 +128,10 @@ describe('los nuevos peleadores del torneo (pedido del autor, 2026-11-05)', () =
   });
 });
 
-describe('golpes que dejan un estado (`deja`: el puño de Jordan, la hipnosis de Maggi)', () => {
+describe('golpes que dejan un estado (`deja`: el puño de Jordy, la hipnosis de Maggi)', () => {
   it('con la probabilidad, deja el estado; sin ella, no; a uno caído o que ya lo tiene, tampoco', async () => {
     const { dejarEstado, estadoInicial } = await import('../src/engine/turnos');
-    const d = armarRonda(TORNEO.copas[0], 0, TORNEO.modalidades[0], ['jordan']);
+    const d = armarRonda(TORNEO.copas[0], 0, TORNEO.modalidades[0], ['jordy']);
     const s = estadoInicial(d);
     const x = s.heroes[0];
     expect(dejarEstado(s, x, { estado: 'dormido', prob: 0.5 }, () => 0.9)).toBeNull();

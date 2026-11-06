@@ -1,5 +1,5 @@
 {
-  "nota": "Boringram en el Capítulo 2 (ver «nota» en src/data/boringram.json). El reloj del celular casi no avanza: en el mundo real pasaron minutos. Jordan (amigo de Jair; aparece en el Capítulo 4) escribe en minúsculas y sin tildes, como Nikki. El celular sigue ligado al mundo real, que corre 45 veces más lento: 1 día de juego son 32 minutos reales (3:12 en las termas, 5:11 en la taberna, 6:34 al llegar al Verano, cerca de las 8:48 en la captura). Los «hace» se cuentan desde el final del capítulo. «estado» de un chat con {hace}: cuándo estuvo activa la persona («activo», o si no, su último mensaje).",
+  "nota": "Boringram en el Capítulo 2 (ver «nota» en src/data/boringram.json). El reloj del celular casi no avanza: en el mundo real pasaron minutos. Jordy (amigo de Jair; aparece en el Capítulo 4) escribe en minúsculas y sin tildes, como Nikki. El celular sigue ligado al mundo real, que corre 45 veces más lento: 1 día de juego son 32 minutos reales (3:12 en las termas, 5:11 en la taberna, 6:34 al llegar al Verano, cerca de las 8:48 en la captura). Los «hace» se cuentan desde el final del capítulo. «estado» de un chat con {hace}: cuándo estuvo activa la persona («activo», o si no, su último mensaje).",
   "estado": [
     {
       "desbloqueo": "cap02_001",
@@ -74,8 +74,8 @@
   ],
   "publicaciones": [
     {
-      "id": "jordan_amigo",
-      "autor": "jordan",
+      "id": "jordy_amigo",
+      "autor": "jordy",
       "tipo": "texto",
       "texto": "dato: si tu amigo no te invita a la playa no es tu amigo. es un contacto",
       "likes": 9,
@@ -84,8 +84,8 @@
       "cuando": "0 07:46"
     },
     {
-      "id": "jordan_ligan",
-      "autor": "jordan",
+      "id": "jordy_ligan",
+      "autor": "jordy",
       "tipo": "texto",
       "texto": "el que dijo que los ingenieros no ligan nunca vio el boringram de mi amigo 🙃",
       "likes": 14,
@@ -104,8 +104,8 @@
       "cuando": "0 06:50"
     },
     {
-      "id": "jordan_silla",
-      "autor": "jordan",
+      "id": "jordy_silla",
+      "autor": "jordy",
       "tipo": "texto",
       "texto": "hay gente que desaparece una semana y vuelve con fotos en la playa con dos modelos. yo aqui en la misma silla de siempre. normal. todo normal",
       "likes": 11,
@@ -122,7 +122,7 @@
       "likes": 0,
       "comentarios": [
         {
-          "usuario": "jordan",
+          "usuario": "jordy",
           "texto": "vaya melones los de la rubia 🍈🍈 seguro que no es IA?"
         }
       ],
@@ -172,7 +172,7 @@
           "texto": "¿Jair? Son las 5 a. m. ¿Estuviste soñando, no puedes dormir o estás ebrio? Responde con una sola palabra."
         },
         {
-          "usuario": "jordan",
+          "usuario": "jordy",
           "texto": "sacerdotisas?? en que bar estas y por que no me invitaste"
         }
       ],
@@ -251,8 +251,8 @@
   ],
   "chats": [
     {
-      "id": "jordan",
-      "perfil": "jordan",
+      "id": "jordy",
+      "perfil": "jordy",
       "estado": "Activo {hace}",
       "mensajes": [
         {

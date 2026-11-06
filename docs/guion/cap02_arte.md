@@ -160,12 +160,12 @@ Sugeridas (no están en el guion todavía): el pulso de Cami contra el leñador,
 
 | Imagen | Tipo | Descripción |
 | --- | --- | --- |
-| `boringram_playa` | Foto del feed | Selfie de Jair en la playa, en traje de baño y quemado por el sol, con Cami y Rikka al fondo (la del comentario de Jordan sobre «la rubia») |
+| `boringram_playa` | Foto del feed | Selfie de Jair en la playa, en traje de baño y quemado por el sol, con Cami y Rikka al fondo (la del comentario de Jordy sobre «la rubia») |
 | `boringram_desayuno_resaca` | Foto del feed | El desayuno de la resaca, tres platos hondos con pan |
 | `historia_jair_taberna` | Historia (vertical) | Jair ebrio levantando la jarra, con Cami y Rikka detrás, borroso y mal encuadrado |
 | `historia_jair_cocina` | Historia (vertical) | Jair cocinando con resaca, selfie |
 | `historia_jair_termas` | Historia (vertical) | Jair posando en el paisaje de las termas |
-| `jordan_perfil` | Foto de perfil | Jordan, el amigo de Jair (Capítulo 4). Hoy se ve su inicial |
+| `jordy_perfil` | Foto de perfil | Jordy, el amigo de Jair (Capítulo 4). Hoy se ve su inicial |
 
 Sugeridas, para que la playa y la taberna tengan más fotos (habría que agregarlas a Boringram):
 

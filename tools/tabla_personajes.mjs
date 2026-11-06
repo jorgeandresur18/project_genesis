@@ -10,7 +10,7 @@ const NIVELES = [5, 10, 15, 20];
 
 /** Propuestos (docs/BIBLIA_RPG.md, sección 20): por aprobar, todavía no están en la ficha. */
 const PROPUESTAS = {
-  jordan: { nombre: 'Jordan', base: { ps: 28, atq: 7, def: 2, vel: 11 }, crece: { ps: 5.5, atq: 1.2, def: 0.4, vel: 0.6 } },
+  jordy: { nombre: 'Jordy', base: { ps: 28, atq: 7, def: 2, vel: 11 }, crece: { ps: 5.5, atq: 1.2, def: 0.4, vel: 0.6 } },
   billy: { nombre: 'Billy', base: { ps: 46, atq: 8, def: 6, vel: 4 }, crece: { ps: 8, atq: 1.25, def: 0.9, vel: 0.2 } },
   maggi: { nombre: 'Maggi', base: { ps: 26, atq: 3, def: 2, vel: 13 }, crece: { ps: 4.5, atq: 0.5, def: 0.4, vel: 0.7 } },
 };

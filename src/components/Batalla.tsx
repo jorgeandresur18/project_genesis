@@ -1584,7 +1584,7 @@ function Pelea({
       forzar();
       await decir(fmt(t('batalla.envenena'), { quien: e.nombre }));
     }
-    // El estado que a veces deja el golpe (el puño de Jordan paraliza, la hipnosis de Maggi duerme).
+    // El estado que a veces deja el golpe (el puño de Jordy paraliza, la hipnosis de Maggi duerme).
     if (!bloqueado) await avisarEstado(e, dejarEstado(b.current, e, ataque.deja));
     if (!vivo(e)) await alCaer(e);
   };

@@ -13,7 +13,7 @@ export interface Stats {
 /** Lo que hace un cebo con efecto al golpearlo. */
 export type EfectoCebo = 'paraliza' | 'veneno' | 'confunde' | 'quema' | 'congela' | 'duerme' | 'explota';
 /**
- * Un golpe que además puede dejar un estado (docs/BIBLIA_RPG.md: el puño de Jordan paraliza, la hipnosis de Maggi
+ * Un golpe que además puede dejar un estado (docs/BIBLIA_RPG.md: el puño de Jordy paraliza, la hipnosis de Maggi
  * duerme): con probabilidad `prob`, al blanco que sigue de pie. Con varios estados, sale uno al azar.
  */
 export interface Deja {
@@ -156,7 +156,7 @@ export interface Heroe {
   hablar: string[];
   /** Lo que dice con «Hablar» si está confundido (incoherente). Sin esto, se le revuelven las palabras. */
   hablar_confundido?: string[];
-  /** Un filtro sobre su sprite (un placeholder hecho con la hoja de otro, mientras no tenga la suya: Jordan, Billy, Maggi). */
+  /** Un filtro sobre su sprite (un placeholder hecho con la hoja de otro, mientras no tenga la suya: Jordy, Billy, Maggi). */
   filtro?: string;
   /**
    * Seguidores (el influencer; pedido del autor, 2026-11-05): cada vez que se luce (un crítico o derribar a alguien)

@@ -89,7 +89,7 @@ La misma proyección, para mirarla en el navegador: `docs/proyeccion.html`.
 - [ ] **Decidir y hacer las peleas del Capítulo 2:** la muralla (Rikka sola), el campamento, el molino con el cassette y Cami acorazada. **Plantillas de relleno ya enganchadas** (2026-11-03; ver `BIBLIA_RPG.md`, sección 12): falta la historia de cada una. El plan simplificado de la cuenta regresiva espera la confirmación del autor.
 - [ ] *Pesada:* sprites del RPG de esas peleas, en tanda.
 - [ ] **Pulir los diálogos del Capítulo 2.**
-- [ ] *Media:* Boringram del Capítulo 2 completo (Jordan, Lady, las fotos del viaje).
+- [ ] *Media:* Boringram del Capítulo 2 completo (Jordy, Lady, las fotos del viaje).
 
 - [x] **Ataques intercambiables** (hecho el 2026-11-03; diseño en `BIBLIA_RPG.md`, sección 18): 3 ataques y 2 especiales equipados, el resto en la mochila; los originales vinculados a su personaje; los sueltos se compran, se venden y se ganan en el torneo. Falta probarlos en el navegador y los ataques del torneo.
 - [x] **Partir `Boringram.tsx` y `App.tsx`** (2026-11-04, segunda computadora): solo se movió código.
@@ -110,8 +110,8 @@ La misma proyección, para mirarla en el navegador: `docs/proyeccion.html`.
 - [ ] **Escribir el guion del Capítulo 4** desde el borrador del autor (escenas 1 a 9: del despertar a «conseguí trabajo en el centro»).
 - [ ] **Pelea RPG con los otakus en la convención** (Cami). *Pesada:* sprites de los otakus. Es la primera pelea en el mundo real después del bar: ¿«vida real» como la de Nikki?
 - [ ] *Liviana:* fondos del mundo real del Capítulo 4 (departamento de día, la convención, las calles donde buscan trabajo).
-- [ ] *Liviana:* sprites nuevos: Lady (la compañera de tesis), Jordan, Billy, Maggi, amigos de Nikki, Cami con uniforme de Dulce Frío. Hojas de pelea de Jordan, Billy y Maggi (propuesta en `BIBLIA_RPG.md`, sección 20).
-- [ ] *Media:* Boringram del Capítulo 4 (las fotos de la convención, lo que ven Lady, Jordan y Nikki).
+- [ ] *Liviana:* sprites nuevos: Lady (la compañera de tesis), Jordy, Billy, Maggi, amigos de Nikki, Cami con uniforme de Dulce Frío. Hojas de pelea de Jordy, Billy y Maggi (propuesta en `BIBLIA_RPG.md`, sección 20).
+- [ ] *Media:* Boringram del Capítulo 4 (las fotos de la convención, lo que ven Lady, Jordy y Nikki).
 - [ ] **Pendientes del RPG que el Capítulo 4 pide:** la tienda desde el título y equiparse de verdad, si la historia lo necesita.
 
 ## Después (desde el 15 de diciembre)
@@ -135,7 +135,7 @@ anota en `docs/PRUEBAS_EN_CASA.md` para la noche.
    final de la Copa Leyenda el 99 %). Propuesta de Claude: que peleen con números de héroe (sus ataques y su especial,
    con la vida y la defensa de un héroe de su estilo). ¿Sí?
 3. **Billy, demasiado fuerte** (100 % en la final individual): ¿se le baja junto con lo anterior?
-4. **Cuándo se desbloquean Jordan y Billy** en el torneo (hoy, desde ya; `TODO(canon)`).
+4. **Cuándo se desbloquean Jordy y Billy** en el torneo (hoy, desde ya; `TODO(canon)`).
 5. **Peleadores nuevos que propuso Claude:** Nail (roba potenciadores), Lady (copia el último ataque), Mike y Nora
    (dúo), Tzai (controla a un rival un turno) y GENESIS (cambia una regla; toca el canon). ¿Cuáles?
 6. **Objetos 🔧** de `OBJETOS_PROPUESTA.txt`: cuáles se hacen.
@@ -192,7 +192,7 @@ Se responden cuando toque su semana; mientras, no se inventan.
 - Cómo es la pelea final del Capítulo 6 (la del Capítulo 3 ya tiene su forma: THE KING, sin la versión gigante, que queda para el Capítulo 6).
 
 **Capítulo 4**
-- Los demás amigos nuevos (Lady y Jordan ya están).
+- Los demás amigos nuevos (Lady y Jordy ya están).
 - Cuál es el adelanto en la primera convención.
 
 **Capítulo 5**
