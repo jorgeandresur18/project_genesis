@@ -3772,8 +3772,8 @@ button.cassette:hover .cassette-imagen { transform: translateY(-2px) rotate(-3de
 /* El «¡¡KYAAAH!!» de la novela: arriba al centro de la pantalla, encima del vapor y fuera del zoom del grito. */
 .stage-grito-texto.emblema-reaccion { position: absolute; top: 6%; left: 0; right: 0; margin-inline: auto; width: max-content; translate: none; z-index: 8; max-width: 90%; }
 
-/* Los sprites secretos de Rikka en la galería llenan la caja de borde a borde (pedido del autor, 2026-11-06): el pelo toca
-   el borde de arriba y el corte de las piernas, el de abajo, sin espacios. El lienzo deja un 7,94 % vacío arriba (el
+/* Los sprites secretos de Rikka en la galería, enteros y grandes (pedido del autor, 2026-11-06): el corte de las piernas
+   justo en el borde de abajo (sin espacio) y un poco de margen arriba. El lienzo deja un 7,94 % vacío arriba (el
    menor de los sprites secretos, medido con su alfa) y nada abajo; el escenario empieza 1rem por debajo del borde y
    llega hasta el de abajo. La imagen y sus capas (emblemas, manos, globo) usan la misma caja, así quedan alineadas.
    El vapor no cambia. */
@@ -3781,7 +3781,9 @@ button.cassette:hover .cassette-imagen { transform: translateY(-2px) rotate(-3de
   position: absolute;
   inset: auto 0;
   width: 100%;
-  height: calc((100% + 1rem) / 0.9206);
-  top: calc(-1rem - (100% + 1rem) * 0.0794 / 0.9206);
+  /* Abajo, el corte de las piernas justo en el borde; arriba, un margen del 5 % de la caja (que los palillos no toquen). */
+  height: calc((100% + 1rem) / 0.9206 * 0.95);
+  top: auto;
+  bottom: 0;
   flex: none;
 }
