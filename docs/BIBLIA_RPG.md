@@ -778,6 +778,22 @@ la probabilidad de ganar a lo sumo unos 3 a 5 puntos). En `npm run dev` se puede
   `src/data/rpg/personajes.json`: «Copia de fan», «Barra luminosa», «Canto de estadio» (a todos, para las hordas) y el
   especial «Fancam». Textos y números: borrador de Claude.
 
+## 23. Objetos libres (decidido por el autor el 2026-11-06; por construir)
+
+En la pelea, **cualquier objeto se puede usar en cualquier personaje**, aliado o rival, sin avisos ni confirmaciones:
+curar al enemigo, darle un pastelillo herbal, subirle el ataque con una Furia Roja. El objeto hace **siempre lo mismo**,
+sea quien sea el que lo recibe (el agua cura, el pastelillo confunde, el veneno envenena): si te equivocas o te pasas de
+listo, la pelea te lo cobra sola (pedido del autor: más libre).
+
+- **Las protecciones del equipo valen igual** cuando el estado viene de un objeto, lo use quien lo use: la **flor de
+  pureza** impide la confusión (el pastelillo herbal o las pastillas felices no le hacen nada); las **prendas de
+  sacerdotisa**, el veneno; y así con cada protección (no pasa nada y se gasta el objeto).
+- Lo que el motor cuida solo (no le quita libertad al jugador): la experiencia cuenta una sola vez por rival aunque se
+  lo reviva, y el jefe se retira cuando le toca aunque lo hayan curado antes.
+- Extra opcional, para después: líneas propias para las combinaciones más graciosas o con historia (el agua a Nikki en
+  el bar).
+- Por decidir al construirlo: si en el torneo el rival también puede usar objetos en los peleadores del jugador.
+
 ## 16. Pendientes e ideas
 
 | Tema | Estado |
