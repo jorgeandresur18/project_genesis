@@ -682,7 +682,9 @@ hacen daño) y un ataque que **duerme** a un rival (hoy dormir solo sale de los 
 especial, derrotado) y sus retratos para la caja de diálogo; mientras tanto, placeholders (como el Rey con el dibujo
 del Capitán).
 
-## 21. La esencia (idea del autor, diseño aprobado el 2026-11-05; por construir)
+## 21. La esencia (idea del autor, diseño aprobado el 2026-11-05; **hecha** el mismo día)
+
+**Hecho:** `src/engine/esencia.ts` (el sorteo con semilla), los efectos en `engine/batalla.ts` y `engine/turnos.ts` (temple: el estado dura un turno menos, a veces). La semilla: en la historia, `partida_id`; en el torneo, la del torneo; en una pelea suelta de prueba, una nueva. El simulador la usa (medido: mueve la probabilidad de ganar entre 0 y 4 puntos). En `npm run dev`, las esencias de los héroes salen en la consola del navegador.
 
 Un rasgo **oculto** de cada personaje de las peleas: un **pequeño plus** que se suma a su base. **Nunca se muestra** en
 el juego (ni en Equipo ni en las fichas); es un cálculo interno, por probabilidad.

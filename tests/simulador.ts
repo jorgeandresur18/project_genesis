@@ -59,8 +59,9 @@ import {
 const GOLPES_CANON = golpesDelCanon(capitan.animations.especial.seq as number[], capitan.rayo as unknown as Record<string, number[]>);
 
 /** Una pelea entera. Devuelve el estado final y si ganó. */
-function pelea(D: DatosBatalla, listo: boolean) {
-  const s = estadoInicial(D);
+function pelea(D: DatosBatalla, listo: boolean, esencias: boolean) {
+  // Con esencias, como en el juego: cada pelea simulada es una partida distinta (otra semilla).
+  const s = estadoInicial(D, undefined, esencias ? `sim${Math.random()}` : undefined);
   const hs = s.heroes;
   /** Un golpe de un enemigo: al que eligió esquivar, los especiales le hacen la mitad. */
   const especialA = (a: Luchador, b: Luchador, poder: number) => resolverGolpe(s, D, a, b, poder, b.esquivando);
@@ -232,12 +233,12 @@ function pelea(D: DatosBatalla, listo: boolean) {
 }
 
 /** Juega `N` peleas: cuántas gana y, en las que gana, con cuánta vida termina y con qué nivel. */
-export function sim(D: DatosBatalla, listo: boolean, N = 2000) {
+export function sim(D: DatosBatalla, listo: boolean, N = 2000, esencias = true) {
   let gana = 0;
   let vida = 0;
   const niveles: Record<string, number> = {};
   for (let i = 0; i < N; i++) {
-    const r = pelea(D, listo);
+    const r = pelea(D, listo, esencias);
     if (!r.gana) continue;
     gana++;
     vida += r.s.heroes.reduce((n, h) => n + h.ps / h.psMax, 0) / r.s.heroes.length;

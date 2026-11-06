@@ -1,5 +1,6 @@
 // Combate por turnos (RPG estilo EarthBound / Final Fantasy): las cuentas, sin interfaz. Los datos de cada batalla
 // están en src/data/batallas/<id>.json; la pantalla, en src/components/Batalla.tsx. Ver docs/SPEC.md.
+import type { Esencia } from './esencia';
 import type { Vars } from './types';
 
 /** Estadísticas en el nivel 1 (`base`) y cuánto suben por nivel (`crece`). */
@@ -270,6 +271,8 @@ export interface Linea {
   texto: string;
 }
 export interface DatosBatalla {
+  /** La semilla de las esencias de esta pelea (el torneo la da; en la historia sale de la partida). */
+  semilla_esencia?: string;
   titulo: string;
   /** Fondo: public/<fondo>.webp (pixel art del autor) o un PLACEHOLDER. */
   fondo: string;
@@ -385,14 +388,14 @@ export function probFallo(d: { fallo?: number }, at: Luchador, de: Luchador) {
   const P = PUNTERIA;
   const dif = entre(de.nivel - at.nivel, -P.falloNivelMin, P.falloNivelMax);
   const estado = (at.confundido > 0 ? P.falloConfundido : 0) + (at.envenenado ? P.falloEnvenenado : 0);
-  return entre((d.fallo ?? FALLO) + dif * P.falloPorNivel + estado, P.falloMin, P.falloMax);
+  return entre((d.fallo ?? FALLO) + dif * P.falloPorNivel + estado - esenciaDe(at, 'punteria'), P.falloMin, P.falloMax);
 }
 /** Probabilidad de que `de`, que eligió esquivar, esquive el golpe de `at`. */
 export function probEsquiva(d: { esquivar: number }, de: Luchador, at: Luchador) {
   const P = PUNTERIA;
   const dif = entre(de.nivel - at.nivel, -P.esquivaNivelMax, P.esquivaNivelMax);
   const estado = (de.confundido > 0 ? P.esquivaConfundido : 0) + (de.envenenado ? P.esquivaEnvenenado : 0);
-  return entre(d.esquivar + dif * P.esquivaPorNivel - estado, P.esquivaMin, P.esquivaMax);
+  return entre(d.esquivar + dif * P.esquivaPorNivel - estado + esenciaDe(de, 'reflejos'), P.esquivaMin, P.esquivaMax);
 }
 export const falla = (d: { fallo?: number }, at: Luchador, de: Luchador, azar: () => number = Math.random) => azar() < probFallo(d, at, de);
 /** Si `de` esquiva el golpe de `at` (solo si eligió esquivar este turno). */
@@ -458,6 +461,8 @@ export interface Luchador {
   inmuneParalisis?: number;
   /** Lo que da el equipo además de ATQ y DEF (esos van en `extra` y `extraDef`). */
   equipo?: { vel: number; critico: number; sinConfusion: boolean; resisteVeneno: boolean };
+  /** Su esencia (oculta; engine/esencia.ts): un pequeño plus que se suma a su base. */
+  esencia?: Esencia;
 }
 
 /**
@@ -469,7 +474,8 @@ export const CARGA_LLENA = 100;
 /** Lo que dura un especial (de todos). */
 export const ESPECIAL_MS = 5000;
 export const cargar = (l: Luchador, n: number) => {
-  l.carga = Math.min(CARGA_LLENA, l.carga + n);
+  // Concentración (esencia): la barra se llena un poco más rápido.
+  l.carga = Math.min(CARGA_LLENA, l.carga + n * (1 + esenciaDe(l, 'concentracion')));
 };
 export const especialListo = (l: Luchador) => l.carga >= CARGA_LLENA;
 
@@ -511,6 +517,26 @@ export function crearLuchador(
   return { id, clave, lado, nombre: d.nombre, nivel, xp, ps: s.ps, psMax: s.ps, atq: s.atq, def: s.def, vel: s.vel, extra: 0, extraDef: 0, esquivando: false, distraido: false, carga: 0, paralizado: 0, confundido: 0, envenenado: null, protegido: 0, quemado: 0, congelado: 0, dormido: 0, desterrado: 0 };
 }
 
+/** Cuánto da la esencia de `l` si es de ese tipo (0 si no). */
+export const esenciaDe = (l: Luchador, tipo: Esencia['tipo']) => (l.esencia?.tipo === tipo ? l.esencia.valor : 0);
+/** Las estadísticas con la esencia (fuerza, firmeza, vitalidad o rapidez). */
+export function conEsencia(s: Stats, e?: Esencia): Stats {
+  if (!e) return s;
+  const m = (k: Esencia['tipo']) => (e.tipo === k ? 1 + e.valor : 1);
+  return { ps: Math.round(s.ps * m('vitalidad')), atq: s.atq * m('fuerza'), def: s.def * m('firmeza'), vel: s.vel * m('rapidez') };
+}
+/** Le pone su esencia a un luchador recién creado (con la vida llena). */
+export function ponerEsencia(l: Luchador, e: Esencia) {
+  l.esencia = e;
+  const s = conEsencia({ ps: l.psMax, atq: l.atq, def: l.def, vel: l.vel }, e);
+  const lleno = l.ps >= l.psMax;
+  l.psMax = s.ps;
+  if (lleno) l.ps = s.ps;
+  l.atq = s.atq;
+  l.def = s.def;
+  l.vel = s.vel;
+}
+
 /**
  * Suma experiencia y sube los niveles que correspondan: las estadísticas pasan a las del nivel nuevo y los PS
  * suben lo mismo que el máximo. Devuelve los niveles nuevos (vacío si no subió).
@@ -521,7 +547,7 @@ export function ganarXp(l: Luchador, d: { base: Stats; crece: Stats }, xp: numbe
   while (l.xp >= xpParaSubir(l.nivel)) {
     l.xp -= xpParaSubir(l.nivel);
     l.nivel++;
-    const s = statsEn(d.base, d.crece, l.nivel);
+    const s = conEsencia(statsEn(d.base, d.crece, l.nivel), l.esencia);
     if (l.ps > 0) l.ps += s.ps - l.psMax;
     l.psMax = s.ps;
     l.atq = s.atq;
@@ -535,7 +561,7 @@ export function ganarXp(l: Luchador, d: { base: Stats; crece: Stats }, xp: numbe
 /** Daño: el ataque contra la defensa (con los potenciadores), con un poco de azar y a veces un crítico. */
 export function dano(atacante: Luchador, defensor: Luchador, poder: number, azar: () => number = Math.random, criticoExtra = 0) {
   const base = ((atacante.atq + atacante.extra) * poder) / 10 - (defensor.def + defensor.extraDef) / 2;
-  const critico = azar() < 0.08 + criticoExtra;
+  const critico = azar() < 0.08 + criticoExtra + esenciaDe(atacante, 'punteria');
   // Quemado: pega a la mitad.
   const n = Math.max(1, Math.round(base * (0.9 + azar() * 0.2) * (critico ? 1.5 : 1) * (atacante.quemado > 0 ? 0.5 : 1)));
   return { n, critico };
@@ -555,7 +581,7 @@ export function disponibles(heroes: Luchador[], datos: Record<string, Heroe>, ac
 export function subirNiveles(l: Luchador, d: { base: Stats; crece: Stats }, n: number) {
   l.nivel += n;
   l.xp = 0;
-  const s = statsEn(d.base, d.crece, l.nivel);
+  const s = conEsencia(statsEn(d.base, d.crece, l.nivel), l.esencia);
   if (l.ps > 0) l.ps += s.ps - l.psMax;
   l.psMax = s.ps;
   l.atq = s.atq;
@@ -861,6 +887,8 @@ export interface Progreso {
   monedas?: number;
   /** Lo que lleva puesto cada héroe, por espacio (`puesto_<héroe>_<espacio>`; ver engine/equipo.ts). */
   puestos?: Record<string, Record<string, string>>;
+  /** El número propio de la partida (`partida_id`): la semilla de las esencias. */
+  partida?: string;
   /** Lo que suben para siempre los permanentes como el CeBiDol (`refuerzo_atq_<héroe>`, `refuerzo_def_<héroe>`). */
   refuerzos?: Record<string, { atq: number; def: number }>;
 }
@@ -887,6 +915,7 @@ export function progresoDeVars(vars: Vars): Progreso {
     if (typeof v !== 'number') continue;
     const nivel = k.match(/^nivel_(.+)$/);
     if (nivel && v > 0) p.heroes[nivel[1]] = { nivel: v, xp: typeof vars[`xp_${nivel[1]}`] === 'number' ? (vars[`xp_${nivel[1]}`] as number) : 0 };
+    if (k === 'partida_id' && typeof v === 'string' && v) p.partida = v;
     const ref = k.match(/^refuerzo_(atq|def)_(.+)$/);
     if (ref && v) ((p.refuerzos ??= {})[ref[2]] ??= { atq: 0, def: 0 })[ref[1] as 'atq' | 'def'] = v;
     const cas = k.match(/^cassette_(.+)$/);

@@ -22,6 +22,8 @@ import {
   seConfunde,
   seRetira,
   noActua,
+  ponerEsencia,
+  esenciaDe,
   turnosDormido,
   vanPerdiendo,
   enCampo,
@@ -34,6 +36,7 @@ import {
   type Luchador,
   type Progreso,
 } from './batalla';
+import { sortearEsencia } from './esencia';
 import { FICHAS } from './batallas';
 import { bonos, puestosDe } from './equipo';
 
@@ -48,6 +51,10 @@ export interface CeboEnPie {
 
 /** El estado de una pelea: lo cambian las acciones, en orden. */
 export interface EstadoPelea {
+  /** La semilla de las esencias (la partida o el torneo); sin ella, nadie tiene esencia (las pruebas de siempre). */
+  semilla?: string;
+  /** Cuántos enemigos ya sortearon su esencia en esta pelea. */
+  sorteos?: number;
   heroes: Luchador[];
   enemigos: Luchador[];
   /** Las monedas de la partida (lo que traía más lo que se gana en esta pelea). */
@@ -88,10 +95,17 @@ export interface EstadoPelea {
  * partida; si la pelea da una mochila inicial, se completa hasta esa cantidad (p. ej. un revivir).
  * `progreso` ya llega vacío en la vida real (el bar): ahí no cuentan los niveles ni la mochila del juego.
  */
-export function estadoInicial(d: DatosBatalla, progreso?: Progreso): EstadoPelea {
+export function estadoInicial(d: DatosBatalla, progreso?: Progreso, semilla?: string): EstadoPelea {
+  // Dos iguales (el torneo deja repetir personaje): el segundo es «jair#2», el tercero «jair#3»; la clave sigue igual.
+  const vistos: Record<string, number> = {};
   return {
+    semilla,
+    sorteos: 0,
     heroes: d.heroes.map((k) => {
-      const h = crearLuchador(k, k, 'heroe', d.personajes[k], progreso?.heroes[k]?.nivel || d.personajes[k].nivel, progreso?.heroes[k]?.xp ?? 0);
+      const n = (vistos[k] = (vistos[k] ?? 0) + 1);
+      const h = crearLuchador(n > 1 ? `${k}#${n}` : k, k, 'heroe', d.personajes[k], progreso?.heroes[k]?.nivel || d.personajes[k].nivel, progreso?.heroes[k]?.xp ?? 0);
+      // Su esencia (oculta): la misma toda la partida (o el torneo) para este personaje.
+      if (semilla) ponerEsencia(h, sortearEsencia(`${semilla}|heroe|${k}|${n}`, true));
       // Lo que subió para siempre (el CeBiDol) y lo que lleva puesto: van en `extra` para que subir de nivel no lo borre.
       const ref = progreso?.refuerzos?.[k];
       if (ref) {
@@ -263,6 +277,8 @@ export function finDeTurno(estado: EstadoPelea) {
 /** Un enemigo entra a la pelea (con algo de barra cargada); los caídos dejan de estar en la lista. */
 export function sumarEnemigo(estado: EstadoPelea, d: DatosBatalla, clave: string, nivel: number, azar: () => number = Math.random): Luchador {
   const e = crearLuchador(`${clave}-${estado.enemigos.length}-${Date.now()}`, clave, 'enemigo', d.enemigos[clave], nivel);
+  // Su esencia (oculta): los jefes, de verdad; los de la horda, baja (casi no se nota).
+  if (estado.semilla) ponerEsencia(e, sortearEsencia(`${estado.semilla}|${d.titulo}|${clave}|${(estado.sorteos = (estado.sorteos ?? 0) + 1)}`, !!d.enemigos[clave].jefe));
   e.carga = Math.floor(azar() * 40);
   estado.enemigos = [...estado.enemigos.filter(vivo), e];
   return e;
@@ -304,8 +320,11 @@ export function resolverGolpe(
 const estaSolo = (estado: EstadoPelea, x: Luchador) => x.lado === 'heroe' && estado.heroes.filter(enCampo).length <= 1;
 
 /** Paraliza: empieza a descontar desde el turno siguiente y reemplaza el descanso (no se suma). */
+/** Temple (esencia): a veces, el estado le dura un turno menos (nunca menos de uno). */
+const conTemple = (x: Luchador, n: number, azar: () => number = Math.random) => (n > 1 && azar() < esenciaDe(x, 'temple') ? n - 1 : n);
+
 export function paralizarA(estado: EstadoPelea, x: Luchador, azar: () => number = Math.random) {
-  x.paralizado = turnosDormido(azar, estaSolo(estado, x));
+  x.paralizado = conTemple(x, turnosDormido(azar, estaSolo(estado, x)), azar);
   estado.paralizadoRecien.push(x.id);
   estado.actuaron = estado.actuaron.filter((id) => id !== x.id);
   estado.cansados.delete(x.id);
@@ -315,7 +334,7 @@ export function paralizarA(estado: EstadoPelea, x: Luchador, azar: () => number 
 export function confundirA(estado: EstadoPelea, x: Luchador, n: number) {
   // La flor de pureza: no se puede confundir.
   if (x.equipo?.sinConfusion) return;
-  x.confundido = n;
+  x.confundido = conTemple(x, n);
   estado.confundidoRecien.push(x.id);
 }
 
@@ -385,8 +404,8 @@ export function aplicarEstado(estado: EstadoPelea, x: Luchador, cual: 'quemado' 
   if (x[cual] > 0) return false;
   // Dormir o congelar: no al que ya no puede actuar (no se pasa de uno a otro) ni en su turno libre.
   if (cual !== 'quemado' && (noActua(x) || x.inmuneParalisis)) return false;
-  if (cual === 'quemado') x.quemado = QUEMADO.turnos;
-  if (cual !== 'quemado') x[cual] = turnosDormido(azar, estaSolo(estado, x));
+  if (cual === 'quemado') x.quemado = conTemple(x, QUEMADO.turnos, azar);
+  if (cual !== 'quemado') x[cual] = conTemple(x, turnosDormido(azar, estaSolo(estado, x)), azar);
   if (cual !== 'quemado') estado.estadoRecien.push(`${x.id}/${cual}`);
   return true;
 }

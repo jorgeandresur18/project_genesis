@@ -1,3 +1,4 @@
+import { nuevaSemilla } from '../engine/esencia';
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
 import '@fontsource/press-start-2p/400.css';
 import '@fontsource/pixelify-sans/400.css';
@@ -211,7 +212,13 @@ function Pelea({
   // El estado de la pelea vive en un ref (lo cambian las acciones, en orden) y se redibuja con `forzar`.
   // Qué contiene y con qué empieza: engine/turnos.ts (`EstadoPelea`, `estadoInicial`).
   const b = useRef<EstadoPelea>(null as unknown as EstadoPelea);
-  if (!b.current) b.current = estadoInicial(d, progreso);
+  // Las esencias (ocultas): la semilla de la partida, la del torneo o, en una pelea suelta, una nueva.
+  const semilla = useMemo(() => d.semilla_esencia ?? guardado?.partida ?? nuevaSemilla(), [d.semilla_esencia, guardado?.partida]);
+  if (!b.current) {
+    b.current = estadoInicial(d, progreso, semilla);
+    // Solo en desarrollo: las esencias en la consola, para probarlas (en lo publicado nunca se muestran).
+    if (import.meta.env.DEV) console.info('[esencias]', b.current.heroes.map((h) => `${h.nombre}: ${h.esencia?.tipo} ${h.esencia?.valor}`).join(' · '));
+  }
   const [, setVersion] = useState(0);
   const forzar = () => setVersion((v) => v + 1);
   const [anims, setAnims] = useState<Record<string, Anim>>({});
