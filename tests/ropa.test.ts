@@ -122,6 +122,8 @@ describe('Rikka empieza con su flor (decisión del autor, 2026-11-05)', () => {
   it('en una partida nueva, la flor de pureza ya está en su amuleto y le quita la confusión', async () => {
     const variables = (await import('../src/data/variables.json')).default as Record<string, unknown>;
     expect(variables.puesto_rikka_amuleto).toBe('flor_pureza');
+    expect(variables.puesto_rikka_traje).toBe('prendas_sacerdotisa');
+    expect(variables.puesto_cami_traje).toBe('traje_azul');
     expect(quienLleva(variables as never, 'flor_pureza')).toEqual({ heroe: 'rikka', espacio: 'amuleto' });
     const p = progresoDeVars(variables as never);
     expect(bonos(Object.values(p.puestos?.rikka ?? {}), O).sinConfusion).toBe(true);
