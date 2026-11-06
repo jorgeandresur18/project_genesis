@@ -15,28 +15,11 @@
       "characters": [],
       "dialogue": {
         "speaker": null,
-        "text": "Viernes, cinco y media de la tarde. El calor de la oficina tiene la consistencia de una sopa."
+        "text": "Viernes, cinco y media de la tarde. El calor de la oficina tiene a todos de mal humor y con el trasero sudado pegado a la silla. El aire acondicionado lleva tres meses «en mantenimiento». Igual que la quincena."
       },
       "choices": [],
       "conditions": [],
       "audio": "audio/musica/afterwork.mp3",
-      "ui_effect": null,
-      "next": "cap01_003"
-    },
-    {
-      "scene_id": "cap01_003",
-      "chapter": 1,
-      "background": "fondos/oficina_dia.webp",
-      "video_fondo": null,
-      "loop_video": false,
-      "characters": [],
-      "dialogue": {
-        "speaker": null,
-        "text": "El aire acondicionado lleva tres meses «en mantenimiento». Igual que la quincena."
-      },
-      "choices": [],
-      "conditions": [],
-      "audio": null,
       "ui_effect": null,
       "next": "cap01_004"
     },
@@ -78,7 +61,7 @@
       ],
       "dialogue": {
         "speaker": "Cliente",
-        "text": "Joven, lo apagué, lo prendí y le recé. Sigue sin internet."
+        "text": "Joven, lo apagué, lo prendí y hasta lo hice bendecir por un sacerdote. Sigue sin internet. ¿Qué necesita, un exorcismo?"
       },
       "choices": [],
       "conditions": [],
@@ -101,7 +84,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "(Treinta años. Ingeniero de software. Y mi trabajo es pedirle a la gente que desenchufe cosas.)"
+        "text": "(Treinta años. Ingeniero de software. Y mi trabajo es pedirle a la gente que desenchufe cosas y las vuelva a enchufar.)"
       },
       "choices": [],
       "conditions": [],
@@ -124,7 +107,7 @@
       ],
       "dialogue": {
         "speaker": "Supervisor (chat)",
-        "text": "Equipo: el pago se corre para el otro viernes. ¡Ánimo, que aquí somos familia!"
+        "text": "Equipo: el pago se va para el otro viernes. ¡Ánimo, que aquí somos familia!"
       },
       "choices": [],
       "conditions": [],
@@ -147,30 +130,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "«Se corre». Como si el sueldo fuera un bus que se pasó de parada."
-      },
-      "choices": [],
-      "conditions": [],
-      "audio": null,
-      "ui_effect": null,
-      "next": "cap01_009"
-    },
-    {
-      "scene_id": "cap01_009",
-      "chapter": 1,
-      "background": "fondos/oficina_dia.webp",
-      "video_fondo": null,
-      "loop_video": false,
-      "characters": [
-        {
-          "id": "jair",
-          "sprite": "sprites/jair/cansado1.webp",
-          "pos": "centro"
-        }
-      ],
-      "dialogue": {
-        "speaker": "Jair",
-        "text": "(Y «familia». A la familia por lo menos le dan almuerzo.)"
+        "text": "«Se va». Como si el sueldo fuera un bus que se pasó de parada. (Y «familia». A la familia, por lo menos, le dan el almuerzo incluido.)"
       },
       "choices": [],
       "conditions": [],
@@ -285,7 +245,7 @@
       ],
       "dialogue": {
         "speaker": "Cliente",
-        "text": "Es inteligente. Lo dice en la caja. Pero no se conecta. Y yo pagué por inteligente."
+        "text": "Es inteligente. Lo dice en la caja. Pero no se conecta. Y yo pagué por una inteligente, no por una simple refrigeradora."
       },
       "choices": [],
       "conditions": [],
@@ -308,30 +268,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "(Hasta las refrigeradoras tienen expectativas más altas que mi sueldo.)"
-      },
-      "choices": [],
-      "conditions": [],
-      "audio": null,
-      "ui_effect": null,
-      "next": "cap01_o07"
-    },
-    {
-      "scene_id": "cap01_o07",
-      "chapter": 1,
-      "background": "fondos/oficina_dia.webp",
-      "video_fondo": null,
-      "loop_video": false,
-      "characters": [
-        {
-          "id": "jair",
-          "sprite": "sprites/jair/cansado1.webp",
-          "pos": "centro"
-        }
-      ],
-      "dialogue": {
-        "speaker": "Jair",
-        "text": "¿Probó apagándola y prendiéndola?"
+        "text": "(Hasta las refrigeradoras tienen expectativas más altas que mi sueldo.) ¿Probó apagándola y prendiéndola?"
       },
       "choices": [],
       "conditions": [],
@@ -354,7 +291,7 @@
       ],
       "dialogue": {
         "speaker": "Cliente",
-        "text": "Joven, si la apago se me daña la carne."
+        "text": "Joven, si la apago se me dañan la carne y la leche."
       },
       "choices": [],
       "conditions": [],
@@ -377,7 +314,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Entonces le recomiendo elegir entre la carne y el internet."
+        "text": "Entonces le recomiendo elegir entre la carne, la leche o el internet."
       },
       "choices": [],
       "conditions": [],
@@ -400,7 +337,7 @@
       ],
       "dialogue": {
         "speaker": "Cliente",
-        "text": "¿Y por qué tengo que elegir?"
+        "text": "¿Y por qué diablos tengo que elegir?"
       },
       "choices": [],
       "conditions": [],
@@ -469,7 +406,7 @@
       ],
       "dialogue": {
         "speaker": "Cliente",
-        "text": "¿Y me van a llamar de verdad?"
+        "text": "¿Y de verdad me van a llamar, o es solo una excusa para no atender mi problema?"
       },
       "choices": [],
       "conditions": [],
@@ -515,7 +452,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Que tenga un buen día."
+        "text": "Que tenga un buen día, señora."
       },
       "choices": [],
       "conditions": [],
@@ -538,7 +475,7 @@
       ],
       "dialogue": {
         "speaker": null,
-        "text": "Cuelga. En la pantalla, la cola de llamadas en espera marca treinta y dos. El reloj marca las cinco y cuarenta. El aire acondicionado no marca nada."
+        "text": "Cuelga. En la pantalla, la cola de llamadas en espera marca treinta y dos. El reloj marca las cinco y cuarenta. El aire acondicionado no marca nada: ni el termómetro le funciona."
       },
       "choices": [],
       "conditions": [],
@@ -561,7 +498,7 @@
       ],
       "dialogue": {
         "speaker": null,
-        "text": "En el escritorio de al lado, un compañero come un sánduche frío con la mirada perdida en una hoja de cálculo. Lleva tres semanas sin decir una frase completa. Jair lo envidia un poco."
+        "text": "En el escritorio de al lado, un compañero come un sánduche frío con la mirada perdida en una hoja de cálculo. Lleva tres semanas con la misma hoja. Jair lo envidia un poco: sabe que solo finge trabajar."
       },
       "choices": [],
       "conditions": [],
@@ -584,7 +521,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "(Tengo una carrera. Sé programar en seis lenguajes. Sé montar un servidor desde cero. Y estoy aquí, generando tickets para refrigeradoras.)"
+        "text": "(Tengo una carrera. Sé programar en Coffee, en Cobra y en ese lenguaje que tiene un elefante de mascota. Sé montar un servidor desde cero. Y estoy aquí, generando tickets para refrigeradoras.)"
       },
       "choices": [],
       "conditions": [],
@@ -607,30 +544,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "(Algún día voy a hacer algo grande. Algo mío. Algún día.)"
-      },
-      "choices": [],
-      "conditions": [],
-      "audio": null,
-      "ui_effect": null,
-      "next": "cap01_o20"
-    },
-    {
-      "scene_id": "cap01_o20",
-      "chapter": 1,
-      "background": "fondos/oficina_dia.webp",
-      "video_fondo": null,
-      "loop_video": false,
-      "characters": [
-        {
-          "id": "jair",
-          "sprite": "sprites/jair/cansado1.webp",
-          "pos": "centro"
-        }
-      ],
-      "dialogue": {
-        "speaker": "Jair",
-        "text": "(Llevo diciendo «algún día» desde los veintidós.)"
+        "text": "(Algún día voy a hacer algo grande. Algo mío. Totalmente mío. Algún día. Llevo diciendo «algún día» desde los veintidós. O desde mucho antes…)"
       },
       "choices": [],
       "conditions": [],
@@ -653,7 +567,7 @@
       ],
       "dialogue": {
         "speaker": null,
-        "text": "Saca el celular y, por costumbre, abre Geekdump: la página donde los programadores del mundo suben sus proyectos para que otros programadores los ignoren."
+        "text": "Saca el celular y, por costumbre, abre Geekdump: la página donde los programadores del mundo suben sus proyectos para que otros programadores los ignoren. O se los roben."
       },
       "choices": [],
       "conditions": [],
@@ -699,7 +613,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "(Tres repositorios. «dragones-rpg»: archivado. «nave-espacial-WIP»: archivado. «granja-final-final-v2»: tan abandonado que el README tiene telarañas.)"
+        "text": "(Tres repositorios. «seriesgratis-rpg»: archivado. «cripto-tokens-WIP»: archivado. «granja-bots-final-final-v2»: tan abandonado que el README tiene telarañas.)"
       },
       "choices": [],
       "conditions": [],
@@ -785,7 +699,7 @@
       "characters": [],
       "dialogue": {
         "speaker": null,
-        "text": "Jair marca la salida a las 18:00:00 exactas. Es la única rebeldía que se permite."
+        "text": "Jair marca la salida a las 18:00:00 exactas. Es la única rebeldía que se permite. Total, las horas extra no se las pagan."
       },
       "choices": [],
       "conditions": [],
@@ -802,7 +716,7 @@
       "characters": [],
       "dialogue": {
         "speaker": null,
-        "text": "Afuera la ciudad huele a asfalto caliente y a fritura. El sol ya se fue, pero el calor se queda, como un pariente que no capta indirectas."
+        "text": "Afuera la ciudad huele a asfalto caliente y a orina fermentada. El sol ya se fue, pero el calor se queda, como un tipo que no capta indirectas."
       },
       "choices": [],
       "conditions": [],
@@ -954,7 +868,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Me dijiste que si entraba me ibas a cobrar doble."
+        "text": "Me dijiste que si entraba me ibas a vetar del local."
       },
       "choices": [],
       "conditions": [],
@@ -982,7 +896,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Y te iba a cobrar doble. Eso no quita que entraras."
+        "text": "Sí, pero eso no significa que tengas que hacerme caso al pie de la letra. Podías entrar y comprarme un helado triple."
       },
       "choices": [],
       "conditions": [],
@@ -1010,7 +924,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Oye. Hoy fue un día de mierda. Vamos por una. Una sola. Lo juro por mi delantal."
+        "text": "Oye. Hoy fue un día de mierda. Vamos por una cerveza. Una sola. Lo juro por mi delantal."
       },
       "choices": [
         {
@@ -1050,7 +964,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Una. Mañana... bueno, mañana es sábado. Una."
+        "text": "Una. Mañana... bueno, mañana es sábado y tengo que trabajar, aunque preferiría que no fuera así."
       },
       "choices": [],
       "conditions": [],
@@ -1157,7 +1071,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "¿Qué? Así sí me invitan una cerveza. Con uniforme lo único que me piden es el baño."
+        "text": "¿Qué? Así sí me invitan una cerveza. Con uniforme lo único que me piden es que les preste el baño."
       },
       "choices": [],
       "conditions": [],
@@ -1213,7 +1127,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "...Ya. Otro día."
+        "text": "...Ya. Otro día. Creo que yo también estoy cansada."
       },
       "choices": [],
       "conditions": [],
@@ -1259,7 +1173,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "(Otro día. Siempre hay otro día. Es lo bueno de vivir en bucle.)"
+        "text": "(Otro día. Siempre hay otro día. Es lo bueno de vivir en un bucle eterno.)"
       },
       "choices": [],
       "conditions": [],
@@ -1282,7 +1196,7 @@
       ],
       "dialogue": {
         "speaker": null,
-        "text": "Jair toma el bus. Llega a su casa a las siete y diez, sobrio, con hambre y con la sensación de haber esquivado algo, sin saber si era un problema o una oportunidad."
+        "text": "Jair toma el bus. Llega a su casa a las siete y diez, sobrio, con hambre y con la sensación de haber esquivado algo, sin saber si era un problema o la oportunidad de que algo cambiara en su vida."
       },
       "choices": [],
       "conditions": [],
@@ -1299,7 +1213,7 @@
       "characters": [],
       "dialogue": {
         "speaker": null,
-        "text": "El bar queda a dos cuadras. Se llama El Último. Nadie recuerda si es por la hora o por la clientela."
+        "text": "El bar queda a dos cuadras. Se llama La Lechuza. Nadie sabe si es porque abre las veinticuatro horas o por los depredadores sexuales que van a cazar presas jóvenes e ingenuas, como lechuzas tras un ratón."
       },
       "choices": [],
       "conditions": [],
@@ -3349,35 +3263,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Siguiente pregunta, hijo de puta."
-      },
-      "choices": [],
-      "conditions": [],
-      "audio": null,
-      "ui_effect": null,
-      "next": "cap01_067y16_a13"
-    },
-    {
-      "scene_id": "cap01_067y16_a13",
-      "chapter": 1,
-      "background": "fondos/bar_noche.webp",
-      "video_fondo": null,
-      "loop_video": false,
-      "characters": [
-        {
-          "id": "jair",
-          "sprite": "sprites/jair/verguenza1.webp",
-          "pos": "izquierda"
-        },
-        {
-          "id": "nikki",
-          "sprite": "sprites/nikki/celosaebria.webp",
-          "pos": "derecha"
-        }
-      ],
-      "dialogue": {
-        "speaker": "Nikki",
-        "text": "Yo nunca... lo he hecho en un lugar público."
+        "text": "Siguiente pregunta, cariño. Yo nunca… lo he hecho en un lugar público."
       },
       "choices": [],
       "conditions": [],
@@ -4662,35 +4548,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Y después nunca la cargarías."
-      },
-      "choices": [],
-      "conditions": [],
-      "audio": null,
-      "ui_effect": null,
-      "next": "cap01_083c3"
-    },
-    {
-      "scene_id": "cap01_083c3",
-      "chapter": 1,
-      "background": "fondos/bar_noche.webp",
-      "video_fondo": null,
-      "loop_video": false,
-      "characters": [
-        {
-          "id": "jair",
-          "sprite": "sprites/jair/verguenza1.webp",
-          "pos": "izquierda"
-        },
-        {
-          "id": "nikki",
-          "sprite": "sprites/nikki/ebria1.webp",
-          "pos": "derecha"
-        }
-      ],
-      "dialogue": {
-        "speaker": "Nikki",
-        "text": "Así eres. Guardas y guardas, y nunca juegas."
+        "text": "Y después nunca la cargarías. Así eres. Guardas y guardas, y nunca juegas."
       },
       "choices": [],
       "conditions": [],
@@ -5250,35 +5108,7 @@
       ],
       "dialogue": {
         "speaker": null,
-        "text": "Se levanta, camina hasta la rocola y mete una moneda. Le toma tres intentos."
-      },
-      "choices": [],
-      "conditions": [],
-      "audio": null,
-      "ui_effect": null,
-      "next": "cap01_095r03"
-    },
-    {
-      "scene_id": "cap01_095r03",
-      "chapter": 1,
-      "background": "fondos/bar_noche.webp",
-      "video_fondo": null,
-      "loop_video": false,
-      "characters": [
-        {
-          "id": "jair",
-          "sprite": "sprites/jair/triste1.webp",
-          "pos": "izquierda"
-        },
-        {
-          "id": "nikki",
-          "sprite": "sprites/nikki/ebria2.webp",
-          "pos": "derecha"
-        }
-      ],
-      "dialogue": {
-        "speaker": null,
-        "text": "Suena algo viejo y lento, de esas canciones que ponen en las bodas cuando ya se fueron los niños."
+        "text": "Se levanta, camina hasta la rocola y mete una moneda. Le toma tres intentos elegir la canción. Suena algo viejo y lento, de esas canciones que ponen en las bodas cuando ya se fueron los niños y solo quedan los adultos borrachos."
       },
       "choices": [],
       "conditions": [],
@@ -5446,35 +5276,7 @@
       ],
       "dialogue": {
         "speaker": null,
-        "text": "Nikki baila sola entre las mesas, abrazada a la botella como a una pareja que no la pisa."
-      },
-      "choices": [],
-      "conditions": [],
-      "audio": null,
-      "ui_effect": null,
-      "next": "cap01_095r10"
-    },
-    {
-      "scene_id": "cap01_095r10",
-      "chapter": 1,
-      "background": "fondos/bar_noche.webp",
-      "video_fondo": null,
-      "loop_video": false,
-      "characters": [
-        {
-          "id": "jair",
-          "sprite": "sprites/jair/triste1.webp",
-          "pos": "izquierda"
-        },
-        {
-          "id": "nikki",
-          "sprite": "sprites/nikki/ebria2.webp",
-          "pos": "derecha"
-        }
-      ],
-      "dialogue": {
-        "speaker": null,
-        "text": "Dos tipos en la barra la miran. Jair los mira a ellos. Es lo más valiente que hace en toda la noche."
+        "text": "Nikki baila sola entre las mesas, abrazada a la botella como a una pareja que no la pisa. Y sabe moverse. Dos tipos en la barra la miran. Jair los mira a ellos. Es lo más valiente que hace en toda la noche."
       },
       "choices": [],
       "conditions": [],
@@ -5978,35 +5780,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "(Siempre es ella la que se invita. Yo solo dejo la puerta abierta.)"
-      },
-      "choices": [],
-      "conditions": [],
-      "audio": null,
-      "ui_effect": null,
-      "next": "cap01_096"
-    },
-    {
-      "scene_id": "cap01_096",
-      "chapter": 1,
-      "background": "fondos/bar_noche.webp",
-      "video_fondo": null,
-      "loop_video": false,
-      "characters": [
-        {
-          "id": "jair",
-          "sprite": "sprites/jair/triste1.webp",
-          "pos": "izquierda"
-        },
-        {
-          "id": "nikki",
-          "sprite": "sprites/nikki/ebria1.webp",
-          "pos": "derecha"
-        }
-      ],
-      "dialogue": {
-        "speaker": "Jair",
-        "text": "(Debería decirle que ya es suficiente.)"
+        "text": "(Siempre es ella la que se invita. Yo solo dejo la puerta abierta. Debería decirle que ya es suficiente, pero estoy demasiado cansado para hacerlo.)"
       },
       "choices": [],
       "conditions": [],
@@ -7468,24 +7242,7 @@
       "characters": [],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "¿Jair? …Jair, levántate. No es gracioso. Levántate."
-      },
-      "choices": [],
-      "conditions": [],
-      "audio": null,
-      "ui_effect": null,
-      "next": "cap01_nk_bad03"
-    },
-    {
-      "scene_id": "cap01_nk_bad03",
-      "chapter": 1,
-      "background": "fondos/cg_nikki_cachetadas.webp",
-      "video_fondo": null,
-      "loop_video": false,
-      "characters": [],
-      "dialogue": {
-        "speaker": "Nikki",
-        "text": "Lo maté. Lo maté a cachetadas. ¿Quién se muere de cachetadas, Jair? ¿Quién?"
+        "text": "¿Jair? …Jair, levántate. No es gracioso. Levántate. Lo maté. Lo maté a cachetadas. ¿Quién se muere de cachetadas, Jair? ¿Quién más?"
       },
       "choices": [],
       "conditions": [],
@@ -8081,24 +7838,7 @@
       "characters": [],
       "dialogue": {
         "speaker": "Jair",
-        "text": "(«Nunca te vayas de mi vida».)"
-      },
-      "choices": [],
-      "conditions": [],
-      "audio": null,
-      "ui_effect": null,
-      "next": "cap01_115n6"
-    },
-    {
-      "scene_id": "cap01_115n6",
-      "chapter": 1,
-      "background": "PANTALLA:celular_favorito",
-      "video_fondo": null,
-      "loop_video": false,
-      "characters": [],
-      "dialogue": {
-        "speaker": "Jair",
-        "text": "(Y hace diez minutos: «Búscate una novia, Jair».)"
+        "text": "(«Nunca te vayas de mi vida». Y hace diez minutos: «Búscate una novia de verdad, Jair».)"
       },
       "choices": [],
       "conditions": [],
@@ -8258,30 +7998,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Gano poco, vivo en una caja de zapatos y mi mejor relación es con un ventilador."
-      },
-      "choices": [],
-      "conditions": [],
-      "audio": null,
-      "ui_effect": null,
-      "next": "cap01_121"
-    },
-    {
-      "scene_id": "cap01_121",
-      "chapter": 1,
-      "background": "fondos/departamento_noche.webp",
-      "video_fondo": null,
-      "loop_video": false,
-      "characters": [
-        {
-          "id": "jair",
-          "sprite": "sprites/jair/triste1.webp",
-          "pos": "centro"
-        }
-      ],
-      "dialogue": {
-        "speaker": "Jair",
-        "text": "(Y con Nikki. Pero de esa relación no tengo ni el manual ni la garantía.)"
+        "text": "Gano poco, vivo en una caja de zapatos y mi mejor relación es con un ventilador. (Y con Nikki. Pero de esa relación no tengo ni el manual ni la garantía.)"
       },
       "choices": [],
       "conditions": [],
@@ -9015,30 +8732,7 @@
       ],
       "dialogue": {
         "speaker": null,
-        "text": "No hay rubia, ni peliverde, ni Rey Malvado. Solo un hombre que, por una noche, eligió no huir."
-      },
-      "choices": [],
-      "conditions": [],
-      "audio": null,
-      "ui_effect": null,
-      "next": "cap01_bad_rechazo_005"
-    },
-    {
-      "scene_id": "cap01_bad_rechazo_005",
-      "chapter": 1,
-      "background": "fondos/departamento_noche.webp",
-      "video_fondo": null,
-      "loop_video": false,
-      "characters": [
-        {
-          "id": "jair",
-          "sprite": "sprites/jair/base.webp",
-          "pos": "centro"
-        }
-      ],
-      "dialogue": {
-        "speaker": null,
-        "text": "Sin esa huida no hay juego. Y sin juego, la historia que estabas por jugar nunca ocurrió."
+        "text": "Esta noche solo hay un hombre que eligió no huir. Sin esa huida no hay juego. Y sin juego, la historia que estabas por jugar nunca ocurrió."
       },
       "choices": [],
       "conditions": [],
@@ -9090,45 +8784,11 @@
       "characters": [],
       "dialogue": {
         "speaker": "GRAVITY",
-        "text": "> Instalando GRAVITY... Framework: Reckt. Front: Coffee. Back: Cobra."
+        "text": "> Instalando GRAVITY... Framework: Reckt. Front: Coffee. Back: Cobra. > Asistente integrado: GENESIS. Estado: en línea. > Describa su proyecto."
       },
       "choices": [],
       "conditions": [],
       "audio": "audio/musica/into_the_ciberse.mp3",
-      "ui_effect": null,
-      "next": "cap01_129"
-    },
-    {
-      "scene_id": "cap01_129",
-      "chapter": 1,
-      "background": "PANTALLA:gravity_ide",
-      "video_fondo": null,
-      "loop_video": false,
-      "characters": [],
-      "dialogue": {
-        "speaker": "GRAVITY",
-        "text": "> Asistente integrado: GENESIS. Estado: en línea."
-      },
-      "choices": [],
-      "conditions": [],
-      "audio": null,
-      "ui_effect": null,
-      "next": "cap01_130"
-    },
-    {
-      "scene_id": "cap01_130",
-      "chapter": 1,
-      "background": "PANTALLA:gravity_ide",
-      "video_fondo": null,
-      "loop_video": false,
-      "characters": [],
-      "dialogue": {
-        "speaker": "GRAVITY",
-        "text": "> Describa su proyecto."
-      },
-      "choices": [],
-      "conditions": [],
-      "audio": null,
       "ui_effect": null,
       "next": "cap01_131"
     },
@@ -9221,30 +8881,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "...Okay. Eso no debería ser posible."
-      },
-      "choices": [],
-      "conditions": [],
-      "audio": null,
-      "ui_effect": null,
-      "next": "cap01_136"
-    },
-    {
-      "scene_id": "cap01_136",
-      "chapter": 1,
-      "background": "PANTALLA:gravity_ide",
-      "video_fondo": null,
-      "loop_video": false,
-      "characters": [
-        {
-          "id": "jair",
-          "sprite": "sprites/jair/asustado1.webp",
-          "pos": "centro"
-        }
-      ],
-      "dialogue": {
-        "speaker": "Jair",
-        "text": "Eso no debería ser posible con mi tarjeta gráfica."
+        "text": "...Okay. Eso no debería ser posible. Eso no debería ser posible con mi tarjeta gráfica."
       },
       "choices": [],
       "conditions": [],
@@ -9499,41 +9136,7 @@
       "characters": [],
       "dialogue": {
         "speaker": "GRAVITY",
-        "text": "> sssssssssssssssssssssssssssssssssssssss"
-      },
-      "choices": [],
-      "conditions": [],
-      "audio": null,
-      "ui_effect": null,
-      "next": "cap01_152"
-    },
-    {
-      "scene_id": "cap01_152",
-      "chapter": 1,
-      "background": "PANTALLA:gravity_ide",
-      "video_fondo": null,
-      "loop_video": false,
-      "characters": [],
-      "dialogue": {
-        "speaker": "GRAVITY",
-        "text": "> Respuesta recibida: S."
-      },
-      "choices": [],
-      "conditions": [],
-      "audio": null,
-      "ui_effect": null,
-      "next": "cap01_153"
-    },
-    {
-      "scene_id": "cap01_153",
-      "chapter": 1,
-      "background": "PANTALLA:gravity_ide",
-      "video_fondo": null,
-      "loop_video": false,
-      "characters": [],
-      "dialogue": {
-        "speaker": "GRAVITY",
-        "text": "> Usuario inactivo detectado. Autocompletando personalidades."
+        "text": "> sssssssssssssssssssssssssssssssssssssss > Respuesta recibida: S. > Usuario inactivo detectado. Autocompletando personalidades."
       },
       "choices": [],
       "conditions": [],
@@ -9584,24 +9187,7 @@
       "characters": [],
       "dialogue": {
         "speaker": "GRAVITY",
-        "text": "> Generando cielo. Color solicitado: no especificado. Color asignado: magenta."
-      },
-      "choices": [],
-      "conditions": [],
-      "audio": null,
-      "ui_effect": null,
-      "next": "cap01_l02"
-    },
-    {
-      "scene_id": "cap01_l02",
-      "chapter": 1,
-      "background": "PANTALLA:gravity_ide",
-      "video_fondo": null,
-      "loop_video": false,
-      "characters": [],
-      "dialogue": {
-        "speaker": "GRAVITY",
-        "text": "> Generando física. Gravedad: reducida, para facilitar escenas de acción."
+        "text": "> Generando cielo. Color solicitado: no especificado. Color asignado: magenta. > Generando física. Gravedad: reducida, para facilitar escenas de acción."
       },
       "choices": [],
       "conditions": [],
@@ -9618,41 +9204,7 @@
       "characters": [],
       "dialogue": {
         "speaker": "GRAVITY",
-        "text": "> Generando antagonista: Rey Malvado. Generando historia previa del antagonista."
-      },
-      "choices": [],
-      "conditions": [],
-      "audio": null,
-      "ui_effect": null,
-      "next": "cap01_l04"
-    },
-    {
-      "scene_id": "cap01_l04",
-      "chapter": 1,
-      "background": "PANTALLA:gravity_ide",
-      "video_fondo": null,
-      "loop_video": false,
-      "characters": [],
-      "dialogue": {
-        "speaker": "GRAVITY",
-        "text": "> Generando ejército. Rostros: no requeridos."
-      },
-      "choices": [],
-      "conditions": [],
-      "audio": null,
-      "ui_effect": null,
-      "next": "cap01_l05"
-    },
-    {
-      "scene_id": "cap01_l05",
-      "chapter": 1,
-      "background": "PANTALLA:gravity_ide",
-      "video_fondo": null,
-      "loop_video": false,
-      "characters": [],
-      "dialogue": {
-        "speaker": "GRAVITY",
-        "text": "> Generando amenaza secundaria. Forma: no requerida."
+        "text": "> Generando antagonista: Rey… Generando historia previa del antagonista. Generando ejército. Rostros: no requeridos. Generando amenaza secundaria. Forma: no requerida."
       },
       "choices": [],
       "conditions": [],
@@ -9669,24 +9221,7 @@
       "characters": [],
       "dialogue": {
         "speaker": "GRAVITY",
-        "text": "> Generando heroína 01. Generando heroína 02. Aplicando referencias importadas."
-      },
-      "choices": [],
-      "conditions": [],
-      "audio": null,
-      "ui_effect": null,
-      "next": "cap01_l07"
-    },
-    {
-      "scene_id": "cap01_l07",
-      "chapter": 1,
-      "background": "PANTALLA:gravity_ide",
-      "video_fondo": null,
-      "loop_video": false,
-      "characters": [],
-      "dialogue": {
-        "speaker": "GRAVITY",
-        "text": "> Generando recuerdos de fondo para las entidades. Calidad: suficiente."
+        "text": "> Generando heroína 01. Generando… ¿heroína 02? Aplicando referencias importadas. Generando recuerdos de fondo para las entidades. Calidad: suficiente."
       },
       "choices": [],
       "conditions": [],
@@ -9703,24 +9238,7 @@
       "characters": [],
       "dialogue": {
         "speaker": "GRAVITY",
-        "text": "> Generando dimensión espacial. Generando dimensión ancestral. Generando historia: en curso."
-      },
-      "choices": [],
-      "conditions": [],
-      "audio": null,
-      "ui_effect": null,
-      "next": "cap01_l09"
-    },
-    {
-      "scene_id": "cap01_l09",
-      "chapter": 1,
-      "background": "PANTALLA:gravity_ide",
-      "video_fondo": null,
-      "loop_video": false,
-      "characters": [],
-      "dialogue": {
-        "speaker": "GRAVITY",
-        "text": "> Advertencia: el usuario no responde. Usuario: dentro del área de carga."
+        "text": "> Generando dimensión espacial. Generando dimensión ancestral. Generando historia: en curso. > Advertencia: el usuario no responde. Usuario: dentro del área de carga."
       },
       "choices": [],
       "conditions": [],
@@ -9806,28 +9324,11 @@
       "characters": [],
       "dialogue": {
         "speaker": null,
-        "text": "Jair abre los ojos."
+        "text": "Jair abre los ojos. El cielo es magenta. No rosado, no morado: magenta, como ese color que nadie elige en la paleta porque se ve demasiado. Demasiado estúpido."
       },
       "choices": [],
       "conditions": [],
       "audio": "audio/musica/new_discover.mp3",
-      "ui_effect": null,
-      "next": "cap01_g1_004"
-    },
-    {
-      "scene_id": "cap01_g1_004",
-      "chapter": 1,
-      "background": "fondos/nebulosa_magenta.webp",
-      "video_fondo": null,
-      "loop_video": false,
-      "characters": [],
-      "dialogue": {
-        "speaker": null,
-        "text": "El cielo es magenta. No rosado, no morado: magenta, como ese color que nadie elige en la paleta porque se ve demasiado."
-      },
-      "choices": [],
-      "conditions": [],
-      "audio": null,
       "ui_effect": null,
       "next": "cap01_g1_005"
     },
@@ -25300,7 +24801,7 @@
       "characters": [],
       "dialogue": {
         "speaker": null,
-        "text": "Jair la abre. Nikki en El Último, con una cerveza en la mano y las mejillas rojas, sonriéndole al celular. Encima, en letras blancas: «una sola»."
+        "text": "Jair la abre. Nikki en La Lechuza, con una cerveza en la mano y las mejillas rojas, sonriéndole al celular. Encima, en letras blancas: «una sola»."
       },
       "choices": [],
       "conditions": [],

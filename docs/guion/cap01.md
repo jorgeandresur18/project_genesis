@@ -13,21 +13,17 @@
 ### fondos/oficina_dia.webp
 
 > ♪ música: afterwork
-`001` — Viernes, cinco y media de la tarde. El calor de la oficina tiene la consistencia de una sopa.
-
-`003` — El aire acondicionado lleva tres meses «en mantenimiento». Igual que la quincena.
+`001` — Viernes, cinco y media de la tarde. El calor de la oficina tiene a todos de mal humor y con el trasero sudado pegado a la silla. El aire acondicionado lleva tres meses «en mantenimiento». Igual que la quincena.
 
 `004` **Jair:** Gracias por llamar a soporte técnico, le habla Jair. ¿Ya probó apagando y prendiendo el módem?
 
-`005` **Cliente:** Joven, lo apagué, lo prendí y le recé. Sigue sin internet.
+`005` **Cliente:** Joven, lo apagué, lo prendí y hasta lo hice bendecir por un sacerdote. Sigue sin internet. ¿Qué necesita, un exorcismo?
 
-`006` **Jair:** (Treinta años. Ingeniero de software. Y mi trabajo es pedirle a la gente que desenchufe cosas.)
+`006` **Jair:** (Treinta años. Ingeniero de software. Y mi trabajo es pedirle a la gente que desenchufe cosas y las vuelva a enchufar.)
 
-`007` **Supervisor (chat):** Equipo: el pago se corre para el otro viernes. ¡Ánimo, que aquí somos familia!
+`007` **Supervisor (chat):** Equipo: el pago se va para el otro viernes. ¡Ánimo, que aquí somos familia!
 
-`008` **Jair:** «Se corre». Como si el sueldo fuera un bus que se pasó de parada.
-
-`009` **Jair:** (Y «familia». A la familia por lo menos le dan almuerzo.)
+`008` **Jair:** «Se va». Como si el sueldo fuera un bus que se pasó de parada. (Y «familia». A la familia, por lo menos, le dan el almuerzo incluido.)
 
 `o01` — El teléfono vuelve a sonar. Siempre vuelve a sonar. Es lo único de la oficina que funciona sin falla.
 
@@ -37,43 +33,39 @@
 
 `o04` **Jair:** ¿Su... refrigeradora?
 
-`o05` **Cliente:** Es inteligente. Lo dice en la caja. Pero no se conecta. Y yo pagué por inteligente.
+`o05` **Cliente:** Es inteligente. Lo dice en la caja. Pero no se conecta. Y yo pagué por una inteligente, no por una simple refrigeradora.
 
-`o06` **Jair:** (Hasta las refrigeradoras tienen expectativas más altas que mi sueldo.)
+`o06` **Jair:** (Hasta las refrigeradoras tienen expectativas más altas que mi sueldo.) ¿Probó apagándola y prendiéndola?
 
-`o07` **Jair:** ¿Probó apagándola y prendiéndola?
+`o08` **Cliente:** Joven, si la apago se me dañan la carne y la leche.
 
-`o08` **Cliente:** Joven, si la apago se me daña la carne.
+`o09` **Jair:** Entonces le recomiendo elegir entre la carne, la leche o el internet.
 
-`o09` **Jair:** Entonces le recomiendo elegir entre la carne y el internet.
-
-`o10` **Cliente:** ¿Y por qué tengo que elegir?
+`o10` **Cliente:** ¿Y por qué diablos tengo que elegir?
 
 `o11` **Jair:** (Porque así funciona todo, señora.)
 
 `o12` **Jair:** Le voy a generar un ticket. Número cuatro, cuatro, siete, dos, uno. Un técnico la llamará en un plazo de tres a cinco días hábiles.
 
-`o13` **Cliente:** ¿Y me van a llamar de verdad?
+`o13` **Cliente:** ¿Y de verdad me van a llamar, o es solo una excusa para no atender mi problema?
 
 `o14` **Jair:** ...
 
-`o15` **Jair:** Que tenga un buen día.
+`o15` **Jair:** Que tenga un buen día, señora.
 
-`o16` — Cuelga. En la pantalla, la cola de llamadas en espera marca treinta y dos. El reloj marca las cinco y cuarenta. El aire acondicionado no marca nada.
+`o16` — Cuelga. En la pantalla, la cola de llamadas en espera marca treinta y dos. El reloj marca las cinco y cuarenta. El aire acondicionado no marca nada: ni el termómetro le funciona.
 
-`o17` — En el escritorio de al lado, un compañero come un sánduche frío con la mirada perdida en una hoja de cálculo. Lleva tres semanas sin decir una frase completa. Jair lo envidia un poco.
+`o17` — En el escritorio de al lado, un compañero come un sánduche frío con la mirada perdida en una hoja de cálculo. Lleva tres semanas con la misma hoja. Jair lo envidia un poco: sabe que solo finge trabajar.
 
-`o18` **Jair:** (Tengo una carrera. Sé programar en seis lenguajes. Sé montar un servidor desde cero. Y estoy aquí, generando tickets para refrigeradoras.)
+`o18` **Jair:** (Tengo una carrera. Sé programar en Coffee, en Cobra y en ese lenguaje que tiene un elefante de mascota. Sé montar un servidor desde cero. Y estoy aquí, generando tickets para refrigeradoras.)
 
-`o19` **Jair:** (Algún día voy a hacer algo grande. Algo mío. Algún día.)
+`o19` **Jair:** (Algún día voy a hacer algo grande. Algo mío. Totalmente mío. Algún día. Llevo diciendo «algún día» desde los veintidós. O desde mucho antes…)
 
-`o20` **Jair:** (Llevo diciendo «algún día» desde los veintidós.)
-
-`o21` — Saca el celular y, por costumbre, abre Geekdump: la página donde los programadores del mundo suben sus proyectos para que otros programadores los ignoren.
+`o21` — Saca el celular y, por costumbre, abre Geekdump: la página donde los programadores del mundo suben sus proyectos para que otros programadores los ignoren. O se los roben.
 
 `o22` — Su perfil. Un calendario de cuadritos que deberían ser verdes. Todos grises. El último commit es de hace dos años y dice «fix: ahora sí».
 
-`o23` **Jair:** (Tres repositorios. «dragones-rpg»: archivado. «nave-espacial-WIP»: archivado. «granja-final-final-v2»: tan abandonado que el README tiene telarañas.)
+`o23` **Jair:** (Tres repositorios. «seriesgratis-rpg»: archivado. «cripto-tokens-WIP»: archivado. «granja-bots-final-final-v2»: tan abandonado que el README tiene telarañas.)
 
 `o24` — Cuatro estrellas en total. Una se la dio él mismo, desde una cuenta falsa. Las otras tres son bots.
 
@@ -81,12 +73,12 @@
 
 `o26` **Jair:** (En Geekdump todos tienen un proyecto que va a cambiar el mundo. Yo tengo cuadritos grises y un «funciona en mi máquina».)
 
-`010` — Jair marca la salida a las 18:00:00 exactas. Es la única rebeldía que se permite.
+`010` — Jair marca la salida a las 18:00:00 exactas. Es la única rebeldía que se permite. Total, las horas extra no se las pagan.
 
 
 ### fondos/calle_noche.webp
 
-`011` — Afuera la ciudad huele a asfalto caliente y a fritura. El sol ya se fue, pero el calor se queda, como un pariente que no capta indirectas.
+`011` — Afuera la ciudad huele a asfalto caliente y a orina fermentada. El sol ya se fue, pero el calor se queda, como un tipo que no capta indirectas.
 
 
 ### fondos/dulce_frio_fachada.webp
@@ -101,18 +93,18 @@
 
 `016` **Nikki:** Y en ocho años nunca entraste a comprarme un helado. Qué detalle.
 
-`017` **Jair:** Me dijiste que si entraba me ibas a cobrar doble.
+`017` **Jair:** Me dijiste que si entraba me ibas a vetar del local.
 
-`018` **Nikki:** Y te iba a cobrar doble. Eso no quita que entraras.
+`018` **Nikki:** Sí, pero eso no significa que tengas que hacerme caso al pie de la letra. Podías entrar y comprarme un helado triple.
 
-`019` **Nikki:** Oye. Hoy fue un día de mierda. Vamos por una. Una sola. Lo juro por mi delantal.
+`019` **Nikki:** Oye. Hoy fue un día de mierda. Vamos por una cerveza. Una sola. Lo juro por mi delantal.
 
 
 > **DECISIÓN**
 - `019#0` Aceptar ⟶ va a `020a`
 - `019#1` Decir que estás cansado ⟶ va a `020b` · noche = "sin_bar"
 
-`020a` **Jair:** Una. Mañana... bueno, mañana es sábado. Una.
+`020a` **Jair:** Una. Mañana... bueno, mañana es sábado y tengo que trabajar, aunque preferiría que no fuera así.
 
 `020a1` **Nikki:** Dame dos minutos. No pienso entrar a un bar vestida de cono de fresa.
 
@@ -120,27 +112,27 @@
 
 `020a3` — Sale a los cinco minutos, no a los dos: camiseta negra, pantalón negro, el pelo suelto. La gorra va hecha un rollo dentro de la mochila y el delantal asoma por el cierre, como si no quisiera quedarse.
 
-`020a4` **Nikki:** ¿Qué? Así sí me invitan una cerveza. Con uniforme lo único que me piden es el baño.
+`020a4` **Nikki:** ¿Qué? Así sí me invitan una cerveza. Con uniforme lo único que me piden es que les preste el baño.
 
 > ⤷ continúa en `021`
 
 `020b` **Jair:** Estoy muerto, Nikki. Otro día.
 
-`020b2` **Nikki:** ...Ya. Otro día.
+`020b2` **Nikki:** ...Ya. Otro día. Creo que yo también estoy cansada.
 
 > ♪ música: nightcity
 `020b3` — Lo dice con una de sus sonrisas de cartel, de las entrenadas. Termina de bajar la persiana y se va caminando hacia el otro lado, sola, con el delantal todavía puesto.
 
-`020b4` **Jair:** (Otro día. Siempre hay otro día. Es lo bueno de vivir en bucle.)
+`020b4` **Jair:** (Otro día. Siempre hay otro día. Es lo bueno de vivir en un bucle eterno.)
 
-`020b5` — Jair toma el bus. Llega a su casa a las siete y diez, sobrio, con hambre y con la sensación de haber esquivado algo, sin saber si era un problema o una oportunidad.
+`020b5` — Jair toma el bus. Llega a su casa a las siete y diez, sobrio, con hambre y con la sensación de haber esquivado algo, sin saber si era un problema o la oportunidad de que algo cambiara en su vida.
 
 > ⤷ continúa en `116`
 
 
 ### fondos/bar_noche.webp
 
-`021` — El bar queda a dos cuadras. Se llama El Último. Nadie recuerda si es por la hora o por la clientela.
+`021` — El bar queda a dos cuadras. Se llama La Lechuza. Nadie sabe si es porque abre las veinticuatro horas o por los depredadores sexuales que van a cazar presas jóvenes e ingenuas, como lechuzas tras un ratón.
 
 `022` — Luces de neón moradas, una rocola que solo toca canciones de despecho y una barra pegajosa que ha visto cosas.
 
@@ -288,9 +280,7 @@
 
 `067y16_a11` **Jair:** ...¿Conmigo?
 
-`067y16_a12` **Nikki:** Siguiente pregunta, hijo de puta.
-
-`067y16_a13` **Nikki:** Yo nunca... lo he hecho en un lugar público.
+`067y16_a12` **Nikki:** Siguiente pregunta, cariño. Yo nunca… lo he hecho en un lugar público.
 
 `067y16_a14` — Los dos toman. Al mismo tiempo. Se miran por encima del vaso.
 
@@ -397,9 +387,7 @@
 
 `083c` **Jair:** Si esto fuera un juego, ahora mismo me saldría una opción romántica. Y yo elegiría «guardar partida».
 
-`083c2` **Nikki:** Y después nunca la cargarías.
-
-`083c3` **Nikki:** Así eres. Guardas y guardas, y nunca juegas.
+`083c2` **Nikki:** Y después nunca la cargarías. Así eres. Guardas y guardas, y nunca juegas.
 
 `084` — Cuarta ronda. O quinta. Jair dejó de contar; el cantinero no.
 
@@ -440,9 +428,7 @@
 
 `095r01` **Nikki:** Esta canción no. Esta canción es para gente que tiene esperanza.
 
-`095r02` — Se levanta, camina hasta la rocola y mete una moneda. Le toma tres intentos.
-
-`095r03` — Suena algo viejo y lento, de esas canciones que ponen en las bodas cuando ya se fueron los niños.
+`095r02` — Se levanta, camina hasta la rocola y mete una moneda. Le toma tres intentos elegir la canción. Suena algo viejo y lento, de esas canciones que ponen en las bodas cuando ya se fueron los niños y solo quedan los adultos borrachos.
 
 `095r04` **Nikki:** Ven a bailar.
 
@@ -454,9 +440,7 @@
 
 `095r08` **Nikki:** Todo es personal, Jair. Hasta lo que no haces.
 
-`095r09` — Nikki baila sola entre las mesas, abrazada a la botella como a una pareja que no la pisa.
-
-`095r10` — Dos tipos en la barra la miran. Jair los mira a ellos. Es lo más valiente que hace en toda la noche.
+`095r09` — Nikki baila sola entre las mesas, abrazada a la botella como a una pareja que no la pisa. Y sabe moverse. Dos tipos en la barra la miran. Jair los mira a ellos. Es lo más valiente que hace en toda la noche.
 
 `095r11` — Cuando la canción termina, Nikki vuelve a la silla, despeinada y sin aire, y se queda mirando a Jair como si fuera la primera vez que lo ve.
 
@@ -492,9 +476,7 @@
 
 `095s16` **Nikki:** ¡Mira quién aprendió a contestar! Un tequila más y hasta me invitas a tu caja de zapatos.
 
-`095s17` **Jair:** (Siempre es ella la que se invita. Yo solo dejo la puerta abierta.)
-
-`096` **Jair:** (Debería decirle que ya es suficiente.)
+`095s17` **Jair:** (Siempre es ella la que se invita. Yo solo dejo la puerta abierta. Debería decirle que ya es suficiente, pero estoy demasiado cansado para hacerlo.)
 
 `097` **Jair:** (No se lo digo. Nunca se lo digo. Si se lo digo, se va. Si no se lo digo, se queda un rato más.)
 
@@ -650,9 +632,7 @@
 
 ### fondos/cg_nikki_cachetadas.webp
 
-`nk_bad02` **Nikki:** ¿Jair? …Jair, levántate. No es gracioso. Levántate.
-
-`nk_bad03` **Nikki:** Lo maté. Lo maté a cachetadas. ¿Quién se muere de cachetadas, Jair? ¿Quién?
+`nk_bad02` **Nikki:** ¿Jair? …Jair, levántate. No es gracioso. Levántate. Lo maté. Lo maté a cachetadas. ¿Quién se muere de cachetadas, Jair? ¿Quién más?
 
 `nk_bad04` **Nikki:** ¡Eres un idiota! ¡Un idiota! Te dije que nunca te fueras de mi vida… ¡y te mueres! ¡Así te vas!
 
@@ -729,9 +709,7 @@
 
 `115n4` — Sin mayúsculas ni punto final, como escribe todo. Jair lo lee como otros leen el horóscopo: casi todas las noches, por si esta vez dice otra cosa.
 
-`115n5` **Jair:** («Nunca te vayas de mi vida».)
-
-`115n6` **Jair:** (Y hace diez minutos: «Búscate una novia, Jair».)
+`115n5` **Jair:** («Nunca te vayas de mi vida». Y hace diez minutos: «Búscate una novia de verdad, Jair».)
 
 
 ### PANTALLA:celular_foto_nikki
@@ -762,9 +740,7 @@
 
 `119` — Prende el ventilador. Prende la PC. Abre el refrigerador, mira adentro y lo cierra. No sabe qué buscaba.
 
-`120` **Jair:** Gano poco, vivo en una caja de zapatos y mi mejor relación es con un ventilador.
-
-`121` **Jair:** (Y con Nikki. Pero de esa relación no tengo ni el manual ni la garantía.)
+`120` **Jair:** Gano poco, vivo en una caja de zapatos y mi mejor relación es con un ventilador. (Y con Nikki. Pero de esa relación no tengo ni el manual ni la garantía.)
 
 > solo si noche == "rechazo"
 `121r1` **Jair:** (Le dije que no. Por primera vez en ocho años, le dije que no.)
@@ -887,9 +863,7 @@
 
 `bad_rechazo_003b` — Le escribe a Nikki: «llegaste bien?». Ella no contesta. Él se duerme igual.
 
-`bad_rechazo_004` — No hay rubia, ni peliverde, ni Rey Malvado. Solo un hombre que, por una noche, eligió no huir.
-
-`bad_rechazo_005` — Sin esa huida no hay juego. Y sin juego, la historia que estabas por jugar nunca ocurrió.
+`bad_rechazo_004` — Esta noche solo hay un hombre que eligió no huir. Sin esa huida no hay juego. Y sin juego, la historia que estabas por jugar nunca ocurrió.
 
 
 ### PANTALLA:negro
@@ -908,11 +882,7 @@
 ### PANTALLA:gravity_ide
 
 > ♪ música: into_the_ciberse
-`128` **GRAVITY:** > Instalando GRAVITY... Framework: Reckt. Front: Coffee. Back: Cobra.
-
-`129` **GRAVITY:** > Asistente integrado: GENESIS. Estado: en línea.
-
-`130` **GRAVITY:** > Describa su proyecto.
+`128` **GRAVITY:** > Instalando GRAVITY... Framework: Reckt. Front: Coffee. Back: Cobra. > Asistente integrado: GENESIS. Estado: en línea. > Describa su proyecto.
 
 `131` **Jair:** A ver qué tan lista eres.
 
@@ -922,9 +892,7 @@
 
 `134` — En la pantalla aparece un castillo. Después un cielo. Después un reino entero, en segundos, como si siempre hubiera estado ahí, esperando que alguien lo pidiera.
 
-`135` **Jair:** ...Okay. Eso no debería ser posible.
-
-`136` **Jair:** Eso no debería ser posible con mi tarjeta gráfica.
+`135` **Jair:** ...Okay. Eso no debería ser posible. Eso no debería ser posible con mi tarjeta gráfica.
 
 `137` **Jair (prompt):** Un protagonista. Un chico normal. Y dos heroínas.
 
@@ -955,33 +923,19 @@
 > ♪ silencio
 `150` — Su frente baja despacio hasta el teclado.
 
-`151` **GRAVITY:** > sssssssssssssssssssssssssssssssssssssss
-
-`152` **GRAVITY:** > Respuesta recibida: S.
-
-`153` **GRAVITY:** > Usuario inactivo detectado. Autocompletando personalidades.
+`151` **GRAVITY:** > sssssssssssssssssssssssssssssssssssssss > Respuesta recibida: S. > Usuario inactivo detectado. Autocompletando personalidades.
 
 `154` **GRAVITY:** > Compilando mundo. Tiempo estimado: indefinido.
 
 `155` — Afuera faltan tres horas para el amanecer. Adentro de la pantalla, el tiempo empieza a correr.
 
-`l01` **GRAVITY:** > Generando cielo. Color solicitado: no especificado. Color asignado: magenta.
+`l01` **GRAVITY:** > Generando cielo. Color solicitado: no especificado. Color asignado: magenta. > Generando física. Gravedad: reducida, para facilitar escenas de acción.
 
-`l02` **GRAVITY:** > Generando física. Gravedad: reducida, para facilitar escenas de acción.
+`l03` **GRAVITY:** > Generando antagonista: Rey… Generando historia previa del antagonista. Generando ejército. Rostros: no requeridos. Generando amenaza secundaria. Forma: no requerida.
 
-`l03` **GRAVITY:** > Generando antagonista: Rey Malvado. Generando historia previa del antagonista.
+`l06` **GRAVITY:** > Generando heroína 01. Generando… ¿heroína 02? Aplicando referencias importadas. Generando recuerdos de fondo para las entidades. Calidad: suficiente.
 
-`l04` **GRAVITY:** > Generando ejército. Rostros: no requeridos.
-
-`l05` **GRAVITY:** > Generando amenaza secundaria. Forma: no requerida.
-
-`l06` **GRAVITY:** > Generando heroína 01. Generando heroína 02. Aplicando referencias importadas.
-
-`l07` **GRAVITY:** > Generando recuerdos de fondo para las entidades. Calidad: suficiente.
-
-`l08` **GRAVITY:** > Generando dimensión espacial. Generando dimensión ancestral. Generando historia: en curso.
-
-`l09` **GRAVITY:** > Advertencia: el usuario no responde. Usuario: dentro del área de carga.
+`l08` **GRAVITY:** > Generando dimensión espacial. Generando dimensión ancestral. Generando historia: en curso. > Advertencia: el usuario no responde. Usuario: dentro del área de carga.
 
 `l10` — En el departamento, el ventilador gira. Jair respira contra el teclado. En la pantalla, las líneas siguen subiendo, cada vez más rápido, hasta que ya no son líneas sino una sola luz blanca.
 
@@ -999,9 +953,7 @@
 ### fondos/nebulosa_magenta.webp
 
 > ♪ música: new_discover
-`g1_003` — Jair abre los ojos.
-
-`g1_004` — El cielo es magenta. No rosado, no morado: magenta, como ese color que nadie elige en la paleta porque se ve demasiado.
+`g1_003` — Jair abre los ojos. El cielo es magenta. No rosado, no morado: magenta, como ese color que nadie elige en la paleta porque se ve demasiado. Demasiado estúpido.
 
 `g1_005` — Y no es un cielo. Hay estrellas abajo. Hay estrellas a los lados. Hay estrellas en lugares donde las estrellas no tienen permiso de estar.
 
@@ -2252,7 +2204,7 @@
 
 ### PANTALLA:boringram_historia
 
-`g5m_011h2` — Jair la abre. Nikki en El Último, con una cerveza en la mano y las mejillas rojas, sonriéndole al celular. Encima, en letras blancas: «una sola».
+`g5m_011h2` — Jair la abre. Nikki en La Lechuza, con una cerveza en la mano y las mejillas rojas, sonriéndole al celular. Encima, en letras blancas: «una sola».
 
 `g5m_011h3` **Jair:** («Una sola».)
 

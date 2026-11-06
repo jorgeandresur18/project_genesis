@@ -210,15 +210,14 @@ Generado por `node tools/condensar.mjs proponer cap01 cap01_001 cap01_g1_007` (C
 
 - [x] `cap01_021` (segunda tanda del autor)
   - antes: El bar queda a dos cuadras. Se llama El Último. Nadie recuerda si es por la hora o por la clientela.
-  - → El bar queda a dos cuadras. Se llama La Lechuza. Nadie sabe si es porque abre las veinticuatro horas o por los depredadores que van a cazar presas jóvenes e ingenuas, como lechuzas tras un ratón.
+  - → El bar queda a dos cuadras. Se llama La Lechuza. Nadie sabe si es porque abre las veinticuatro horas o por los depredadores sexuales que van a cazar presas jóvenes e ingenuas, como lechuzas tras un ratón.
 
 - [x] `cap01_g5m_011h2` (la historia de Nikki en Boringram): el bar ahora se llama La Lechuza.
   - → Jair la abre. Nikki en La Lechuza, con una cerveza en la mano y las mejillas rojas, sonriéndole al celular. Encima, en letras blancas: «una sola».
 
-- [ ] `cap01_020a` **⚠ choca con el canon** (Capítulo 4, escena 3: Jair *había olvidado* que el sábado también trabaja; si aquí ya lo dice, allá no puede olvidarlo). Elige una y márcala [x]:
+- [x] `cap01_020a` (decisión del autor: Jair trabaja el sábado; por eso acepta solo una)
   - antes: Una. Mañana... bueno, mañana es sábado. Una.
-  - → Una. Mañana... bueno, mañana es sábado. Creo que no me toca trabajar. Una.
-  - (la tuya, corregida: Una. Mañana... bueno, mañana es sábado y tengo que trabajar, aunque preferiría que no fuera así.)
+  - → Una. Mañana... bueno, mañana es sábado y tengo que trabajar, aunque preferiría que no fuera así.
 
 > Al aplicar el nombre del bar también cambian `docs/CANON.md` (Boringram) y el correo de `src/data/pantallas.json` (`[granja-final-final-v2]` → `[granja-bots-final-final-v2]`).
 
@@ -335,7 +334,7 @@ Generado por `node tools/condensar.mjs proponer cap01 cap01_001 cap01_g1_007` (C
 - `019#0` Aceptar ⟶ va a `020a`
 - `019#1` Decir que estás cansado ⟶ va a `020b` · noche = "sin_bar"
 
-`020a` **Jair:** Una. Mañana... bueno, mañana es sábado y tengo que trabajar, aunque preferiría que no fuera así. <!-- ✎ CORREGIDO POR EL AUTOR · ⚠ choca con el canon: ver «Cambios sueltos» -->
+`020a` **Jair:** Una. Mañana... bueno, mañana es sábado y tengo que trabajar, aunque preferiría que no fuera así. <!-- ✎ CORREGIDO POR EL AUTOR -->
 
 `020a1` **Nikki:** Dame dos minutos. No pienso entrar a un bar vestida de cono de fresa.
 
@@ -363,7 +362,7 @@ Generado por `node tools/condensar.mjs proponer cap01 cap01_001 cap01_g1_007` (C
 
 #### fondos/bar_noche.webp
 
-`021` — El bar queda a dos cuadras. Se llama La Lechuza. Nadie sabe si es porque abre las veinticuatro horas o por los depredadores que van a cazar presas jóvenes e ingenuas, como lechuzas tras un ratón. <!-- ✎ CORREGIDO POR EL AUTOR -->
+`021` — El bar queda a dos cuadras. Se llama La Lechuza. Nadie sabe si es porque abre las veinticuatro horas o por los depredadores sexuales que van a cazar presas jóvenes e ingenuas, como lechuzas tras un ratón. <!-- ✎ CORREGIDO POR EL AUTOR -->
 
 `022` — Luces de neón moradas, una rocola que solo toca canciones de despecho y una barra pegajosa que ha visto cosas.
 
