@@ -238,6 +238,7 @@
   "batalla.especial_listo": "READY!",
   "batalla.especial": "SPECIAL!",
   "batalla.especial_total": "{quien} dealt {n} damage in total.",
+  "batalla.orden_turno": "Turn order",
   "batalla.turno_de": "Turn:",
   "galeria.accion.idle": "Base",
   "galeria.accion.mover": "Move",

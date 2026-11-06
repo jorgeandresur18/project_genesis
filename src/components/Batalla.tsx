@@ -744,6 +744,13 @@ function Pelea({
     const alEmpezar = fotoEstados([...b.current.heroes, ...b.current.enemigos]);
     const opciones = disponibles(b.current.heroes, d.personajes, b.current.actuaron);
     b.current.descansan = b.current.heroes.filter((h) => vivo(h) && !opciones.includes(h)).map((h) => h.id);
+    // La barra: mientras eligen, el orden previsto solo por velocidad.
+    setBarra({
+      orden: ordenDelTurno([...opciones.map((h) => ({ l: h, dato: 0 })), ...b.current.enemigos.filter(vivo).map((e) => ({ l: e, dato: 0 }))]).map((x) => x.l.id),
+      prioridad: [],
+      actua: null,
+      hecho: [],
+    });
     forzar();
     // Dormido, congelado o paralizado: pierde su turno.
     for (const h of b.current.heroes.filter((x) => vivo(x) && x.desterrado)) await decir(fmt(t('batalla.sigue_desterrado'), { quien: h.nombre, n: h.desterrado }));
@@ -793,34 +800,41 @@ function Pelea({
       ...elecciones.map(([h, c]) => ({ l: h, prioridad: prioridad(h, c), dato: c })),
       ...b.current.enemigos.filter(vivo).map((e) => ({ l: e, dato: null })),
     ]);
+    setBarra({ orden: orden.map((x) => x.l.id), prioridad: orden.filter((x) => x.dato && prioridad(x.l, x.dato)).map((x) => x.l.id), actua: null, hecho: [] });
     for (const { l, dato: c } of orden) {
-      if (!c) {
-        // Un enemigo: si cayó o ya no queda a quién pegarle, no actúa.
-        if (!vivo(l) || !b.current.heroes.some(enCampo)) continue;
-        await actuarEnemigo(l);
+      // La barra: este actúa ahora; al terminar (aunque se salte), queda como hecho.
+      setBarra((v) => ({ ...v, actua: l.id }));
+      try {
+        if (!c) {
+          // Un enemigo: si cayó o ya no queda a quién pegarle, no actúa.
+          if (!vivo(l) || !b.current.heroes.some(enCampo)) continue;
+          await actuarEnemigo(l);
+          const r = resultado(b.current, d);
+          if (r === 'empate' || r === 'pierde') return r;
+          continue;
+        }
+        const h = l;
+        if (!vivo(h)) {
+          if (c.tipo === 'objeto') b.current.mochila[c.clave]++;
+          continue;
+        }
+        // Dormido, congelado o paralizado por un enemigo más rápido en este mismo turno: ya no actúa.
+        if (noActua(h) || h.desterrado) {
+          if (c.tipo === 'objeto') b.current.mochila[c.clave]++;
+          continue;
+        }
+        // Si ya no queda ningún enemigo (antes del jefe), los ataques de este turno se pierden.
+        if (c.tipo !== 'objeto' && c.tipo !== 'esquivar' && !b.current.enemigos.some(vivo)) continue;
+        await actuarHeroe(h, c);
+        if (b.current.perdona) return 'perdona';
+        // La autodestrucción o un cebo explosivo pueden terminarla de golpe.
         const r = resultado(b.current, d);
         if (r === 'empate' || r === 'pierde') return r;
-        continue;
+        if (jefeSeRetira()) return 'gana';
+        if (ataca(c)) await cansarse(h);
+      } finally {
+        setBarra((v) => ({ ...v, actua: null, hecho: [...v.hecho, l.id] }));
       }
-      const h = l;
-      if (!vivo(h)) {
-        if (c.tipo === 'objeto') b.current.mochila[c.clave]++;
-        continue;
-      }
-      // Dormido, congelado o paralizado por un enemigo más rápido en este mismo turno: ya no actúa.
-      if (noActua(h) || h.desterrado) {
-        if (c.tipo === 'objeto') b.current.mochila[c.clave]++;
-        continue;
-      }
-      // Si ya no queda ningún enemigo (antes del jefe), los ataques de este turno se pierden.
-      if (c.tipo !== 'objeto' && c.tipo !== 'esquivar' && !b.current.enemigos.some(vivo)) continue;
-      await actuarHeroe(h, c);
-      if (b.current.perdona) return 'perdona';
-      // La autodestrucción o un cebo explosivo pueden terminarla de golpe.
-      const r = resultado(b.current, d);
-      if (r === 'empate' || r === 'pierde') return r;
-      if (jefeSeRetira()) return 'gana';
-      if (ataca(c)) await cansarse(h);
     }
     // Los refuerzos que llegaron en este turno actúan al final (si queda a quién pegarle).
     for (const id of llegaronEnTurno.current) {
@@ -1263,6 +1277,11 @@ function Pelea({
     }
   };
 
+  /**
+   * La barra del orden del turno (pedido del autor, 2026-11-05): quiénes actúan y en qué orden; `actua`, el que está
+   * actuando; `hecho`, los que ya actuaron; `prioridad`, los que van primero por esquivar, un objeto o un cebo.
+   */
+  const [barra, setBarra] = useState<{ orden: string[]; prioridad: string[]; actua: string | null; hecho: string[] }>({ orden: [], prioridad: [], actua: null, hecho: [] });
   /** Los refuerzos que llegaron en este turno (actúan al final del turno). */
   const llegaronEnTurno = useRef<string[]>([]);
   /** El ataque que eligió un héroe (el mismo que usa `actuarHeroe`). */
@@ -2323,6 +2342,27 @@ function Pelea({
         )}
         {mensaje && !habla && <p>{conNumeros(texto)}</p>}
       </div>
+      {/* El orden del turno: de izquierda a derecha, quién actúa (el más rápido primero). */}
+      {barra.orden.length > 0 && (
+        <ol className="batalla-orden" aria-label={t('batalla.orden_turno')}>
+          {barra.orden.map((id) => {
+            const l = [...b.current.heroes, ...b.current.enemigos].find((x) => x.id === id);
+            if (!l) return null;
+            const retrato = d.retratos[l.nombre] ?? (l.lado === 'heroe' ? d.retratos[d.personajes[l.clave]?.nombre ?? ''] : undefined);
+            return (
+              <li
+                key={id}
+                className={`${l.lado} ${barra.actua === id ? 'actua' : ''} ${barra.hecho.includes(id) || !vivo(l) ? 'hecho' : ''}`}
+                style={{ '--c': l.lado === 'heroe' ? colorDe(l.clave) : '#e05a5a' } as CSSProperties}
+                title={l.nombre}
+              >
+                {retrato ? <img src={`${BASE}${retrato}.png`} alt="" draggable={false} /> : <span>{l.nombre.charAt(0)}</span>}
+                {barra.prioridad.includes(id) && <i aria-hidden>⚡</i>}
+              </li>
+            );
+          })}
+        </ol>
+      )}
       <div className={`batalla-escena ${casillas ? 'con-casillas' : ''}`}>
         <CajaCasillas casillas={casillas} r={d.fondo_proporcion ?? 16 / 9}>
         <div className="batalla-lado enemigos">

@@ -3692,3 +3692,15 @@ button.cassette:hover .cassette-imagen { transform: translateY(-2px) rotate(-3de
 /* Desterrado por la Tajada del abismo (provisional): casi invisible, como si no estuviera. */
 .batalla-figura.desterrado { opacity: 0.12; filter: grayscale(1); transition: opacity 0.6s ease; }
 .batalla-descansa.desterrado { color: #b48cff; }
+
+/* El orden del turno (pedido del autor, 2026-11-05): arriba a la derecha, de izquierda a derecha. El que actúa se
+   ilumina y crece; los que ya actuaron se apagan; ⚡: va primero (esquivar, un objeto o un cebo). */
+.batalla-orden { position: absolute; top: 0.6rem; right: 3.4rem; z-index: 12; display: flex; gap: 0.3rem; margin: 0; padding: 0.3rem 0.4rem; list-style: none; background: rgba(8, 8, 11, 0.72); border: 1px solid var(--n-borde); pointer-events: none; }
+.batalla-orden li { position: relative; width: 2rem; height: 2rem; border: 2px solid var(--c); background: #111; transition: scale 0.2s, opacity 0.3s, box-shadow 0.2s; }
+.batalla-orden li img { width: 100%; height: 100%; image-rendering: pixelated; display: block; }
+.batalla-orden li span { display: grid; place-items: center; height: 100%; color: var(--c); font-family: 'Press Start 2P', monospace; font-size: 0.7rem; }
+.batalla-orden li.enemigo { border-style: dashed; }
+.batalla-orden li.actua { scale: 1.25; box-shadow: 0 0 0.6rem var(--c); z-index: 1; }
+.batalla-orden li.hecho { opacity: 0.35; }
+.batalla-orden li i { position: absolute; top: -0.55rem; left: -0.35rem; font-size: 0.7rem; font-style: normal; text-shadow: 0 0 3px #000; }
+@media (max-width: 700px), (max-height: 500px) { .batalla-orden { top: 0.3rem; right: 2.8rem; gap: 0.2rem; padding: 0.2rem; } .batalla-orden li { width: 1.4rem; height: 1.4rem; } }

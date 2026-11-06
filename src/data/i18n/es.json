@@ -238,6 +238,7 @@
   "batalla.especial_listo": "¡LISTO!",
   "batalla.especial": "¡ESPECIAL!",
   "batalla.especial_total": "{quien} hizo {n} de daño en total.",
+  "batalla.orden_turno": "Orden del turno",
   "batalla.turno_de": "Turno de",
   "galeria.accion.idle": "Base",
   "galeria.accion.mover": "Moverse",

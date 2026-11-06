@@ -182,3 +182,4 @@ primero. Las pruebas automáticas y el simulador ya lo usan (el equilibrio no se
 - [ ] **El bar con Nikki** (`?batalla=nikki`): Jair sigue actuando antes que ella (está ebria, más lenta).
 - [ ] **Una pelea con un enemigo más rápido** que alguno de los héroes (`?batalla=cap03_rey`: los caballeros empatan con Jair): que el orden se entienda y que esquivar funcione aunque el enemigo sea más rápido.
 - [ ] **Que nada se trabe:** dormir o paralizar a un héroe antes de que actúe (pierde la acción y su objeto vuelve a la mochila).
+- [ ] **La barra del orden** (arriba a la derecha): que se entienda quién va a actuar, que el ⚡ marque al que esquiva o usa un objeto, y que no tape nada en el celular.
