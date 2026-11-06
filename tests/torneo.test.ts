@@ -180,3 +180,24 @@ describe('cuándo se puede elegir cada peleador (decisión del autor, 2026-11-06
     expect(rey.nombre).not.toMatch(/gigante/i);
   });
 });
+
+describe('rivales variados (pedido del autor, 2026-11-06)', () => {
+  it('con la semilla del torneo, las rondas sortean rivales distintos (personajes incluidos); la gran final sigue siendo Nikki', async () => {
+    const { TORNEO, armarRonda } = await import('../src/engine/torneo');
+    const { estadoInicial } = await import('../src/engine/turnos');
+    const triple = TORNEO.modalidades.find((m) => m.peleadores === 3)!;
+    const cruces = new Set<string>();
+    for (let i = 0; i < 40; i++) {
+      const d = armarRonda(TORNEO.copas[0], 1, triple, ['jair', 'cami', 'rikka'], 0, `semilla${i}`);
+      cruces.add(`${d.jefe.enemigo}+${d.horda.enemigo}`);
+      // Una pelea válida: cada rival tiene su ficha y el jefe se rinde al final.
+      expect(d.enemigos[d.jefe.enemigo]?.jefe).toBe(true);
+      expect(d.enemigos[d.horda.enemigo]).toBeTruthy();
+      expect(estadoInicial(d).heroes).toHaveLength(3);
+    }
+    expect(cruces.size).toBeGreaterThan(10);
+    expect([...cruces].some((x) => x.includes('rival_'))).toBe(true);
+    const final = armarRonda(TORNEO.copas[0], TORNEO.rondas.length - 1, triple, ['jair'], 0, 'semilla1');
+    expect(final.jefe.enemigo).toBe('nikki');
+  });
+});

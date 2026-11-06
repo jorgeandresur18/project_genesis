@@ -53,6 +53,8 @@ export interface DatosTorneo {
   equipo_peleadores: Record<string, string[] | string>;
   /** Qué pelea de la historia abre a cada peleador («libre»: desde el inicio; null: todavía no). */
   desbloqueo_peleadores: Record<string, string[] | string | null>;
+  /** Los rivales que se sortean en cada ronda (salvo la gran final) y lo bajos que salen los personajes. */
+  rivales: { jefes: string[]; companeros: string[]; nivel_por_ronda: number[]; /** Los compañeros personajes, un poco más bajos (pegan más que un soldado). */ nivel_companeros?: number };
 }
 
 export const TORNEO = datos as unknown as DatosTorneo;
@@ -141,6 +143,43 @@ const nikkiCampeona = (): Enemigo => {
  * Una ronda del torneo como una pelea más: los héroes elegidos y los rivales, todos al nivel de la copa (Nikki, más:
  * es la campeona y sube con cada defensa del título).
  */
+/** Un azar con semilla (el mismo torneo, los mismos cruces). */
+function azarDe(semilla: string) {
+  let a = [...semilla].reduce((h, c) => (Math.imul(h, 31) + c.charCodeAt(0)) | 0, 7);
+  return () => {
+    a = (a + 0x6d2b79f5) | 0;
+    let x = Math.imul(a ^ (a >>> 15), 1 | a);
+    x = (x + Math.imul(x ^ (x >>> 7), 61 | x)) ^ x;
+    return ((x ^ (x >>> 14)) >>> 0) / 4294967296;
+  };
+}
+/** Las fichas de enemigo que ya existen (los demás rivales son personajes). */
+const ENEMIGOS_TORNEO = ['soldado', 'soldado_veterano', 'capitan'];
+
+/**
+ * Un personaje como rival: su ficha de peleador (números, ataques y especial), sin lo que solo sabe usar el jugador
+ * (cebos, curarse, la bomba). El jefe de la ronda se rinde al final, como todos los jefes.
+ */
+function rivalComoEnemigo(k: string, jefe: boolean): Enemigo {
+  const f = fichaPeleador(k);
+  const ataques = f.ataques.filter((a) => !a.cebo && !a.cura && !a.alMismo && !a.aplica && !a.autodestruccion);
+  const especial = f.especial && !f.especial.bomba ? f.especial : undefined;
+  return {
+    nombre: f.nombre,
+    sprite: f.sprite,
+    base: f.base,
+    crece: f.crece,
+    ataques: ataques.length ? ataques : [{ nombre: 'Golpe', poder: 5, texto: '{quien} le pega a {objetivo}.' }],
+    especial,
+    escala: f.escala,
+    sonido: f.sonido,
+    distancia: f.distancia,
+    filtro: f.filtro,
+    cae_en_cebo: 0.5,
+    ...(jefe ? { jefe: true, huye_a: 0.3 } : {}),
+  } as Enemigo;
+}
+
 export function armarRonda(c: Copa, ronda: number, m: Modalidad, heroes: string[], defensas = 0, semilla?: string): DatosBatalla {
   const r = TORNEO.rondas[ronda];
   const final = r.jefe === 'nikki';
@@ -161,6 +200,29 @@ export function armarRonda(c: Copa, ronda: number, m: Modalidad, heroes: string[
   const n = alInicio ? alInicio + r.extra : 0;
   const nivelRival = Math.round(c.nivel * (1 + (m.nivel_rivales ?? 0)));
   const nivelJefe = final ? Math.round(nivelRival * (1 + TORNEO.nikki.nivel_extra)) + defensas * TORNEO.nikki.por_defensa : nivelRival;
+  // Rivales variados (pedido del autor, 2026-11-06): con la semilla del torneo, cada ronda menos la gran final sortea su
+  // rival y sus compañeros. Sin semilla (las pruebas), las rondas de siempre.
+  let jefeK = r.jefe;
+  let hordaK = r.horda ?? r.jefe;
+  let nivelJ = nivelJefe;
+  let nivelH = nivelRival;
+  if (semilla && !final) {
+    const azar = azarDe(`${semilla}|${c.id}|${m.id}|${ronda}`);
+    const elegir = (l: string[]) => l[Math.floor(azar() * l.length)];
+    const factor = TORNEO.rivales.nivel_por_ronda[ronda] ?? 1;
+    const j = elegir(TORNEO.rivales.jefes);
+    const h = elegir(TORNEO.rivales.companeros);
+    if (!ENEMIGOS_TORNEO.includes(j)) {
+      jefeK = `rival_${j}`;
+      enemigos[jefeK] = rivalComoEnemigo(j, true);
+      nivelJ = Math.max(1, Math.round(nivelRival * factor));
+    } else jefeK = j;
+    if (!ENEMIGOS_TORNEO.includes(h)) {
+      hordaK = `rival_${h}_c`;
+      enemigos[hordaK] = rivalComoEnemigo(h, false);
+      nivelH = Math.max(1, Math.round(nivelRival * factor * (TORNEO.rivales.nivel_companeros ?? 1)));
+    } else hordaK = h;
+  }
   const reemplazar = (ls: Linea[]) =>
     ls.map((l) => ({ ...l, texto: l.texto.replace('{ronda}', `${c.nombre}, ${r.nombre}`).replace('{defensa}', String(defensas + 1)) }));
   const dialogos: Record<string, Linea[]> = { ...base.dialogos };
@@ -174,8 +236,8 @@ export function armarRonda(c: Copa, ronda: number, m: Modalidad, heroes: string[
     heroes,
     personajes,
     enemigos,
-    horda: { enemigo: r.horda ?? r.jefe, al_inicio: alInicio, niveles: Array.from({ length: n }, () => nivelRival) },
-    jefe: { enemigo: r.jefe, nivel: nivelJefe },
+    horda: { enemigo: hordaK, al_inicio: alInicio, niveles: Array.from({ length: n }, () => nivelH) },
+    jefe: { enemigo: jefeK, nivel: nivelJ },
     jefe_con_horda: true,
     objetos: FICHAS.objetos,
     retratos: { ...FICHAS.retratos, 'Nikki, la campeona': FICHAS.retratos.Nikki, 'Soldado veterano': FICHAS.retratos.Soldado },

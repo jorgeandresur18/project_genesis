@@ -810,3 +810,5 @@ Detalle completo en `docs/BATALLA_FINAL.md`.
 
 **Pruebas de balance con semilla fija** (2026-11-06): `balance.test.ts` tira siempre los mismos dados; ya no falla por azar.
 
+**Rivales variados en el torneo** (pedido del autor, 2026-11-06): cada ronda, salvo la gran final (Nikki campeona), sortea su rival y, en dobles y triples, sus compañeros (`rivales` en `torneo.json`): soldados, el soldado veterano, el Capitán o un personaje (Jair, Cami, Rikka, Jordy, Billy, Maggie, el influencer, el otaku, Nikki). Sale distinto en cada torneo (la semilla del torneo). Los personajes rivales pelean con su ficha de peleador (sin cebos, curas ni bomba) y salen un poco más bajos de nivel (×0,8, ×0,9 y ×1,1 por ronda; los compañeros, además ×0,75), así la dificultad sube como con las rondas de siempre. Sin semilla (las pruebas), las rondas de siempre.
+

@@ -232,4 +232,5 @@ En el Torneo (`npm run dev`, desde Extras):
 
 - [ ] Golpear a alguien dormido: sale «¡DESPIERTA!» y se despierta. A los jefes, dormir, congelar y paralizar les dura menos.
 - [ ] En el torneo (con `npm run dev` se ven todos): Nikki y el Rey Malvado como peleadores. En una partida nueva (sin `/all`), solo Jair y Maggie hasta pelear en la historia.
+- [ ] **Rivales variados:** jugar dos torneos seguidos y ver que los rivales cambian (personajes como rivales: que miren hacia el lado correcto y peleen bien).
 

@@ -483,4 +483,6 @@ de Rikka en la galería se ven enteros y grandes. CLAUDE.md, al día con el 6 de
 - **La torre:** el Rey sube al nivel 30 (atento ~52 %; con la ropa de inicio había quedado en ~72 %).
 - **Pruebas de balance con semilla fija:** ya no fallan por azar.
 - **Compras del menú (el autor):** los objetos de pelea comprados en el Boringram del menú sirven solo para el torneo (por ahora); falta construirlo.
+- **Rivales variados en el torneo (pedido del autor):** cada ronda menos la gran final sortea rival y compañeros (soldados, el Capitán o personajes: Cami contra Rikka, Nikki contra un soldado…), también en dobles y triples; 40+ cruces distintos. Los personajes rivales salen un poco más bajos de nivel para que la dificultad siga como antes (medido: simple igual; dobles y triples parecidos). Prueba nueva.
+- **Pendiente de decidir (autor):** las compras del menú. Hoy, comprar objetos desde el título es **para una partida guardada** (con sus monedas). El autor dijo que los objetos de pelea comprados ahí sirven solo para el torneo: eso sería una mochila propia del torneo pagada con PayFoe. Se le preguntó antes de rehacerlo.
 

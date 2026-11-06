@@ -319,5 +319,37 @@
     "maggie": "libre",
     "rey": null,
     "_todo": "TODO(canon): las peleas del Capítulo 4 de Jordy (entrenamiento con Jair), Billy (con Jair contra los influencers), el influencer y el otaku; el final del Capítulo 6 para el Rey Malvado; Maggie es exclusiva del torneo (¿se desbloquea con algo?)."
+  },
+  "rivales": {
+    "_nota": "Rivales variados (pedido del autor, 2026-11-06): cada ronda, salvo la gran final, sortea su rival (el jefe de la ronda) y, en dobles y triples, sus compañeros. Sale distinto en cada torneo (la semilla del torneo). Los personajes pelean como en manos del jugador, pero un poco más bajos de nivel en las primeras rondas (`nivel_por_ronda`, sobre el nivel de la copa).",
+    "jefes": [
+      "soldado_veterano",
+      "capitan",
+      "jair",
+      "cami",
+      "rikka",
+      "jordy",
+      "billy",
+      "maggie",
+      "influencer",
+      "otaku",
+      "nikki"
+    ],
+    "companeros": [
+      "soldado",
+      "jair",
+      "cami",
+      "rikka",
+      "jordy",
+      "maggie",
+      "influencer",
+      "otaku"
+    ],
+    "nivel_por_ronda": [
+      0.8,
+      0.9,
+      1.1
+    ],
+    "nivel_companeros": 0.75
   }
 }
