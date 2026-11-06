@@ -127,8 +127,7 @@ Decisiones y datos que solo puede dar el autor; Claude los aplica sin pedir prue
 computadora de Jorge: ver `docs/PRUEBAS_EN_CASA.md`).
 
 0. **Publicada la 1.1.3** (5 de noviembre, orden del autor; la 1.1.2 cerró los atajos): `/all` y los demás atajos piden el PIN del autor. Publicar en tandas, para no gastar el límite de Vercel; probar a diario con `npm run dev`.
-1. **Los enlaces de Lolabúm** que faltan: «16 Phantasmas», «Tócame» y «Novedades ecuatorianas» (hoy abren la búsqueda
-   de Spotify).
+1. ~~**Los enlaces de Lolabúm**~~ ✓ (5 de noviembre: ya con su enlace directo; falta publicarlos en `main`).
 2. **El repositorio sigue público** (decisión del autor, 5 de noviembre: por ahora no pasa a privado).
 3. **Mirar que Vercel haya publicado la 1.1.0** (la CI de `main` dio bien: comprobado el 5 de noviembre).
 4. **Boringram del menú:** si en el menú se pueden comprar objetos de pelea con PayFoe, ¿llegan a la próxima partida
