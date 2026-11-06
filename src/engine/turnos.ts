@@ -258,6 +258,14 @@ export function decidirEnemigo(
  */
 export function finDeTurno(estado: EstadoPelea) {
   estado.heroes.forEach((h) => (h.esquivando = false));
+  // Seguidores (el influencer): el que no se lució en este turno pierde uno.
+  [...estado.heroes, ...estado.enemigos].forEach((h) => {
+    if (h.seguidores && !h.lucio) {
+      h.seguidores--;
+      h.extra -= h.atqSeguidor ?? 0;
+    }
+    h.lucio = false;
+  });
   [...estado.heroes, ...estado.enemigos].forEach((h) => {
     // Desterrado: solo descuenta el destierro; lo demás queda en pausa hasta que vuelve.
     if (h.desterrado) {
@@ -288,6 +296,18 @@ export function sumarEnemigo(estado: EstadoPelea, d: DatosBatalla, clave: string
 /** Si al caer `e` llega otro de la horda: solo los de la horda, y mientras queden. */
 export const llegaRefuerzo = (estado: EstadoPelea, d: DatosBatalla, e: Luchador) => e.clave === d.horda.enemigo && estado.salieron < d.horda.niveles.length;
 
+/** Se lució (crítico o derribó a alguien): si junta seguidores, gana uno (hasta su máximo). Devuelve si ganó. */
+export function lucirse(d: DatosBatalla, x: Luchador): boolean {
+  const s = (x.lado === 'heroe' ? d.personajes[x.clave] : d.enemigos[x.clave])?.seguidores;
+  if (!s) return false;
+  x.lucio = true;
+  if ((x.seguidores ?? 0) >= s.max) return false;
+  x.seguidores = (x.seguidores ?? 0) + 1;
+  x.atqSeguidor = s.atq;
+  x.extra += s.atq;
+  return true;
+}
+
 /**
  * Un golpe, sin dibujo: la protección lo bloquea (y se gasta); si no, resta PS y carga la barra de quien lo recibe.
  * Si los héroes van perdiendo, los suyos son críticos más seguido. El jefe que se retira nunca llega a 0 (su clon, sí).
@@ -314,6 +334,7 @@ export function resolverGolpe(
   const jefe = defensor.lado === 'enemigo' ? d.enemigos[defensor.clave] : null;
   defensor.ps = Math.max(jefe?.huye_a && defensor.clon === undefined ? 1 : 0, defensor.ps - n);
   if (defensor.ps === 0) limpiarEstados(defensor);
+  if (golpe.critico || (defensor.ps === 0 && !defensor.cebo && atacante !== defensor)) lucirse(d, atacante);
   return { n, critico: golpe.critico };
 }
 

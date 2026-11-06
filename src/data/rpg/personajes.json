@@ -496,6 +496,151 @@
       },
       "escala": 1.0,
       "sonido": "cachetada"
+    },
+    "influencer": {
+      "nombre": "Influencer",
+      "sprite": "batalla/nikki",
+      "filtro": "hue-rotate(300deg) saturate(1.5) brightness(1.08)",
+      "seguido": true,
+      "base": {
+        "ps": 30,
+        "atq": 6,
+        "def": 3,
+        "vel": 10
+      },
+      "crece": {
+        "ps": 5,
+        "atq": 1,
+        "def": 0.5,
+        "vel": 0.5
+      },
+      "seguidores": {
+        "atq": 2,
+        "max": 5
+      },
+      "ataques": [
+        {
+          "nombre": "Selfie con flash",
+          "poder": 10,
+          "deja": {
+            "estado": "paralizado",
+            "prob": 0.15
+          },
+          "usos": 20,
+          "texto": "{quien} se saca una selfie con {objetivo} de fondo. El flash va directo a los ojos. [Relleno: borrador de Claude, sin sprites propios]"
+        },
+        {
+          "nombre": "Unboxing violento",
+          "poder": 16,
+          "usos": 8,
+          "texto": "{quien} abre un paquete patrocinado a golpes. La caja termina en la cara de {objetivo}. [Relleno: borrador de Claude, sin sprites propios]"
+        },
+        {
+          "nombre": "Colaboración pagada",
+          "poder": 0,
+          "cura": 0.2,
+          "usos": 3,
+          "texto": "A {quien} le llega una bebida de un patrocinador. La toma mirando a la cámara. [Relleno: borrador de Claude, sin sprites propios]"
+        }
+      ],
+      "hablar": [
+        "¿Me das un like? Es para el algoritmo.",
+        "Esto va directo a mis historias.",
+        "Usa mi código de descuento y te dejo ganar."
+      ],
+      "especial": {
+        "nombre": "Transmisión en vivo",
+        "poder": 5,
+        "golpes": 6,
+        "objetivo": "todos",
+        "posicion": "centro",
+        "color": "#ff5fc8",
+        "ojos": [
+          62,
+          38,
+          26,
+          13
+        ],
+        "texto": "{quien} prende la transmisión en vivo. Los comentarios llueven. Los golpes, también. [Relleno: borrador de Claude, sin sprites propios]"
+      },
+      "escala": 0.97,
+      "sonido": "cachetada"
+    },
+    "otaku": {
+      "nombre": "Otaku",
+      "sprite": "batalla/jair",
+      "filtro": "grayscale(0.4) hue-rotate(90deg) brightness(0.95)",
+      "seguido": true,
+      "base": {
+        "ps": 32,
+        "atq": 6,
+        "def": 4,
+        "vel": 6
+      },
+      "crece": {
+        "ps": 5.5,
+        "atq": 1,
+        "def": 0.7,
+        "vel": 0.3
+      },
+      "ataques": [
+        {
+          "nombre": "Foto sin permiso",
+          "poder": 6,
+          "deja": {
+            "estado": "paralizado",
+            "prob": 0.3
+          },
+          "usos": 15,
+          "texto": "{quien} le saca una foto a {objetivo} sin pedir permiso. El flash lo deja tieso. [Relleno: borrador de Claude, sin sprites propios]"
+        },
+        {
+          "nombre": "Explicación del lore",
+          "poder": 3,
+          "deja": {
+            "estado": "dormido",
+            "prob": 0.6
+          },
+          "usos": 5,
+          "texto": "{quien} le explica a {objetivo} toda la cronología de una saga de 400 episodios. {objetivo} empieza a cabecear. [Relleno: borrador de Claude, sin sprites propios]"
+        },
+        {
+          "nombre": "Abrazo de almohada",
+          "poder": 0,
+          "alMismo": true,
+          "aplica": {
+            "protege": 1
+          },
+          "usos": 3,
+          "texto": "{quien} se abraza a su almohada estampada y se esconde detrás. Nada lo toca. [Relleno: borrador de Claude, sin sprites propios]"
+        }
+      ],
+      "hablar": [
+        "Técnicamente, eso no es canon.",
+        "Mi personaje favorito haría esto mejor.",
+        "¿Puedo sacarte una foto? Es para mi colección."
+      ],
+      "especial": {
+        "nombre": "Técnica prohibida del episodio 400",
+        "poder": 8,
+        "golpes": 5,
+        "objetivo": "uno",
+        "posicion": "objetivo",
+        "color": "#7cff6b",
+        "ojos": [
+          50,
+          37,
+          27,
+          13
+        ],
+        "deja": {
+          "estado": "confundido",
+          "prob": 0.5
+        },
+        "texto": "{quien} grita el nombre de una técnica que solo existe en un episodio que nadie más vio. {objetivo} no entiende nada. [Relleno: borrador de Claude, sin sprites propios]"
+      },
+      "escala": 1.05,
+      "sonido": "puno"
     }
   },
   "enemigos": {

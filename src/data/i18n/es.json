@@ -403,6 +403,7 @@
   "batalla.empate": "¡Empate! No queda nadie en pie.",
   "batalla.sigue_congelado": "{quien} sigue congelado.",
   "batalla.sigue_dormido": "{quien} sigue dormido.",
+  "batalla.seguidor": "+1 seguidor ({n})",
   "batalla.golpe_deja": "{quien} queda {estado}: {n} turnos.",
   "batalla.especial_quema": "¡Los puños salieron en llamas! {quien} se quema.",
   "batalla.multicebo_aparece": "Hay un cebo delante de cada uno.",

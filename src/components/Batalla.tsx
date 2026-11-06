@@ -1213,7 +1213,10 @@ function Pelea({
    */
   const golpear = async (atacante: Luchador, defensor: Luchador, poder: number, color = '#fff6d0', aMedias = false) => {
     // Las cuentas: engine/turnos.ts (`resolverGolpe`). Aquí, cómo se ve.
+    const seguia = atacante.seguidores ?? 0;
     const golpe = resolverGolpe(b.current, d, atacante, defensor, poder, aMedias);
+    // Se lució: un seguidor más (el influencer).
+    if ((atacante.seguidores ?? 0) > seguia) numero(atacante.id, fmt(t('batalla.seguidor'), { n: atacante.seguidores ?? 0 }), 'cura');
     // Protegido: este golpe no le hace nada (y se gasta la protección).
     if (golpe.bloqueado) {
       numero(defensor.id, t('batalla.bloquea'), 'falla');

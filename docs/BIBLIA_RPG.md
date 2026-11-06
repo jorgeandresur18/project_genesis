@@ -701,7 +701,17 @@ Comparados con Jair (`base` PS 30, ATQ 5, DEF 3, VEL 8; sube por nivel PS 6, ATQ
 **En el torneo (pedido del autor, 2026-11-05):** Jordan, Billy y Maggi ya pelean en el Torneo Genesis con estas fichas
 (borrador, `heroes` de `personajes.json`), elegibles desde ya (`TODO(canon)`: cuándo se desbloquean Jordan y Billy). Sin
 hoja propia: usan la de otro con un filtro de color (Jordan la de Jair, Billy la del soldado, Maggi la de Rikka). Nikki
-también es peleadora: se gana al vencerla en la gran final de cualquier copa. **Simulación en simple (final, atento):**
+también es peleadora, **desde el inicio** (pedido del autor). Como peleadora tiene **5 ataques**; la Nikki campeona del
+torneo, 6 (`TODO`: hoy tiene 4: cachetada, revés, beso y la ráfaga; falta decidir cuál es el quinto).
+
+**El influencer y el otaku** (pedido del autor, 2026-11-05; los otakus son los de la convención del Capítulo 4):
+también peleadores del torneo, desde ya (borrador; sprites prestados: la hoja de Nikki y la de Jair con filtro).
+- **Influencer**: Selfie con flash (a veces paraliza), Unboxing violento, Colaboración pagada (se cura) y el especial
+  *Transmisión en vivo* (a todos). **Seguidores** (`seguidores` en la ficha): cada vez que se luce (un crítico o
+  derribar a alguien) gana uno, hasta 5, y cada uno le suma +2 de ataque; por cada turno sin lucirse pierde uno.
+- **Otaku**: Foto sin permiso (a veces paraliza), Explicación del lore (a veces duerme), Abrazo de almohada (se
+  protege) y el especial *Técnica prohibida del episodio 400* (a veces confunde).
+- Simulación en simple (final, atento): los dos a la par de Jair (~32–73 %). **Simulación en simple (final, atento):**
 Billy 100 % (demasiado: por balancear), Jordan 66–77 %, Maggi y Nikki ~0 % (el simulador no usa dormir ni confundir:
 las subestima).
 

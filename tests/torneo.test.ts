@@ -142,3 +142,22 @@ describe('golpes que dejan un estado (`deja`: el puño de Jordan, la hipnosis de
     expect(dejarEstado(s, y, { estado: 'quemado', prob: 1 }, () => 0)).toBeNull();
   });
 });
+
+describe('los seguidores del influencer (pedido del autor, 2026-11-05)', () => {
+  it('gana uno al lucirse (hasta 5, +2 de ataque cada uno) y pierde uno por cada turno sin lucirse', async () => {
+    const { estadoInicial, lucirse, finDeTurno } = await import('../src/engine/turnos');
+    const d = armarRonda(TORNEO.copas[0], 0, TORNEO.modalidades[0], ['influencer']);
+    const s = estadoInicial(d);
+    const x = s.heroes[0];
+    for (let i = 0; i < 7; i++) lucirse(d, x);
+    expect(x.seguidores).toBe(5);
+    expect(x.extra).toBe(10);
+    finDeTurno(s); // se lució en este turno: no pierde
+    expect(x.seguidores).toBe(5);
+    finDeTurno(s); // un turno sin lucirse
+    expect(x.seguidores).toBe(4);
+    expect(x.extra).toBe(8);
+    const otro = estadoInicial(armarRonda(TORNEO.copas[0], 0, TORNEO.modalidades[0], ['jair'])).heroes[0];
+    expect(lucirse(d, otro)).toBe(false);
+  });
+});

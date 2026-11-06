@@ -32,8 +32,8 @@ export function TorneoPantalla({ onClose }: { onClose: () => void }) {
   const disponibles = [
     ...HEROES_TORNEO.filter((k) => k === 'jair' || LIBRES_TORNEO.includes(k) || GALERIA_COMPLETA || vistos[FICHAS.heroes[k]?.sprite]),
     ...JEFES_TORRE.filter((k) => GALERIA_COMPLETA || torneo.jefes?.[k]),
-    // Nikki, al vencerla en la gran final de cualquier copa.
-    ...(GALERIA_COMPLETA || Object.keys(torneo.ganadas ?? {}).length ? [NIKKI_PELEADORA] : []),
+    // Nikki, desde el inicio (pedido del autor).
+    NIKKI_PELEADORA,
   ];
   const abierta = (c: Copa) => GALERIA_COMPLETA || copaAbierta(c, visitadas, torneo.ganadas);
   const listos = elegidos.length === modalidad.peleadores;

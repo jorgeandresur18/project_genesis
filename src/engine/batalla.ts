@@ -158,6 +158,11 @@ export interface Heroe {
   hablar_confundido?: string[];
   /** Un filtro sobre su sprite (un placeholder hecho con la hoja de otro, mientras no tenga la suya: Jordan, Billy, Maggi). */
   filtro?: string;
+  /**
+   * Seguidores (el influencer; pedido del autor, 2026-11-05): cada vez que se luce (un crítico o derribar a alguien)
+   * gana uno, hasta `max`, y cada uno le suma `atq`; por cada turno sin lucirse pierde uno.
+   */
+  seguidores?: { atq: number; max: number };
   /** Ataques que aprende al llegar a un nivel (Jair: el Cebo, en el 6). */
   aprende?: { nivel: number; ataque: Ataque }[];
   /** El sonido de sus golpes (ataque y especial). */
@@ -230,6 +235,8 @@ export interface Enemigo {
   color_disparo?: string;
   /** Un filtro sobre su sprite (un placeholder hecho con la hoja de otro, mientras no tenga la suya). */
   filtro?: string;
+  /** Seguidores, como el influencer héroe (ver Heroe). */
+  seguidores?: { atq: number; max: number };
 }
 /** De qué tipo es un objeto (decide dónde aparece y cómo se usa; ver docs/BIBLIA_RPG.md, sección 14). */
 export type TipoObjeto = 'curacion' | 'mejora' | 'permanente' | 'tactico' | 'equipo' | 'coleccion';
@@ -426,6 +433,11 @@ export const vanPerdiendo = (heroes: Luchador[], umbral: number) =>
 
 /** Un luchador en la pelea (héroe o enemigo), con lo que tiene ahora. */
 export interface Luchador {
+  /** Los seguidores que tiene ahora (el influencer) y si se lució en este turno. */
+  seguidores?: number;
+  lucio?: boolean;
+  /** Cuánto ataque le da cada seguidor (de su ficha). */
+  atqSeguidor?: number;
   id: string;
   clave: string;
   lado: 'heroe' | 'enemigo';

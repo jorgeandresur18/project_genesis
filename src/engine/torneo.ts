@@ -49,13 +49,13 @@ export interface DatosTorneo {
 }
 
 export const TORNEO = datos as unknown as DatosTorneo;
-export const HEROES_TORNEO = ['jair', 'cami', 'rikka', 'jordan', 'billy', 'maggi'];
+export const HEROES_TORNEO = ['jair', 'cami', 'rikka', 'jordan', 'billy', 'maggi', 'influencer', 'otaku'];
 /**
  * Los que todavía no salen en la historia (Jordan y Billy son del Capítulo 4; Maggi es exclusiva del torneo): se
  * pueden elegir desde ya (pedido del autor, 2026-11-05). TODO(canon): cuándo se desbloquean Jordan y Billy.
  */
-export const LIBRES_TORNEO = ['jordan', 'billy', 'maggi'];
-/** Nikki también pelea en el torneo: se gana al vencerla en la gran final (pedido del autor, 2026-11-05). */
+export const LIBRES_TORNEO = ['jordan', 'billy', 'maggi', 'influencer', 'otaku'];
+/** Nikki también pelea en el torneo, desde el inicio (pedido del autor, 2026-11-05). */
 export const NIKKI_PELEADORA = 'nikki';
 /**
  * Los jefes de los pisos de la torre del Capítulo 3: se pueden elegir en el torneo al vencerlos en la torre (decisión
