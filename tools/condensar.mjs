@@ -61,6 +61,8 @@ function juntar(a, b) {
   const pa = /^\(.*\)$/s.test(a);
   const pb = /^\(.*\)$/s.test(b);
   if (pa && pb) return `${a.slice(0, -1)} ${b.slice(1)}`;
+  // Dos líneas de consola (GRAVITY, la Voz): un solo «>» al principio.
+  if (/^> /.test(a) && /^> /.test(b)) return `${a} ${b.slice(2)}`;
   return `${a} ${b}`;
 }
 
@@ -131,6 +133,12 @@ if (modo === 'proponer') {
     const texto = (b.match(/\n {2}- → (.*)/) ?? [])[1];
     if (!ids || !texto) continue;
     const [cabeza, ...resto] = ids.map((id) => M.get(id));
+    // Un cambio suelto (una sola escena): solo el texto.
+    if (cabeza && !resto.length) {
+      cabeza.dialogue.text = texto;
+      n++;
+      continue;
+    }
     if (!cabeza || resto.some((x) => !x || prot.has(x.scene_id))) throw new Error('Fusión inválida: ' + ids.join(' + '));
     // Sigue siendo una cadena: cada una lleva a la siguiente.
     ids.slice(0, -1).forEach((id, i) => {

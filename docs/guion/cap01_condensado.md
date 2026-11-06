@@ -12,9 +12,9 @@ Generado por `node tools/condensar.mjs proponer cap01 cap01_001 cap01_g1_007` (C
   - → Viernes, cinco y media de la tarde. El calor de la oficina tiene la consistencia de una sopa. El aire acondicionado lleva tres meses «en mantenimiento». Igual que la quincena.
 
 - [x] `cap01_008 + cap01_009` — Jair
-  - «Se corre». Como si el sueldo fuera un bus que se pasó de parada.
-  - (Y «familia». A la familia por lo menos le dan almuerzo.)
-  - → «Se corre». Como si el sueldo fuera un bus que se pasó de parada. (Y «familia». A la familia por lo menos le dan almuerzo.)
+  - «Se va». Como si el sueldo fuera un bus que se pasó de parada.
+  - (Y «familia». A la familia, por lo menos, le dan el almuerzo incluido.)
+  - → «Se va». Como si el sueldo fuera un bus que se pasó de parada. (Y «familia». A la familia, por lo menos, le dan el almuerzo incluido.)
 
 - [x] `cap01_o06 + cap01_o07` — Jair
   - (Hasta las refrigeradoras tienen expectativas más altas que mi sueldo.)
@@ -22,14 +22,14 @@ Generado por `node tools/condensar.mjs proponer cap01 cap01_001 cap01_g1_007` (C
   - → (Hasta las refrigeradoras tienen expectativas más altas que mi sueldo.) ¿Probó apagándola y prendiéndola?
 
 - [x] `cap01_o19 + cap01_o20` — Jair
-  - (Algún día voy a hacer algo grande. Algo mío. Algún día.)
-  - (Llevo diciendo «algún día» desde los veintidós.)
-  - → (Algún día voy a hacer algo grande. Algo mío. Algún día. Llevo diciendo «algún día» desde los veintidós.)
+  - (Algún día voy a hacer algo grande. Algo mío. Totalmente mío. Algún día.)
+  - (Llevo diciendo «algún día» desde los veintidós. O desde mucho antes…)
+  - → (Algún día voy a hacer algo grande. Algo mío. Totalmente mío. Algún día. Llevo diciendo «algún día» desde los veintidós. O desde mucho antes…)
 
 - [x] `cap01_067y16_a12 + cap01_067y16_a13` — Nikki
-  - Siguiente pregunta, hijo de puta.
-  - Yo nunca... lo he hecho en un lugar público.
-  - → Siguiente pregunta, hijo de puta. Yo nunca... lo he hecho en un lugar público.
+  - Siguiente pregunta, cariño.
+  - Yo nunca… lo he hecho en un lugar público.
+  - → Siguiente pregunta, cariño. Yo nunca… lo he hecho en un lugar público.
 
 - [x] `cap01_083c2 + cap01_083c3` — Nikki
   - Y después nunca la cargarías.
@@ -37,29 +37,29 @@ Generado por `node tools/condensar.mjs proponer cap01 cap01_001 cap01_g1_007` (C
   - → Y después nunca la cargarías. Así eres. Guardas y guardas, y nunca juegas.
 
 - [x] `cap01_095r02 + cap01_095r03` — narración
-  - Se levanta, camina hasta la rocola y mete una moneda. Le toma tres intentos.
-  - Suena algo viejo y lento, de esas canciones que ponen en las bodas cuando ya se fueron los niños.
-  - → Se levanta, camina hasta la rocola y mete una moneda. Le toma tres intentos. Suena algo viejo y lento, de esas canciones que ponen en las bodas cuando ya se fueron los niños.
+  - Se levanta, camina hasta la rocola y mete una moneda. Le toma tres intentos elegir la canción.
+  - Suena algo viejo y lento, de esas canciones que ponen en las bodas cuando ya se fueron los niños y solo quedan los adultos borrachos.
+  - → Se levanta, camina hasta la rocola y mete una moneda. Le toma tres intentos elegir la canción. Suena algo viejo y lento, de esas canciones que ponen en las bodas cuando ya se fueron los niños y solo quedan los adultos borrachos.
 
 - [x] `cap01_095r09 + cap01_095r10` — narración
-  - Nikki baila sola entre las mesas, abrazada a la botella como a una pareja que no la pisa.
+  - Nikki baila sola entre las mesas, abrazada a la botella como a una pareja que no la pisa. Y sabe moverse.
   - Dos tipos en la barra la miran. Jair los mira a ellos. Es lo más valiente que hace en toda la noche.
-  - → Nikki baila sola entre las mesas, abrazada a la botella como a una pareja que no la pisa. Dos tipos en la barra la miran. Jair los mira a ellos. Es lo más valiente que hace en toda la noche.
+  - → Nikki baila sola entre las mesas, abrazada a la botella como a una pareja que no la pisa. Y sabe moverse. Dos tipos en la barra la miran. Jair los mira a ellos. Es lo más valiente que hace en toda la noche.
 
 - [x] `cap01_095s17 + cap01_096` — Jair
   - (Siempre es ella la que se invita. Yo solo dejo la puerta abierta.)
-  - (Debería decirle que ya es suficiente.)
-  - → (Siempre es ella la que se invita. Yo solo dejo la puerta abierta. Debería decirle que ya es suficiente.)
+  - (Debería decirle que ya es suficiente, pero estoy demasiado cansado para hacerlo.)
+  - → (Siempre es ella la que se invita. Yo solo dejo la puerta abierta. Debería decirle que ya es suficiente, pero estoy demasiado cansado para hacerlo.)
 
 - [x] `cap01_nk_bad02 + cap01_nk_bad03` — Nikki
   - ¿Jair? …Jair, levántate. No es gracioso. Levántate.
-  - Lo maté. Lo maté a cachetadas. ¿Quién se muere de cachetadas, Jair? ¿Quién?
-  - → ¿Jair? …Jair, levántate. No es gracioso. Levántate. Lo maté. Lo maté a cachetadas. ¿Quién se muere de cachetadas, Jair? ¿Quién?
+  - Lo maté. Lo maté a cachetadas. ¿Quién se muere de cachetadas, Jair? ¿Quién más?
+  - → ¿Jair? …Jair, levántate. No es gracioso. Levántate. Lo maté. Lo maté a cachetadas. ¿Quién se muere de cachetadas, Jair? ¿Quién más?
 
 - [x] `cap01_115n5 + cap01_115n6` — Jair
   - («Nunca te vayas de mi vida».)
-  - (Y hace diez minutos: «Búscate una novia, Jair».)
-  - → («Nunca te vayas de mi vida». Y hace diez minutos: «Búscate una novia, Jair».)
+  - (Y hace diez minutos: «Búscate una novia de verdad, Jair».)
+  - → («Nunca te vayas de mi vida». Y hace diez minutos: «Búscate una novia de verdad, Jair».)
 
 - [x] `cap01_120 + cap01_121` — Jair
   - Gano poco, vivo en una caja de zapatos y mi mejor relación es con un ventilador.
@@ -67,9 +67,9 @@ Generado por `node tools/condensar.mjs proponer cap01 cap01_001 cap01_g1_007` (C
   - → Gano poco, vivo en una caja de zapatos y mi mejor relación es con un ventilador. (Y con Nikki. Pero de esa relación no tengo ni el manual ni la garantía.)
 
 - [x] `cap01_bad_rechazo_004 + cap01_bad_rechazo_005` — narración
-  - No hay rubia, ni peliverde, ni Rey Malvado. Solo un hombre que, por una noche, eligió no huir.
+  - Esta noche solo hay un hombre que eligió no huir.
   - Sin esa huida no hay juego. Y sin juego, la historia que estabas por jugar nunca ocurrió.
-  - → No hay rubia, ni peliverde, ni Rey Malvado. Solo un hombre que, por una noche, eligió no huir. Sin esa huida no hay juego. Y sin juego, la historia que estabas por jugar nunca ocurrió.
+  - → Esta noche solo hay un hombre que eligió no huir. Sin esa huida no hay juego. Y sin juego, la historia que estabas por jugar nunca ocurrió.
 
 - [x] `cap01_128 + cap01_129 + cap01_130` — GRAVITY
   - > Instalando GRAVITY... Framework: Reckt. Front: Coffee. Back: Cobra.
@@ -94,15 +94,15 @@ Generado por `node tools/condensar.mjs proponer cap01 cap01_001 cap01_g1_007` (C
   - → > Generando cielo. Color solicitado: no especificado. Color asignado: magenta. > Generando física. Gravedad: reducida, para facilitar escenas de acción.
 
 - [x] `cap01_l03 + cap01_l04 + cap01_l05` — GRAVITY
-  - > Generando antagonista: Rey Malvado. Generando historia previa del antagonista.
+  - > Generando antagonista: Rey… Generando historia previa del antagonista.
   - > Generando ejército. Rostros: no requeridos.
   - > Generando amenaza secundaria. Forma: no requerida.
-  - → > Generando antagonista: Rey Malvado. Generando historia previa del antagonista. > Generando ejército. Rostros: no requeridos. > Generando amenaza secundaria. Forma: no requerida.
+  - → > Generando antagonista: Rey… Generando historia previa del antagonista. Generando ejército. Rostros: no requeridos. Generando amenaza secundaria. Forma: no requerida.
 
 - [x] `cap01_l06 + cap01_l07` — GRAVITY
-  - > Generando heroína 01. Generando heroína 02. Aplicando referencias importadas.
+  - > Generando heroína 01. Generando… ¿heroína 02? Aplicando referencias importadas.
   - > Generando recuerdos de fondo para las entidades. Calidad: suficiente.
-  - → > Generando heroína 01. Generando heroína 02. Aplicando referencias importadas. > Generando recuerdos de fondo para las entidades. Calidad: suficiente.
+  - → > Generando heroína 01. Generando… ¿heroína 02? Aplicando referencias importadas. Generando recuerdos de fondo para las entidades. Calidad: suficiente.
 
 - [x] `cap01_l08 + cap01_l09` — GRAVITY
   - > Generando dimensión espacial. Generando dimensión ancestral. Generando historia: en curso.
@@ -111,5 +111,11 @@ Generado por `node tools/condensar.mjs proponer cap01 cap01_001 cap01_g1_007` (C
 
 - [x] `cap01_g1_003 + cap01_g1_004` — narración
   - Jair abre los ojos.
-  - El cielo es magenta. No rosado, no morado: magenta, como ese color que nadie elige en la paleta porque se ve demasiado.
-  - → Jair abre los ojos. El cielo es magenta. No rosado, no morado: magenta, como ese color que nadie elige en la paleta porque se ve demasiado.
+  - El cielo es magenta. No rosado, no morado: magenta, como ese color que nadie elige en la paleta porque se ve demasiado. Demasiado estúpido.
+  - → Jair abre los ojos. El cielo es magenta. No rosado, no morado: magenta, como ese color que nadie elige en la paleta porque se ve demasiado. Demasiado estúpido.
+
+## Cambios sueltos (fuera de las fusiones)
+
+- [x] `cap01_007` (el mensaje del grupo del trabajo): para que la cita de `cap01_008` siga calzando con «Se va».
+  - Equipo: el pago se corre para el otro viernes. ¡Ánimo, que aquí somos familia!
+  - → Equipo: el pago se va para el otro viernes. ¡Ánimo, que aquí somos familia!
