@@ -511,3 +511,4 @@ de Rikka en la galería se ven enteros y grandes. CLAUDE.md, al día con el 6 de
 - **Regla de estética (dicha por el autor):** mundo real sucio, lo-fi, cínico, áspero e indomable; mundo de la IA, aventura cordial. Cami rompe a veces esa estética y por eso en el mundo de la IA se la ve como problemática. Anotado en `docs/TONO.md` (Contraste) y `docs/CANON.md` (Cami).
 - **Capítulo 5 casi sin peleas (decisión del autor):** es más novela; anotado en `docs/CANON.md` (Capítulo 5).
 - **Cuánta novela y cuánta pelea por capítulo (dicho por el autor):** 1 mucho diálogo; 2 equilibrado; 3 el de más peleas; 4 como el 1; 5 casi sin peleas; 6 equilibrado tirando a peleas; 7 pura novela. Tabla en `docs/CANON.md` (estructura de capítulos).
+- **Pendiente para la noche:** sección 21 de `docs/PRUEBAS_EN_CASA.md` (el prólogo condensado). Todo subido a `desarrollo` (no a `main`).

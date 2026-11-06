@@ -246,3 +246,11 @@ En el Torneo (`npm run dev`, desde Extras):
 - [ ] **Las curas por porcentaje:** en una pelea, el agua cura el 30 % de la vida (en Jair, en el Capítulo 1, unos 16; en el torneo, mucho más). En Boringplace dice «+30 % de vida».
 - [ ] **La pelea de práctica** (`?escena=cap01_g1_086` o jugando hasta que Cami se presenta): Cami explica cada comando, el soldado llama a su cabo, el agua en la mochila. Al ganar, sigue «El piso tiembla». ¿Va o no va?
 
+
+## 21. El prólogo del Capítulo 1 condensado y corregido (nuevo, 6 de noviembre)
+
+- Jugar desde el principio hasta entrar al bar: se avanza con menos clics (varias líneas seguidas en una sola caja) y
+  ningún texto se corta ni se sale de la caja (las más largas: la `001` de la oficina y la `021` de La Lechuza).
+- La llamada de la refrigeradora: el chiste nuevo de la carne y la leche (`o08`, `o08b`, `o09`) se lee bien seguido.
+- La historia de Nikki en Boringram dice «La Lechuza»; el correo del repositorio dice «granja-bots-final-final-v2».
+- Con el juego en inglés, lo mismo (The Owl).
