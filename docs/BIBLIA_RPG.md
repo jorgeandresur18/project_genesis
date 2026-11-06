@@ -637,6 +637,44 @@ Los números (poder y golpes) son propuesta de Claude, sin balancear.
 
 **Los jefes** (el autor lo dejó a criterio de Claude): la bomba y la autodestrucción no hacen retirar a un jefe por sí solas: lo dejan justo por encima de su límite y hay que darle el último golpe. Si la explosión se lleva a todos los héroes con el jefe en el campo, es empate.
 
+## 20. Los amigos de Jair en el Capítulo 4 (propuesta de Claude, por aprobar; 2026-11-05)
+
+Lo que contó el autor está en `docs/CANON.md` (Capítulo 4, punto 5). Esto es la propuesta de cómo pelean: números y
+ataques de borrador. **Falta decidir** si pelean del lado de Jair (héroes) o en contra (rivales), y en qué peleas.
+Comparados con Jair (`base` PS 30, ATQ 5, DEF 3, VEL 8; sube por nivel PS 6, ATQ 1, DEF 0,6, VEL 0,5).
+
+| | PS | ATQ | DEF | VEL | Cómo se siente |
+|---|---|---|---|---|---|
+| **Jair** (para comparar) | 30 (+6) | 5 (+1) | 3 (+0,6) | 8 (+0,5) | — |
+| **Jordan** | 28 (+5,5) | 7 (+1,2) | 2 (+0,4) | 11 (+0,6) | Pega más y antes que Jair, pero aguanta menos. |
+| **Billy** | 46 (+8) | 7 (+1,1) | 6 (+0,9) | 4 (+0,2) | El tanque: aguanta mucho y pega bien, pero casi siempre actúa último. |
+| **Maggi** | 26 (+4,5) | 7 (+1,15) | 2 (+0,4) | 12 (+0,6) | Rápida y peligrosa, pero frágil. La que duerme y confunde. |
+
+**Ataques (nombres y efectos de borrador):**
+
+- **Jordan** (parecidos a los de Jair; su puño paraliza):
+  - *Puñetazo eléctrico:* poder 14, como el de Jair, y a veces (25 %) **paraliza**.
+  - *Combo de calle:* dos golpes rápidos de poder 8.
+  - *Ctrl+Z de gimnasio:* se cura un poco (como el Ctrl+Z de Jair).
+  - Especial *Ráfaga relámpago:* varios golpes como la Ráfaga de Jair; el último paraliza.
+- **Billy** (carne, cerveza y su restaurante):
+  - *Panzazo:* poder 15, un golpe pesado.
+  - *Brindis:* sube su ATQ hasta el final de la pelea (potenciarse).
+  - *Pastelillo de la casa:* le da a un rival un pastelillo herbal «con extra de compuesto T»: lo **confunde** (el guiño al objeto de la tienda).
+  - Especial *Parrillada Beef Boy:* a todos los rivales, con un poco de **quemadura**.
+- **Maggi** (ondas psíquicas e hipnosis clínica):
+  - *Onda psíquica:* poder 13 a un rival.
+  - *Hipnosis clínica:* lo **duerme** (como el cebo sueño).
+  - *Lectura del subconsciente:* lo **confunde**.
+  - Especial *Sesión de grupo:* ondas a todos los rivales; cada uno puede quedar dormido o confundido.
+
+**Lo que haría falta en el motor:** un golpe que hace daño y **además** puede paralizar (hoy los ataques que paralizan no
+hacen daño) y un ataque que **duerme** a un rival (hoy dormir solo sale de los cebos). Lo demás ya existe.
+
+**Arte que haría falta** (para la fase de arte): las hojas de pelea de Jordan, Billy y Maggi (reposo, ataque, daño,
+especial, derrotado) y sus retratos para la caja de diálogo; mientras tanto, placeholders (como el Rey con el dibujo
+del Capitán).
+
 ## 16. Pendientes e ideas
 
 | Tema | Estado |

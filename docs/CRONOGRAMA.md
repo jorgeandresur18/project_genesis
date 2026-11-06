@@ -110,7 +110,7 @@ La misma proyección, para mirarla en el navegador: `docs/proyeccion.html`.
 - [ ] **Escribir el guion del Capítulo 4** desde el borrador del autor (escenas 1 a 9: del despertar a «conseguí trabajo en el centro»).
 - [ ] **Pelea RPG con los otakus en la convención** (Cami). *Pesada:* sprites de los otakus. Es la primera pelea en el mundo real después del bar: ¿«vida real» como la de Nikki?
 - [ ] *Liviana:* fondos del mundo real del Capítulo 4 (departamento de día, la convención, las calles donde buscan trabajo).
-- [ ] *Liviana:* sprites nuevos: Lady (la compañera de tesis), Jordan, amigos de Jair y de Nikki, Cami con uniforme de Dulce Frío.
+- [ ] *Liviana:* sprites nuevos: Lady (la compañera de tesis), Jordan, Billy, Maggi, amigos de Nikki, Cami con uniforme de Dulce Frío. Hojas de pelea de Jordan, Billy y Maggi (propuesta en `BIBLIA_RPG.md`, sección 20).
 - [ ] *Media:* Boringram del Capítulo 4 (las fotos de la convención, lo que ven Lady, Jordan y Nikki).
 - [ ] **Pendientes del RPG que el Capítulo 4 pide:** la tienda desde el título y equiparse de verdad, si la historia lo necesita.
 
