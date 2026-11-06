@@ -204,3 +204,6 @@ primero. Las pruebas automáticas y el simulador ya lo usan (el equilibrio no se
 - [ ] **La caja de diálogo nueva** en cualquier escena: que se lea bien en el celular y con el modo Retro CRT.
 - [ ] **Las termas** (`?escena=cap02_p2_s01`): Rikka más grande; antes de la ráfaga no se la puede tocar; desde la ráfaga, un solo globo que cambia al tocarla, las manos del jugador (pecho desde afuera, nalgada, la que apunta) y el «¡¡KYAAAH!!» arriba.
 - [ ] **Después del grito:** la imagen secreta, el fundido a negro lento, y Cami y Jair diciendo que está pálida con Rikka callada.
+- [ ] **La galería de Rikka** (`?galeria=todo` › Personajes › «Termas:»): las manos del jugador (no las de Cami), las tres del mismo tamaño; el sprite grande, con las piernas justo en el borde de abajo y un poco de margen arriba; el globo oscuro a la izquierda de la cara.
+- [ ] **Jordy** (antes Jordan) en Boringram del Capítulo 2 y en el torneo: que diga «Jordy» en todos lados.
+

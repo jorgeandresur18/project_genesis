@@ -448,3 +448,10 @@ adelante (cronograma, «Ideas anotadas»).
 - **Cami es bisexual (decisión del autor, 2026-11-06):** queda fijo «bisexual» en el canon (antes «bisexual o pansexual»).
 - **Galería con las manos del jugador (decisión del autor, 2026-11-06, a propuesta de Claude):** la galería también usa las manos del jugador, como la novela (coherencia: el que toca es el jugador). Las de Cami quedan guardadas en `manos` de `emblemas_18.json`.
 - **Manos del mismo tamaño y Rikka más grande en la galería (pedido del autor, 2026-11-06):** las manos del jugador copiaban el tamaño de las de Cami del PSD, que no son iguales (la del pecho salía un 14 % más grande que la de la nalgada). Ahora todas usan el promedio (escala 0,143 del dibujo; la punta del dedo queda fija, toca el mismo lugar), en la novela y en la galería (`tools/manos_jugador.py`). Los sprites secretos de Rikka en la galería, un 10 % más grandes (la imagen con sus emblemas, manos y globo; el vapor no cambia) y ajustados a la caja (pedido del autor): el corte de las piernas justo en el borde de abajo, sin espacio, y un margen del 5 % arriba para que los palillos no toquen el borde; se ve el sprite entero.
+
+**Cierre del 6 de noviembre (noche):** además de lo de arriba, quedó fijo en el canon que Cami es bisexual, Jordan pasó
+a llamarse Jordy (gay, discreto), la galería usa las manos del jugador (todas del mismo tamaño) y los sprites secretos
+de Rikka en la galería se ven enteros y grandes. CLAUDE.md, al día con el 6 de noviembre. Para mañana en la oficina:
+`docs/CRONOGRAMA.md`, «Para mañana» (solo decisiones y trabajo de Claude sin pruebas); para la noche,
+`docs/PRUEBAS_EN_CASA.md` (secciones 10 a 15). Nada publicado en `main` todavía.
+

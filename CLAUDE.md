@@ -59,7 +59,7 @@ npm run test:routes
 
 Pregunta antes de decidir cualquier cosa de historia. Preferir una pregunta corta a una invención.
 
-## Lo que conviene saber (al día con el 5 de noviembre de 2026)
+## Lo que conviene saber (al día con el 6 de noviembre de 2026)
 
 Para trabajar desde cualquier computadora. El detalle de cada sesión está en `docs/BITACORA.md`.
 
@@ -107,3 +107,13 @@ Para trabajar desde cualquier computadora. El detalle de cada sesión está en `
 - Escena secreta y galería de Rikka: `src/data/emblemas_18.json` (emblemas, manos, caras) y las frases por zona en
   `src/data/galeria.json` (`quejas.rikka`: `zonas`, `zonas_novela`, `al_pasar`).
 - Ideas anotadas sin hacer (por ejemplo, los dos Boringram): `docs/CRONOGRAMA.md`, «Ideas anotadas».
+- **La demo y `capitulo_maximo`:** en lo publicado, la galería, los finales, el porcentaje, el mapa y Boringram muestran
+  solo los capítulos publicados (`capituloPublicado`, `archivosPublicados`, `escenaPublicada`, `endingsPublicados` en
+  `src/engine/story.ts`). En desarrollo se ve todo.
+- **Escena secreta de las termas (novela):** campos de escena `globo` (la línea en un globo con «Siguiente»; recién ahí
+  se toca a Rikka) y `escala` en un personaje; las manos del jugador (también en la galería) salen de
+  `python -I -X utf8 tools/manos_jugador.py` (desde `docs/palma.png`, `agarrando.png`, `apuntando.png`, que no se suben).
+- **Torneo:** peleadores nuevos (Jordy, Billy, Maggi, el influencer con seguidores, el otaku; Nikki desde el inicio) en
+  `heroes` de `src/data/rpg/personajes.json`; golpes que dejan un estado (`deja`); equipos parejos (`jefe_con_horda`).
+- **Nombres:** las chicas reales son **Milka** (base de Cami) y **Ari** (Arianni, base de Rikka); Jordan pasó a llamarse
+  **Jordy** (gay, discreto). Cami es bisexual (canon). Todo en `docs/CANON.md`.

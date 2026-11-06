@@ -146,6 +146,11 @@ anota en `docs/PRUEBAS_EN_CASA.md` para la noche.
 10. **Capítulos 2 y 3:** las decisiones de abajo («Decisiones pendientes del autor») y las preguntas de
     `docs/guion/cap03_plan.md`.
 11. **«First Date» de Blink-182** en Conoce más: sigue abriendo la búsqueda; si quiere, que pase el enlace.
+12. **Orientación de Jair y Rikka:** Claude propuso heterosexuales; falta confirmarlo para el canon (Cami bisexual y
+    Nikki más heterosexual ya están).
+13. **El silencio de Rikka después del grito:** ¿se nota en alguna línea posterior o en su confianza con Jair (aunque él
+    no sepa por qué)? Idea de Claude, sin tocar.
+14. **La escena secreta de Jordy** (Capítulo 4, al 100 %): si se diseña, las preguntas de «Ideas anotadas».
 
 **Lo que Claude puede hacer solo (sin pruebas del autor):**
 - Que el simulador use dormir y confundir (hoy subestima a Maggi y a Nikki peleadora) y volver a medir el torneo.
