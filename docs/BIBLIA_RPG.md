@@ -761,6 +761,17 @@ la pelea. En el torneo, una semilla nueva al empezar cada torneo, que dura hasta
 **Pruebas:** el simulador la sortea igual que el juego, para medir el equilibrio con esencias reales (la meta: que mueva
 la probabilidad de ganar a lo sumo unos 3 a 5 puntos). En `npm run dev` se puede ver, para probarla; en lo publicado, no.
 
+## 22. Lady y la copia (decidido por el autor el 2026-11-06; por construir)
+
+- **Lady pelea** en el Capítulo 4, en la convención de KJ-pop, contra las hordas de **KJPopers** (las fans). Después se
+  desbloquea para el torneo, como los demás.
+- **Copia:** su ataque toma **el daño y el efecto del último ataque que le pegó el rival** (estado, veneno,
+  parálisis, etc.), pero **la animación es siempre la misma: Lady golpeando**. Así no hay que dibujar a Lady haciendo
+  cada ataque.
+-  (para construir): qué hace si todavía nadie le pegó (propuesta: un golpe simple y débil); si copia
+  también los especiales del rival o solo sus ataques; si los ataques raros (ráfagas, balas, cebo, autodestrucción) se
+  copian como un golpe con su mismo daño total.
+
 ## 16. Pendientes e ideas
 
 | Tema | Estado |
