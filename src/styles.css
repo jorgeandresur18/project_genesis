@@ -3624,6 +3624,13 @@ button.cassette:hover .cassette-imagen { transform: translateY(-2px) rotate(-3de
 .torneo-opciones { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .torneo-opciones button { display: grid; gap: 0.15rem; min-width: 7.5rem; text-align: left; }
 .torneo-opciones small { color: var(--muted); font-size: 0.72rem; }
+/* La mochila del torneo y la ropa de cada peleador (2026-11-06). */
+.torneo-mochila { display: grid; gap: 0.5rem; }
+.torneo-objeto { padding: 0.2rem 0.55rem; border: 1px solid var(--border, rgba(255,255,255,0.15)); border-radius: 6px; font-size: 0.85rem; }
+.torneo-ropa { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.8rem; padding: 0.4rem 0; border-top: 1px solid rgba(255,255,255,0.08); }
+.torneo-ropa b { min-width: 6rem; }
+.torneo-ropa label { display: grid; gap: 0.1rem; font-size: 0.78rem; color: var(--muted); }
+.torneo-ropa select { max-width: 11rem; }
 .torneo-opciones .torneo-ganada { color: #ffd76a; }
 .torneo-empezar { justify-self: start; margin-top: 0.4rem; padding: 0.6rem 1.4rem; border-color: var(--accent); color: var(--accent); font-weight: 700; }
 

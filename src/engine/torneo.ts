@@ -180,7 +180,16 @@ function rivalComoEnemigo(k: string, jefe: boolean): Enemigo {
   } as Enemigo;
 }
 
-export function armarRonda(c: Copa, ronda: number, m: Modalidad, heroes: string[], defensas = 0, semilla?: string): DatosBatalla {
+export function armarRonda(
+  c: Copa,
+  ronda: number,
+  m: Modalidad,
+  heroes: string[],
+  defensas = 0,
+  semilla?: string,
+  /** Lo del jugador (engine/mochilaTorneo.ts): lo que lleva puesto cada peleador y la mochila con que entra. */
+  bolsa?: { equipo?: Record<string, string[]>; mochila?: Record<string, number> },
+): DatosBatalla {
   const r = TORNEO.rondas[ronda];
   const final = r.jefe === 'nikki';
   const base = final ? BATALLAS.nikki : BATALLAS.bastion;
@@ -241,9 +250,9 @@ export function armarRonda(c: Copa, ronda: number, m: Modalidad, heroes: string[
     jefe_con_horda: true,
     objetos: FICHAS.objetos,
     retratos: { ...FICHAS.retratos, 'Nikki, la campeona': FICHAS.retratos.Nikki, 'Soldado veterano': FICHAS.retratos.Soldado },
-    mochila_inicial: TORNEO.mochila,
+    mochila_inicial: bolsa?.mochila ?? TORNEO.mochila,
     // Lo que lleva puesto cada peleador (decisión del autor, 2026-11-06: en el torneo sí hay objetos y amuletos).
-    equipo_fijo: Object.fromEntries(heroes.map((k) => [k, TORNEO.equipo_peleadores[k]]).filter((x): x is [string, string[]] => Array.isArray(x[1]))),
+    equipo_fijo: Object.fromEntries(heroes.map((k) => [k, bolsa?.equipo?.[k] ?? TORNEO.equipo_peleadores[k]]).filter((x): x is [string, string[]] => Array.isArray(x[1]))),
     huir: false,
     ayuda: undefined,
     premio: undefined,

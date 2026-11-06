@@ -25,6 +25,7 @@
     "transferible": "Puedes pasar {n} a PayFoe",
     "todo": "Todo",
     "al_terminar_capitulo": "Se pasan a PayFoe al terminar cada capítulo.",
+    "para_torneo": "Para la mochila del torneo (solo sirve ahí). Se paga con PayFoe.",
     "billetera_sin_partida": "Para transferir tokens de una partida, entra a esa partida.",
     "uso_titulo": "¿Para qué sirve PayFoe?",
     "entendido": "Entendido",

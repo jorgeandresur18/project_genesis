@@ -28,5 +28,13 @@
     "todo": "Todo",
     "hecho": "Listo: {n} tokens en PayFoe. Úsalos bien. O no.",
     "nada": "No hay tokens nuevos para pasar a PayFoe."
+  },
+  "traspaso": {
+    "pregunta": "¿Quieres pasar objetos a la mochila del torneo?",
+    "cupo": "Puedes pasar {n} más en este capítulo (solo los que se gastan en las peleas).",
+    "aviso": "Ojo: los objetos que pases al torneo no vuelven a la partida.",
+    "boton": "Pasar {n} objetos",
+    "hecho": "Listo: {n} objetos en la mochila del torneo.",
+    "sin_cupo": "Ya pasaste todo lo que se puede en este capítulo."
   }
 }

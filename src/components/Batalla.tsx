@@ -176,7 +176,7 @@ export function Batalla({
   progreso?: Progreso;
   /** Al ganar (o huir): las variables que hay que guardar en la partida (niveles, experiencia, mochila). */
   onGanar: (vars: Vars) => void;
-  onPerder: () => void;
+  onPerder: (vars?: Vars) => void;
   /** Si el rival perdona y la pelea termina hablando (Nikki). Si no está, cuenta como ganar. */
   onPerdonar?: (vars: Vars) => void;
 }) {
@@ -202,7 +202,7 @@ function Pelea({
   d: DatosBatalla;
   progreso?: Progreso;
   onGanar: (vars: Vars) => void;
-  onPerder: () => void;
+  onPerder: (vars?: Vars) => void;
   onPerdonar?: (vars: Vars) => void;
   arena?: [string, number][];
 }) {
@@ -1096,7 +1096,7 @@ function Pelea({
         // Empate: mueren todos. En la historia cuenta como perder (lleva a su bad end).
         if (r === 'empate') {
           await decir(t('batalla.empate'));
-          return salir(() => fin.current.onPerder());
+          return salir(() => fin.current.onPerder(varsFinales()));
         }
         if (r === 'perdona') {
           await lineas('perdon');
@@ -1109,7 +1109,7 @@ function Pelea({
           const j = b.current.enemigos.find((e) => vivo(e) && e.clon === undefined && d.enemigos[e.clave].al_ganar);
           if (j) void animar(j.id, d.enemigos[j.clave].al_ganar as Anim);
           await lineas('derrota');
-          return salir(() => fin.current.onPerder());
+          return salir(() => fin.current.onPerder(varsFinales()));
         }
         // Ganó: si era un jefe de la torre, queda para elegir en el torneo (en cualquier partida).
         if (JEFES_TORRE.includes(d.jefe.enemigo)) useStore.getState().vencerJefe(d.jefe.enemigo);

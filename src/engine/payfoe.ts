@@ -70,3 +70,10 @@ export function acreditar(p: PayFoe, n: number): { payfoe: PayFoe; perdido: numb
   const payfoe = entra > 0 ? { ...p, saldo: p.saldo + entra, movimientos: conMovimiento(p, { tipo: 'premio', n: entra, fecha: Date.now() }) } : p;
   return { payfoe, perdido: Math.max(0, Math.floor(n) - entra) };
 }
+
+/** Paga una compra con PayFoe (la mochila del torneo). Null si no alcanza. */
+export function gastar(p: PayFoe, n: number): PayFoe | null {
+  const t = Math.floor(n);
+  if (t <= 0 || p.saldo < t) return null;
+  return { ...p, saldo: p.saldo - t, movimientos: conMovimiento(p, { tipo: 'compra', n: t, fecha: Date.now() }) };
+}

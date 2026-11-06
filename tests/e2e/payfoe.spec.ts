@@ -37,3 +37,28 @@ test('al terminar el capítulo se transfieren los tokens a PayFoe; antes, no', a
   expect(saldo).toBe(110);
   expect(errores).toEqual([]);
 });
+
+test('al terminar el capítulo se pasan objetos a la mochila del torneo, con tope; no vuelven', async ({ page }) => {
+  const errores = await empezar(page, 'cap01_g8_072');
+  await page.evaluate(() => {
+    const g = (window as unknown as { __genesis: G }).__genesis;
+    const game = g.getState().game!;
+    g.setState({ game: { ...game, vars: { ...game.vars, partida_id: 'prueba', mochila_vida: 3, mochila_traje_rojo: 1 } } });
+    g.getState().advance();
+  });
+  await expect(page.getByText(/pasar objetos a la mochila del torneo/)).toBeVisible({ timeout: 15_000 });
+  // Solo lo que se gasta: el agua sí, la ropa no.
+  const fila = page.locator('.chapter-end-payfoe-cantidad', { hasText: 'Agua sin gas' });
+  await expect(fila).toBeVisible();
+  await expect(page.locator('.chapter-end-payfoe-cantidad', { hasText: 'Traje de combate rojo' })).toHaveCount(0);
+  await fila.getByRole('button', { name: 'Más' }).click();
+  await fila.getByRole('button', { name: 'Más' }).click();
+  await page.getByRole('button', { name: /Pasar 2 objetos/ }).click();
+  await expect(page.getByText(/2 objetos en la mochila del torneo/)).toBeVisible();
+  const r = await page.evaluate(() => {
+    const st = (window as unknown as { __genesis: { getState: () => { torneo: { mochila?: Record<string, number> }; game: { vars: Record<string, unknown> } } } }).__genesis.getState();
+    return { torneo: st.torneo.mochila?.vida, partida: st.game.vars.mochila_vida };
+  });
+  expect(r).toEqual({ torneo: 2, partida: 1 });
+  expect(errores).toEqual([]);
+});

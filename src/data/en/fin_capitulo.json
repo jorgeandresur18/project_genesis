@@ -21,5 +21,13 @@
     "todo": "All",
     "hecho": "Done: {n} tokens in PayFoe. Use them wisely. Or not.",
     "nada": "No new tokens to move to PayFoe."
+  },
+  "traspaso": {
+    "pregunta": "Do you want to move items to the tournament bag?",
+    "cupo": "You can move {n} more in this chapter (only items used up in fights).",
+    "aviso": "Heads up: items you move to the tournament never come back to the game.",
+    "boton": "Move {n} items",
+    "hecho": "Done: {n} items in the tournament bag.",
+    "sin_cupo": "You've already moved everything allowed this chapter."
   }
 }

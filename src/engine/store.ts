@@ -7,7 +7,9 @@ import { escribirEquipo } from './batalla';
 import type { Vars } from './types';
 import { config, scenes, variables } from './story';
 import { applyChoice, enterScene, resolveNext, visibleChoices, alEntrar } from './logic';
-import { PAYFOE_INICIAL, acreditar, conGanados, nuevoIdPartida, transferir, type PayFoe } from './payfoe';
+import { PAYFOE_INICIAL, acreditar, conGanados, gastar, nuevoIdPartida, transferir, type PayFoe } from './payfoe';
+import { gastarEnRonda, lugarPara, ponerPrenda, restaurarEquipo, sacarPrenda, traspasar, type EstadoMochila } from './mochilaTorneo';
+import type { Espacio } from './equipo';
 
 export const SAVE_SLOTS = 6;
 /** El nombre del guardado automático antes de una pelea. */
@@ -264,7 +266,18 @@ interface Store {
     bombas?: number;
     /** Los jefes de la torre ya vencidos (en cualquier partida): se pueden elegir en el torneo. */
     jefes?: Record<string, true>;
-  };
+  } & EstadoMochila;
+  /**
+   * La mochila del torneo (decisiones del autor, 2026-11-06; cuentas en engine/mochilaTorneo.ts): comprar con PayFoe
+   * desde el menú, vestir a los peleadores, gastar en las rondas y recibir objetos de una partida al terminar un capítulo.
+   */
+  comprarTorneo: (objeto: string, precio: number, n?: number) => boolean;
+  ponerPrendaTorneo: (peleador: string, objeto: string) => void;
+  sacarPrendaTorneo: (peleador: string, espacio: Espacio) => void;
+  restaurarEquipoTorneo: (peleador: string) => void;
+  gastarRondaTorneo: (antes: Record<string, number>, despues: Record<string, number>) => void;
+  /** Al terminar un capítulo: pasa objetos que se gastan de la partida al torneo (con tope). Devuelve cuántos pasaron. */
+  traspasarATorneo: (items: Record<string, number>, capitulo: number) => number;
   /** Le da a una partida guardada una bomba ganada en el torneo. */
   darBombaAPartida: (slot: number) => void;
   /** Un premio del torneo a PayFoe (lo que pase del tope se pierde). Devuelve lo que entró. */
@@ -670,6 +683,34 @@ export const useStore = create<Store>()(
           }),
 
         torneo: { ganadas: {}, defensas: 0 },
+        comprarTorneo: (objeto, precio, n = 1) => {
+          // El tope de cada objeto (9; 3 de cada prenda): no se compra de más.
+          if (n <= 0 || n > lugarPara(get().torneo, objeto)) return false;
+          const payfoe = gastar(get().payfoe, precio * n);
+          if (!payfoe) return false;
+          const { torneo } = get();
+          set({ payfoe, torneo: { ...torneo, mochila: { ...(torneo.mochila ?? {}), [objeto]: (torneo.mochila?.[objeto] ?? 0) + n } } });
+          return true;
+        },
+        ponerPrendaTorneo: (peleador, objeto) => {
+          const r = ponerPrenda(get().torneo, peleador, objeto);
+          if (r) set({ torneo: { ...get().torneo, ...r } });
+        },
+        sacarPrendaTorneo: (peleador, espacio) => {
+          const r = sacarPrenda(get().torneo, peleador, espacio);
+          if (r) set({ torneo: { ...get().torneo, ...r } });
+        },
+        restaurarEquipoTorneo: (peleador) => set({ torneo: { ...get().torneo, ...restaurarEquipo(get().torneo, peleador) } }),
+        gastarRondaTorneo: (antes, despues) => set({ torneo: { ...get().torneo, ...gastarEnRonda(get().torneo, antes, despues) } }),
+        traspasarATorneo: (items, capitulo) => {
+          const { game, torneo } = get();
+          // Solo al terminar un capítulo, como los tokens (decisión del autor, 2026-11-06).
+          if (!game || !game.finished?.startsWith(CHAPTER_END)) return 0;
+          const r = traspasar(torneo, game.vars, items, capitulo);
+          if (!r) return 0;
+          set({ game: { ...game, vars: r.vars }, torneo: { ...torneo, ...r.mochila } });
+          return r.pasados;
+        },
         premioTorneo: (n) => {
           const r = acreditar(get().payfoe, n);
           set({ payfoe: r.payfoe });

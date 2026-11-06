@@ -2,6 +2,7 @@ import { useState, type CSSProperties } from 'react';
 import { playSelect } from '../engine/sound';
 import { assetUrl } from '../engine/assets';
 import { OBJETOS_TIENDA, colorDeObjeto, precioVenta, useBoringplace, usePartidaTienda, type Articulo } from '../engine/boringplace';
+import { esDelTorneo, lugarPara } from '../engine/mochilaTorneo';
 import { quedanStock, varStock } from '../engine/tienda';
 import { ataqueEn, objetoEn } from '../engine/rpgTexto';
 import { esEquipo, yaTiene } from '../engine/equipo';
@@ -469,20 +470,32 @@ const ID_TIENDA = 'tienda:';
 function ObjetoVista({ objeto, onBack, onToast }: { objeto: string; onBack: () => void; onToast: (texto: string) => void }) {
   const p = useBoringplace();
   const tx = p.data.textos;
-  const { vars, capitulo } = usePartidaTienda();
+  const { vars, capitulo, desdeTitulo } = usePartidaTienda();
   const [n, setN] = useState(1);
   const lang = useLang();
+  const payfoe = useStore((st) => st.payfoe);
+  const torneo = useStore((st) => st.torneo);
   const x = p.tienda.find((t) => t.objeto === objeto);
   const base = OBJETOS_TIENDA.get(objeto);
   if (!x || !base) return null;
   const o = objetoEn(lang, objeto, base);
-  const monedas = (vars?.monedas as number | undefined) ?? 0;
-  const tengo = (vars?.[`mochila_${objeto}`] as number | undefined) ?? 0;
+  // Desde el menú, los objetos de pelea y la ropa son para el torneo y se pagan con PayFoe (decisión del autor,
+  // 2026-11-06). Lo demás (los permanentes) sigue siendo para la partida guardada.
+  const paraTorneo = !!config.payfoe_activo && desdeTitulo && esDelTorneo(base);
+  const monedas = paraTorneo ? payfoe.saldo : ((vars?.monedas as number | undefined) ?? 0);
+  const tengo = paraTorneo ? (torneo.mochila?.[objeto] ?? 0) : ((vars?.[`mochila_${objeto}`] as number | undefined) ?? 0);
   const total = n * x.precio;
-  // Lo permanente se vende de a poco por capítulo.
-  const quedan = quedanStock(vars, objeto, capitulo, x.stock_por_capitulo);
+  // Lo permanente se vende de a poco por capítulo; en el torneo, el tope de cada objeto (9; 3 de cada prenda).
+  const quedan = paraTorneo ? lugarPara(torneo, objeto) : quedanStock(vars, objeto, capitulo, x.stock_por_capitulo);
   const comprar = () => {
     playSelect();
+    if (paraTorneo) {
+      if (n > quedan) return onToast(tx.sin_stock);
+      if (!useStore.getState().comprarTorneo(objeto, x.precio, n)) return onToast(tx.sin_monedas.replace('{n}', String(total - monedas)));
+      onToast(n === 1 ? tx.comprado.replace('{objeto}', o.nombre) : tx.comprados.replace('{n}', String(n)).replace('{objeto}', o.nombre));
+      setN(1);
+      return;
+    }
     if (monedas < total) {
       onToast(tx.sin_monedas.replace('{n}', String(total - monedas)));
       return;
@@ -499,9 +512,9 @@ function ObjetoVista({ objeto, onBack, onToast }: { objeto: string; onBack: () =
           ‹
         </button>
         <b>{tx.titulo}</b>
-        {vars && (
+        {(vars || paraTorneo) && (
           <span className={s.monedas}>
-            {tx.monedas} <b>{monedas}</b>
+            {paraTorneo ? tx.payfoe : tx.monedas} <b>{monedas}</b>
           </span>
         )}
       </div>
@@ -513,22 +526,23 @@ function ObjetoVista({ objeto, onBack, onToast }: { objeto: string; onBack: () =
         <Precio n={x.precio} grande />
         <small className={s.lugar}>{tx.lugar_tienda}</small>
         <p className={s.descripcion}>{x.descripcion}</p>
+        {paraTorneo && <small className={s.lugar}>{tx.para_torneo}</small>}
         {tengo > 0 && <small className={s.tienes}>{tx.tienes.replace('{n}', String(tengo))}</small>}
-        {/* La ropa es única: se compra una sola vez. */}
-        {vars && esEquipo(o) && yaTiene(vars, objeto) ? (
+        {/* La ropa es única en la partida: se compra una sola vez. */}
+        {!paraTorneo && vars && esEquipo(o) && yaTiene(vars, objeto) ? (
           <p className={s.sinTuyos}>{tx.ya_tuyo}</p>
-        ) : vars && quedan <= 0 ? (
+        ) : (vars || paraTorneo) && quedan <= 0 ? (
           <p className={s.sinTuyos}>{tx.sin_stock}</p>
-        ) : vars ? (
+        ) : vars || paraTorneo ? (
           <>
-            {!esEquipo(o) && (
+            {(paraTorneo || !esEquipo(o)) && (
               <div className={s.cantidad}>
                 <span>{tx.cantidad}</span>
                 <button aria-label={tx.menos} disabled={n <= 1} onClick={() => setN(n - 1)}>
                   −
                 </button>
                 <b>{n}</b>
-                <button aria-label={tx.mas} onClick={() => setN(n + 1)}>
+                <button aria-label={tx.mas} disabled={paraTorneo && n >= quedan} onClick={() => setN(n + 1)}>
                   +
                 </button>
               </div>

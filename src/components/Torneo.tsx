@@ -9,6 +9,8 @@ import { useStore } from '../engine/store';
 import { playSelect } from '../engine/sound';
 import { HEROES_TORNEO, JEFES_TORRE, NIKKI_PELEADORA, REY_PELEADOR, TORNEO, peleadorAbierto, armarRonda, copaAbierta, fichaPeleador, premioDe, type Copa, type Modalidad } from '../engine/torneo';
 import { nuevaSemilla } from '../engine/esencia';
+import { equipoDe, mochilaDeRonda } from '../engine/mochilaTorneo';
+import { MochilaTorneo } from './MochilaTorneo';
 import { GALERIA_COMPLETA } from '../engine/modo';
 
 type Fase = { paso: 'menu' } | { paso: 'pelea'; ronda: number } | { paso: 'ronda'; ronda: number; premio: number } | { paso: 'fin'; gano: boolean };
@@ -38,18 +40,27 @@ export function TorneoPantalla({ onClose }: { onClose: () => void }) {
 
   if (fase.paso === 'pelea' && copa) {
     const final = fase.ronda === TORNEO.rondas.length - 1;
+    // Lo que lleva puesto cada uno y la mochila con que entran (lo usado se descuenta al terminar, gane o pierda).
+    const antes = mochilaDeRonda(torneo);
+    const bolsa = { equipo: Object.fromEntries(elegidos.map((k) => [k, equipoDe(k, torneo)])), mochila: antes };
+    const despuesDe = (vars?: Record<string, unknown>) =>
+      Object.fromEntries(Object.keys(antes).map((k) => [k, typeof vars?.[`mochila_${k}`] === 'number' ? (vars[`mochila_${k}`] as number) : antes[k]]));
     return (
       <Batalla
         key={`${copa.id}-${fase.ronda}`}
         id="torneo"
-        datos={armarRonda(copa, fase.ronda, modalidad, elegidos, torneo.defensas, semilla)}
-        onGanar={() => {
+        datos={armarRonda(copa, fase.ronda, modalidad, elegidos, torneo.defensas, semilla, bolsa)}
+        onGanar={(vars) => {
+          useStore.getState().gastarRondaTorneo(antes, despuesDe(vars));
           const entro = useStore.getState().premioTorneo(premioDe(copa, fase.ronda, modalidad));
           setGanado((g) => g + entro);
           if (final) useStore.getState().ganarCopa(copa.id);
           setFase({ paso: 'ronda', ronda: fase.ronda, premio: entro });
         }}
-        onPerder={() => setFase({ paso: 'fin', gano: false })}
+        onPerder={(vars) => {
+          useStore.getState().gastarRondaTorneo(antes, despuesDe(vars));
+          setFase({ paso: 'fin', gano: false });
+        }}
       />
     );
   }
@@ -158,6 +169,8 @@ export function TorneoPantalla({ onClose }: { onClose: () => void }) {
                     </button>
                   ))}
                 </div>
+                {/* La mochila del torneo y lo que lleva puesto cada uno (se cambia antes de empezar). */}
+                <MochilaTorneo peleadores={elegidos} />
               </>
             )}
             {copa && (

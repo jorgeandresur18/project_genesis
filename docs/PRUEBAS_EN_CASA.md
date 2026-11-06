@@ -235,3 +235,10 @@ En el Torneo (`npm run dev`, desde Extras):
 - [ ] **Rivales variados:** jugar dos torneos seguidos y ver que los rivales cambian (personajes como rivales: que miren hacia el lado correcto y peleen bien).
 - [ ] **PayFoe al terminar un capítulo:** al llegar al fin del Capítulo 1 o 2 con tokens ganados, aparece «Transferir N tokens»; tocarlo y ver el saldo en la billetera de PayFoe.
 
+## 20. La mochila del torneo (nuevo, 6 de noviembre)
+
+- [ ] En Boringplace, desde el título: comprar un objeto de pelea y una prenda (dice «Para la mochila del torneo» y se paga con PayFoe).
+- [ ] En el Torneo, debajo de «Tu equipo»: la mochila y la ropa de cada peleador; cambiar una prenda, sacarla y «Equipo de fábrica».
+- [ ] Al terminar un capítulo con objetos en la mochila: «¿Quieres pasar objetos a la mochila del torneo?» (hasta 5).
+- [ ] En una ronda del torneo, usar algo de la mochila y ver que después baja.
+

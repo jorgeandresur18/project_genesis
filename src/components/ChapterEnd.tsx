@@ -9,6 +9,9 @@ import textosEn from '../data/en/fin_capitulo.json';
 import { localized, useLang } from '../engine/i18n';
 import { assetUrl } from '../engine/assets';
 import { transferible } from '../engine/payfoe';
+import { quedanTraspasos, traspasables } from '../engine/mochilaTorneo';
+import { FICHAS } from '../engine/batallas';
+import { objetoEn } from '../engine/rpgTexto';
 
 interface Props {
   chapter: number;
@@ -84,6 +87,14 @@ export function ChapterEnd({ chapter, lastScene, onSave, onTitle }: Props) {
   const [cuantos, setCuantos] = useState<number | null>(null);
   const cant = Math.min(cuantos ?? puede, puede);
   const salto = Math.max(1, 10 ** Math.max(0, String(puede).length - 2));
+  // Objetos al torneo: los que se gastan, con tope por capítulo; no vuelven (decisión del autor, 2026-11-06).
+  const torneo = useStore((s) => s.torneo);
+  const tiene = config.torneo_activo && vars ? traspasables(vars) : {};
+  const partidaId = typeof vars?.partida_id === 'string' ? vars.partida_id : '';
+  const cupo = partidaId ? quedanTraspasos(torneo, partidaId, chapter) : 0;
+  const [pedido, setPedido] = useState<Record<string, number>>({});
+  const [pasaron, setPasaron] = useState<number | null>(null);
+  const pedidos = Object.values(pedido).reduce((a, b) => a + b, 0);
   const diff = title && alt ? splitDiff(title, alt) : null;
   const word = sub === 'alt' || sub === 'glitch-out' ? diff?.b : diff?.a;
 
@@ -161,6 +172,39 @@ export function ChapterEnd({ chapter, lastScene, onSave, onTitle }: Props) {
             </>
           ) : (
             <p>{textos.payfoe.nada}</p>
+          )}
+        </div>
+      )}
+      {config.torneo_activo && vars && (Object.keys(tiene).length > 0 || pasaron !== null) && (
+        <div className="chapter-end-payfoe">
+          {pasaron !== null ? (
+            <p>{textos.traspaso.hecho.replace('{n}', String(pasaron))}</p>
+          ) : cupo <= 0 ? (
+            <p>{textos.traspaso.sin_cupo}</p>
+          ) : (
+            <>
+              <p className="chapter-end-payfoe-pregunta">{textos.traspaso.pregunta}</p>
+              <small>{textos.traspaso.cupo.replace('{n}', String(cupo - pedidos))}</small>
+              {Object.entries(tiene).map(([id, max]) => {
+                const n = pedido[id] ?? 0;
+                return (
+                  <div key={id} className="chapter-end-payfoe-cantidad">
+                    <span>{objetoEn(lang, id, FICHAS.objetos[id]).nombre} (×{max})</span>
+                    <button aria-label={textos.payfoe.menos} disabled={n <= 0} onClick={() => setPedido({ ...pedido, [id]: n - 1 })}>
+                      −
+                    </button>
+                    <b>{n}</b>
+                    <button aria-label={textos.payfoe.mas} disabled={n >= max || pedidos >= cupo} onClick={() => setPedido({ ...pedido, [id]: n + 1 })}>
+                      +
+                    </button>
+                  </div>
+                );
+              })}
+              <small className="chapter-end-payfoe-aviso">{textos.traspaso.aviso}</small>
+              <button disabled={pedidos <= 0} onClick={click(() => setPasaron(useStore.getState().traspasarATorneo(pedido, chapter)))}>
+                {textos.traspaso.boton.replace('{n}', String(pedidos))}
+              </button>
+            </>
           )}
         </div>
       )}

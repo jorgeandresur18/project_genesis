@@ -138,7 +138,7 @@ anota en `docs/PRUEBAS_EN_CASA.md` para la noche.
    (dúo), Tzai (controla a un rival un turno) y GENESIS (cambia una regla; toca el canon). ¿Cuáles?
 6. **Objetos 🔧** de `OBJETOS_PROPUESTA.txt`: cuáles se hacen.
 7. **Precios** propuestos por Claude (los de la tabla, el traje rojo revendido a 160): revisarlos cuando quiera.
-8. **Boringram del menú (el autor, 2026-11-06):** los objetos de pelea comprados ahí sirven **solo para el torneo**; el autor todavía ve si se podrán pasar a una partida.
+8. ~~Boringram del menú~~ **Hecho** (6 de noviembre): la mochila del torneo (compras con PayFoe desde el menú, objetos traídos de las partidas, equipo de los peleadores). Falta decidir el puente de premios del torneo a la historia (idea: un objeto por capítulo).
 9. ~~Estados~~ **Hecho** (6 de noviembre): a los jefes les duran la mitad; un golpe despierta al dormido.
 10. **Capítulos 2 y 3:** las decisiones de abajo («Decisiones pendientes del autor») y las preguntas de
     `docs/guion/cap03_plan.md`.

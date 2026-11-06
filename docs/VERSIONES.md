@@ -5,6 +5,14 @@ Qué trae cada versión. La que está en curso lleva `-dev` y todavía no se pub
 
 ## 1.2.0-dev (en curso, rama `desarrollo`; sin publicar)
 
+- **Torneo:** rivales variados en cada ronda (personajes incluidos); cada peleador se desbloquea con su pelea de la historia; Nikki y el Rey Malvado (al terminar el Capítulo 6) como peleadores; los jefes de la torre con números de héroe; Billy apenas el más fuerte; **la mochila del torneo** (compras con PayFoe desde el menú, objetos traídos de las partidas) y el equipo de cada peleador.
+- **PayFoe:** los tokens de la partida pasan a PayFoe al terminar cada capítulo (eligiendo cuántos); también objetos al torneo.
+- **Maggie:** sus cuatro objetos contra el dormido y el confundido. **Jair:** sus lentes de programador.
+- **Estados:** a los jefes les duran la mitad; un golpe despierta al dormido.
+- **Capítulo 1 (en prueba, no publicar sin el visto bueno del autor):** la pelea contra la sombra de roca en el claro.
+- **Boringram:** los recuerdos de Noodle (la historia de Jair y Nikki, Capítulos 2 y 3).
+- **Capítulo 3:** la torre de 9 pisos, con los guardias de las estaciones y sus jefes con ataques propios.
+
 - **El Rey Malvado y sus especiales:** Espada de las estaciones (una estación al azar: veneno, quemadura, parálisis o congelado) y Tajada del abismo, con el estado nuevo **desaparecido**.
 - **Capítulo 3 en borrador** («Sin DÓNDE ir»): la fortaleza del Rey piso por piso, 5 peleas de relleno, el DELETE sin WHERE, el final «Cancelar» y el despertar con Cami y Rikka. Se juega en desarrollo después del Capítulo 2; apagado en lo publicado.
 
