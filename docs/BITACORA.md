@@ -466,4 +466,5 @@ de Rikka en la galería se ven enteros y grandes. CLAUDE.md, al día con el 6 de
 - **Maggi se escribe Maggie** (corrección del autor): cambiado en el código (clave `maggie`), los datos, las pruebas y los documentos; la bitácora queda como historia.
 - **Bar del Capítulo 1 (corrección de diálogo del autor):** Nikki: «Ocho años y no has vuelto a bailar conmigo. Desde aquella fiesta.» Jair: «Esa vez estaba borracho. Bailar contigo fue lo único que me salió bien esa noche.» (también en inglés). La chica de la fiesta no tiene nombre: «la chica de la fiesta que quería con Jair». Canon y guion al día.
 - **Explicado al autor:** por qué Maggie y Nikki peleadora salen ~0 % en el simulador (el simulador juega a los héroes con su primer ataque que hace daño y no usa dormir ni confundir).
+- **Dónde se cuenta lo de Jair y Nikki (del autor):** en Boringram, como desbloqueables de su vida de antes. Anotado en el canon y en «Ideas anotadas» del cronograma.
 
