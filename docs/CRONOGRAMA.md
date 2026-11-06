@@ -161,6 +161,13 @@ abajo de espaldas) cuando toque.
 
 ## Ideas anotadas (por diseñar)
 
+**Escena secreta de Jordy en el Capítulo 4 (recomendación, idea del autor del 6 de noviembre; no es canon):** al
+completar el juego al 100 %, en el Capítulo 4 se podría desbloquear una escena extra parecida a la de Rikka en las
+termas, esta vez con Jordy cambiándose después del gimnasio (o algo así). Lo que habría que decidir: si se lo puede
+tocar como a Rikka y qué pasa si se pasa de la raya (el tono de Jordy: gay, discreto); quién mira (¿el jugador otra vez,
+como en las termas?); dónde ocurre (vestidor del gimnasio); si tiene imagen secreta y galería propia. Mismas reglas
+que lo de Rikka: sugerido, con censura, nunca explícito; no cuenta para el 100 %.
+
 **Nikki peleadora, su quinto ataque (para mucho más adelante, decisión del autor, 5 de noviembre):** como peleadora del
 torneo lleva 5 ataques; la Nikki campeona, 6. Hoy tiene 4 (cachetada, revés, beso confusión y la ráfaga de cachetadas).
 Falta decidir cuál es el quinto: el clon de sombra (habría que enseñarle al motor que un clon pelee del lado del jugador)
