@@ -581,3 +581,26 @@ export function desterrar(estado: EstadoPelea, x: Luchador, [min, max]: [number,
 
 /** Los que se pierden en el abismo: desaparecidos cuando la pelea se pierde porque no quedó nadie más en el campo. */
 export const encerradosEnElAbismo = (estado: EstadoPelea) => estado.heroes.filter((h) => vivo(h) && h.desterrado > 0);
+
+/** La velocidad con la que actúa (la de su nivel más la de la ropa). */
+export const velocidadDe = (l: Luchador) => l.vel + (l.equipo?.vel ?? 0);
+
+/**
+ * El orden del turno (decisión del autor, 2026-11-05: el más rápido actúa primero). Primero van las acciones con
+ * prioridad de los héroes (esquivar, protegerse o potenciarse, un objeto, poner un cebo), en el orden en que se
+ * eligieron; después todos los demás, héroes y enemigos mezclados, de más rápido a más lento. En un empate va
+ * primero el héroe; entre dos del mismo lado, el que venía antes.
+ */
+export function ordenDelTurno<T>(acciones: { l: Luchador; prioridad?: boolean; dato: T }[]): { l: Luchador; dato: T }[] {
+  return acciones
+    .map((a, i) => ({ ...a, i }))
+    .sort((a, b) => {
+      if (!!a.prioridad !== !!b.prioridad) return a.prioridad ? -1 : 1;
+      if (a.prioridad) return a.i - b.i;
+      const v = velocidadDe(b.l) - velocidadDe(a.l);
+      if (v) return v;
+      if (a.l.lado !== b.l.lado) return a.l.lado === 'heroe' ? -1 : 1;
+      return a.i - b.i;
+    })
+    .map(({ l, dato }) => ({ l, dato }));
+}

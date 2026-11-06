@@ -8,6 +8,8 @@ import fichas from '../data/rpg/personajes.json';
 export interface PeleaArchivo extends Omit<DatosBatalla, 'personajes' | 'enemigos' | 'objetos' | 'retratos'> {
   personajes: Record<string, Partial<Heroe> & { nivel: number }>;
   enemigos: string[];
+  /** Lo que cambia de un enemigo solo en esta pelea (p. ej. Nikki ebria en el bar: más lenta). `base` y `crece` se mezclan. */
+  enemigos_cambios?: Record<string, Partial<Enemigo>>;
   objetos: string[];
   retratos?: Record<string, string>;
 }
@@ -42,7 +44,8 @@ export function armarBatalla(p: PeleaArchivo, f: Fichas = FICHAS, id = '?'): Dat
   const enemigos: Record<string, Enemigo> = {};
   for (const k of p.enemigos) {
     if (!f.enemigos[k]) throw new Error(`Pelea ${id}: el enemigo «${k}» no tiene ficha`);
-    enemigos[k] = f.enemigos[k];
+    const c = p.enemigos_cambios?.[k];
+    enemigos[k] = c ? { ...f.enemigos[k], ...c, base: { ...f.enemigos[k].base, ...c.base }, crece: { ...f.enemigos[k].crece, ...c.crece } } : f.enemigos[k];
   }
   const objetos: Record<string, Objeto> = {};
   for (const k of p.objetos) {

@@ -13,6 +13,8 @@ import {
   estadosTerminados,
   finDeTurno,
   fotoEstados,
+  ordenDelTurno,
+  velocidadDe,
   sufreAlFinal,
   quemarConEspecial,
   aplicarEstado,
@@ -324,5 +326,30 @@ describe('la Ráfaga de puños de Jair a veces quema', () => {
     expect(quemarConEspecial(s, esp, [e], fijo(0.5))).toEqual([]);
     expect(quemarConEspecial(s, esp, [e], fijo(0.05))).toEqual([e]);
     expect(e.quemado).toBeGreaterThan(0);
+  });
+});
+
+describe('el orden del turno por velocidad (decisión del autor, 2026-11-05)', () => {
+  const d = D('bastion');
+  const con = (id: string, lado: 'heroe' | 'enemigo', vel: number) => ({ ...enemigo(d, Object.keys(d.enemigos)[0]), id, lado, vel });
+  it('el más rápido primero; en un empate, el héroe; esquivar, objetos y cebos siempre antes', () => {
+    const lento = con('lento', 'heroe', 5);
+    const rapido = con('rapido', 'enemigo', 12);
+    const empate = con('empate', 'enemigo', 5);
+    const esquiva = con('esquiva', 'heroe', 1);
+    const orden = ordenDelTurno([
+      { l: lento, dato: 'a' },
+      { l: rapido, dato: 'b' },
+      { l: empate, dato: 'c' },
+      { l: esquiva, prioridad: true, dato: 'd' },
+    ]).map((x) => x.l.id);
+    expect(orden).toEqual(['esquiva', 'rapido', 'lento', 'empate']);
+  });
+  it('en el bar Nikki está ebria: más lenta que Jair (él actúa primero, como antes)', () => {
+    const bar = D('nikki');
+    const s = estadoInicial(bar);
+    const nikki = sumarEnemigo(s, bar, bar.jefe.enemigo, bar.jefe.nivel);
+    const jair = s.heroes[0];
+    expect(velocidadDe(nikki)).toBeLessThan(velocidadDe(jair));
   });
 });

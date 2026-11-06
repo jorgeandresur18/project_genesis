@@ -1,5 +1,7 @@
 {
   "titulo": "El bar",
+  "_nota_ebria": "Nikki está ebria en el bar: más lenta (decisión del autor, 2026-11-05, con el orden por velocidad). Así Jair actúa primero, como antes.",
+  "enemigos_cambios": { "nikki": { "base": { "vel": 4 }, "crece": { "vel": 0.15 } } },
   "fondo": "batalla/fondos/bar",
   "heroes": [
     "jair"

@@ -174,3 +174,11 @@ Cambiar el idioma a inglés (Opciones) y abrir una pelea (`?batalla=bastion` o `
 - [ ] **Importante:** con el juego en inglés, que los ataques equipados de Jair, Cami y Rikka sigan siendo los mismos que en español (nada se desequipa al cambiar de idioma).
 - [ ] Volver a español: todo como antes.
 
+## 12. La velocidad decide el orden (nuevo, 5 de noviembre, noche)
+
+El más rápido actúa primero: héroes y enemigos mezclados. Esquivar, los objetos, protegerse y los cebos van siempre
+primero. Las pruebas automáticas y el simulador ya lo usan (el equilibrio no se movió).
+
+- [ ] **El bar con Nikki** (`?batalla=nikki`): Jair sigue actuando antes que ella (está ebria, más lenta).
+- [ ] **Una pelea con un enemigo más rápido** que alguno de los héroes (`?batalla=cap03_rey`: los caballeros empatan con Jair): que el orden se entienda y que esquivar funcione aunque el enemigo sea más rápido.
+- [ ] **Que nada se trabe:** dormir o paralizar a un héroe antes de que actúe (pierde la acción y su objeto vuelve a la mochila).

@@ -11,6 +11,7 @@ import {
   CONFUSION,
   cargar,
   disponibles,
+  noActua,
   equipados,
   especialListo,
   esquiva,
@@ -50,6 +51,7 @@ import {
   resolverGolpe,
   sumarEnemigo,
   fotoEstados,
+  ordenDelTurno,
   sufreAlFinal,
 } from '../src/engine/turnos';
 
@@ -62,6 +64,8 @@ function pelea(D: DatosBatalla, listo: boolean) {
   const hs = s.heroes;
   /** Un golpe de un enemigo: al que eligió esquivar, los especiales le hacen la mitad. */
   const especialA = (a: Luchador, b: Luchador, poder: number) => resolverGolpe(s, D, a, b, poder, b.esquivando);
+  /** Los refuerzos que llegaron en este turno: actúan al final del turno, como en el juego. */
+  let llegaron: Luchador[] = [];
   const cae = (e: Luchador) => {
     if (e.clon !== undefined) return;
     hs.filter(vivo).forEach((x) => ganarXp(x, D.personajes[x.clave], xpDe(e.nivel)));
@@ -69,7 +73,7 @@ function pelea(D: DatosBatalla, listo: boolean) {
       const k = D.botin.objetos[Math.floor(Math.random() * D.botin.objetos.length)];
       s.mochila[k] = (s.mochila[k] ?? 0) + 1;
     }
-    if (llegaRefuerzo(s, D, e)) sumarEnemigo(s, D, D.horda.enemigo, D.horda.niveles[s.salieron++]);
+    if (llegaRefuerzo(s, D, e)) llegaron.push(sumarEnemigo(s, D, D.horda.enemigo, D.horda.niveles[s.salieron++]));
   };
   const seRetiraElJefe = () => {
     const j = s.enemigos.find((e) => D.enemigos[e.clave].jefe && e.clon === undefined);
@@ -191,19 +195,26 @@ function pelea(D: DatosBatalla, listo: boolean) {
     const disp = disponibles(hs, D.personajes, s.actuaron);
     const alEmpezar = fotoEstados([...hs, ...s.enemigos]);
     s.actuaron = [];
-    for (const h of disp) {
-      if (!vivo(h)) continue;
-      actuarHeroe(h);
-      if (seRetiraElJefe()) return { s, gana: true };
+    // El orden del turno, como en el juego (`ordenDelTurno`): del más rápido al más lento, héroes y enemigos mezclados.
+    // (El simulador decide al actuar: sus esquivas, cuando se queda sin usos, no van con prioridad.)
+    const orden = ordenDelTurno([...disp.map((h) => ({ l: h, dato: 'heroe' as const })), ...s.enemigos.filter(vivo).map((e) => ({ l: e, dato: 'enemigo' as const }))]);
+    llegaron = [];
+    for (const { l, dato } of orden) {
+      if (!vivo(l)) continue;
+      if (dato === 'heroe') {
+        if (noActua(l) || l.desterrado || !s.enemigos.some(vivo)) continue;
+        actuarHeroe(l);
+        if (seRetiraElJefe()) return { s, gana: true };
+      } else {
+        if (!hs.some(enCampo)) continue;
+        actuarEnemigo(l);
+      }
     }
+    for (const e of llegaron) if (vivo(e) && hs.some(enCampo)) actuarEnemigo(e);
     // Se acabó la horda: sale el jefe (actúa desde el turno siguiente).
     if (!s.enemigos.some(vivo)) {
       sumarEnemigo(s, D, D.jefe.enemigo, D.jefe.nivel);
       continue;
-    }
-    for (const e of s.enemigos.filter(vivo)) {
-      if (!hs.some(enCampo)) break;
-      actuarEnemigo(e);
     }
     finDeTurno(s);
     if (!hs.some(vivo)) return { s, gana: false };

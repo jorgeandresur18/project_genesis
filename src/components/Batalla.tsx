@@ -73,6 +73,7 @@ import {
   evaporarClones,
   finDeTurno,
   fotoEstados,
+  ordenDelTurno,
   sufreAlFinal,
   quemarConEspecial,
   type EstadoQueTermina,
@@ -747,11 +748,14 @@ function Pelea({
     // Dormido, congelado o paralizado: pierde su turno.
     for (const h of b.current.heroes.filter((x) => vivo(x) && x.desterrado)) await decir(fmt(t('batalla.sigue_desterrado'), { quien: h.nombre, n: h.desterrado }));
     for (const h of b.current.heroes.filter((x) => vivo(x) && !x.desterrado && noActua(x))) await decir(fmt(t(h.paralizado ? 'batalla.sigue_paralizado' : h.congelado ? 'batalla.sigue_congelado' : 'batalla.sigue_dormido'), { quien: h.nombre, n: h.paralizado }));
+    // Lo que eligió cada héroe (sin elegir, nadie: descansan todos).
+    const elecciones: [Luchador, Comando][] = [];
+    // Solo atacar (o el especial) la cansa: hablar, esquivar o usar un objeto no le hacen doler el tobillo.
+    const ataca = (c: Comando) => c.tipo === 'atacar' || c.tipo === 'especial';
     if (!opciones.length) {
       await lineas('descanso');
       b.current.actuaron = [];
     } else {
-      const elecciones: [Luchador, Comando][] = [];
       for (let k = 0; k < opciones.length; k++) {
         const c = await pedirComando(opciones[k], k === 0);
         if (!c) {
@@ -774,25 +778,59 @@ function Pelea({
         elecciones.push([opciones[k], c]);
       }
       setMensaje(null);
-      // Solo atacar (o el especial) la cansa: hablar, esquivar o usar un objeto no le hacen doler el tobillo.
-      const ataca = (c: Comando) => c.tipo === 'atacar' || c.tipo === 'especial';
       b.current.actuaron = elecciones.filter(([, c]) => ataca(c)).map(([h]) => h.id);
-      for (const [h, c] of elecciones) {
-        if (!vivo(h)) {
-          if (c.tipo === 'objeto') b.current.mochila[c.clave]++;
-          continue;
-        }
-        // Si ya no queda ningún enemigo (antes del jefe), los ataques de este turno se pierden.
-        if (c.tipo !== 'objeto' && c.tipo !== 'esquivar' && !b.current.enemigos.some(vivo)) continue;
-        await actuarHeroe(h, c);
-        if (b.current.perdona) return 'perdona';
-        // La autodestrucción o un cebo explosivo pueden terminarla de golpe.
+    }
+    // El orden del turno (engine/turnos.ts, `ordenDelTurno`): primero esquivar, protegerse, los objetos y los cebos;
+    // después héroes y enemigos mezclados, del más rápido al más lento (empate: el héroe).
+    const prioridad = (h: Luchador, c: Comando) => {
+      if (c.tipo === 'esquivar' || c.tipo === 'objeto') return true;
+      if (c.tipo !== 'atacar') return false;
+      const a = ataqueDeComando(h, c);
+      return !!(a?.cebo || a?.alMismo);
+    };
+    llegaronEnTurno.current = [];
+    const orden = ordenDelTurno<Comando | null>([
+      ...elecciones.map(([h, c]) => ({ l: h, prioridad: prioridad(h, c), dato: c })),
+      ...b.current.enemigos.filter(vivo).map((e) => ({ l: e, dato: null })),
+    ]);
+    for (const { l, dato: c } of orden) {
+      if (!c) {
+        // Un enemigo: si cayó o ya no queda a quién pegarle, no actúa.
+        if (!vivo(l) || !b.current.heroes.some(enCampo)) continue;
+        await actuarEnemigo(l);
         const r = resultado(b.current, d);
         if (r === 'empate' || r === 'pierde') return r;
-        if (jefeSeRetira()) return 'gana';
-        if (ataca(c)) await cansarse(h);
+        continue;
       }
+      const h = l;
+      if (!vivo(h)) {
+        if (c.tipo === 'objeto') b.current.mochila[c.clave]++;
+        continue;
+      }
+      // Dormido, congelado o paralizado por un enemigo más rápido en este mismo turno: ya no actúa.
+      if (noActua(h) || h.desterrado) {
+        if (c.tipo === 'objeto') b.current.mochila[c.clave]++;
+        continue;
+      }
+      // Si ya no queda ningún enemigo (antes del jefe), los ataques de este turno se pierden.
+      if (c.tipo !== 'objeto' && c.tipo !== 'esquivar' && !b.current.enemigos.some(vivo)) continue;
+      await actuarHeroe(h, c);
+      if (b.current.perdona) return 'perdona';
+      // La autodestrucción o un cebo explosivo pueden terminarla de golpe.
+      const r = resultado(b.current, d);
+      if (r === 'empate' || r === 'pierde') return r;
+      if (jefeSeRetira()) return 'gana';
+      if (ataca(c)) await cansarse(h);
     }
+    // Los refuerzos que llegaron en este turno actúan al final (si queda a quién pegarle).
+    for (const id of llegaronEnTurno.current) {
+      const e = b.current.enemigos.find((x) => x.id === id);
+      if (!e || !vivo(e) || !b.current.heroes.some(enCampo)) continue;
+      await actuarEnemigo(e);
+      const r = resultado(b.current, d);
+      if (r === 'empate' || r === 'pierde') return r;
+    }
+    llegaronEnTurno.current = [];
     if (jefeSeRetira()) return 'gana';
     // En la arena, si cayeron todos los rivales, se levantan.
     if (arena && !b.current.enemigos.some(vivo)) {
@@ -807,10 +845,6 @@ function Pelea({
       await decir(fmt(t('batalla.aparece_jefe'), { nombre: e.nombre }));
       await levantarse();
       return 'sigue';
-    }
-    for (const e of b.current.enemigos.filter(vivo)) {
-      if (!b.current.heroes.some(enCampo)) break;
-      await actuarEnemigo(e);
     }
     // Si los que quedan están desaparecidos, se pierde ya, antes de que el destierro descuente y vuelvan.
     {
@@ -1223,10 +1257,17 @@ function Pelea({
         await lineas('refuerzos');
       }
       const nuevo = sacar(horda.enemigo, horda.niveles[b.current.salieron++]);
+      // Actúa al final de este mismo turno (como antes del orden por velocidad).
+      llegaronEnTurno.current.push(nuevo.id);
       await decir(fmt(t('batalla.llega_otro'), { nombre: nuevo.nombre, nivel: nuevo.nivel }));
     }
   };
 
+  /** Los refuerzos que llegaron en este turno (actúan al final del turno). */
+  const llegaronEnTurno = useRef<string[]>([]);
+  /** El ataque que eligió un héroe (el mismo que usa `actuarHeroe`). */
+  const ataqueDeComando = (h: Luchador, c: Extract<Comando, { tipo: 'atacar' }>) =>
+    equipados(d.personajes[h.clave], h.nivel, progreso?.equipo?.[h.clave], sueltosQueTengo(progreso?.cassettes).map((x) => ataqueHeroeEn(lang, x)), progreso?.especialesGanados).ataques[c.ataque];
   const actuarHeroe = async (h: Luchador, c: Comando) => {
     const enemigos = b.current.enemigos.filter(vivo);
     // Pedir perdón tiene que ser seguido: si hace otra cosa, se vuelve a empezar.

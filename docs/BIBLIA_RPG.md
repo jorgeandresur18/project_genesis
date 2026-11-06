@@ -24,7 +24,7 @@ Cada luchador tiene cuatro estadísticas:
 | PS | Puntos de vida | Con 0, cae. Un jefe nunca llega a 0: se retira (ver 8). |
 | ATQ | Ataque | Cuánto daño hace. |
 | DEF | Defensa | Cuánto daño quita al recibir. |
-| VEL | Velocidad | Hoy no decide nada. Pendiente: que el más rápido actúe primero (ver 14). |
+| VEL | Velocidad | **Decide el orden del turno** (decisión del autor, 2026-11-05): primero esquivar, protegerse o potenciarse, los objetos y los cebos (en el orden en que se eligieron); después héroes y enemigos mezclados, del más rápido al más lento (la de su nivel más la de la ropa). Empate: el héroe. Los refuerzos que llegan en el turno actúan al final de ese turno. El que queda dormido, congelado o paralizado antes de actuar pierde la acción. En el bar, Nikki está ebria: más lenta que Jair (`enemigos_cambios` de `nikki.json`). |
 
 - Cada personaje tiene sus estadísticas en el nivel 1 (`base`) y cuánto sube cada una por nivel (`crece`).
   En el nivel N: `base + crece × (N − 1)`.
