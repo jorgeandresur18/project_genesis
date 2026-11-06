@@ -121,32 +121,43 @@ La misma proyección, para mirarla en el navegador: `docs/proyeccion.html`.
 
 ---
 
-## Para mañana (6 de noviembre, desde la computadora del trabajo: nada que requiera probar)
+## Para mañana (7 de noviembre, desde la computadora del trabajo: nada que requiera probar)
 
-Decisiones y datos que solo puede dar el autor; Claude los aplica sin pedir pruebas (las pruebas, de noche, en la
-computadora de Jorge: ver `docs/PRUEBAS_EN_CASA.md`).
+Allí el autor no puede abrir el juego. Son decisiones que solo puede dar él (con una respuesta corta alcanza) y trabajo
+que Claude hace solo, con sus pruebas automáticas (`npm test`, rutas, simulador). Lo que haya que mirar en pantalla se
+anota en `docs/PRUEBAS_EN_CASA.md` para la noche.
 
-0. **Publicada la 1.1.3** (5 de noviembre, orden del autor; la 1.1.2 cerró los atajos): `/all` y los demás atajos piden el PIN del autor. Publicar en tandas, para no gastar el límite de Vercel; probar a diario con `npm run dev`.
-1. ~~**Los enlaces de Lolabúm**~~ ✓ (5 de noviembre: ya con su enlace directo; falta publicarlos en `main`).
-2. **El repositorio sigue público** (decisión del autor, 5 de noviembre: por ahora no pasa a privado).
-3. **Mirar que Vercel haya publicado la 1.1.0** (la CI de `main` dio bien: comprobado el 5 de noviembre).
-4. **Boringram del menú:** si en el menú se pueden comprar objetos de pelea con PayFoe, ¿llegan a la próxima partida
-   («cofre») o no se venden ahí? (ver «Ideas anotadas»).
-5. **Estados (opcionales):** ¿a los jefes les duran menos dormido, congelado y paralizado? ¿un golpe despierta al
-   dormido? ¿subirle al veneno o bajarle al quemado contra jefes?
-6. **Precios** propuestos por Claude (pastelillo herbal 90, pastillas felices 45, CeBiDol 400, Multicebo 150 y los de
-   la tabla): revisarlos cuando quiera.
-7. **Capítulo 2:** las decisiones de abajo («Decisiones pendientes del autor») y las preguntas de
-   `docs/guion/cap03_plan.md`.
-8. **Boringram en los Capítulos 2 y 3 (lo hace el autor):** hacer más eventos de Boringram (posts, historias, pensamientos de Jair) para el Capítulo 2 y el 3. Anotado el 2026-11-05.
-9. **Capítulo 3, tres preguntas de coherencia** (al final de `docs/guion/cap03_plan.md`).
-10. **Inglés de la historia de los Capítulos 2 y 3:** cuando se cierren sus diálogos.
-11. **Arte (cuando toque):** si quiere el mosaico de la censura más grueso en los archivos; si la mano de abajo de espalda
-   queda como está.
+**Decisiones del autor (respuesta corta):**
+1. **Publicar en `main`:** ¿se sube ya lo de la demo (solo el Capítulo 1 en los desbloqueables, el menú que no se toca
+   antes de aparecer, los enlaces de Lolabúm, las cajas de texto nuevas) o se espera a probarlo de noche? Publicar en
+   tandas, por el límite de Vercel.
+2. **Jefes de la torre como peleadores del torneo:** hoy están muy por encima de los héroes (Comandante ×3 gana la
+   final de la Copa Leyenda el 99 %). Propuesta de Claude: que peleen con números de héroe (sus ataques y su especial,
+   con la vida y la defensa de un héroe de su estilo). ¿Sí?
+3. **Billy, demasiado fuerte** (100 % en la final individual): ¿se le baja junto con lo anterior?
+4. **Cuándo se desbloquean Jordan y Billy** en el torneo (hoy, desde ya; `TODO(canon)`).
+5. **Peleadores nuevos que propuso Claude:** Nail (roba potenciadores), Lady (copia el último ataque), Mike y Nora
+   (dúo), Tzai (controla a un rival un turno) y GENESIS (cambia una regla; toca el canon). ¿Cuáles?
+6. **Objetos 🔧** de `OBJETOS_PROPUESTA.txt`: cuáles se hacen.
+7. **Precios** propuestos por Claude (los de la tabla, el traje rojo revendido a 160): revisarlos cuando quiera.
+8. **Boringram del menú:** si se pueden comprar objetos de pelea con PayFoe, ¿llegan a la próxima partida («cofre»)?
+9. **Estados (opcionales):** ¿a los jefes les duran menos dormido, congelado y paralizado? ¿un golpe despierta al
+   dormido?
+10. **Capítulos 2 y 3:** las decisiones de abajo («Decisiones pendientes del autor») y las preguntas de
+    `docs/guion/cap03_plan.md`.
+11. **«First Date» de Blink-182** en Conoce más: sigue abriendo la búsqueda; si quiere, que pase el enlace.
 
-**Para la noche (computadora de Jorge), lo que falta probar:** la segunda revisión de las peleas del Bastión, Nikki y el hangar con las reglas
-nuevas (veneno y quemadura desde el turno siguiente, turno libre, quemar de Jair, saltos al esquivar); la galería de
-Rikka (manos, nalgadas, la marca a las 7, el grito a los 30); el CeBiDol desde Equipo; y la demo publicada 1.1.0.
+**Lo que Claude puede hacer solo (sin pruebas del autor):**
+- Que el simulador use dormir y confundir (hoy subestima a Maggi y a Nikki peleadora) y volver a medir el torneo.
+- Hacer más estables las pruebas de balance que a veces fallan por azar (el Bastión y el Rey): más peleas simuladas o
+  una semilla fija.
+- Lo que el autor decida de la lista de arriba (balance de los jefes, Billy, peleadores nuevos), con el simulador.
+
+**Siguen igual:** el repositorio sigue público (decisión del autor); Boringram de los Capítulos 2 y 3 (lo hace el
+autor); el inglés de los Capítulos 2 y 3, cuando se cierren sus diálogos; el arte (mosaico más grueso, la mano de
+abajo de espaldas) cuando toque.
+
+**Para la noche (computadora de Jorge):** `docs/PRUEBAS_EN_CASA.md`, secciones 10 a 15.
 
 ## Ideas anotadas (por diseñar)
 

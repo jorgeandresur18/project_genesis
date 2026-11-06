@@ -418,3 +418,28 @@ fuera de la computadora principal. **Al volver a la principal: `git checkout des
 - **No se tradujo la historia de los Capítulos 2 y 3:** no tienen nada en inglés todavía; se deja para cuando el autor cierre sus diálogos (traducir el borrador quedaría viejo).
 - **«Conoce más del proyecto» en txt:** a pedido del autor, en `Documents/jorge/conoce_mas_del_proyecto.txt`, **fuera del repositorio** (lleva el nombre del autor, que solo va en `conoce_mas.json`).
 
+## 5 y 6 de noviembre — cierre de la sesión (computadora del trabajo y de Jorge)
+
+**Qué se hizo** (el detalle, en las entradas de arriba):
+- **Ropa y objetos:** ropa de inicio (Rikka con la flor y las prendas; Cami con el traje azul y la placa de piloto;
+  Jair, nada). Nail se lleva las prendas en las termas (traje rojo) y Rikka vuelve a ellas al venderlo; el traje rojo
+  se revende en Boringplace.
+- **Peleas:** el tobillo de Cami, solo en el Capítulo 1; la torre del Capítulo 3, reajustada, y el Rey al nivel 28.
+  Equipos parejos en el torneo.
+- **Peleadores nuevos del torneo:** Jordan, Billy, Maggi, el influencer (seguidores) y el otaku; Nikki, desde el
+  inicio. Golpes que dejan un estado (`deja`).
+- **Demo:** solo muestra lo del Capítulo 1 (desbloqueables, finales, porcentaje, mapa, Boringram). El menú principal ya
+  no se toca antes de aparecer.
+- **Galería de Rikka:** luz del grito en toda la pantalla, vapor fijo dentro del recuadro, globos encima del vapor.
+- **Termas en la novela:** Rikka más grande; globo con «Siguiente» desde la ráfaga y recién ahí se la toca, un solo
+  globo; manos del jugador; el «¡¡KYAAAH!!» arriba; Cami y Jair la ven pálida; fundido lento.
+- **Cajas de texto y globos** más elegantes.
+- **Conoce más y canon:** enlaces de Lolabúm; las chicas reales se llaman **Milka** (base de Cami) y **Ari**
+  (Arianni, base de Rikka).
+
+**Qué decidió el autor:** todo lo de la lista anterior. El quinto ataque de Nikki peleadora queda para mucho más
+adelante (cronograma, «Ideas anotadas»).
+
+**Pendiente:** lo de «Para mañana» en el cronograma (decisiones, sin pruebas) y lo de la noche en
+`docs/PRUEBAS_EN_CASA.md` (secciones 10 a 15). Nada de esto está publicado en `main` todavía.
+
