@@ -188,7 +188,8 @@ const EMBLEMAS = emblemas.sprites as Record<string, Emblema[]>;
 const MANOS = Object.values(emblemas.manos) as Manos[];
 const manosDe = (clave: string): Manos | undefined => MANOS.find((m) => m.sprites.includes(clave));
 /**
- * Las manos del jugador (en la novela; las de Cami quedan en la galería): las mismas acciones con la palma, la mano que
+ * Las manos del jugador (en la novela y, desde el 2026-11-06, también en la galería; las de Cami quedan guardadas en
+ * `manos` por si algo de ella las usa): las mismas acciones con la palma, la mano que
  * agarra y la que apunta (pedido del autor, 2026-11-05; las genera tools/manos_jugador.py).
  */
 const MANOS_JUGADOR = Object.values((emblemas as { manos_jugador?: Record<string, Manos> }).manos_jugador ?? {});
@@ -217,7 +218,7 @@ const spriteRef = (s: string) => `sprites/${s}.webp`;
 const claveSprite = (ref: string) => ref.match(/^sprites\/([^/]+\/[^/.]+)\.webp$/)?.[1] ?? null;
 /** Los emblemas y la proporción de un sprite secreto (para la galería). */
 export const capaDeSprite = (clave: string): Capa | null =>
-  EMBLEMAS[clave] ? { proporcion: 3 / 4, vapor: 'medio', emblemas: EMBLEMAS[clave], manos: manosDe(clave), cara: manosDe(clave)?.cara } : null;
+  EMBLEMAS[clave] ? { proporcion: 3 / 4, vapor: 'medio', emblemas: EMBLEMAS[clave], manos: manosJugadorDe(clave), cara: manosDe(clave)?.cara } : null;
 export const capaDeFondo = (fondo: string): Capa | null => FONDOS[fondo] ?? null;
 export const esSpriteSecreto = (clave: string) => clave in EMBLEMAS;
 // Cuánto tarda en darse vuelta después del susto, cuánto entre la cara de susto y el grito, y cuánto dura el grito.
