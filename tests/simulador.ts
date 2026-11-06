@@ -71,7 +71,8 @@ function pelea(D: DatosBatalla, listo: boolean, esencias: boolean) {
   let llegaron: Luchador[] = [];
   const cae = (e: Luchador) => {
     if (e.clon !== undefined) return;
-    hs.filter(vivo).forEach((x) => ganarXp(x, D.personajes[x.clave], xpDe(e.nivel)));
+    // En el torneo no se gana experiencia (decisión del autor, 2026-11-06).
+    if (!D.torneo) hs.filter(vivo).forEach((x) => ganarXp(x, D.personajes[x.clave], xpDe(e.nivel)));
     if (Math.random() < D.botin.probabilidad) {
       const k = D.botin.objetos[Math.floor(Math.random() * D.botin.objetos.length)];
       s.mochila[k] = (s.mochila[k] ?? 0) + 1;

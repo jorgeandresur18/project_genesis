@@ -478,9 +478,42 @@ describe('la mochila de combate del rival (decisión del autor, 2026-11-06)', ()
     s.enemigos = [rival];
     rival.ps = 1;
     const antes = Object.values(s.mochilaRival ?? {}).reduce((a, b) => a + b, 0);
-    const r = decidirEnemigo(s, d, rival, fijo(0));
+    const r = decidirEnemigo(s, d, rival, false, fijo(0));
     expect(r.tipo).toBe('objeto');
     expect(rival.ps).toBeGreaterThan(1);
     expect(Object.values(s.mochilaRival ?? {}).reduce((a, b) => a + b, 0)).toBe(antes - 1);
+  });
+});
+
+describe('el rival usa su mochila con cabeza (pedido del autor, 2026-11-06)', () => {
+  const armar = async (bolsa: Record<string, number>) => {
+    const { TORNEO, armarRonda } = await import('../src/engine/torneo');
+    const { crearLuchador } = await import('../src/engine/batalla');
+    const d = { ...armarRonda(TORNEO.copas[0], 0, TORNEO.modalidades[0], ['jair']), mochila_rival: bolsa };
+    const s = estadoInicial(d);
+    const rival = crearLuchador('r', d.jefe.enemigo, 'enemigo', d.enemigos[d.jefe.enemigo], 10);
+    s.enemigos = [rival];
+    return { d, s, rival };
+  };
+  it('le saca un estado a un compañero', async () => {
+    const { d, s, rival } = await armar({ galleta_arcoiris: 1 });
+    rival.envenenado = { danio: 3, turnos: 3 };
+    const r = decidirEnemigo(s, d, rival, false, fijo(0));
+    expect(r.tipo).toBe('objeto');
+    expect(rival.envenenado).toBeNull();
+  });
+  it('cura con el objeto que mejor cubre lo que le falta (no gasta el más grande en un rasguño)', async () => {
+    const { d, s, rival } = await armar({ galleta_brownie: 1, galleta_clasica: 1 });
+    rival.ps = Math.round(rival.psMax * 0.3);
+    const falta = rival.psMax - rival.ps;
+    const r = decidirEnemigo(s, d, rival, false, fijo(0));
+    expect(r.tipo).toBe('objeto');
+    // La clásica cura 20; la brownie, 50: si con 20 alcanza, usa la clásica.
+    if (r.tipo === 'objeto') expect(r.objeto).toBe(falta <= 20 ? 'galleta_clasica' : 'galleta_brownie');
+  });
+  it('el jefe se potencia una sola vez por pelea', async () => {
+    const { d, s, rival } = await armar({ atq: 2 });
+    expect(decidirEnemigo(s, d, rival, false, fijo(0)).tipo).toBe('objeto');
+    expect(decidirEnemigo(s, d, rival, false, fijo(0)).tipo).not.toBe('objeto');
   });
 });

@@ -1142,8 +1142,8 @@ function Pelea({
       }
       b.current.heroes.filter(vivo).forEach((h) => animar(h.id, 'victoria'));
       await lineas('victoria');
-      // Hacer retirar al jefe deja monedas.
-      if (jefe) {
+      // Hacer retirar al jefe deja tokens (no en el torneo: ahí el premio va por ronda a PayFoe).
+      if (jefe && !d.torneo) {
         const m = monedasJefe(jefe.nivel);
         b.current.monedas += m;
         playChip('vida');
@@ -1256,21 +1256,24 @@ function Pelea({
   const alCaer = async (e: Luchador) => {
     if (e.clon !== undefined) return decir(fmt(t('batalla.clon_cae'), { quien: e.nombre }));
     await decir(fmt(t('batalla.cae'), { quien: e.nombre }));
-    const xp = xpDe(e.nivel);
-    // Experiencia para todos y monedas para la partida.
-    const m = monedasDe(e.nivel);
-    b.current.monedas += m;
-    await decir(fmt(t('batalla.xp_monedas'), { n: xp, m }));
-    for (const h of b.current.heroes.filter(vivo)) {
-      for (const nivel of ganarXp(h, d.personajes[h.clave], xp)) {
-        playChip('vida');
-        forzar();
-        void animar(h.id, 'victoria', 1200);
-        efecto(h.id, 'sube-stat', 1300);
-        await decir(fmt(t('batalla.sube'), { quien: h.nombre, nivel }));
-        for (const a of aprendeEn(d.personajes[h.clave], nivel)) {
-          playChip('revivir');
-          await decir(fmt(t('batalla.aprende'), { quien: h.nombre, ataque: a.nombre }));
+    // En el torneo no se gana experiencia ni caen tokens (decisión del autor, 2026-11-06); el botín ahí no cae (probabilidad 0).
+    if (!d.torneo) {
+      const xp = xpDe(e.nivel);
+      // Experiencia para todos y monedas para la partida.
+      const m = monedasDe(e.nivel);
+      b.current.monedas += m;
+      await decir(fmt(t('batalla.xp_monedas'), { n: xp, m }));
+      for (const h of b.current.heroes.filter(vivo)) {
+        for (const nivel of ganarXp(h, d.personajes[h.clave], xp)) {
+          playChip('vida');
+          forzar();
+          void animar(h.id, 'victoria', 1200);
+          efecto(h.id, 'sube-stat', 1300);
+          await decir(fmt(t('batalla.sube'), { quien: h.nombre, nivel }));
+          for (const a of aprendeEn(d.personajes[h.clave], nivel)) {
+            playChip('revivir');
+            await decir(fmt(t('batalla.aprende'), { quien: h.nombre, ataque: a.nombre }));
+          }
         }
       }
     }

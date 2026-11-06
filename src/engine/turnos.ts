@@ -31,6 +31,7 @@ import {
   vivo,
   yaTiene,
   type Ataque,
+  type Objeto,
   type DatosBatalla,
   type Enemigo,
   type Deja,
@@ -64,6 +65,8 @@ export interface EstadoPelea {
   mochila: Record<string, number>;
   /** La mochila de combate del rival (el torneo; ver `mochila_rival`). */
   mochilaRival?: Record<string, number>;
+  /** Los rivales que ya se potenciaron con su mochila (una vez por pelea). */
+  potenciados?: string[];
   /** Cuántos de la horda ya salieron. */
   salieron: number;
   /** Los héroes que atacaron el turno anterior (los que no pueden repetir, descansan este). */
@@ -197,19 +200,61 @@ export type DecisionEnemigo =
  * la distracción, el remate o la traición y el uso del ataque) y devuelve lo que hay que mostrar.
  * `arena`: en la arena de prueba la Mega Bola sale al azar, aunque sea solo por traición.
  */
-/** Por debajo de esta parte de su vida, el rival piensa en curar a uno de los suyos (y lo hace a veces). */
-const CURA_RIVAL = { umbral: 0.35, probabilidad: 0.7 };
-function curaDelRival(estado: EstadoPelea, d: DatosBatalla, azar: () => number): DecisionEnemigo | null {
+/**
+ * Cómo usa el rival su mochila de combate (decisión del autor, 2026-11-06: «más inteligente»), en este orden:
+ * 1. Le saca un estado a un compañero (veneno, quemadura o confusión) si tiene con qué.
+ * 2. Cura al que quedó bajo de vida (antes al jefe), con el objeto que más se ajusta a lo que le falta (nunca el
+ *    pastelillo herbal, que confunde).
+ * 3. Llena su especial si lo tiene a medio cargar.
+ * 4. Una vez por pelea, el jefe se potencia (ataque o defensa) antes de pelear en serio.
+ * Cada cosa, a veces (`probabilidad`), para que no sea una máquina perfecta, y solo si vale la pena: una cura tiene que
+ * devolver al menos el 15 % de su vida (en las copas altas una galleta no alcanza) y un potenciador, sumar al menos el
+ * 10 % de su ataque o su defensa (si no, gastaría el turno en nada).
+ */
+const MOCHILA_RIVAL = { umbral: 0.35, cura: 0.75, estado: 0.6, carga: 0.5, potencia: 0.6 };
+function usoDeMochila(estado: EstadoPelea, d: DatosBatalla, e: Luchador, azar: () => number): DecisionEnemigo | null {
   const bolsa = estado.mochilaRival;
   if (!bolsa) return null;
-  const objeto = Object.keys(bolsa).find((k) => bolsa[k] > 0 && d.objetos[k] && (d.objetos[k].ps || d.objetos[k].cura_toda) && !d.objetos[k].revive);
-  if (!objeto) return null;
-  const bajos = estado.enemigos.filter((x) => vivo(x) && x.clon === undefined && !x.desterrado && x.ps < x.psMax * CURA_RIVAL.umbral);
-  if (!bajos.length || azar() >= CURA_RIVAL.probabilidad) return null;
-  const blanco = bajos.sort((a, b) => a.ps / a.psMax - b.ps / b.psMax)[0];
-  bolsa[objeto]--;
-  const n = usarObjeto(d.objetos[objeto], blanco);
-  return { tipo: 'objeto', objeto, blanco, n };
+  const hay = (f: (o: Objeto) => boolean) => Object.keys(bolsa).filter((k) => bolsa[k] > 0 && d.objetos[k] && f(d.objetos[k]));
+  const usar = (objeto: string, blanco: Luchador): DecisionEnemigo => {
+    bolsa[objeto]--;
+    const n = usarObjeto(d.objetos[objeto], blanco);
+    return { tipo: 'objeto', objeto, blanco, n };
+  };
+  const suyos = estado.enemigos.filter((x) => vivo(x) && x.clon === undefined && !x.desterrado);
+  // 1. Un estado que se puede sacar.
+  const conEstado = suyos.find((x) => x.envenenado || x.quemado > 0 || x.confundido > 0);
+  if (conEstado) {
+    const sirve = hay((o) => !!o.quita_estado || !!o.cura_estados || (!!o.quita_veneno && !!conEstado.envenenado));
+    if (sirve.length && azar() < MOCHILA_RIVAL.estado) return usar(sirve[0], conEstado);
+  }
+  // 2. Curar al que quedó bajo de vida: primero al jefe; el objeto que mejor cubre lo que le falta.
+  const bajos = suyos.filter((x) => x.ps < x.psMax * MOCHILA_RIVAL.umbral).sort((x, y) => Number(!!y.jefe) - Number(!!x.jefe) || x.ps / x.psMax - y.ps / y.psMax);
+  const blanco = bajos[0];
+  const falta = blanco ? blanco.psMax - blanco.ps : 0;
+  const cuanto = (k: string) => (d.objetos[k].cura_toda ? falta : (d.objetos[k].ps ?? 0));
+  const curas = blanco ? hay((o) => (!!o.ps || !!o.cura_toda) && !o.revive && !o.confunde_al_comer).filter((k) => cuanto(k) >= blanco.psMax * 0.15) : [];
+  if (blanco && curas.length && azar() < MOCHILA_RIVAL.cura) {
+    // El más chico que cubre lo que falta; si ninguno alcanza, el más grande.
+    const alcanzan = curas.filter((k) => cuanto(k) >= falta).sort((x, y) => cuanto(x) - cuanto(y));
+    const objeto = alcanzan[0] ?? curas.sort((x, y) => cuanto(y) - cuanto(x))[0];
+    return usar(objeto, blanco);
+  }
+  // 3. Llenar el especial a medio cargar.
+  const enemigo = d.enemigos[e.clave];
+  if ((enemigo.especial || enemigo.especiales?.length) && e.carga >= 40 && e.carga < 100) {
+    const recarga = hay((o) => !!o.carga);
+    if (recarga.length && azar() < MOCHILA_RIVAL.carga) return usar(recarga[0], e);
+  }
+  // 4. El jefe se potencia una vez por pelea.
+  if (e.jefe && !estado.potenciados?.includes(e.id)) {
+    const potencia = hay((o) => (!!o.atq && o.atq >= e.atq * 0.1) || (!!o.def && o.def >= e.def * 0.1));
+    if (potencia.length && azar() < MOCHILA_RIVAL.potencia) {
+      estado.potenciados = [...(estado.potenciados ?? []), e.id];
+      return usar(potencia[Math.floor(azar() * potencia.length)], e);
+    }
+  }
+  return null;
 }
 
 export function decidirEnemigo(
@@ -232,8 +277,8 @@ export function decidirEnemigo(
   const hs = estado.heroes.filter(enCampo);
   if (!hs.length) return { tipo: 'nada' };
   // La mochila de combate del rival: si uno de los suyos quedó bajo de vida, a veces lo cura (como haría el jugador).
-  const cura = curaDelRival(estado, d, azar);
-  if (cura) return cura;
+  const uso = usoDeMochila(estado, d, e, azar);
+  if (uso) return uso;
   const esp = en.especial;
   const bola = en.bola_toxica;
   const rematado = bola && estado.remate ? estado.heroes.find((x) => x.id === estado.remate && vivo(x)) : undefined;

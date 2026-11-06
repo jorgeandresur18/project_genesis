@@ -201,3 +201,12 @@ describe('rivales variados (pedido del autor, 2026-11-06)', () => {
     expect(final.jefe.enemigo).toBe('nikki');
   });
 });
+
+describe('en el torneo no se gana experiencia ni caen tokens ni botín (decisión del autor, 2026-11-06)', () => {
+  it('la ronda está marcada como del torneo y sin botín', async () => {
+    const { TORNEO, armarRonda } = await import('../src/engine/torneo');
+    const d = armarRonda(TORNEO.copas[0], 0, TORNEO.modalidades[0], ['jair']);
+    expect(d.torneo).toBe(true);
+    expect(d.botin.probabilidad).toBe(0);
+  });
+});

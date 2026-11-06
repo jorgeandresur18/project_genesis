@@ -266,6 +266,9 @@ export function armarRonda(
     retratos: { ...FICHAS.retratos, 'Nikki, la campeona': FICHAS.retratos.Nikki, 'Soldado veterano': FICHAS.retratos.Soldado },
     mochila_inicial: bolsa?.mochila ?? TORNEO.mochila,
     mochila_rival: mochilaRival,
+    // Sin experiencia, sin tokens caídos y sin botín (decisión del autor, 2026-11-06).
+    torneo: true,
+    botin: { ...base.botin, probabilidad: 0 },
     // Lo que lleva puesto cada peleador (decisión del autor, 2026-11-06: en el torneo sí hay objetos y amuletos).
     equipo_fijo: Object.fromEntries(heroes.map((k) => [k, bolsa?.equipo?.[k] ?? TORNEO.equipo_peleadores[k]]).filter((x): x is [string, string[]] => Array.isArray(x[1]))),
     huir: false,

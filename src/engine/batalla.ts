@@ -351,6 +351,11 @@ export interface DatosBatalla {
    * héroes pelean con el nivel del .json y la mochila vacía, y al terminar no se guarda nada de eso (solo el premio).
    */
   vida_real?: boolean;
+  /**
+   * Pelea del torneo: no se gana experiencia ni caen tokens ni botín (decisión del autor, 2026-11-06: los personajes no
+   * suben de nivel y el premio va por ronda a PayFoe; en el torneo nadie regala nada).
+   */
+  torneo?: boolean;
   /** «versus»: antes de empezar, la presentación del enfrentamiento (los dos sprites, velocidad, zoom). */
   intro?: 'versus';
   /**
