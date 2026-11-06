@@ -14,7 +14,8 @@ La voz es provocativa: humor negro, sarcasmo y crudeza cotidiana. Provoca, pero 
 - **Groserías:** moderadas y con peso. No en cada línea.
 - **Sexualidad:** sugerida, nunca explícita, nunca con parecidos de personas reales.
 - **Evitar:** justificar a Jair, glorificar el abuso, reducir a Nikki a un chiste de alcohol, presentar su relación con Jair como sana.
-- **Contraste:** la fantasía isekai usa tono épico y brillante; el mundo real, tono áspero, sofocante y sudado. El cambio de registro es parte del chiste y del terror.
+- **Contraste (regla del autor, 2026-11-06):** el **mundo real** es sucio, lo-fi, cínico, áspero e indomable (sofocante y sudado; la gente no sigue ningún guion). El **mundo de la IA** es aventura: épico, brillante y cordial, como un juego que quiere caerte bien. El cambio de registro es parte del chiste y del terror.
+- **Cami rompe esa estética** dentro del mundo de la IA: su ironía fría y su agresividad suenan al mundo real, por eso allá se la ve como un problema. Escribirla con esa aspereza a propósito, sin suavizarla para que encaje con el tono cordial de alrededor.
 
 ## Voces
 
