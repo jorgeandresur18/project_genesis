@@ -702,7 +702,8 @@ Comparados con Jair (`base` PS 30, ATQ 5, DEF 3, VEL 8; sube por nivel PS 6, ATQ
 (borrador, `heroes` de `personajes.json`), elegibles desde ya (`TODO(canon)`: cuándo se desbloquean Jordan y Billy). Sin
 hoja propia: usan la de otro con un filtro de color (Jordan la de Jair, Billy la del soldado, Maggi la de Rikka). Nikki
 también es peleadora, **desde el inicio** (pedido del autor). Como peleadora tiene **5 ataques**; la Nikki campeona del
-torneo, 6 (`TODO`: hoy tiene 4: cachetada, revés, beso y la ráfaga; falta decidir cuál es el quinto).
+torneo, 6 (`TODO`: hoy tiene 4: cachetada, revés, beso y la ráfaga; el quinto queda para mucho más adelante, anotado en el
+cronograma, «Ideas anotadas»).
 
 **El influencer y el otaku** (pedido del autor, 2026-11-05; los otakus son los de la convención del Capítulo 4):
 también peleadores del torneo, desde ya (borrador; sprites prestados: la hoja de Nikki y la de Jair con filtro).

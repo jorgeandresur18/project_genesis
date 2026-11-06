@@ -150,6 +150,11 @@ Rikka (manos, nalgadas, la marca a las 7, el grito a los 30); el CeBiDol desde E
 
 ## Ideas anotadas (por diseñar)
 
+**Nikki peleadora, su quinto ataque (para mucho más adelante, decisión del autor, 5 de noviembre):** como peleadora del
+torneo lleva 5 ataques; la Nikki campeona, 6. Hoy tiene 4 (cachetada, revés, beso confusión y la ráfaga de cachetadas).
+Falta decidir cuál es el quinto: el clon de sombra (habría que enseñarle al motor que un clon pelee del lado del jugador)
+o la Mega Bola Tóxica (que entonces sería el sexto de la campeona).
+
 **Arte pendiente de objetos:** los 14 agregados el 5 de noviembre (gorra de repartidor, casco de obra, lentes de lectura, vincha de anime, camisa de oficina, delantal de Billy's, chanclas, botas de seguridad, café de máquina, botiquín de oficina, antídoto universal, proteína, crema antiarrugas, caramelo ácido) van sin dibujo: la tienda muestra el recuadro de su color. Cuando haya dibujos, `tools/objetos.py`.
 
 **Por decidir (objetos con mecánicas nuevas, 🔧 en `OBJETOS_PROPUESTA.txt`):** audífonos, hoodie de hackatón, uniforme de Dulce Frío, chaleco reflectivo, medias de la suerte, pendrive de GENESIS, gafete, llavero de Boringplace, amuleto del Invierno, Turbo Vatio, cerveza de 9 %, hielo, spray de pimienta, bomba de humo, granada de confeti, cupón 2×1, multivitamínico, bebida isotónica, curso online y libro de autoayuda.
