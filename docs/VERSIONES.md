@@ -19,6 +19,10 @@ Qué trae cada versión. La que está en curso lleva `-dev` y todavía no se pub
 - **El Rey Malvado y sus especiales:** Espada de las estaciones (una estación al azar: veneno, quemadura, parálisis o congelado) y Tajada del abismo, con el estado nuevo **desaparecido**.
 - **Capítulo 3 en borrador** («Sin DÓNDE ir»): la fortaleza del Rey piso por piso, 5 peleas de relleno, el DELETE sin WHERE, el final «Cancelar» y el despertar con Cami y Rikka. Se juega en desarrollo después del Capítulo 2; apagado en lo publicado.
 
+## 1.1.5 (publicada el 6 de noviembre de 2026; etiqueta `v1.1.5`)
+
+- **Conoce más:** la sección nueva «El cine, los actores y los directores» (texto del autor) y, en «Las influencias», las películas que influyeron en el juego. Solo eso, sacado de `desarrollo` a `main` (orden del autor): lo demás sigue sin publicar.
+
 ## 1.1.4 (publicada el 6 de noviembre de 2026; etiqueta `v1.1.4`)
 
 **Sigue apagado en lo publicado** (`demo_publica`): los Capítulos 2 y 3, el Torneo, PayFoe y la tienda nueva.
