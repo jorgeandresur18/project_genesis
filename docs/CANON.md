@@ -314,6 +314,9 @@ Todo es canon dicho por el autor, en borrador (puede cambiar). El orden de las e
 9. **Jair y Rikka.** Un momento íntimo: Jair le agradece que lo ayude con todo; ella dice que no es nada, además todavía no consiguió trabajo. Llega Cami: consiguió trabajo «en un lugar del centro». No dice dónde: no quiere que Jair la vaya a ver haciendo cosas de humanos.
 **— Capítulo 5 —**
 
+- **Casi sin peleas: es más novela** (decisión del autor, 2026-11-06). El peso está en las conversaciones, las decisiones y lo que se rompe entre los personajes. La pelea que se anuncia (Nikki contra Rikka, punto 15) se corta antes de empezar. `[CANON]`
+
+
 10. **Cami aprende.** Al principio es enojona y trata mal a los clientes; viendo a Nikki aprende y empieza a hacer mejor las cosas.
 11. **El beso.** Jair, al salir del trabajo, decide ir a verla al centro y se da cuenta de que está cerca de Dulce Frío. Sale Cami: «Gracias por venir a verme», lo agarra del brazo y, mirando a Nikki de reojo, le planta un beso. Nikki lo ve de lejos; Jair queda helado. **Cami lo hizo a propósito** (`[PENDIENTE]`: por qué).
 12. **Nikki en el parque.** Se va triste a un parque, sollozando: pensó que Jair venía por ella y ahora está con la de su trabajo.
