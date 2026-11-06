@@ -540,9 +540,12 @@ menú como «5/5». La curación de Rikka: 5/5. Sin `usos`, no tiene límite. Lo
   y Leyenda (50), cada una al ganar la anterior. Cuatro rondas: cuartos (un «Soldado veterano» que se rinde), semifinal,
   final de llave (el Capitán) y la gran final contra **Nikki, la campeona** (sin el perdón del bar, se rinde recién con
   el 10 % de su vida, 70 % más de nivel que la copa, con escoltas según la modalidad, y +2 niveles por cada defensa del
-  título). En doble y triple hay más rivales y de más nivel. Mochila fija (2 aguas y un Elixit). Los premios van a
-  PayFoe (que se prendió con el torneo). **Balance (jugador atento, Copa Bronce; medido el 2026-11-04):** la final, ~32 % en simple, ~93 % en
-  doble y ~99 % en triple (regalada, por balancear); las rondas anteriores, fáciles. Entre rondas la vida se recupera entera (pendiente: solo
+  título). En doble y triple los rivales son de más nivel y **los equipos son parejos** (pedido del autor, 2026-11-05):
+  el jefe de la ronda sale de entrada con su equipo, tantos rivales como peleadores (2 contra 2, 3 contra 3; en simple,
+  el jefe solo); los soldados de más de la semifinal y la final llegan de refuerzo cuando cae uno (`jefe_con_horda`).
+  Mochila fija (2 aguas y un Elixit). Los premios van a PayFoe (que se prendió con el torneo). **Balance (jugador
+  atento / descuidado, Copa Bronce; medido el 2026-11-05):** doble 100/100, 98/87, 67/29 y la final 19/8; triple
+  100/100, 98/88, 90/66 y la final 28/17 (antes, con el jefe al final de la horda, la final en triple era ~99 %). Entre rondas la vida se recupera entera (pendiente: solo
   una parte).
 - `TODO(canon)`: nombres de las copas, cuándo abre cada una, qué personajes salen en cada copa, los tres especiales de
   Nikki, los premios exactos.

@@ -859,8 +859,8 @@ function Pelea({
       await revivirArena();
       return 'sigue';
     }
-    // Se acabó la horda: sale el jefe (actúa desde el turno siguiente).
-    if (!b.current.enemigos.some(vivo)) {
+    // Se acabó la horda: sale el jefe (actúa desde el turno siguiente). Si ya salió con su equipo, no.
+    if (!b.current.enemigos.some(vivo) && !d.jefe_con_horda) {
       playChip('modem');
       await lineas('jefe');
       const e = sacar(d.jefe.enemigo, d.jefe.nivel);
@@ -1061,8 +1061,9 @@ function Pelea({
         // La arena: salen los rivales elegidos, todos juntos.
         for (const [clave, nivel] of arena) sacar(clave, nivel);
         await decir(fmt(t('batalla.aparecen'), { n: b.current.enemigos.length }));
-      } else if (!horda.niveles.length) {
-        // Sin horda (p. ej. Nikki en el bar): el jefe sale de entrada.
+      } else if (!horda.niveles.length || d.jefe_con_horda) {
+        // Sin horda (p. ej. Nikki en el bar), o el jefe con su equipo (el torneo): el jefe sale de entrada.
+        for (; b.current.salieron < Math.min(horda.al_inicio, horda.niveles.length); b.current.salieron++) sacar(horda.enemigo, horda.niveles[b.current.salieron]);
         await lineas('jefe');
         const e = sacar(d.jefe.enemigo, d.jefe.nivel);
         await decir(fmt(t('batalla.aparece_jefe'), { nombre: e.nombre }));

@@ -18,7 +18,10 @@ describe('Torneo Genesis', () => {
           expect(d.enemigos[d.jefe.enemigo].jefe, donde).toBe(true);
           expect(d.enemigos[d.jefe.enemigo].huye_a, donde).toBeGreaterThan(0);
           expect(d.enemigos[d.horda.enemigo], donde).toBeTruthy();
-          expect(d.horda.niveles, donde).toHaveLength(d.horda.al_inicio);
+          // Equipos parejos: el jefe y los de su horda, tantos como los peleadores; los de más, de refuerzo.
+          expect(d.jefe_con_horda, donde).toBe(true);
+          expect(d.horda.al_inicio + 1, donde).toBe(m.peleadores);
+          expect(d.horda.niveles.length, donde).toBeGreaterThanOrEqual(d.horda.al_inicio);
           for (const k of Object.keys(d.mochila_inicial ?? {})) expect(d.objetos[k], `${donde}: ${k}`).toBeTruthy();
           for (const k of CLAVES) expect(d.dialogos[k]?.length, `${donde}: ${k}`).toBeGreaterThan(0);
           for (const ls of Object.values(d.dialogos)) for (const l of ls) if (l.quien !== 'Voz') expect(d.retratos[l.quien], `${donde}: ${l.quien}`).toBeTruthy();
@@ -72,9 +75,8 @@ describe('balance del torneo (Copa Bronce, jugador atento)', () => {
     }
   }, 300000);
 
-  // META INCUMPLIDA HOY (2026-11-04): el torneo es de relleno. La simulación vieja no contaba la mochila fija (2 aguas y
-  // un Elixit) y daba ~93 %; con ella, la final en triple sale ~99 %. `it.fails` avisa cuando se balancee: ahí, a `it`.
-  it.fails('la final en triple no está regalada', async () => {
+  // Se cumplió el 2026-11-05 con los equipos parejos (el jefe sale de entrada con su equipo): antes ~99 %, hoy ~28 %.
+  it('la final en triple no está regalada', async () => {
     const { informe } = await import('./simulador');
     const m = TORNEO.modalidades[2];
     const final = informe(armarRonda(TORNEO.copas[0], TORNEO.rondas.length - 1, m, ['jair', 'cami', 'rikka'])).atento.gana;

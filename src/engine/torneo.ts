@@ -122,7 +122,11 @@ export function armarRonda(c: Copa, ronda: number, m: Modalidad, heroes: string[
     capitan: FICHAS.enemigos.capitan,
     nikki: nikkiCampeona(),
   };
-  const n = r.horda ? m.rivales + r.extra : 0;
+  // Equipos parejos (pedido del autor, 2026-11-05): el jefe de la ronda sale de entrada con `m.rivales` de su horda, así
+  // hay tantos rivales como peleadores (3 contra 3 en Triple). Los de más (`extra`) llegan de refuerzo cuando cae uno;
+  // en Simple, el jefe pelea solo.
+  const alInicio = r.horda ? m.rivales : 0;
+  const n = alInicio ? alInicio + r.extra : 0;
   const nivelRival = Math.round(c.nivel * (1 + (m.nivel_rivales ?? 0)));
   const nivelJefe = final ? Math.round(nivelRival * (1 + TORNEO.nikki.nivel_extra)) + defensas * TORNEO.nikki.por_defensa : nivelRival;
   const reemplazar = (ls: Linea[]) =>
@@ -138,8 +142,9 @@ export function armarRonda(c: Copa, ronda: number, m: Modalidad, heroes: string[
     heroes,
     personajes,
     enemigos,
-    horda: { enemigo: r.horda ?? r.jefe, al_inicio: n, niveles: Array.from({ length: n }, () => nivelRival) },
+    horda: { enemigo: r.horda ?? r.jefe, al_inicio: alInicio, niveles: Array.from({ length: n }, () => nivelRival) },
     jefe: { enemigo: r.jefe, nivel: nivelJefe },
+    jefe_con_horda: true,
     objetos: FICHAS.objetos,
     retratos: { ...FICHAS.retratos, 'Nikki, la campeona': FICHAS.retratos.Nikki, 'Soldado veterano': FICHAS.retratos.Soldado },
     mochila_inicial: TORNEO.mochila,

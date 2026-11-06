@@ -195,3 +195,4 @@ primero. Las pruebas automáticas y el simulador ya lo usan (el equilibrio no se
 - [ ] **Las termas del Capítulo 2** (después de la decisión del traje): en Equipo, Rikka con el traje rojo y las prendas ya no están en ninguna parte.
 - [ ] **Después del molino**, cuando Rikka vuelve con su kimono: en Equipo, otra vez con las prendas; el traje rojo ya no está, y en Boringplace aparece a la venta.
 - [ ] **El menú principal:** al abrir el juego, tocar donde van a salir los botones y los íconos antes de que aparezcan: no tiene que pasar nada.
+- [ ] **El torneo en Triple:** que salgan 3 rivales de entrada (el jefe de la ronda con dos soldados) y que la final con Nikki se sienta difícil pero ganable (ahora ~28 % con buen juego).

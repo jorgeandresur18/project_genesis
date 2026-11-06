@@ -190,7 +190,7 @@ function pelea(D: DatosBatalla, listo: boolean, esencias: boolean) {
 
   // Cómo empieza: la horda o, sin horda, el jefe de entrada.
   for (; s.salieron < Math.min(D.horda.al_inicio, D.horda.niveles.length); s.salieron++) sumarEnemigo(s, D, D.horda.enemigo, D.horda.niveles[s.salieron]);
-  if (!D.horda.niveles.length) sumarEnemigo(s, D, D.jefe.enemigo, D.jefe.nivel);
+  if (!D.horda.niveles.length || D.jefe_con_horda) sumarEnemigo(s, D, D.jefe.enemigo, D.jefe.nivel);
 
   for (let turno = 0; turno < 300; turno++) {
     const disp = disponibles(hs, D.personajes, s.actuaron);
@@ -213,7 +213,7 @@ function pelea(D: DatosBatalla, listo: boolean, esencias: boolean) {
     }
     for (const e of llegaron) if (vivo(e) && hs.some(enCampo)) actuarEnemigo(e);
     // Se acabó la horda: sale el jefe (actúa desde el turno siguiente).
-    if (!s.enemigos.some(vivo)) {
+    if (!s.enemigos.some(vivo) && !D.jefe_con_horda) {
       sumarEnemigo(s, D, D.jefe.enemigo, D.jefe.nivel);
       continue;
     }

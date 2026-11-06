@@ -286,6 +286,11 @@ export interface DatosBatalla {
   horda: { enemigo: string; al_inicio: number; niveles: number[] };
   /** Después de la horda, el jefe (con su nivel). */
   jefe: { enemigo: string; nivel: number };
+  /**
+   * El jefe sale de entrada junto con la horda, como un equipo (el torneo: tantos rivales como peleadores, pedido del
+   * autor 2026-11-05); los que sobran de la horda llegan de refuerzo cuando cae uno.
+   */
+  jefe_con_horda?: boolean;
   objetos: Record<string, Objeto>;
   /** Lo que suelta un enemigo al caer, con esta probabilidad (un objeto al azar de la lista; repetir pesa más). */
   botin: { probabilidad: number; objetos: string[] };
