@@ -299,6 +299,7 @@
   "batalla.desc.cebo": "Leaves a black-and-white copy of yourself. It does nothing: sometimes the enemy hits it instead of you, and it falls apart at the first hit. The most useless move there is, except for sneaking out of work if your boss does not notice.",
   "batalla.cebo_se_va": "{quien} (the decoy) evaporates. Nobody paid it any attention.",
   "batalla.sin_blanco": "Nobody left to use it on. The item goes back to the backpack.",
+  "batalla.despierta": "WAKES UP!",
   "batalla.bloquea": "BLOCK",
   "batalla.veneno": "{quien} loses {n} to the poison.",
   "batalla.tag_veneno": "poison",

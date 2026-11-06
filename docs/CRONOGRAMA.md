@@ -133,14 +133,13 @@ anota en `docs/PRUEBAS_EN_CASA.md` para la noche.
    final de la Copa Leyenda el 99 %). Propuesta de Claude: que peleen con números de héroe (sus ataques y su especial,
    con la vida y la defensa de un héroe de su estilo). ¿Sí?~~
 3. ~~Billy, demasiado fuerte~~ **Hecho** (6 de noviembre): un poco más fuerte que el resto (~7 puntos sobre Jordy en las finales), sin que se note tanto.
-4. **Cuándo se desbloquean Jordy y Billy** en el torneo (hoy, desde ya; `TODO(canon)`).
+4. ~~Cuándo se desbloquean~~ **Hecho** (6 de noviembre): cada peleador, después de su pelea RPG en la historia; el Rey Malvado, al terminar el Capítulo 6.
 5. **Peleadores nuevos que propuso Claude:** Nail (roba potenciadores), Lady (copia el último ataque), Mike y Nora
    (dúo), Tzai (controla a un rival un turno) y GENESIS (cambia una regla; toca el canon). ¿Cuáles?
 6. **Objetos 🔧** de `OBJETOS_PROPUESTA.txt`: cuáles se hacen.
 7. **Precios** propuestos por Claude (los de la tabla, el traje rojo revendido a 160): revisarlos cuando quiera.
-8. **Boringram del menú:** si se pueden comprar objetos de pelea con PayFoe, ¿llegan a la próxima partida («cofre»)?
-9. **Estados (opcionales):** ¿a los jefes les duran menos dormido, congelado y paralizado? ¿un golpe despierta al
-   dormido?
+8. **Boringram del menú (el autor, 2026-11-06):** los objetos de pelea comprados ahí sirven **solo para el torneo**; el autor todavía ve si se podrán pasar a una partida.
+9. ~~Estados~~ **Hecho** (6 de noviembre): a los jefes les duran la mitad; un golpe despierta al dormido.
 10. **Capítulos 2 y 3:** las decisiones de abajo («Decisiones pendientes del autor») y las preguntas de
     `docs/guion/cap03_plan.md`.
 11. **«First Date» de Blink-182** en Conoce más: sigue abriendo la búsqueda; si quiere, que pase el enlace.

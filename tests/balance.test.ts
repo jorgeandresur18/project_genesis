@@ -2,9 +2,25 @@
 // con las mismas reglas que el juego). La meta (docs/SPEC.md): que el descuidado pierda casi siempre y que el atento
 // gane casi siempre, pero llegando justo. Si cambias números en src/data/batallas/ y esto falla, la pelea quedó muy
 // fácil o muy difícil. Para ver los números: `npx vitest run tests/balance.test.ts --disable-console-intercept`.
-import { describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { BATALLAS } from '../src/engine/batallas';
 import { conRopa, informe, sim } from './simulador';
+
+// Azar con semilla fija (2026-11-06): cada prueba tira siempre los mismos dados, así no falla de vez en cuando por mala
+// suerte. Si se cambian los números de una pelea, el resultado cambia de verdad (no por azar).
+const azarReal = Math.random;
+beforeEach((ctx) => {
+  let a = [...ctx.task.name].reduce((h, c) => (Math.imul(h, 31) + c.charCodeAt(0)) | 0, 20261106);
+  Math.random = () => {
+    a = (a + 0x6d2b79f5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+});
+afterEach(() => {
+  Math.random = azarReal;
+});
 
 
 describe('balance del Bastión', () => {

@@ -431,15 +431,15 @@
       "filtro": "hue-rotate(230deg) saturate(1.2)",
       "seguido": true,
       "base": {
-        "ps": 37,
-        "atq": 4,
+        "ps": 43,
+        "atq": 5,
         "def": 3,
         "vel": 13
       },
       "crece": {
-        "ps": 6.35,
-        "atq": 0.71,
-        "def": 0.56,
+        "ps": 7.4,
+        "atq": 0.83,
+        "def": 0.65,
         "vel": 0.7
       },
       "ataques": [

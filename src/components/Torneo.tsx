@@ -7,8 +7,7 @@ import { Batalla } from './Batalla';
 import { useT } from '../engine/i18n';
 import { useStore } from '../engine/store';
 import { playSelect } from '../engine/sound';
-import { FICHAS } from '../engine/batallas';
-import { HEROES_TORNEO, JEFES_TORRE, LIBRES_TORNEO, NIKKI_PELEADORA, TORNEO, armarRonda, copaAbierta, fichaPeleador, premioDe, type Copa, type Modalidad } from '../engine/torneo';
+import { HEROES_TORNEO, JEFES_TORRE, NIKKI_PELEADORA, REY_PELEADOR, TORNEO, peleadorAbierto, armarRonda, copaAbierta, fichaPeleador, premioDe, type Copa, type Modalidad } from '../engine/torneo';
 import { nuevaSemilla } from '../engine/esencia';
 import { GALERIA_COMPLETA } from '../engine/modo';
 
@@ -17,7 +16,6 @@ type Fase = { paso: 'menu' } | { paso: 'pelea'; ronda: number } | { paso: 'ronda
 export function TorneoPantalla({ onClose }: { onClose: () => void }) {
   const t = useT();
   const visitadas = useStore((s) => s.snapshots);
-  const vistos = useStore((s) => s.rpgVistos);
   const torneo = useStore((s) => s.torneo);
   const saves = useStore((s) => s.saves);
   const [copa, setCopa] = useState<Copa | null>(null);
@@ -30,10 +28,10 @@ export function TorneoPantalla({ onClose }: { onClose: () => void }) {
   // Los peleadores: los que la historia ya desbloqueó (Jair siempre; los demás, desde que pelearon en alguna partida) y
   // los jefes de la torre ya vencidos (decisión del autor, 2026-11-05).
   const disponibles = [
-    ...HEROES_TORNEO.filter((k) => k === 'jair' || LIBRES_TORNEO.includes(k) || GALERIA_COMPLETA || vistos[FICHAS.heroes[k]?.sprite]),
+    // Cada uno, después de su pelea RPG en la historia (decisión del autor, 2026-11-06; ver torneo.json).
+    ...HEROES_TORNEO.filter((k) => GALERIA_COMPLETA || peleadorAbierto(k, visitadas)),
     ...JEFES_TORRE.filter((k) => GALERIA_COMPLETA || torneo.jefes?.[k]),
-    // Nikki, desde el inicio (pedido del autor).
-    NIKKI_PELEADORA,
+    ...[NIKKI_PELEADORA, REY_PELEADOR].filter((k) => GALERIA_COMPLETA || peleadorAbierto(k, visitadas)),
   ];
   const abierta = (c: Copa) => GALERIA_COMPLETA || copaAbierta(c, visitadas, torneo.ganadas);
   const listos = elegidos.length === modalidad.peleadores;

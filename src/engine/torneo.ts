@@ -5,6 +5,7 @@ import type { Vars } from './types';
 // pelea más para el componente de batalla.
 import type { DatosBatalla, Enemigo, Heroe, Stats } from './batalla';
 import { BATALLAS, FICHAS } from './batallas';
+import { scenes } from './story';
 import datos from '../data/rpg/torneo.json';
 
 export interface Copa {
@@ -50,17 +51,30 @@ export interface DatosTorneo {
   estilo_jefes: Record<string, { heroe: string; factor: number } | string>;
   /** Lo que lleva puesto cada peleador (sus prendas y su amuleto). */
   equipo_peleadores: Record<string, string[] | string>;
+  /** Qué pelea de la historia abre a cada peleador («libre»: desde el inicio; null: todavía no). */
+  desbloqueo_peleadores: Record<string, string[] | string | null>;
 }
 
 export const TORNEO = datos as unknown as DatosTorneo;
 export const HEROES_TORNEO = ['jair', 'cami', 'rikka', 'jordy', 'billy', 'maggie', 'influencer', 'otaku'];
-/**
- * Los que todavía no salen en la historia (Jordy y Billy son del Capítulo 4; Maggie es exclusiva del torneo): se
- * pueden elegir desde ya (pedido del autor, 2026-11-05). TODO(canon): cuándo se desbloquean Jordy y Billy.
- */
+/** Ya no se usa para desbloquear (ver `peleadorAbierto`): los peleadores que todavía no salen en la historia. */
 export const LIBRES_TORNEO = ['jordy', 'billy', 'maggie', 'influencer', 'otaku'];
 /** Nikki también pelea en el torneo, desde el inicio (pedido del autor, 2026-11-05). */
 export const NIKKI_PELEADORA = 'nikki';
+/** El Rey Malvado como peleador: al terminar el Capítulo 6, solo THE KING (decisión del autor, 2026-11-06). */
+export const REY_PELEADOR = 'rey';
+
+/**
+ * Si un peleador ya se puede elegir: después de su pelea RPG en la historia (decisión del autor, 2026-11-06), es decir,
+ * si alguna escena con esa pelea se visitó en alguna partida. Ver `desbloqueo_peleadores` en torneo.json.
+ */
+export function peleadorAbierto(k: string, visitadas: Record<string, unknown>): boolean {
+  const d = TORNEO.desbloqueo_peleadores[k];
+  if (d === 'libre') return true;
+  if (!Array.isArray(d)) return false;
+  for (const sc of scenes.values()) if (sc.batalla && d.includes(sc.batalla) && visitadas[sc.scene_id]) return true;
+  return false;
+}
 /**
  * Los jefes de los pisos de la torre del Capítulo 3: se pueden elegir en el torneo al vencerlos en la torre (decisión
  * del autor, 2026-11-05; los enemigos comunes, no).

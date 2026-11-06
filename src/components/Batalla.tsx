@@ -1233,6 +1233,8 @@ function Pelea({
     luz(defensor.id, color, critico);
     playChip(critico ? 'golpe' : 'impacto');
     numero(defensor.id, critico ? `${n}!` : String(n), critico ? 'critico' : 'dano');
+    // El golpe lo despertó.
+    if (golpe.desperto) numero(defensor.id, t('batalla.despierta'), 'falla');
     forzar();
     if (defensor.ps === 0 && enEspecial.current) {
       // Cae al terminar el especial: mientras tanto se lo sigue viendo golpeado.

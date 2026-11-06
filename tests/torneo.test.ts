@@ -108,8 +108,8 @@ describe('el torneo: jefes de la torre y personajes repetidos (decisiones del au
 
 describe('los nuevos peleadores del torneo (pedido del autor, 2026-11-05)', () => {
   it('Jordy, Billy y Maggie tienen ficha, ataques y especial, y Nikki pelea como peleadora', async () => {
-    const { HEROES_TORNEO, LIBRES_TORNEO, NIKKI_PELEADORA, fichaPeleador } = await import('../src/engine/torneo');
-    for (const k of LIBRES_TORNEO) {
+    const { HEROES_TORNEO, NIKKI_PELEADORA, fichaPeleador } = await import('../src/engine/torneo');
+    for (const k of ['jordy', 'billy', 'maggie']) {
       expect(HEROES_TORNEO, k).toContain(k);
       const f = fichaPeleador(k);
       expect(f.ataques.length, k).toBeGreaterThanOrEqual(3);
@@ -159,5 +159,24 @@ describe('los seguidores del influencer (pedido del autor, 2026-11-05)', () => {
     expect(x.extra).toBe(8);
     const otro = estadoInicial(armarRonda(TORNEO.copas[0], 0, TORNEO.modalidades[0], ['jair'])).heroes[0];
     expect(lucirse(d, otro)).toBe(false);
+  });
+});
+
+describe('cuándo se puede elegir cada peleador (decisión del autor, 2026-11-06)', () => {
+  it('después de su pelea RPG en la historia; el Rey Malvado y los del Capítulo 4, todavía no', async () => {
+    const { peleadorAbierto } = await import('../src/engine/torneo');
+    const nada = {};
+    expect(peleadorAbierto('jair', nada)).toBe(true);
+    expect(peleadorAbierto('cami', nada)).toBe(false);
+    expect(peleadorAbierto('cami', { cap01_n05: true })).toBe(true);
+    expect(peleadorAbierto('rikka', { cap02_143: true })).toBe(true);
+    expect(peleadorAbierto('nikki', nada)).toBe(false);
+    for (const k of ['jordy', 'billy', 'influencer', 'otaku', 'rey']) expect(peleadorAbierto(k, { cap01_n05: true, cap02_143: true }), k).toBe(false);
+  });
+  it('el Rey Malvado pelea con sus ataques y la Espada de las estaciones, sin transformaciones', async () => {
+    const { fichaPeleador } = await import('../src/engine/torneo');
+    const rey = fichaPeleador('rey');
+    expect(rey.especial?.estaciones).toBe(true);
+    expect(rey.nombre).not.toMatch(/gigante/i);
   });
 });

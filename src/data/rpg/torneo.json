@@ -228,7 +228,7 @@
     "_nota": "Los jefes de la torre como peleadores del jugador (decisión del autor, 2026-11-06): conservan sus ataques y su especial, pero pelean con la vida, el ataque, la defensa y la velocidad (y su crecimiento) del héroe de su estilo, por la fuerza que dice factor. Sin esto eran fichas de jefe, hechas para enfrentar a tres héroes (Comandante ×3 ganaba la final de la Copa Leyenda el 99 %).",
     "reina_bichos": {
       "heroe": "maggie",
-      "factor": 1.28
+      "factor": 1.1
     },
     "jefe_bodega": {
       "heroe": "jair",
@@ -236,7 +236,7 @@
     },
     "sargento": {
       "heroe": "jordy",
-      "factor": 0.73
+      "factor": 0.88
     },
     "chef": {
       "heroe": "rikka",
@@ -244,19 +244,27 @@
     },
     "maestro_herrero": {
       "heroe": "billy",
-      "factor": 1.09
+      "factor": 1.08
     },
     "alcaide": {
       "heroe": "billy",
-      "factor": 0.98
+      "factor": 1.01
     },
     "intendente": {
       "heroe": "cami",
-      "factor": 1.29
+      "factor": 1.32
     },
     "comandante": {
       "heroe": "billy",
-      "factor": 1.01
+      "factor": 1.08
+    },
+    "nikki": {
+      "heroe": "rikka",
+      "factor": 0.94
+    },
+    "rey": {
+      "heroe": "billy",
+      "factor": 1.07
     }
   },
   "equipo_peleadores": {
@@ -285,6 +293,31 @@
     ],
     "otaku": [
       "vincha_anime"
-    ]
+    ],
+    "nikki": [
+      "zapatos_plataforma"
+    ],
+    "rey": []
+  },
+  "desbloqueo_peleadores": {
+    "_nota": "Cuándo se puede elegir cada peleador (decisión del autor, 2026-11-06): después de su pelea RPG en la historia (alguna escena con esa pelea, visitada en cualquier partida). «libre»: desde el inicio; null: todavía no (su pelea no existe). Los jefes de la torre, al vencerlos (aparte).",
+    "jair": "libre",
+    "cami": [
+      "bastion",
+      "hangar"
+    ],
+    "rikka": [
+      "cap02_muralla"
+    ],
+    "nikki": [
+      "nikki"
+    ],
+    "jordy": null,
+    "billy": null,
+    "influencer": null,
+    "otaku": null,
+    "maggie": "libre",
+    "rey": null,
+    "_todo": "TODO(canon): las peleas del Capítulo 4 de Jordy (entrenamiento con Jair), Billy (con Jair contra los influencers), el influencer y el otaku; el final del Capítulo 6 para el Rey Malvado; Maggie es exclusiva del torneo (¿se desbloquea con algo?)."
   }
 }

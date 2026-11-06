@@ -47,14 +47,21 @@ describe('dormido, congelado y paralizado: la misma mecánica', () => {
   const aplicar = (s: EstadoPelea, x: Luchador, cual: 'dormido' | 'congelado' | 'paralizado', azar: () => number) =>
     cual === 'paralizado' ? paralizarA(s, x, azar) : aplicarEstado(s, x, cual, azar);
 
-  it.each(['dormido', 'congelado', 'paralizado'] as const)('%s: pierde el turno; un compañero con un objeto lo saca; un golpe, no', (cual) => {
+  it.each(['dormido', 'congelado', 'paralizado'] as const)('%s: pierde el turno; un compañero con un objeto lo saca; un golpe solo despierta al dormido', (cual) => {
     const s = estadoInicial(D);
     const [h, compa] = s.heroes;
     aplicar(s, h, cual, fijo(0.999));
     expect(h[cual]).toBe(4);
     expect(noActua(h)).toBe(true);
     expect(disponibles(s.heroes, D.personajes, [])).toEqual([compa]);
-    resolverGolpe(s, D, soldado(), h, 1);
+    const golpe = resolverGolpe(s, D, soldado(), h, 1);
+    // Un golpe despierta al dormido (decisión del autor, 2026-11-06), con su turno libre; al congelado y al paralizado, no.
+    if (cual === 'dormido') {
+      expect(h.dormido).toBe(0);
+      expect(golpe.desperto).toBe(true);
+      expect(h.inmuneParalisis).toBe(1);
+      return;
+    }
     expect(h[cual]).toBe(4);
     usarObjeto(FICHAS.objetos.veneno_ratas, h);
     expect(h[cual]).toBe(4);
@@ -443,3 +450,19 @@ describe('los objetos de Maggie: contra el dormido y el confundido (idea del aut
     expect(criticos(false)).toBeLessThan(0.3);
   });
 });
+
+describe('a los jefes, dormido, congelado y paralizado les duran la mitad (decisión del autor, 2026-11-06)', () => {
+  it('con el mismo azar, el jefe queda la mitad de turnos que un soldado (mínimo 1)', async () => {
+    const { crearLuchador } = await import('../src/engine/batalla');
+    const s = estadoInicial(D);
+    const comun = crearLuchador('a', 'soldado', 'enemigo', D.enemigos.soldado, 10);
+    const jefe = crearLuchador('b', 'sombra', 'enemigo', FICHAS.enemigos.sombra, 10);
+    expect(jefe.jefe).toBe(true);
+    s.enemigos = [comun, jefe];
+    paralizarA(s, comun, fijo(0.999));
+    paralizarA(s, jefe, fijo(0.999));
+    expect(comun.paralizado).toBe(4);
+    expect(jefe.paralizado).toBe(2);
+  });
+});
+

@@ -321,7 +321,7 @@ export function resolverGolpe(
   poder: number,
   aMedias = false,
   azar: () => number = Math.random,
-): { n: number; critico: boolean; bloqueado?: boolean } {
+): { n: number; critico: boolean; bloqueado?: boolean; desperto?: boolean } {
   const ayuda = d.ayuda && atacante.lado === 'heroe' && vanPerdiendo(estado.heroes, d.ayuda.umbral) ? d.ayuda.critico : 0;
   // Lo que lleva puesto contra el que duerme o está confundido (los objetos de Maggie).
   const eq = atacante.equipo;
@@ -341,6 +341,12 @@ export function resolverGolpe(
   defensor.ps = Math.max(jefe?.huye_a && defensor.clon === undefined ? 1 : 0, defensor.ps - n);
   if (defensor.ps === 0) limpiarEstados(defensor);
   if (golpe.critico || (defensor.ps === 0 && !defensor.cebo && atacante !== defensor)) lucirse(d, atacante);
+  // Un golpe despierta al dormido (decisión del autor, 2026-11-06), con su turno libre, como cuando se despierta solo.
+  if (defensor.dormido > 0 && defensor.ps > 0 && n > 0 && atacante !== defensor) {
+    defensor.dormido = 0;
+    defensor.inmuneParalisis = 1;
+    return { n, critico: golpe.critico, desperto: true };
+  }
   return { n, critico: golpe.critico };
 }
 
@@ -350,9 +356,14 @@ const estaSolo = (estado: EstadoPelea, x: Luchador) => x.lado === 'heroe' && est
 /** Paraliza: empieza a descontar desde el turno siguiente y reemplaza el descanso (no se suma). */
 /** Temple (esencia): a veces, el estado le dura un turno menos (nunca menos de uno). */
 const conTemple = (x: Luchador, n: number, azar: () => number = Math.random) => (n > 1 && azar() < esenciaDe(x, 'temple') ? n - 1 : n);
+/** Cuánto le dura dormido, congelado o paralizado: al jefe, la mitad (mínimo 1; decisión del autor, 2026-11-06). */
+const cuantoNoActua = (estado: EstadoPelea, x: Luchador, azar: () => number) => {
+  const n = conTemple(x, turnosDormido(azar, estaSolo(estado, x)), azar);
+  return x.jefe ? Math.max(1, Math.ceil(n / 2)) : n;
+};
 
 export function paralizarA(estado: EstadoPelea, x: Luchador, azar: () => number = Math.random) {
-  x.paralizado = conTemple(x, turnosDormido(azar, estaSolo(estado, x)), azar);
+  x.paralizado = cuantoNoActua(estado, x, azar);
   estado.paralizadoRecien.push(x.id);
   estado.actuaron = estado.actuaron.filter((id) => id !== x.id);
   estado.cansados.delete(x.id);
@@ -433,7 +444,7 @@ export function aplicarEstado(estado: EstadoPelea, x: Luchador, cual: 'quemado' 
   // Dormir o congelar: no al que ya no puede actuar (no se pasa de uno a otro) ni en su turno libre.
   if (cual !== 'quemado' && (noActua(x) || x.inmuneParalisis)) return false;
   if (cual === 'quemado') x.quemado = conTemple(x, QUEMADO.turnos, azar);
-  if (cual !== 'quemado') x[cual] = conTemple(x, turnosDormido(azar, estaSolo(estado, x)), azar);
+  if (cual !== 'quemado') x[cual] = cuantoNoActua(estado, x, azar);
   if (cual !== 'quemado') estado.estadoRecien.push(`${x.id}/${cual}`);
   return true;
 }

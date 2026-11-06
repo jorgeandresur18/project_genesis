@@ -36,11 +36,11 @@ const PLAN: Record<string, [number[], number]> = {
   cap03_galeria_1: [[17, 17, 18, 18], 19],
   cap03_salon_2: [[18, 18], 20],
   cap03_galeria_2: [[18, 18], 20],
-  cap03_rey: [[], 28],
+  cap03_rey: [[], 30],
 };
 // Qué se ajusta en cada pelea: la fuerza de esos enemigos (multiplica vida y ataque) o, si es «horda», cuántos salen.
 // Los jefes no se inflan (decisión del autor, 2026-11-05): todos parten de la ficha del Capitán y suben un poco por piso;
-// en sus peleas se ajusta solo el nivel de la horda. Al final pelean solo contra el Rey: nivel 28 (un salto grande; era 26
+// en sus peleas se ajusta solo el nivel de la horda. Al final pelean solo contra el Rey: nivel 30 (un salto grande; era 28 hasta que la ropa de inicio facilitó la torre, 2026-11-06; antes 26
 // hasta que Cami dejó de descansar fuera del Capítulo 1, 2026-11-05), con la ficha del Capitán, sin ajuste.
 const PERILLA: Record<string, string[] | 'nivel' | 'nivel_horda'> = {
   cap03_calabozo: 'nivel_horda',

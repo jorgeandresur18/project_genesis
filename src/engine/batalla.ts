@@ -484,6 +484,8 @@ export interface Luchador {
    * código se llama así): fuera del campo; no actúa y nadie lo toca, lo elige ni lo cura.
    */
   desterrado: number;
+  /** Es el jefe de la pelea: dormido, congelado y paralizado le duran la mitad (decisión del autor, 2026-11-06). */
+  jefe?: boolean;
   /** Turnos que le quedan dormido: pierde su turno; lo saca un compañero con un objeto, o se le pasa solo. */
   dormido: number;
   /** Si es un cebo con efecto: lo que le hace a quien lo golpea. */
@@ -547,12 +549,12 @@ export function crearLuchador(
   id: string,
   clave: string,
   lado: Luchador['lado'],
-  d: { nombre: string; base: Stats; crece: Stats },
+  d: { nombre: string; base: Stats; crece: Stats; jefe?: boolean },
   nivel: number,
   xp = 0,
 ): Luchador {
   const s = statsEn(d.base, d.crece, nivel);
-  return { id, clave, lado, nombre: d.nombre, nivel, xp, ps: s.ps, psMax: s.ps, atq: s.atq, def: s.def, vel: s.vel, extra: 0, extraDef: 0, esquivando: false, distraido: false, carga: 0, paralizado: 0, confundido: 0, envenenado: null, protegido: 0, quemado: 0, congelado: 0, dormido: 0, desterrado: 0 };
+  return { id, clave, lado, ...(lado === 'enemigo' && d.jefe ? { jefe: true } : {}), nombre: d.nombre, nivel, xp, ps: s.ps, psMax: s.ps, atq: s.atq, def: s.def, vel: s.vel, extra: 0, extraDef: 0, esquivando: false, distraido: false, carga: 0, paralizado: 0, confundido: 0, envenenado: null, protegido: 0, quemado: 0, congelado: 0, dormido: 0, desterrado: 0 };
 }
 
 /** Cuánto da la esencia de `l` si es de ese tipo (0 si no). */
