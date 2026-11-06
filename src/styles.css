@@ -3631,6 +3631,9 @@ button.cassette:hover .cassette-imagen { transform: translateY(-2px) rotate(-3de
 .torneo-ropa b { min-width: 6rem; }
 .torneo-ropa label { display: grid; gap: 0.1rem; font-size: 0.78rem; color: var(--muted); }
 .torneo-ropa select { max-width: 11rem; }
+.torneo-combate { display: flex; align-items: center; gap: 0.5rem; }
+.torneo-combate span { flex: 1; }
+.torneo-combate b { min-width: 1.5rem; text-align: center; }
 .torneo-opciones .torneo-ganada { color: #ffd76a; }
 .torneo-empezar { justify-self: start; margin-top: 0.4rem; padding: 0.6rem 1.4rem; border-color: var(--accent); color: var(--accent); font-weight: 700; }
 

@@ -4,7 +4,10 @@ import {
   TOPE_OBJETO,
   TOPE_TRASPASO,
   equipoDe,
-  gastarEnRonda,
+  TOPE_COMBATE,
+  armarCombate,
+  devolverCombate,
+  gastarEnCombate,
   lugarPara,
   mochilaDeRonda,
   piezas,
@@ -38,15 +41,22 @@ describe('el equipo de los peleadores del torneo', () => {
   });
 });
 
-describe('la mochila en las rondas', () => {
-  it('entra solo con la mochila del torneo (nadie regala nada) y lo usado se descuenta', () => {
+describe('la mochila de combate (decisión del autor, 2026-11-06)', () => {
+  it(`se arma con objetos de la principal (hasta ${TOPE_COMBATE}; solo los que se gastan); nadie regala nada`, () => {
     expect(TORNEO.mochila).toEqual({});
-    const m = { mochila: { vida: 2, revivir_plus: 1 } };
-    const antes = mochilaDeRonda(m);
-    expect(antes.vida).toBe((TORNEO.mochila.vida ?? 0) + 2);
-    // Usó la fija de agua y una más: la mochila del torneo pierde una.
-    const despues = { ...antes, vida: antes.vida - (TORNEO.mochila.vida ?? 0) - 1 };
-    expect(gastarEnRonda(m, antes, despues).mochila).toEqual({ vida: 1, revivir_plus: 1 });
+    const m = armarCombate({ mochila: { vida: 5, revivir_plus: 3, casco_obra: 1 } }, { vida: 5, revivir_plus: 3, casco_obra: 1 });
+    expect(Object.values(m.combate!).reduce((a, b) => a + b, 0)).toBe(TOPE_COMBATE);
+    expect(m.combate).toEqual({ vida: 5, revivir_plus: 1 });
+    expect(m.mochila).toEqual({ revivir_plus: 2, casco_obra: 1 });
+    expect(mochilaDeRonda(m)).toEqual({ vida: 5, revivir_plus: 1 });
+  });
+  it('se gasta ronda a ronda y lo que sobra vuelve a la principal al terminar', () => {
+    let m = armarCombate({ mochila: { vida: 4 } }, { vida: 3 });
+    m = gastarEnCombate(m, { vida: 1 });
+    expect(m.combate).toEqual({ vida: 1 });
+    m = devolverCombate(m);
+    expect(m.mochila).toEqual({ vida: 2 });
+    expect(m.combate).toEqual({});
   });
 });
 

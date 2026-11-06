@@ -27,6 +27,8 @@ export interface Modalidad {
   /** Cuánto más nivel tienen los rivales, como parte del nivel de la copa (0,3 = 30 % más): con tres peleadores, más fuertes. */
   nivel_rivales?: number;
   multiplicador: number;
+  /** Cuántos objetos entran en la mochila de combate (decisión del autor, 2026-11-06: varía con la modalidad). */
+  mochila_combate?: number;
 }
 export interface Ronda {
   nombre: string;

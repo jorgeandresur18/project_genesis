@@ -8,7 +8,7 @@ import type { Vars } from './types';
 import { config, scenes, variables } from './story';
 import { applyChoice, enterScene, resolveNext, visibleChoices, alEntrar } from './logic';
 import { PAYFOE_INICIAL, acreditar, conGanados, gastar, nuevoIdPartida, transferir, type PayFoe } from './payfoe';
-import { gastarEnRonda, lugarPara, ponerPrenda, restaurarEquipo, sacarPrenda, traspasar, type EstadoMochila } from './mochilaTorneo';
+import { armarCombate, devolverCombate, gastarEnCombate, lugarPara, ponerPrenda, restaurarEquipo, sacarPrenda, traspasar, type EstadoMochila } from './mochilaTorneo';
 import type { Espacio } from './equipo';
 
 export const SAVE_SLOTS = 6;
@@ -275,7 +275,10 @@ interface Store {
   ponerPrendaTorneo: (peleador: string, objeto: string) => void;
   sacarPrendaTorneo: (peleador: string, espacio: Espacio) => void;
   restaurarEquipoTorneo: (peleador: string) => void;
-  gastarRondaTorneo: (antes: Record<string, number>, despues: Record<string, number>) => void;
+  /** La mochila de combate: armarla antes del torneo, lo que queda tras cada ronda y devolver lo que sobró al terminar. */
+  armarCombateTorneo: (items: Record<string, number>, tope?: number) => void;
+  gastarCombateTorneo: (despues: Record<string, number>) => void;
+  devolverCombateTorneo: () => void;
   /** Al terminar un capítulo: pasa objetos que se gastan de la partida al torneo (con tope). Devuelve cuántos pasaron. */
   traspasarATorneo: (items: Record<string, number>, capitulo: number) => number;
   /** Le da a una partida guardada una bomba ganada en el torneo. */
@@ -701,7 +704,9 @@ export const useStore = create<Store>()(
           if (r) set({ torneo: { ...get().torneo, ...r } });
         },
         restaurarEquipoTorneo: (peleador) => set({ torneo: { ...get().torneo, ...restaurarEquipo(get().torneo, peleador) } }),
-        gastarRondaTorneo: (antes, despues) => set({ torneo: { ...get().torneo, ...gastarEnRonda(get().torneo, antes, despues) } }),
+        armarCombateTorneo: (items, tope) => set({ torneo: { ...get().torneo, ...armarCombate(get().torneo, items, tope) } }),
+        gastarCombateTorneo: (despues) => set({ torneo: { ...get().torneo, ...gastarEnCombate(get().torneo, despues) } }),
+        devolverCombateTorneo: () => set({ torneo: { ...get().torneo, ...devolverCombate(get().torneo) } }),
         traspasarATorneo: (items, capitulo) => {
           const { game, torneo } = get();
           // Solo al terminar un capítulo, como los tokens (decisión del autor, 2026-11-06).

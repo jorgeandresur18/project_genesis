@@ -17,6 +17,8 @@ export interface EstadoMochila {
   equipo?: Record<string, Partial<Record<Espacio, string>>>;
   /** Cuántos objetos ya pasó cada partida en cada capítulo («partida|capítulo» → cantidad). */
   traspasos?: Record<string, number>;
+  /** La mochila de combate del torneo en curso (sale de la principal; lo que sobra vuelve al terminar). */
+  combate?: Record<string, number>;
 }
 
 /** Cuántos objetos pueden pasar de una partida al torneo por capítulo. */
@@ -33,7 +35,7 @@ export const topeDe = (id: string) => (tipoDe(FICHAS.objetos[id]) === 'equipo' ?
 /** Cuántos más de un objeto entran en la mochila (contando los que llevan puestos). */
 export function lugarPara(m: EstadoMochila, id: string): number {
   const puestos = tipoDe(FICHAS.objetos[id]) === 'equipo' ? Object.values(m.equipo ?? {}).filter((e) => Object.values(e).includes(id)).length : 0;
-  return Math.max(0, topeDe(id) - (m.mochila?.[id] ?? 0) - puestos);
+  return Math.max(0, topeDe(id) - (m.mochila?.[id] ?? 0) - (m.combate?.[id] ?? 0) - puestos);
 }
 /** Lo que se puede comprar para el torneo: lo que se gasta y la ropa. */
 export const esDelTorneo = (o?: Objeto) => !!o && (esGastable(o) || tipoDe(o) === 'equipo');
@@ -98,23 +100,48 @@ export function restaurarEquipo(m: EstadoMochila, k: string): EstadoMochila {
 }
 
 /**
- * Después de una ronda: lo que se gastó sale de la mochila del torneo. Nadie regala nada (decisión del autor,
- * 2026-11-06): se pelea solo con lo que se lleva (`TORNEO.mochila` quedó vacía; si algún día vuelve, se gasta primero).
+ * Cuántos objetos entran en la mochila de combate: depende de la modalidad (decisión del autor, 2026-11-06; números
+ * propuestos por Claude: simple 4, doble 6, triple 8, en `mochila_combate` de torneo.json). Sin modalidad, 6.
  */
-export function gastarEnRonda(m: EstadoMochila, antes: Record<string, number>, despues: Record<string, number>): EstadoMochila {
-  let mochila = m.mochila ?? {};
-  for (const [id, n] of Object.entries(antes)) {
-    const usado = Math.max(0, n - (despues[id] ?? 0) - (TORNEO.mochila[id] ?? 0));
-    if (usado) mochila = sumar(mochila, id, -Math.min(usado, mochila[id] ?? 0));
+export const TOPE_COMBATE = 6;
+const total = (x: Record<string, number> = {}) => Object.values(x).reduce((a, b) => a + b, 0);
+
+/**
+ * Arma la mochila de combate antes del torneo: los objetos elegidos salen de la mochila principal (solo los que se
+ * gastan; hasta TOPE_COMBATE en total). Si quedaba una de un torneo anterior, primero vuelve a la principal.
+ */
+export function armarCombate(m: EstadoMochila, items: Record<string, number>, tope = TOPE_COMBATE): EstadoMochila {
+  let mochila = devolverCombate(m).mochila ?? {};
+  const combate: Record<string, number> = {};
+  let queda = tope;
+  for (const [id, pedido] of Object.entries(items)) {
+    if (!esGastable(FICHAS.objetos[id])) continue;
+    const n = Math.max(0, Math.min(Math.floor(pedido), mochila[id] ?? 0, queda));
+    if (!n) continue;
+    mochila = sumar(mochila, id, -n);
+    combate[id] = n;
+    queda -= n;
   }
-  return { ...m, mochila };
+  return { ...m, mochila, combate };
 }
-/** La mochila con que entra a una ronda: la del torneo (solo lo que se gasta). */
-export function mochilaDeRonda(m: EstadoMochila): Record<string, number> {
-  const out: Record<string, number> = { ...TORNEO.mochila };
-  for (const [id, n] of Object.entries(m.mochila ?? {})) if (esGastable(FICHAS.objetos[id])) out[id] = (out[id] ?? 0) + n;
-  return out;
+/** Lo que quedó en la mochila de combate después de una ronda (lo usado ya no está). */
+export function gastarEnCombate(m: EstadoMochila, despues: Record<string, number>): EstadoMochila {
+  const combate: Record<string, number> = {};
+  for (const [id, n] of Object.entries(m.combate ?? {})) {
+    const queda = Math.max(0, Math.min(n, despues[id] ?? n));
+    if (queda) combate[id] = queda;
+  }
+  return { ...m, combate };
 }
+/** Al terminar el torneo (gane o pierda): lo que sobró de la mochila de combate vuelve a la principal. */
+export function devolverCombate(m: EstadoMochila): EstadoMochila {
+  let mochila = m.mochila ?? {};
+  for (const [id, n] of Object.entries(m.combate ?? {})) if (n > 0) mochila = sumar(mochila, id, n);
+  return { ...m, mochila, combate: {} };
+}
+/** La mochila con que entra a una ronda: la de combate (en el torneo nadie regala nada). */
+export const mochilaDeRonda = (m: EstadoMochila): Record<string, number> => ({ ...(m.combate ?? {}) });
+export const cuantosEnCombate = (m: EstadoMochila) => total(m.combate);
 
 /** Lo que una partida puede pasar al torneo: los objetos que se gastan que tiene en la mochila. */
 export function traspasables(vars: Vars): Record<string, number> {

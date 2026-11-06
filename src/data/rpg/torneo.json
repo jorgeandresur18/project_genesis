@@ -57,7 +57,8 @@
       "peleadores": 1,
       "rivales": 0,
       "multiplicador": 1,
-      "nivel_rivales": 0
+      "nivel_rivales": 0,
+      "mochila_combate": 4
     },
     {
       "id": "doble",
@@ -65,7 +66,8 @@
       "peleadores": 2,
       "rivales": 1,
       "multiplicador": 0.8,
-      "nivel_rivales": 0.1
+      "nivel_rivales": 0.1,
+      "mochila_combate": 6
     },
     {
       "id": "triple",
@@ -73,7 +75,8 @@
       "peleadores": 3,
       "rivales": 2,
       "multiplicador": 0.6,
-      "nivel_rivales": 0.2
+      "nivel_rivales": 0.2,
+      "mochila_combate": 8
     }
   ],
   "rondas": [

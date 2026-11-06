@@ -1,7 +1,7 @@
 // El Torneo Genesis (docs/BIBLIA_RPG.md, sección 17; datos de relleno en src/data/rpg/torneo.json): se elige la copa,
 // la modalidad (simple, doble o triple) y los peleadores; después, cuatro rondas seguidas hasta la final contra Nikki.
 // Cada ronda ganada paga tokens a PayFoe; si se pierde, se queda eliminado pero lo ganado se queda.
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Panel } from './Panels';
 import { Batalla } from './Batalla';
 import { useT } from '../engine/i18n';
@@ -10,10 +10,10 @@ import { playSelect } from '../engine/sound';
 import { HEROES_TORNEO, JEFES_TORRE, NIKKI_PELEADORA, REY_PELEADOR, TORNEO, peleadorAbierto, armarRonda, copaAbierta, fichaPeleador, premioDe, type Copa, type Modalidad } from '../engine/torneo';
 import { nuevaSemilla } from '../engine/esencia';
 import { equipoDe, mochilaDeRonda } from '../engine/mochilaTorneo';
-import { MochilaTorneo } from './MochilaTorneo';
+import { PreparacionTorneo } from './MochilaTorneo';
 import { GALERIA_COMPLETA } from '../engine/modo';
 
-type Fase = { paso: 'menu' } | { paso: 'pelea'; ronda: number } | { paso: 'ronda'; ronda: number; premio: number } | { paso: 'fin'; gano: boolean };
+type Fase = { paso: 'menu' } | { paso: 'preparar' } | { paso: 'pelea'; ronda: number } | { paso: 'ronda'; ronda: number; premio: number } | { paso: 'fin'; gano: boolean };
 
 export function TorneoPantalla({ onClose }: { onClose: () => void }) {
   const t = useT();
@@ -37,10 +37,14 @@ export function TorneoPantalla({ onClose }: { onClose: () => void }) {
   ];
   const abierta = (c: Copa) => GALERIA_COMPLETA || copaAbierta(c, visitadas, torneo.ganadas);
   const listos = elegidos.length === modalidad.peleadores;
+  // Si quedó una mochila de combate de un torneo sin terminar (se cerró a la mitad), vuelve a la principal.
+  useEffect(() => {
+    useStore.getState().devolverCombateTorneo();
+  }, []);
 
   if (fase.paso === 'pelea' && copa) {
     const final = fase.ronda === TORNEO.rondas.length - 1;
-    // Lo que lleva puesto cada uno y la mochila con que entran (lo usado se descuenta al terminar, gane o pierda).
+    // Lo que lleva puesto cada uno y la mochila de combate con que entran (lo usado ya no está en la ronda siguiente).
     const antes = mochilaDeRonda(torneo);
     const bolsa = { equipo: Object.fromEntries(elegidos.map((k) => [k, equipoDe(k, torneo)])), mochila: antes };
     const despuesDe = (vars?: Record<string, unknown>) =>
@@ -51,14 +55,16 @@ export function TorneoPantalla({ onClose }: { onClose: () => void }) {
         id="torneo"
         datos={armarRonda(copa, fase.ronda, modalidad, elegidos, torneo.defensas, semilla, bolsa)}
         onGanar={(vars) => {
-          useStore.getState().gastarRondaTorneo(antes, despuesDe(vars));
+          useStore.getState().gastarCombateTorneo(despuesDe(vars));
           const entro = useStore.getState().premioTorneo(premioDe(copa, fase.ronda, modalidad));
           setGanado((g) => g + entro);
           if (final) useStore.getState().ganarCopa(copa.id);
           setFase({ paso: 'ronda', ronda: fase.ronda, premio: entro });
         }}
         onPerder={(vars) => {
-          useStore.getState().gastarRondaTorneo(antes, despuesDe(vars));
+          useStore.getState().gastarCombateTorneo(despuesDe(vars));
+          // Eliminados: lo que sobró de la mochila de combate vuelve a la principal.
+          useStore.getState().devolverCombateTorneo();
           setFase({ paso: 'fin', gano: false });
         }}
       />
@@ -169,8 +175,6 @@ export function TorneoPantalla({ onClose }: { onClose: () => void }) {
                     </button>
                   ))}
                 </div>
-                {/* La mochila del torneo y lo que lleva puesto cada uno (se cambia antes de empezar). */}
-                <MochilaTorneo peleadores={elegidos} />
               </>
             )}
             {copa && (
@@ -183,14 +187,26 @@ export function TorneoPantalla({ onClose }: { onClose: () => void }) {
               disabled={!copa || !listos}
               onClick={() => {
                 playSelect();
-                setGanado(0);
-                setSemilla(nuevaSemilla());
-                setFase({ paso: 'pelea', ronda: 0 });
+                // Antes de la primera ronda: la preparación (equipo y mochila de combate).
+                setFase({ paso: 'preparar' });
               }}
             >
               {t('torneo.empezar')}
             </button>
           </>
+        )}
+        {fase.paso === 'preparar' && (
+          <PreparacionTorneo
+            peleadores={elegidos}
+            tope={modalidad.mochila_combate}
+            onVolver={() => setFase({ paso: 'menu' })}
+            onListo={(combate) => {
+              useStore.getState().armarCombateTorneo(combate, modalidad.mochila_combate);
+              setGanado(0);
+              setSemilla(nuevaSemilla());
+              setFase({ paso: 'pelea', ronda: 0 });
+            }}
+          />
         )}
         {fase.paso === 'ronda' && copa && (
           <>
@@ -204,7 +220,14 @@ export function TorneoPantalla({ onClose }: { onClose: () => void }) {
                 </button>
               </>
             ) : (
-              <button className="torneo-empezar" onClick={() => setFase({ paso: 'fin', gano: true })}>
+              <button
+                className="torneo-empezar"
+                onClick={() => {
+                  // Campeones: lo que sobró de la mochila de combate vuelve a la principal.
+                  useStore.getState().devolverCombateTorneo();
+                  setFase({ paso: 'fin', gano: true });
+                }}
+              >
                 {t('torneo.terminar')}
               </button>
             )}

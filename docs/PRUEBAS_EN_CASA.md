@@ -238,7 +238,7 @@ En el Torneo (`npm run dev`, desde Extras):
 ## 20. La mochila del torneo (nuevo, 6 de noviembre)
 
 - [ ] En Boringplace, desde el título: comprar un objeto de pelea y una prenda (dice «Para la mochila del torneo» y se paga con PayFoe).
-- [ ] En el Torneo, debajo de «Tu equipo»: la mochila y la ropa de cada peleador; cambiar una prenda, sacarla y «Equipo de fábrica».
+- [ ] En el Torneo, al tocar «Empezar»: la **preparación** (la ropa de cada peleador y la mochila de combate: 4, 6 u 8 según la modalidad). Cambiar una prenda, «Equipo de fábrica», armar la mochila y «¡A pelear!». Al terminar, lo que sobró vuelve a la mochila.
 - [ ] Al terminar un capítulo con objetos en la mochila: «¿Quieres pasar objetos a la mochila del torneo?» (hasta 5).
 - [ ] En una ronda del torneo, usar algo de la mochila y ver que después baja.
 

@@ -493,4 +493,5 @@ de Rikka en la galería se ven enteros y grandes. CLAUDE.md, al día con el 6 de
 - **El autor:** «la prenda es única» y enseguida «olvida lo de la prenda»: quedó en 3 de cada prenda.
 - **En el torneo nadie regala nada (decisión del autor):** se sacó la mochila regalada (2 aguas y un Elixit por ronda); cada peleador usa solo lo que se lleva en la mochila del torneo. Sin objetos: Billy ~79 %, Jordy ~73 %, Nikki ~49 %, Maggie ~42 %; el Rey y los jefes, con su factor reajustado (Rey ~78 %, jefes 42–47 % de promedio). El texto de la mochila vacía avisa que nadie regala nada.
 - **Premios del torneo hacia la historia:** el autor los deja para después.
+- **Preparación del torneo y mochila de combate (decisión del autor):** al tocar «Empezar», un menú para equipar a los peleadores y armar la mochila de combate desde la principal, con tope por modalidad (simple 4, doble 6, triple 8; propuesta de Claude). Se gasta ronda a ronda; lo que sobra vuelve a la principal al terminar. Prueba en navegador nueva (`tests/e2e/torneo_prep.spec.ts`).
 
