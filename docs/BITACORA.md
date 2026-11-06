@@ -512,3 +512,6 @@ de Rikka en la galería se ven enteros y grandes. CLAUDE.md, al día con el 6 de
 - **Capítulo 5 casi sin peleas (decisión del autor):** es más novela; anotado en `docs/CANON.md` (Capítulo 5).
 - **Cuánta novela y cuánta pelea por capítulo (dicho por el autor):** 1 mucho diálogo; 2 equilibrado; 3 el de más peleas; 4 como el 1; 5 casi sin peleas; 6 equilibrado tirando a peleas; 7 pura novela. Tabla en `docs/CANON.md` (estructura de capítulos).
 - **Pendiente para la noche:** sección 21 de `docs/PRUEBAS_EN_CASA.md` (el prólogo condensado). Todo subido a `desarrollo` (no a `main`).
+- **Por qué Cami besa a Jair (dicho por el autor):** siente algo por él y quiere darle celos a Nikki; sabe cómo ha tratado a Jair y le gusta verla molesta, también en el trabajo. En `docs/CANON.md` (Capítulo 5, punto 11).
+- **Mapa de semillas** (`docs/SEMILLAS.md`): dónde están las pistas del origen, el orgullo de Rikka, la cara del Rey y Cami llave en los Capítulos 1 a 3, y 9 propuestas (A a I) sin aplicar. Faltan Ari y Milka en todo el juego; el Capítulo 3 es el más flojo en pistas. Dos preguntas de canon: si Jair ya conocía a Milka por las llamadas y si el orgullo se borra en los prompts de la noche del Capítulo 1.
+- **El autor deja para la noche** la pasada de diálogos y chistes del Capítulo 1 desde el bar.
