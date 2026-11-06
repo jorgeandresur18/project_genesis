@@ -84,7 +84,7 @@
         "Literatura: además de los libros de arriba, El señor de los anillos, de J. R. R. Tolkien, y la novela gráfica Persépolis, de Marjane Satrapi.",
         "Anime y manga: Neon Genesis Evangelion, Perfect Blue, Serial Experiments Lain, Fullmetal Alchemist, Mirai Nikki, Gantz, School Days y Welcome to the NHK.",
         "Cómics: Scott Pilgrim, La última cacería de Kraven, la melancolía de Spider-Man: Blue y la crudeza de Daredevil: Born Again.",
-        "Cine: Matrix, Yo, robot y The Truman Show.",
+        "Cine: Matrix, Yo, robot y The Truman Show; Scott Pilgrim vs. the World; las comedias Superbad, Project X y ¿Qué pasó ayer?, para las noches que se salen de control; El señor de los anillos, para la aventura; y Réquiem por un sueño e Inception, por lo psicológico. Las cuento más abajo, en «El cine, los actores y los directores».",
         "Música: la melancolía honesta y pura de The Smiths sobre el amor y la soledad; las relaciones rotas y los sentimientos imperfectos de The Strokes; la vulnerabilidad de The Cranberries; la poesía oscura y la teatralidad gótica de The Cure; The Killers, con la idea de que, aunque todo salga mal, puede haber una luz. Las demás, con la canción de cada personaje, las cuento más abajo, en las notas del autor.",
         "Videojuegos: los RPG por turnos de toda la vida, como EarthBound y Final Fantasy, para las peleas; y la entrada de los combates de Pokémon, para el enfrentamiento del bar."
       ]
@@ -235,6 +235,24 @@
             "De Letelefono me gustan [«Empate»](https://open.spotify.com/track/11E92FQUOcQhCEaNGjRSR7) y [«La Favorita»](https://open.spotify.com/track/6uayRkYG58XPw8u7Kg6lq1), tanto por la música como por la estética. Y completan la lista La Máquina Camaleón y Alkaloides."
           ]
         }
+      ]
+    },
+    {
+      "titulo": "El cine, los actores y los directores",
+      "parte": "autor",
+      "parrafos": [
+        "En cuanto al cine, los actores y los directores de mi preferencia, la verdad es que no soy ningún hipster cinéfilo que presume de ver películas que nadie conoce. Si fuera por mí, diría que me gustan todas las de Marvel y Harry Potter, pero eso sería demasiado simple y predecible. Aunque, siendo sincero, tampoco tengo una película favorita como tal: hay demasiadas que me gustan.",
+        "Si tuviera que elegir una, probablemente sería Forrest Gump. Es esa película que siempre puedo poner y ver de principio a fin sin aburrirme. Me gusta mucho Tom Hanks y la forma en que interpreta a sus personajes; también disfruto sus actuaciones en La milla verde, La terminal y Náufrago.",
+        "Otro actor que admiro bastante es Willem Dafoe, sobre todo por sus papeles en The Lighthouse, de Robert Eggers, y La última tentación de Cristo, de Martin Scorsese.",
+        "Y ya que mencioné a estos dos directores: los dos están entre mis favoritos, aunque por razones distintas. De Scorsese me gusta esa manera tan cruda de retratar la condición humana, sus excesos, sus contradicciones y los aspectos menos agradables de la sociedad. Taxi Driver y El lobo de Wall Street son buenos ejemplos.",
+        "De Robert Eggers me fascinan su estética tan cuidada, su atmósfera inquietante y esa sensación de estar viendo algo extraño y, al mismo tiempo, profundamente humano. The Lighthouse y The Northman son dos películas que disfruto mucho por su dirección visual y por la manera en que construyen sus mundos.",
+        "También me encanta la estética de Wes Anderson, con sus composiciones simétricas, sus colores y esa forma tan particular de presentar situaciones absurdas con absoluta seriedad. De Darren Aronofsky me atrae el componente psicológico de sus películas, sobre todo cuando explora la obsesión, la autodestrucción y los límites de la mente humana. Y, por supuesto, está Quentin Tarantino, con esa violencia exagerada, absurda y extrañamente disfrutable, y unos diálogos que pasan de lo cotidiano a lo completamente ridículo en cuestión de segundos.",
+        "### Las que influyeron en PROJECT GENESIS",
+        "Ahora bien, ¿qué películas influyeron directamente en PROJECT GENESIS? Sin duda, una de las principales fue Scott Pilgrim vs. the World. Me encanta su manera de mezclar videojuegos, romance, comedia y situaciones completamente absurdas sin perder su identidad. Es una influencia bastante evidente en algunas partes del proyecto.",
+        "También tomé elementos de comedias como Superbad, Project X y la trilogía de ¿Qué pasó ayer?, sobre todo por su humor vulgar, sus personajes desastrosos y esas noches que empiezan como algo aparentemente normal y terminan convirtiéndose en un desastre completo.",
+        "Por otro lado, la saga de El señor de los anillos influyó en la parte fantástica y aventurera del juego, mientras que películas como Réquiem por un sueño e Inception me interesan por sus componentes psicológicos, por su forma de representar la realidad y por las consecuencias de las decisiones de sus personajes.",
+        "Seguramente hay muchas otras que terminaron influyendo en PROJECT GENESIS sin que me diera cuenta. Tampoco quiero convertir esta sección en una lista interminable de títulos que nadie va a terminar de leer, así que estas son algunas de las más importantes. Y si mientras juegan encuentran alguna escena, diálogo o situación que les recuerde a una de estas películas, probablemente no sea coincidencia: es muy posible que haya sacado la inspiración de ahí.",
+        "Al final, creo que uno termina creando con pedazos de todo lo que ha visto, leído, escuchado y vivido. Algunas referencias son intencionales; otras aparecen solas, cuando menos te lo esperas. Y PROJECT GENESIS tiene bastante de ambas."
       ]
     },
     {
