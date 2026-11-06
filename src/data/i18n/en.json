@@ -275,6 +275,7 @@
   "batalla.desc.especial_carga": "Special bar: {n} %. It fills by attacking, taking hits, talking or dodging.",
   "batalla.desc.a_uno": "one enemy",
   "batalla.desc.a_todos": "all enemies",
+  "batalla.desc.obj_cura": "Heals {n}% of HP.",
   "batalla.desc.obj_ps": "Heals {n} HP.",
   "batalla.desc.obj_cura_toda": "Restores all HP.",
   "batalla.desc.obj_confunde_al_comer": "But confuses whoever eats it for {n} turns.",

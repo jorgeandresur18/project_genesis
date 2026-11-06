@@ -20,14 +20,14 @@ describe('los consumibles', () => {
     expect([h.envenenado, h.confundido, h.quemado]).toEqual([null, 2, 2]);
   });
 
-  it('la galleta clásica solo sube vida; las otras suben vida y quitan un estado (uno solo)', () => {
+  it('la galleta clásica solo sube vida; las otras suben vida y quitan un estado (uno solo); curan una parte de la vida (2026-11-06)', () => {
     const h = jair();
     h.ps = 1;
     h.envenenado = { danio: 6, turnos: 3 };
     usarObjeto(O.galleta_clasica, h);
-    expect(h.ps).toBe(21);
+    expect(h.ps).toBe(1 + Math.round(h.psMax * 0.25));
     expect(h.envenenado).not.toBeNull();
-    for (const [k, ps] of [['galleta_arcoiris', 20], ['galleta_brownie', 50], ['galleta_red_velvet', 35]] as const) {
+    for (const [k, ps] of [['galleta_arcoiris', 200], ['galleta_brownie', 550], ['galleta_red_velvet', 400]] as const) {
       const x = jair();
       x.psMax = 1000;
       x.ps = 1;

@@ -155,7 +155,7 @@
   ],
   "tienda": [
     {
-      "descripcion": "+30 HP. The cheapest thing on the menu and the only one that never lies to you."
+      "descripcion": "+30% HP. The cheapest thing on the menu and the only one that doesn't lie to you."
     },
     {
       "descripcion": "Attack +3 until the end of the fight. A sports drink; nobody knows which sport."
@@ -194,16 +194,16 @@
       "descripcion": "Removes poison."
     },
     {
-      "descripcion": "+20 HP."
+      "descripcion": "+25% HP."
     },
     {
-      "descripcion": "+20 HP to the whole party, and removes one status from each."
+      "descripcion": "+20% HP to the whole team and removes a status from each one."
     },
     {
-      "descripcion": "+50 HP and removes one status."
+      "descripcion": "+55% HP and removes a status."
     },
     {
-      "descripcion": "+35 HP and removes one status."
+      "descripcion": "+40% HP and removes a status."
     },
     {
       "descripcion": "Restores all HP, but confuses whoever eats it for 3 turns. House recipe. Don't ask which herb."
@@ -248,7 +248,7 @@
       "descripcion": "Fills the special bar a little and wakes up an ally. Tastes like cardboard, works."
     },
     {
-      "descripcion": "+30 HP to the whole party. Expired band-aids included."
+      "descripcion": "+25% HP to the whole team. With expired band-aids."
     },
     {
       "descripcion": "Removes every status: poison, burn, confusion, paralysis, sleep and ice."

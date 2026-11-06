@@ -228,27 +228,27 @@
     "_nota": "Los jefes de la torre como peleadores del jugador (decisión del autor, 2026-11-06): conservan sus ataques y su especial, pero pelean con la vida, el ataque, la defensa y la velocidad (y su crecimiento) del héroe de su estilo, por la fuerza que dice factor. Sin esto eran fichas de jefe, hechas para enfrentar a tres héroes (Comandante ×3 ganaba la final de la Copa Leyenda el 99 %).",
     "reina_bichos": {
       "heroe": "maggie",
-      "factor": 1.14
+      "factor": 1.12
     },
     "jefe_bodega": {
       "heroe": "jair",
-      "factor": 1.31
+      "factor": 1.32
     },
     "sargento": {
       "heroe": "jordy",
-      "factor": 0.86
+      "factor": 0.87
     },
     "chef": {
       "heroe": "rikka",
-      "factor": 1.38
+      "factor": 1.43
     },
     "maestro_herrero": {
       "heroe": "billy",
-      "factor": 1.16
+      "factor": 1.13
     },
     "alcaide": {
       "heroe": "billy",
-      "factor": 1.05
+      "factor": 1.01
     },
     "intendente": {
       "heroe": "cami",
@@ -256,7 +256,7 @@
     },
     "comandante": {
       "heroe": "billy",
-      "factor": 1.11
+      "factor": 1.1
     },
     "nikki": {
       "heroe": "rikka",
@@ -264,7 +264,7 @@
     },
     "rey": {
       "heroe": "billy",
-      "factor": 1.15
+      "factor": 1.1
     }
   },
   "equipo_peleadores": {

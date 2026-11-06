@@ -232,8 +232,11 @@ function usoDeMochila(estado: EstadoPelea, d: DatosBatalla, e: Luchador, azar: (
   const bajos = suyos.filter((x) => x.ps < x.psMax * MOCHILA_RIVAL.umbral).sort((x, y) => Number(!!y.jefe) - Number(!!x.jefe) || x.ps / x.psMax - y.ps / y.psMax);
   const blanco = bajos[0];
   const falta = blanco ? blanco.psMax - blanco.ps : 0;
-  const cuanto = (k: string) => (d.objetos[k].cura_toda ? falta : (d.objetos[k].ps ?? 0));
-  const curas = blanco ? hay((o) => (!!o.ps || !!o.cura_toda) && !o.revive && !o.confunde_al_comer).filter((k) => cuanto(k) >= blanco.psMax * 0.15) : [];
+  const cuanto = (k: string) => {
+    const o = d.objetos[k];
+    return o.cura_toda ? falta : o.cura && blanco ? Math.round(blanco.psMax * o.cura) : (o.ps ?? 0);
+  };
+  const curas = blanco ? hay((o) => (!!o.ps || !!o.cura || !!o.cura_toda) && !o.revive && !o.confunde_al_comer).filter((k) => cuanto(k) >= blanco.psMax * 0.15) : [];
   if (blanco && curas.length && azar() < MOCHILA_RIVAL.cura) {
     // El más chico que cubre lo que falta; si ninguno alcanza, el más grande.
     const alcanzan = curas.filter((k) => cuanto(k) >= falta).sort((x, y) => cuanto(x) - cuanto(y));

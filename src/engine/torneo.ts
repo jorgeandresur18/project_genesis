@@ -241,7 +241,8 @@ export function armarRonda(
   const mochilaRival: Record<string, number> = {};
   if (Array.isArray(opciones) && opciones.length) {
     const azarM = azarDe(`${semilla ?? 'fijo'}|${c.id}|${m.id}|${ronda}|mochila`);
-    for (let i = 0; i < (m.mochila_combate ?? 4); i++) {
+    // El rival lleva la mitad que el jugador (2, 3 o 4): con las curas por porcentaje, más lo aplastaba (2026-11-06).
+    for (let i = 0; i < Math.ceil((m.mochila_combate ?? 4) / 2); i++) {
       const k = semilla ? opciones[Math.floor(azarM() * opciones.length)] : opciones[i % opciones.length];
       mochilaRival[k] = (mochilaRival[k] ?? 0) + 1;
     }

@@ -359,15 +359,15 @@
       "filtro": "sepia(0.7) saturate(1.6) hue-rotate(-25deg) brightness(1.05)",
       "seguido": true,
       "base": {
-        "ps": 25,
+        "ps": 27,
         "atq": 4,
         "def": 3,
         "vel": 4
       },
       "crece": {
-        "ps": 6.8,
-        "atq": 1.06,
-        "def": 0.77,
+        "ps": 7.21,
+        "atq": 1.12,
+        "def": 0.82,
         "vel": 0.2
       },
       "ataques": [
@@ -431,15 +431,15 @@
       "filtro": "hue-rotate(230deg) saturate(1.2)",
       "seguido": true,
       "base": {
-        "ps": 43,
+        "ps": 47,
         "atq": 5,
         "def": 3,
         "vel": 13
       },
       "crece": {
-        "ps": 7.4,
-        "atq": 0.83,
-        "def": 0.65,
+        "ps": 8.11,
+        "atq": 0.91,
+        "def": 0.71,
         "vel": 0.7
       },
       "ataques": [
@@ -2302,10 +2302,10 @@
     },
     "vida": {
       "nombre": "Agua sin gas",
-      "ps": 30,
       "texto": "{quien} se toma el agua sin gas: +{n} PS. Lo más barato del menú y lo único que no te miente.",
       "tipo": "curacion",
-      "icono": "objetos/agua"
+      "icono": "objetos/agua",
+      "cura": 0.3
     },
     "carga": {
       "nombre": "4Low-Co",
@@ -2379,34 +2379,34 @@
     "galleta_clasica": {
       "nombre": "Galleta clásica",
       "tipo": "curacion",
-      "ps": 20,
       "texto": "{quien} se come una galleta clásica: +{n} PS.",
-      "icono": "objetos/galleta_clasica"
+      "icono": "objetos/galleta_clasica",
+      "cura": 0.25
     },
     "galleta_arcoiris": {
       "nombre": "Galleta arcoíris",
       "tipo": "curacion",
       "objetivo": "equipo",
-      "ps": 20,
       "quita_estado": true,
       "texto": "{quien} comparte la galleta arcoíris: +{n} PS y se le va un estado.",
-      "icono": "objetos/galleta_arcoiris"
+      "icono": "objetos/galleta_arcoiris",
+      "cura": 0.2
     },
     "galleta_brownie": {
       "nombre": "Galleta brownie",
       "tipo": "curacion",
-      "ps": 50,
       "quita_estado": true,
       "texto": "{quien} se come una galleta brownie: +{n} PS y se le va un estado.",
-      "icono": "objetos/galleta_brownie"
+      "icono": "objetos/galleta_brownie",
+      "cura": 0.55
     },
     "galleta_red_velvet": {
       "nombre": "Galleta red velvet",
       "tipo": "curacion",
-      "ps": 35,
       "quita_estado": true,
       "texto": "{quien} se come una galleta red velvet: +{n} PS y se le va un estado.",
-      "icono": "objetos/galleta_red_velvet"
+      "icono": "objetos/galleta_red_velvet",
+      "cura": 0.4
     },
     "pastelillo_herbal": {
       "nombre": "Pastelillo herbal",
@@ -2586,8 +2586,8 @@
       "nombre": "Botiquín de oficina",
       "tipo": "curacion",
       "objetivo": "equipo",
-      "ps": 30,
-      "texto": "{quien} abre el botiquín de la oficina: curitas vencidas y algo de fe. +{n} PS."
+      "texto": "{quien} abre el botiquín de la oficina: curitas vencidas y algo de fe. +{n} PS.",
+      "cura": 0.25
     },
     "antidoto_universal": {
       "nombre": "Antídoto universal",

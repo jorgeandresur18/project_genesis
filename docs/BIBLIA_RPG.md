@@ -825,3 +825,5 @@ Detalle completo en `docs/BATALLA_FINAL.md`.
 
 **En el torneo no se gana experiencia ni caen tokens ni botín** (decisión del autor, 2026-11-06): los personajes no suben de nivel y el premio va por ronda a PayFoe (`torneo: true` en la pelea).
 
+**Las curas devuelven una parte de la vida** (decisión del autor, 2026-11-06; campo `cura` de cada objeto): agua sin gas 30 %, galleta clásica 25 %, galleta arcoíris 20 % a todo el equipo, red velvet 40 %, brownie 55 %, botiquín de oficina 25 % a todo el equipo (antes, 30, 20, 20, 35, 50 y 30 PS fijos). El pastelillo herbal (todo) y los Elixit (reviven con la mitad o con todo) ya eran así. Así sirven igual en el Capítulo 1 que en la Copa Leyenda. El Bastión y el hangar siguen en su meta. **El rival lleva la mitad que el jugador** (2, 3 o 4): con curas por porcentaje, más lo aplastaba a los peleadores lentos. Torneo reajustado (Billy ~81 %, Jordy ~77 %, Nikki ~53 %, Maggie ~43 %, el Rey ~77 %, jefes 40–46 %).
+

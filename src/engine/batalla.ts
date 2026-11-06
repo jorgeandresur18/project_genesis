@@ -267,6 +267,8 @@ export interface Objeto {
   atq?: number;
   def?: number;
   ps?: number;
+  /** Cura esta parte de la vida máxima de quien lo toma (0,3: 30 %; decisión del autor, 2026-11-06: no una cantidad fija). */
+  cura?: number;
   /** Cura toda la vida (el pastelillo herbal). */
   cura_toda?: boolean;
   /** Confunde tantos turnos a quien lo come (el pastelillo herbal). */
@@ -685,9 +687,10 @@ export function usarObjeto(o: Objeto, h: Luchador, d?: { base: Stats; crece: Sta
     cargar(h, o.carga);
     return h.carga - antes;
   }
-  if (o.cura_toda || o.ps) {
+  if (o.cura_toda || o.ps || o.cura) {
     const antes = h.ps;
-    h.ps = o.cura_toda ? h.psMax : Math.min(h.psMax, h.ps + (o.ps ?? 0));
+    const suma = o.cura ? Math.max(1, Math.round(h.psMax * o.cura)) : (o.ps ?? 0);
+    h.ps = o.cura_toda ? h.psMax : Math.min(h.psMax, h.ps + suma);
     // El pastelillo herbal: toda la vida, pero queda confundido.
     if (o.confunde_al_comer && !h.equipo?.sinConfusion) h.confundido = Math.max(h.confundido, o.confunde_al_comer);
     return h.ps - antes;
@@ -697,7 +700,7 @@ export function usarObjeto(o: Objeto, h: Luchador, d?: { base: Stats; crece: Sta
 
 /** El tipo de un objeto: el que dice o, si no dice, el que corresponde a lo que hace. */
 export const tipoDe = (o: Objeto): TipoObjeto =>
-  o.tipo ?? (o.niveles ? 'permanente' : o.ps || o.cura_toda || o.revive || o.cura_estados || o.quita_veneno ? 'curacion' : o.veneno || o.protege || o.confunde || o.paraliza ? 'tactico' : 'mejora');
+  o.tipo ?? (o.niveles ? 'permanente' : o.ps || o.cura || o.cura_toda || o.revive || o.cura_estados || o.quita_veneno ? 'curacion' : o.veneno || o.protege || o.confunde || o.paraliza ? 'tactico' : 'mejora');
 /** Lo que se puede usar en una pelea (el equipo y la colección, no). */
 export const usableEnPelea = (o: Objeto) => !['equipo', 'coleccion'].includes(tipoDe(o)) && !esRefuerzo(o) && !((o.niveles ?? 0) < 0);
 /** Un permanente que sube estadísticas para siempre (el CeBiDol): solo se toma fuera de las peleas. */

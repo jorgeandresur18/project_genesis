@@ -237,7 +237,7 @@
     {
       "objeto": "vida",
       "precio": 15,
-      "descripcion": "+30 PS. Lo más barato del menú y lo único que no te miente."
+      "descripcion": "+30 % de vida. Lo más barato del menú y lo único que no te miente."
     },
     {
       "objeto": "atq",
@@ -302,22 +302,22 @@
     {
       "objeto": "galleta_clasica",
       "precio": 12,
-      "descripcion": "+20 PS."
+      "descripcion": "+25 % de vida."
     },
     {
       "objeto": "galleta_arcoiris",
       "precio": 45,
-      "descripcion": "+20 PS a todo el equipo y le quita un estado a cada uno."
+      "descripcion": "+20 % de vida a todo el equipo y le quita un estado a cada uno."
     },
     {
       "objeto": "galleta_brownie",
       "precio": 50,
-      "descripcion": "+50 PS y quita un estado."
+      "descripcion": "+55 % de vida y quita un estado."
     },
     {
       "objeto": "galleta_red_velvet",
       "precio": 40,
-      "descripcion": "+35 PS y quita un estado."
+      "descripcion": "+40 % de vida y quita un estado."
     },
     {
       "objeto": "pastelillo_herbal",
@@ -395,7 +395,7 @@
     {
       "objeto": "botiquin_oficina",
       "precio": 70,
-      "descripcion": "+30 PS a todo el equipo. Con curitas vencidas."
+      "descripcion": "+25 % de vida a todo el equipo. Con curitas vencidas."
     },
     {
       "objeto": "antidoto_universal",
