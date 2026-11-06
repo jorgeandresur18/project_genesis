@@ -163,6 +163,7 @@ Se juega con `npm run dev`: al terminar el Capítulo 2, «Continuar» sigue al 3
 - [ ] **El final «Cancelar»** (cruzar solo) y el despertar.
 - [ ] **La torre del Capítulo 3** (`/cap3`): los caminos (cloacas, bodegas o montacargas; comedor o forja; celdas o patio; salón o galería) y los descansos. Las peleas nuevas abren con `?batalla=cap03_cloacas_1` y las demás de `src/data/batallas/cap03_*`. Están sin balancear: anotar cuáles se sienten largas o injustas.
 - [ ] **Los cofres de los descansos** del Capítulo 3: Claude ya comprobó sin ventana que lo elegido llega a la mochila (`tests/e2e/torre.spec.ts`); falta ver cómo se ven.
+- Nota (5 de noviembre, noche): en las cloacas, la Ráfaga de Jair quemó a un bicho y nunca se vio el daño. Es lo esperado: la quemadura empieza al final del turno siguiente y el bicho cayó antes. **Decisión del autor: la mecánica queda como está.**
 - [ ] **Los jefes nuevos:** que se vean bien sus ataques (la reina pone huevos, el chef sirve la olla, el yunque del herrero, los grilletes del alcaide) y que el Rey pelee con espada.
 
 ## 11. Las peleas en inglés (nuevo, 5 de noviembre)
