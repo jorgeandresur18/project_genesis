@@ -61,7 +61,7 @@
       ],
       "dialogue": {
         "speaker": "Cliente",
-        "text": "Joven, lo apagué, lo prendí y hasta lo hice bendecir por un sacerdote. Sigue sin internet. ¿Qué necesita, un exorcismo?"
+        "text": "Joven, lo apagué, lo prendí, lo desenchufé, le soplé como a los cartuchos y hasta le hablé bonito. Sigue sin internet."
       },
       "choices": [],
       "conditions": [],
@@ -315,6 +315,29 @@
       "dialogue": {
         "speaker": "Jair",
         "text": "¿Y cuál es el problema? Ni que fuera pecado. Y si lo es, ya se la bendijo un sacerdote: de seguro sus creencias se lo permiten, estimada."
+      },
+      "choices": [],
+      "conditions": [],
+      "audio": null,
+      "ui_effect": null,
+      "next": "cap01_o08c"
+    },
+    {
+      "scene_id": "cap01_o08c",
+      "chapter": 1,
+      "background": "fondos/oficina_dia.webp",
+      "video_fondo": null,
+      "loop_video": false,
+      "characters": [
+        {
+          "id": "jair",
+          "sprite": "sprites/jair/cansado1.webp",
+          "pos": "centro"
+        }
+      ],
+      "dialogue": {
+        "speaker": "Cliente",
+        "text": "Igual, la refrigeradora seguía sin internet. Pensé que necesitaba que la bendijeran. ¿Y ahora qué hago? ¿Llamo a un exorcista para que la purifique?"
       },
       "choices": [],
       "conditions": [],

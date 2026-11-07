@@ -1,7 +1,7 @@
 {
 "cap01_001": {"t":"Friday, five-thirty in the afternoon. The office heat has everyone in a bad mood, their sweaty butts stuck to their chairs. The air conditioning has been «under maintenance» for three months. Same as the paycheck."},
 "cap01_004": {"t":"Thank you for calling tech support, this is Jair. Have you tried turning the modem off and on again?"},
-"cap01_005": {"t":"Young man, I turned it off, I turned it on, and I even had a priest bless it. Still no internet. What does it need, an exorcism?"},
+"cap01_005": {"t":"Young man, I turned it off, turned it on, unplugged it, blew on it like an old cartridge and even sweet-talked it. Still no internet."},
 "cap01_006": {"t":"(Thirty years old. Software engineer. And my job is asking people to unplug things and plug them back in.)"},
 "cap01_007": {"t":"Team: payday's gone to next Friday. Chin up, we're family here!"},
 "cap01_008": {"t":"«Gone». As if the salary were a bus that missed its stop. (And «family». At least family gets lunch included.)"},
@@ -13,6 +13,7 @@
 "cap01_o06": {"t":"(Even fridges have higher expectations than my salary.) Have you tried turning it off and on again?"},
 "cap01_o08": {"t":"Young man, if I turn it off my meat and my milk go bad. And this «smart» one puts them together in the same compartment. My old one kept them apart."},
 "cap01_o08b": {"t":"So what's the problem? It's not like it's a sin. And if it is, a priest already blessed it: I'm sure your beliefs allow it, ma'am."},
+"cap01_o08c": {"t":"Still, the fridge had no internet. I thought it needed a blessing. So now what? Do I call an exorcist to purify it?"},
 "cap01_o09": {"t":"Still, I recommend you choose between the meat, the milk or the internet."},
 "cap01_o10": {"t":"And why the hell do I have to choose?"},
 "cap01_o11": {"t":"(Because that's how everything works, ma'am.)"},
