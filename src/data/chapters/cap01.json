@@ -61,7 +61,7 @@
       ],
       "dialogue": {
         "speaker": "Cliente",
-        "text": "Joven, lo apagué, lo prendí, lo desenchufé, le soplé como a los cartuchos y hasta le hablé bonito. Sigue sin internet."
+        "text": "Joven, lo apagué, lo prendí, lo desenchufé, le soplé como a un cartucho de videojuego y hasta le invité unas cervezas. Sigue sin internet."
       },
       "choices": [],
       "conditions": [],
@@ -199,7 +199,7 @@
       ],
       "dialogue": {
         "speaker": "Cliente",
-        "text": "Buenas. Quiero saber por qué mi refrigeradora no tiene internet."
+        "text": "Buenas. Quiero saber por qué mi refrigeradora no tiene internet. Ya la hice bendecir por un sacerdote y nada. ¿Qué más tengo que hacer, llamar a un exorcista para que la purifique?"
       },
       "choices": [],
       "conditions": [],
@@ -291,7 +291,7 @@
       ],
       "dialogue": {
         "speaker": "Cliente",
-        "text": "Joven, si la apago se me dañan la carne y la leche. Y esta «inteligente» me las junta en el mismo compartimento. La anterior las tenía separadas."
+        "text": "Joven, si la apago se me dañan la carne y la leche. Y esta refri «inteligente» me las junta en el mismo compartimento. La anterior las tenía separadas."
       },
       "choices": [],
       "conditions": [],
@@ -337,7 +337,7 @@
       ],
       "dialogue": {
         "speaker": "Cliente",
-        "text": "Igual, la refrigeradora sigue sin internet. Ya la hice bendecir por un sacerdote y nada. ¿Qué más tengo que hacer, llamar a un exorcista para que la purifique?"
+        "text": "Igual, la refrigeradora sigue sin internet... Necesito que se solucione esto de inmediato."
       },
       "choices": [],
       "conditions": [],
@@ -360,7 +360,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Igual le recomiendo elegir entre la carne, la leche o el internet."
+        "text": "Comprendo, estimada, pero le recomiendo elegir entre la carne, la leche o el internet."
       },
       "choices": [],
       "conditions": [],
@@ -1089,7 +1089,7 @@
       ],
       "dialogue": {
         "speaker": null,
-        "text": "Sale a los cinco minutos, no a los dos: camiseta negra, pantalón negro, el pelo suelto. La gorra va hecha un rollo dentro de la mochila y el delantal asoma por el cierre, como si no quisiera quedarse."
+        "text": "Sale a los cinco minutos, no a los dos: camiseta negra, pantalón negro, el pelo suelto. La gorra va hecha un rollo dentro del bolso y el delantal asoma por el cierre, como si no quisiera quedarse."
       },
       "choices": [],
       "conditions": [],
@@ -1489,7 +1489,7 @@
       ],
       "dialogue": {
         "speaker": null,
-        "text": "Chocan las botellas. Durante un rato no dicen nada. Ocho años dan para eso: para saber callarse juntos."
+        "text": "Chocan las botellas. Durante un rato no dicen nada. Ocho años de casi algo dan para eso: para saber callarse juntos."
       },
       "choices": [],
       "conditions": [],
@@ -1545,7 +1545,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Me deben medio mes. El supervisor dice que somos familia."
+        "text": "Me deben medio mes. El supervisor dice que somos una familia."
       },
       "choices": [],
       "conditions": [],
@@ -1573,7 +1573,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Mi jefa también dice eso, la muy hija de puta. La semana pasada me descontó un cono que se cayó solo."
+        "text": "Vaya mierda. Mi jefa también dice eso, la muy hija de puta. La semana pasada me descontó un cono que se cayó solo."
       },
       "choices": [],
       "conditions": [],
@@ -1629,7 +1629,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Lo empujó un niño. Pero el niño no tiene sueldo, así que lo pagué yo."
+        "text": "Lo empujó un niño pendejo. Pero el niño no tiene dinero, y sus padres de seguro tampoco, porque pidieron el cono más barato. Así que lo pagué yo, por «despistada»."
       },
       "choices": [],
       "conditions": [],
@@ -1657,7 +1657,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Justicia laboral."
+        "text": "Vaya injusticia."
       },
       "choices": [],
       "conditions": [],
@@ -1741,7 +1741,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Da un poco de miedo."
+        "text": "Tu sonrisa me hace sentir incómodo."
       },
       "choices": [],
       "conditions": [],
@@ -1769,7 +1769,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Esa es la idea. Los clientes asustados compran más rápido."
+        "text": "Esa es la idea. Los clientes se incomodan, compran más rápido y no hacen tantas preguntas por los sabores de helado."
       },
       "choices": [],
       "conditions": [],
@@ -1853,7 +1853,7 @@
       ],
       "dialogue": {
         "speaker": null,
-        "text": "Le pone el celular en la cara. Boringram. El perfil de un tipo con lentes de sol, posando en un gimnasio que obviamente no es suyo."
+        "text": "Le pone el celular en la cara. Boringram. El perfil de un tipo con lentes de sol, posando en un gimnasio, en una foto que obviamente subió para presumir su cuerpo fornido."
       },
       "choices": [],
       "conditions": [],
@@ -1909,7 +1909,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Con y griega ya es una bandera roja."
+        "text": "Sí que eres realmente mala."
       },
       "choices": [],
       "conditions": [],
@@ -1937,7 +1937,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Todo es bandera roja para ti. Si fuera por ti, yo saldría con un ventilador."
+        "text": "Para ti siempre soy mala. Si así fuera, sería la mismísima representación del tipo del bigote cuadrado chistoso."
       },
       "choices": [],
       "conditions": [],
@@ -1965,7 +1965,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Los ventiladores son leales."
+        "text": "Creo que exageras mucho."
       },
       "choices": [],
       "conditions": [],
@@ -1993,7 +1993,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Los ventiladores no te invitan a cenar."
+        "text": "Exagero porque nadie me invita a cenar."
       },
       "choices": [],
       "conditions": [],
@@ -2161,7 +2161,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Ahora te la voy a cobrar con rencor."
+        "text": "Te odio. Ahora te la voy a cobrar con rencor."
       },
       "choices": [],
       "conditions": [],
@@ -2189,7 +2189,7 @@
       ],
       "dialogue": {
         "speaker": null,
-        "text": "Segunda cerveza. La rocola cambia de una canción de despecho a otra idéntica."
+        "text": "Segunda cerveza. La rocola cambia de una canción de despecho a otra idéntica, pero más deprimente, como para meterse a la tina con una secadora."
       },
       "choices": [],
       "conditions": [],
@@ -2245,7 +2245,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Nadie."
+        "text": "Nadie. Ni que fuera uno de los tipos que acechan en este bar."
       },
       "choices": [],
       "conditions": [],
@@ -2273,7 +2273,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "¿Nadie, nadie? ¿Ni en una de esas apps?"
+        "text": "¿Nadie, nadie? ¿Ni en una de esas apps hot?"
       },
       "choices": [],
       "conditions": [],
@@ -2301,7 +2301,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Me registré en una. Me hizo match un bot que quería venderme criptomonedas."
+        "text": "Me registré en una. Me hizo match una chica que quería convencerme de hacer trading con criptomonedas."
       },
       "choices": [],
       "conditions": [],
@@ -2329,7 +2329,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Y le compraste."
+        "text": "¿Y te convenció?"
       },
       "choices": [],
       "conditions": [],
@@ -2357,7 +2357,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Dos dólares. Por cortesía."
+        "text": "Se veía a kilómetros que era una de esas mierdas piramidales."
       },
       "choices": [],
       "conditions": [],
@@ -2413,7 +2413,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Búscate una novia, Jair. Y cuando la encuentres, avísame para ir a odiarla."
+        "text": "Búscate una novia de verdad, Jair. Y cuando la encuentres, avísame para ir a odiarla por puta."
       },
       "choices": [],
       "conditions": [],
@@ -2469,7 +2469,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Y tú llevas ocho años sin hacerme caso. Somos un equipo."
+        "text": "Y tú llevas ocho años sin aclarar qué somos realmente. Somos un equipo."
       },
       "choices": [],
       "conditions": [],
@@ -2497,7 +2497,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "(Un equipo. Ella pone las reglas; yo pongo el dinero del taxi.)"
+        "text": "(Un equipo. Ella pone las reglas; yo pongo el dinero de las cervezas.)"
       },
       "choices": [],
       "conditions": [],
@@ -2525,7 +2525,7 @@
       ],
       "dialogue": {
         "speaker": null,
-        "text": "Tercera ronda. Nikki cambia la cerveza por tequila. «Para la digestión», dice. No ha comido nada."
+        "text": "Tercera ronda. Nikki cambia la cerveza por tequila. «Para la digestión», dice. No ha comido nada: es un tip para que le agarre más el alcohol."
       },
       "choices": [],
       "conditions": [],
@@ -2581,7 +2581,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Tenemos treinta años, Nikki."
+        "text": "Tenemos treinta años, Nikki. Ya somos adultos."
       },
       "choices": [],
       "conditions": [],
@@ -2889,7 +2889,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Yo nunca he buscado a un ex en Boringram a las tres de la mañana."
+        "text": "Yo nunca le he escrito a un ex por Boringram a las tres de la mañana estando borracha."
       },
       "choices": [],
       "conditions": [],
@@ -3085,7 +3085,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Yo me sé el nombre de todas."
+        "text": "Yo me sé el nombre de todas con las que he estado."
       },
       "choices": [],
       "conditions": [],
@@ -3169,7 +3169,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Yo no cuento, idiota. Yo soy... mantenimiento preventivo."
+        "text": "Yo no cuento, idiota. Yo soy... memoria a corto plazo."
       },
       "choices": [],
       "conditions": [],
@@ -3197,7 +3197,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "(Ocho años de mantenimiento preventivo. Ni una sola actualización.)"
+        "text": "(Lleva años de memoria a corto plazo y ni una sola actualización para solucionar ese problema de caché.)"
       },
       "choices": [],
       "conditions": [],
@@ -3225,7 +3225,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Yo nunca he fingido nada en la cama."
+        "text": "Yo nunca he fingido un orgasmo en la cama."
       },
       "choices": [],
       "conditions": [],
@@ -3365,7 +3365,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "El cine. La película de los robots."
+        "text": "El cine. La película del chico que viaja a la tierra de los muertos y tiene un perro."
       },
       "choices": [],
       "conditions": [],
@@ -3421,7 +3421,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Nadie vio la película, Jair. Nos echaron antes de los créditos."
+        "text": "Se muere su abuelita y él sigue siendo pobre y miserable, igual que nosotros. Después nos echaron del cine."
       },
       "choices": [],
       "conditions": [],
@@ -3449,7 +3449,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Yo nunca... me he enamorado de un amigo."
+        "text": "Yo nunca... me he acostado con una amistad."
       },
       "choices": [],
       "conditions": [],
@@ -3477,7 +3477,7 @@
       ],
       "dialogue": {
         "speaker": null,
-        "text": "Silencio. La rocola, por crueldad o por casualidad, empieza otra canción de despecho."
+        "text": "Silencio. La rocola, por crueldad o por casualidad, empieza otra canción de despecho, más deprimente que la anterior, y eso que la anterior ya era lo más deprimente."
       },
       "choices": [],
       "conditions": [],
@@ -3598,7 +3598,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Bueno. Seguro fue en la universidad. Todo el mundo se enamora de alguien en la universidad."
+        "text": "Bueno. Seguro fue en la universidad. Todo el mundo hace sus cosas en la universidad."
       },
       "choices": [],
       "conditions": [],
@@ -3626,7 +3626,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "(No fue en la universidad.)"
+        "text": "(Jamás me acosté con nadie en la universidad.)"
       },
       "choices": [],
       "conditions": [],
@@ -3738,7 +3738,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Ya me aburrí de este juego. Hablando de juegos... ¿sigues con los tuyos? ¿El de los dragones?"
+        "text": "Ya me aburrí de este juego. Hablando de proyectos... ¿sigues con los tuyos? ¿El de las series gratis?"
       },
       "choices": [],
       "conditions": [],
@@ -3766,7 +3766,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Lo dejé. Y el de la nave espacial. Y el de la granja."
+        "text": "Lo dejé. Me pusieron una demanda por copyright, con orden de captura de la Interpol. También el de las criptomonedas."
       },
       "choices": [],
       "conditions": [],
@@ -3878,7 +3878,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Geekdump. Donde los programadores suben sus proyectos. Les das estrellas, les haces fork, les mandas pull requests..."
+        "text": "Geekdump. Donde los programadores suben sus proyectos. Les das estrellas, les haces fork, les mandas pull requests y otros se acreditan robándotelos..."
       },
       "choices": [],
       "conditions": [],
@@ -3906,7 +3906,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "No entendí ni mierda, pero suena a algo que hacen los que no salen de su casa."
+        "text": "No entendí ni mierda, pero suena a algo que hacen los que no salen de su casa ni cogen."
       },
       "choices": [],
       "conditions": [],
@@ -4242,7 +4242,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "No sé. Por si acaso la vida."
+        "text": "No sé. Por si acaso la vida, o por si un nuevo virus de diarrea explosiva contagia a todos y agota las reservas de papel higiénico del mundo."
       },
       "choices": [],
       "conditions": [],
@@ -4270,7 +4270,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "La vida ya está pasando, Jair. Esto es la vida. Este bar. Esta cerveza tibia. Tú y yo."
+        "text": "La vida ya está pasando, Jair. Esto es la vida. Este bar. Esta cerveza tibia. Tú y yo. Qué importan la diarrea explosiva y el papel higiénico."
       },
       "choices": [],
       "conditions": [],
@@ -4342,7 +4342,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Nikki. ¿Qué somos?"
+        "text": "Nikki. ¿Qué somos en realidad?"
       },
       "choices": [],
       "conditions": [],
@@ -4370,7 +4370,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Uy. Ya empezó."
+        "text": "Uy. Ya empezaste."
       },
       "choices": [],
       "conditions": [],
@@ -4398,7 +4398,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Ocho años. Te lo pregunté hace dos años, y hace cinco. Siempre cambias de tema."
+        "text": "Te lo pregunté hace dos años, y hace cinco. Siempre cambias de tema."
       },
       "choices": [],
       "conditions": [],
@@ -4426,7 +4426,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Porque es un tema horrible. Somos amigos. Amigos que... a veces. Ya. No le pongas nombre, que los nombres lo arruinan todo."
+        "text": "Porque es un tema horrible. Somos amigos. Amigos que... a veces. Ya. No le pongas etiqueta, que las etiquetas lo arruinan todo."
       },
       "choices": [],
       "conditions": [],
@@ -4454,7 +4454,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "(Ocho años sin nombre. Como un archivo temporal que nadie se atreve a borrar.)"
+        "text": "(Sin etiqueta y sin clasificar. Como un archivo temporal que nadie se atreve a borrar.)"
       },
       "choices": [],
       "conditions": [],
@@ -4650,7 +4650,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Bryan ni siquiera me gustaba, ¿sabes? Era un imbécil. Un imbécil con abdominales prestados."
+        "text": "Bryan ni siquiera me gustaba, ¿sabes? Era un imbécil. Un imbécil con abdominales firmes."
       },
       "choices": [],
       "conditions": [],
@@ -4734,7 +4734,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "No. No me pongas voz de psicólogo, carajo. Tú no sabes arreglar nada que no tenga teclado."
+        "text": "No. No me pongas voz de sufrido, mierda. Tú no sabes arreglar nada que no tenga pantalla."
       },
       "choices": [],
       "conditions": [],
@@ -4958,7 +4958,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Mi jefa me dijo hoy que a mi atención «le falta alegría». ¡Alegría! Le voy a dar alegría. Le voy a meter la alegría por..."
+        "text": "Mi jefa me dijo hoy que a mi atención «le falta alegría». ¡Alegría! Le voy a dar alegría. Le voy a meter la alegría por el c..."
       },
       "choices": [],
       "conditions": [],
@@ -5210,7 +5210,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "No bailo."
+        "text": "No sé bailar."
       },
       "choices": [],
       "conditions": [],
@@ -5322,7 +5322,7 @@
       ],
       "dialogue": {
         "speaker": null,
-        "text": "Nikki baila sola entre las mesas, abrazada a la botella como a una pareja que no la pisa. Y sabe moverse. Dos tipos en la barra la miran. Jair los mira a ellos. Es lo más valiente que hace en toda la noche."
+        "text": "Nikki baila sola entre las mesas, abrazada a la botella como a una pareja que no la pisa. Y sabe moverse. Dos tipos en la barra la miran con ojos desagradables. Jair los mira a ellos. Es lo más valiente que hace en toda la noche."
       },
       "choices": [],
       "conditions": [],
@@ -5434,7 +5434,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Que te pones rojo. Mira, ya estás rojo. Treinta años y te pones rojo como si nunca te hubiera visto sin camisa."
+        "text": "Que te pones tímido. Mira, ya estás rojo. Treinta años y te pones rojo como si nunca hubieras visto a una mujer guapa como yo."
       },
       "choices": [],
       "conditions": [],
@@ -5462,7 +5462,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "(Me ha visto sin camisa. Me ha visto sin bastante más. Igual me pongo rojo.)"
+        "text": "(La veo seguido desde hace ocho años. Igual me pongo tímido y rojo cuando la veo.)"
       },
       "choices": [],
       "conditions": [],
@@ -5602,7 +5602,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "«Preocupación logística». Dios mío. Así hablas en la cama también, ¿no? «Iniciando proceso. No apague el equipo.»"
+        "text": "«Preocupación logística». Dios mío. Así hablas cuando coges, ¿no? «Iniciando proceso. No apague el equipo. Levantando el servidor. Se cayó el servidor.»"
       },
       "choices": [],
       "conditions": [],
@@ -5938,7 +5938,7 @@
       ],
       "dialogue": {
         "speaker": null,
-        "text": "Lo jala de la camisa —la negra estampada, la de siempre— hasta tenerlo cerca. Huele a tequila y a vainilla de heladería."
+        "text": "Lo jala de la camisa —la azul marino, la de siempre— hasta tenerlo cerca. Huele a tequila y a vainilla de heladería."
       },
       "choices": [],
       "conditions": [],
@@ -5966,7 +5966,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Al final... cuando ya todo se acabe, cuando ya nos cansemos de todo... termina conmigo, ¿sí? Prométemelo."
+        "text": "Al final... cuando ya todo se acabe, cuando ya nos cansemos de todo... cásate conmigo, ¿sí? Prométemelo."
       },
       "choices": [],
       "conditions": [],
@@ -7601,7 +7601,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Pídeme un taxi. Pagas tú, que tienes dinero guardado. Yo sé."
+        "text": "Pídeme un taxi. Pagas tú, que no cargo efectivo. ¡Hip!"
       },
       "choices": [],
       "conditions": [],
@@ -7691,7 +7691,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Y no me vuelvas a preguntar qué somos. Somos esto. Esto alcanza."
+        "text": "Y no me vuelvas a preguntar qué somos. Somos esto. Eso cansa."
       },
       "choices": [],
       "conditions": [
@@ -7753,7 +7753,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Búscate una novia, Jair."
+        "text": "Búscate una novia de verdad, Jair, y no me vayas a decir que soy yo."
       },
       "choices": [],
       "conditions": [],
@@ -7770,7 +7770,7 @@
       "characters": [],
       "dialogue": {
         "speaker": null,
-        "text": "El taxi arranca. Nikki no se despide. Nunca se despide; así no cuenta como irse."
+        "text": "El taxi arranca. Nikki se despide de lejos desde la ventanilla del copiloto."
       },
       "choices": [],
       "conditions": [],
@@ -7867,7 +7867,7 @@
       "characters": [],
       "dialogue": {
         "speaker": null,
-        "text": "Sin mayúsculas ni punto final, como escribe todo. Jair lo lee como otros leen el horóscopo: casi todas las noches, por si esta vez dice otra cosa."
+        "text": "Jair lo lee casi todas las noches, por si esta vez dice otra cosa."
       },
       "choices": [],
       "conditions": [],
@@ -7918,7 +7918,7 @@
       "characters": [],
       "dialogue": {
         "speaker": "Jair",
-        "text": "(Ocho años.)"
+        "text": "(Qué bella.)"
       },
       "choices": [],
       "conditions": [],
@@ -7958,7 +7958,7 @@
       "characters": [],
       "dialogue": {
         "speaker": null,
-        "text": "El departamento: un cuarto, un baño y una cocina que también es pasillo. Una caja de zapatos con wifi."
+        "text": "El departamento: un cuarto, un baño y una cocina que también es pasillo. Para algunos, un cuchitril; para él, lo que le alcanza con el sueldo que gana."
       },
       "choices": [],
       "conditions": [],
@@ -7975,7 +7975,7 @@
       "characters": [],
       "dialogue": {
         "speaker": null,
-        "text": "Sobre la cama hay un póster de un anime: un chico de cara genérica, con el pelo tapándole los ojos, rodeado de chicas que lo miran como si él fuera la respuesta a algo. Ninguna se parece a la otra. Todas parecen enamoradas por contrato."
+        "text": "Sobre la cama hay un póster de un anime: un chico de cara genérica, con el pelo tapándole los ojos, rodeado de chicas que lo miran como si él fuera la respuesta a algo. Todas parecen novias de alquiler, por no decir escorts."
       },
       "choices": [],
       "conditions": [],
@@ -7998,7 +7998,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Lo compré en oferta, de un anime que nunca terminé. Ni me acuerdo cómo se llamaba. Ahora me mira cada noche como si supiera algo que yo no."
+        "text": "Lo compré en oferta, de un anime que nunca terminé. Ni me acuerdo cómo se llamaba. A lo mejor era un hentai de esos donde las chicas tienen pepinillos."
       },
       "choices": [],
       "conditions": [],
@@ -9594,7 +9594,7 @@
       ],
       "dialogue": {
         "speaker": null,
-        "text": "La camisa negra estampada. El pantalón beige. Los lentes, intactos. Hasta en sueños se viste igual. Hasta en sueños no tiene otra ropa."
+        "text": "La camisa azul marino. El pantalón beige. Los lentes, intactos. Hasta en sueños se viste igual. Hasta en sueños no tiene otra ropa."
       },
       "choices": [],
       "conditions": [],
@@ -29430,7 +29430,7 @@
       ],
       "dialogue": {
         "speaker": null,
-        "text": "Uno le pasa tan cerca que le chamusca la manga. La camisa negra estampada. La de siempre."
+        "text": "Uno le pasa tan cerca que le chamusca la manga. La camisa azul marino. La de siempre."
       },
       "choices": [],
       "conditions": [],

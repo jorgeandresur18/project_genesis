@@ -93,14 +93,14 @@ Género y tono por etapas `[CANON]`: el Capítulo 1 es un isekai adulto (humor n
 - **Jair no es una IA:** es humano. Que su nombre tenga solo las vocales A e I viene del agente de IA del autor, no de la regla de las vocales; el efecto `ai_vowels` no lo incluye. `[CANON]`
 - Ingeniero de software, 30 años. Se graduó de la universidad hace un año. `[CANON]` Trabaja en una empresa de internet. Vida precaria: le deben sueldo, gana poco. Aun así tiene dinero ahorrado y le obsesiona ahorrar; es importante, pero **nunca se dice la cifra**. `[CANON]`
 - Cobarde pero no cruel. Siempre sonrojado, en pánico o cansado; nunca posa como héroe.
-- Aspecto: lentes (sus **lentes de programador**, de luz azul; en el RPG, su prenda propia, que lleva puesta desde el inicio de cada partida: dicho por el autor el 2026-11-06), camisa negra estampada de manga corta, pantalón beige.
+- Aspecto: lentes (sus **lentes de programador**, de luz azul; en el RPG, su prenda propia, que lleva puesta desde el inicio de cada partida: dicho por el autor el 2026-11-06), camisa **azul marino** de manga corta (siempre fue así, como en sus sprites de la novela y del RPG; corregido por el autor el 2026-11-06), pantalón beige.
 - Quiere los beneficios emocionales de una relación sin aceptar la autonomía de la otra persona; se relaciona con lo que necesita que los demás sean. Usa a Cami como «perro de ataque» para pelear lo que él evita. Comprenderlo no es absolverlo. `[CANON]`
 - Puede entender su problema sin estar dispuesto a cambiar. En el fondo sigue deseando a Ari. `[CANON]`
 - **Orientación** (decisión del autor, 2026-11-06): **heterosexual.** `[CANON]`
 
 ### Nikki (Nicole)
 - 30 años, pelo negro. Amiga con derecho de Jair desde hace 8 años. **No viven juntos.** Nunca han logrado una relación estable aunque él se lo ha pedido. `[CANON]`
-- Le dice que se consiga novia, pero borracha le pide que al final termine con ella, que esté para ella y la bese. `[CANON]`
+- Le dice que se consiga novia, pero borracha le pide que al final, cuando todo se acabe, **se case con ella** (antes: «que termine con ella»; corregido por el autor el 2026-11-06), que esté para ella y la bese. Estudia enfermería (ver el epílogo 7A): fue a la universidad. **Gana un poco más que Jair y tiene mejores prestaciones**, aunque no trabaja de lo suyo (dicho por el autor el 2026-11-06). `[CANON]`
 - Lidia con el alcoholismo. `[CANON]` Mostrar consecuencias, no diagnosticarla con una escena ni reducirla a un chiste de alcohol.
 - **Orientación** (decisión del autor, 2026-11-06): **más heterosexual que bisexual.** Lo de «a veces me siento confundida… si realmente solo me gustan los chicos» y el intento de besar a Rikka (Capítulo 4) los dice y los hace **ebria**: no la definen. `[CANON]`
 - **Por qué Nikki tiene un ataque especial más** `[CANON]` (dicho por el autor el 2026-11-04): hasta ahora es el único personaje con 6 ataques (3 ataques y 3 especiales; lo normal son 5: 3 y 2). En una borrachera en el bar encontró un **caramelo premium** (dorado, muy bonito) y se lo comió; eso le dio un espacio más de especial.
