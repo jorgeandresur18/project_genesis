@@ -97,6 +97,16 @@ Puede experimentar afecto genuino y, aun así, elegir la mentira, la comodidad o
 
 **Idea clave:** Jair puede comprender intelectualmente su problema sin estar dispuesto a cambiar su conducta.
 
+### Idea por trabajar: Jair fue más de lo que es (no canon; anotada por el autor el 2026-11-06)
+
+El mensaje con estrella («nunca te vayas de mi vida», de hace un año y medio) marca una época en que Jair todavía
+empujaba: proponía planes, le hablaba de futuro a Nikki, la animaba a salir adelante y creía que algo podía cambiar.
+El Jair del Capítulo 1 es lo que queda cuando ese impulso se apagó: ya no propone, solo espera. Por eso relee el mensaje
+cada noche: no solo relee lo que ella dijo, sino **quién era él cuando ella se lo dijo**. Encaja con «empuja a los
+demás, nunca a sí mismo» (`docs/CANON.md`, Jair): en algún momento sí empujaba, y dejó de hacerlo. Por trabajar: si se
+muestra (por ejemplo, en los recuerdos de Noodle de Boringram, con mensajes de él de esa época, más cálidos y
+activos que los de ahora) o queda solo como guía para escribirlo. Nunca se explica en el juego.
+
 ## 3.2 Nikki (Nicole)
 
 - Mujer de treinta años.
