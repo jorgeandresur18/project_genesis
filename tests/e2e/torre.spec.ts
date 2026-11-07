@@ -9,7 +9,7 @@ const ESCENAS = escenasDe('cap03');
 const recorrer = (page: Page, elecciones: RegExp[], pierde?: string) => recorrerHistoria(page, ESCENAS, porTexto(elecciones), pierde);
 
 const CAMINO_A = [/forzar|cerradura/i, /cloacas/i, /comedor/i, /agua sin gas/i, /celdas/i, /Elixit \(2\)/, /salón/i, /Elixit\+\+/, /directo por la espada/i, /con las dos/i];
-const CAMINO_B = [/cerradura/i, /bodegas/i, /forja/i, /Furia Roja/i, /patio/i, /monedas/i, /galería/i, /Caramelo dulce/i, /directo por la espada/i, /con las dos/i];
+const CAMINO_B = [/cerradura/i, /bodegas/i, /forja/i, /Furia Roja/i, /patio/i, /monedas|tokens/i, /galería/i, /Caramelo dulce/i, /directo por la espada/i, /con las dos/i];
 
 test.describe('la torre del Capítulo 3', () => {
   test('camino A (cloacas, comedor, celdas, salón) hasta el final del capítulo, con los cofres', async ({ page }) => {

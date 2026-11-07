@@ -670,10 +670,11 @@ export function usarObjeto(o: Objeto, h: Luchador, d?: { base: Stats; crece: Sta
     h.quemado = 0;
     h.congelado = 0;
   }
-  if (o.veneno) h.envenenado = { ...o.veneno };
+  if (o.veneno && puedeRecibir(h, 'envenenado') && !h.envenenado) h.envenenado = { ...o.veneno };
   if (o.protege) h.protegido += o.protege;
-  if (o.confunde) h.confundido = Math.max(h.confundido, o.confunde);
-  if (o.paraliza) h.paralizado = Math.max(h.paralizado, o.paraliza);
+  // La flor de pureza: no se puede confundir, tampoco con un objeto (objetos libres, docs/BIBLIA_RPG.md, sección 23).
+  if (o.confunde && !h.equipo?.sinConfusion && puedeRecibir(h, 'confundido')) h.confundido = Math.max(h.confundido, o.confunde);
+  if (o.paraliza && puedeRecibir(h, 'paralizado')) h.paralizado = Math.max(h.paralizado, o.paraliza);
   if (o.veneno || o.protege || o.confunde || o.paraliza) return o.veneno?.turnos ?? o.protege ?? o.confunde ?? o.paraliza ?? 0;
   if (o.niveles && d) {
     subirNiveles(h, d, o.niveles);
@@ -700,7 +701,7 @@ export function usarObjeto(o: Objeto, h: Luchador, d?: { base: Stats; crece: Sta
     const suma = o.cura ? Math.max(1, Math.round(h.psMax * o.cura)) : (o.ps ?? 0);
     h.ps = o.cura_toda ? h.psMax : Math.min(h.psMax, h.ps + suma);
     // El pastelillo herbal: toda la vida, pero queda confundido.
-    if (o.confunde_al_comer && !h.equipo?.sinConfusion) h.confundido = Math.max(h.confundido, o.confunde_al_comer);
+    if (o.confunde_al_comer && !h.equipo?.sinConfusion && puedeRecibir(h, 'confundido')) h.confundido = Math.max(h.confundido, o.confunde_al_comer);
     return h.ps - antes;
   }
   return o.atq ?? o.def ?? 0;
@@ -820,7 +821,11 @@ export const seConfunde = (l: Luchador, azar: () => number = Math.random) =>
 export function eligeAtaque(ataques: Ataque[], heroes: Luchador[], azar: () => number = Math.random): { ataque: Ataque; blancos: Luchador[] } | null {
   const vivos = heroes.filter(enCampo);
   const libres = (a: Ataque) =>
-    a.paraliza ? vivos.filter((h) => !noActua(h) && !h.inmuneParalisis) : a.confunde ? vivos.filter((h) => !h.confundido && !h.equipo?.sinConfusion) : vivos;
+    a.paraliza
+      ? vivos.filter((h) => !noActua(h) && !h.inmuneParalisis && puedeRecibir(h, 'paralizado'))
+      : a.confunde
+        ? vivos.filter((h) => !h.confundido && !h.equipo?.sinConfusion && puedeRecibir(h, 'confundido'))
+        : vivos;
   const posibles = ataques.filter((a) => libres(a).length > 0);
   if (!posibles.length) return null;
   const total = posibles.reduce((n, a) => n + (a.peso ?? 1), 0);
@@ -834,8 +839,40 @@ export function eligeAtaque(ataques: Ataque[], heroes: Luchador[], azar: () => n
  * Los estados no se acumulan: el que ya está paralizado, confundido o envenenado no puede volver a caer en eso
  * (tampoco el que acaba de salir de una parálisis: un turno de respiro). Devuelve el estado que ya tiene, si lo tiene.
  */
-export function yaTiene(l: Luchador, efecto: { paraliza?: number; confunde?: number; veneno?: unknown }): 'paralizado' | 'confundido' | 'envenenado' | 'dormido' | 'congelado' | null {
+/**
+ * Un solo estado a la vez (decisión del autor, 2026-11-06): no se puede estar, por ejemplo, dormido y envenenado, ni
+ * envenenado y quemado. El estado que tiene ahora (sin contar el destierro, que es otra cosa), o null.
+ */
+export type EstadoUnico = 'paralizado' | 'dormido' | 'congelado' | 'confundido' | 'envenenado' | 'quemado';
+export const estadoActual = (l: Luchador): EstadoUnico | null =>
+  l.paralizado > 0
+    ? 'paralizado'
+    : l.dormido > 0
+      ? 'dormido'
+      : l.congelado > 0
+        ? 'congelado'
+        : l.confundido > 0
+          ? 'confundido'
+          : l.envenenado
+            ? 'envenenado'
+            : l.quemado > 0
+              ? 'quemado'
+              : null;
+/** Si se le puede poner ese estado: no tiene ninguno (o tiene ese mismo; ahí manda la regla de que no se acumula). */
+export const puedeRecibir = (l: Luchador, cual: EstadoUnico) => {
+  const e = estadoActual(l);
+  return !e || e === cual;
+};
+
+/** Si lo que lleva puesto lo protege de este objeto (la flor de pureza, de la confusión): el objeto se gasta y no le hace nada. */
+export const protegidoDe = (l: Luchador, o: { confunde?: number }) => !!o.confunde && !!l.equipo?.sinConfusion;
+
+export function yaTiene(l: Luchador, efecto: { paraliza?: number; confunde?: number; veneno?: unknown }): EstadoUnico | null {
   // Paralizar: tampoco al que duerme o está congelado (no se pasa de uno a otro), ni en su turno libre.
+  // Un solo estado a la vez: si ya tiene otro, este no le hace nada (se dice cuál tiene).
+  const otro = estadoActual(l);
+  const quiere = efecto.paraliza ? 'paralizado' : efecto.confunde ? 'confundido' : efecto.veneno ? 'envenenado' : null;
+  if (quiere && otro && otro !== quiere) return otro;
   if (efecto.paraliza && l.dormido > 0) return 'dormido';
   if (efecto.paraliza && l.congelado > 0) return 'congelado';
   if (efecto.paraliza && (l.paralizado > 0 || l.inmuneParalisis)) return 'paralizado';

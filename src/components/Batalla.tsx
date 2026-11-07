@@ -43,6 +43,8 @@ import {
   ganarXp,
   seRetira,
   usarObjeto,
+  protegidoDe,
+  puedeRecibir,
   varsDeProgreso,
   vivo,
   xpDe,
@@ -154,7 +156,7 @@ type Menu =
   | { paso: 'comando'; i: number }
   | { paso: 'ataque'; i: number }
   | { paso: 'objeto'; i: number }
-  | { paso: 'objetivo'; i: number; lado: 'enemigo' | 'heroe'; luego: (id: string) => Comando; caidos?: boolean };
+  | { paso: 'objetivo'; i: number; lado: 'enemigo' | 'heroe' | 'todos'; luego: (id: string) => Comando; caidos?: boolean };
 
 export function Batalla({
   id,
@@ -1339,17 +1341,16 @@ function Pelea({
       const o = d.objetos[c.clave];
       const destino = objetivoDe(o);
       const rivales = b.current.enemigos.filter(vivo);
+      // Objetos libres: el elegido (de cualquier lado) o, si el objeto es de grupo, todo su lado.
+      const elegidoX = [...b.current.heroes, ...rivales].find((x) => x.id === c.objetivo && vivo(x));
+      const lado = elegidoX ? (elegidoX.lado === 'heroe' ? b.current.heroes.filter(vivo) : rivales) : [];
       const blancos: Luchador[] = o.revive
         ? b.current.heroes.filter((x) => x.id === c.objetivo && !vivo(x))
-        : destino === 'yo'
-          ? [h]
-          : destino === 'equipo'
-            ? b.current.heroes.filter(vivo)
-            : destino === 'rivales'
-              ? rivales
-              : destino === 'rival'
-                ? [rivales.find((x) => x.id === c.objetivo) ?? rivales[0]].filter(Boolean)
-                : [b.current.heroes.find((x) => x.id === c.objetivo && vivo(x)) ?? h];
+        : !elegidoX
+          ? []
+          : destino === 'equipo' || destino === 'rivales'
+            ? lado
+            : [elegidoX];
       // Si ya no hay a quién (revivir a alguien que se levantó, o el rival cayó): el objeto vuelve a la mochila.
       if (!blancos.length) {
         b.current.mochila[c.clave]++;
@@ -1363,6 +1364,16 @@ function Pelea({
       }
       // A los que ya lo tienen no les hace nada.
       blancos.splice(0, blancos.length, ...blancos.filter((_, i) => !yaEstan[i]));
+      // A los que protege lo que llevan puesto (la flor de pureza contra la confusión), tampoco; pero el objeto se gasta.
+      const protegidos = blancos.filter((x) => protegidoDe(x, o));
+      if (protegidos.length) {
+        blancos.splice(0, blancos.length, ...blancos.filter((x) => !protegidoDe(x, o)));
+        for (const x of protegidos) numero(x.id, '—', 'falla');
+        playChip('vacio');
+        await decir(fmt(t('batalla.objeto_protegido'), { quien: protegidos.map((x) => x.nombre).join(' y ') }));
+        if (!blancos.length) return;
+      }
+      // El color y el sonido dicen qué es el objeto (dañino o no), se lo den a quien se lo den.
       const contra = destino === 'rival' || destino === 'rivales';
       // Para avisar después si el objeto le sacó un estado a alguien.
       const antesDelObjeto = fotoEstados(blancos);
@@ -1682,6 +1693,8 @@ function Pelea({
         void animar(x.id, 'golpeado');
         luz(x.id, bt.color, true);
         // En esta pelea el veneno no lo mata: lo deja en 1 y el remate es de Nikki.
+        // La traición del bar es guionada: siempre envenena (le saca cualquier otro estado: uno a la vez).
+        Object.assign(x, { paralizado: 0, dormido: 0, congelado: 0, confundido: 0, quemado: 0 });
         x.envenenado = { danio: bt.traicion!.veneno, turnos: 9, noMata: true };
         b.current.remate = x.id;
       } else {
@@ -1692,7 +1705,7 @@ function Pelea({
     }
     // Salpica a los suyos (no a ella).
     for (const x of (e.lado === 'enemigo' ? b.current.enemigos : b.current.heroes).filter((y) => vivo(y) && y !== e && !y.cebo)) {
-      if (!x.envenenado) x.envenenado = { ...bt.veneno };
+      if (!x.envenenado && puedeRecibir(x, 'envenenado')) x.envenenado = { ...bt.veneno };
       luz(x.id, bt.color);
     }
     // Los golpeados quedan tirados y después se levantan.
@@ -2152,7 +2165,13 @@ function Pelea({
   const vivosDe = (lado: 'enemigo' | 'heroe') => (lado === 'enemigo' ? b.current.enemigos.filter(vivo) : b.current.heroes.filter(enCampo));
   /** A quiénes se puede elegir: los de pie o, para revivir, los caídos. */
   const candidatos = () =>
-    menu.paso === 'objetivo' ? (menu.caidos ? b.current.heroes.filter((x) => !vivo(x)) : vivosDe(menu.lado)) : [];
+    menu.paso === 'objetivo'
+      ? menu.caidos
+        ? b.current.heroes.filter((x) => !vivo(x))
+        : menu.lado === 'todos'
+          ? [...vivosDe('heroe'), ...vivosDe('enemigo')]
+          : vivosDe(menu.lado)
+      : [];
   const base = (): number =>
     menu.paso === 'comando' ? comandos.length : menu.paso === 'ataque' ? ataques.length + especiales.length : menu.paso === 'objeto' ? enMochila.length : candidatos().length;
   // «Volver» va al final de cada lista: desde un submenú, a los comandos; desde los comandos, al héroe anterior.
@@ -2218,10 +2237,11 @@ function Pelea({
         return setMenu({ paso: 'objetivo', i: 0, lado: 'heroe', caidos: true, luego: (o) => ({ tipo: 'objeto', clave: k, objetivo: o }) });
       }
       if (!k) return;
+      // Objetos libres (docs/BIBLIA_RPG.md, sección 23): cualquier objeto en cualquiera, de tu equipo o rival. El cursor
+      // empieza donde va lo de siempre (el rival para lo que es contra un rival; si no, quien lo usa).
       const destino = objetivoDe(d.objetos[k]);
-      if (destino === 'yo' || destino === 'equipo' || destino === 'rivales') return listo({ tipo: 'objeto', clave: k, objetivo: heroe.id });
-      if (destino === 'rival') return setMenu({ paso: 'objetivo', i: 0, lado: 'enemigo', luego: (o) => ({ tipo: 'objeto', clave: k, objetivo: o }) });
-      setMenu({ paso: 'objetivo', i: Math.max(0, vivosDe('heroe').indexOf(heroe)), lado: 'heroe', luego: (o) => ({ tipo: 'objeto', clave: k, objetivo: o }) });
+      const inicio = destino === 'rival' || destino === 'rivales' ? vivosDe('heroe').length : Math.max(0, vivosDe('heroe').indexOf(heroe));
+      setMenu({ paso: 'objetivo', i: inicio, lado: 'todos', luego: (o) => ({ tipo: 'objeto', clave: k, objetivo: o }) });
       return;
     }
     const o = candidatos()[i];
@@ -2339,7 +2359,7 @@ function Pelea({
           ? enMochila.map((k) => ({ texto: d.objetos[k].nombre, extra: `×${b.current.mochila[k]}`, desc: descObjeto(d.objetos[k]), icono: d.objetos[k].icono }))
           : candidatos().map((l) => ({
               texto: l.nombre,
-              extra: menu.lado === 'enemigo' ? `${t('batalla.nivel')} ${l.nivel}` : `${l.ps} HP`,
+              extra: l.lado === 'enemigo' ? `${t('batalla.nivel')} ${l.nivel}` : `${l.ps} HP`,
               desc: fmt(t('batalla.desc.objetivo'), { nivel: l.nivel, ps: l.ps, max: l.psMax, atq: l.atq + l.extra, def: l.def + l.extraDef, vel: l.vel }),
             }));
   if (conVolver) lista.push({ texto: `◀ ${t('batalla.volver')}`, extra: '', clase: 'volver', desc: t('batalla.desc.volver') });

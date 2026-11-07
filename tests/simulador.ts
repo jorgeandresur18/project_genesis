@@ -32,6 +32,7 @@ import {
   type DatosBatalla,
   type Luchador,
   ataqueCopiado,
+  puedeRecibir,
 } from '../src/engine/batalla';
 import {
   aplicarEstacion,
@@ -147,7 +148,7 @@ function pelea(D: DatosBatalla, listo: boolean, esencias: boolean) {
     for (const b of blancos) if (!falla(D, h, b)) {
       resolverGolpe(s, D, h, b, copia.poder);
       dejarEstado(s, b, copia.deja);
-      if (copia.aplica?.veneno && vivo(b) && !b.envenenado) b.envenenado = { ...copia.aplica.veneno };
+      if (copia.aplica?.veneno && vivo(b) && !b.envenenado && puedeRecibir(b, 'envenenado')) b.envenenado = { ...copia.aplica.veneno };
     }
     blancos.filter((b) => !vivo(b)).forEach(cae);
   };
@@ -170,7 +171,7 @@ function pelea(D: DatosBatalla, listo: boolean, esencias: boolean) {
         envenenarConBola(x, bt.veneno, x.esquivando);
       }
       // Salpica a los suyos (no a ella).
-      for (const x of s.enemigos.filter((y) => vivo(y) && y !== e)) if (!x.envenenado) x.envenenado = { ...bt.veneno };
+      for (const x of s.enemigos.filter((y) => vivo(y) && y !== e)) if (!x.envenenado && puedeRecibir(x, 'envenenado')) x.envenenado = { ...bt.veneno };
     } else if (r.tipo === 'especial') {
       const esp = r.especial;
       e.carga = 0;

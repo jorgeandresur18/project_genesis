@@ -408,6 +408,7 @@
   "batalla.sigue_congelado": "{quien} sigue congelado.",
   "batalla.sigue_dormido": "{quien} sigue dormido.",
   "batalla.seguidor": "+1 seguidor ({n})",
+  "batalla.objeto_protegido": "A {quien} no le hace nada: lo protege lo que lleva puesto.",
   "batalla.golpe_deja": "{quien} queda {estado}: {n} turnos.",
   "batalla.especial_quema": "¡Los puños salieron en llamas! {quien} se quema.",
   "batalla.multicebo_aparece": "Hay un cebo delante de cada uno.",

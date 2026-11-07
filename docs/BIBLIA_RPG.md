@@ -778,7 +778,7 @@ la probabilidad de ganar a lo sumo unos 3 a 5 puntos). En `npm run dev` se puede
   `src/data/rpg/personajes.json`: «Copia de fan», «Barra luminosa», «Canto de estadio» (a todos, para las hordas) y el
   especial «Fancam». Textos y números: borrador de Claude.
 
-## 23. Objetos libres (decidido por el autor el 2026-11-06; por construir)
+## 23. Objetos libres (decidido por el autor el 2026-11-06; **hecho** el mismo día)
 
 En la pelea, **cualquier objeto se puede usar en cualquier personaje**, aliado o rival, sin avisos ni confirmaciones:
 curar al enemigo, darle un pastelillo herbal, subirle el ataque con una Furia Roja. El objeto hace **siempre lo mismo**,
@@ -792,7 +792,21 @@ listo, la pelea te lo cobra sola (pedido del autor: más libre).
   lo reviva, y el jefe se retira cuando le toca aunque lo hayan curado antes.
 - Extra opcional, para después: líneas propias para las combinaciones más graciosas o con historia (el agua a Nikki en
   el bar).
-- Por decidir al construirlo: si en el torneo el rival también puede usar objetos en los peleadores del jugador.
+- Por decidir: si en el torneo el rival también puede usar objetos en los peleadores del jugador (hoy, solo en los suyos).
+- **Cómo se elige:** al tocar un objeto sale la lista de todos los que están en pie, los tuyos primero y después los
+  rivales (el cursor empieza donde va lo de siempre: en ti, o en el primer rival si el objeto es contra rivales). Los
+  objetos de grupo (el botiquín, los que pegan a todos los rivales) se aplican a todo el lado del elegido. Revivir, solo
+  a los tuyos (los rivales caídos se van del campo). Código: `actuarHeroe` y el menú en `src/components/Batalla.tsx`;
+  `protegidoDe` en `src/engine/batalla.ts`.
+
+## 24. Un solo estado a la vez (decidido por el autor el 2026-11-06; **hecho** el mismo día)
+
+Un personaje no puede estar en dos estados a la vez (nada de dormido y envenenado, ni envenenado y quemado): si ya tiene
+uno, el nuevo **no le hace nada**, venga de donde venga (objetos, ataques, especiales, cebos, estaciones, la bola
+tóxica). El mismo estado tampoco se acumula (como siempre). Cuando se saca, ya se le puede poner otro. Excepción: la
+traición del bar (guionada) envenena siempre y le saca el estado que tuviera. El destierro va aparte. Código:
+`estadoActual` y `puedeRecibir` en `src/engine/batalla.ts`; lo usan `paralizarA`, `confundirA`, `aplicarEstado`,
+`dejarEstado`, `aplicarEstacion`, `envenenarConBola`, `usarObjeto`, `yaTiene` y la IA de los enemigos.
 
 ## 16. Pendientes e ideas
 

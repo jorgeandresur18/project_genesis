@@ -265,3 +265,10 @@ En el Torneo (`npm run dev`, desde Extras):
 - Se ve rosada (la hoja de Jair con filtro): es provisional hasta que tenga arte.
 - También está la **KJPoper** (amarilla): su «Grito de fan» confunde y «Barra coordinada» pega a todos.
 - (Conoce más) La sección nueva «El cine, los actores y los directores», después de la de música latinoamericana, con su subtítulo; y la línea de cine de «Las influencias». En inglés también.
+
+## 23. Objetos libres y un solo estado (nuevo, 6 de noviembre, noche)
+
+- [ ] En cualquier pelea, tocar un objeto: la lista trae a tus peleadores y a los rivales. Darle agua a un rival (se cura) o el pastelillo herbal a un compañero (se confunde).
+- [ ] Rikka con la flor de pureza: darle pastillas felices o el pastelillo herbal no le hace nada («no le hace nada: lo protege lo que lleva puesto») y el objeto se gasta.
+- [ ] Un personaje envenenado no se puede quemar, dormir, paralizar ni confundir: el ataque o el objeto no le hacen nada hasta que se le pasa el veneno (o se lo sacas con un antídoto).
+

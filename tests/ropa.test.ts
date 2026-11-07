@@ -171,3 +171,43 @@ describe('Rikka vende el traje rojo y vuelve a sus prendas (decisión del autor,
     expect(t.tienda.find((x) => x.objeto === 'traje_rojo')?.desbloqueo).toBe('cap02_p2_092');
   });
 });
+
+describe('objetos libres: las protecciones del equipo valen con objetos (decisión del autor, 2026-11-06)', () => {
+  it('con la flor de pureza, el pastelillo herbal (o cualquier objeto que confunde) no le hace nada', async () => {
+    const { usarObjeto, protegidoDe } = await import('../src/engine/batalla');
+    const conFlor = { confundido: 0, equipo: { sinConfusion: true } } as never as Parameters<typeof usarObjeto>[1];
+    const sinFlor = { confundido: 0, equipo: { sinConfusion: false } } as never as Parameters<typeof usarObjeto>[1];
+    const pastillas = { nombre: 'x', texto: '', confunde: 3 } as Parameters<typeof usarObjeto>[0];
+    expect(protegidoDe(conFlor, pastillas)).toBe(true);
+    expect(protegidoDe(sinFlor, pastillas)).toBe(false);
+    usarObjeto(pastillas, conFlor);
+    usarObjeto(pastillas, sinFlor);
+    expect(conFlor.confundido).toBe(0);
+    expect(sinFlor.confundido).toBe(3);
+  });
+});
+
+describe('un solo estado a la vez (decisión del autor, 2026-11-06)', () => {
+  it('con un estado puesto, ningún otro le hace nada: ni de objetos ni de ataques', async () => {
+    const { usarObjeto, yaTiene, estadoActual, puedeRecibir } = await import('../src/engine/batalla');
+    const { aplicarEstado, paralizarA, confundirA } = await import('../src/engine/turnos');
+    const nuevo = () => ({ id: 'x', ps: 50, psMax: 50, confundido: 0, paralizado: 0, dormido: 0, congelado: 0, quemado: 0, envenenado: null, equipo: undefined }) as never as Parameters<typeof usarObjeto>[1];
+    const estado = { heroes: [], enemigos: [], paralizadoRecien: [], confundidoRecien: [], estadoRecien: [], actuaron: [], cansados: new Set() } as never;
+    const x = nuevo();
+    usarObjeto({ nombre: 'v', texto: '', veneno: { danio: 3, turnos: 3 } } as never, x);
+    expect(estadoActual(x)).toBe('envenenado');
+    expect(puedeRecibir(x, 'quemado')).toBe(false);
+    expect(aplicarEstado(estado, x, 'quemado', () => 0)).toBe(false);
+    expect(aplicarEstado(estado, x, 'dormido', () => 0)).toBe(false);
+    expect(paralizarA(estado, x, () => 0)).toBe(false);
+    expect(confundirA(estado, x, 2)).toBe(false);
+    expect(yaTiene(x, { confunde: 2 })).toBe('envenenado');
+    usarObjeto({ nombre: 'p', texto: '', confunde: 3 } as never, x);
+    expect(x.confundido).toBe(0);
+    expect(x.quemado).toBe(0);
+    // Sin estado, sí.
+    const y = nuevo();
+    expect(aplicarEstado(estado, y, 'quemado', () => 0)).toBe(true);
+    expect(estadoActual(y)).toBe('quemado');
+  });
+});

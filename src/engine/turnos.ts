@@ -38,6 +38,7 @@ import {
   type Especial,
   type Luchador,
   type Progreso,
+  puedeRecibir,
 } from './batalla';
 import { sortearEsencia } from './esencia';
 import { FICHAS } from './batallas';
@@ -434,19 +435,23 @@ const cuantoNoActua = (estado: EstadoPelea, x: Luchador, azar: () => number) => 
   return x.jefe ? Math.max(1, Math.ceil(n / 2)) : n;
 };
 
-export function paralizarA(estado: EstadoPelea, x: Luchador, azar: () => number = Math.random) {
+/** Paraliza (si no tiene otro estado: uno a la vez). Devuelve si se aplicó. */
+export function paralizarA(estado: EstadoPelea, x: Luchador, azar: () => number = Math.random): boolean {
+  if (!puedeRecibir(x, 'paralizado')) return false;
   x.paralizado = cuantoNoActua(estado, x, azar);
   estado.paralizadoRecien.push(x.id);
   estado.actuaron = estado.actuaron.filter((id) => id !== x.id);
   estado.cansados.delete(x.id);
+  return true;
 }
 
 /** Confunde: empieza a descontar desde el turno siguiente. */
-export function confundirA(estado: EstadoPelea, x: Luchador, n: number) {
-  // La flor de pureza: no se puede confundir.
-  if (x.equipo?.sinConfusion) return;
+export function confundirA(estado: EstadoPelea, x: Luchador, n: number): boolean {
+  // La flor de pureza: no se puede confundir. Y un solo estado a la vez.
+  if (x.equipo?.sinConfusion || !puedeRecibir(x, 'confundido')) return false;
   x.confundido = conTemple(x, n);
   estado.confundidoRecien.push(x.id);
+  return true;
 }
 
 /** El clon de sombra: le cuesta vida a quien lo hace y entra a la pelea. Devuelve el clon y lo que costó. */
@@ -472,7 +477,7 @@ export function evaporarClones(estado: EstadoPelea): Luchador[] {
 
 /** El veneno que deja la Mega Bola: al que eligió esquivar le dura un turno menos. No se acumula. */
 export function envenenarConBola(x: Luchador, veneno: NonNullable<Enemigo['bola_toxica']>['veneno'], esquivando = false) {
-  if (vivo(x) && !x.envenenado) x.envenenado = { ...veneno, turnos: Math.max(1, veneno.turnos - (esquivando ? 1 : 0)) };
+  if (vivo(x) && !x.envenenado && puedeRecibir(x, 'envenenado')) x.envenenado = { ...veneno, turnos: Math.max(1, veneno.turnos - (esquivando ? 1 : 0)) };
 }
 
 /**
@@ -512,7 +517,7 @@ function limpiarEstados(x: Luchador) {
 
 /** Quema, congela o duerme (no se acumula: al que ya lo está no le hace nada). Devuelve si se aplicó. */
 export function aplicarEstado(estado: EstadoPelea, x: Luchador, cual: 'quemado' | 'congelado' | 'dormido', azar: () => number = Math.random): boolean {
-  if (x[cual] > 0) return false;
+  if (x[cual] > 0 || !puedeRecibir(x, cual)) return false;
   // Dormir o congelar: no al que ya no puede actuar (no se pasa de uno a otro) ni en su turno libre.
   if (cual !== 'quemado' && (noActua(x) || x.inmuneParalisis)) return false;
   if (cual === 'quemado') x.quemado = conTemple(x, QUEMADO.turnos, azar);
@@ -556,18 +561,16 @@ export function reaccionCebo(estado: EstadoPelea, d: DatosBatalla, cebo: Luchado
     return { tipo: 'explota', aAtacante: explosionA(d, atacante, EXPLOSION_CEBO.atacante), aDueno: dueno ? explosionA(d, dueno, EXPLOSION_CEBO.dueno) : 0, dueno };
   }
   if (efecto === 'paraliza') {
-    if (yaTiene(atacante, { paraliza: 1 })) return null;
-    paralizarA(estado, atacante, azar);
+    if (yaTiene(atacante, { paraliza: 1 }) || !paralizarA(estado, atacante, azar)) return null;
     return { tipo: 'estado', estado: 'paralizado' };
   }
   if (efecto === 'veneno') {
-    if (atacante.envenenado) return null;
+    if (atacante.envenenado || !puedeRecibir(atacante, 'envenenado')) return null;
     atacante.envenenado = { danio: 6, turnos: 3 };
     return { tipo: 'estado', estado: 'envenenado' };
   }
   if (efecto === 'confunde') {
-    if (atacante.confundido) return null;
-    confundirA(estado, atacante, 3);
+    if (atacante.confundido || !confundirA(estado, atacante, 3)) return null;
     return { tipo: 'estado', estado: 'confundido' };
   }
   const cual = efecto === 'quema' ? 'quemado' : efecto === 'congela' ? 'congelado' : 'dormido';
@@ -670,13 +673,11 @@ export function dejarEstado(estado: EstadoPelea, x: Luchador, deja: Deja | undef
   const lista = Array.isArray(deja.estado) ? deja.estado : [deja.estado];
   const cual = lista[Math.min(lista.length - 1, Math.floor(azar() * lista.length))];
   if (cual === 'paralizado') {
-    if (noActua(x) || x.inmuneParalisis) return null;
-    paralizarA(estado, x, azar);
+    if (noActua(x) || x.inmuneParalisis || !paralizarA(estado, x, azar)) return null;
     return 'paralizado';
   }
   if (cual === 'confundido') {
-    if (x.confundido > 0 || x.equipo?.sinConfusion) return null;
-    confundirA(estado, x, 2);
+    if (x.confundido > 0 || !confundirA(estado, x, 2)) return null;
     return 'confundido';
   }
   return aplicarEstado(estado, x, cual, azar) ? cual : null;
@@ -701,14 +702,13 @@ export const estacionAlAzar = (azar: () => number = Math.random): Estacion =>
 export function aplicarEstacion(estado: EstadoPelea, x: Luchador, estacion: Estacion, azar: () => number = Math.random): boolean {
   if (!enCampo(x)) return false;
   if (estacion === 'primavera') {
-    if (x.envenenado) return false;
+    if (x.envenenado || !puedeRecibir(x, 'envenenado')) return false;
     x.envenenado = { danio: 6, turnos: 3 };
     return true;
   }
   if (estacion === 'otono') {
     if (yaTiene(x, { paraliza: 1 })) return false;
-    paralizarA(estado, x, azar);
-    return true;
+    return paralizarA(estado, x, azar);
   }
   return aplicarEstado(estado, x, estacion === 'verano' ? 'quemado' : 'congelado', azar);
 }
