@@ -33,8 +33,10 @@ const ESTADOS = {
 const tramo = (fondo) =>
   !fondo ? 'Sin fondo' : String(fondo).replace(/^PLACEHOLDER:/, '').replace(/^.*\//, '').replace(/\.\w+$/, '').replace(/[_-]+/g, ' ');
 
-/** `base`: la dirección del juego para los enlaces «Ir» (vacía en `/__avance`, que ya está en el juego). */
-export function generarAvance(raiz, cap = 'cap01', base = '') {
+export { ESTADOS, esc };
+
+/** Las líneas de un capítulo con su estado, y cuántas hay de cada uno (también lo usa tools/entornos_prueba.mjs). */
+export function lineasDe(raiz, cap = 'cap01') {
   const capitulo = leer(join(raiz, `src/data/chapters/${cap}.json`), { scenes: [] });
   const revisadas = leer(join(raiz, 'docs/guion/revisadas.json'), {});
   const ediciones = leer(join(raiz, 'docs/guion/ediciones_en_vivo.json'), {});
@@ -49,11 +51,11 @@ export function generarAvance(raiz, cap = 'cap01', base = '') {
     lineas.push({ k, quien: s.dialogue.speaker, texto, nuevo: e?.texto, estado, tramo: tramo(s.background), opciones: s.choices.map((c) => c.text), final: s.ending });
   }
   const cuenta = Object.fromEntries(Object.keys(ESTADOS).map((x) => [x, lineas.filter((l) => l.estado === x).length]));
-  const total = lineas.length;
-  const listas = cuenta.tuya + cuenta.aprobada;
-  const pct = (n) => ((n / Math.max(1, total)) * 100).toFixed(1);
+  return { capitulo, lineas, cuenta, total: lineas.length };
+}
 
-  // Las líneas, en bloques por tramo (cada vez que cambia el fondo).
+/** Las líneas en bloques por tramo (cada vez que cambia el fondo), con su enlace «▶ Ir». */
+export function htmlLineas(lineas, cap, base = '') {
   let html = '';
   let actual = null;
   for (const l of lineas) {
@@ -69,6 +71,16 @@ export function generarAvance(raiz, cap = 'cap01', base = '') {
 </article>`;
   }
   if (actual !== null) html += '</section>';
+  return html;
+}
+
+/** `base`: la dirección del juego para los enlaces «Ir» (vacía en `/__avance`, que ya está en el juego). */
+export function generarAvance(raiz, cap = 'cap01', base = '') {
+  const { capitulo, lineas, cuenta, total } = lineasDe(raiz, cap);
+  const listas = cuenta.tuya + cuenta.aprobada;
+  const pct = (n) => ((n / Math.max(1, total)) * 100).toFixed(1);
+
+  const html = htmlLineas(lineas, cap, base);
 
   const fecha = new Date().toLocaleString('es-EC', { dateStyle: 'long', timeStyle: 'short' });
   const barras = Object.keys(ESTADOS)

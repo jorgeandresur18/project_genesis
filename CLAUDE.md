@@ -118,10 +118,11 @@ Para trabajar desde cualquier computadora. El detalle de cada sesión está en `
 - **Editor de diálogos en vivo** (solo en `npm run dev`): «✎ Editar» en la caja de diálogo; lo que el autor guarda va a
   `docs/guion/ediciones_en_vivo.json` (original y texto nuevo). Para aplicarlo: leer ese archivo, corregir la redacción,
   pasarlo al JSON de la historia con el inglés y vaciarlo. Ver `docs/SPEC.md`.
-- **Entornos de prueba (archivo importante del autor):** `npm run entornos` rehace la carpeta «Entornos de prueba» del
-  escritorio: la página madre (herramientas, escenas clave con «▶ Ir», todas las peleas con variables, la lista de
-  `docs/PRUEBAS_EN_CASA.md` con casillas, notas y comandos) y los avances de diálogos. Rehacerla al agregar peleas, escenas o
-  pruebas; las casillas y notas del autor quedan en su navegador (no se pierden al rehacerla).
+- **Entornos de prueba (archivo importante del autor):** `npm run entornos` rehace «PROJECT GENESIS - entornos de
+  prueba.html» en la carpeta «Entornos de prueba» del escritorio: **una sola página** con pestañas (herramientas, capítulos
+  con «▶ Ir», peleas con variables, diálogos de cada capítulo con su estado, arte y sprites de `public/`, la lista de
+  `docs/PRUEBAS_EN_CASA.md` con casillas, notas y comandos). Rehacerla al agregar peleas, escenas, pruebas o arte; las
+  casillas y notas del autor quedan en su navegador (no se pierden al rehacerla).
 - **Avance de la revisión de diálogos:** `npm run avance` arma `docs/guion/avance_cap01.html` (cada línea con su estado: ✓ tuya,
   ✓ aprobada, por aplicar, borrador de Claude o sin revisar); con `npm run dev`, al día en `/__avance` (`?cap=cap02` para otro). «▶ Ir» abre el juego en esa línea
   (`?escena=<id>&ir`, solo en desarrollo).
