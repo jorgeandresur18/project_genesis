@@ -1,5 +1,5 @@
 import { CHAPTER_STARTS } from '../components/ChapterIntro';
-import { useRef, useState, type CSSProperties, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { useStore } from '../engine/store';
 import { ProbadorSprites } from '../components/ProbadorSprites';
 import { Batalla } from '../components/Batalla';
@@ -76,6 +76,17 @@ export function TitleScreen({ open, intro, onEgg }: TitleProps) {
   const t = useT();
   const storyNotice = t('idioma.historia_es');
   const pick = () => playSelect();
+  // Desde el avance de la revisión de diálogos (tools/avance_dialogos.mjs), solo en desarrollo: ?escena=<id>&ir abre esa
+  // escena sin pasar por «Nueva partida», para corregir la línea con el editor en vivo. Se limpia la dirección para que
+  // recargar no vuelva a saltar.
+  useEffect(() => {
+    if (!import.meta.env.DEV) return;
+    const q = new URLSearchParams(location.search);
+    const escena = q.get('escena');
+    if (!escena || !q.has('ir')) return;
+    history.replaceState(null, '', location.pathname);
+    newGame(escena);
+  }, [newGame]);
   const galleryNew = useGalleryState().hasNew;
   const boringramNew = useBoringram().hasNew;
   const load = useStore((s) => s.load);

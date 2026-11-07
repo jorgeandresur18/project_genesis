@@ -33,7 +33,8 @@ const ESTADOS = {
 const tramo = (fondo) =>
   !fondo ? 'Sin fondo' : String(fondo).replace(/^PLACEHOLDER:/, '').replace(/^.*\//, '').replace(/\.\w+$/, '').replace(/[_-]+/g, ' ');
 
-export function generarAvance(raiz, cap = 'cap01') {
+/** `base`: la dirección del juego para los enlaces «Ir» (vacía en `/__avance`, que ya está en el juego). */
+export function generarAvance(raiz, cap = 'cap01', base = '') {
   const capitulo = leer(join(raiz, `src/data/chapters/${cap}.json`), { scenes: [] });
   const revisadas = leer(join(raiz, 'docs/guion/revisadas.json'), {});
   const ediciones = leer(join(raiz, 'docs/guion/ediciones_en_vivo.json'), {});
@@ -62,7 +63,7 @@ export function generarAvance(raiz, cap = 'cap01') {
       html += `<section class="tramo"><h2>${esc(actual)}</h2>`;
     }
     html += `<article class="linea" data-estado="${l.estado}" data-buscar="${esc(`${l.k} ${l.quien ?? ''} ${l.texto} ${l.nuevo ?? ''}`.toLowerCase())}">
-  <header><code>${esc(l.k.replace(`${cap}_`, ''))}</code><b>${esc(l.quien ?? 'Narración')}</b><span class="pill">${ESTADOS[l.estado].t}</span>${l.final ? `<span class="pill final">Final: ${esc(l.final)}</span>` : ''}</header>
+  <header><code>${esc(l.k.replace(`${cap}_`, ''))}</code><b>${esc(l.quien ?? 'Narración')}</b><span class="pill">${ESTADOS[l.estado].t}</span><a class="ir" href="${base}/?escena=${encodeURIComponent(l.k)}&amp;ir" target="juego" title="Abrir el juego en esta línea para editarla">▶ Ir</a>${l.final ? `<span class="pill final">Final: ${esc(l.final)}</span>` : ''}</header>
   ${l.nuevo !== undefined ? `<p class="viejo">${esc(l.texto)}</p><p class="nuevo">${esc(l.nuevo)}</p>` : `<p>${esc(l.texto)}</p>`}
   ${l.opciones.length ? `<ul class="opciones">${l.opciones.map((o) => `<li>${esc(o)}</li>`).join('')}</ul>` : ''}
 </article>`;
@@ -114,6 +115,8 @@ main { max-width: 56rem; margin: 0 auto; padding: 1rem max(16px, 4vw) 4rem; }
 .pill { padding: 0 0.5rem; border-radius: 999px; color: #0b0b0e; background: var(--c, var(--gris)); font-size: 0.72rem; font-weight: 600; }
 .linea[data-estado="pendiente"] .pill { color: var(--texto); }
 .pill.final { background: #ff4d5e; color: #fff; }
+.ir { margin-left: auto; padding: 0.05rem 0.6rem; border: 1px solid var(--borde); border-radius: 999px; color: var(--texto); font-size: 0.75rem; text-decoration: none; }
+.ir:hover { border-color: var(--texto); background: #1b1b23; }
 .linea p { margin: 0.25rem 0 0; }
 .viejo { color: var(--tenue); text-decoration: line-through; text-decoration-color: rgba(255, 255, 255, 0.25); font-size: 0.9rem; }
 .nuevo::before { content: '→ '; color: var(--c); }
@@ -124,7 +127,7 @@ main { max-width: 56rem; margin: 0 auto; padding: 1rem max(16px, 4vw) 4rem; }
 <body>
 <div class="cabeza">
   <h1>Avance de diálogos · Capítulo ${esc(String(capitulo.chapter ?? ''))}: ${esc(capitulo.title ?? '')}</h1>
-  <p class="sub">Generado el ${esc(fecha)} · en <code>npm run dev</code>, al día en <code>/__avance</code></p>
+  <p class="sub">Generado el ${esc(fecha)} · en <code>npm run dev</code>, al día en <code>/__avance</code> · «▶ Ir» abre el juego en esa línea (con <code>npm run dev</code> encendido)</p>
   <div class="numeros"><span><b>${listas}</b> de ${total} líneas con ✓ (${pct(listas)} %)</span><span>${cuenta.tuya} tuyas · ${cuenta.aprobada} aprobadas · ${cuenta.aplicar} por aplicar · ${cuenta.borrador} borradores · ${cuenta.pendiente} sin revisar</span></div>
   <div class="barra">${barras}</div>
   <div class="filtros">${filtros}</div>
@@ -155,6 +158,6 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const raiz = join(fileURLToPath(new URL('.', import.meta.url)), '..');
   const cap = process.argv[2] ?? 'cap01';
   const salida = join(raiz, `docs/guion/avance_${cap}.html`);
-  writeFileSync(salida, generarAvance(raiz, cap));
+  writeFileSync(salida, generarAvance(raiz, cap, 'http://localhost:5173'));
   console.log(`✓ ${salida}`);
 }
