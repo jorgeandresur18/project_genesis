@@ -33,7 +33,7 @@ El RPG, Boringram y el arte se hacen **para el capítulo que toca**, no por adel
 | Capítulo 3 | **Borrador jugable** (2026-11-05): torre de 9 pisos con caminos que se cruzan, 23 peleas equilibradas con el simulador, cofres en los descansos, 12 bad ends y `alt_1`. Faltan los enemigos del autor y el arte. |
 | Capítulo 4 | Borrador del autor (17 escenas) en `docs/CANON.md`; sin guion. |
 | Capítulos 5 a 7 | Esquema en el canon. |
-| RPG | Ficha única por personaje, varios especiales, ataques intercambiables con cassettes, ataques nuevos y sueltos, Torneo Genesis y PayFoe (de relleno). Faltan: olvidar ataques, la regla anti-farmeo y sacar de `Batalla.tsx` los turnos de los héroes (los de los enemigos ya están en `engine/turnos.ts`). |
+| RPG | Ficha única por personaje, varios especiales, ataques intercambiables con cassettes, ataques nuevos y sueltos, Torneo Genesis y PayFoe (de relleno). Faltan: olvidar ataques, la regla anti-farmeo. Los turnos de los héroes y de los enemigos ya están en `engine/turnos.ts` (2026-11-07). |
 | Boringram y Boringplace | Completos para los Capítulos 1 y 2. |
 | Robustez | Hecha el 3 de noviembre: pantalla de error, guardado seguro, ESLint y CI. |
 
@@ -85,7 +85,7 @@ La misma proyección, para mirarla en el navegador: `docs/proyeccion.html`.
 - [ ] *Liviana:* arte del Capítulo 2 que falte (`docs/guion/cap02_arte.md`): Rikka con traje rojo y espada, etc.
 
 ## Semana 2 (10–16 de noviembre): las peleas del Capítulo 2
-- [x] **Ordenar el RPG antes de sumar peleas** (2026-11-03): una sola ficha por personaje, `Batalla.tsx` partido (etapa 1: el dibujo), varios especiales y balance simulado del Bastión, el bar, el hangar y el torneo. Etapa 2 (2026-11-04, segunda computadora): la lógica de turnos sin dibujo en `src/engine/turnos.ts` (estado inicial, decisión de los enemigos, cebos, fin del turno). El simulador del balance ya juega con esas reglas (`tests/simulador.ts`, 2026-11-04). Queda para después: los turnos de los héroes y el bucle de la pelea en pantalla.
+- [x] **Ordenar el RPG antes de sumar peleas** (2026-11-03): una sola ficha por personaje, `Batalla.tsx` partido (etapa 1: el dibujo), varios especiales y balance simulado del Bastión, el bar, el hangar y el torneo. Etapa 2 (2026-11-04, segunda computadora): la lógica de turnos sin dibujo en `src/engine/turnos.ts` (estado inicial, decisión de los enemigos, cebos, fin del turno). El simulador del balance ya juega con esas reglas (`tests/simulador.ts`, 2026-11-04). Etapa 3 (2026-11-07): los turnos de los héroes (objetos, perder la acción, prioridad, tipo de ataque, hablar y perdón), con `tests/turno_heroe.test.ts`. Queda en pantalla solo el bucle con las animaciones.
 - [ ] **Decidir y hacer las peleas del Capítulo 2:** la muralla (Rikka sola), el campamento, el molino con el cassette y Cami acorazada. **Plantillas de relleno ya enganchadas** (2026-11-03; ver `BIBLIA_RPG.md`, sección 12): falta la historia de cada una. El plan simplificado de la cuenta regresiva espera la confirmación del autor.
 - [ ] *Pesada:* sprites del RPG de esas peleas, en tanda.
 - [ ] **Pulir los diálogos del Capítulo 2.**

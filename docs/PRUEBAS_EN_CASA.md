@@ -52,9 +52,9 @@ Hay que jugar la historia (o usar `/all`) hasta ganar el Bastión, porque ahí s
 
 - [ ] En Boringplace aparecen el gorro de navidad (120), la chaqueta jean (90) y las zapatillas buenas (80).
 - [ ] Al comprar una prenda no sale el selector de cantidad y, después de comprarla, dice que ya es tuya.
-- [ ] En Equipo › Mochila aparece la prenda con un botón por personaje («Poner a Jair»).
-- [ ] Al ponerla: sale de la mochila, se ve en la ficha del personaje y suben sus números (DEF, VEL).
-- [ ] «Quitar» la devuelve a la mochila. Poner otra en el mismo espacio devuelve la anterior.
+- [ ] En Equipo › Mochila aparece la prenda con un botón por personaje («Poner a Jair»). *(Claude ya lo comprobó sin ventana: `tests/e2e/equipo.spec.ts`; falta ver cómo se ve.)*
+- [ ] Al ponerla: sale de la mochila, se ve en la ficha del personaje y suben sus números (DEF, VEL). *(Claude ya lo comprobó sin ventana: `tests/e2e/equipo.spec.ts`; falta ver cómo se ve.)*
+- [ ] «Quitar» la devuelve a la mochila. Poner otra en el mismo espacio devuelve la anterior. *(Claude ya lo comprobó sin ventana: `tests/e2e/equipo.spec.ts`; falta ver cómo se ve.)*
 - [ ] En una pelea, la tarjeta del personaje muestra «DEF +n»; en la pausa, el Equipo se mira pero no se cambia.
 - [ ] Se guarda: guardar la partida, cargarla y que siga puesta.
 - [ ] Lo que no se lleva puesto se vende a la mitad en «Tus artículos». Lo puesto no aparece para vender.
@@ -64,7 +64,7 @@ Hay que jugar la historia (o usar `/all`) hasta ganar el Bastión, porque ahí s
 ## 5. Los caramelos fuera de las peleas (nuevo)
 
 - [ ] Ganarle a Nikki (bajarle la mitad de la vida) da el caramelo rancio.
-- [ ] En Equipo › Mochila, «Usar en Jair» sube 10 niveles, la experiencia vuelve a 0 y se gasta.
+- [ ] En Equipo › Mochila, «Usar en Jair» sube 10 niveles, la experiencia vuelve a 0 y se gasta. *(Claude ya lo comprobó sin ventana: `tests/e2e/equipo.spec.ts`; falta ver cómo se ve.)*
 - [ ] Los números de la ficha suben, y en la siguiente pelea entra con ese nivel.
 
 ## 5b. Tienda: consumibles, stock, título e inglés (nuevo)
@@ -80,9 +80,9 @@ Hay que jugar la historia (o usar `/all`) hasta ganar el Bastión, porque ahí s
 En Guardar y en Cargar, cada espacio tiene «Exportar» e «Importar».
 
 - [ ] «Exportar» baja un archivo `.json` a descargas, también en el celular.
-- [ ] «Importar» en un espacio vacío la pone ahí; en uno ocupado, pregunta antes de reemplazar.
-- [ ] **La prueba importante:** exportar en un navegador, importar en otro y seguir jugando. Comprobar nivel, mochila, ropa y tokens.
-- [ ] Importar un archivo cualquiera (una foto, un `.txt`) da un aviso y no rompe nada.
+- [ ] «Importar» en un espacio vacío la pone ahí; en uno ocupado, pregunta antes de reemplazar. *(Claude ya lo comprobó sin ventana: `tests/e2e/partidas.spec.ts`; falta ver cómo se ve.)*
+- [ ] **La prueba importante:** exportar en un navegador, importar en otro y seguir jugando. Comprobar nivel, mochila, ropa y tokens. *(Claude ya lo comprobó entre dos navegadores sin ventana: `tests/e2e/partidas.spec.ts`. Falta la prueba entre la computadora y el celular.)*
+- [ ] Importar un archivo cualquiera (una foto, un `.txt`) da un aviso y no rompe nada. *(Claude ya lo comprobó sin ventana: `tests/e2e/partidas.spec.ts`; falta ver cómo se ve.)*
 - [ ] Los botones caben en el celular (ahora son cinco por espacio y se acomodan en dos filas).
 
 ## 6. Limpieza (revisar que no se rompió nada)
@@ -132,7 +132,7 @@ No hay que probarlo: son decisiones del autor. Claude puede repasarlas una por u
 - [ ] **El inglés en las peleas:** menús, mensajes, y ataques y diálogos de los rivales siguen en español.
 - [ ] **La opción C:** que la velocidad (VEL) decida quién actúa primero.
 - [ ] **Lo visual provisional:** los colores de los cebos y estados, y la bomba (un 💣 con la cuenta).
-- [ ] **Sacar los turnos de los héroes** de `Batalla.tsx` a `engine/turnos.ts`.
+- [x] **Sacar los turnos de los héroes** de `Batalla.tsx` a `engine/turnos.ts` (hecho el 2026-11-07, con 16 pruebas). Solo revisar que las peleas se jueguen igual que antes.
 
 **Publicar y limpiar**
 - [ ] **La demo publicada** (`main`) sigue en la versión 1.0, con el Capitán del hangar en nivel 12, el más difícil. Publicar solo con orden del autor, cuando las pruebas de arriba estén bien (pasos en `docs/METODOLOGIA.md`).
