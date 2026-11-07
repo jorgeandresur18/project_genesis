@@ -820,19 +820,19 @@ las partes de la montaña). **Casi todo le pega a todo el equipo** (decisión de
 
 | Qué | Golpe | Cómo se ve |
 |---|---|---|
-| Puño de roca | 9, a uno (el más usado) | Se acerca y baja el puño con llamas moradas (la animación entera). |
-| Montañas de roca | 4, a todos | Levanta el brazo y brotan montañitas por el suelo, una detrás de otra, hasta cada uno. |
-| Bola espinosa | 6, a todos | Se agacha, carga, se vuelve la bola y rueda hasta cada uno. |
+| Puño de roca | 7, a uno (el más usado) | Se acerca y baja el puño con llamas moradas (la animación entera). |
+| Montañas de roca | 3, a todos | Levanta el brazo y brotan montañitas por el suelo, una detrás de otra, hasta cada uno. |
+| Bola espinosa | 5, a todos | Se agacha, carga, se vuelve la bola y rueda hasta cada uno. |
 | Bola de defensa (idea del autor) | no golpea | Se agacha y se vuelve la bola por 2 turnos (desde el siguiente): DEF +6 y **espinas**. |
-| Especial: Lluvia de meteoritos | 4 × 8 golpes, a todos | El cielo se tiñe de morado con nubes; caen más de 40 meteoritos por toda la pantalla y revientan en morado. |
-| Especial: La gran montaña | 9, a todos | Se desmorona, brota una montaña gigante detrás de los héroes (el de arriba queda en la ladera), brilla con el golpe, se hunde y él se vuelve a armar. |
+| Especial: Lluvia de meteoritos | 3 × 8 golpes, a todos | El cielo se tiñe de morado con nubes; caen más de 40 meteoritos por toda la pantalla y revientan en morado. |
+| Especial: La gran montaña | 8, a todos | Se desmorona, brota una montaña gigante detrás de los héroes (el de arriba queda en la ladera), brilla con el golpe, se hunde y él se vuelve a armar. |
 
 - **Las espinas:** al que le pega de cerca le devuelven el 25 % del daño (al menos 1; nunca lo matan, lo dejan en 1).
   Los que pelean de lejos (Cami) no se pinchan: «Las balas rebotan en la piedra» (el canon: los disparos de Cami
   rebotan). No la repite mientras la tiene. Al terminar: «se desenrolla». Código: `ponerEspinas` y `pinchar` en
   `src/engine/turnos.ts`.
 - **Agachado:** antes de cada bola, y al retirarse herido (sigue la historia: pisa el hielo del arroyo).
-- **Balance** (simulado): el atento gana ~84 %, el descuidado ~26 % (`tests/balance.test.ts`).
+- **Balance** (simulado): el atento gana ~98 %, el descuidado ~83 % (`tests/balance.test.ts`). Antes era ~84 % y ~26 %; el autor la sintió demasiado difícil (2026-11-07).
 - Para probar a mano en el navegador (solo en desarrollo): `window.__pelea` tiene el estado y los datos de la pelea
   (forzar un ataque, llenar la barra).
 

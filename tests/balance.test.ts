@@ -2,12 +2,14 @@
 // con las mismas reglas que el juego). La meta (docs/SPEC.md): que el descuidado pierda casi siempre y que el atento
 // gane casi siempre, pero llegando justo. Si cambias números en src/data/batallas/ y esto falla, la pelea quedó muy
 // fácil o muy difícil. Para ver los números: `npx vitest run tests/balance.test.ts --disable-console-intercept`.
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { BATALLAS } from '../src/engine/batallas';
 import { conRopa, informe, sim } from './simulador';
 
 // Azar con semilla fija (2026-11-06): cada prueba tira siempre los mismos dados, así no falla de vez en cuando por mala
 // suerte. Si se cambian los números de una pelea, el resultado cambia de verdad (no por azar).
+// Cada prueba simula miles de peleas: con todo el resto corriendo en paralelo, 5 segundos no alcanzan (2026-11-07).
+vi.setConfig({ testTimeout: 30_000 });
 const azarReal = Math.random;
 beforeEach((ctx) => {
   let a = [...ctx.task.name].reduce((h, c) => (Math.imul(h, 31) + c.charCodeAt(0)) | 0, 20261106);
@@ -104,13 +106,14 @@ describe('balance del torneo: Maggie, con sus objetos contra el dormido y el con
 });
 
 describe('balance de la sombra de roca (Capítulo 1, en prueba; pedido del autor, 2026-11-06)', () => {
-  // Una pelea que Cami avisa que no se tome: algo más difícil que el Bastión, pero ganable con cuidado.
-  it('el atento gana la mayoría (entre 70 % y 95 %) y el descuidado pierde casi siempre (menos de 55 %)', () => {
+  // Una pelea que Cami avisa que no se tome. El autor la sintió demasiado difícil (2026-11-07): ahora se gana casi
+  // siempre jugando atento y, sin cuidado, todavía se puede perder.
+  it('el atento gana casi siempre (más de 90 %) y el descuidado a veces pierde (entre 60 % y 92 %)', () => {
     const r = informe(conRopa(BATALLAS.sombra_roca));
     console.log('sombra_roca', JSON.stringify({ atento: r.atento.gana, descuidado: r.descuidado.gana }));
-    expect(r.atento.gana).toBeGreaterThan(0.7);
-    expect(r.atento.gana).toBeLessThan(0.95);
-    expect(r.descuidado.gana).toBeLessThan(0.55);
+    expect(r.atento.gana).toBeGreaterThan(0.9);
+    expect(r.descuidado.gana).toBeGreaterThan(0.6);
+    expect(r.descuidado.gana).toBeLessThan(0.92);
   });
 });
 

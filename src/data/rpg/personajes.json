@@ -2366,14 +2366,14 @@
       "ataques": [
         {
           "nombre": "Puño de roca",
-          "poder": 9,
+          "poder": 7,
           "usos": 20,
           "peso": 2,
           "texto": "El monstruo cierra el puño de piedra, se le prenden llamas moradas y lo baja sobre {objetivo}. La nieve salta."
         },
         {
           "nombre": "Montañas de roca",
-          "poder": 4,
+          "poder": 3,
           "usos": 8,
           "objetivo": "todos",
           "anim": "brazo",
@@ -2382,7 +2382,7 @@
         },
         {
           "nombre": "Bola espinosa",
-          "poder": 6,
+          "poder": 5,
           "usos": 5,
           "objetivo": "todos",
           "efecto": "rueda",
@@ -2404,7 +2404,7 @@
       "escala": 1.54,
       "especial": {
         "nombre": "Lluvia de meteoritos",
-        "poder": 4,
+        "poder": 3,
         "golpes": 8,
         "objetivo": "todos",
         "color": "#a64dff",
@@ -2426,7 +2426,7 @@
       "especiales": [
         {
           "nombre": "La gran montaña",
-          "poder": 9,
+          "poder": 8,
           "golpes": 1,
           "objetivo": "todos",
           "efecto": "montana",

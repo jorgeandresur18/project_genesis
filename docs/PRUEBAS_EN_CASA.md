@@ -289,5 +289,5 @@ Abrir `http://localhost:5173/?batalla=sombra_roca`. Claude ya vio cada ataque si
 - [ ] **La bola espinosa:** se agacha, se vuelve la bola y rueda hasta cada uno (no gira: se desliza). ¿Quieres que gire?
 - [ ] **La bola de defensa:** se queda hecha bola 2 turnos; a Jair el puño le devuelve un poco («se pincha») y a Cami «las balas rebotan». ¿Los números (DEF +6, devuelve 25 %) se sienten bien?
 - [ ] **El puño:** ahora se ve entero (con las llamas y la vuelta a la guardia), unos 2,7 segundos. ¿Muy lento?
-- [ ] **La dificultad:** pensada para ganarla con cuidado (simulada: ~84 % si juegas atento).
+- [ ] **La dificultad:** la bajé porque la sentiste demasiado difícil: ahora, simulada, se gana ~98 % jugando atento y ~83 % sin cuidado. ¿Ahora sí?
 
