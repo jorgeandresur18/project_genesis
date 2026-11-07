@@ -1259,6 +1259,10 @@ function Pelea({
   const alCaer = async (e: Luchador) => {
     if (e.clon !== undefined) return decir(fmt(t('batalla.clon_cae'), { quien: e.nombre }));
     await decir(fmt(t('batalla.cae'), { quien: e.nombre }));
+    // Si ya había caído antes (lo revivieron con un objeto): no da otra vez experiencia, monedas, botín ni refuerzos.
+    const premiados = (b.current.premiados ??= []);
+    if (premiados.includes(e.id)) return;
+    premiados.push(e.id);
     // En el torneo no se gana experiencia ni caen tokens (decisión del autor, 2026-11-06); el botín ahí no cae (probabilidad 0).
     if (!d.torneo) {
       const xp = xpDe(e.nivel);
@@ -1345,7 +1349,7 @@ function Pelea({
       const elegidoX = [...b.current.heroes, ...rivales].find((x) => x.id === c.objetivo && vivo(x));
       const lado = elegidoX ? (elegidoX.lado === 'heroe' ? b.current.heroes.filter(vivo) : rivales) : [];
       const blancos: Luchador[] = o.revive
-        ? b.current.heroes.filter((x) => x.id === c.objetivo && !vivo(x))
+        ? [...b.current.heroes, ...b.current.enemigos].filter((x) => x.id === c.objetivo && !vivo(x))
         : !elegidoX
           ? []
           : destino === 'equipo' || destino === 'rivales'
@@ -2163,11 +2167,13 @@ function Pelea({
   const enMochila = Object.keys(d.objetos).filter((k) => (b.current.mochila[k] ?? 0) > 0 && usableEnPelea(d.objetos[k]));
   // A los desterrados no se los puede elegir (tampoco para darles un objeto).
   const vivosDe = (lado: 'enemigo' | 'heroe') => (lado === 'enemigo' ? b.current.enemigos.filter(vivo) : b.current.heroes.filter(enCampo));
+  /** Los caídos que siguen en el campo: los tuyos y los rivales que no se fueron (en el torneo se quedan tirados). */
+  const caidos = () => [...b.current.heroes.filter((x) => !vivo(x)), ...b.current.enemigos.filter((x) => !vivo(x) && x.clon === undefined && !x.cebo)];
   /** A quiénes se puede elegir: los de pie o, para revivir, los caídos. */
   const candidatos = () =>
     menu.paso === 'objetivo'
       ? menu.caidos
-        ? b.current.heroes.filter((x) => !vivo(x))
+        ? caidos()
         : menu.lado === 'todos'
           ? [...vivosDe('heroe'), ...vivosDe('enemigo')]
           : vivosDe(menu.lado)
@@ -2230,7 +2236,7 @@ function Pelea({
     if (menu.paso === 'objeto') {
       const k = enMochila[i];
       if (k && d.objetos[k].revive) {
-        if (!b.current.heroes.some((x) => !vivo(x))) {
+        if (!caidos().length) {
           playChip('vacio');
           return setMensaje({ texto: t('batalla.nadie_caido'), n: Math.random() });
         }

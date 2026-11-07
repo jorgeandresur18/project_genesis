@@ -795,8 +795,10 @@ listo, la pelea te lo cobra sola (pedido del autor: más libre).
 - Por decidir: si en el torneo el rival también puede usar objetos en los peleadores del jugador (hoy, solo en los suyos).
 - **Cómo se elige:** al tocar un objeto sale la lista de todos los que están en pie, los tuyos primero y después los
   rivales (el cursor empieza donde va lo de siempre: en ti, o en el primer rival si el objeto es contra rivales). Los
-  objetos de grupo (el botiquín, los que pegan a todos los rivales) se aplican a todo el lado del elegido. Revivir, solo
-  a los tuyos (los rivales caídos se van del campo). Código: `actuarHeroe` y el menú en `src/components/Batalla.tsx`;
+  objetos de grupo (el botiquín, los que pegan a todos los rivales) se aplican a todo el lado del elegido. Revivir, a
+  cualquiera que siga caído en el campo: los tuyos y los rivales que no se fueron (en el torneo se quedan tirados; en
+  la historia se van cuando entra el siguiente). Un rival revivido que vuelve a caer no da otra vez experiencia,
+  monedas, botín ni refuerzos (`premiados`). Código: `actuarHeroe` y el menú en `src/components/Batalla.tsx`;
   `protegidoDe` en `src/engine/batalla.ts`.
 
 ## 24. Un solo estado a la vez (decidido por el autor el 2026-11-06; **hecho** el mismo día)

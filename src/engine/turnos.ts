@@ -55,6 +55,8 @@ export interface CeboEnPie {
 
 /** El estado de una pelea: lo cambian las acciones, en orden. */
 export interface EstadoPelea {
+  /** Los rivales que ya dieron experiencia, monedas, botín y refuerzos al caer (revivido y vuelto a caer, no dan otra vez). */
+  premiados?: string[];
   /** La semilla de las esencias (la partida o el torneo); sin ella, nadie tiene esencia (las pruebas de siempre). */
   semilla?: string;
   /** Cuántos enemigos ya sortearon su esencia en esta pelea. */
