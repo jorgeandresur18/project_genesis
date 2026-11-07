@@ -659,7 +659,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "(Tres repositorios. «seriesgratis-rpg»: archivado. «cripto-tokens-WIP»: archivado. «granja-bots-final-final-v2»: tan abandonado que el README tiene telarañas.)"
+        "text": "(Tres repositorios. «seriesgratis-rpg»: archivado. «cripto-tokens-WIP»: archivado. «granja-bots-final-final-v2»: tan abandonado que el README está vandalizado como una pared blanca en la ciudad.)"
       },
       "choices": [],
       "conditions": [],
@@ -2469,7 +2469,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Y tú llevas ocho años sin aclarar qué somos realmente. Somos un equipo."
+        "text": "Y tú llevas ocho años sin buscarte otra mujer que no sea yo. Somos un equipo."
       },
       "choices": [],
       "conditions": [],
@@ -4594,7 +4594,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Y después nunca la cargarías. Así eres. Guardas y guardas, y nunca juegas."
+        "text": "Y después nunca la cargarías. Así eres. Guardas y guardas, y nunca juegas. Por eso nunca concretas nada con nadie, Jair."
       },
       "choices": [],
       "conditions": [],
@@ -6733,7 +6733,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "...Eres un cobarde de mierda, Jair. Un cobarde chistoso, pero cobarde."
+        "text": "...Qué mierda dices, Jair. Eres un cobarde, un cobarde con chistes rancios de oficina. Por eso sigues solo."
       },
       "choices": [],
       "conditions": [],
@@ -6789,7 +6789,7 @@
       ],
       "dialogue": {
         "speaker": null,
-        "text": "Jair no espera la respuesta. Ni el beso. Se pasa de la raya: las manos van adonde nadie las invitó."
+        "text": "Jair no espera la respuesta. Ni el beso. Se pasa de la raya: se parece a uno de esos tipos que frecuentan este bar."
       },
       "choices": [],
       "conditions": [],
@@ -6901,7 +6901,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Dije «bésame». No dije «aprovéchate de que no puedo ni pararme»."
+        "text": "Te pedí que me dieras un beso. No que te aprovecharas de que no puedo ni pararme, tonto."
       },
       "choices": [],
       "conditions": [],
@@ -6960,7 +6960,7 @@
       ],
       "dialogue": {
         "speaker": null,
-        "text": "Nikki se sienta otra vez en el banco, que alguien levantó por ella. Se arregla el pelo. Tarda en hablar."
+        "text": "Nikki se sienta otra vez en el banco. Se arregla el pelo. Tarda en hablar."
       },
       "choices": [],
       "conditions": [],
@@ -6988,7 +6988,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Te perdono. Pero no gratis."
+        "text": "Te perdono. Pero no va a ser gratis."
       },
       "choices": [],
       "conditions": [],
@@ -7016,7 +7016,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Otra ronda. Y nada de esa cerveza aguada de promoción: una stout imperial, de las negras que se mastican. Y después una doble IPA."
+        "text": "Otra ronda. Y nada de esa cerveza aguada de promoción: una stout imperial, de las negras, pero con derechos. Y después una doble IPA."
       },
       "choices": [],
       "conditions": [],
@@ -7271,7 +7271,7 @@
       ],
       "dialogue": {
         "speaker": null,
-        "text": "La última cachetada suena distinta. Jair cae entre los vidrios. Y no se levanta."
+        "text": "La última cachetada suena distinta. Jair cae como un servidor que tocaron los pasantes de informática. Y no se levanta."
       },
       "choices": [],
       "conditions": [],
@@ -8165,7 +8165,7 @@
       "characters": [],
       "dialogue": {
         "speaker": null,
-        "text": "Entre ofertas de tarjetas de crédito, un recordatorio del dentista y el spam lleno de publicidad de páginas pornográficas de chicas asiáticas haciendo lives de cualquier fetiche que les propongan, hay un correo de un remitente que no conoce."
+        "text": "Entre ofertas de tarjetas de crédito, un recordatorio del dentista y el spam lleno de publicidad de páginas pornográficas de chicas de dudoso país haciendo lives de cualquier fetiche que les propongan, hay un correo de un remitente que no conoce."
       },
       "choices": [],
       "conditions": [],
@@ -8830,7 +8830,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "A ver qué tan lista eres."
+        "text": "A ver qué tan lista eres y si me ayudas a terminar mi juego."
       },
       "choices": [],
       "conditions": [],
@@ -8847,7 +8847,7 @@
       "characters": [],
       "dialogue": {
         "speaker": "Jair (prompt)",
-        "text": "Un videojuego. Fantasía con ciencia ficción. Un mundo con un Rey Malvado que aterroriza a todos."
+        "text": "Abre la carpeta de mi proyecto, videojuego_jair, y haz todo lo que tengas que hacer. Cuando necesites hacerme alguna pregunta, haz lo que sea más conveniente según tus criterios."
       },
       "choices": [],
       "conditions": [],
@@ -8864,7 +8864,7 @@
       "characters": [],
       "dialogue": {
         "speaker": "GRAVITY",
-        "text": "> Entendido. Generando mundo base."
+        "text": "> Entendido. Editando el código base del mundo."
       },
       "choices": [],
       "conditions": [],
@@ -8904,7 +8904,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "...Okay. Eso no debería ser posible. Eso no debería ser posible con mi tarjeta gráfica."
+        "text": "...Okay. Eso no debería ser posible. Eso no debería ser posible con mi tarjeta gráfica de 100 FLOPS y un núcleo."
       },
       "choices": [],
       "conditions": [],
@@ -8921,7 +8921,7 @@
       "characters": [],
       "dialogue": {
         "speaker": "Jair (prompt)",
-        "text": "Un protagonista. Un chico normal. Y dos heroínas."
+        "text": "Un protagonista. Un chico normal. Y una heroína."
       },
       "choices": [],
       "conditions": [],
@@ -8938,7 +8938,7 @@
       "characters": [],
       "dialogue": {
         "speaker": "GRAVITY",
-        "text": "> Describa a las heroínas. Puede importar material de referencia."
+        "text": "> Describa a la heroína. Puede importar material de referencia."
       },
       "choices": [],
       "conditions": [],
@@ -8989,7 +8989,7 @@
       "characters": [],
       "dialogue": {
         "speaker": null,
-        "text": "Dos figuras se forman en la pantalla: una rubia con un traje azul y una peliverde con un kimono rojo."
+        "text": "La pantalla empieza a mostrar modelos 3D de los personajes que Jair ya había creado antes."
       },
       "choices": [],
       "conditions": [],
@@ -9006,7 +9006,7 @@
       "characters": [],
       "dialogue": {
         "speaker": "Jair (prompt)",
-        "text": "Que sean rivales. Tensión. Celos. Un poco de picor."
+        "text": "Que las mujeres de este juego estén bien dotadas y estén encueradas, sin pena ni lástima."
       },
       "choices": [],
       "conditions": [],
@@ -9040,7 +9040,7 @@
       "characters": [],
       "dialogue": {
         "speaker": "Jair (prompt)",
-        "text": "Rivales, sí. Pero que no sean solo eso. Que tengan algo propio."
+        "text": "No creo que me lo permitas. Mejor que haya varias dimensiones; una de ellas, inspirada en varias culturas: Japón, vikingos y todas esas cosas cliché. La heroína debe ir con el protagonista."
       },
       "choices": [],
       "conditions": [],
@@ -9057,7 +9057,7 @@
       "characters": [],
       "dialogue": {
         "speaker": "GRAVITY",
-        "text": "> Instrucción ambigua: «algo propio». Faltan parámetros de personalidad."
+        "text": "> Instrucción ambigua: «la heroína debe ir con el protagonista». Faltan parámetros de personalidad."
       },
       "choices": [],
       "conditions": [],
@@ -9074,7 +9074,7 @@
       "characters": [],
       "dialogue": {
         "speaker": "Jair (prompt)",
-        "text": "Que se peleen. Y que me cuiden. Que no se vayan."
+        "text": "Que sea... la mujer ideal para el protagonista, según su forma de ser."
       },
       "choices": [],
       "conditions": [],
@@ -9193,7 +9193,7 @@
       "characters": [],
       "dialogue": {
         "speaker": null,
-        "text": "Afuera faltan tres horas para el amanecer. Adentro de la pantalla, el tiempo empieza a correr."
+        "text": "Afuera es una noche como cualquier otra, llena de crimen y de adictos pidiendo dinero en las aceras. Adentro de la pantalla, un mundo contrario al real se está terminando de construir."
       },
       "choices": [],
       "conditions": [],
@@ -9227,7 +9227,7 @@
       "characters": [],
       "dialogue": {
         "speaker": "GRAVITY",
-        "text": "> Generando antagonista: Rey… Generando historia previa del antagonista. Generando ejército. Rostros: no requeridos. Generando amenaza secundaria. Forma: no requerida."
+        "text": "> Generando personajes principales: Rey Prim… Rey… Rey Malvado generado como villano principal. Generando historia previa del villano. Generando ejército. Generando amenazas secundarias. Forma: no requerida."
       },
       "choices": [],
       "conditions": [],
@@ -9244,7 +9244,7 @@
       "characters": [],
       "dialogue": {
         "speaker": "GRAVITY",
-        "text": "> Generando heroína 01. Generando… ¿heroína 02? Aplicando referencias importadas. Generando recuerdos de fondo para las entidades. Calidad: suficiente."
+        "text": "> Generando heroína. Generando… ¿heroína piloto? Aplicando referencias importadas. Generando recuerdos de fondo para las entidades. Calidad: suficiente."
       },
       "choices": [],
       "conditions": [],
@@ -9278,7 +9278,7 @@
       "characters": [],
       "dialogue": {
         "speaker": null,
-        "text": "En el departamento, el ventilador gira. Jair respira contra el teclado. En la pantalla, las líneas siguen subiendo, cada vez más rápido, hasta que ya no son líneas sino una sola luz blanca."
+        "text": "En el departamento, la rata se come las sobras que Jair se iba a comer de desayuno. Jair respira contra el teclado. En la pantalla, las líneas siguen subiendo, cada vez más rápido, hasta que ya no son líneas sino una sola luz blanca."
       },
       "choices": [],
       "conditions": [],
@@ -9295,7 +9295,7 @@
       "characters": [],
       "dialogue": {
         "speaker": null,
-        "text": "Y la luz lo mira de vuelta."
+        "text": "Y un cielo digital resplandece a su alrededor."
       },
       "choices": [],
       "conditions": [],

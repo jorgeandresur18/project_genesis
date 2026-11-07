@@ -22,7 +22,7 @@ para que el autor elija. Ninguna toca decisiones ni el árbol.
 | 2. El orgullo | Nada | `or_mxr4` («Ni tú, ni tu orgullo»), de pasada | `calabozo_05` Rikka: «me quitaron la daga y el orgullo. La daga me dolió más» (muy buena) |
 | 3. La cara del Rey | `l03` «Rostros: no requeridos», los soldados sin cara (`g5_023c3`, `g6_054b4`) | Los soldados sin cara (`059`); `131`–`133` «el creador de esta realidad», «el Gran Ingeniero» | `trono_10` «debajo hay alguien conocido»; `galeria_01` el último retrato tapado; `galeria_2_02` «Nadie mira ese retrato. Ni siquiera él.» |
 | 4. Cami llave | Nada directo | Muchas puertas, ninguna con Cami | `trono_06` «Y tú abres las puertas, niña» |
-| 5. Cami no calza | `l06` «Generando… ¿heroína 02?» | Su voz misma | Su voz misma |
+| 5. Cami no calza | `l06` «Generando… ¿heroína piloto?» (desde el 2026-11-08: Jair pide **una** heroína, `137`) | Su voz misma | Su voz misma |
 
 **Lectura:** el Capítulo 1 está muy bien sembrado y el 2 bastante. **El 3 es el más flojo justo en el origen**, y es
 el capítulo más largo en peleas: ahí el jugador puede olvidar las pistas antes del Capítulo 4. Lo que **falta en los

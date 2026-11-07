@@ -23,12 +23,6 @@
     "fecha": "2026-11-06T22:00:00.000Z",
     "autor": "claude"
   },
-  "cap01_083c2": {
-    "original": "Y después nunca la cargarías. Así eres. Guardas y guardas, y nunca juegas.",
-    "texto": "Y después nunca la cargarías. Así eres. Guardas y guardas, y nunca juegas. Por eso nunca coges, Jair.",
-    "fecha": "2026-11-06T22:00:00.000Z",
-    "autor": "claude"
-  },
   "cap01_103a": {
     "original": "Jair la besa. Es un beso torpe, con sabor a tequila y a costumbre.",
     "texto": "Jair la besa. Es un beso torpe, con sabor a tequila y a costumbre, como todo lo que hacen juntos.",
@@ -47,18 +41,6 @@
     "fecha": "2026-11-06T22:00:00.000Z",
     "autor": "claude"
   },
-  "cap01_103c": {
-    "original": "¿Es una propuesta formal? Porque necesito que me la mandes por correo, con copia a recursos humanos.",
-    "texto": "¿Es una propuesta formal? Porque necesito que me la mandes por correo, con copia a recursos humanos y firmada ante notario.",
-    "fecha": "2026-11-06T22:00:00.000Z",
-    "autor": "claude"
-  },
-  "cap01_103c2": {
-    "original": "...Eres un cobarde de mierda, Jair. Un cobarde chistoso, pero cobarde.",
-    "texto": "...Eres un cobarde de mierda, Jair. Un cobarde chistoso, pero cobarde. Por eso sigues solo.",
-    "fecha": "2026-11-06T22:00:00.000Z",
-    "autor": "claude"
-  },
   "cap01_103c3": {
     "original": "Lo suelta. Le pide la cuenta al cantinero con un dedo en el aire.",
     "texto": "Lo suelta. Le pide la cuenta al cantinero con un dedo en el aire, sin mirarlo.",
@@ -68,12 +50,6 @@
   "cap01_nk03": {
     "original": "¿Qué haces? ¿Qué mierda crees que estás haciendo?",
     "texto": "¿Qué haces? ¿Qué mierda crees que estás haciendo, imbécil?",
-    "fecha": "2026-11-06T22:00:00.000Z",
-    "autor": "claude"
-  },
-  "cap01_nk05": {
-    "original": "Dije «bésame». No dije «aprovéchate de que no puedo ni pararme».",
-    "texto": "Te pedí que te casaras conmigo. No que te aprovecharas de que no puedo ni pararme, hijo de puta.",
     "fecha": "2026-11-06T22:00:00.000Z",
     "autor": "claude"
   },

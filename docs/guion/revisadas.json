@@ -87,10 +87,6 @@
     "fecha": "2026-11-06",
     "origen": "autor"
   },
-  "cap01_065": {
-    "fecha": "2026-11-06",
-    "origen": "autor"
-  },
   "cap01_066": {
     "fecha": "2026-11-06",
     "origen": "autor"
@@ -352,10 +348,6 @@
     "origen": "aprobada"
   },
   "cap01_o24": {
-    "fecha": "2026-11-07",
-    "origen": "aprobada"
-  },
-  "cap01_o23": {
     "fecha": "2026-11-07",
     "origen": "aprobada"
   },
@@ -907,10 +899,6 @@
     "fecha": "2026-11-07",
     "origen": "autor"
   },
-  "cap01_123": {
-    "fecha": "2026-11-07",
-    "origen": "autor"
-  },
   "cap01_125": {
     "fecha": "2026-11-07",
     "origen": "autor"
@@ -926,5 +914,109 @@
   "cap01_020b2": {
     "fecha": "2026-11-07",
     "origen": "aprobada"
+  },
+  "cap01_083c2": {
+    "fecha": "2026-11-07",
+    "origen": "autor"
+  },
+  "cap01_103c2": {
+    "fecha": "2026-11-07",
+    "origen": "autor"
+  },
+  "cap01_nk05": {
+    "fecha": "2026-11-07",
+    "origen": "autor"
+  },
+  "cap01_o23": {
+    "fecha": "2026-11-07",
+    "origen": "autor"
+  },
+  "cap01_065": {
+    "fecha": "2026-11-07",
+    "origen": "autor"
+  },
+  "cap01_nk01": {
+    "fecha": "2026-11-07",
+    "origen": "autor"
+  },
+  "cap01_nkp01": {
+    "fecha": "2026-11-07",
+    "origen": "autor"
+  },
+  "cap01_nkp02": {
+    "fecha": "2026-11-07",
+    "origen": "autor"
+  },
+  "cap01_nk_bad01": {
+    "fecha": "2026-11-07",
+    "origen": "autor"
+  },
+  "cap01_nkp03": {
+    "fecha": "2026-11-07",
+    "origen": "autor"
+  },
+  "cap01_123": {
+    "fecha": "2026-11-07",
+    "origen": "autor"
+  },
+  "cap01_131": {
+    "fecha": "2026-11-07",
+    "origen": "autor"
+  },
+  "cap01_132": {
+    "fecha": "2026-11-07",
+    "origen": "autor"
+  },
+  "cap01_133": {
+    "fecha": "2026-11-07",
+    "origen": "autor"
+  },
+  "cap01_135": {
+    "fecha": "2026-11-07",
+    "origen": "autor"
+  },
+  "cap01_137": {
+    "fecha": "2026-11-07",
+    "origen": "autor"
+  },
+  "cap01_138": {
+    "fecha": "2026-11-07",
+    "origen": "autor"
+  },
+  "cap01_141": {
+    "fecha": "2026-11-07",
+    "origen": "autor"
+  },
+  "cap01_142": {
+    "fecha": "2026-11-07",
+    "origen": "autor"
+  },
+  "cap01_144": {
+    "fecha": "2026-11-07",
+    "origen": "autor"
+  },
+  "cap01_146": {
+    "fecha": "2026-11-07",
+    "origen": "autor"
+  },
+  "cap01_155": {
+    "fecha": "2026-11-07",
+    "origen": "autor"
+  },
+  "cap01_l03": {
+    "fecha": "2026-11-07",
+    "origen": "autor"
+  },
+  "cap01_l06": {
+    "fecha": "2026-11-07",
+    "origen": "autor"
+  },
+  "cap01_l10": {
+    "fecha": "2026-11-07",
+    "origen": "autor"
+  },
+  "cap01_l11": {
+    "fecha": "2026-11-07",
+    "origen": "autor"
   }
 }

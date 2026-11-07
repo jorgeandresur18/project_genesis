@@ -69,7 +69,7 @@
 
 `o22` — Su perfil. Un calendario de cuadritos que deberían ser verdes. Todos grises. El último commit es de hace dos años y dice «fix: ahora sí».
 
-`o23` **Jair:** (Tres repositorios. «seriesgratis-rpg»: archivado. «cripto-tokens-WIP»: archivado. «granja-bots-final-final-v2»: tan abandonado que el README tiene telarañas.)
+`o23` **Jair:** (Tres repositorios. «seriesgratis-rpg»: archivado. «cripto-tokens-WIP»: archivado. «granja-bots-final-final-v2»: tan abandonado que el README está vandalizado como una pared blanca en la ciudad.)
 
 `o24` — Cuatro estrellas en total. Una se la dio él mismo, desde una cuenta falsa. Las otras tres son bots.
 
@@ -224,7 +224,7 @@
 
 `064` **Jair:** Llevas ocho años diciéndome eso.
 
-`065` **Nikki:** Y tú llevas ocho años sin aclarar qué somos realmente. Somos un equipo.
+`065` **Nikki:** Y tú llevas ocho años sin buscarte otra mujer que no sea yo. Somos un equipo.
 
 `066` **Jair:** (Un equipo. Ella pone las reglas; yo pongo el dinero de las cervezas.)
 
@@ -391,7 +391,7 @@
 
 `083c` **Jair:** Si esto fuera un juego, ahora mismo me saldría una opción romántica. Y yo elegiría «guardar partida».
 
-`083c2` **Nikki:** Y después nunca la cargarías. Así eres. Guardas y guardas, y nunca juegas.
+`083c2` **Nikki:** Y después nunca la cargarías. Así eres. Guardas y guardas, y nunca juegas. Por eso nunca concretas nada con nadie, Jair.
 
 `084` — Cuarta ronda. O quinta. Jair dejó de contar; el cantinero no.
 
@@ -577,13 +577,13 @@
 
 `103c` **Jair:** ¿Es una propuesta formal? Porque necesito que me la mandes por correo, con copia a recursos humanos.
 
-`103c2` **Nikki:** ...Eres un cobarde de mierda, Jair. Un cobarde chistoso, pero cobarde.
+`103c2` **Nikki:** ...Qué mierda dices, Jair. Eres un cobarde, un cobarde con chistes rancios de oficina. Por eso sigues solo.
 
 `103c3` — Lo suelta. Le pide la cuenta al cantinero con un dedo en el aire.
 
 > ⤷ continúa en `104`
 
-`nk01` — Jair no espera la respuesta. Ni el beso. Se pasa de la raya: las manos van adonde nadie las invitó.
+`nk01` — Jair no espera la respuesta. Ni el beso. Se pasa de la raya: se parece a uno de esos tipos que frecuentan este bar.
 
 `nk02` — Nikki se queda quieta. Un segundo. Uno solo. Después le cambia la cara.
 
@@ -591,17 +591,17 @@
 
 `nk04` **Jair:** Tú dijiste que…
 
-`nk05` **Nikki:** Dije «bésame». No dije «aprovéchate de que no puedo ni pararme».
+`nk05` **Nikki:** Te pedí que me dieras un beso. No que te aprovecharas de que no puedo ni pararme, tonto.
 
 `nk06` — Nikki se levanta. El banco se cae. El cantinero, por puro instinto profesional, guarda los vasos buenos.
 
 > ⤷ continúa en `nk10`
 
-`nkp01` — Nikki se sienta otra vez en el banco, que alguien levantó por ella. Se arregla el pelo. Tarda en hablar.
+`nkp01` — Nikki se sienta otra vez en el banco. Se arregla el pelo. Tarda en hablar.
 
-`nkp02` **Nikki:** Te perdono. Pero no gratis.
+`nkp02` **Nikki:** Te perdono. Pero no va a ser gratis.
 
-`nkp03` **Nikki:** Otra ronda. Y nada de esa cerveza aguada de promoción: una stout imperial, de las negras que se mastican. Y después una doble IPA.
+`nkp03` **Nikki:** Otra ronda. Y nada de esa cerveza aguada de promoción: una stout imperial, de las negras, pero con derechos. Y después una doble IPA.
 
 `nkp04` **Jair:** (Las dos más caras de la pizarra. Claro que sí.)
 
@@ -631,7 +631,7 @@
 
 ### fondos/bar_noche.webp
 
-`nk_bad01` — La última cachetada suena distinta. Jair cae entre los vidrios. Y no se levanta.
+`nk_bad01` — La última cachetada suena distinta. Jair cae como un servidor que tocaron los pasantes de informática. Y no se levanta.
 
 
 ### fondos/cg_nikki_cachetadas.webp
@@ -762,7 +762,7 @@
 `122s` — Debería cocinar algo. En vez de eso, revisa el correo. Es lo que hace la gente que no quiere quedarse a solas con sus pensamientos.
 
 > ♪ silencio
-`123` — Entre ofertas de tarjetas de crédito, un recordatorio del dentista y el spam lleno de publicidad de páginas pornográficas de chicas asiáticas haciendo lives de cualquier fetiche que les propongan, hay un correo de un remitente que no conoce.
+`123` — Entre ofertas de tarjetas de crédito, un recordatorio del dentista y el spam lleno de publicidad de páginas pornográficas de chicas de dudoso país haciendo lives de cualquier fetiche que les propongan, hay un correo de un remitente que no conoce.
 
 `124` **Correo:** ASUNTO: Has sido seleccionado para el acceso anticipado a GRAVITY.
 
@@ -886,35 +886,35 @@
 > ♪ música: into_the_ciberse
 `128` **GRAVITY:** > Instalando GRAVITY... Framework: Reckt. Front: Coffee. Back: Cobra. > Asistente integrado: GENESIS. Estado: en línea. > Describa su proyecto.
 
-`131` **Jair:** A ver qué tan lista eres.
+`131` **Jair:** A ver qué tan lista eres y si me ayudas a terminar mi juego.
 
-`132` **Jair (prompt):** Un videojuego. Fantasía con ciencia ficción. Un mundo con un Rey Malvado que aterroriza a todos.
+`132` **Jair (prompt):** Abre la carpeta de mi proyecto, videojuego_jair, y haz todo lo que tengas que hacer. Cuando necesites hacerme alguna pregunta, haz lo que sea más conveniente según tus criterios.
 
-`133` **GRAVITY:** > Entendido. Generando mundo base.
+`133` **GRAVITY:** > Entendido. Editando el código base del mundo.
 
 `134` — En la pantalla aparece un castillo. Después un cielo. Después un reino entero, en segundos, como si siempre hubiera estado ahí, esperando que alguien lo pidiera.
 
-`135` **Jair:** ...Okay. Eso no debería ser posible. Eso no debería ser posible con mi tarjeta gráfica.
+`135` **Jair:** ...Okay. Eso no debería ser posible. Eso no debería ser posible con mi tarjeta gráfica de 100 FLOPS y un núcleo.
 
-`137` **Jair (prompt):** Un protagonista. Un chico normal. Y dos heroínas.
+`137` **Jair (prompt):** Un protagonista. Un chico normal. Y una heroína.
 
-`138` **GRAVITY:** > Describa a las heroínas. Puede importar material de referencia.
+`138` **GRAVITY:** > Describa a la heroína. Puede importar material de referencia.
 
 `139` — Jair arrastra una carpeta a la ventana. No mira el nombre. Está demasiado cansado para mirar nombres.
 
 `140` **GRAVITY:** > Referencias importadas. Generando modelos.
 
-`141` — Dos figuras se forman en la pantalla: una rubia con un traje azul y una peliverde con un kimono rojo.
+`141` — La pantalla empieza a mostrar modelos 3D de los personajes que Jair ya había creado antes.
 
-`142` **Jair (prompt):** Que sean rivales. Tensión. Celos. Un poco de picor.
+`142` **Jair (prompt):** Que las mujeres de este juego estén bien dotadas y estén encueradas, sin pena ni lástima.
 
 `143` — Lo lee dos veces. Lo borra.
 
-`144` **Jair (prompt):** Rivales, sí. Pero que no sean solo eso. Que tengan algo propio.
+`144` **Jair (prompt):** No creo que me lo permitas. Mejor que haya varias dimensiones; una de ellas, inspirada en varias culturas: Japón, vikingos y todas esas cosas cliché. La heroína debe ir con el protagonista.
 
-`145` **GRAVITY:** > Instrucción ambigua: «algo propio». Faltan parámetros de personalidad.
+`145` **GRAVITY:** > Instrucción ambigua: «la heroína debe ir con el protagonista». Faltan parámetros de personalidad.
 
-`146` **Jair (prompt):** Que se peleen. Y que me cuiden. Que no se vayan.
+`146` **Jair (prompt):** Que sea... la mujer ideal para el protagonista, según su forma de ser.
 
 `147` — Jair no relee eso. Si lo releyera, lo borraría.
 
@@ -929,19 +929,19 @@
 
 `154` **GRAVITY:** > Compilando mundo. Tiempo estimado: indefinido.
 
-`155` — Afuera faltan tres horas para el amanecer. Adentro de la pantalla, el tiempo empieza a correr.
+`155` — Afuera es una noche como cualquier otra, llena de crimen y de adictos pidiendo dinero en las aceras. Adentro de la pantalla, un mundo contrario al real se está terminando de construir.
 
 `l01` **GRAVITY:** > Generando cielo. Color solicitado: no especificado. Color asignado: magenta. > Generando física. Gravedad: reducida, para facilitar escenas de acción.
 
-`l03` **GRAVITY:** > Generando antagonista: Rey… Generando historia previa del antagonista. Generando ejército. Rostros: no requeridos. Generando amenaza secundaria. Forma: no requerida.
+`l03` **GRAVITY:** > Generando personajes principales: Rey Prim… Rey… Rey Malvado generado como villano principal. Generando historia previa del villano. Generando ejército. Generando amenazas secundarias. Forma: no requerida.
 
-`l06` **GRAVITY:** > Generando heroína 01. Generando… ¿heroína 02? Aplicando referencias importadas. Generando recuerdos de fondo para las entidades. Calidad: suficiente.
+`l06` **GRAVITY:** > Generando heroína. Generando… ¿heroína piloto? Aplicando referencias importadas. Generando recuerdos de fondo para las entidades. Calidad: suficiente.
 
 `l08` **GRAVITY:** > Generando dimensión espacial. Generando dimensión ancestral. Generando historia: en curso. > Advertencia: el usuario no responde. Usuario: dentro del área de carga.
 
-`l10` — En el departamento, el ventilador gira. Jair respira contra el teclado. En la pantalla, las líneas siguen subiendo, cada vez más rápido, hasta que ya no son líneas sino una sola luz blanca.
+`l10` — En el departamento, la rata se come las sobras que Jair se iba a comer de desayuno. Jair respira contra el teclado. En la pantalla, las líneas siguen subiendo, cada vez más rápido, hasta que ya no son líneas sino una sola luz blanca.
 
-`l11` — Y la luz lo mira de vuelta.
+`l11` — Y un cielo digital resplandece a su alrededor.
 
 
 ### PANTALLA:negro
