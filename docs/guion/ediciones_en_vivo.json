@@ -154,5 +154,16 @@
     "texto": "Duerme once horas. Despierta con resaca, la boca seca como un cenicero y un mensaje de Nikki que dice «ya llegue». La misma vida de mierda de siempre.",
     "fecha": "2026-11-06T22:00:00.000Z",
     "autor": "claude"
+  },
+  "cap01_044": {
+    "original": "Se llama Bryan. Con y griega. Me dejó en visto hace tres días.",
+    "texto": "Se llama Bryan. Con y griega. Lo dejé en visto hace tres días.",
+    "fecha": "2026-11-06T23:00:00.000Z"
+  },
+  "cap01_049": {
+    "original": "Bryan tampoco.",
+    "texto": "Bryan te invitó. Lo dejaste en visto.",
+    "fecha": "2026-11-06T23:00:00.000Z",
+    "autor": "claude"
   }
 }
