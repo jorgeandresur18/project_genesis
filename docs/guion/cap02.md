@@ -1711,7 +1711,7 @@
 
 `t_rk09` — Cami se acurruca contra Rikka, sin pedir permiso, y se duerme también. Jair se queda despierto, cuidando a las dos.
 
-`t_rk10` **Jair:** (Les pedí a una IA dos heroínas que se pelearan por mí. Ahora se besan entre ellas y yo pago la cuenta. No sé si es un fallo del sistema o justicia poética.)
+`t_rk10` **Jair:** (Le pedí a una IA una sola heroína. Me salieron dos, ahora se besan entre ellas y yo pago la cuenta. No sé si es un fallo del sistema o justicia poética.)
 
 
 ### cg_taberna_beso

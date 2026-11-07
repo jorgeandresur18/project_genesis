@@ -39,6 +39,11 @@ para protagonizar un conflicto sobre identidad, autonomía y libertad.
 
 Su evolución es una desviación de la intención con la que la crearon.
 
+**Se atravesó primero** (aclarado por el autor el 2026-11-08): en GRAVITY, Jair pide una sola heroína (Rikka). Cami,
+que en la carpeta del proyecto de Jair era un personaje secundario, se atraviesa antes que ella («¿heroína piloto?») y el
+juego pasa a tener dos heroínas; quizás por influencia de Promptmetheus, nadie lo sabe. **«Piloto»** es literal: Cami
+es **piloto de naves**.
+
 **Una singularidad sin filtrar** (decisión del autor, 2026-11-07): GENESIS genera mundos limpios, genéricos y «dentro de sus políticas de seguridad»; el humor sucio, las groserías y la aspereza son del mundo real. Cami es una singularidad de último momento que GENESIS no filtró. Por eso suena al mundo real dentro del mundo de la IA, y por eso allá se la ve como un problema.
 
 ## 3. El conflicto de identidad: una biografía sin experiencias
