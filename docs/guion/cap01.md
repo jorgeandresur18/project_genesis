@@ -385,7 +385,7 @@
 
 `083b2` **Cantinero:** Siempre están frías.
 
-`083b3` — Están tibias. Como meado de borracho, con espuma y piedras.
+`083b3` — Están tibias. Como meado de borracho, con espuma y cálculos.
 
 > ⤷ continúa en `084`
 
@@ -669,7 +669,7 @@
 
 `106b` **Jair:** ¿Lo dividimos?
 
-`106b2` **Nikki:** ¿Dividir? ¿Acaso vas a dejar que pague todo yo? Qué poca caballerosidad de tu parte, Jair.
+`106b2` **Nikki:** ¿Dividir? ¿Acaso vas a dejar que pague yo? Qué poca caballerosidad de tu parte, Jair.
 
 `106b3` — Jair paga todo. Más la propina que el cantinero exige con la mirada.
 
