@@ -194,7 +194,7 @@
 
 `049` **Jair:** Bryan tampoco.
 
-`050` — Nikki se queda anonadada.
+`050` — Nikki se queda anonadada: abre la boca, la cierra y no le sale nada.
 
 `051` **Nikki:** ...
 
@@ -345,7 +345,7 @@
 
 `073` — Lo dice mirando el vaso. No queda claro si sigue hablando de proyectos de programación fraudulentos.
 
-`074` **Jair:** Tengo unos ahorros. Bastantes, en realidad. Podría renunciar y hacer apps de verdad, que solucionen problemas de la gente, y no aplicaciones que inyectan scripts maliciosos para robar sus datos y vendérselos a hackers del sur de Asia.
+`074` **Jair:** Tengo unos ahorros. Bastantes, en realidad. Podría renunciar y hacer un juego en serio. O apps de verdad, que solucionen problemas de la gente, y no aplicaciones que inyectan scripts maliciosos para robar sus datos y vendérselos a hackers del sur de Asia.
 
 `075` **Nikki:** ¿Bastantes? ¿Tienes putos ahorros y me dejas pedir lo más barato? ¿Y por qué estoy pagando yo?
 
@@ -452,7 +452,7 @@
 
 `095s02` **Jair:** ¿Que estoy cerca y pago la cuenta?
 
-`095s03` **Nikki:** Que te pones tímido. Mira, ya estás rojo. Treinta años y te pones rojo como si nunca hubieras visto a una mujer guapa como yo. No te vayas a propasar conmigo estando así, ya verás.
+`095s03` **Nikki:** Que te pones tímido. Mira, ya estás rojo. Treinta años y te pones rojo como si nunca hubieras visto a una mujer guapa como yo.
 
 `095s04` **Jair:** (La veo seguido desde hace ocho años. Igual me pongo tímido y rojo cuando la veo. Jamás me he propasado con ella.)
 
@@ -472,7 +472,7 @@
 
 `095s12` — Por debajo de la mesa, le pasa el pie por la pantorrilla. Sin mirarlo. Como quien revisa que algo siga en su lugar.
 
-`095s13` **Jair:** (Todavía no sé si es por cariño o una indirecta para implementar la estrategia push-pull.)
+`095s13` **Jair:** (Ocho años y todavía no sé si es cariño, inventario o una indirecta para implementar la estrategia push-pull.)
 
 `095s14` **Nikki:** No te ilusiones. Es el tequila. El tequila me pone cariñosa.
 
@@ -551,7 +551,7 @@
 
 `103e0` — Jair saca el celular. Abre la app. Escribe la dirección de Nikki de memoria: la sabe mejor que la suya.
 
-`103e0b` — El dedo se le queda encima de «Confirmar viaje». Un segundo. Dos. Nikki mira la pared como si la pared se fuera a lamentar frente a ella.
+`103e0b` — El dedo se le queda encima de «Confirmar viaje». Un segundo. Dos. Nikki mira la pared como si estuviera a punto de apoyar la frente en ella y lamentarse por todos sus errores.
 
 `103e0c` **Jair:** (Si aprieto, se va. Y mañana vamos a hacer como que esto no pasó. Como siempre.)
 
