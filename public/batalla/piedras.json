@@ -1,0 +1,24 @@
+{
+  "frameWidth": 96,
+  "frameHeight": 72,
+  "animations": {
+    "idle": {
+      "row": 0,
+      "frames": 4,
+      "fps": 10,
+      "loop": true
+    },
+    "impacto": {
+      "row": 1,
+      "frames": 15,
+      "fps": 14,
+      "loop": false
+    }
+  },
+  "cuerpo": [
+    25,
+    23,
+    79,
+    48
+  ]
+}

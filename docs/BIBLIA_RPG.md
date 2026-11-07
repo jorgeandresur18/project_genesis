@@ -810,6 +810,32 @@ traición del bar (guionada) envenena siempre y le saca el estado que tuviera. E
 `estadoActual` y `puedeRecibir` en `src/engine/batalla.ts`; lo usan `paralizarA`, `confundirA`, `aplicarEstado`,
 `dejarEstado`, `aplicarEstacion`, `envenenarConBola`, `usarObjeto`, `yaTiene` y la IA de los enemigos.
 
+## 25. La sombra de roca (diseño y sprites del autor, 2026-11-07; **hecha** el mismo día)
+
+La pelea del claro de las cuatro estaciones (`sombra_roca`, Capítulo 1, en prueba). Hoja del autor: el gólem de piedra
+(«piedra» en `docs/sprites de prueba/sprites_rpg.html`), más las piedras lanzadas (su estallido morado) y los meteoritos
+(recortados de su imagen, `public/batalla/meteoritos/`). Para rehacerlos: `python -I -X utf8 tools/batalla_sprites.py
+"docs/sprites de prueba/sprites_rpg.html" piedra piedras` (la herramienta acorta las esperas del puño y el brazo y arma
+las partes de la montaña). **Casi todo le pega a todo el equipo** (decisión del autor); el puño, a uno.
+
+| Qué | Golpe | Cómo se ve |
+|---|---|---|
+| Puño de roca | 9, a uno (el más usado) | Se acerca y baja el puño con llamas moradas (la animación entera). |
+| Montañas de roca | 4, a todos | Levanta el brazo y brotan montañitas por el suelo, una detrás de otra, hasta cada uno. |
+| Bola espinosa | 6, a todos | Se agacha, carga, se vuelve la bola y rueda hasta cada uno. |
+| Bola de defensa (idea del autor) | no golpea | Se agacha y se vuelve la bola por 2 turnos (desde el siguiente): DEF +6 y **espinas**. |
+| Especial: Lluvia de meteoritos | 4 × 8 golpes, a todos | El cielo se tiñe de morado con nubes; caen más de 40 meteoritos por toda la pantalla y revientan en morado. |
+| Especial: La gran montaña | 9, a todos | Se desmorona, brota una montaña gigante detrás de los héroes (el de arriba queda en la ladera), brilla con el golpe, se hunde y él se vuelve a armar. |
+
+- **Las espinas:** al que le pega de cerca le devuelven el 25 % del daño (al menos 1; nunca lo matan, lo dejan en 1).
+  Los que pelean de lejos (Cami) no se pinchan: «Las balas rebotan en la piedra» (el canon: los disparos de Cami
+  rebotan). No la repite mientras la tiene. Al terminar: «se desenrolla». Código: `ponerEspinas` y `pinchar` en
+  `src/engine/turnos.ts`.
+- **Agachado:** antes de cada bola, y al retirarse herido (sigue la historia: pisa el hielo del arroyo).
+- **Balance** (simulado): el atento gana ~84 %, el descuidado ~26 % (`tests/balance.test.ts`).
+- Para probar a mano en el navegador (solo en desarrollo): `window.__pelea` tiene el estado y los datos de la pelea
+  (forzar un ataque, llenar la barra).
+
 ## 16. Pendientes e ideas
 
 | Tema | Estado |

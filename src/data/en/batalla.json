@@ -458,13 +458,6 @@
     "A la sombra no le importa tu ex.": "The shadow doesn't care about your ex.",
     "Monstruo de sombras (de roca)": "Shadow Monster (stone)",
     "Puño de roca": "Stone Fist",
-    "El monstruo baja el brazo de piedra sobre {objetivo}. La nieve salta.": "The monster brings its stone arm down on {objetivo}. Snow flies.",
-    "Avalancha": "Avalanche",
-    "El monstruo golpea el suelo y una ola de nieve y piedras les cae a todos.": "The monster slams the ground and a wave of snow and stones falls on everyone.",
-    "Grieta en la nieve": "Crack in the Snow",
-    "El suelo se parte bajo {objetivo}, que se queda atascado en la grieta.": "The ground splits under {objetivo}, who gets stuck in the crack.",
-    "Desprendimiento": "Rockslide",
-    "Las rocas del monstruo se sueltan todas a la vez y caen sobre {objetivo}. Después vuelven a pegarse a la tinta, como si nada.": "All the monster's rocks break loose at once and fall on {objetivo}. Then they stick back onto the ink, as if nothing happened.",
     "El claro de las cuatro estaciones": "The clearing of the four seasons",
     "Entidad hostil: la de la tinta. Ahora con piedras del otoño encima.": "Hostile entity: the ink one. Now with autumn stones on top.",
     "¡Te dije lo del hielo! …Bueno. Desde aquí también disparo.": "I told you about the ice! …Fine. I can shoot from here too.",
@@ -493,6 +486,17 @@
     "El cabo retrocede por el pasillo, apretando la radio. No va solo a ningún lado: va a buscar a todos.": "The corporal backs down the hallway, clutching his radio. He's not going anywhere alone: he's going to get everyone.",
     "No estuvo mal. Para un oficinista.": "Not bad. For an office worker.",
     "Usuario: incapacitado en el tutorial. Partida: no guardada.": "User: incapacitated in the tutorial. Game: not saved.",
-    "Es uno. Uno. No vamos a correr de uno.": "It's one. One. We're not running from one."
+    "Es uno. Uno. No vamos a correr de uno.": "It's one. One. We're not running from one.",
+    "El monstruo cierra el puño de piedra, se le prenden llamas moradas y lo baja sobre {objetivo}. La nieve salta.": "The monster clenches its stone fist, purple flames catch on it, and it brings it down on {objetivo}. Snow flies.",
+    "Montañas de roca": "Rock Mountains",
+    "El monstruo levanta el brazo. Del suelo brotan montañitas de roca, una detrás de otra, hasta llegarles a todos.": "The monster raises its arm. Little rock mountains burst from the ground, one after another, until they reach everyone.",
+    "Bola espinosa": "Spiked Ball",
+    "El monstruo se agacha, se encoge y se vuelve una bola de piedra llena de espinas. Rueda contra todos.": "The monster crouches, curls up and turns into a stone ball covered in spikes. It rolls into everyone.",
+    "Bola de defensa": "Defensive Ball",
+    "El monstruo se encoge y se vuelve una bola de espinas. Pegarle ahora va a doler.": "The monster curls up into a ball of spikes. Hitting it now is going to hurt.",
+    "Lluvia de meteoritos": "Meteor Shower",
+    "El cielo se pone morado. Entre las nubes empiezan a caer meteoritos, cada vez más, y revientan en morado sobre todos.": "The sky turns purple. Meteors start falling through the clouds, more and more of them, bursting purple on everyone.",
+    "La gran montaña": "The Great Mountain",
+    "El monstruo se desmorona. Por un segundo no queda nada. Después el suelo se levanta debajo de todos: una montaña entera, con las grietas encendidas.": "The monster crumbles. For a second there's nothing left. Then the ground rises under everyone: a whole mountain, its cracks glowing."
   }
 }

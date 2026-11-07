@@ -6,6 +6,10 @@ import { BATALLAS } from '../src/engine/batallas';
 import {
   cortarRacha,
   curarse,
+  decidirEnemigo,
+  finDeTurno,
+  ponerEspinas,
+  resolverGolpe,
   efectoRepetido,
   estadoInicial,
   hablarFunciona,
@@ -184,5 +188,58 @@ describe('hablar y pedir perdón', () => {
     s.racha = 1;
     cortarRacha(s, jair, { tipo: 'especial', objetivo: '', cual: 0 });
     expect(s.traicion).toBe(jair.id);
+  });
+});
+
+describe('la bola de defensa de la sombra de roca (idea del autor, 2026-11-07)', () => {
+  const roca = () => {
+    const d = BATALLAS.sombra_roca as DatosBatalla;
+    const s = estadoInicial(d);
+    const e = sumarEnemigo(s, d, 'sombra_roca', 20);
+    const [jair, cami] = s.heroes;
+    const bola = d.enemigos.sombra_roca.ataques.find((a) => a.espinas)!.espinas!;
+    return { d, s, e, jair, cami, bola };
+  };
+
+  it('sube su DEF mientras dura y la devuelve al terminar (cuenta desde el turno siguiente)', () => {
+    const { d, s, e } = roca();
+    const def = e.extraDef;
+    const sinOtros = { ...d, enemigos: { ...d.enemigos, sombra_roca: { ...d.enemigos.sombra_roca, ataques: d.enemigos.sombra_roca.ataques.filter((a) => a.espinas) } } } as DatosBatalla;
+    const r = decidirEnemigo(s, sinOtros, e, false, () => 0.5);
+    expect(r).toMatchObject({ tipo: 'ataque', blancos: [] });
+    expect(e.espinas).toBeTruthy();
+    expect(e.extraDef).toBe(def + e.espinas!.def);
+    finDeTurno(s);
+    expect(e.espinas?.turnos).toBe(2);
+    finDeTurno(s);
+    finDeTurno(s);
+    expect(e.espinas).toBeUndefined();
+    expect(e.extraDef).toBe(def);
+  });
+
+  it('no la repite mientras la tiene puesta', () => {
+    const { d, s, e, bola } = roca();
+    ponerEspinas(e, bola);
+    for (let i = 0; i < 30; i++) {
+      const r = decidirEnemigo(s, d, e, false, () => (i % 10) / 10);
+      if (r.tipo === 'ataque') expect(r.ataque.espinas).toBeUndefined();
+      e.carga = 0;
+    }
+  });
+
+  it('las espinas pinchan al que pega de cerca (una parte del daño, al menos 1, sin matar); las balas de Cami, no', () => {
+    const { d, s, e, jair, cami, bola } = roca();
+    ponerEspinas(e, bola);
+    const antes = jair.ps;
+    const g = resolverGolpe(s, d, jair, e, 40, false, () => 0.5);
+    expect(g.espinas).toBe(Math.max(1, Math.round(g.n * bola.devuelve)));
+    expect(jair.ps).toBe(antes - g.espinas!);
+    jair.ps = 1;
+    expect(resolverGolpe(s, d, jair, e, 40, false, () => 0.5).espinas).toBeUndefined();
+    expect(jair.ps).toBe(1);
+    expect(d.personajes.cami.distancia).toBe(true);
+    const ps = cami.ps;
+    expect(resolverGolpe(s, d, cami, e, 40, false, () => 0.5).espinas).toBeUndefined();
+    expect(cami.ps).toBe(ps);
   });
 });

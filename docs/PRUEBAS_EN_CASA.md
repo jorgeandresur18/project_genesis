@@ -226,7 +226,7 @@ En el Torneo (`npm run dev`, desde Extras):
 
 - [ ] Jair empieza con sus lentes de programador puestos (Equipo).
 - [ ] El Bastión (la sombra ahora es nivel 15) y el hangar (el Capitán, nivel 11): ¿se sienten como antes de la ropa de inicio, ni regalados ni imposibles?
-- [ ] **La sombra de roca** (`?escena=cap01_g7b_020` o jugando hasta el claro): elegir «Enfrentar al monstruo». La pelea (la sombra en gris, con filtro: hoja provisional), perderla (el final malo de siempre) y ganarla (se congela en el arroyo y sigue la historia). ¿Va o no va?
+- [ ] **La sombra de roca** (`?escena=cap01_g7b_020` o jugando hasta el claro): elegir «Enfrentar al monstruo». La pelea (ahora con tu gólem de piedra; ver abajo), perderla (el final malo de siempre) y ganarla (se congela en el arroyo y sigue la historia). ¿Va o no va?
 
 ## 19. Estados y torneo (nuevo, 6 de noviembre)
 
@@ -279,3 +279,15 @@ En el Torneo (`npm run dev`, desde Extras):
 - [ ] Cuando termines una tanda, avisar a Claude: lee `docs/guion/ediciones_en_vivo.json`, te corrige la redacción y lo aplica con el inglés.
 - [ ] Las flechas ◀ ▶ al lado de la caja: la anterior y la siguiente línea (en las decisiones, ▶ espera a que elijas).
 - [ ] La marca ✓ verde en las líneas que corregiste (por ejemplo, la clienta de la refrigeradora). En el editor, «Poner ✓» en una línea de Claude que apruebes y «Quitar ✓».
+
+## 25. La sombra de roca con tus sprites (nuevo, 7 de noviembre)
+
+Abrir `http://localhost:5173/?batalla=sombra_roca`. Claude ya vio cada ataque sin ventana (capturas); falta verlo en movimiento.
+- [ ] **La lluvia de meteoritos:** el cielo morado con nubes, los meteoritos cayendo hacia los héroes y el estallido morado. ¿Son suficientes? ¿El cielo se nota?
+- [ ] **La gran montaña:** se desmorona en escombros, la montaña sale detrás de los héroes (Jair queda en la ladera), brilla y se hunde; después se vuelve a armar. ¿El tamaño está bien?
+- [ ] **Las montañitas del brazo:** brotan por el suelo hasta cada uno. ¿Más grandes, más, más lentas?
+- [ ] **La bola espinosa:** se agacha, se vuelve la bola y rueda hasta cada uno (no gira: se desliza). ¿Quieres que gire?
+- [ ] **La bola de defensa:** se queda hecha bola 2 turnos; a Jair el puño le devuelve un poco («se pincha») y a Cami «las balas rebotan». ¿Los números (DEF +6, devuelve 25 %) se sienten bien?
+- [ ] **El puño:** ahora se ve entero (con las llamas y la vuelta a la guardia), unos 2,7 segundos. ¿Muy lento?
+- [ ] **La dificultad:** pensada para ganarla con cuidado (simulada: ~84 % si juegas atento).
+

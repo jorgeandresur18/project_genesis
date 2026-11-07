@@ -9,7 +9,8 @@
 #   hasta su objetivo y la traiga de vuelta mientras es un vórtice («viaje» en el .json).
 # - la media luna de la tajada de la sombra sale de su hoja y queda como proyectil aparte (sombra_tajada.png, de
 #   «ataque de la sombra.png», junto al HTML): el juego la lanza en horizontal hasta salir de la pantalla.
-# Uso: python -I tools/batalla_sprites.py "docs/sprites de prueba/sprites rpg.html"
+# Uso: python -I tools/batalla_sprites.py "docs/sprites de prueba/sprites rpg.html" [ids...]
+# Con ids (los del HTML: piedra, piedras, sombra…), rehace solo esas hojas.
 import base64
 import io
 import json
@@ -36,6 +37,11 @@ HOJAS = {
     'sombra': ('sombra', {'idle': 'idle', 'tajada': 'ataque', 'desgarro': 'especial', 'daño': 'daño'}),
     # La Mega Bola Tóxica de Nikki (un proyectil con su propia hoja: aparecer, flamas y explotar).
     'bola': ('bola_toxica', {'idle': 'idle', 'aparecer': 'aparecer', 'explotar': 'explotar'}),
+    # La sombra de roca del claro (Capítulo 1): el gólem de piedra con sus montañas y la bola espinosa.
+    'piedra': ('sombra_roca', {'idle': 'idle', 'puno': 'ataque', 'brazo': 'brazo', 'daño': 'daño', 'montana': 'montana',
+                               'montana2': 'montana2', 'derrotado': 'derrotado', 'agachado': 'agachado', 'bola': 'bola'}),
+    # Las piedras que lanza (vuelo e impacto morado): el estallido de los meteoritos.
+    'piedras': ('piedras', {'idle': 'idle', 'impacto': 'impacto'}),
 }
 
 
@@ -347,9 +353,31 @@ def repartir(im: np.ndarray, fw: int, fh: int, meta: dict) -> np.ndarray:
     return np.concatenate(filas)
 
 
+def recortar_roca(meta: dict):
+    """La sombra de roca en la pelea: sus animaciones vienen largas (el puño, ~5,5 s; el brazo, ~8,5 s; la montaña, ~8 s)
+    porque se quedan un rato quietas. Para un turno se acorta esa espera (los mismos cuadros, menos vueltas) y se arman
+    las partes de la montaña que usa el juego."""
+    a = meta['animations']
+    # Puño y brazo: sube de una, un respiro con las llamas o las chispas y vuelve a la guardia.
+    a['ataque'] = {**a['ataque'], 'seq': list(range(14)) + list(range(23, 41))}
+    a['brazo'] = {**a['brazo'], 'seq': list(range(14)) + list(range(23, 41))}
+    # La montañita del brazo: brota y se hunde enseguida (en el juego, chiquita, por el suelo hasta el rival).
+    a['montanita'] = {**a['montana'], 'loop': False, 'seq': list(range(14)) + list(range(38, 48))}
+    # La gran montaña: brota y queda (sube), después brilla con el golpe y se hunde (brilla).
+    a['montana_sube'] = {**a['montana'], 'loop': False, 'seq': list(range(38))}
+    a['montana_brilla'] = {**a['montana2'], 'loop': False, 'seq': list(range(14, 48))}
+    # Agacharse antes de la bola: la pose agachado una vez (sin vueltas).
+    a['agachado'] = {**a['agachado'], 'loop': False}
+    # Al retirarse herido: agachado (la historia sigue con el hielo del arroyo).
+    a['retirada'] = {**a['agachado'], 'loop': False}
+
+
 def main():
     ruta = Path(sys.argv[1]) if len(sys.argv) > 1 else RAIZ / 'docs' / 'sprites de prueba' / 'sprites rpg.html'
+    solo = set(sys.argv[2:])
     for c in leer_html(ruta):
+        if solo and c['id'] not in solo:
+            continue
         if c['id'] == 'soldado':
             im, meta = hoja_capitan(c)
             meta['cuerpo'] = cuerpo(im, meta)
@@ -422,6 +450,8 @@ def main():
             # Al retirarse: se hunde hasta quedar hecha vórtice (el comienzo del especial, en sus mismas filas).
             es = meta['animations']['especial']
             meta['animations']['retirada'] = {**es, 'loop': False, 'seq': es['seq'][:meta['viaje']['ida'][0] + 4]}
+        if nombre == 'sombra_roca':
+            recortar_roca(meta)
         Image.fromarray(im).save(SALIDA / f'{nombre}.png')
         (SALIDA / f'{nombre}.json').write_text(json.dumps(meta, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
         print(nombre, Image.fromarray(im).size, list(meta['animations']))

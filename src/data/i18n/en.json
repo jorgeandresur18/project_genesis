@@ -495,5 +495,8 @@
   "batalla.fin_congelado": "{quien} thaws out.",
   "batalla.fin_confundido": "{quien} snaps out of the confusion.",
   "batalla.fin_envenenado": "The poison wore off for {quien}.",
-  "batalla.fin_quemado": "{quien}'s burns die down."
+  "batalla.fin_quemado": "{quien}'s burns die down.",
+  "batalla.fin_espinas": "{quien} uncurls: no longer a ball of spikes.",
+  "batalla.espinas_pincha": "{quien} gets stabbed by the spikes: loses {n} HP.",
+  "batalla.espinas_rebota": "The bullets bounce off the stone."
 }

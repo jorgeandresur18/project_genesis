@@ -740,6 +740,12 @@ function Pelea({
     });
 
   useEffect(() => precargarMenus(), []);
+  // Solo en desarrollo: la pelea a mano de las pruebas en el navegador (forzar un ataque, llenar una barra).
+  useEffect(() => {
+    if (!import.meta.env.DEV) return;
+    (window as unknown as { __pelea?: unknown }).__pelea = { estado: b.current, datos: d };
+    return () => void delete (window as unknown as { __pelea?: unknown }).__pelea;
+  }, [d]);
   // La música de la pelea manda mientras dura; al terminar vuelve la de la escena.
   useEffect(() => {
     useStore.getState().setMusicaBatalla(d.musica ?? null);
@@ -838,6 +844,7 @@ function Pelea({
         // mochila), o ya no queda a quién atacar: no actúa.
         if (!puedeActuarHeroe(b.current, h, c)) continue;
         await actuarHeroe(h, c);
+        await avisarEspinas();
         if (b.current.perdona) return 'perdona';
         // La autodestrucción o un cebo explosivo pueden terminarla de golpe.
         const r = resultado(b.current, d);
@@ -1205,12 +1212,30 @@ function Pelea({
    * Un golpe: resta PS (el jefe que se retira nunca llega a 0), números, animación y, si cae, lo que pasa.
    * `aMedias`: un especial al que eligió esquivar (no se esquiva, pero le hace la mitad).
    */
+  /** Las espinas de la bola de defensa: cuánto se pinchó cada uno en su acción, y si rebotaron balas (se dice al final). */
+  const pinchados = useRef(new Map<string, number>());
+  const rebotaron = useRef(false);
+  const avisarEspinas = async () => {
+    for (const [id, n] of pinchados.current) {
+      const x = [...b.current.heroes, ...b.current.enemigos].find((y) => y.id === id);
+      if (x) await decir(fmt(t('batalla.espinas_pincha'), { quien: x.nombre, n }));
+    }
+    if (rebotaron.current && !pinchados.current.size) await decir(t('batalla.espinas_rebota'));
+    pinchados.current.clear();
+    rebotaron.current = false;
+  };
   const golpear = async (atacante: Luchador, defensor: Luchador, poder: number, color = '#fff6d0', aMedias = false) => {
     // Las cuentas: engine/turnos.ts (`resolverGolpe`). Aquí, cómo se ve.
     const seguia = atacante.seguidores ?? 0;
     const golpe = resolverGolpe(b.current, d, atacante, defensor, poder, aMedias);
     // Se lució: un seguidor más (el influencer).
     if ((atacante.seguidores ?? 0) > seguia) numero(atacante.id, fmt(t('batalla.seguidor'), { n: atacante.seguidores ?? 0 }), 'cura');
+    // La bola de defensa (la sombra de roca): el que le pegó de cerca se pincha; las balas de lejos rebotan.
+    if (golpe.espinas) {
+      numero(atacante.id, String(golpe.espinas), 'dano');
+      luz(atacante.id, '#c35cff');
+      pinchados.current.set(atacante.id, (pinchados.current.get(atacante.id) ?? 0) + golpe.espinas);
+    } else if (defensor.espinas && atacante.lado === 'heroe' && d.personajes[atacante.clave]?.distancia && !golpe.bloqueado) rebotaron.current = true;
     // Protegido: este golpe no le hace nada (y se gasta la protección).
     if (golpe.bloqueado) {
       numero(defensor.id, t('batalla.bloquea'), 'falla');
@@ -1699,6 +1724,225 @@ function Pelea({
     await limpiarCebos();
     for (const x of rivales) if (!vivo(x) && !x.cebo) await decir(fmt(t('batalla.cae'), { quien: x.nombre }));
   };
+  // ---------------------------------------------------------------------------------------------------------------
+  // La sombra de roca (el claro, Capítulo 1): sus ataques y especiales con la hoja del gólem de piedra. El golpe es
+  // el de siempre (`golpear`); aquí, solo cómo se ve.
+  // ---------------------------------------------------------------------------------------------------------------
+  /** Los meteoritos que caen (de dónde a dónde, cuándo) y los estallidos morados donde pegan. */
+  const [meteoros, setMeteoros] = useState<{ key: number; img: number; x: number; y: number; dx: number; dy: number; ang: number; k: number; ms: number; demora: number }[]>([]);
+  const [estallidos, setEstallidos] = useState<{ key: number; x: number; y: number; k: number }[]>([]);
+  /** El cielo morado con nubes de la lluvia de meteoritos. */
+  const [cielo, setCielo] = useState(false);
+  /** Las montañas que brotan del suelo (las montañitas del brazo y la gran montaña), con la hoja de la roca. */
+  const [montanas, setMontanas] = useState<{ key: number; x: number; y: number; k: number; anim: string }[]>([]);
+  /** Dónde pisa un luchador (abajo al centro de su sprite) y qué tan ancho se ve, relativo a la batalla. */
+  const piesDe = (l: Luchador) => {
+    const s = rectSprite(figuras.current.get(l.id)?.querySelector('.batalla-sprite'));
+    const base = raiz.current?.getBoundingClientRect();
+    if (!s || !base) return null;
+    return { x: s.left + s.width / 2 - base.left, y: s.bottom - base.top - s.height * 0.04, ancho: s.width };
+  };
+  /** Cuánto dura una animación de la hoja de la roca (con sus vueltas), en ms. */
+  const duraRoca = async (l: Luchador, anim: string) => {
+    const hoja = (await cargarHoja(d.enemigos[l.clave].sprite)) as Hoja;
+    const f = 'animations' in hoja ? hoja.animations[anim] : undefined;
+    return f ? ((f.seq?.length ?? f.frames) * 1000) / f.fps : 800;
+  };
+  /** Un estallido morado (las piedras lanzadas, su impacto) que se va solo. */
+  const estallar = (x: number, y: number, k: number) => {
+    const key = Math.random();
+    setEstallidos((v) => [...v, { key, x, y, k }]);
+    setTimeout(() => setEstallidos((v) => v.filter((z) => z.key !== key)), 1150);
+  };
+  /** Una montaña que brota en (x, y) y se va sola al terminar su animación. */
+  const brotar = (x: number, y: number, k: number, anim: string, ms: number) => {
+    const key = Math.random();
+    setMontanas((v) => [...v, { key, x, y, k, anim }]);
+    setTimeout(() => setMontanas((v) => v.filter((z) => z.key !== key)), ms);
+    return key;
+  };
+  /** Al terminar un especial a todos: los golpeados vuelven a su pose y caen los que derrotó. */
+  const cerrarEspecialRoca = async (l: Luchador, blancos: Luchador[]) => {
+    setAnims((x) => ({ ...x, [l.id]: 'idle' }));
+    for (const x of blancos) {
+      bajoEspecial.current.delete(x.id);
+      if (vivo(x)) setAnims((m) => ({ ...m, [x.id]: 'idle' }));
+    }
+    enEspecial.current = false;
+    const ultimo = !b.current.heroes.some(vivo) ? b.current.heroes.find((x) => retenidos.current.has(x.id)) : undefined;
+    for (const id of retenidos.current) if (id !== ultimo?.id) void animar(id, 'ko');
+    if (ultimo) await caeElUltimo(ultimo);
+    retenidos.current.clear();
+    forzar();
+    await limpiarCebos();
+    for (const x of blancos) if (!vivo(x) && !x.cebo) await decir(fmt(t('batalla.cae'), { quien: x.nombre }));
+  };
+  /** Los golpes de un especial a todos, cada uno a su hora (ms desde ahora): al que esquivaba, la mitad. */
+  const golpesALaHora = async (l: Luchador, e: Especial, golpes: { x: Luchador; ms: number }[]) => {
+    const desde = Date.now();
+    let total = 0;
+    for (const g of golpes) {
+      await espera(Math.max(0, g.ms - (Date.now() - desde)));
+      if (!vivo(g.x)) continue;
+      const { n } = await golpear(l, g.x, e.poder, e.color, g.x.esquivando);
+      total += n;
+    }
+    return total;
+  };
+
+  /**
+   * La lluvia de meteoritos: levanta el brazo, el cielo se tiñe de morado y se nubla, y caen muchos meteoritos (los del
+   * autor, public/batalla/meteoritos) que llenan la pantalla y revientan en morado; los que pegan son `golpes`,
+   * repartidos entre el equipo.
+   */
+  const lluviaMeteoritos = async (l: Luchador, e: Especial) => {
+    l.carga = 0;
+    forzar();
+    await avisar(e, d.enemigos[l.clave].sprite, false);
+    await decir(fmt(e.texto, { quien: l.nombre, objetivo: '' }));
+    const base = raiz.current?.getBoundingClientRect();
+    const hs = b.current.heroes.filter(enCampo);
+    if (!base || !hs.length) return;
+    enEspecial.current = true;
+    hs.forEach((x) => bajoEspecial.current.add(x.id));
+    void animar(l.id, 'brazo' as Anim, await duraRoca(l, 'brazo'));
+    setCielo(true);
+    playChip('vortice');
+    await espera(900);
+    const W = base.width;
+    const H = base.height;
+    // Cada meteorito cae en diagonal hacia el lado de los héroes (desde arriba, del lado del monstruo).
+    const k = Math.max(1.4, H / 260);
+    const largo = H * 1.15;
+    const caida = 620;
+    const yo = centroDe(l);
+    const ellos = centroDe(hs[0]);
+    const hacia = yo && ellos && ellos.x < yo.x ? -1 : 1;
+    const lista: (typeof meteoros)[number][] = [];
+    const nuevo = (x: number, y: number, demora: number, grande = 1) => {
+      const dx = hacia * 0.55 * largo;
+      const dy = largo;
+      lista.push({
+        key: Math.random(),
+        img: 1 + Math.floor(Math.random() * 7),
+        x: x - dx,
+        y: y - dy,
+        dx,
+        dy,
+        ang: (Math.atan2(dy, dx) * 180) / Math.PI,
+        k: k * grande * (0.7 + Math.random() * 0.6),
+        ms: caida,
+        demora: Math.max(0, demora),
+      });
+    };
+    // Los que no pegan a nadie: llenan la pantalla, cada vez más seguido.
+    for (let i = 0; i < 42; i++) nuevo(Math.random() * W, H * (0.35 + Math.random() * 0.55), 3600 * Math.sqrt(i / 42) + Math.random() * 120);
+    // Los que pegan: uno por golpe, sobre el héroe.
+    const golpes = golpesEspecial(e, hs, b.current.heroes.length).map((x, i, todos) => ({ x, ms: 500 + (i * 3000) / Math.max(1, todos.length - 1) }));
+    for (const g of golpes) {
+      const p = piesDe(g.x);
+      if (p) nuevo(p.x + (Math.random() - 0.5) * p.ancho * 0.4, p.y - p.ancho * 0.35, g.ms - caida, 1.3);
+    }
+    setMeteoros(lista);
+    for (const m of lista) {
+      setTimeout(() => {
+        estallar(m.x + m.dx, m.y + m.dy, m.k);
+        if (Math.random() < 0.35) playChip('impacto');
+      }, m.demora + m.ms);
+    }
+    const total = await golpesALaHora(l, e, golpes);
+    setTiembla(Math.random());
+    await espera(1300);
+    setMeteoros([]);
+    setCielo(false);
+    await cerrarEspecialRoca(l, hs);
+    await decir(fmt(t('batalla.especial_total'), { quien: l.nombre, n: total }));
+  };
+
+  /**
+   * La gran montaña: se desmorona (su sprite de derrotado, hasta quedar en escombros), brota una montaña gigante debajo
+   * de los rivales que, al golpear, brilla con las grietas encendidas (temblor) y se hunde; después él se vuelve a armar.
+   */
+  const granMontana = async (l: Luchador, e: Especial) => {
+    l.carga = 0;
+    forzar();
+    await avisar(e, d.enemigos[l.clave].sprite, false);
+    await decir(fmt(e.texto, { quien: l.nombre, objetivo: '' }));
+    const hs = b.current.heroes.filter(enCampo);
+    const pies = hs.map(piesDe).filter(Boolean) as { x: number; y: number; ancho: number }[];
+    if (!pies.length) return;
+    enEspecial.current = true;
+    hs.forEach((x) => bajoEspecial.current.add(x.id));
+    // Se desmorona.
+    playChip('muerte');
+    void animar(l.id, 'derrotado' as Anim);
+    await espera(1300);
+    // La montaña: debajo del medio del equipo, más ancha que todos juntos.
+    const izq = Math.min(...pies.map((p) => p.x - p.ancho / 2));
+    const der = Math.max(...pies.map((p) => p.x + p.ancho / 2));
+    const x = (izq + der) / 2;
+    const y = Math.max(...pies.map((p) => p.y)) + 8;
+    const hoja = (await cargarHoja(d.enemigos[l.clave].sprite)) as Hoja;
+    // Detrás de los héroes y más alta que el equipo: el de arriba queda parado en la ladera.
+    const arriba = Math.min(...pies.map((p) => p.y));
+    const k = Math.max(1.5, ((der - izq) * 1.7) / hoja.frameWidth, ((y - arriba) * 1.5 + 60) / hoja.frameHeight);
+    const sube = await duraRoca(l, 'montana_sube');
+    const brilla = await duraRoca(l, 'montana_brilla');
+    playChip('vortice');
+    setTiembla(Math.random());
+    const primera = brotar(x, y, k, 'montana_sube', sube + brilla + 400);
+    await espera(1100);
+    setTiembla(Math.random());
+    playChip('impacto');
+    setFogonazo({ key: Math.random(), color: e.color });
+    // El golpe: brilla con las grietas encendidas y después se hunde.
+    setMontanas((v) => v.map((m) => (m.key === primera ? { ...m, anim: 'montana_brilla' } : m)));
+    setTimeout(() => setMontanas((v) => v.filter((m) => m.key !== primera)), brilla);
+    const golpes = golpesEspecial(e, hs, b.current.heroes.length).map((h, i) => ({ x: h, ms: i * 260 }));
+    const total = await golpesALaHora(l, e, golpes);
+    await espera(Math.max(0, brilla - 600));
+    // Se vuelve a armar.
+    efecto(l.id, 'aparece', 900);
+    setAnims((m) => ({ ...m, [l.id]: 'idle' }));
+    await espera(700);
+    await cerrarEspecialRoca(l, hs);
+    await decir(fmt(t('batalla.especial_total'), { quien: l.nombre, n: total }));
+  };
+
+  /** Montañas de roca: levanta el brazo y brotan montañitas por el suelo, una detrás de otra, hasta cada rival. */
+  const montanitas = async (l: Luchador, blancos: Luchador[]) => {
+    void animar(l.id, 'brazo' as Anim, await duraRoca(l, 'brazo'));
+    playChip('carga');
+    await espera(500);
+    const yo = piesDe(l);
+    const hoja = (await cargarHoja(d.enemigos[l.clave].sprite)) as Hoja;
+    const ms = await duraRoca(l, 'montanita');
+    const pasos = 4;
+    for (const h of blancos) {
+      const p = piesDe(h);
+      if (!yo || !p) continue;
+      const k = (p.ancho * 0.8) / hoja.frameWidth;
+      for (let i = 1; i <= pasos; i++) {
+        const f = i / pasos;
+        setTimeout(() => {
+          brotar(yo.x + (p.x - yo.x) * f, yo.y + (p.y - yo.y) * f, k * (0.55 + 0.45 * f), 'montanita', ms);
+          playChip('golpe');
+        }, i * 170);
+      }
+    }
+    await espera(pasos * 170 + 250);
+  };
+
+  /** Antes de la bola (la espinosa o la de defensa): se agacha, carga y se vuelve la bola. */
+  const hacerseBola = async (l: Luchador) => {
+    void animar(l.id, 'agachado' as Anim);
+    playChip('carga');
+    luz(l.id, '#c35cff');
+    await espera(1000);
+    void animar(l.id, 'bola' as Anim);
+    luz(l.id, '#c35cff', true);
+    await espera(350);
+  };
   /** El rayo del especial del Capitán que sigue más allá de su cuadro, hasta el borde de la pantalla. */
   const [rayoSigue, setRayoSigue] = useState<{ id: string; x: number; y: number; largo: number; ang: number; grosor: number } | null>(null);
   /** El rayo grueso del cañón (de dónde a dónde, y de qué color). */
@@ -2016,6 +2260,8 @@ function Pelea({
     if (decision.tipo === 'especial') {
       const { especial: esp, blanco } = decision;
       if (esp.canon) await canonazo(e, esp, blanco);
+      else if (esp.efecto === 'meteoritos') await lluviaMeteoritos(e, esp);
+      else if (esp.efecto === 'montana') await granMontana(e, esp);
       else await usarEspecial(e, esp, d.enemigos[e.clave].sprite, hs, blanco);
       return limpiarCebos();
     }
@@ -2023,6 +2269,15 @@ function Pelea({
     const { blancos } = decision;
     const a = ataqueCopiado(decision.ataque, e.copiado);
     await decir(fmt(a.texto, { quien: e.nombre, objetivo: blancos.map((x) => x.nombre).join(' y ') }));
+    // La bola de defensa (la sombra de roca): ya está protegido (engine/turnos.ts); se agacha y se vuelve la bola, y
+    // así se queda mientras le duren las espinas.
+    if (a.espinas) {
+      await hacerseBola(e);
+      forzar();
+      return;
+    }
+    if (a.efecto === 'rueda') await hacerseBola(e);
+    if (a.efecto === 'montanitas') await montanitas(e, blancos);
     if (a.confunde) {
       blancos.forEach((h) => (h.copiado = a));
       return besar(e, a, blancos);
@@ -2075,14 +2330,17 @@ function Pelea({
         }, i * 160);
         return i * 160 + (Math.hypot(c.x - x, c.y - y) / 1600) * 1000;
       });
-    } else {
+    } else if (!a.efecto) {
       if (blancos.length === 1) await deslizar(e.id, blancos[0].id);
-      void animar(e.id, 'ataque', 800);
+      // Con `anim_completa` (la roca), el ataque se ve entero; si no, un golpe corto.
+      void animar(e.id, (a.anim ?? 'ataque') as Anim, d.enemigos[e.clave].anim_completa ? await duraRoca(e, a.anim ?? 'ataque') : 800);
       await espera(380);
     }
     for (const [i, h] of blancos.entries()) {
       if (llegadas) await espera(Math.max(0, llegadas[i] - (Date.now() - desde) + (proy ? ((proy.cuadro * 1000) / hoja.animations.ataque.fps) : 0)));
       if (deLejos) luz(h.id, d.enemigos[e.clave].color_disparo ?? '#ff3b3b');
+      // La bola espinosa rueda hasta cada uno.
+      if (a.efecto === 'rueda') await deslizar(e.id, h.id, 'bola' as Anim);
       // A veces el golpe falla solo.
       if (falla(d, e, h)) {
         numero(h.id, 'MISS', 'falla');
@@ -2109,7 +2367,10 @@ function Pelea({
         await avisarEstado(h, dejarEstado(b.current, h, a.deja));
       }
     }
-    if (blancos.length === 1 && !proy && !deLejos) await deslizar(e.id, null);
+    if (a.efecto === 'rueda') {
+      await deslizar(e.id, null);
+      setAnims((m) => ({ ...m, [e.id]: 'idle' }));
+    } else if (blancos.length === 1 && !proy && !deLejos && !a.efecto) await deslizar(e.id, null);
     else await espera(500);
     soltar(blancos);
     await limpiarCebos();
@@ -2440,7 +2701,7 @@ function Pelea({
               filtro={d.enemigos[e.clave].filtro}
               escala={(d.enemigos[e.clave].escala ?? 1) * (e.clon !== undefined ? CLON_ESCALA : 1)}
               jefe={!!d.enemigos[e.clave].jefe}
-              anim={anims[e.id] ?? 'idle'}
+              anim={(anims[e.id] ?? 'idle') === 'idle' && vivo(e) && e.espinas ? 'bola' : (anims[e.id] ?? 'idle')}
               vez={veces[e.id] ?? 0}
               especial={d.enemigos[e.clave].especial}
               alCuadro={(anim, col, hoja) => alCuadro(e, anim, col, hoja)}
@@ -2557,6 +2818,42 @@ function Pelea({
         </span>
       )}
       {tiembla > 0 && <span key={tiembla} className="batalla-temblor" aria-hidden />}
+      {/* La sombra de roca: el cielo morado con nubes, los meteoritos, sus estallidos y las montañas que brotan. */}
+      <span className={`batalla-cielo-roca ${cielo ? 'activo' : ''}`} aria-hidden>
+        <i />
+        <i />
+        <i />
+      </span>
+      {montanas.map((m) => (
+        <span key={m.key} className="batalla-montana" style={{ left: m.x, top: m.y, scale: String(m.k) } as CSSProperties} aria-hidden>
+          <SpriteHoja key={m.anim} src="batalla/sombra_roca" anim={m.anim} />
+        </span>
+      ))}
+      {meteoros.map((m) => (
+        <span
+          key={m.key}
+          className="batalla-meteorito"
+          style={
+            {
+              left: m.x,
+              top: m.y,
+              '--dx': `${m.dx}px`,
+              '--dy': `${m.dy}px`,
+              '--ang': `${m.ang}deg`,
+              '--k': m.k,
+              animationDuration: `${m.ms}ms`,
+              animationDelay: `${m.demora}ms`,
+              backgroundImage: `url(${BASE}batalla/meteoritos/meteorito_${m.img}.png)`,
+            } as CSSProperties
+          }
+          aria-hidden
+        />
+      ))}
+      {estallidos.map((x) => (
+        <span key={x.key} className="batalla-estallido" style={{ left: x.x, top: x.y, scale: String(x.k) } as CSSProperties} aria-hidden>
+          <SpriteHoja src="batalla/piedras" anim="impacto" />
+        </span>
+      ))}
       <span className={`batalla-tinte-toxico ${tinte ? 'activo' : ''}`} aria-hidden />
       {energias && <EnergiasHacia x={energias.x} y={energias.y} lejos={energias.lejos} />}
       {onda && <span key={onda.key} className="batalla-onda-toxica" style={{ left: onda.x, top: onda.y }} aria-hidden />}

@@ -495,5 +495,8 @@
   "batalla.fin_congelado": "{quien} se descongela.",
   "batalla.fin_confundido": "{quien} sale de la confusión.",
   "batalla.fin_envenenado": "A {quien} se le pasó el veneno.",
-  "batalla.fin_quemado": "A {quien} se le apagan las quemaduras."
+  "batalla.fin_quemado": "A {quien} se le apagan las quemaduras.",
+  "batalla.fin_espinas": "{quien} se desenrolla: ya no es una bola de espinas.",
+  "batalla.espinas_pincha": "{quien} se pincha con las espinas: pierde {n} PS.",
+  "batalla.espinas_rebota": "Las balas rebotan en la piedra."
 }

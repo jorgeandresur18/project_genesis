@@ -1,0 +1,37 @@
+[
+ {
+  "imagen": "batalla/meteoritos/meteorito_1",
+  "ancho": 69,
+  "alto": 26
+ },
+ {
+  "imagen": "batalla/meteoritos/meteorito_2",
+  "ancho": 38,
+  "alto": 16
+ },
+ {
+  "imagen": "batalla/meteoritos/meteorito_3",
+  "ancho": 42,
+  "alto": 29
+ },
+ {
+  "imagen": "batalla/meteoritos/meteorito_4",
+  "ancho": 33,
+  "alto": 27
+ },
+ {
+  "imagen": "batalla/meteoritos/meteorito_5",
+  "ancho": 44,
+  "alto": 26
+ },
+ {
+  "imagen": "batalla/meteoritos/meteorito_6",
+  "ancho": 40,
+  "alto": 26
+ },
+ {
+  "imagen": "batalla/meteoritos/meteorito_7",
+  "ancho": 32,
+  "alto": 25
+ }
+]

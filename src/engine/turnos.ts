@@ -312,13 +312,21 @@ export function decidirEnemigo(
   // La parálisis solo va contra los que todavía se mueven (si nadie se mueve, ataca de otra forma).
   // Si no le queda ningún ataque posible (solo de efecto y ya todos lo tienen), espera.
   const elegido = eligeAtaque(
-    en.ataques.filter((a) => quedan(e, a) > 0 && !(hs.some((x) => x.envenenado && x.ps <= 2) && (a.confunde || a.paraliza))),
+    en.ataques.filter((a) => quedan(e, a) > 0 && !(a.espinas && e.espinas) && !(hs.some((x) => x.envenenado && x.ps <= 2) && (a.confunde || a.paraliza))),
     hs,
     azar,
   );
   if (!elegido) return { tipo: 'nada' };
   const { ataque: a } = elegido;
   // Las ráfagas (la sombra) se reparten: una a cada uno y las que sobran al azar.
+  // La bola de defensa no va contra nadie: se protege él.
+  if (a.espinas) {
+    gastarUso(e, a);
+    ponerEspinas(e, a.espinas);
+    // Cuenta desde el turno siguiente: casi siempre actúa último (es lento) y si no, la bola duraría un turno menos.
+    estado.estadoRecien.push(`${e.id}/espinas`);
+    return { tipo: 'ataque', ataque: a, blancos: [] };
+  }
   const blancos = a.rafagas
     ? repartirRafagas(a.rafagas, estado.heroes.filter(enCampo), azar)
     : a.confunde || a.paraliza
@@ -350,6 +358,10 @@ export function finDeTurno(estado: EstadoPelea) {
       return;
     }
     if (h.inmuneParalisis) h.inmuneParalisis--;
+    if (h.espinas && !estado.estadoRecien.includes(`${h.id}/espinas`) && --h.espinas.turnos <= 0) {
+      h.extraDef -= h.espinas.def;
+      h.espinas = undefined;
+    }
     if (h.paralizado && !estado.paralizadoRecien.includes(h.id) && --h.paralizado === 0) h.inmuneParalisis = 1;
     if (h.confundido && !estado.confundidoRecien.includes(h.id)) h.confundido--;
     if (h.congelado && !estado.estadoRecien.includes(`${h.id}/congelado`) && --h.congelado === 0) h.inmuneParalisis = 1;
@@ -405,7 +417,7 @@ export function resolverGolpe(
   poder: number,
   aMedias = false,
   azar: () => number = Math.random,
-): { n: number; critico: boolean; bloqueado?: boolean; desperto?: boolean } {
+): { n: number; critico: boolean; bloqueado?: boolean; desperto?: boolean; espinas?: number } {
   const ayuda = d.ayuda && atacante.lado === 'heroe' && vanPerdiendo(estado.heroes, d.ayuda.umbral) ? d.ayuda.critico : 0;
   // Lo que lleva puesto contra el que duerme o está confundido (los objetos de Maggie).
   const eq = atacante.equipo;
@@ -425,13 +437,34 @@ export function resolverGolpe(
   defensor.ps = Math.max(jefe?.huye_a && defensor.clon === undefined ? 1 : 0, defensor.ps - n);
   if (defensor.ps === 0) limpiarEstados(defensor);
   if (golpe.critico || (defensor.ps === 0 && !defensor.cebo && atacante !== defensor)) lucirse(d, atacante);
+  const espinas = pinchar(d, atacante, defensor, n);
   // Un golpe despierta al dormido (decisión del autor, 2026-11-06), con su turno libre, como cuando se despierta solo.
   if (defensor.dormido > 0 && defensor.ps > 0 && n > 0 && atacante !== defensor) {
     defensor.dormido = 0;
     defensor.inmuneParalisis = 1;
-    return { n, critico: golpe.critico, desperto: true };
+    return { n, critico: golpe.critico, desperto: true, ...(espinas ? { espinas } : {}) };
   }
-  return { n, critico: golpe.critico };
+  return { n, critico: golpe.critico, ...(espinas ? { espinas } : {}) };
+}
+
+/** La bola de defensa: sube la DEF por unos turnos (si ya la tiene, vuelve a empezar la cuenta sin sumar otra vez). */
+export function ponerEspinas(x: Luchador, e: NonNullable<Ataque['espinas']>) {
+  if (!x.espinas) x.extraDef += e.def;
+  x.espinas = { ...e };
+}
+
+/**
+ * Las espinas de la bola de defensa: al que le pegó de cerca le devuelven una parte del daño (al menos 1). Los que
+ * pelean de lejos (Cami) no se lastiman. Las espinas no matan: dejan al atacante en 1. Devuelve cuánto le quitaron.
+ */
+function pinchar(d: DatosBatalla, atacante: Luchador, defensor: Luchador, n: number): number {
+  const e = defensor.espinas;
+  if (!e || n <= 0 || atacante === defensor || atacante.ps <= 1) return 0;
+  const deLejos = atacante.lado === 'heroe' ? !!d.personajes[atacante.clave]?.distancia : !!d.enemigos[atacante.clave]?.distancia;
+  if (deLejos) return 0;
+  const r = Math.min(atacante.ps - 1, Math.max(1, Math.round(n * e.devuelve)));
+  atacante.ps -= r;
+  return r;
 }
 
 /** Sin un compañero de pie que lo pueda sacar: el héroe que pelea solo (no los rivales). */
@@ -636,7 +669,7 @@ export function resultado(estado: EstadoPelea, d: DatosBatalla): 'empate' | 'pie
 }
 
 /** Los estados que se anuncian cuando terminan (arriba, con su mensaje: «… se despierta»). */
-export type EstadoQueTermina = 'paralizado' | 'dormido' | 'congelado' | 'confundido' | 'envenenado' | 'quemado' | 'desterrado';
+export type EstadoQueTermina = 'paralizado' | 'dormido' | 'congelado' | 'confundido' | 'envenenado' | 'quemado' | 'desterrado' | 'espinas';
 
 /** Los estados que tiene ahora un luchador. */
 export const estadosActivos = (l: Luchador): EstadoQueTermina[] =>
@@ -648,6 +681,7 @@ export const estadosActivos = (l: Luchador): EstadoQueTermina[] =>
     !!l.envenenado && 'envenenado',
     l.quemado > 0 && 'quemado',
     l.desterrado > 0 && 'desterrado',
+    !!l.espinas && 'espinas',
   ].filter((x): x is EstadoQueTermina => !!x);
 
 /** Qué estados tiene cada uno en este momento (para comparar después). */

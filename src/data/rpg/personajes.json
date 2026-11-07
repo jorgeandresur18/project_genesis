@@ -2348,7 +2348,7 @@
     },
     "sombra_roca": {
       "nombre": "Monstruo de sombras (de roca)",
-      "sprite": "batalla/sombra",
+      "sprite": "batalla/sombra_roca",
       "jefe": true,
       "huye_a": 0.3,
       "base": {
@@ -2366,49 +2366,82 @@
       "ataques": [
         {
           "nombre": "Puño de roca",
-          "poder": 7,
+          "poder": 9,
           "usos": 20,
-          "texto": "El monstruo baja el brazo de piedra sobre {objetivo}. La nieve salta."
+          "peso": 2,
+          "texto": "El monstruo cierra el puño de piedra, se le prenden llamas moradas y lo baja sobre {objetivo}. La nieve salta."
         },
         {
-          "nombre": "Avalancha",
-          "poder": 3,
+          "nombre": "Montañas de roca",
+          "poder": 4,
           "usos": 8,
           "objetivo": "todos",
-          "texto": "El monstruo golpea el suelo y una ola de nieve y piedras les cae a todos."
+          "anim": "brazo",
+          "efecto": "montanitas",
+          "texto": "El monstruo levanta el brazo. Del suelo brotan montañitas de roca, una detrás de otra, hasta llegarles a todos."
         },
         {
-          "nombre": "Grieta en la nieve",
+          "nombre": "Bola espinosa",
+          "poder": 6,
+          "usos": 5,
+          "objetivo": "todos",
+          "efecto": "rueda",
+          "texto": "El monstruo se agacha, se encoge y se vuelve una bola de piedra llena de espinas. Rueda contra todos."
+        },
+        {
+          "nombre": "Bola de defensa",
           "poder": 0,
           "usos": 3,
-          "paraliza": 1,
-          "texto": "El suelo se parte bajo {objetivo}, que se queda atascado en la grieta."
+          "peso": 0.7,
+          "espinas": {
+            "turnos": 2,
+            "def": 6,
+            "devuelve": 0.25
+          },
+          "texto": "El monstruo se encoge y se vuelve una bola de espinas. Pegarle ahora va a doler."
         }
       ],
       "escala": 1.54,
       "especial": {
-        "nombre": "Desprendimiento",
-        "poder": 6,
-        "golpes": 3,
-        "objetivo": "uno",
+        "nombre": "Lluvia de meteoritos",
+        "poder": 4,
+        "golpes": 8,
+        "objetivo": "todos",
         "color": "#a64dff",
         "ojos": [
-          84,
-          112,
-          26,
-          13
+          74,
+          25,
+          22,
+          11
         ],
-        "texto": "Las rocas del monstruo se sueltan todas a la vez y caen sobre {objetivo}. Después vuelven a pegarse a la tinta, como si nada.",
-        "posicion": "objetivo",
-        "pantalla": "oscura",
-        "levanta": true
+        "texto": "El cielo se pone morado. Entre las nubes empiezan a caer meteoritos, cada vez más, y revientan en morado sobre todos.",
+        "efecto": "meteoritos",
+        "posicion": "centro"
       },
       "sonido": "tajada",
       "al_retirarse": "retirada",
       "sale_atras": true,
       "cae_en_cebo": 0.35,
-      "_nota": "La sombra cubierta de rocas del otoño (Capítulo 1, el claro de las cuatro estaciones). Usa la hoja de la sombra con un filtro gris hasta que el autor haga la suya (en la novela ya existe sprites/monstruo_sombras/armored).",
-      "filtro": "grayscale(0.85) brightness(0.85) contrast(1.15)"
+      "_nota": "La sombra cubierta de rocas del otoño (Capítulo 1, el claro de las cuatro estaciones). Hoja del autor: el gólem de piedra (docs/sprites de prueba/sprites_rpg.html, «piedra»), con las piedras lanzadas y los meteoritos (public/batalla/meteoritos). Casi todo le pega a todo el equipo (decisión del autor, 2026-11-07); el puño, a uno. La bola de defensa: idea del autor.",
+      "especiales": [
+        {
+          "nombre": "La gran montaña",
+          "poder": 9,
+          "golpes": 1,
+          "objetivo": "todos",
+          "efecto": "montana",
+          "color": "#a64dff",
+          "ojos": [
+            74,
+            25,
+            22,
+            11
+          ],
+          "texto": "El monstruo se desmorona. Por un segundo no queda nada. Después el suelo se levanta debajo de todos: una montaña entera, con las grietas encendidas.",
+          "posicion": "objetivo"
+        }
+      ],
+      "anim_completa": true
     },
     "cabo": {
       "nombre": "Cabo de la Federación",
