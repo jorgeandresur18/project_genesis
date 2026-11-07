@@ -1378,7 +1378,8 @@ function Pelea({
     l.def = s.def;
     l.vel = s.vel;
     l.usados = {};
-    efecto(l.id, 'aparece', 900);
+    // Un destello del color de su especial (no el portal rojo con que aparecen los enemigos).
+    efecto(l.id, 'cambia-forma', 900);
     forzar();
   };
   /** El especial que transforma (el Armored): gasta el turno; desde ese momento ya es la otra forma (la armadura protege). */
