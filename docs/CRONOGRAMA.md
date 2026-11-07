@@ -131,7 +131,7 @@ La sesión del viernes 6 terminó el sábado a las 4:27 (resumen en `docs/BITACO
 3. **Lo del sábado y el domingo de abajo** sigue en pie (jugar el Capítulo 1 y decidir la demo, los Capítulos 2 y 3, y
    pensar el 4, el 5 y el 6).
 
-## El fin de semana (lo planeado el 6 (6 al 8 de noviembre, en la computadora de Jorge)
+## El fin de semana (lo planeado el 6 de noviembre, en la computadora de Jorge)
 
 **Esta noche (viernes):**
 1. **Probar** `docs/PRUEBAS_EN_CASA.md`, secciones 16 a 22 (lo de hoy): los recuerdos de Noodle, el torneo con su

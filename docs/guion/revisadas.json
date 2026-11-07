@@ -918,5 +918,13 @@
   "cap01_126": {
     "fecha": "2026-11-07",
     "origen": "autor"
+  },
+  "cap01_020b": {
+    "fecha": "2026-11-07",
+    "origen": "aprobada"
+  },
+  "cap01_020b2": {
+    "fecha": "2026-11-07",
+    "origen": "aprobada"
   }
 }
