@@ -385,7 +385,7 @@
 
 `083b2` **Cantinero:** Siempre están frías.
 
-`083b3` — Están tibias. Como meado de borracho, con espuma y cálculos.
+`083b3` — Están tibias. Como meado de borracho, con espuma y piedras.
 
 > ⤷ continúa en `084`
 
