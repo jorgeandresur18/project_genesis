@@ -499,5 +499,7 @@
   "batalla.fin_espinas": "{quien} se desenrolla: ya no es una bola de espinas.",
   "batalla.espinas_pincha": "{quien} se pincha con las espinas: pierde {n} PS.",
   "batalla.espinas_rebota": "Las balas rebotan en la piedra.",
-  "batalla.berserk_agachense": "¡Agáchense!"
+  "batalla.berserk_agachense": "¡Agáchense!",
+  "batalla.berserk_agotada": "{quien} se queda sin aire. El próximo turno descansa.",
+  "batalla.sigue_agotada": "{quien} recupera el aliento: no hace nada este turno."
 }

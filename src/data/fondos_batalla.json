@@ -1,5 +1,10 @@
 {
   "_nota": "La cuadrícula de cada fondo de pelea: dónde pisa cada uno, en % de la imagen ([x, y]: el centro de los pies). El primero de cada lista es el primero del equipo o de los rivales; el resto, en orden. Para verlos sobre la pelea: ?cuadricula en la dirección (por ejemplo ?batalla=bastion&cuadricula o ?sprites&cuadricula para la arena). brillos: estrellas que titilan en el cielo ([x, y]); nebulosas: un resplandor que respira ([x, y, radio], en %). Abajo a la izquierda va el menú y abajo a la derecha las tarjetas: los pies no deberían bajar de ~72 % a la izquierda ni de ~80 % a la derecha. luces: el resplandor de las luces del lugar ([x, y, radio, tono]; tono «calida» por defecto, «morada» o «cielo»).",
+  "batalla/fondos/claro": {
+    "rivales": [[32, 68], [20, 58], [44, 60]],
+    "equipo": [[76, 62], [86, 74], [66, 74]],
+    "luces": [[36, 30, 9], [58, 22, 7, "morada"]]
+  },
   "batalla/fondos/bastion_ruinas": {
     "rivales": [[30, 69], [17, 61], [43, 61]],
     "equipo": [[78, 64], [87, 75], [66, 75]],

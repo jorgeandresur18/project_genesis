@@ -499,5 +499,7 @@
   "batalla.fin_espinas": "{quien} uncurls: no longer a ball of spikes.",
   "batalla.espinas_pincha": "{quien} gets stabbed by the spikes: loses {n} HP.",
   "batalla.espinas_rebota": "The bullets bounce off the stone.",
-  "batalla.berserk_agachense": "Get down!"
+  "batalla.berserk_agachense": "Get down!",
+  "batalla.berserk_agotada": "{quien} is out of breath. She rests next turn.",
+  "batalla.sigue_agotada": "{quien} catches her breath: she sits this turn out."
 }

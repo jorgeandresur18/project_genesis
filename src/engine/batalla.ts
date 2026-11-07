@@ -93,6 +93,11 @@ export interface Especial {
    */
   berserk?: { sprite: string; grito?: string; ms?: number };
   /**
+   * Sin barra (el Berserk): siempre se puede usar, sale en el menú como un botón grande, sin porcentaje, y después el
+   * que lo usó descansa este número de turnos (`agotado` del luchador).
+   */
+  sin_barra?: { descanso: number };
+  /**
    * La bola de defensa (la sombra de roca; decisión del autor, 2026-11-07): un especial que no golpea: se hace bola por `turnos`
    * ([mín, máx], al azar), sube su DEF en `def` y al que le pega de cerca le devuelve esta parte (`devuelve`) del daño
    * con las espinas (los disparos de lejos rebotan). Mientras es bola no usa especiales ni sus otros ataques: solo
@@ -178,6 +183,8 @@ export interface Heroe {
   descanso?: string;
   /** Lo que se dice cuando se queda descansando (apenas actúa) y cuando ya puede volver ({quien}: su nombre). */
   descanso_textos?: { empieza: string; termina: string };
+  /** En el menú, sus ataques no muestran números (ni usos ni poder): Cami armored. */
+  sin_numeros?: boolean;
   /** Ataca de lejos: no se acerca, y sale una bala de su pistola que impacta en el objetivo (Cami). */
   distancia?: boolean;
   /** Tamaño en pantalla respecto de los demás (1: normal). */
@@ -533,6 +540,8 @@ export interface Luchador {
   ceboEfecto?: EfectoCebo;
   /** Protegido: tantos golpes que no le hacen daño. */
   protegido: number;
+  /** Descansa (después del Berserk): turnos que no actúa. */
+  agotado?: number;
   /** En modo bola (la sombra de roca): turnos que le quedan, la DEF que suma, qué parte del daño devuelve y cómo rueda. */
   espinas?: { turnos: number; def: number; devuelve: number; rodar: Ataque };
   /** Cuántas veces usó cada ataque con usos limitados en esta pelea (por nombre). */
@@ -661,7 +670,7 @@ export function dano(atacante: Luchador, defensor: Luchador, poder: number, azar
 /** Dormido, congelado o paralizado: pierde su turno. */
 export const noActua = (l: Luchador) => l.dormido > 0 || l.congelado > 0 || l.paralizado > 0;
 export function disponibles(heroes: Luchador[], datos: Record<string, Heroe>, actuaron: string[]): Luchador[] {
-  return heroes.filter((h) => h.ps > 0 && !h.desterrado && !noActua(h) && (datos[h.clave].seguido || !actuaron.includes(h.id)));
+  return heroes.filter((h) => h.ps > 0 && !h.desterrado && !noActua(h) && !h.agotado && (datos[h.clave].seguido || !actuaron.includes(h.id)));
 }
 
 /** Sube `n` niveles de golpe (el caramelo rancio): las estadísticas pasan a las del nivel nuevo. */

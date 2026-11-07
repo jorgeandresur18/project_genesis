@@ -3876,3 +3876,11 @@ button.cassette:hover .cassette-imagen { transform: translateY(-2px) rotate(-3de
 @keyframes bala-espiral { to { translate: var(--dx) var(--dy); } }
 .batalla-figura.agachado-berserk .batalla-sprite { translate: 0 18%; scale: 1.06 0.78; transform-origin: bottom; filter: brightness(0.85); transition: translate 0.2s, scale 0.2s; }
 @media (prefers-reduced-motion: reduce) { .batalla-bala-espiral { animation-duration: 0.01s !important; } }
+/* El Berserk en el menú: un botón grande, azul y blanco, siempre listo (sin porcentaje). */
+.batalla-menu button.berserk { margin: 0.3rem 0 0.1rem; padding: 0.55rem 0.8rem; font-size: 1.15em; letter-spacing: 0.12em; color: #fff; text-align: center;
+  background: linear-gradient(180deg, #5ee0ff, #2f8cff 55%, #1b5fd6); border: 2px solid #fff; border-radius: 0.45rem;
+  box-shadow: 0 0 10px rgba(94, 224, 255, 0.8), inset 0 0 8px rgba(255, 255, 255, 0.45); text-shadow: 0 1px 0 #0b2f6e, 0 0 6px rgba(255, 255, 255, 0.8);
+  animation: berserk-late 1.4s ease-in-out infinite; }
+.batalla-menu button.berserk.sel { box-shadow: 0 0 16px #5ee0ff, 0 0 30px rgba(94, 224, 255, 0.7), inset 0 0 10px #fff; }
+@keyframes berserk-late { 50% { filter: brightness(1.18); } }
+@media (prefers-reduced-motion: reduce) { .batalla-menu button.berserk { animation: none; } }

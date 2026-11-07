@@ -107,6 +107,7 @@ import {
   curarse,
   hablarFunciona,
   pedirPerdon,
+  agotar,
 } from '../engine/turnos';
 import { BASE, PausaContexto, SpriteHoja, anguloDisparo, cargarHoja, rectSprite, type Anim, type Hoja } from './batalla/sprites';
 import { AvisoEspecial, CajaCasillas, Figura, Tarjeta, conNumeros, type Casillas } from './batalla/escena';
@@ -785,6 +786,8 @@ function Pelea({
       hecho: [],
     });
     forzar();
+    // Después del berserk: descansa este turno.
+    for (const h of b.current.heroes.filter((x) => vivo(x) && x.agotado)) await decir(fmt(t('batalla.sigue_agotada'), { quien: h.nombre }));
     // Dormido, congelado o paralizado: pierde su turno.
     for (const h of b.current.heroes.filter((x) => vivo(x) && x.desterrado)) await decir(fmt(t('batalla.sigue_desterrado'), { quien: h.nombre, n: h.desterrado }));
     for (const h of b.current.heroes.filter((x) => vivo(x) && !x.desterrado && noActua(x))) await decir(fmt(t(h.paralizado ? 'batalla.sigue_paralizado' : h.congelado ? 'batalla.sigue_congelado' : 'batalla.sigue_dormido'), { quien: h.nombre, n: h.paralizado }));
@@ -1968,7 +1971,7 @@ function Pelea({
   const [espiral, setEspiral] = useState<{ key: number; x: number; y: number; dx: number; dy: number; ms: number; color: string; misil: boolean }[]>([]);
   const berserk = async (l: Luchador, e: Especial) => {
     const cfg = e.berserk!;
-    l.carga = 0;
+    if (!e.sin_barra) l.carga = 0;
     forzar();
     await avisar(e, cfg.sprite, true);
     await decir(fmt(e.texto, { quien: l.nombre }));
@@ -2055,6 +2058,12 @@ function Pelea({
     await decir(fmt(t('batalla.especial_total'), { quien: l.nombre, n: total }));
     await limpiarCebos();
     for (const x of rivales) if (!vivo(x) && !x.cebo) await alCaer(x);
+    // Después del berserk, descansa (el turno siguiente no actúa).
+    if (e.sin_barra && vivo(l)) {
+      agotar(b.current, l, e.sin_barra.descanso);
+      forzar();
+      await decir(fmt(t('batalla.berserk_agotada'), { quien: l.nombre }));
+    }
   };
   /** El rayo del especial del Capitán que sigue más allá de su cuadro, hasta el borde de la pantalla. */
   const [rayoSigue, setRayoSigue] = useState<{ id: string; x: number; y: number; largo: number; ang: number; grosor: number } | null>(null);
@@ -2547,7 +2556,7 @@ function Pelea({
       const especial = especiales[i - ataques.length];
       if (i >= ataques.length && especial) {
         const cual = i - ataques.length;
-        if (!especialListo(heroe)) {
+        if (!especialListo(heroe) && !especial.sin_barra) {
           playChip('vacio');
           return setMensaje({ texto: fmt(t('batalla.especial_no'), { n: Math.floor(heroe.carga) }), n: Math.random() });
         }
@@ -2666,7 +2675,7 @@ function Pelea({
             ...ataques.map((a) => ({
               texto: a.nombre,
               // Los usos que le quedan (5/5); sin límite, su poder.
-              extra: a.usos !== undefined ? `${quedan(heroe!, a)}/${a.usos}` : `${a.poder}`,
+              extra: d.personajes[heroe!.clave].sin_numeros ? '' : a.usos !== undefined ? `${quedan(heroe!, a)}/${a.usos}` : `${a.poder}`,
               clase: (a.cebo && tieneCebo(heroe!)) || quedan(heroe!, a) <= 0 ? 'especial' : '',
               desc:
                 (a.copia
@@ -2691,9 +2700,10 @@ function Pelea({
             })),
             ...(heroe
               ? especiales.map((especial) => ({
-                    texto: `★ ${especial.nombre}`,
-                    extra: especialListo(heroe) ? t('batalla.especial_listo') : `${Math.floor(heroe.carga)}%`,
-                    clase: especialListo(heroe) ? 'especial listo' : 'especial',
+                    // Sin barra (el Berserk): un botón grande, azul y blanco, siempre listo y sin porcentaje.
+                    texto: especial.sin_barra ? especial.nombre.toUpperCase() : `★ ${especial.nombre}`,
+                    extra: especial.sin_barra ? '' : especialListo(heroe) ? t('batalla.especial_listo') : `${Math.floor(heroe.carga)}%`,
+                    clase: especial.sin_barra ? 'berserk' : especialListo(heroe) ? 'especial listo' : 'especial',
                     desc: fmt(t(especial.multicebo ? 'batalla.desc.multicebo' : 'batalla.desc.especial'), {
                       poder: especial.poder,
                       golpes: especial.golpes,
@@ -2716,7 +2726,7 @@ function Pelea({
    * «Descansa» en la tarjeta: solo mientras se la ve agachada (el sprite de descanso), igual que la figura (si está
    * paralizada, se la ve paralizada).
    */
-  const descansa = (h: Luchador) => vivo(h) && !h.paralizado && b.current.cansados.has(h.id) && !!d.personajes[h.clave].descanso;
+  const descansa = (h: Luchador) => vivo(h) && !h.paralizado && ((b.current.cansados.has(h.id) && !!d.personajes[h.clave].descanso) || !!h.agotado);
   const habla = mensaje?.quien;
   const colorDe = (clave: string) => d.personajes[clave]?.especial?.color ?? '#e8e2d4';
   const texto = mensaje ? mensaje.texto.slice(0, letras) : '';
@@ -2849,7 +2859,7 @@ function Pelea({
                     : (anims[h.id] ?? 'idle')
               }
               alCuadro={(anim, col, hoja) => alCuadro(h, anim, col, hoja)}
-              efecto={agachados.includes(h.id) ? 'agachado-berserk' : efectos[h.id]}
+              efecto={agachados.includes(h.id) || (vivo(h) && h.agotado) ? 'agachado-berserk' : efectos[h.id]}
               alto={aire[h.id] ?? 0}
               vez={veces[h.id] ?? 0}
               especial={d.personajes[h.clave].especial}
@@ -3092,7 +3102,7 @@ function Pelea({
         </div>
         <div className="batalla-grupo">
           {b.current.heroes.map((h) => (
-            <Tarjeta key={h.id} h={h} color={colorDe(h.clave)} activo={eligiendo === h.id} descansa={descansa(h)} especial={d.personajes[h.clave].especial} />
+            <Tarjeta key={h.id} h={h} color={colorDe(h.clave)} activo={eligiendo === h.id} descansa={descansa(h)} especial={d.personajes[h.clave].especial?.sin_barra ? undefined : d.personajes[h.clave].especial} />
           ))}
         </div>
         {/* Lo que dice alguien: abajo, con su retrato en pixel art. */}

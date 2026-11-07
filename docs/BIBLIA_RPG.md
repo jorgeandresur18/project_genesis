@@ -834,6 +834,9 @@ La gran montaña se sacó (decisión del autor, 2026-11-07: los dos especiales s
   derrotado. Al terminar los turnos: «se desenrolla». Código: `ponerEspinas` y `pinchar` en `src/engine/turnos.ts`;
   `modoBola` y `desintegrar` en `Batalla.tsx`.
 - **Agachado:** antes de la bola, y al retirarse herido (sigue la historia: pisa el hielo del arroyo).
+- **El fondo** (del autor, 2026-11-07): `public/batalla/fondos/claro.webp` (de `docs/fondos/Four Seasons Twilight
+  Battlefield.png`), con el arroyo congelado a la izquierda, del lado de la roca. Cuadrícula en
+  `src/data/fondos_batalla.json`.
 - **Balance** (simulado): el atento gana ~98 %, el descuidado ~87 % (`tests/balance.test.ts`). El autor sintió demasiado difícil la primera versión (~84 % y ~26 %).
 - Para probar a mano en el navegador (solo en desarrollo): `window.__pelea` tiene el estado y los datos de la pelea
   (forzar un ataque, llenar la barra).
@@ -846,7 +849,11 @@ casco con visor y los dos cañones), por ahora solo el idle; el parpadeo sale de
 (`tools/batalla_sprites.py … armored berserk` → `public/batalla/cami_armored` y `cami_berserk`).
 
 - **En esta forma tiene solo dos cosas:** el **Blaster+** (un disparo fuerte desde el puño; 22) y el especial+
-  **Berserk**. Con la armadura no siente el tobillo: actúa todos los turnos.
+  **Berserk**. **Sin números** (decisión del autor): el Blaster+ no tiene usos y el menú no muestra cifras
+  (`sin_numeros` del personaje); el Berserk no usa la barra: está siempre listo y sale en el menú como un **botón
+  grande, azul y blanco** (`sin_barra` del especial; la tarjeta no muestra la barra). **Después del Berserk descansa
+  un turno** (`agotado`; `agotar` en `src/engine/turnos.ts`). Con la armadura no siente el tobillo: actúa todos los
+  turnos.
 - **El Berserk:** se le cierra el casco (cambia a la hoja del berserk), les grita a los suyos «¡Agáchense!» (se agachan
   mientras dura), se planta en el medio de la arena y suelta un infierno de balas en espiral, como en los juegos de
   naves: cinco brazos que giran hacia un lado y tres hacia el otro, más algún misil naranja directo a un rival (unas 190

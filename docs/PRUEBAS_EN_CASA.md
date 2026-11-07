@@ -283,6 +283,7 @@ En el Torneo (`npm run dev`, desde Extras):
 ## 25. La sombra de roca con tus sprites (nuevo, 7 de noviembre)
 
 Abrir `http://localhost:5173/?batalla=sombra_roca`. Claude ya vio cada ataque sin ventana (capturas); falta verlo en movimiento.
+- [ ] **El fondo nuevo** (el tuyo, el claro con el arroyo congelado): que la roca y los héroes pisen bien (con `&cuadricula` se ven los puntos).
 - [ ] **La lluvia de meteoritos:** el cielo morado con nubes, los meteoritos cayendo hacia los héroes y el estallido morado. ¿Son suficientes? ¿El cielo se nota?
 - [ ] **Las montañitas del brazo:** brotan por el suelo hasta cada uno. ¿Más grandes, más, más lentas?
 - [ ] **La bola de espinas (especial):** de pie, se arrodilla, carga mientras le llegan pedruscos y se transforma en la bola (más grande); se queda así 3 o 4 turnos. Mientras tanto solo rueda contra uno (sin especiales) y su barra no se carga. Si le pegas, solo brilla. A Jair el puño le devuelve un poco («se pincha») y a Cami «las balas rebotan». ¿DEF +10 y el 25 % se sienten bien?
@@ -292,9 +293,10 @@ Abrir `http://localhost:5173/?batalla=sombra_roca`. Claude ya vio cada ataque si
 
 ## 26. Cami armored y el Berserk (nuevo, 7 de noviembre)
 
-Abrir `http://localhost:5173/?batalla=prueba_armored`. Para el Berserk, llenar la barra con «Objetos › 4Low-Co» (hay 3 en la mochila).
+Abrir `http://localhost:5173/?batalla=prueba_armored`.
 - [ ] Cami armored (tu sprite, con el parpadeo) junto a Jair y Rikka.
-- [ ] **Blaster+:** dispara desde el puño. Es muy fuerte a propósito (el armored es «un trámite»). ¿Lo bajo?
+- [ ] **Blaster+:** dispara desde el puño, sin números en el menú. Es muy fuerte a propósito (el armored es «un trámite»). ¿Lo bajo?
+- [ ] **El botón BERSERK:** grande, azul y blanco, siempre listo (sin porcentaje; la tarjeta de Cami no tiene barra).
 - [ ] **Berserk:** se le cierra el casco (cambia al sprite con visor y cañones), grita «¡Agáchense!» y Jair y Rikka se agachan; va al medio y suelta la espiral de balas con misiles. ¿Son suficientes las balas? ¿Más rápido, más lento, más largo?
-- [ ] Al terminar: se saca el casco, vuelve a su lugar y los otros se paran.
+- [ ] Al terminar: se saca el casco, vuelve a su lugar y los otros se paran. **El turno siguiente Cami descansa** («recupera el aliento») y después vuelve a elegir.
 

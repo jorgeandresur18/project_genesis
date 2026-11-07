@@ -21,7 +21,6 @@
         {
           "nombre": "Blaster+",
           "poder": 22,
-          "usos": 30,
           "texto": "{quien} levanta el puño de la armadura y dispara. El blaster ahora tiene más ganas que ella."
         }
       ],
@@ -41,12 +40,16 @@
         "texto": "A {quien} se le cierra el casco sobre la cara. El visor se enciende. Del hombro le salen dos cañones.",
         "berserk": {
           "sprite": "batalla/cami_berserk"
+        },
+        "sin_barra": {
+          "descanso": 1
         }
       },
       "aprende": [],
       "especiales_extra": [],
       "descanso": "",
-      "_nota": "Con la armadura no siente el tobillo: actúa todos los turnos y no se agacha a descansar."
+      "_nota": "Con la armadura no siente el tobillo: actúa todos los turnos. Sin números en el menú (decisión del autor): el Blaster+ sin usos y el Berserk siempre listo (un botón grande); después del Berserk descansa un turno.",
+      "sin_numeros": true
     },
     "jair": {
       "nivel": 8
@@ -121,7 +124,7 @@
     "inicio": [
       {
         "quien": "Voz",
-        "texto": "[Prueba] Cami armored contra los soldados del molino. Usa «Objetos › 4Low-Co» para llenar la barra y ver el Berserk."
+        "texto": "[Prueba] Cami armored contra los soldados del molino. El Berserk está siempre listo: después, Cami descansa un turno."
       }
     ],
     "refuerzos": [

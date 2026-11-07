@@ -1,6 +1,6 @@
 {
   "titulo": "El claro de las cuatro estaciones",
-  "fondo": "PLACEHOLDER:claro_cuatro_estaciones",
+  "fondo": "batalla/fondos/claro",
   "heroes": [
     "jair",
     "cami"

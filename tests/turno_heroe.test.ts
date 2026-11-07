@@ -1,9 +1,10 @@
 // El turno de los héroes sin dibujo (src/engine/turnos.ts, etapa 3 de partir Batalla.tsx): a quién le llega un
 // objeto, cuándo se pierde la acción, qué tipo de ataque es, hablar y pedir perdón.
 import { describe, expect, it } from 'vitest';
-import { crearLuchador, type Ataque, type DatosBatalla, type Luchador } from '../src/engine/batalla';
+import { crearLuchador, disponibles, type Ataque, type DatosBatalla, type Luchador } from '../src/engine/batalla';
 import { BATALLAS } from '../src/engine/batallas';
 import {
+  agotar,
   cortarRacha,
   curarse,
   decidirEnemigo,
@@ -258,5 +259,26 @@ describe('el modo bola de la sombra de roca (idea del autor, 2026-11-07)', () =>
     const ps = cami.ps;
     expect(resolverGolpe(s, d, cami, e, 40, false, () => 0.5).espinas).toBeUndefined();
     expect(cami.ps).toBe(ps);
+  });
+});
+
+describe('el Berserk de Cami armored (decisión del autor, 2026-11-07)', () => {
+  it('después del berserk descansa un turno (desde el siguiente) y vuelve a actuar', () => {
+    const d = BATALLAS.prueba_armored as DatosBatalla;
+    const s = estadoInicial(d);
+    const cami = s.heroes.find((h) => h.clave === 'cami')!;
+    expect(d.personajes.cami.especial?.sin_barra).toBeTruthy();
+    agotar(s, cami, d.personajes.cami.especial!.sin_barra!.descanso);
+    // El mismo turno en que lo usó no cuenta.
+    finDeTurno(s);
+    expect(disponibles(s.heroes, d.personajes, [])).not.toContain(cami);
+    finDeTurno(s);
+    expect(disponibles(s.heroes, d.personajes, [])).toContain(cami);
+  });
+
+  it('el Blaster+ no tiene usos', () => {
+    const d = BATALLAS.prueba_armored as DatosBatalla;
+    expect(d.personajes.cami.ataques[0].usos).toBeUndefined();
+    expect(d.personajes.cami.sin_numeros).toBe(true);
   });
 });

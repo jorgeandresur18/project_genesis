@@ -359,6 +359,7 @@ export function finDeTurno(estado: EstadoPelea) {
       return;
     }
     if (h.inmuneParalisis) h.inmuneParalisis--;
+    if (h.agotado && !estado.estadoRecien.includes(`${h.id}/agotado`)) h.agotado--;
     if (h.espinas && !estado.estadoRecien.includes(`${h.id}/espinas`) && --h.espinas.turnos <= 0) {
       h.extraDef -= h.espinas.def;
       h.espinas = undefined;
@@ -920,6 +921,12 @@ export function efectoRepetido(h: Luchador, e: Luchador, a: Ataque): string | nu
   if (!ya) return null;
   if (h.usados?.[a.nombre]) h.usados[a.nombre]--;
   return ya;
+}
+
+/** Después de un especial sin barra (el Berserk): no actúa por tantos turnos, desde el siguiente. */
+export function agotar(estado: EstadoPelea, h: Luchador, turnos: number) {
+  h.agotado = turnos;
+  estado.estadoRecien.push(`${h.id}/agotado`);
 }
 
 /** Se cura una parte de su vida máxima (Rikka, Ctrl+Z de Jair). Devuelve cuánto subió. */
