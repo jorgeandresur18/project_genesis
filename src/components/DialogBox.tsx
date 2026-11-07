@@ -5,6 +5,7 @@ import { highlightAiVowels } from '../effects/aiVowels';
 import { startTyping, stopTyping } from '../engine/sound';
 import personajes from '../data/personajes_ui.json';
 import { useT } from '../engine/i18n';
+import { EDITOR_EN_VIVO, useEdiciones } from '../engine/ediciones';
 
 /** Color (y si es una voz de máquina) del nombre de un hablante: «Nikki (mensaje)» usa el de Nikki. */
 function speakerStyle(speaker: string): { color: string; mono: boolean } {
@@ -26,19 +27,29 @@ interface Props {
   globo?: boolean;
   /** Lo que dice al tocarla (en globo): reemplaza el texto de la línea mientras no se siga. */
   reaccion?: { quien: string; texto: string; n: number } | null;
+  /** La escena (para el editor en vivo, solo en `npm run dev`). */
+  escena?: string;
+  /** Si se puede editar el texto mientras se juega (en desarrollo y en español). */
+  editable?: boolean;
 }
 
 /**
  * Caja de diálogo con efecto máquina de escribir. Se monta de nuevo en cada escena (key = scene_id),
  * así que siempre empieza desde cero. Al terminar marca `textDone` en el estado global.
  */
-export function DialogBox({ dialogue, aiVowels, hasChoices, onAdvance, globo = false, reaccion = null }: Props) {
+export function DialogBox({ dialogue, aiVowels, hasChoices, onAdvance, globo = false, reaccion = null, escena, editable = false }: Props) {
   const textDone = useStore((s) => s.textDone);
   const setTextDone = useStore((s) => s.setTextDone);
   const speed = useStore((s) => s.settings.textSpeed);
   const t = useT();
   const [count, setCount] = useState(0);
-  const text = dialogue?.text ?? '';
+  // El editor en vivo: lo que el autor corrigió de esta línea (se muestra en lugar del original, con «EDITADO»).
+  const conEditor = EDITOR_EN_VIVO && editable && !!escena;
+  const edicion = useEdiciones((s) => (conEditor && escena ? s.mapa[escena] : undefined));
+  const guardar = useEdiciones((s) => s.guardar);
+  const [editando, setEditando] = useState<string | null>(null);
+  const original = dialogue?.text ?? '';
+  const text = edicion ? edicion.texto : original;
 
   useEffect(() => {
     if (textDone) return;
@@ -80,13 +91,63 @@ export function DialogBox({ dialogue, aiVowels, hasChoices, onAdvance, globo = f
       style={who ? ({ '--speaker': who.color } as CSSProperties) : undefined}
     >
       {dialogue.speaker && <div className={`dialog-speaker ${who?.mono ? 'dialog-speaker-mono' : ''}`}>{render(dialogue.speaker)}</div>}
+      {conEditor && edicion && !reaccion && <span className="dialog-editado">EDITADO</span>}
+      {conEditor && !reaccion && editando === null && (
+        <button
+          className="dialog-editar"
+          onClick={(e) => {
+            e.stopPropagation();
+            setEditando(text);
+          }}
+          onMouseDown={(e) => e.preventDefault()}
+          title="Editar esta línea (solo en desarrollo)"
+        >
+          ✎ Editar
+        </button>
+      )}
+      {editando !== null ? (
+        <div className="dialog-editor" onClick={(e) => e.stopPropagation()}>
+          <textarea
+            autoFocus
+            value={editando}
+            onChange={(e) => setEditando(e.target.value)}
+            onKeyDown={(e) => e.stopPropagation()}
+            rows={Math.min(8, Math.max(3, Math.ceil(editando.length / 70)))}
+          />
+          <div className="dialog-editor-botones">
+            <button
+              className="dialog-editor-guardar"
+              onClick={() => {
+                const nuevo = editando.trim();
+                void guardar(escena!, nuevo && nuevo !== original ? nuevo : null, original);
+                setEditando(null);
+              }}
+            >
+              Guardar
+            </button>
+            {edicion && (
+              <button
+                onClick={() => {
+                  void guardar(escena!, null, original);
+                  setEditando(null);
+                }}
+              >
+                Volver al original
+              </button>
+            )}
+            <button onClick={() => setEditando(null)}>Cancelar</button>
+          </div>
+          {edicion && <small className="dialog-editor-original">Original: {original}</small>}
+        </div>
+      ) : (
       <div key={reaccion?.n} className={`dialog-text ${thought && !reaccion ? 'dialog-thought' : ''} ${who?.mono ? 'dialog-mono' : ''} ${reaccion ? 'dialog-reaccion' : ''}`}>
         {render(visible)}
         {/* El resto del texto ocupa su lugar sin verse, para que la caja no cambie de tamaño al escribir. */}
         {!textDone && !reaccion && <span className="dialog-hidden">{text.slice(count)}</span>}
       </div>
+      )}
       {/* Deja claro dónde tocar: mientras se escribe, completa el texto; al terminar, pasa al siguiente. */}
-      {!(hasChoices && textDone) && (
+      {!(hasChoices && textDone) && editando === null && (
         <button
           className={`dialog-advance ${textDone ? 'dialog-advance-ready' : ''}`}
           onClick={(e) => {

@@ -115,5 +115,8 @@ Para trabajar desde cualquier computadora. El detalle de cada sesión está en `
   `python -I -X utf8 tools/manos_jugador.py` (desde `docs/palma.png`, `agarrando.png`, `apuntando.png`, que no se suben).
 - **Torneo:** peleadores nuevos (Jordy, Billy, Maggie, el influencer con seguidores, el otaku; Nikki desde el inicio) en
   `heroes` de `src/data/rpg/personajes.json`; golpes que dejan un estado (`deja`); equipos parejos (`jefe_con_horda`).
+- **Editor de diálogos en vivo** (solo en `npm run dev`): «✎ Editar» en la caja de diálogo; lo que el autor guarda va a
+  `docs/guion/ediciones_en_vivo.json` (original y texto nuevo). Para aplicarlo: leer ese archivo, corregir la redacción,
+  pasarlo al JSON de la historia con el inglés y vaciarlo. Ver `docs/SPEC.md`.
 - **Nombres:** las chicas reales son **Milka** (base de Cami) y **Ari** (Arianni, base de Rikka); Jordan pasó a llamarse
   **Jordy** (gay, discreto). Cami es bisexual (canon). Todo en `docs/CANON.md`.

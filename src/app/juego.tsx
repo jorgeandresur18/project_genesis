@@ -184,6 +184,8 @@ export function Game({ open, paused, onTitle }: { open: (o: Overlay) => void; pa
     if (paused) return;
     const onKey = (e: KeyboardEvent) => {
       if (useStore.getState().game?.finished) return; // En los finales se elige con los botones.
+      // Escribiendo en el editor de diálogos en vivo: las teclas son del texto.
+      if ((e.target as HTMLElement | null)?.closest?.('textarea, input')) return;
       if (card) return; // La portada del capítulo se salta sola (ver ChapterIntro).
       if (enNivel) return; // En el nivel de acción, las teclas son del juego.
       if (e.key.toLowerCase() === 'h' && !e.ctrlKey && !e.metaKey) {
@@ -430,6 +432,8 @@ export function Game({ open, paused, onTitle }: { open: (o: Overlay) => void; pa
           hasChoices={waitingChoice}
           onAdvance={advanceIfReady}
           globo={!!shown.globo}
+          escena={shown.scene_id}
+          editable={lang === 'es'}
           reaccion={shown.globo && reaccionGlobo?.escena === shown.scene_id ? reaccionGlobo : null}
         />
       )}

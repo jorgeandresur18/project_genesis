@@ -3805,3 +3805,14 @@ button.cassette:hover .cassette-imagen { transform: translateY(-2px) rotate(-3de
   bottom: 0;
   flex: none;
 }
+
+/* El editor de diálogos en vivo (solo en `npm run dev`; ver src/engine/ediciones.ts). */
+.dialog-editado { position: absolute; top: 0; right: 1.3rem; transform: translateY(-55%); padding: 0.18rem 0.7rem; border-radius: 999px; background: #ffd23f; color: #1a1500; font: 700 0.72rem/1.2 'Montserrat', sans-serif; letter-spacing: 0.14em; box-shadow: 0 0 0.8rem rgba(255, 210, 63, 0.45); }
+.dialog-editar { position: absolute; right: 0.9rem; top: 0.55rem; padding: 0.15rem 0.6rem; border-radius: 999px; border: 1px solid rgba(255, 210, 63, 0.45); background: rgba(255, 210, 63, 0.1); color: #ffe27a; font-size: 0.75rem; cursor: pointer; opacity: 0.75; }
+.dialog-editar:hover { opacity: 1; }
+.dialog-editor { display: flex; flex-direction: column; gap: 0.5rem; }
+.dialog-editor textarea { width: 100%; resize: vertical; padding: 0.6rem 0.75rem; border-radius: 0.6rem; border: 1px solid rgba(255, 210, 63, 0.5); background: rgba(0, 0, 0, 0.45); color: #f2f0f5; font: inherit; font-size: calc(1rem * var(--text-scale, 1)); line-height: 1.5; }
+.dialog-editor-botones { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.dialog-editor-botones button { padding: 0.35rem 1rem; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.25); background: rgba(255, 255, 255, 0.07); color: #e9ecf1; cursor: pointer; }
+.dialog-editor-botones .dialog-editor-guardar { background: #ffd23f; color: #1a1500; border-color: transparent; font-weight: 700; }
+.dialog-editor-original { color: #a9aebb; font-size: 0.8rem; }

@@ -272,3 +272,9 @@ En el Torneo (`npm run dev`, desde Extras):
 - [ ] Rikka con la flor de pureza: darle pastillas felices o el pastelillo herbal no le hace nada («no le hace nada: lo protege lo que lleva puesto») y el objeto se gasta.
 - [ ] Un personaje envenenado no se puede quemar, dormir, paralizar ni confundir: el ataque o el objeto no le hacen nada hasta que se le pasa el veneno (o se lo sacas con un antídoto).
 
+## 24. El editor de diálogos en vivo (nuevo, 6 de noviembre, noche; en `npm run dev`)
+
+- [ ] Jugar el Capítulo 1 y, en cualquier línea, tocar «✎ Editar»: cambiar el texto y «Guardar». Sale la etiqueta amarilla «EDITADO» y la línea queda con tu texto (también si vuelves a pasar por ahí).
+- [ ] «Volver al original» la deja como estaba. Mientras escribes, Espacio y Enter no hacen avanzar la historia.
+- [ ] Cuando termines una tanda, avisar a Claude: lee `docs/guion/ediciones_en_vivo.json`, te corrige la redacción y lo aplica con el inglés.
+
