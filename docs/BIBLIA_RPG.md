@@ -823,7 +823,7 @@ las partes de la montaña). **Casi todo le pega a todo el equipo** (decisión de
 | Puño de roca | 9, a uno (el más usado) | Se acerca y baja el puño con llamas moradas (la animación entera). |
 | Montañas de roca | 4, a todos | Levanta el brazo y brotan montañitas por el suelo, una detrás de otra, hasta cada uno. |
 | Especial: Lluvia de meteoritos | 4 × 8 golpes, a todos | El cielo se tiñe de morado con nubes; caen más de 40 meteoritos por toda la pantalla y revientan en morado. |
-| Especial: Bola de espinas | (rodar: 3, a uno) | Se agacha, carga y se vuelve la bola espinosa por **3 o 4 turnos** (al azar, desde el siguiente): DEF +10 y espinas. Mientras es bola **no usa especiales ni sus otros ataques: solo rueda** contra uno que elige, y **la barra no se carga**. |
+| Especial: Bola de espinas | (rodar: 3, a uno) | De pie, se arrodilla y carga mientras le llegan pedruscos de todos lados; con un destello se transforma en la bola espinosa (**más grande** que el gólem, ×1,3) por **3 o 4 turnos** (al azar, desde el siguiente): DEF +10 y espinas. Mientras es bola **no usa especiales ni sus otros ataques: solo rueda** contra uno que elige, y **la barra no se carga**. |
 
 La gran montaña se sacó (decisión del autor, 2026-11-07: los dos especiales son la lluvia y la bola).
 

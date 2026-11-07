@@ -154,6 +154,8 @@ const CLON_CORRIDO: [number, number] = [8, -3];
 const CLON_ESCALA = 0.9;
 /** El clon de sombra: cuánto carga energía antes del destello. */
 const CARGA_CLON_MS = 1500;
+/** La bola de la sombra de roca se ve más grande que el gólem (pedido del autor). */
+const BOLA_ESCALA = 1.3;
 type Bala = { key: number; x: number; y: number; dx: number; dy: number; ms: number; color: string; rafaga: boolean };
 
 type Menu =
@@ -1896,6 +1898,8 @@ function Pelea({
    * agacha y se vuelve la bola, y así se queda mientras le duren las espinas (solo rueda; los golpes solo lo iluminan).
    */
   const modoBola = async (l: Luchador, e: Especial) => {
+    // Las espinas ya están puestas, pero hasta transformarse se lo ve de pie (después se arrodilla y se arma).
+    setArmando((v) => [...v, l.id]);
     forzar();
     await avisar(e, d.enemigos[l.clave].sprite, false);
     await decir(fmt(e.texto, { quien: l.nombre, objetivo: '' }));
@@ -1913,14 +1917,41 @@ function Pelea({
     await espera(1400);
   };
   /** Antes de la bola: se agacha, carga y se vuelve la bola. */
+  const [armando, setArmando] = useState<string[]>([]);
+  /** Los pedruscos que vuelan hacia él mientras se arma la bola (de dónde, hacia dónde y cuándo). */
+  const [pedruscos, setPedruscos] = useState<{ key: number; x: number; y: number; dx: number; dy: number; ang: number; ms: number; demora: number; k: number }[]>([]);
   const hacerseBola = async (l: Luchador) => {
+    // Mientras se arma no se ve todavía como bola (las espinas ya están puestas desde que lo decidió).
+    setArmando((v) => (v.includes(l.id) ? v : [...v, l.id]));
     void animar(l.id, 'agachado' as Anim);
     playChip('carga');
     luz(l.id, '#c35cff');
-    await espera(1000);
+    // Arrodillado, carga: de todos lados le llegan pedruscos que se le pegan.
+    const c = centroDe(l);
+    const base = raiz.current?.getBoundingClientRect();
+    const carga = 1600;
+    if (c && base) {
+      const lejos = Math.hypot(base.width, base.height) * 0.45;
+      const k = Math.max(1.8, base.height / 280);
+      setPedruscos(
+        Array.from({ length: 22 }, (_, i) => {
+          const ang = Math.random() * Math.PI * 2;
+          const dx = -Math.cos(ang) * lejos;
+          const dy = -Math.sin(ang) * lejos;
+          return { key: Math.random(), x: c.x - dx, y: c.y - dy, dx, dy, ang: (Math.atan2(dy, dx) * 180) / Math.PI, ms: 480, demora: (i * (carga - 560)) / 22, k: k * (0.7 + Math.random() * 0.6) };
+        }),
+      );
+      for (let i = 0; i < 4; i++) setTimeout(() => luz(l.id, '#c35cff'), 300 + i * 320);
+    }
+    await espera(carga);
+    // Se transforma: un destello y ya es la bola (más grande).
+    setPedruscos([]);
+    if (c) estallar(c.x, c.y, 1.8);
+    playChip('impacto');
+    setArmando((v) => v.filter((x) => x !== l.id));
     void animar(l.id, 'bola' as Anim);
-    luz(l.id, '#c35cff', true);
-    await espera(350);
+    luz(l.id, '#ffffff', true);
+    await espera(450);
   };
   /** El rayo del especial del Capitán que sigue más allá de su cuadro, hasta el borde de la pantalla. */
   const [rayoSigue, setRayoSigue] = useState<{ id: string; x: number; y: number; largo: number; ang: number; grosor: number } | null>(null);
@@ -2357,6 +2388,14 @@ function Pelea({
     }
   };
 
+  /**
+   * La animación de un enemigo. En modo bola (la sombra de roca) sigue siendo bola aunque le peguen, salte o caiga
+   * (solo se ilumina o se desintegra), salvo mientras se está armando.
+   */
+  const animEnemigo = (e: Luchador) => {
+    const a = anims[e.id] ?? 'idle';
+    return e.espinas && !armando.includes(e.id) && ['idle', 'golpeado', 'daño', 'salto', 'mover', 'ko', 'retirada'].includes(a) ? 'bola' : a;
+  };
   // El menú: qué hace, qué ataque, qué objeto y a quién.
   const heroe = b.current.heroes.find((h) => h.id === eligiendo);
   // Lo equipado (docs/BIBLIA_RPG.md, sección 18): hasta 3 ataques y 2 especiales; los especiales comparten la barra y,
@@ -2672,12 +2711,9 @@ function Pelea({
               refFigura={(el) => (el ? figuras.current.set(e.id, el) : figuras.current.delete(e.id))}
               sprite={d.enemigos[e.clave].sprite}
               filtro={d.enemigos[e.clave].filtro}
-              escala={(d.enemigos[e.clave].escala ?? 1) * (e.clon !== undefined ? CLON_ESCALA : 1)}
+              escala={(d.enemigos[e.clave].escala ?? 1) * (e.clon !== undefined ? CLON_ESCALA : 1) * (animEnemigo(e) === 'bola' ? BOLA_ESCALA : 1)}
               jefe={!!d.enemigos[e.clave].jefe}
-              anim={
-                // En modo bola: sigue siendo bola aunque le peguen, salte o caiga (solo se ilumina o se desintegra).
-                e.espinas && ['idle', 'golpeado', 'daño', 'salto', 'mover', 'ko', 'retirada'].includes(anims[e.id] ?? 'idle') ? 'bola' : (anims[e.id] ?? 'idle')
-              }
+              anim={animEnemigo(e)}
               vez={veces[e.id] ?? 0}
               especial={d.enemigos[e.clave].especial}
               alCuadro={(anim, col, hoja) => alCuadro(e, anim, col, hoja)}
@@ -2824,6 +2860,16 @@ function Pelea({
           }
           aria-hidden
         />
+      ))}
+      {pedruscos.map((m) => (
+        <span
+          key={m.key}
+          className="batalla-pedrusco"
+          style={{ left: m.x, top: m.y, '--dx': `${m.dx}px`, '--dy': `${m.dy}px`, '--ang': `${m.ang}deg`, '--k': m.k, animationDuration: `${m.ms}ms`, animationDelay: `${m.demora}ms` } as CSSProperties}
+          aria-hidden
+        >
+          <SpriteHoja src="batalla/piedras" anim="idle" />
+        </span>
       ))}
       {estallidos.map((x) => (
         <span key={x.key} className="batalla-estallido" style={{ left: x.x, top: x.y, scale: String(x.k) } as CSSProperties} aria-hidden>
