@@ -191,43 +191,51 @@ describe('hablar y pedir perdón', () => {
   });
 });
 
-describe('la bola de defensa de la sombra de roca (idea del autor, 2026-11-07)', () => {
+describe('el modo bola de la sombra de roca (idea del autor, 2026-11-07)', () => {
   const roca = () => {
     const d = BATALLAS.sombra_roca as DatosBatalla;
     const s = estadoInicial(d);
     const e = sumarEnemigo(s, d, 'sombra_roca', 20);
     const [jair, cami] = s.heroes;
-    const bola = d.enemigos.sombra_roca.ataques.find((a) => a.espinas)!.espinas!;
-    return { d, s, e, jair, cami, bola };
+    const esp = d.enemigos.sombra_roca.especiales!.find((x) => x.espinas)!;
+    return { d, s, e, jair, cami, esp, bola: esp.espinas! };
   };
 
-  it('sube su DEF mientras dura y la devuelve al terminar (cuenta desde el turno siguiente)', () => {
+  it('es un especial: gasta la barra, sube su DEF por 3 o 4 turnos (desde el siguiente) y después la devuelve', () => {
     const { d, s, e } = roca();
     const def = e.extraDef;
-    const sinOtros = { ...d, enemigos: { ...d.enemigos, sombra_roca: { ...d.enemigos.sombra_roca, ataques: d.enemigos.sombra_roca.ataques.filter((a) => a.espinas) } } } as DatosBatalla;
-    const r = decidirEnemigo(s, sinOtros, e, false, () => 0.5);
-    expect(r).toMatchObject({ tipo: 'ataque', blancos: [] });
-    expect(e.espinas).toBeTruthy();
+    const soloBola = { ...d, enemigos: { ...d.enemigos, sombra_roca: { ...d.enemigos.sombra_roca, especial: d.enemigos.sombra_roca.especiales![0], especiales: [] } } } as DatosBatalla;
+    e.carga = 100;
+    const r = decidirEnemigo(s, soloBola, e, false, () => 0.99);
+    expect(r).toMatchObject({ tipo: 'especial', especial: { nombre: 'Bola de espinas' } });
+    expect(e.carga).toBe(0);
+    expect(e.espinas?.turnos).toBe(4);
     expect(e.extraDef).toBe(def + e.espinas!.def);
     finDeTurno(s);
-    expect(e.espinas?.turnos).toBe(2);
-    finDeTurno(s);
-    finDeTurno(s);
+    expect(e.espinas?.turnos).toBe(4);
+    for (let i = 0; i < 4; i++) finDeTurno(s);
     expect(e.espinas).toBeUndefined();
     expect(e.extraDef).toBe(def);
   });
 
-  it('no la repite mientras la tiene puesta', () => {
+  it('dura 3 o 4 turnos, al azar', () => {
+    const { e, bola } = roca();
+    ponerEspinas(e, bola, () => 0);
+    expect(e.espinas?.turnos).toBe(3);
+  });
+
+  it('mientras es bola: ni especiales ni sus otros ataques, solo rueda contra uno', () => {
     const { d, s, e, bola } = roca();
     ponerEspinas(e, bola);
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 20; i++) {
+      e.carga = 100;
       const r = decidirEnemigo(s, d, e, false, () => (i % 10) / 10);
-      if (r.tipo === 'ataque') expect(r.ataque.espinas).toBeUndefined();
-      e.carga = 0;
+      expect(r).toMatchObject({ tipo: 'ataque', ataque: { nombre: 'Rodar' } });
+      if (r.tipo === 'ataque') expect(r.blancos).toHaveLength(1);
     }
   });
 
-  it('las espinas pinchan al que pega de cerca (una parte del daño, al menos 1, sin matar); las balas de Cami, no', () => {
+  it('las espinas pinchan al que pega de cerca (menos que lo que pega la bola, al menos 1, sin matar); las balas de Cami, no', () => {
     const { d, s, e, jair, cami, bola } = roca();
     ponerEspinas(e, bola);
     const antes = jair.ps;

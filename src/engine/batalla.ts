@@ -36,12 +36,6 @@ export interface Ataque {
   /** La animación de su hoja que usa (si no, «ataque»); si la hoja tiene un proyectil para ella, lo lanza. */
   anim?: string;
   /**
-   * La bola de defensa (la sombra de roca): no golpea; durante `turnos` sube su DEF en `def` y al que le pega de cerca
-   * le devuelve esta parte (`devuelve`) del daño, con las espinas (los disparos de lejos no se lastiman). Ver
-   * `ponerEspinas` y `resolverGolpe` en turnos.ts.
-   */
-  espinas?: { turnos: number; def: number; devuelve: number };
-  /**
    * Cómo se ve un ataque de la sombra de roca (solo el dibujo; el golpe es el de siempre): `montanitas` (levanta el
    * brazo y brotan montañitas de roca por el suelo hasta cada rival) o `rueda` (se agacha, se hace la bola espinosa y
    * rueda contra cada uno).
@@ -93,11 +87,17 @@ export interface Ataque {
  */
 export interface Especial {
   /**
-   * Cómo se ve un especial de la sombra de roca: `meteoritos` (el cielo morado, nubes y una lluvia de meteoritos que
-   * estallan en morado) o `montana` (se desmorona, brota una montaña gigante debajo de los rivales, brilla con el golpe
-   * y se hunde; después se vuelve a armar). El golpe es el de siempre (`poder`, `golpes`, `objetivo`).
+   * La bola de defensa (la sombra de roca; decisión del autor, 2026-11-07): un especial que no golpea: se hace bola por `turnos`
+   * ([mín, máx], al azar), sube su DEF en `def` y al que le pega de cerca le devuelve esta parte (`devuelve`) del daño
+   * con las espinas (los disparos de lejos rebotan). Mientras es bola no usa especiales ni sus otros ataques: solo
+   * `rodar` (contra uno que elige). Ver `ponerEspinas`, `decidirEnemigo` y `resolverGolpe` en turnos.ts.
    */
-  efecto?: 'meteoritos' | 'montana';
+  espinas?: { turnos: [number, number]; def: number; devuelve: number; rodar: Ataque };
+  /**
+   * Cómo se ve un especial de la sombra de roca: `meteoritos` (el cielo morado, nubes y una lluvia de meteoritos que
+   * estallan en morado). El golpe es el de siempre (`poder`, `golpes`, `objetivo`).
+   */
+  efecto?: 'meteoritos';
   /** Al terminar, a veces deja un estado a cada blanco que sigue de pie (la sesión de grupo de Maggie; ver `Deja`). */
   deja?: Deja;
   /** La Espada de las estaciones (el Rey): a cada blanco que queda en pie le cae una estación al azar (ver turnos.ts). */
@@ -527,8 +527,8 @@ export interface Luchador {
   ceboEfecto?: EfectoCebo;
   /** Protegido: tantos golpes que no le hacen daño. */
   protegido: number;
-  /** La bola de defensa (la sombra de roca): turnos que le quedan, la DEF que suma y qué parte del daño devuelve. */
-  espinas?: { turnos: number; def: number; devuelve: number };
+  /** En modo bola (la sombra de roca): turnos que le quedan, la DEF que suma, qué parte del daño devuelve y cómo rueda. */
+  espinas?: { turnos: number; def: number; devuelve: number; rodar: Ataque };
   /** Cuántas veces usó cada ataque con usos limitados en esta pelea (por nombre). */
   usados?: Record<string, number>;
   /** El último ataque (no especial) que le pegó un rival: lo que copia Lady (ver `ataqueCopiado`). */

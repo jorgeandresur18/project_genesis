@@ -284,10 +284,9 @@ En el Torneo (`npm run dev`, desde Extras):
 
 Abrir `http://localhost:5173/?batalla=sombra_roca`. Claude ya vio cada ataque sin ventana (capturas); falta verlo en movimiento.
 - [ ] **La lluvia de meteoritos:** el cielo morado con nubes, los meteoritos cayendo hacia los héroes y el estallido morado. ¿Son suficientes? ¿El cielo se nota?
-- [ ] **La gran montaña:** se desmorona en escombros, la montaña sale detrás de los héroes (Jair queda en la ladera), brilla y se hunde; después se vuelve a armar. ¿El tamaño está bien?
 - [ ] **Las montañitas del brazo:** brotan por el suelo hasta cada uno. ¿Más grandes, más, más lentas?
-- [ ] **La bola espinosa:** se agacha, se vuelve la bola y rueda hasta cada uno (no gira: se desliza). ¿Quieres que gire?
-- [ ] **La bola de defensa:** se queda hecha bola 2 turnos; a Jair el puño le devuelve un poco («se pincha») y a Cami «las balas rebotan». ¿Los números (DEF +6, devuelve 25 %) se sienten bien?
-- [ ] **El puño:** ahora se ve entero (con las llamas y la vuelta a la guardia), unos 2,7 segundos. ¿Muy lento?
-- [ ] **La dificultad:** la bajé porque la sentiste demasiado difícil: ahora, simulada, se gana ~98 % jugando atento y ~83 % sin cuidado. ¿Ahora sí?
+- [ ] **La bola de espinas (especial):** se agacha, se hace bola y se queda así 3 o 4 turnos. Mientras tanto solo rueda contra uno (sin especiales). Si le pegas, solo brilla. A Jair el puño le devuelve un poco («se pincha») y a Cami «las balas rebotan». ¿DEF +10 y el 25 % se sienten bien?
+- [ ] **Derrotarla siendo bola:** se desintegra (brilla, estallidos morados y desaparece) y sigue la historia.
+- [ ] **El puño:** se ve entero (con las llamas y la vuelta a la guardia), unos 2,7 segundos. ¿Muy lento?
+- [ ] **La dificultad:** simulada, ~96 % si juegas atento y ~85 % sin cuidado (la bajé porque la sentiste difícil). ¿Ahora sí?
 

@@ -490,13 +490,11 @@
     "El monstruo cierra el puño de piedra, se le prenden llamas moradas y lo baja sobre {objetivo}. La nieve salta.": "The monster clenches its stone fist, purple flames catch on it, and it brings it down on {objetivo}. Snow flies.",
     "Montañas de roca": "Rock Mountains",
     "El monstruo levanta el brazo. Del suelo brotan montañitas de roca, una detrás de otra, hasta llegarles a todos.": "The monster raises its arm. Little rock mountains burst from the ground, one after another, until they reach everyone.",
-    "Bola espinosa": "Spiked Ball",
-    "El monstruo se agacha, se encoge y se vuelve una bola de piedra llena de espinas. Rueda contra todos.": "The monster crouches, curls up and turns into a stone ball covered in spikes. It rolls into everyone.",
-    "Bola de defensa": "Defensive Ball",
-    "El monstruo se encoge y se vuelve una bola de espinas. Pegarle ahora va a doler.": "The monster curls up into a ball of spikes. Hitting it now is going to hurt.",
     "Lluvia de meteoritos": "Meteor Shower",
     "El cielo se pone morado. Entre las nubes empiezan a caer meteoritos, cada vez más, y revientan en morado sobre todos.": "The sky turns purple. Meteors start falling through the clouds, more and more of them, bursting purple on everyone.",
-    "La gran montaña": "The Great Mountain",
-    "El monstruo se desmorona. Por un segundo no queda nada. Después el suelo se levanta debajo de todos: una montaña entera, con las grietas encendidas.": "The monster crumbles. For a second there's nothing left. Then the ground rises under everyone: a whole mountain, its cracks glowing."
+    "El monstruo se agacha, se encoge y se vuelve una bola de piedra llena de espinas. Pegarle ahora va a doler.": "The monster crouches, curls up and turns into a stone ball covered in spikes. Hitting it now is going to hurt.",
+    "Rodar": "Roll",
+    "La bola de espinas rueda contra {objetivo}.": "The spiked ball rolls into {objetivo}.",
+    "Bola de espinas": "Spike Ball"
   }
 }

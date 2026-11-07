@@ -301,10 +301,19 @@ export function decidirEnemigo(
     return { tipo: 'bola', traidor };
   }
   const caeEnCebo = en.cae_en_cebo ?? CEBO;
+  // En modo bola (la sombra de roca): ni especiales ni sus otros ataques; solo rueda contra uno que elige.
+  if (e.espinas) return { tipo: 'ataque', ataque: e.espinas.rodar, blancos: desviarACebo(estado, [alAzar(hs, azar)], caeEnCebo, azar) };
   const elige = eligeEspecial(e, en, estado.heroes, estado.enemigos, azar, !bola?.solo_traicion || arena);
   if (elige?.tipo === 'clon') return { tipo: 'clon' };
   if (elige?.tipo === 'bola') return { tipo: 'bola' };
   const especialElegido = elige?.tipo === 'especial' ? (elige.especial ?? esp) : undefined;
+  if (especialElegido?.espinas) {
+    // El modo bola (la sombra de roca): gasta la barra y se protege; cuenta desde el turno siguiente (es lento).
+    e.carga = 0;
+    ponerEspinas(e, especialElegido.espinas, azar);
+    estado.estadoRecien.push(`${e.id}/espinas`);
+    return { tipo: 'especial', especial: especialElegido, blanco: hs[0] };
+  }
   if (especialElegido) {
     const blanco = desviarACebo(estado, [elige!.blanco ?? alAzar(hs, azar)], caeEnCebo, azar)[0];
     return { tipo: 'especial', especial: especialElegido, blanco };
@@ -312,21 +321,13 @@ export function decidirEnemigo(
   // La parálisis solo va contra los que todavía se mueven (si nadie se mueve, ataca de otra forma).
   // Si no le queda ningún ataque posible (solo de efecto y ya todos lo tienen), espera.
   const elegido = eligeAtaque(
-    en.ataques.filter((a) => quedan(e, a) > 0 && !(a.espinas && e.espinas) && !(hs.some((x) => x.envenenado && x.ps <= 2) && (a.confunde || a.paraliza))),
+    en.ataques.filter((a) => quedan(e, a) > 0 && !(hs.some((x) => x.envenenado && x.ps <= 2) && (a.confunde || a.paraliza))),
     hs,
     azar,
   );
   if (!elegido) return { tipo: 'nada' };
   const { ataque: a } = elegido;
   // Las ráfagas (la sombra) se reparten: una a cada uno y las que sobran al azar.
-  // La bola de defensa no va contra nadie: se protege él.
-  if (a.espinas) {
-    gastarUso(e, a);
-    ponerEspinas(e, a.espinas);
-    // Cuenta desde el turno siguiente: casi siempre actúa último (es lento) y si no, la bola duraría un turno menos.
-    estado.estadoRecien.push(`${e.id}/espinas`);
-    return { tipo: 'ataque', ataque: a, blancos: [] };
-  }
   const blancos = a.rafagas
     ? repartirRafagas(a.rafagas, estado.heroes.filter(enCampo), azar)
     : a.confunde || a.paraliza
@@ -447,10 +448,11 @@ export function resolverGolpe(
   return { n, critico: golpe.critico, ...(espinas ? { espinas } : {}) };
 }
 
-/** La bola de defensa: sube la DEF por unos turnos (si ya la tiene, vuelve a empezar la cuenta sin sumar otra vez). */
-export function ponerEspinas(x: Luchador, e: NonNullable<Ataque['espinas']>) {
+/** El modo bola: sube la DEF por 3 o 4 turnos (al azar entre `turnos`); si ya lo tiene, vuelve a empezar la cuenta. */
+export function ponerEspinas(x: Luchador, e: NonNullable<Especial['espinas']>, azar: () => number = Math.random) {
   if (!x.espinas) x.extraDef += e.def;
-  x.espinas = { ...e };
+  const [min, max] = e.turnos;
+  x.espinas = { turnos: min + Math.floor(azar() * (max - min + 1)), def: e.def, devuelve: e.devuelve, rodar: e.rodar };
 }
 
 /**

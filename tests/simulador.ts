@@ -176,6 +176,8 @@ function pelea(D: DatosBatalla, listo: boolean, esencias: boolean) {
     } else if (r.tipo === 'especial') {
       const esp = r.especial;
       e.carga = 0;
+      // El modo bola (la sombra de roca): ya se protegió al decidir; no golpea.
+      if (esp.espinas) return;
       if (esp.canon) {
         for (const g of GOLPES_CANON) {
           const x = blancoDelCanon(hs, r.blanco, g.fuerte);

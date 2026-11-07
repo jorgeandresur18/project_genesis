@@ -1123,7 +1123,9 @@ function Pelea({
         void animar(k.id, 'ko');
       }
       forzar();
-      const llora = jefe && d.enemigos[jefe.clave].al_retirarse;
+      // En modo bola (la sombra de roca), la bola se desintegra en vez de su retirada (pedido del autor).
+      if (jefe?.espinas) await desintegrar(jefe);
+      const llora = jefe && !jefe.espinas && d.enemigos[jefe.clave].al_retirarse;
       if (jefe && llora) void animar(jefe.id, llora as Anim);
       if (jefe && d.enemigos[jefe.clave].sale_atras) {
         playChip('vortice');
@@ -1261,9 +1263,14 @@ function Pelea({
       void animar(defensor.id, 'golpeado');
     } else if (defensor.ps === 0 && defensor.lado === 'heroe' && !b.current.heroes.some(vivo)) {
       await caeElUltimo(defensor);
+    } else if (defensor.ps === 0 && defensor.espinas) {
+      void desintegrar(defensor);
     } else if (defensor.ps === 0) {
       void animar(defensor.id, 'ko');
       if (defensor.lado === 'enemigo') playChip('muerte');
+    } else if (defensor.espinas) {
+      // En modo bola (la sombra de roca): no se desarma con el golpe, solo brilla (pedido del autor).
+      luz(defensor.id, '#ffffff', true);
     } else if (enElAire.current.has(defensor.id) || bajoEspecial.current.has(defensor.id)) void animar(defensor.id, 'golpeado');
     else void animar(defensor.id, 'daño', 500);
     // El cebo reacciona al terminar el ataque (ver limpiarCebos).
@@ -1583,7 +1590,8 @@ function Pelea({
     cargar(h, CARGA.atacar);
     if (falla(d, h, e)) {
       numero(e.id, 'MISS', 'falla');
-      void animar(e.id, 'salto', 600);
+      // La bola no salta: se queda quieta (esquivó igual).
+      if (!e.espinas) void animar(e.id, 'salto', 600);
       playChip('cambio');
       await espera(450);
       if (!deLejos) await deslizar(h.id, null);
@@ -1859,56 +1867,6 @@ function Pelea({
     await decir(fmt(t('batalla.especial_total'), { quien: l.nombre, n: total }));
   };
 
-  /**
-   * La gran montaña: se desmorona (su sprite de derrotado, hasta quedar en escombros), brota una montaña gigante debajo
-   * de los rivales que, al golpear, brilla con las grietas encendidas (temblor) y se hunde; después él se vuelve a armar.
-   */
-  const granMontana = async (l: Luchador, e: Especial) => {
-    l.carga = 0;
-    forzar();
-    await avisar(e, d.enemigos[l.clave].sprite, false);
-    await decir(fmt(e.texto, { quien: l.nombre, objetivo: '' }));
-    const hs = b.current.heroes.filter(enCampo);
-    const pies = hs.map(piesDe).filter(Boolean) as { x: number; y: number; ancho: number }[];
-    if (!pies.length) return;
-    enEspecial.current = true;
-    hs.forEach((x) => bajoEspecial.current.add(x.id));
-    // Se desmorona.
-    playChip('muerte');
-    void animar(l.id, 'derrotado' as Anim);
-    await espera(1300);
-    // La montaña: debajo del medio del equipo, más ancha que todos juntos.
-    const izq = Math.min(...pies.map((p) => p.x - p.ancho / 2));
-    const der = Math.max(...pies.map((p) => p.x + p.ancho / 2));
-    const x = (izq + der) / 2;
-    const y = Math.max(...pies.map((p) => p.y)) + 8;
-    const hoja = (await cargarHoja(d.enemigos[l.clave].sprite)) as Hoja;
-    // Detrás de los héroes y más alta que el equipo: el de arriba queda parado en la ladera.
-    const arriba = Math.min(...pies.map((p) => p.y));
-    const k = Math.max(1.5, ((der - izq) * 1.7) / hoja.frameWidth, ((y - arriba) * 1.5 + 60) / hoja.frameHeight);
-    const sube = await duraRoca(l, 'montana_sube');
-    const brilla = await duraRoca(l, 'montana_brilla');
-    playChip('vortice');
-    setTiembla(Math.random());
-    const primera = brotar(x, y, k, 'montana_sube', sube + brilla + 400);
-    await espera(1100);
-    setTiembla(Math.random());
-    playChip('impacto');
-    setFogonazo({ key: Math.random(), color: e.color });
-    // El golpe: brilla con las grietas encendidas y después se hunde.
-    setMontanas((v) => v.map((m) => (m.key === primera ? { ...m, anim: 'montana_brilla' } : m)));
-    setTimeout(() => setMontanas((v) => v.filter((m) => m.key !== primera)), brilla);
-    const golpes = golpesEspecial(e, hs, b.current.heroes.length).map((h, i) => ({ x: h, ms: i * 260 }));
-    const total = await golpesALaHora(l, e, golpes);
-    await espera(Math.max(0, brilla - 600));
-    // Se vuelve a armar.
-    efecto(l.id, 'aparece', 900);
-    setAnims((m) => ({ ...m, [l.id]: 'idle' }));
-    await espera(700);
-    await cerrarEspecialRoca(l, hs);
-    await decir(fmt(t('batalla.especial_total'), { quien: l.nombre, n: total }));
-  };
-
   /** Montañas de roca: levanta el brazo y brotan montañitas por el suelo, una detrás de otra, hasta cada rival. */
   const montanitas = async (l: Luchador, blancos: Luchador[]) => {
     void animar(l.id, 'brazo' as Anim, await duraRoca(l, 'brazo'));
@@ -1933,7 +1891,28 @@ function Pelea({
     await espera(pasos * 170 + 250);
   };
 
-  /** Antes de la bola (la espinosa o la de defensa): se agacha, carga y se vuelve la bola. */
+  /**
+   * El modo bola (especial de la sombra de roca): ya se protegió (engine/turnos.ts, `decidirEnemigo`); el aviso, se
+   * agacha y se vuelve la bola, y así se queda mientras le duren las espinas (solo rueda; los golpes solo lo iluminan).
+   */
+  const modoBola = async (l: Luchador, e: Especial) => {
+    forzar();
+    await avisar(e, d.enemigos[l.clave].sprite, false);
+    await decir(fmt(e.texto, { quien: l.nombre, objetivo: '' }));
+    await hacerseBola(l);
+    forzar();
+  };
+  /** Derrotada (o retirándose) en modo bola: brilla, se rompe en estallidos morados y desaparece. */
+  const [desintegrados, setDesintegrados] = useState<string[]>([]);
+  const desintegrar = async (l: Luchador) => {
+    const p = piesDe(l);
+    setDesintegrados((v) => [...v, l.id]);
+    playChip('muerte');
+    luz(l.id, '#ffffff', true);
+    if (p) for (let i = 0; i < 6; i++) setTimeout(() => estallar(p.x + (Math.random() - 0.5) * p.ancho * 0.6, p.y - p.ancho * (0.2 + Math.random() * 0.5), 1.6), i * 160);
+    await espera(1400);
+  };
+  /** Antes de la bola: se agacha, carga y se vuelve la bola. */
   const hacerseBola = async (l: Luchador) => {
     void animar(l.id, 'agachado' as Anim);
     playChip('carga');
@@ -2261,7 +2240,7 @@ function Pelea({
       const { especial: esp, blanco } = decision;
       if (esp.canon) await canonazo(e, esp, blanco);
       else if (esp.efecto === 'meteoritos') await lluviaMeteoritos(e, esp);
-      else if (esp.efecto === 'montana') await granMontana(e, esp);
+      else if (esp.espinas) await modoBola(e, esp);
       else await usarEspecial(e, esp, d.enemigos[e.clave].sprite, hs, blanco);
       return limpiarCebos();
     }
@@ -2269,14 +2248,8 @@ function Pelea({
     const { blancos } = decision;
     const a = ataqueCopiado(decision.ataque, e.copiado);
     await decir(fmt(a.texto, { quien: e.nombre, objetivo: blancos.map((x) => x.nombre).join(' y ') }));
-    // La bola de defensa (la sombra de roca): ya está protegido (engine/turnos.ts); se agacha y se vuelve la bola, y
-    // así se queda mientras le duren las espinas.
-    if (a.espinas) {
-      await hacerseBola(e);
-      forzar();
-      return;
-    }
-    if (a.efecto === 'rueda') await hacerseBola(e);
+    // Rodar: ya es bola (modo bola); si no lo fuera, primero se agacha y se hace bola.
+    if (a.efecto === 'rueda' && !e.espinas) await hacerseBola(e);
     if (a.efecto === 'montanitas') await montanitas(e, blancos);
     if (a.confunde) {
       blancos.forEach((h) => (h.copiado = a));
@@ -2701,11 +2674,14 @@ function Pelea({
               filtro={d.enemigos[e.clave].filtro}
               escala={(d.enemigos[e.clave].escala ?? 1) * (e.clon !== undefined ? CLON_ESCALA : 1)}
               jefe={!!d.enemigos[e.clave].jefe}
-              anim={(anims[e.id] ?? 'idle') === 'idle' && vivo(e) && e.espinas ? 'bola' : (anims[e.id] ?? 'idle')}
+              anim={
+                // En modo bola: sigue siendo bola aunque le peguen, salte o caiga (solo se ilumina o se desintegra).
+                e.espinas && ['idle', 'golpeado', 'daño', 'salto', 'mover', 'ko', 'retirada'].includes(anims[e.id] ?? 'idle') ? 'bola' : (anims[e.id] ?? 'idle')
+              }
               vez={veces[e.id] ?? 0}
               especial={d.enemigos[e.clave].especial}
               alCuadro={(anim, col, hoja) => alCuadro(e, anim, col, hoja)}
-              efecto={efectos[e.id]}
+              efecto={desintegrados.includes(e.id) ? 'se-desintegra' : efectos[e.id]}
               luces={luces.filter((x) => x.id === e.id)}
               desliz={desliz[e.id]}
               marcado={marcado(e)}

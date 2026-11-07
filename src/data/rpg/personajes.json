@@ -2366,45 +2366,25 @@
       "ataques": [
         {
           "nombre": "Puño de roca",
-          "poder": 7,
+          "poder": 10,
           "usos": 20,
           "peso": 2,
           "texto": "El monstruo cierra el puño de piedra, se le prenden llamas moradas y lo baja sobre {objetivo}. La nieve salta."
         },
         {
           "nombre": "Montañas de roca",
-          "poder": 3,
+          "poder": 4,
           "usos": 8,
           "objetivo": "todos",
           "anim": "brazo",
           "efecto": "montanitas",
           "texto": "El monstruo levanta el brazo. Del suelo brotan montañitas de roca, una detrás de otra, hasta llegarles a todos."
-        },
-        {
-          "nombre": "Bola espinosa",
-          "poder": 5,
-          "usos": 5,
-          "objetivo": "todos",
-          "efecto": "rueda",
-          "texto": "El monstruo se agacha, se encoge y se vuelve una bola de piedra llena de espinas. Rueda contra todos."
-        },
-        {
-          "nombre": "Bola de defensa",
-          "poder": 0,
-          "usos": 3,
-          "peso": 0.7,
-          "espinas": {
-            "turnos": 2,
-            "def": 6,
-            "devuelve": 0.25
-          },
-          "texto": "El monstruo se encoge y se vuelve una bola de espinas. Pegarle ahora va a doler."
         }
       ],
       "escala": 1.54,
       "especial": {
         "nombre": "Lluvia de meteoritos",
-        "poder": 3,
+        "poder": 4,
         "golpes": 8,
         "objetivo": "todos",
         "color": "#a64dff",
@@ -2422,14 +2402,14 @@
       "al_retirarse": "retirada",
       "sale_atras": true,
       "cae_en_cebo": 0.35,
-      "_nota": "La sombra cubierta de rocas del otoño (Capítulo 1, el claro de las cuatro estaciones). Hoja del autor: el gólem de piedra (docs/sprites de prueba/sprites_rpg.html, «piedra»), con las piedras lanzadas y los meteoritos (public/batalla/meteoritos). Casi todo le pega a todo el equipo (decisión del autor, 2026-11-07); el puño, a uno. La bola de defensa: idea del autor.",
+      "_nota": "La sombra cubierta de rocas del otoño (Capítulo 1, el claro de las cuatro estaciones). Hoja del autor: el gólem de piedra (docs/sprites de prueba/sprites_rpg.html, «piedra»), con las piedras lanzadas y los meteoritos (public/batalla/meteoritos). Casi todo le pega a todo el equipo (decisión del autor, 2026-11-07); el puño, a uno. La bola de defensa: idea del autor. Especiales: la lluvia de meteoritos y la bola de espinas (3 o 4 turnos hecha bola, solo rueda contra uno; idea del autor). La gran montaña se sacó (2026-11-07).",
       "especiales": [
         {
-          "nombre": "La gran montaña",
-          "poder": 8,
+          "nombre": "Bola de espinas",
+          "poder": 0,
           "golpes": 1,
-          "objetivo": "todos",
-          "efecto": "montana",
+          "objetivo": "uno",
+          "posicion": "objetivo",
           "color": "#a64dff",
           "ojos": [
             74,
@@ -2437,8 +2417,21 @@
             22,
             11
           ],
-          "texto": "El monstruo se desmorona. Por un segundo no queda nada. Después el suelo se levanta debajo de todos: una montaña entera, con las grietas encendidas.",
-          "posicion": "objetivo"
+          "texto": "El monstruo se agacha, se encoge y se vuelve una bola de piedra llena de espinas. Pegarle ahora va a doler.",
+          "espinas": {
+            "turnos": [
+              3,
+              4
+            ],
+            "def": 10,
+            "devuelve": 0.25,
+            "rodar": {
+              "nombre": "Rodar",
+              "poder": 3,
+              "efecto": "rueda",
+              "texto": "La bola de espinas rueda contra {objetivo}."
+            }
+          }
         }
       ],
       "anim_completa": true
