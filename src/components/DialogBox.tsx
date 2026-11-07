@@ -97,7 +97,9 @@ export function DialogBox({ dialogue, aiVowels, hasChoices, onAdvance, globo = f
       style={who ? ({ '--speaker': who.color } as CSSProperties) : undefined}
     >
       {dialogue.speaker && <div className={`dialog-speaker ${who?.mono ? 'dialog-speaker-mono' : ''}`}>{render(dialogue.speaker)}</div>}
-      {conEditor && edicion && !reaccion && <span className="dialog-editado">EDITADO</span>}
+      {conEditor && edicion && !reaccion && (
+        <span className={`dialog-editado ${edicion.autor === 'claude' ? 'dialog-borrador' : ''}`}>{edicion.autor === 'claude' ? 'BORRADOR' : 'EDITADO'}</span>
+      )}
       {conEditor && revisada && !reaccion && (
         <span className="dialog-revisada" title="Revisada: la escribiste tú y la corrigió Claude, o la aprobaste tú">
           ✓

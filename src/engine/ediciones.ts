@@ -10,6 +10,8 @@ export interface Edicion {
   original: string;
   texto: string;
   fecha: string;
+  /** «claude»: un borrador de Claude para que el autor lo revise (etiqueta BORRADOR); si el autor lo edita, pasa a ser suyo. */
+  autor?: string;
 }
 
 interface EstadoEdiciones {

@@ -3828,3 +3828,4 @@ button.cassette:hover .cassette-imagen { transform: translateY(-2px) rotate(-3de
 .dialog-listo { position: absolute; right: 6.1rem; top: 0.55rem; padding: 0.15rem 0.7rem; border-radius: 999px; border: 1px solid rgba(46, 204, 113, 0.6); background: rgba(46, 204, 113, 0.15); color: #8ff0b5; font-size: 0.75rem; font-weight: 700; cursor: pointer; }
 .dialog-listo:hover { background: rgba(46, 204, 113, 0.3); }
 .dialog-listo-quitar { border-color: rgba(255, 255, 255, 0.25); background: rgba(255, 255, 255, 0.06); color: #c9ced6; font-weight: 600; }
+.dialog-editado.dialog-borrador { background: #5aa9ff; color: #04121f; box-shadow: 0 0 0.8rem rgba(90, 169, 255, 0.45); }
