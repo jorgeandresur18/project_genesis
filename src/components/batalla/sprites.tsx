@@ -202,7 +202,7 @@ export function SpriteHoja({
   if (!hoja) return <span className="batalla-sprite" />;
   if (!('animations' in hoja)) {
     const [w, h] = hoja.cuadro;
-    return <span key={vez} className={`batalla-sprite${claseSalto}`} style={{ width: w, height: h, backgroundImage: `url(${BASE}${src}.png)` }} />;
+    return <span key={vez} className={`batalla-sprite${claseSalto}`} style={{ width: w, height: h, backgroundImage: `url(${BASE}${src}.webp)` }} />;
   }
   if (!a) return <span className="batalla-sprite" />;
   return (
@@ -213,7 +213,7 @@ export function SpriteHoja({
         {
           width: hoja.frameWidth,
           height: hoja.frameHeight,
-          backgroundImage: `url(${BASE}${src}.png)`,
+          backgroundImage: `url(${BASE}${src}.webp)`,
           backgroundPosition: `-${x * hoja.frameWidth}px -${y * hoja.frameHeight}px`,
           ...(corazonVictoria ? { position: 'relative' } : {}),
         } as CSSProperties
@@ -230,7 +230,7 @@ export function SpriteHoja({
               top: (origenCorazon?.[1] ?? corazonVictoria.y + corazonVictoria.alto / 2) - corazonVictoria.alto / 2,
               width: corazonVictoria.ancho,
               height: corazonVictoria.alto,
-              backgroundImage: `url(${BASE}${corazonVictoria.imagen}.png)`,
+              backgroundImage: `url(${BASE}${corazonVictoria.imagen}.webp)`,
             } as CSSProperties
           }
           aria-hidden

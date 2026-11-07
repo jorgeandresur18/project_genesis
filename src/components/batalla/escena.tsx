@@ -245,7 +245,7 @@ export function AvisoEspecial({ e, sprite, heroe }: { e: Especial; sprite: strin
         <span className="batalla-aviso-marco">
           <span
             className="batalla-aviso-ojos"
-            style={{ width: w, height: h, backgroundImage: `url(${BASE}${sprite}.png)`, backgroundPosition: `-${x}px -${y}px` }}
+            style={{ width: w, height: h, backgroundImage: `url(${BASE}${sprite}.webp)`, backgroundPosition: `-${x}px -${y}px` }}
           />
         </span>
         <b>

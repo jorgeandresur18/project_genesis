@@ -9,6 +9,7 @@
 #   hasta su objetivo y la traiga de vuelta mientras es un vórtice («viaje» en el .json).
 # - la media luna de la tajada de la sombra sale de su hoja y queda como proyectil aparte (sombra_tajada.png, de
 #   «ataque de la sombra.png», junto al HTML): el juego la lanza en horizontal hasta salir de la pantalla.
+# Las hojas quedan en WebP sin pérdida (exacto: idéntico pixel por pixel; pesan un tercio que en PNG).
 # Uso: python -I tools/batalla_sprites.py "docs/sprites de prueba/sprites rpg.html" [ids...]
 # Con ids (los del HTML: piedra, piedras, sombra…), rehace solo esas hojas.
 import base64
@@ -79,7 +80,7 @@ def proyectil(html: Path):
         return None
     im = Image.open(ruta).convert('RGBA')
     x0, y0, x1, y1 = im.getbbox()
-    im.crop((x0, y0, x1, y1)).save(SALIDA / 'sombra_tajada.png')
+    guardar(im.crop((x0, y0, x1, y1)), SALIDA / 'sombra_tajada.png')
     return {'imagen': 'batalla/sombra_tajada', 'cuadro': TAJADA_SUELTA, 'x': x0, 'y': y0, 'ancho': x1 - x0, 'alto': y1 - y0}
 
 
@@ -135,7 +136,7 @@ def hoja_beso(c: dict, html: Path):
         cor = Image.open(ruta).convert('RGBA')
         cor = cor.crop(cor.getbbox())
         # A 4 veces su tamaño en la pelea, nítido (es pixel art).
-        cor.resize((BESO_CORAZON['ancho'] * 4, BESO_CORAZON['alto'] * 4), Image.NEAREST).save(SALIDA / 'nikki_corazon.png')
+        guardar(cor.resize((BESO_CORAZON['ancho'] * 4, BESO_CORAZON['alto'] * 4), Image.NEAREST), SALIDA / 'nikki_corazon.png')
         proy = {'imagen': 'batalla/nikki_corazon', 'cuadro': BESO_SUELTA, **BESO_CORAZON, 'pista': pista}
     return fila, {'frames': an['frames'], 'fps': an['fps'], 'loop': False, 'seq': list(range(BESO_DESDE, an['frames']))}, proy
 
@@ -400,6 +401,13 @@ def parpadeo_de_parche(im: np.ndarray, c: dict, meta: dict) -> np.ndarray:
 PUNO_ARMORED = [88, 60]
 
 
+def guardar(im, ruta: Path):
+    """Guarda una imagen del combate en WebP sin pérdida (la ruta puede venir con .png: se cambia a .webp)."""
+    if not isinstance(im, Image.Image):
+        im = Image.fromarray(im)
+    im.convert('RGBA').save(ruta.with_suffix('.webp'), 'WEBP', lossless=True, method=6, exact=True)
+
+
 def main():
     ruta = Path(sys.argv[1]) if len(sys.argv) > 1 else RAIZ / 'docs' / 'sprites de prueba' / 'sprites rpg.html'
     solo = set(sys.argv[2:])
@@ -411,7 +419,7 @@ def main():
             meta['cuerpo'] = cuerpo(im, meta)
             if im.shape[1] > ANCHO_MAX:
                 im = repartir(im, meta['frameWidth'], meta['frameHeight'], meta)
-            Image.fromarray(im).save(SALIDA / 'capitan.png')
+            guardar(im, SALIDA / 'capitan.png')
             (SALIDA / 'capitan.json').write_text(json.dumps(meta, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
             print('capitan', Image.fromarray(im).size, list(meta['animations']))
             continue
@@ -486,7 +494,7 @@ def main():
             meta['animations']['retirada'] = {**es, 'loop': False, 'seq': es['seq'][:meta['viaje']['ida'][0] + 4]}
         if nombre == 'sombra_roca':
             recortar_roca(meta)
-        Image.fromarray(im).save(SALIDA / f'{nombre}.png')
+        guardar(im, SALIDA / f'{nombre}.png')
         (SALIDA / f'{nombre}.json').write_text(json.dumps(meta, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
         print(nombre, Image.fromarray(im).size, list(meta['animations']))
 

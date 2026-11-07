@@ -63,7 +63,7 @@ export function useEfectosSprite({
     const dx = volteado ? -(x + p.ancho * k) : d.base.width - x + p.ancho * k;
     const ms = (Math.abs(dx) / 700) * 1000;
     const key = Math.random();
-    setVuelan((l) => [...l, { key, src: `${BASE}${p.imagen}.png`, x, y, w: p.ancho * k, h: p.alto * k, dx, ms }]);
+    setVuelan((l) => [...l, { key, src: `${BASE}${p.imagen}.webp`, x, y, w: p.ancho * k, h: p.alto * k, dx, ms }]);
     setTimeout(() => setVuelan((l) => l.filter((z) => z.key !== key)), ms + 60);
   };
   const [rayo, setRayo] = useState<{ x: number; y: number; largo: number; ang: number; grosor: number } | null>(null);
@@ -97,7 +97,7 @@ export function useEfectosSprite({
       const d = p && donde();
       if (p && d) {
         const k = d.s.width / h.frameWidth;
-        setEnMano({ src: `${BASE}${pm.imagen}.png`, x: (volteado ? d.s.right - p[0] * k : d.s.left + p[0] * k) - d.base.left, y: d.s.top + p[1] * k - d.base.top, w: pm.ancho * k * p[2], h: pm.alto * k * p[2] });
+        setEnMano({ src: `${BASE}${pm.imagen}.webp`, x: (volteado ? d.s.right - p[0] * k : d.s.left + p[0] * k) - d.base.left, y: d.s.top + p[1] * k - d.base.top, w: pm.ancho * k * p[2], h: pm.alto * k * p[2] });
       } else setEnMano(null);
     }
     if (h.rayo) {

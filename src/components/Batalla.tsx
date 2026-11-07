@@ -428,7 +428,7 @@ function Pelea({
         const espejo = l.lado === 'heroe';
         setEnMano((m) => ({
           ...m,
-          [l.id]: { src: `${BASE}${pm.imagen}.png`, x: (espejo ? s.right - p[0] * k : s.left + p[0] * k) - base.left, y: s.top + p[1] * k - base.top, w: pm.ancho * k * p[2], h: pm.alto * k * p[2], espejo },
+          [l.id]: { src: `${BASE}${pm.imagen}.webp`, x: (espejo ? s.right - p[0] * k : s.left + p[0] * k) - base.left, y: s.top + p[1] * k - base.top, w: pm.ancho * k * p[2], h: pm.alto * k * p[2], espejo },
         }));
       } else setEnMano((m) => (m[l.id] ? Object.fromEntries(Object.entries(m).filter(([id]) => id !== l.id)) : m));
     }
@@ -480,7 +480,7 @@ function Pelea({
     setProyectiles((l) => [
       ...l,
       // Hacia la izquierda va en espejo (girarlo 180° lo dejaba cabeza abajo).
-      { key, src: `${BASE}${p.imagen}.png`, x, y, w: p.ancho * k, h: p.alto * k, dx: cos * largo, dy: Math.sin(ang) * largo, ms, demora, ang: cos < 0 ? ang - Math.PI : ang, espejo: cos < 0 },
+      { key, src: `${BASE}${p.imagen}.webp`, x, y, w: p.ancho * k, h: p.alto * k, dx: cos * largo, dy: Math.sin(ang) * largo, ms, demora, ang: cos < 0 ? ang - Math.PI : ang, espejo: cos < 0 },
     ]);
     setTimeout(() => setProyectiles((l) => l.filter((z) => z.key !== key)), demora + ms + 60);
     setTimeout(() => playChip(sonidoDe(quien)), demora);
@@ -3045,7 +3045,7 @@ function Pelea({
               '--k': m.k,
               animationDuration: `${m.ms}ms`,
               animationDelay: `${m.demora}ms`,
-              backgroundImage: `url(${BASE}batalla/meteoritos/meteorito_${m.img}.png)`,
+              backgroundImage: `url(${BASE}batalla/meteoritos/meteorito_${m.img}.webp)`,
             } as CSSProperties
           }
           aria-hidden

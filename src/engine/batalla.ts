@@ -166,7 +166,7 @@ export interface Especial {
 }
 export interface Heroe {
   nombre: string;
-  /** Hoja de animaciones (public/<sprite>.png y .json). */
+  /** Hoja de animaciones (public/<sprite>.webp y .json). */
   sprite: string;
   nivel: number;
   /** Si puede actuar todos los turnos (Jair sí; Cami pega fuerte y actúa un turno sí y uno no). */

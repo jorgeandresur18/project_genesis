@@ -632,3 +632,4 @@ GENESIS no filtró.
 - **Pruebas en el navegador nuevas** (`tests/e2e/especiales.spec.ts`): la lluvia de meteoritos, el modo bola de la roca
   y el ciclo completo de Cami (transformarse, el menú del armored, el Berserk, volver a Cami, descansar, el Armored que
   ya no aparece).
+- **Peso de la demo (punto 3):** al abrir, el juego baja unos 580 KB comprimidos de código (un tercio son los textos de todos los capítulos en dos idiomas; Phaser ya se carga recién en los minijuegos). Las hojas de las peleas pasaron de PNG a **WebP sin pérdida y exacto** (idénticas pixel por pixel): de 5,3 MB a 1,9 MB (la roca, de 1,5 MB a 385 KB; Nikki, de 1,2 MB a 487 KB). Cambiados el código que las pide, `tools/batalla_sprites.py` (ahora guarda WebP) y la prueba que mide las hojas. Revisado en el navegador: cada hoja responde como WebP, sin errores. Pendiente posible (más grande, por consultar): cargar los capítulos 2 y 3 recién cuando se juegan.

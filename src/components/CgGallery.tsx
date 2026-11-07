@@ -1083,7 +1083,7 @@ function PixelArt() {
           ficha={(i) => <AccionesRpg r={lista[i]} accion={accion} onAccion={setAccion} />}
           src={() => ''}
           label={(i) => `${texts.personajes[(galeriaEs.rpg as Record<string, { personaje: string }>)[lista[i].hoja].personaje]} · ${t('galeria.pixel_art')}`}
-          info={(i) => ({ file: `${lista[i].hoja}.png`, text: texts.rpg[lista[i].hoja]?.info ?? '' })}
+          info={(i) => ({ file: `${lista[i].hoja}.webp`, text: texts.rpg[lista[i].hoja]?.info ?? '' })}
           onShow={() => setAccion('idle')}
           count={lista.length}
           index={open}

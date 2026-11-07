@@ -7,16 +7,26 @@ import { BATALLAS } from '../src/engine/batallas';
 
 const CLAVES_DIALOGO = ['inicio', 'refuerzos', 'jefe', 'jefe_huye', 'victoria', 'derrota', 'huir_no', 'huir', 'descanso', 'cae_jair', 'hablar_ok', 'hablar_no', 'esquiva_ok', 'botin'];
 
-/** La hoja tiene su .png y su .json, y el .json no pide filas ni cuadros que la imagen no tiene (`extra`: especial o dolor, sin reposo). */
+/** El ancho y el alto de un WebP (sin pérdida, VP8L; o con cabecera extendida, VP8X). */
+function medidaWebp(b: Buffer): [number, number] {
+  const tipo = b.toString('ascii', 12, 16);
+  if (tipo === 'VP8L') {
+    const bits = b.readUInt32LE(21);
+    return [(bits & 0x3fff) + 1, ((bits >> 14) & 0x3fff) + 1];
+  }
+  if (tipo === 'VP8X') return [b.readUIntLE(24, 3) + 1, b.readUIntLE(27, 3) + 1];
+  // Con pérdida (VP8): las medidas van después de la firma del cuadro.
+  return [b.readUInt16LE(26) & 0x3fff, b.readUInt16LE(28) & 0x3fff];
+}
+
+/** La hoja tiene su .webp y su .json, y el .json no pide filas ni cuadros que la imagen no tiene (`extra`: especial o dolor, sin reposo). */
 function hojaValida(sprite: string, extra = false) {
-  expect(existsSync(`public/${sprite}.png`), sprite).toBe(true);
+  expect(existsSync(`public/${sprite}.webp`), sprite).toBe(true);
   const j = JSON.parse(readFileSync(`public/${sprite}.json`, 'utf8'));
   if (j.cuadro) return;
   // Las hojas extra (especial, dolor) no tienen reposo: solo su animación.
   if (!extra) expect(j.animations.idle, `${sprite}: idle`).toBeTruthy();
-  const png = readFileSync(`public/${sprite}.png`);
-  const ancho = png.readUInt32BE(16);
-  const alto = png.readUInt32BE(20);
+  const [ancho, alto] = medidaWebp(readFileSync(`public/${sprite}.webp`));
   // Una hoja partida en renglones (`columnas`): cada animación ocupa sus renglones de a tantos cuadros.
   const col: number = j.columnas ?? Infinity;
   for (const [k, a] of Object.entries<{ row: number; frames: number }>(j.animations)) {
