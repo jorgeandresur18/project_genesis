@@ -553,6 +553,8 @@ export const CARGA_LLENA = 100;
 /** Lo que dura un especial (de todos). */
 export const ESPECIAL_MS = 5000;
 export const cargar = (l: Luchador, n: number) => {
+  // En modo bola (la sombra de roca) la barra no se carga: ni en su turno ni con los golpes (decisión del autor).
+  if (l.espinas) return;
   // Concentración (esencia): la barra se llena un poco más rápido.
   l.carga = Math.min(CARGA_LLENA, l.carga + n * (1 + esenciaDe(l, 'concentracion')));
 };

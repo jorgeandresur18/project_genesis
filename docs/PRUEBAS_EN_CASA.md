@@ -285,8 +285,8 @@ En el Torneo (`npm run dev`, desde Extras):
 Abrir `http://localhost:5173/?batalla=sombra_roca`. Claude ya vio cada ataque sin ventana (capturas); falta verlo en movimiento.
 - [ ] **La lluvia de meteoritos:** el cielo morado con nubes, los meteoritos cayendo hacia los héroes y el estallido morado. ¿Son suficientes? ¿El cielo se nota?
 - [ ] **Las montañitas del brazo:** brotan por el suelo hasta cada uno. ¿Más grandes, más, más lentas?
-- [ ] **La bola de espinas (especial):** se agacha, se hace bola y se queda así 3 o 4 turnos. Mientras tanto solo rueda contra uno (sin especiales). Si le pegas, solo brilla. A Jair el puño le devuelve un poco («se pincha») y a Cami «las balas rebotan». ¿DEF +10 y el 25 % se sienten bien?
+- [ ] **La bola de espinas (especial):** se agacha, se hace bola y se queda así 3 o 4 turnos. Mientras tanto solo rueda contra uno (sin especiales) y su barra no se carga. Si le pegas, solo brilla. A Jair el puño le devuelve un poco («se pincha») y a Cami «las balas rebotan». ¿DEF +10 y el 25 % se sienten bien?
 - [ ] **Derrotarla siendo bola:** se desintegra (brilla, estallidos morados y desaparece) y sigue la historia.
 - [ ] **El puño:** se ve entero (con las llamas y la vuelta a la guardia), unos 2,7 segundos. ¿Muy lento?
-- [ ] **La dificultad:** simulada, ~96 % si juegas atento y ~85 % sin cuidado (la bajé porque la sentiste difícil). ¿Ahora sí?
+- [ ] **La dificultad:** simulada, ~98 % si juegas atento y ~87 % sin cuidado (la bajé porque la sentiste difícil). ¿Ahora sí?
 

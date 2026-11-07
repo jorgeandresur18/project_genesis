@@ -2366,7 +2366,7 @@
       "ataques": [
         {
           "nombre": "Puño de roca",
-          "poder": 10,
+          "poder": 9,
           "usos": 20,
           "peso": 2,
           "texto": "El monstruo cierra el puño de piedra, se le prenden llamas moradas y lo baja sobre {objetivo}. La nieve salta."

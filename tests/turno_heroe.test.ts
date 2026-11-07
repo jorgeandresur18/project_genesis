@@ -218,6 +218,15 @@ describe('el modo bola de la sombra de roca (idea del autor, 2026-11-07)', () =>
     expect(e.extraDef).toBe(def);
   });
 
+  it('mientras es bola no carga el especial (ni en su turno ni con los golpes)', () => {
+    const { d, s, e, jair, bola } = roca();
+    ponerEspinas(e, bola);
+    e.carga = 0;
+    decidirEnemigo(s, d, e, false, () => 0.5);
+    resolverGolpe(s, d, jair, e, 20, false, () => 0.5);
+    expect(e.carga).toBe(0);
+  });
+
   it('dura 3 o 4 turnos, al azar', () => {
     const { e, bola } = roca();
     ponerEspinas(e, bola, () => 0);

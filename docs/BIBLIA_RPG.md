@@ -820,10 +820,10 @@ las partes de la montaña). **Casi todo le pega a todo el equipo** (decisión de
 
 | Qué | Golpe | Cómo se ve |
 |---|---|---|
-| Puño de roca | 10, a uno (el más usado) | Se acerca y baja el puño con llamas moradas (la animación entera). |
+| Puño de roca | 9, a uno (el más usado) | Se acerca y baja el puño con llamas moradas (la animación entera). |
 | Montañas de roca | 4, a todos | Levanta el brazo y brotan montañitas por el suelo, una detrás de otra, hasta cada uno. |
 | Especial: Lluvia de meteoritos | 4 × 8 golpes, a todos | El cielo se tiñe de morado con nubes; caen más de 40 meteoritos por toda la pantalla y revientan en morado. |
-| Especial: Bola de espinas | (rodar: 3, a uno) | Se agacha, carga y se vuelve la bola espinosa por **3 o 4 turnos** (al azar, desde el siguiente): DEF +10 y espinas. Mientras es bola **no usa especiales ni sus otros ataques: solo rueda** contra uno que elige. |
+| Especial: Bola de espinas | (rodar: 3, a uno) | Se agacha, carga y se vuelve la bola espinosa por **3 o 4 turnos** (al azar, desde el siguiente): DEF +10 y espinas. Mientras es bola **no usa especiales ni sus otros ataques: solo rueda** contra uno que elige, y **la barra no se carga**. |
 
 La gran montaña se sacó (decisión del autor, 2026-11-07: los dos especiales son la lluvia y la bola).
 
@@ -834,7 +834,7 @@ La gran montaña se sacó (decisión del autor, 2026-11-07: los dos especiales s
   derrotado. Al terminar los turnos: «se desenrolla». Código: `ponerEspinas` y `pinchar` en `src/engine/turnos.ts`;
   `modoBola` y `desintegrar` en `Batalla.tsx`.
 - **Agachado:** antes de la bola, y al retirarse herido (sigue la historia: pisa el hielo del arroyo).
-- **Balance** (simulado): el atento gana ~96 %, el descuidado ~85 % (`tests/balance.test.ts`). El autor sintió demasiado difícil la primera versión (~84 % y ~26 %).
+- **Balance** (simulado): el atento gana ~98 %, el descuidado ~87 % (`tests/balance.test.ts`). El autor sintió demasiado difícil la primera versión (~84 % y ~26 %).
 - Para probar a mano en el navegador (solo en desarrollo): `window.__pelea` tiene el estado y los datos de la pelea
   (forzar un ataque, llenar la barra).
 
