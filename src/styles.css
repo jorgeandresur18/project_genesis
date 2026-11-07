@@ -3896,3 +3896,34 @@ button.cassette:hover .cassette-imagen { transform: translateY(-2px) rotate(-3de
   background: radial-gradient(circle, rgba(255, 255, 255, 0.95), color-mix(in srgb, var(--c, #5ee0ff) 60%, transparent) 32%, transparent 66%); animation: enemigo-portal 0.9s ease-out both; pointer-events: none; }
 @keyframes cambia-forma { 0% { filter: brightness(3) saturate(0); } 100% { filter: none; } }
 @media (prefers-reduced-motion: reduce) { .batalla-figura.cambia-forma .batalla-sprite, .batalla-figura.cambia-forma::before { animation: none; } }
+/* ---------- La Sentencia lunar (Rikka princesa de luna) ----------
+   Detrás de todos se hace de noche: el cielo azul oscuro, las estrellas que titilan, la luna en pixel art que sube con
+   su halo y un haz de luz de luna con brillos que caen. */
+.batalla-noche { position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0; overflow: hidden; transition: opacity 1.2s ease;
+  background: radial-gradient(ellipse at 50% 18%, rgba(60, 80, 150, 0.55), rgba(8, 10, 32, 0.92) 60%), linear-gradient(#050716, #0b1030 70%, #141a3e); }
+.batalla-noche.activa { opacity: 1; }
+.batalla-noche i { position: absolute; width: 3px; height: 3px; background: #fff; box-shadow: 0 0 4px #cfe0ff; animation: titila 1.6s ease-in-out infinite; }
+@keyframes titila { 50% { opacity: 0.25; transform: scale(0.6); } }
+.batalla-luna { position: absolute; left: 50%; top: 8%; width: 31px; height: 31px; margin-left: -15.5px; image-rendering: pixelated; background-size: 100% 100%;
+  scale: 4.2; transform-origin: center top; filter: drop-shadow(0 0 3px #fff) drop-shadow(0 0 10px #bcd6ff) drop-shadow(0 0 22px rgba(150, 190, 255, 0.8));
+  translate: 0 120%; opacity: 0; transition: translate 1.8s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 1.2s ease; }
+.batalla-noche.activa .batalla-luna { translate: 0 0; opacity: 1; }
+.batalla-luz-luna { position: absolute; left: 50%; top: 14%; width: 70%; height: 90%; translate: -50% 0; opacity: 0; transition: opacity 1.6s ease 0.8s;
+  background: conic-gradient(from 180deg at 50% 0%, transparent 152deg, rgba(190, 215, 255, 0.28) 168deg, rgba(220, 235, 255, 0.4) 180deg, rgba(190, 215, 255, 0.28) 192deg, transparent 208deg);
+  mix-blend-mode: screen; filter: blur(2px); }
+.batalla-noche.activa .batalla-luz-luna { opacity: 1; }
+.batalla-noche b { position: absolute; top: 18%; width: 4px; height: 4px; background: #fff; rotate: 45deg; box-shadow: 0 0 6px #bcd6ff, 0 0 12px #9fc7ff;
+  opacity: 0; animation: brillo-luna 3.2s linear infinite; }
+.batalla-noche:not(.activa) b { animation: none; }
+@keyframes brillo-luna { 0% { opacity: 0; translate: 0 0; } 15% { opacity: 1; } 85% { opacity: 0.9; } 100% { opacity: 0; translate: -10px 420px; } }
+/* El Berserk: brilla como loca mientras dura el frenesí. */
+.batalla-figura.berserk-loco .batalla-sprite { animation: berserk-loco 0.16s steps(2) infinite; }
+@keyframes berserk-loco { 0% { filter: brightness(1.9) saturate(1.6) drop-shadow(0 0 6px #5ee0ff) drop-shadow(0 0 16px #5ee0ff); }
+  100% { filter: brightness(1.2) hue-rotate(25deg) drop-shadow(0 0 10px #fff) drop-shadow(0 0 24px #2f8cff); } }
+@media (prefers-reduced-motion: reduce) { .batalla-noche i, .batalla-noche b, .batalla-figura.berserk-loco .batalla-sprite { animation: none; } .batalla-luna { transition: none; } }
+/* El rayo dibujado en la hoja que sigue hasta el rival (el Blaster+): el mismo celeste con el centro blanco. */
+.batalla-rayo-hoja { position: absolute; z-index: 6; translate: 0 -50%; transform-origin: 0 50%; pointer-events: none; border-radius: 999px;
+  background: linear-gradient(to bottom, transparent, var(--c) 18%, #fff 40%, #fff 60%, var(--c) 82%, transparent);
+  box-shadow: 0 0 10px var(--c), 0 0 26px var(--c); animation: rayo-hoja linear both; }
+@keyframes rayo-hoja { 0% { scale: 0 1; opacity: 1; } 12% { scale: 1 1; } 85% { opacity: 1; } 100% { scale: 1 0.2; opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .batalla-rayo-hoja { animation: none; } }

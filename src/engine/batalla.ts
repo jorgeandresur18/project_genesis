@@ -41,6 +41,16 @@ export interface Ataque {
    * rueda contra cada uno).
    */
   efecto?: 'montanitas' | 'rueda';
+  /**
+   * Cuándo pega (ms desde que empieza su animación `anim`), para los ataques cuyo disparo ya viene dibujado en la hoja
+   * (el rayo del Blaster+, la media luna del Corte de luna): no sale una bala aparte.
+   */
+  golpe_ms?: number;
+  /**
+   * El rayo dibujado en la hoja sigue hasta el rival (el Blaster+): de dónde sale en el cuadro ([x, y], mirando a la
+   * derecha), cuánto dura (ms), su grosor (px del cuadro) y su color.
+   */
+  rayo?: { x: number; y: number; ms: number; grosor: number; color: string };
   /** Cuánto pesa al elegir un ataque al azar (si no, 1). */
   peso?: number;
   /**
@@ -104,6 +114,12 @@ export interface Especial {
    * que lo usó descansa este número de turnos (`agotado` del luchador).
    */
   sin_barra?: { descanso: number };
+  /**
+   * La Sentencia lunar (Rikka princesa de luna): se hace de noche y sale la luna, reza, se alza y suelta la onda de
+   * media luna; confunde a los rivales (`confunde` turnos), le cura a los suyos esta parte de su vida (`cura`) y, al
+   * volver a su forma (`vuelve_a`), queda confundida ella (`confundida` turnos): la consecuencia.
+   */
+  luna?: { sprite: string; confunde: number; cura: number; confundida: number; vuelve_a: string };
   /**
    * La bola de defensa (la sombra de roca; decisión del autor, 2026-11-07): un especial que no golpea: se hace bola por `turnos`
    * ([mín, máx], al azar), sube su DEF en `def` y al que le pega de cerca le devuelve esta parte (`devuelve`) del daño

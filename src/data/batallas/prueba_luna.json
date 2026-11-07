@@ -1,0 +1,208 @@
+{
+  "titulo": "Prueba: Rikka princesa de luna",
+  "fondo": "PLACEHOLDER:almacen_molino",
+  "heroes": [
+    "rikka",
+    "jair",
+    "cami"
+  ],
+  "personajes": {
+    "rikka": {
+      "nivel": 18,
+      "_nota": "Empieza como Rikka; su especial «Princesa de luna» la transforma (gasta su turno).",
+      "especiales": [
+        {
+          "nombre": "Tajo de primavera",
+          "poder": 10,
+          "golpes": 3,
+          "objetivo": "uno",
+          "color": "#ff4f8b",
+          "ojos": [
+            44,
+            36,
+            28,
+            13
+          ],
+          "texto": "{quien} desenvaina en un parpadeo. Quinientos años de práctica en un solo corte.",
+          "posicion": "objetivo"
+        },
+        {
+          "nombre": "Princesa de luna",
+          "poder": 0,
+          "golpes": 1,
+          "objetivo": "uno",
+          "posicion": "objetivo",
+          "color": "#b9a6ff",
+          "ojos": [
+            44,
+            36,
+            28,
+            13
+          ],
+          "texto": "{quien} cierra los ojos. El kimono se llena de luz de luna y la bufanda se le enreda en el aire.",
+          "transforma": "rikka_luna"
+        }
+      ]
+    },
+    "jair": {
+      "nivel": 8
+    },
+    "cami": {
+      "nivel": 16
+    }
+  },
+  "enemigos": [
+    "soldado",
+    "capitan"
+  ],
+  "horda": {
+    "enemigo": "soldado",
+    "al_inicio": 2,
+    "niveles": [
+      10,
+      12,
+      12,
+      12
+    ]
+  },
+  "jefe": {
+    "enemigo": "capitan",
+    "nivel": 18
+  },
+  "botin": {
+    "probabilidad": 0.6,
+    "objetos": [
+      "atq",
+      "def",
+      "vida",
+      "vida",
+      "carga",
+      "revivir"
+    ]
+  },
+  "esquivar": 0.5,
+  "hablar": 0.4,
+  "huir": false,
+  "dialogos": {
+    "hablar_ok": [
+      {
+        "quien": "Voz",
+        "texto": "{objetivo} se queda pensando. Pierde su próximo ataque."
+      }
+    ],
+    "hablar_no": [
+      {
+        "quien": "Voz",
+        "texto": "{objetivo} no le hace caso."
+      }
+    ],
+    "esquiva_ok": [
+      {
+        "quien": "Voz",
+        "texto": "¡{quien} lo esquiva!"
+      }
+    ],
+    "botin": [
+      {
+        "quien": "Voz",
+        "texto": "Al {objetivo} se le cae algo: {objeto}. Va a la mochila."
+      }
+    ],
+    "ayuda": [
+      {
+        "quien": "Voz",
+        "texto": "Algo cae del techo y rebota en el piso: {objeto}. Nadie pregunta de dónde. Va a la mochila."
+      }
+    ],
+    "inicio": [
+      {
+        "quien": "Voz",
+        "texto": "[Prueba] Rikka contra los soldados del molino. Llena su barra (Objetos › 4Low-Co) y usa «Princesa de luna»."
+      }
+    ],
+    "refuerzos": [
+      {
+        "quien": "Voz",
+        "texto": "[Prueba] Entra otro soldado."
+      }
+    ],
+    "jefe": [
+      {
+        "quien": "Voz",
+        "texto": "[Prueba] Llega el capitán."
+      }
+    ],
+    "jefe_huye": [
+      {
+        "quien": "Voz",
+        "texto": "[Prueba] El capitán se retira."
+      }
+    ],
+    "victoria": [
+      {
+        "quien": "Voz",
+        "texto": "[Prueba] Ganaron."
+      }
+    ],
+    "derrota": [
+      {
+        "quien": "Voz",
+        "texto": "[Prueba] Perdieron."
+      }
+    ],
+    "huir_no": [
+      {
+        "quien": "Voz",
+        "texto": "[Relleno] No se puede huir."
+      }
+    ],
+    "huir": [
+      {
+        "quien": "Voz",
+        "texto": "[Relleno] Escapan."
+      }
+    ],
+    "descanso": [
+      {
+        "quien": "Voz",
+        "texto": "[Relleno] Necesita un segundo."
+      }
+    ],
+    "cae_jair": [
+      {
+        "quien": "Voz",
+        "texto": "[Relleno] Jair cae."
+      }
+    ]
+  },
+  "objetos": [
+    "atq",
+    "def",
+    "vida",
+    "carga",
+    "caramelo_rancio",
+    "revivir",
+    "veneno_ratas",
+    "condon"
+  ],
+  "ayuda": {
+    "umbral": 0.35,
+    "cae": 0.3,
+    "objeto": "vida",
+    "critico": 0.1
+  },
+  "musica_jefe": "audio/musica/combate_arcade.mp3",
+  "musica": "audio/musica/combate_arcade.mp3",
+  "_nota": "Pelea de prueba (pedida por el autor, 2026-11-08): Rikka con su especial «Princesa de luna» (se transforma), el Corte de luna y la Sentencia lunar, con Jair y Cami. Se abre con ?batalla=prueba_luna. TODO(canon): dónde se gana en el Capítulo 3.",
+  "premio": {
+    "objetos": {},
+    "vars": {
+      "especial_cami_armored": true
+    }
+  },
+  "mochila_inicial": {
+    "vida": 2,
+    "carga": 3,
+    "revivir": 1
+  }
+}

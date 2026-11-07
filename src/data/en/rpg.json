@@ -377,7 +377,7 @@
     },
     "Armored": {
       "nombre": "Armored",
-      "texto": "{quien} covers up in metal plates. The helmet's eyes light up. What comes next isn't a fight: it's paperwork. [Filler: Cami armored and berserk sprites missing]"
+      "texto": "{quien} is covered in white and blue metal plates. The armor closes by itself, piece by piece."
     },
     "Espada": {
       "nombre": "Sword",
@@ -430,6 +430,26 @@
     "Primera fila": {
       "nombre": "Front Row",
       "texto": "{quien} shoves like the concert doors just opened, and all the others come in behind her. [Filler: Claude draft, no sprites of their own]"
+    },
+    "Princesa de luna": {
+      "nombre": "Moon Princess",
+      "texto": "{quien} closes her eyes. Her kimono fills with moonlight and her scarf tangles in the air."
+    },
+    "Corte de luna": {
+      "nombre": "Moon Cut",
+      "texto": "{quien} draws a sword out of nowhere. A blue crescent flies from the tip and cuts {objetivo}."
+    },
+    "Sentencia lunar": {
+      "nombre": "Lunar Sentence",
+      "texto": "{quien} joins her hands. Behind everyone night falls and the moon rises."
+    },
+    "Blaster+": {
+      "nombre": "Blaster+",
+      "texto": "{quien} charges the blaster. The barrel gathers energy... and lets out a beam that never ends."
+    },
+    "Berserk": {
+      "nombre": "Berserk",
+      "texto": "The helmet snaps shut over {quien}'s face. The visor lights up. Two cannons come out of her shoulders."
     }
   }
 }

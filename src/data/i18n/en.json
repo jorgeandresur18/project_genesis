@@ -502,5 +502,8 @@
   "batalla.berserk_agachense": "Get down!",
   "batalla.berserk_agotada": "{quien} is out of breath. She rests next turn.",
   "batalla.sigue_agotada": "{quien} catches her breath: she sits this turn out.",
-  "batalla.transformada": "{quien} is someone else now. She fights like this from next turn."
+  "batalla.transformada": "{quien} is someone else now. She fights like this from next turn.",
+  "batalla.luna_confunde": "The moonlight confuses {quien}.",
+  "batalla.luna_cura": "The moonlight gives {quien} back {n} HP.",
+  "batalla.luna_confundida": "The light caught her too: {quien} is confused."
 }

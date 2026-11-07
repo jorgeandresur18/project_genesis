@@ -851,8 +851,9 @@ aparte, `formas.cami_armored` en `src/data/rpg/personajes.json` (no sale como pe
 casco con visor y los dos cañones), por ahora solo el idle; el parpadeo sale del parche del HTML
 (`tools/batalla_sprites.py … armored berserk` → `public/batalla/cami_armored` y `cami_berserk`).
 
-- **En esta forma tiene solo dos cosas:** el **Blaster+** (un disparo fuerte desde el puño; **16**, bajado de 22 el
-  2026-11-08: con 22 dejaba a un soldado casi muerto de un tiro y el Berserk sobraba) y el especial+
+- **En esta forma tiene solo dos cosas:** el **Blaster+** (**16**, bajado de 22 el 2026-11-08: con 22 dejaba a un
+  soldado casi muerto de un tiro y el Berserk sobraba; con la animación del autor: carga 2 s y suelta el rayo dibujado
+  en la hoja, que el juego sigue hasta el rival, `rayo` y `golpe_ms` del ataque) y el especial+
   **Berserk**. **Sin números** (decisión del autor): el Blaster+ no tiene usos y el menú no muestra cifras
   (`sin_numeros` del personaje); el Berserk no usa la barra: está siempre listo y sale en el menú como un **botón
   grande, azul y blanco** (`sin_barra` del especial; la tarjeta no muestra la barra). **Después del Berserk descansa
@@ -864,7 +865,8 @@ casco con visor y los dos cañones), por ahora solo el idle; el parpadeo sale de
   a los rivales (o caen cerca) y explotan, con temblores y destellos: más de 600 balas a la vez, 7,5 s (pedido del autor:
   «una monstruosidad exagerada»). Los golpes (**5 × 26**: con golpes más fuertes también le pega de verdad al jefe, que
   con 4 × 30 se comía casi todo con su defensa) se reparten entre todos los rivales. Al terminar se saca el casco,
-  vuelve a su lugar y los suyos se paran. **Pierde la armadura:** vuelve a ser Cami (su ficha de siempre: sus ataques,
+  vuelve a su lugar y los suyos se paran. Mientras dispara está en la pose del autor con los dos cañones abiertos
+  («brazos») y brilla como loca. **Pierde la armadura:** vuelve a ser Cami (su ficha de siempre: sus ataques,
   su barra y el tobillo) por el resto de la pelea (`vuelve_a`), y **descansa un turno** (agachada). Código: `berserk` en `Batalla.tsx`; el campo `berserk` del especial.
 - **Falta (arte del autor):** las animaciones de ataque del armored y del berserk. Mientras tanto usa el idle.
 - **Pendiente del autor:** cómo entra al juego (el molino del Capítulo 2).
@@ -881,14 +883,18 @@ todo para el torneo): después ya no se puede volver a transformar (`especialMas
 | Forma | Ataques en esa forma | Especial+ | La consecuencia |
 |---|---|---|---|
 | Cami armored (hecha, prueba) | Blaster+ | **Berserk:** el frenesí de balas y misiles a todos | Vuelve a Cami y descansa un turno |
-| Rikka diosa lunar (por hacer, Capítulo 3) | Ráfagas de corte lunar con la espada | **Luz de luna:** confunde a los rivales y cura algo al equipo | Vuelve a Rikka y queda **confundida** ella también |
+| Rikka princesa de luna (hecha, prueba `prueba_luna`; se gana en el Capítulo 3) | **Corte de luna** (13; la espada y la media luna) | **Sentencia lunar:** la noche, la luna, se alza y suelta la onda; confunde a los rivales (3 turnos) y cura un 25 % a los suyos | Vuelve a Rikka y queda **confundida** (2 turnos) |
 
-**Rikka diosa lunar** (basada en la princesa Kaguya; la Primavera está basada en Japón; ver `docs/CANON.md`). Ideas de
-Claude para cuando lleguen los sprites (por confirmar): las ráfagas como medias lunas repartidas entre los rivales (como
-la «Ola de petróleo»), cada corte más flojo que el Blaster+; la cura, una cuarta parte de la vida a cada uno (ella
-incluida); a los jefes la confusión les dura menos (1 turno); un rival que ya tiene otro estado no se confunde (un solo
-estado a la vez); el botón en plateado y lila; la pantalla azul plateada con la luna llena detrás. Se gana en el
-Capítulo 3 (`TODO(canon)`: dónde).
+**Rikka princesa de luna** (basada en la princesa Kaguya; la Primavera está basada en Japón; ver `docs/CANON.md`).
+Sprites del autor (2026-11-08): el idle, la Sentencia lunar (cuadro ancho, con la onda), el rezo y, aparte, Rikka
+derrotada. Forma `formas.rikka_luna`; Rikka la toma con su especial «Princesa de luna» (`especiales_extra`, se
+desbloquea con `especial_rikka_luna`; `TODO(canon)`: dónde en el Capítulo 3). **Corte de luna:** un tramo rápido de la
+animación de la Sentencia (saca la espada y sale la media luna), pega a los 0,8 s. **Sentencia lunar:** detrás de todos
+se hace de noche (cielo azul oscuro, estrellas que titilan), sube la luna (pixel art de `public/batalla/luna.webp`, de la
+imagen de referencia del autor) con su halo y un haz de luz con brillos que caen; Rikka reza, se alza en el aire y suelta
+la onda; los rivales quedan confundidos (a los jefes les dura la mitad, como todos los estados) y los suyos se curan un
+25 % (ella incluida); al bajar vuelve a ser Rikka y queda confundida. Código: `sentenciaLunar` en `Batalla.tsx`; el
+campo `luna` del especial.
 
 ## 16. Pendientes e ideas
 

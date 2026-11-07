@@ -282,6 +282,27 @@
             "texto": "{quien} se planta como en su puente. Nada pasa. [Relleno: ataque de prueba, sin sprites nuevos]"
           }
         }
+      ],
+      "especiales_extra": [
+        {
+          "especial": {
+            "nombre": "Princesa de luna",
+            "poder": 0,
+            "golpes": 1,
+            "objetivo": "uno",
+            "posicion": "objetivo",
+            "color": "#b9a6ff",
+            "ojos": [
+              44,
+              36,
+              28,
+              13
+            ],
+            "texto": "{quien} cierra los ojos. El kimono se llena de luz de luna y la bufanda se le enreda en el aire.",
+            "transforma": "rikka_luna"
+          },
+          "desbloqueo": "especial_rikka_luna"
+        }
       ]
     },
     "jordy": {
@@ -3072,7 +3093,16 @@
         {
           "nombre": "Blaster+",
           "poder": 16,
-          "texto": "{quien} levanta el puño de la armadura y dispara. El blaster ahora tiene más ganas que ella."
+          "texto": "{quien} carga el blaster. El cañón junta energía... y suelta un rayo que no se termina nunca.",
+          "anim": "ataque",
+          "golpe_ms": 2050,
+          "rayo": {
+            "x": 330,
+            "y": 68,
+            "ms": 1400,
+            "grosor": 9,
+            "color": "#5ee0ff"
+          }
         }
       ],
       "especial": {
@@ -3082,7 +3112,7 @@
         "objetivo": "todos",
         "color": "#5ee0ff",
         "ojos": [
-          46,
+          53,
           38,
           26,
           14
@@ -3107,6 +3137,70 @@
         "Tienes la postura de alguien que… qué lindo brilla tu casco. No me mires así. Tú, el del medio.",
         "¿Te mandaron solo? ¿Y por qué son cuatro? Contesten de a uno."
       ],
+      "aprende": []
+    },
+    "rikka_luna": {
+      "_nota": "Una forma (especial+; docs/BIBLIA_RPG.md, sección 27): la princesa de luna, basada en la princesa Kaguya. La toma Rikka con su especial «Princesa de luna» y la deja al terminar la Sentencia lunar. No es un peleador aparte.",
+      "nombre": "Rikka",
+      "forma": true,
+      "sprite": "batalla/rikka_luna",
+      "seguido": true,
+      "descanso": "",
+      "distancia": true,
+      "sin_numeros": true,
+      "sonido": "espada",
+      "escala": 1.05,
+      "base": {
+        "ps": 32,
+        "atq": 8,
+        "def": 6,
+        "vel": 11
+      },
+      "crece": {
+        "ps": 5,
+        "atq": 1,
+        "def": 0.6,
+        "vel": 0.4
+      },
+      "ataques": [
+        {
+          "nombre": "Corte de luna",
+          "poder": 13,
+          "anim": "corte",
+          "golpe_ms": 800,
+          "texto": "{quien} saca la espada de la nada. De la punta sale una media luna azul que corta a {objetivo}."
+        }
+      ],
+      "especial": {
+        "nombre": "Sentencia lunar",
+        "poder": 0,
+        "golpes": 1,
+        "objetivo": "todos",
+        "posicion": "centro",
+        "color": "#9fc7ff",
+        "ojos": [
+          204,
+          29,
+          22,
+          11
+        ],
+        "texto": "{quien} junta las manos. Detrás de todos se hace de noche y sale la luna.",
+        "sin_barra": {
+          "descanso": 0
+        },
+        "luna": {
+          "sprite": "batalla/rikka_luna",
+          "confunde": 3,
+          "cura": 0.25,
+          "confundida": 2,
+          "vuelve_a": "rikka"
+        }
+      },
+      "hablar": [
+        "¿Sabes cuánto cuesta esa armadura? Yo sí. Y me da pena por ti.",
+        "Arrodíllate ante una sacerdotisa. Por favor. Es gratis."
+      ],
+      "hablar_confundido": [],
       "aprende": []
     }
   }

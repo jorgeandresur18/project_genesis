@@ -507,6 +507,15 @@
     "Berserk": "Berserk",
     "A {quien} se le cierra el casco sobre la cara. El visor se enciende. Del hombro le salen dos cañones.": "The helmet snaps shut over {quien}'s face. The visor lights up. Two cannons come out of her shoulders.",
     "[Prueba] Cami contra los soldados del molino. Llena su barra (Objetos › 4Low-Co) y usa el Armored: se transforma y desde el turno siguiente ataca con la armadura.": "[Test] Cami against the mill soldiers. Fill her bar (Items › 4Low-Co) and use Armored: she transforms and attacks in armor from the next turn.",
-    "{quien} se cubre de placas de metal blancas y azules. La armadura se cierra sola, pieza por pieza.": "{quien} is covered in white and blue metal plates. The armor closes by itself, piece by piece."
+    "{quien} se cubre de placas de metal blancas y azules. La armadura se cierra sola, pieza por pieza.": "{quien} is covered in white and blue metal plates. The armor closes by itself, piece by piece.",
+    "{quien} carga el blaster. El cañón junta energía... y suelta un rayo que no se termina nunca.": "{quien} charges the blaster. The barrel gathers energy... and lets out a beam that never ends.",
+    "Sentencia lunar": "Lunar Sentence",
+    "{quien} junta las manos. Detrás de todos se hace de noche y sale la luna.": "{quien} joins her hands. Behind everyone night falls and the moon rises.",
+    "Corte de luna": "Moon Cut",
+    "{quien} saca la espada de la nada. De la punta sale una media luna azul que corta a {objetivo}.": "{quien} draws a sword out of nowhere. A blue crescent flies from the tip and cuts {objetivo}.",
+    "Princesa de luna": "Moon Princess",
+    "{quien} cierra los ojos. El kimono se llena de luz de luna y la bufanda se le enreda en el aire.": "{quien} closes her eyes. Her kimono fills with moonlight and her scarf tangles in the air.",
+    "Prueba: Rikka princesa de luna": "Test: Rikka, Moon Princess",
+    "[Prueba] Rikka contra los soldados del molino. Llena su barra (Objetos › 4Low-Co) y usa «Princesa de luna».": "[Test] Rikka against the mill soldiers. Fill her bar (Items › 4Low-Co) and use «Moon Princess»."
   }
 }

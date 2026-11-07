@@ -502,5 +502,8 @@
   "batalla.berserk_agachense": "¡Agáchense!",
   "batalla.berserk_agotada": "{quien} se queda sin aire. El próximo turno descansa.",
   "batalla.sigue_agotada": "{quien} recupera el aliento: no hace nada este turno.",
-  "batalla.transformada": "{quien} ya es otra. Desde el próximo turno pelea así."
+  "batalla.transformada": "{quien} ya es otra. Desde el próximo turno pelea así.",
+  "batalla.luna_confunde": "La luz de luna confunde a {quien}.",
+  "batalla.luna_cura": "La luz de luna le devuelve {n} PS a {quien}.",
+  "batalla.luna_confundida": "La luz también la alcanzó a ella: {quien} queda confundida."
 }

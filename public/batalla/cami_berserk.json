@@ -1,5 +1,5 @@
 {
-  "frameWidth": 116,
+  "frameWidth": 130,
   "frameHeight": 118,
   "animations": {
     "idle": {
@@ -8,21 +8,23 @@
       "fps": 12,
       "loop": true
     },
-    "pestaneo": {
+    "brazos": {
       "row": 1,
+      "frames": 16,
+      "fps": 8,
+      "loop": true
+    },
+    "pestaneo": {
+      "row": 2,
       "frames": 3,
       "fps": 10,
       "loop": false
     }
   },
-  "ancla_disparo": [
-    56,
-    58
-  ],
   "cuerpo": [
-    7,
+    14,
     21,
-    110,
+    117,
     116
   ]
 }

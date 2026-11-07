@@ -158,6 +158,9 @@ const CLON_CORRIDO: [number, number] = [8, -3];
 const CLON_ESCALA = 0.9;
 /** El clon de sombra: cuánto carga energía antes del destello. */
 const CARGA_CLON_MS = 1500;
+/** Las estrellas de la noche de la Sentencia lunar ([x %, y %, demora del titileo]) y los brillos que caen de la luna. */
+const ESTRELLAS: [number, number, number][] = Array.from({ length: 34 }, (_, i) => [(i * 37 + 11) % 100, ((i * 53) % 55) + 2, ((i * 7) % 10) / 4]);
+const BRILLOS_LUNA: [number, number][] = Array.from({ length: 26 }, (_, i) => [28 + ((i * 41) % 46), ((i * 13) % 20) / 6]);
 /** La bola de la sombra de roca se ve más grande que el gólem (pedido del autor). */
 const BOLA_ESCALA = 1.3;
 type Bala = { key: number; x: number; y: number; dx: number; dy: number; ms: number; color: string; rafaga: boolean };
@@ -1496,6 +1499,8 @@ function Pelea({
       }
       // El Berserk (Cami armored): el casco y la espiral de balas para todos lados.
       if (esp.berserk) return berserk(h, esp);
+      // La Sentencia lunar (Rikka princesa de luna): la noche, la luna y la onda que confunde y cura.
+      if (esp.luna) return sentenciaLunar(h, esp);
       // La bomba: no golpea, queda en el campo.
       if (esp.bomba) {
         if (!ponerBomba(b.current, h, esp.bomba)) return decir(t('batalla.bomba_ya'));
@@ -1629,7 +1634,15 @@ function Pelea({
       return paralizar(e);
     }
     const deLejos = !!d.personajes[h.clave].distancia;
-    if (deLejos) {
+    if (ataque.golpe_ms) {
+      // El disparo viene dibujado en la hoja (el rayo del Blaster+, la media luna del Corte de luna): la animación
+      // entera y el golpe cuando sale.
+      void animar(h.id, (ataque.anim ?? 'ataque') as Anim, await duraHoja(d.personajes[h.clave].sprite, ataque.anim ?? 'ataque'));
+      playChip(sonidoDe(h));
+      await espera(ataque.golpe_ms);
+      // El rayo de la hoja sigue hasta el rival (si no, termina donde termina el dibujo).
+      if (ataque.rayo) seguirRayo(h, ataque.rayo, e);
+    } else if (deLejos) {
       // Dispara desde su lugar: una sola bala sale de la pistola y pega en el que eligió.
       const llego = new Promise<void>((ok) => {
         disparando.current.set(h.id, { tipo: 'una', hacia: e, llego: ok });
@@ -2027,6 +2040,101 @@ function Pelea({
     setExplosiones((v) => [...v, { key, x, y, k }]);
     setTimeout(() => setExplosiones((v) => v.filter((z) => z.key !== key)), 700);
   };
+  /** El rayo dibujado en la hoja (el Blaster+), desde la punta del cuadro hasta el rival, mientras dura el disparo. */
+  const [rayoHoja, setRayoHoja] = useState<{ key: number; x: number; y: number; largo: number; ang: number; grosor: number; color: string; ms: number } | null>(null);
+  const seguirRayo = (l: Luchador, r: NonNullable<Ataque['rayo']>, hacia: Luchador) => {
+    void cargarHoja(d.personajes[l.clave].sprite).then((h) => {
+      const hoja = h as Hoja;
+      const s = rectSprite(figuras.current.get(l.id)?.querySelector('.batalla-sprite'));
+      const base = raiz.current?.getBoundingClientRect();
+      const c = centroDe(hacia);
+      if (!s || !base || !c) return;
+      const k = s.width / hoja.frameWidth;
+      // Los héroes se dibujan espejados: la punta queda del lado izquierdo del cuadro.
+      const x = (l.lado === 'heroe' ? s.right - r.x * k : s.left + r.x * k) - base.left;
+      const y = s.top + r.y * k - base.top;
+      const key = Math.random();
+      setRayoHoja({ key, x, y, largo: Math.hypot(c.x - x, c.y - y) + 30, ang: Math.atan2(c.y - y, c.x - x), grosor: r.grosor * k, color: r.color, ms: r.ms });
+      setTimeout(() => setRayoHoja((v) => (v?.key === key ? null : v)), r.ms);
+    });
+  };
+  /** Quién está brillando como loca (el Berserk). */
+  const [loca, setLoca] = useState<string | null>(null);
+  /** Cuánto dura una animación de cualquier hoja (con sus vueltas), en ms. */
+  const duraHoja = async (sprite: string, anim: string) => {
+    const hoja = (await cargarHoja(sprite)) as Hoja;
+    const f = 'animations' in hoja ? hoja.animations[anim] : undefined;
+    return f ? ((f.seq?.length ?? f.frames) * 1000) / f.fps : 800;
+  };
+  /** La noche de la Sentencia lunar (el cielo, las estrellas, la luna y su luz con brillos). */
+  const [noche, setNoche] = useState(false);
+  /**
+   * La Sentencia lunar (Rikka princesa de luna, especial+): se hace de noche y sale la luna; reza, se alza y suelta la
+   * onda de media luna. Los rivales quedan confundidos y los suyos se curan. Al terminar vuelve a ser Rikka y queda
+   * confundida ella también (la consecuencia). Un especial+ por pelea.
+   */
+  const sentenciaLunar = async (l: Luchador, e: Especial) => {
+    const cfg = e.luna!;
+    forzar();
+    await avisar(e, cfg.sprite, true);
+    await decir(fmt(e.texto, { quien: l.nombre }));
+    const rivales = b.current.enemigos.filter(vivo);
+    const suyos = b.current.heroes.filter(vivo);
+    enEspecial.current = true;
+    // Se hace de noche detrás de todos y sube la luna.
+    setNoche(true);
+    playChip('vortice');
+    void animar(l.id, 'rezo' as Anim);
+    await espera(1600);
+    // Se alza y suelta la onda.
+    enElAire.current.add(l.id);
+    setAire((m) => ({ ...m, [l.id]: 70 }));
+    playChip('carga');
+    await espera(500);
+    void animar(l.id, 'sentencia' as Anim, await duraHoja(cfg.sprite, 'sentencia'));
+    await espera(2300);
+    playChip('impacto');
+    setFogonazo({ key: Math.random(), color: e.color });
+    // La luz de luna: confunde a los rivales y cura a los suyos.
+    for (const x of rivales) {
+      if (!vivo(x)) continue;
+      if (confundirA(b.current, x, cfg.confunde)) {
+        luz(x.id, '#ff6fae', true);
+        numero(x.id, t('batalla.confundido_tag'), 'falla');
+      }
+    }
+    for (const x of suyos) {
+      if (!vivo(x)) continue;
+      const n = curarse(x, cfg.cura);
+      if (n) numero(x.id, `+${n}`, 'cura');
+      luz(x.id, '#9fe8ff', true);
+      efecto(x.id, 'cura', 1300);
+    }
+    playChip('vida');
+    forzar();
+    await espera(2400);
+    // Baja, se apaga la noche y vuelve a ser Rikka.
+    enElAire.current.delete(l.id);
+    setAire((m) => ({ ...m, [l.id]: 0 }));
+    setAnims((m) => ({ ...m, [l.id]: 'idle' }));
+    await espera(400);
+    setNoche(false);
+    enEspecial.current = false;
+    const confundidos = rivales.filter((x) => vivo(x) && x.confundido > 0);
+    if (confundidos.length) await decir(fmt(t('batalla.luna_confunde'), { quien: confundidos.map((x) => x.nombre).join(', ') }));
+    if (FICHAS.heroes[cfg.vuelve_a]) {
+      cambiarForma(l, FICHAS.heroes[cfg.vuelve_a]);
+      l.carga = 0;
+      playChip('cambio');
+    }
+    l.especialMas = true;
+    // La consecuencia: la luz también la alcanzó a ella.
+    if (vivo(l) && confundirA(b.current, l, cfg.confundida)) {
+      luz(l.id, '#ff6fae', true);
+      forzar();
+      await decir(fmt(t('batalla.luna_confundida'), { quien: l.nombre }));
+    }
+  };
   const berserk = async (l: Luchador, e: Especial) => {
     const cfg = e.berserk!;
     if (!e.sin_barra) l.carga = 0;
@@ -2046,6 +2154,9 @@ function Pelea({
       playChip('salto');
     }
     await alCentro(l.id);
+    // Los cañones abiertos y el brillo loco mientras dura el frenesí.
+    void animar(l.id, 'brazos' as Anim);
+    setLoca(l.id);
     const rivales = (l.lado === 'heroe' ? b.current.enemigos : b.current.heroes).filter((x) => (l.lado === 'heroe' ? vivo(x) : enCampo(x)));
     const c = centroDe(l);
     const base = raiz.current?.getBoundingClientRect();
@@ -2105,6 +2216,8 @@ function Pelea({
     }
     await espera(Math.max(0, dura + 900 - (Date.now() - desde)));
     setEspiral([]);
+    setLoca(null);
+    setAnims((m) => ({ ...m, [l.id]: 'idle' }));
     // Se saca el casco y vuelve a su lugar; los suyos se paran. Con `vuelve_a`, pierde la armadura: vuelve a su forma
     // base (su ficha de siempre) por el resto de la pelea.
     setSpriteDe((m) => {
@@ -2937,7 +3050,7 @@ function Pelea({
                     : (anims[h.id] ?? 'idle')
               }
               alCuadro={(anim, col, hoja) => alCuadro(h, anim, col, hoja)}
-              efecto={agachados.includes(h.id) || (vivo(h) && h.agotado && !d.personajes[h.clave].descanso) ? 'agachado-berserk' : efectos[h.id]}
+              efecto={loca === h.id ? 'berserk-loco' : agachados.includes(h.id) || (vivo(h) && h.agotado && !d.personajes[h.clave].descanso) ? 'agachado-berserk' : efectos[h.id]}
               alto={aire[h.id] ?? 0}
               vez={veces[h.id] ?? 0}
               especial={d.personajes[h.clave].especial}
@@ -3021,6 +3134,17 @@ function Pelea({
         </span>
       )}
       {tiembla > 0 && <span key={tiembla} className="batalla-temblor" aria-hidden />}
+      {/* La Sentencia lunar: la noche detrás de todos, las estrellas, la luna (pixel art) y su luz con brillos. */}
+      <span className={`batalla-noche ${noche ? 'activa' : ''}`} aria-hidden>
+        {ESTRELLAS.map(([x, y, r], i) => (
+          <i key={i} style={{ left: `${x}%`, top: `${y}%`, animationDelay: `${r}s` } as CSSProperties} />
+        ))}
+        <span className="batalla-luna" style={{ backgroundImage: `url(${BASE}batalla/luna.webp)` }} />
+        <span className="batalla-luz-luna" />
+        {BRILLOS_LUNA.map(([x, r], i) => (
+          <b key={i} style={{ left: `${x}%`, animationDelay: `${r}s` } as CSSProperties} />
+        ))}
+      </span>
       {/* La sombra de roca: el cielo morado con nubes, los meteoritos, sus estallidos y las montañas que brotan. */}
       <span className={`batalla-cielo-roca ${cielo ? 'activo' : ''}`} aria-hidden>
         <i />
@@ -3063,6 +3187,14 @@ function Pelea({
       {explosiones.map((x) => (
         <span key={x.key} className="batalla-explosion-misil" style={{ left: x.x, top: x.y, scale: String(x.k) } as CSSProperties} aria-hidden />
       ))}
+      {rayoHoja && (
+        <span
+          key={rayoHoja.key}
+          className="batalla-rayo-hoja"
+          style={{ left: rayoHoja.x, top: rayoHoja.y, width: rayoHoja.largo, height: rayoHoja.grosor, rotate: `${rayoHoja.ang}rad`, '--c': rayoHoja.color, animationDuration: `${rayoHoja.ms}ms` } as CSSProperties}
+          aria-hidden
+        />
+      )}
       {pedruscos.map((m) => (
         <span
           key={m.key}

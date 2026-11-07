@@ -133,3 +133,33 @@ test.describe('Cami armored', () => {
     expect(errores).toEqual([]);
   });
 });
+
+test.describe('Rikka princesa de luna', () => {
+  test('se transforma; Corte de luna y SENTENCIA LUNAR; la noche confunde a los rivales, cura y la deja confundida como Rikka', async ({ page }) => {
+    test.setTimeout(240_000);
+    const errores = await abrir(page, 'prueba_luna');
+    await hastaElegir(page, /RIKKA/i);
+    await pelea(page, (p) => ((p.estado.heroes.find((h) => h.clave === 'rikka') as { carga: number }).carga = 100));
+    await elegir(page, 'Atacar', /Princesa de luna/);
+    for (let k = 0; k < 2; k++) {
+      await hastaElegir(page);
+      await elegir(page, 'Esquivar');
+    }
+    await hastaElegir(page, /RIKKA/i);
+    expect(await pelea(page, (p) => p.datos.personajes.rikka.sprite)).toBe('batalla/rikka_luna');
+    await elegir(page, 'Atacar');
+    await expect(menu(page)).toHaveText(['Corte de luna', 'SENTENCIA LUNAR', /Volver/]);
+    await elegir(page, 'SENTENCIA LUNAR');
+    for (let k = 0; k < 2; k++) {
+      await hastaElegir(page);
+      await elegir(page, 'Esquivar');
+    }
+    await hasta(page, async () => (await page.locator('.batalla-noche.activa').count()) === 1);
+    await hasta(page, async () => (await pelea(page, (p) => p.estado.enemigos.filter((e) => (e as { confundido: number }).confundido > 0).length)) > 0, 60_000);
+    // Al terminar: vuelve a ser Rikka, ya usó su especial+ y queda confundida.
+    await hasta(page, async () => (await pelea(page, (p) => p.datos.personajes.rikka.sprite)) === 'batalla/rikka', 60_000);
+    await hasta(page, async () => (await pelea(page, (p) => (p.estado.heroes.find((h) => h.clave === 'rikka') as { confundido: number }).confundido)) > 0);
+    expect(await pelea(page, (p) => (p.estado.heroes.find((h) => h.clave === 'rikka') as { especialMas?: boolean }).especialMas)).toBe(true);
+    expect(errores).toEqual([]);
+  });
+});

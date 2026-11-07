@@ -300,3 +300,13 @@ Abrir `http://localhost:5173/?batalla=prueba_armored`.
 - [ ] **Berserk:** se le cierra el casco (cambia al sprite con visor y cañones), grita «¡Agáchense!» y Jair y Rikka se agachan; va al medio y suelta el frenesí: la espiral cada vez más cargada y misiles que explotan, 7,5 segundos. ¿Es la monstruosidad que buscabas? ¿Las explosiones tapan demasiado?
 - [ ] Al terminar: se saca el casco y **pierde la armadura: vuelve a ser la Cami de siempre** (traje azul, sus ataques y su barra) el resto de la pelea. El turno siguiente descansa agachada y después vuelve a elegir. **El Armored ya no aparece** en su menú (un especial+ por pelea).
 
+## 27. Rikka princesa de luna y lo nuevo del armored (nuevo, 8 de noviembre)
+
+Abrir `http://localhost:5173/?batalla=prueba_luna` (Rikka) y `?batalla=prueba_armored` (Cami). Para la barra: Objetos › 4Low-Co.
+- [ ] **Rikka se transforma** con «★ Princesa de luna» (gasta el turno) en tu princesa de luna; el turno siguiente su menú es **Corte de luna** y **SENTENCIA LUNAR**.
+- [ ] **Corte de luna:** saca la espada y sale la media luna. ¿El tramo de la animación que elegí sirve, o prefieres otro?
+- [ ] **Sentencia lunar:** reza, se hace de noche detrás de todos, sube tu luna en pixel art con su luz y los brillos, se alza y suelta la onda. Los soldados quedan confundidos y tu equipo se cura. Al bajar vuelve a ser Rikka y queda confundida.
+- [ ] **Rikka derrotada:** tu sprite nuevo (para verlo, que la tumben).
+- [ ] **El Blaster+:** tu animación (carga y rayo) y el rayo sigue hasta el soldado. **El Berserk:** la pose de los cañones abiertos y el brillo loco.
+- [ ] **Los HTML separados:** en `docs/sprites de prueba/personajes/` hay una carpeta por personaje con su HTML (y `index.html`). Para cambiar a uno, reemplazas su HTML; `python -I -X utf8 tools/sprites_separar.py juntar` los vuelve a unir en `todos.html`.
+

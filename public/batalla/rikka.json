@@ -125,6 +125,12 @@
         17,
         0
       ]
+    },
+    "derrotado": {
+      "row": 7,
+      "frames": 24,
+      "fps": 8,
+      "loop": true
     }
   },
   "cuerpo": [

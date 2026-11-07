@@ -10,7 +10,7 @@
 # - la media luna de la tajada de la sombra sale de su hoja y queda como proyectil aparte (sombra_tajada.png, de
 #   «ataque de la sombra.png», junto al HTML): el juego la lanza en horizontal hasta salir de la pantalla.
 # Las hojas quedan en WebP sin pérdida (exacto: idéntico pixel por pixel; pesan un tercio que en PNG).
-# Uso: python -I tools/batalla_sprites.py "docs/sprites de prueba/sprites rpg.html" [ids...]
+# Uso: python -I tools/batalla_sprites.py ["docs/sprites de prueba/personajes" | un HTML] [ids...]
 # Con ids (los del HTML: piedra, piedras, sombra…), rehace solo esas hojas.
 import base64
 import io
@@ -33,7 +33,8 @@ HOJAS = {
                       'blush': 'sonrojada', 'pestaneo': 'pestaneo', 'agachada': 'agachada', 'especial': 'especial', 'derrotada': 'derrotado'}),
     'nikki': ('nikki', {'idle': 'idle', 'pestaneo': 'pestaneo', 'ataque': 'ataque', 'daño': 'daño', 'llorando': 'llorando', 'derrotada': 'derrotado',
                         'especial': 'especial'}),  # «beso» viene en su propia hoja: ver hoja_beso.
-    'kimono': ('rikka', {'idle': 'idle', 'cabello': 'cabello', 'salto': 'salto', 'ataque': 'ataque', 'daño': 'daño', 'pestaneo': 'pestaneo', 'especial': 'especial'}),
+    'kimono': ('rikka', {'idle': 'idle', 'cabello': 'cabello', 'salto': 'salto', 'ataque': 'ataque', 'daño': 'daño', 'pestaneo': 'pestaneo', 'especial': 'especial',
+                         'derrotada': 'derrotado'}),
     'ninja': ('soldado', {'idle': 'idle', 'correr': 'mover', 'salto': 'salto', 'ataque': 'ataque', 'daño': 'daño', 'pestaneo': 'pestaneo'}),
     'sombra': ('sombra', {'idle': 'idle', 'tajada': 'ataque', 'desgarro': 'especial', 'daño': 'daño'}),
     # La Mega Bola Tóxica de Nikki (un proyectil con su propia hoja: aparecer, flamas y explotar).
@@ -43,10 +44,13 @@ HOJAS = {
                                'montana2': 'montana2', 'derrotado': 'derrotado', 'agachado': 'agachado', 'bola': 'bola'}),
     # Las piedras que lanza (vuelo e impacto morado): el estallido de los meteoritos.
     'piedras': ('piedras', {'idle': 'idle', 'impacto': 'impacto'}),
-    # Cami armored (la armadura, sin casco) y su berserk (casco con visor y dos cañones). Por ahora, solo el idle; el
-    # parpadeo se arma con el parche del HTML (ver parpadeo_de_parche).
-    'armored': ('cami_armored', {'idle': 'idle'}),
-    'berserk': ('cami_berserk', {'idle': 'idle'}),
+    # Cami armored con su blaster (el idle de combate y el disparo: carga 2 s y sale el rayo, dibujado en la hoja) y su
+    # berserk (casco con visor y dos cañones; «brazos»: los cañones abiertos, para el frenesí). El parpadeo del berserk
+    # se arma con el parche del HTML (ver componer). La hoja «armored» sola (solo el idle) ya no se usa.
+    'camiblaster': ('cami_armored', {'idle': 'idle', 'disparo': 'ataque'}),
+    'berserk': ('cami_berserk', {'idle': 'idle', 'brazos': 'brazos'}),
+    # Rikka princesa de luna (su especial+): el idle, la Sentencia lunar (la onda de media luna) y el rezo.
+    'princesa': ('rikka_luna', {'idle': 'idle', 'sentencia': 'sentencia', 'rezo': 'rezo'}),
 }
 
 
@@ -152,6 +156,11 @@ def viaje(seq: list) -> dict:
 
 
 def leer_html(ruta: Path):
+    # Una carpeta (la de los personajes separados, tools/sprites_separar.py): todos sus HTML juntos.
+    if ruta.is_dir():
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        from sprites_separar import leer_carpeta
+        return leer_carpeta(ruta)[1]
     h = ruta.read_text(encoding='utf8')
     i = h.index('const CHARS=')
     j = h.index('];', i) + 1
@@ -408,8 +417,103 @@ def guardar(im, ruta: Path):
     im.convert('RGBA').save(ruta.with_suffix('.webp'), 'WEBP', lossless=True, method=6, exact=True)
 
 
+def imagen(src: str) -> np.ndarray:
+    return np.array(Image.open(io.BytesIO(base64.b64decode(src.split('base64,')[1]))).convert('RGBA'))
+
+
+def donde_esta(grande: np.ndarray, chico: np.ndarray):
+    """Dónde está `chico` (el idle) dentro de `grande` (el primer cuadro de una animación de cuadro ancho), comparando
+    las siluetas. Devuelve (x, y) y qué parte no coincide (0: igual). Si no se parecen, None."""
+    H, W = grande.shape[:2]
+    h, w = chico.shape[:2]
+    a = chico[..., 3] > 0
+    mejor = None
+    for y in range(0, max(1, H - h + 1)):
+        for x in range(0, max(1, W - w + 1)):
+            b = grande[y:y + h, x:x + w, 3] > 0
+            if b.shape != a.shape:
+                continue
+            dif = np.count_nonzero(a ^ b) / max(1, np.count_nonzero(a | b))
+            if mejor is None or dif < mejor[2]:
+                mejor = (x, y, dif)
+    return mejor if mejor and mejor[2] < 0.35 else None
+
+
+def componer(c: dict, mapa: dict):
+    """Una hoja del juego a partir de un personaje del visor con animaciones en hojas aparte («sheets», a veces con
+    cuadros más anchos: el rayo del blaster, la onda de la Sentencia lunar). Todas quedan con el mismo tamaño de cuadro:
+    cada animación ancha se alinea con el idle (buscando dónde está su cuerpo) y el lienzo crece parejo a los dos lados,
+    para que el personaje quede en el medio del cuadro (así no se corre en la pelea). Una fila por animación.
+    Si el visor arma el pestañeo con un parche (Cami berserk), sale como la fila «pestaneo»."""
+    fw, fh = c['fw'], c['fh']
+    base = imagen(c['src'])
+    hojas = {k: imagen(v['src']) for k, v in c.get('sheets', {}).items()}
+    cuadros: dict = {}   # nombre en el juego -> (lista de cuadros, (x, y) del cuadro en el lienzo común, datos)
+    for k, a in c['anims'].items():
+        if k not in mapa:
+            continue
+        if a.get('sheet'):
+            sh = c['sheets'][a['sheet']]
+            im, sw, shh, cols = hojas[a['sheet']], sh['fw'], sh['fh'], a.get('cols', a['frames'])
+            fr = [im[(a['row'] + f // cols) * shh:(a['row'] + f // cols + 1) * shh, (f % cols) * sw:(f % cols + 1) * sw] for f in range(a['frames'])]
+        else:
+            fr = [base[a['row'] * fh:(a['row'] + 1) * fh, f * fw:(f + 1) * fw] for f in range(a['frames'])]
+        cuadros[mapa[k]] = [fr, (0, 0), a]
+    # El pestañeo con parche: sobre el primer cuadro del idle, ojos a medias, cerrados y a medias.
+    b = c.get('blink')
+    if b and b.get('type') == 'patch' and 'pestaneo' not in cuadros and 'idle' in cuadros:
+        fr = []
+        for cual in ['half', 'closed', 'half']:
+            q = cuadros['idle'][0][0].copy()
+            for x, y, r, g, bb in b[cual]:
+                if 0 <= x < fw and 0 <= y < fh:
+                    q[y, x] = [r, g, bb, 255]
+            fr.append(q)
+        cuadros['pestaneo'] = [fr, (0, 0), {'fps': 10, 'loop': False}]
+    idle0 = cuadros['idle'][0][0]
+    # Las animaciones de otro tamaño: dónde está el idle en su primer cuadro (si no se parece, abajo y al medio).
+    for nombre, (fr, _, a) in cuadros.items():
+        h, w = fr[0].shape[:2]
+        if (w, h) == (fw, fh):
+            continue
+        d = donde_esta(fr[0], idle0)
+        x, y = (d[0], d[1]) if d else ((w - fw) // 2, h - fh)
+        cuadros[nombre][1] = (-x, -y)
+        print(f"  {nombre}: cuadro {w}x{h}, el idle está en ({x}, {y})" + ('' if d else ' (no se parece: abajo y al medio)'))
+    # El lienzo común, parejo alrededor del centro del cuerpo del idle.
+    ys, xs = np.nonzero(idle0[..., 3] > 0)
+    cx = (xs.min() + xs.max() + 1) / 2
+    x0 = min(o[0] for _, o, _ in cuadros.values())
+    x1 = max(o[0] + fr[0].shape[1] for fr, o, _ in cuadros.values())
+    y0 = min(o[1] for _, o, _ in cuadros.values())
+    y1 = max(o[1] + fr[0].shape[0] for fr, o, _ in cuadros.values())
+    if (x0, y0, x1, y1) == (0, 0, fw, fh):
+        # Todas del mismo tamaño (Rikka con su derrotada): el cuadro queda igual que en el visor.
+        izq, W, H = 0, fw, fh
+    else:
+        medio = int(np.ceil(max(cx - x0, x1 - cx)))
+        izq = int(np.floor(cx)) - medio
+        W, H = 2 * medio, y1 - y0
+    filas, meta = [], {'frameWidth': W, 'frameHeight': H, 'animations': {}}
+    ancho = max(len(fr) for fr, _, _ in cuadros.values()) * W
+    for nombre, (fr, (ox, oy), a) in cuadros.items():
+        fila = np.zeros((H, ancho, 4), np.uint8)
+        for f, q in enumerate(fr):
+            x, y = f * W + ox - izq, oy - y0
+            fila[y:y + q.shape[0], x:x + q.shape[1]] = q
+        anim = {'row': len(filas), 'frames': len(fr), 'fps': a.get('fps', 12), 'loop': a.get('loop', False)}
+        if 'seq' in a:
+            anim['seq'] = a['seq']
+        meta['animations'][nombre] = anim
+        filas.append(fila)
+    if (W, H) != (fw, fh):
+        print(f"  cuadro del juego: {W}x{H} (el del idle era {fw}x{fh})")
+    return np.concatenate(filas), meta
+
+
 def main():
-    ruta = Path(sys.argv[1]) if len(sys.argv) > 1 else RAIZ / 'docs' / 'sprites de prueba' / 'sprites rpg.html'
+    # Por defecto, la carpeta de los personajes separados (tools/sprites_separar.py); también sirve un HTML.
+    ruta = Path(sys.argv[1]) if len(sys.argv) > 1 else RAIZ / 'docs' / 'sprites de prueba' / 'personajes'
     solo = set(sys.argv[2:])
     for c in leer_html(ruta):
         if solo and c['id'] not in solo:
@@ -427,16 +531,21 @@ def main():
             continue
         nombre, mapa = HOJAS[c['id']]
         fw, fh = c['fw'], c['fh']
-        im = np.array(Image.open(io.BytesIO(base64.b64decode(c['src'].split('base64,')[1]))).convert('RGBA'))
-        meta = {'frameWidth': fw, 'frameHeight': fh, 'animations': {}}
-        for k, a in c['anims'].items():
-            if k not in mapa:
-                continue
-            anim = {'row': a['row'], 'frames': a['frames'], 'fps': a['fps'], 'loop': a['loop']}
-            # Orden de cuadros (los especiales repiten cuadros durante unos 5 segundos).
-            if 'seq' in a:
-                anim['seq'] = a['seq']
-            meta['animations'][mapa[k]] = anim
+        if c['id'] != 'nikki' and (any(a.get('sheet') for k, a in c['anims'].items() if k in mapa) or (c.get('blink') or {}).get('type') == 'patch'):
+            print(nombre)
+            im, meta = componer(c, mapa)
+            fw, fh = meta['frameWidth'], meta['frameHeight']
+        else:
+            im = np.array(Image.open(io.BytesIO(base64.b64decode(c['src'].split('base64,')[1]))).convert('RGBA'))
+            meta = {'frameWidth': fw, 'frameHeight': fh, 'animations': {}}
+            for k, a in c['anims'].items():
+                if k not in mapa:
+                    continue
+                anim = {'row': a['row'], 'frames': a['frames'], 'fps': a['fps'], 'loop': a['loop']}
+                # Orden de cuadros (los especiales repiten cuadros durante unos 5 segundos).
+                if 'seq' in a:
+                    anim['seq'] = a['seq']
+                meta['animations'][mapa[k]] = anim
         if nombre == 'cami':
             at = c['anims']['attack']
             print('cami: destello rellenado,', rellenar_destello(im, fw, fh, at['row'], at['frames']), 'pixeles')
@@ -472,12 +581,6 @@ def main():
             im = np.concatenate([np.pad(im, ((0, 0), (0, ancho - im.shape[1]), (0, 0))), np.pad(fila, ((0, 0), (0, ancho - fila.shape[1]), (0, 0)))])
             if proy:
                 meta['proyectiles'] = {'beso': proy}
-        if nombre in ('cami_armored', 'cami_berserk'):
-            im = parpadeo_de_parche(im, c, meta)
-            meta['ancla_disparo'] = [56, 58]
-        if nombre == 'cami_armored':
-            # Sin fila de ataque todavía: dispara desde el puño en cualquier cuadro (usa el idle).
-            meta['disparos'] = {'ataque': {str(f): [PUNO_ARMORED] for f in range(c['anims']['idle']['frames'])}}
         if nombre == 'sombra':
             meta['viaje'] = viaje(c['anims']['desgarro']['seq'])
             p = proyectil(ruta)
@@ -494,6 +597,10 @@ def main():
             meta['animations']['retirada'] = {**es, 'loop': False, 'seq': es['seq'][:meta['viaje']['ida'][0] + 4]}
         if nombre == 'sombra_roca':
             recortar_roca(meta)
+        if nombre == 'rikka_luna':
+            # El Corte de luna (su ataque): el tramo de la Sentencia en que saca la espada y sale la media luna, rápido.
+            s = meta['animations']['sentencia']
+            meta['animations']['corte'] = {**s, 'fps': 18, 'loop': False, 'seq': list(range(12, 47))}
         guardar(im, SALIDA / f'{nombre}.png')
         (SALIDA / f'{nombre}.json').write_text(json.dumps(meta, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
         print(nombre, Image.fromarray(im).size, list(meta['animations']))

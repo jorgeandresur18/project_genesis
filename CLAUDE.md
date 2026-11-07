@@ -114,10 +114,12 @@ Para trabajar desde cualquier computadora. El detalle de cada sesión está en `
   se toca a Rikka) y `escala` en un personaje; las manos del jugador (también en la galería) salen de
   `python -I -X utf8 tools/manos_jugador.py` (desde `docs/palma.png`, `agarrando.png`, `apuntando.png`, que no se suben).
 - **Peleas, lo del 7 de noviembre:** el turno de los héroes también está en `src/engine/turnos.ts` (`resolverObjeto`,
-  `puedeActuarHeroe`, `tipoDeAtaque`…). Los sprites de las peleas salen del HTML del autor con
-  `python -I -X utf8 tools/batalla_sprites.py "docs/sprites de prueba/sprites_rpg.html" [ids]` (con ids, solo esas
-  hojas; quedan en WebP sin pérdida, no en PNG). **Especiales+** (`docs/BIBLIA_RPG.md`, secciones 26 y 27): una forma con otra hoja, que al terminar vuelve a la
-  base (Cami armored → `prueba_armored`; Rikka diosa lunar, por hacer). La sombra de roca: sección 25. Para probar a mano
+  `puedeActuarHeroe`, `tipoDeAtaque`…). Los sprites de las peleas salen de los HTML del autor con
+  `python -I -X utf8 tools/batalla_sprites.py ["docs/sprites de prueba/personajes"] [ids]` (con ids, solo esas hojas;
+  quedan en WebP sin pérdida). **El HTML grande se separa** en una carpeta por personaje con
+  `python -I -X utf8 tools/sprites_separar.py separar <html>` (`juntar` los vuelve a unir): el autor pasa solo el HTML
+  del personaje que cambió. **Especiales+** (`docs/BIBLIA_RPG.md`, secciones 26 y 27): una forma con otra hoja, que al terminar vuelve a la
+  base (Cami armored → `prueba_armored`; Rikka princesa de luna → `prueba_luna`). La sombra de roca: sección 25. Para probar a mano
   en el navegador (solo en `npm run dev`): `window.__pelea` tiene el estado y los datos de la pelea (forzar un ataque,
   llenar la barra); los recorridos sin ventana están en `tests/e2e/`.
 - **Torneo:** peleadores nuevos (Jordy, Billy, Maggie, el influencer con seguidores, el otaku; Nikki desde el inicio) en
