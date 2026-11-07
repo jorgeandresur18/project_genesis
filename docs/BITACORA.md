@@ -621,3 +621,14 @@ GENESIS no filtró.
 - **Diálogos:** los 20 borradores de Claude del Capítulo 1 y seguir la revisión con el editor en vivo.
 - **Programación que Claude puede hacer sola:** revisar cuánto pesa la demo (que abra más rápido en el celular) y buscar
   más errores como el de los ids repetidos.
+
+## 8 de noviembre — Mientras el autor termina sprites (computadora de Jorge)
+
+- **La transformación como turno propio (idea del autor, Claude la confirmó):** Cami empieza normal y su especial
+  Armored la transforma: gasta su turno, la armadura protege desde ese momento (DEF 14 → 19 en la prueba) y desde el
+  turno siguiente pelea como armored. La forma es una ficha aparte (`formas.cami_armored`), así no sale en el torneo.
+- **Un especial+ por pelea (decisión del autor):** después del Berserk ya no se puede volver a transformar.
+- **Balance (el autor se lo dejó a Claude):** Blaster+ de 22 a 16; Berserk de 4 × 30 a 5 × 26 (le pega de verdad al jefe).
+- **Pruebas en el navegador nuevas** (`tests/e2e/especiales.spec.ts`): la lluvia de meteoritos, el modo bola de la roca
+  y el ciclo completo de Cami (transformarse, el menú del armored, el Berserk, volver a Cami, descansar, el Armored que
+  ya no aparece).

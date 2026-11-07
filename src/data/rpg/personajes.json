@@ -188,9 +188,9 @@
         {
           "especial": {
             "nombre": "Armored",
-            "poder": 9,
-            "golpes": 8,
-            "objetivo": "todos",
+            "poder": 0,
+            "golpes": 1,
+            "objetivo": "uno",
             "color": "#5ea8ff",
             "ojos": [
               44,
@@ -198,8 +198,9 @@
               26,
               14
             ],
-            "texto": "{quien} se cubre de placas de metal. Los ojos del casco se encienden. Lo que sigue no es una pelea: es un trámite. [Relleno: falta el sprite de Cami armored y el berserk]",
-            "posicion": "centro"
+            "texto": "{quien} se cubre de placas de metal blancas y azules. La armadura se cierra sola, pieza por pieza.",
+            "posicion": "centro",
+            "transforma": "cami_armored"
           },
           "desbloqueo": "especial_cami_armored"
         }
@@ -3041,6 +3042,72 @@
         "usos": 3,
         "texto": "{quien} le pega a {objetivo} con una botella rota. No pregunten de qué bar salió. [Relleno: cassette suelto de prueba]"
       }
+    }
+  },
+  "formas": {
+    "cami_armored": {
+      "_nota": "Una forma (especial+; docs/BIBLIA_RPG.md, secciones 26 y 27): la toma Cami con su especial Armored y la deja al terminar el Berserk. No es un peleador aparte (no sale en el torneo ni en el equipo).",
+      "nombre": "Cami",
+      "forma": true,
+      "sprite": "batalla/cami_armored",
+      "seguido": true,
+      "descanso": "",
+      "distancia": true,
+      "sin_numeros": true,
+      "sonido": "disparo",
+      "escala": 1.01,
+      "base": {
+        "ps": 34,
+        "atq": 8,
+        "def": 9,
+        "vel": 12
+      },
+      "crece": {
+        "ps": 4,
+        "atq": 1.1,
+        "def": 0.5,
+        "vel": 0.4
+      },
+      "ataques": [
+        {
+          "nombre": "Blaster+",
+          "poder": 16,
+          "texto": "{quien} levanta el puño de la armadura y dispara. El blaster ahora tiene más ganas que ella."
+        }
+      ],
+      "especial": {
+        "nombre": "Berserk",
+        "poder": 5,
+        "golpes": 26,
+        "objetivo": "todos",
+        "color": "#5ee0ff",
+        "ojos": [
+          46,
+          38,
+          26,
+          14
+        ],
+        "posicion": "centro",
+        "texto": "A {quien} se le cierra el casco sobre la cara. El visor se enciende. Del hombro le salen dos cañones.",
+        "berserk": {
+          "sprite": "batalla/cami_berserk",
+          "vuelve_a": "cami"
+        },
+        "sin_barra": {
+          "descanso": 1
+        }
+      },
+      "hablar": [
+        "Baja eso antes de que te lo baje yo.",
+        "Tienes la postura de alguien que perdió muchas peleas.",
+        "¿Te mandaron solo? Qué triste. Para ti, digo."
+      ],
+      "hablar_confundido": [
+        "Baja eso antes de que te lo… ¿siempre fueron tres? Qué falta de respeto.",
+        "Tienes la postura de alguien que… qué lindo brilla tu casco. No me mires así. Tú, el del medio.",
+        "¿Te mandaron solo? ¿Y por qué son cuatro? Contesten de a uno."
+      ],
+      "aprende": []
     }
   }
 }

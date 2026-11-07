@@ -843,12 +843,16 @@ La gran montaña se sacó (decisión del autor, 2026-11-07: los dos especiales s
 
 ## 26. Cami armored y el Berserk (sprites e idea del autor, 2026-11-07; **pelea de prueba**)
 
-Pelea de prueba: `?batalla=prueba_armored` (Cami armored con Jair y Rikka contra los soldados del molino; no reemplaza
-todavía a `cap02_molino_armored`). Hojas del autor: «armored» (la armadura blanca y azul, sin casco) y «berserk» (el
+Pelea de prueba: `?batalla=prueba_armored` (Cami con Jair y Rikka contra los soldados del molino; no reemplaza
+todavía a `cap02_molino_armored`). **Cami empieza normal:** su especial **Armored** (el cassette del molino, un especial
+normal con la barra) la transforma. **Transformarse gasta el turno** (decisión del autor, 2026-11-08) y la armadura la
+protege desde ese momento (su DEF sube al instante); desde el turno siguiente pelea con la forma. La forma es una ficha
+aparte, `formas.cami_armored` en `src/data/rpg/personajes.json` (no sale como peleadora en el torneo ni en el equipo). Hojas del autor: «armored» (la armadura blanca y azul, sin casco) y «berserk» (el
 casco con visor y los dos cañones), por ahora solo el idle; el parpadeo sale del parche del HTML
 (`tools/batalla_sprites.py … armored berserk` → `public/batalla/cami_armored` y `cami_berserk`).
 
-- **En esta forma tiene solo dos cosas:** el **Blaster+** (un disparo fuerte desde el puño; 22) y el especial+
+- **En esta forma tiene solo dos cosas:** el **Blaster+** (un disparo fuerte desde el puño; **16**, bajado de 22 el
+  2026-11-08: con 22 dejaba a un soldado casi muerto de un tiro y el Berserk sobraba) y el especial+
   **Berserk**. **Sin números** (decisión del autor): el Blaster+ no tiene usos y el menú no muestra cifras
   (`sin_numeros` del personaje); el Berserk no usa la barra: está siempre listo y sale en el menú como un **botón
   grande, azul y blanco** (`sin_barra` del especial; la tarjeta no muestra la barra). **Después del Berserk descansa
@@ -858,7 +862,8 @@ casco con visor y los dos cañones), por ahora solo el idle; el parpadeo sale de
   mientras dura), se planta en el medio de la arena y suelta un infierno de balas en espiral, como en los juegos de
   naves, cada vez más cargada (de 6 a 10 brazos hacia un lado y de 4 a 7 hacia el otro), y un frenesí de misiles que van
   a los rivales (o caen cerca) y explotan, con temblores y destellos: más de 600 balas a la vez, 7,5 s (pedido del autor:
-  «una monstruosidad exagerada»). Los golpes (4 × 30) se reparten entre todos los rivales. Al terminar se saca el casco,
+  «una monstruosidad exagerada»). Los golpes (**5 × 26**: con golpes más fuertes también le pega de verdad al jefe, que
+  con 4 × 30 se comía casi todo con su defensa) se reparten entre todos los rivales. Al terminar se saca el casco,
   vuelve a su lugar y los suyos se paran. **Pierde la armadura:** vuelve a ser Cami (su ficha de siempre: sus ataques,
   su barra y el tobillo) por el resto de la pelea (`vuelve_a`), y **descansa un turno** (agachada). Código: `berserk` en `Batalla.tsx`; el campo `berserk` del especial.
 - **Falta (arte del autor):** las animaciones de ataque del armored y del berserk. Mientras tanto usa el idle.
@@ -867,8 +872,11 @@ casco con visor y los dos cañones), por ahora solo el idle; el parpadeo sale de
 ## 27. Los especiales+ (regla del autor, 2026-11-07)
 
 Un **especial+** es una transformación: el personaje toma otra forma con **ataques fuertes** y un especial+ que hace un
-**gran efecto pero trae una consecuencia**. **Regla para todos:** al usar el especial+, cuando termina su animación,
-**vuelve a su forma base** (su ficha de siempre) por el resto de la pelea. Hechos o planeados:
+**gran efecto pero trae una consecuencia**. **Reglas para todos:** transformarse **gasta el turno** (desde el
+siguiente ya se pelea con la forma); al usar el especial+, cuando termina su animación, **vuelve a su forma base** (su
+ficha de siempre) por el resto de la pelea; y **un especial+ por pelea** (decisión del autor, 2026-11-08; pensado sobre
+todo para el torneo): después ya no se puede volver a transformar (`especialMas`). Código: `transformar`,
+`cambiarForma` y `equipoDe` en `Batalla.tsx`; el campo `transforma` del especial. Hechos o planeados:
 
 | Forma | Ataques en esa forma | Especial+ | La consecuencia |
 |---|---|---|---|

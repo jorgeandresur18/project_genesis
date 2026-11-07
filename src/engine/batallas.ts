@@ -25,6 +25,8 @@ export interface Suelto {
 
 export interface Fichas {
   heroes: Record<string, Omit<Heroe, 'nivel'>>;
+  /** Las formas de los especiales+ (Cami armored): fichas que se toman a mitad de una pelea. */
+  formas?: Record<string, Omit<Heroe, 'nivel'>>;
   sueltos: Record<string, Suelto>;
   enemigos: Record<string, Enemigo>;
   objetos: Record<string, Objeto>;

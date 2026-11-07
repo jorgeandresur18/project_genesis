@@ -501,5 +501,6 @@
   "batalla.espinas_rebota": "Las balas rebotan en la piedra.",
   "batalla.berserk_agachense": "¡Agáchense!",
   "batalla.berserk_agotada": "{quien} se queda sin aire. El próximo turno descansa.",
-  "batalla.sigue_agotada": "{quien} recupera el aliento: no hace nada este turno."
+  "batalla.sigue_agotada": "{quien} recupera el aliento: no hace nada este turno.",
+  "batalla.transformada": "{quien} ya es otra. Desde el próximo turno pelea así."
 }

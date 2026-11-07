@@ -9,48 +9,40 @@
   "personajes": {
     "cami": {
       "nivel": 20,
-      "seguido": true,
-      "sprite": "batalla/cami_armored",
-      "base": {
-        "ps": 44,
-        "atq": 8,
-        "def": 9,
-        "vel": 12
-      },
-      "ataques": [
+      "_nota": "Empieza como Cami normal; su especial Armored la transforma (gasta su turno, la armadura protege desde ese momento). Después: Blaster+ y el Berserk, que la devuelve a su forma base y la deja descansando un turno. Un especial+ por pelea.",
+      "especiales": [
         {
-          "nombre": "Blaster+",
-          "poder": 22,
-          "texto": "{quien} levanta el puño de la armadura y dispara. El blaster ahora tiene más ganas que ella."
-        }
-      ],
-      "especial": {
-        "nombre": "Berserk",
-        "poder": 4,
-        "golpes": 30,
-        "objetivo": "todos",
-        "color": "#5ee0ff",
-        "ojos": [
-          46,
-          38,
-          26,
-          14
-        ],
-        "posicion": "centro",
-        "texto": "A {quien} se le cierra el casco sobre la cara. El visor se enciende. Del hombro le salen dos cañones.",
-        "berserk": {
-          "sprite": "batalla/cami_berserk",
-          "vuelve_a": "cami"
+          "nombre": "Lluvia de plasma",
+          "poder": 5,
+          "golpes": 8,
+          "objetivo": "todos",
+          "color": "#2f8cff",
+          "ojos": [
+            44,
+            39,
+            26,
+            14
+          ],
+          "texto": "{quien} se planta en el medio, saca la segunda pistola y dispara sin parar. Arriba, al medio, abajo. A todos.",
+          "posicion": "centro"
         },
-        "sin_barra": {
-          "descanso": 1
+        {
+          "nombre": "Armored",
+          "poder": 0,
+          "golpes": 1,
+          "objetivo": "uno",
+          "color": "#5ea8ff",
+          "ojos": [
+            44,
+            39,
+            26,
+            14
+          ],
+          "texto": "{quien} se cubre de placas de metal blancas y azules. La armadura se cierra sola, pieza por pieza.",
+          "posicion": "centro",
+          "transforma": "cami_armored"
         }
-      },
-      "aprende": [],
-      "especiales_extra": [],
-      "descanso": "",
-      "_nota": "Con la armadura no siente el tobillo: actúa todos los turnos. Sin números en el menú (decisión del autor): el Blaster+ sin usos y el Berserk siempre listo (un botón grande). Después del Berserk pierde la armadura: vuelve a ser Cami (su ficha de siempre) y descansa un turno.",
-      "sin_numeros": true
+      ]
     },
     "jair": {
       "nivel": 8
@@ -125,7 +117,7 @@
     "inicio": [
       {
         "quien": "Voz",
-        "texto": "[Prueba] Cami armored contra los soldados del molino. El Berserk está siempre listo: después, Cami descansa un turno."
+        "texto": "[Prueba] Cami contra los soldados del molino. Llena su barra (Objetos › 4Low-Co) y usa el Armored: se transforma y desde el turno siguiente ataca con la armadura."
       }
     ],
     "refuerzos": [
@@ -201,7 +193,7 @@
   },
   "musica_jefe": "audio/musica/combate_arcade.mp3",
   "musica": "audio/musica/combate_arcade.mp3",
-  "_nota": "Pelea de prueba (pedida por el autor, 2026-11-07): Cami armored con el Blaster+ y el especial+ Berserk, con Jair y Rikka para ver el «¡Agáchense!». Se abre con ?batalla=prueba_armored. Los sprites de ataque del armored todavía no están (usa el idle). No es canon todavía: el molino del Capítulo 2 sigue con su plantilla.",
+  "_nota": "Pelea de prueba (pedida por el autor, 2026-11-07): Cami con su especial Armored (se transforma), el Blaster+ y el especial+ Berserk, con Jair y Rikka para ver el «¡Agáchense!». Se abre con ?batalla=prueba_armored. Los sprites de ataque del armored todavía no están (usa el idle). No es canon todavía: el molino del Capítulo 2 sigue con su plantilla.",
   "premio": {
     "objetos": {},
     "vars": {

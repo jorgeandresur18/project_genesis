@@ -2,7 +2,7 @@
 // objeto, cuándo se pierde la acción, qué tipo de ataque es, hablar y pedir perdón.
 import { describe, expect, it } from 'vitest';
 import { crearLuchador, disponibles, type Ataque, type DatosBatalla, type Luchador } from '../src/engine/batalla';
-import { BATALLAS } from '../src/engine/batallas';
+import { BATALLAS, FICHAS } from '../src/engine/batallas';
 import {
   agotar,
   cortarRacha,
@@ -262,23 +262,35 @@ describe('el modo bola de la sombra de roca (idea del autor, 2026-11-07)', () =>
   });
 });
 
-describe('el Berserk de Cami armored (decisión del autor, 2026-11-07)', () => {
+describe('Cami armored: la forma del especial+ (decisiones del autor, 2026-11-07)', () => {
+  const forma = FICHAS.formas!.cami_armored;
+
+  it('el Armored de Cami la transforma en la forma armored (no golpea)', () => {
+    const arm = FICHAS.heroes.cami.especiales_extra!.find((x) => x.especial.transforma)!.especial;
+    expect(arm.transforma).toBe('cami_armored');
+    const d = BATALLAS.prueba_armored as DatosBatalla;
+    expect(d.personajes.cami.especiales?.some((x) => x.transforma)).toBe(true);
+  });
+
+  it('la forma: solo el Blaster+ (sin usos) y el Berserk (sin barra, vuelve a Cami), sin números, más defensa', () => {
+    expect(forma.forma).toBe(true);
+    expect(forma.sin_numeros).toBe(true);
+    expect(forma.ataques.map((a) => a.nombre)).toEqual(['Blaster+']);
+    expect(forma.ataques[0].usos).toBeUndefined();
+    expect(forma.especial?.sin_barra).toBeTruthy();
+    expect(forma.especial?.berserk?.vuelve_a).toBe('cami');
+    expect(forma.base.def).toBeGreaterThan(FICHAS.heroes.cami.base.def);
+  });
+
   it('después del berserk descansa un turno (desde el siguiente) y vuelve a actuar', () => {
     const d = BATALLAS.prueba_armored as DatosBatalla;
     const s = estadoInicial(d);
     const cami = s.heroes.find((h) => h.clave === 'cami')!;
-    expect(d.personajes.cami.especial?.sin_barra).toBeTruthy();
-    agotar(s, cami, d.personajes.cami.especial!.sin_barra!.descanso);
+    agotar(s, cami, forma.especial!.sin_barra!.descanso);
     // El mismo turno en que lo usó no cuenta.
     finDeTurno(s);
     expect(disponibles(s.heroes, d.personajes, [])).not.toContain(cami);
     finDeTurno(s);
     expect(disponibles(s.heroes, d.personajes, [])).toContain(cami);
-  });
-
-  it('el Blaster+ no tiene usos', () => {
-    const d = BATALLAS.prueba_armored as DatosBatalla;
-    expect(d.personajes.cami.ataques[0].usos).toBeUndefined();
-    expect(d.personajes.cami.sin_numeros).toBe(true);
   });
 });

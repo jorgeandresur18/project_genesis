@@ -501,5 +501,6 @@
   "batalla.espinas_rebota": "The bullets bounce off the stone.",
   "batalla.berserk_agachense": "Get down!",
   "batalla.berserk_agotada": "{quien} is out of breath. She rests next turn.",
-  "batalla.sigue_agotada": "{quien} catches her breath: she sits this turn out."
+  "batalla.sigue_agotada": "{quien} catches her breath: she sits this turn out.",
+  "batalla.transformada": "{quien} is someone else now. She fights like this from next turn."
 }

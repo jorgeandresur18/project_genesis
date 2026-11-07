@@ -294,9 +294,9 @@ Abrir `http://localhost:5173/?batalla=sombra_roca`. Claude ya vio cada ataque si
 ## 26. Cami armored y el Berserk (nuevo, 7 de noviembre)
 
 Abrir `http://localhost:5173/?batalla=prueba_armored`.
-- [ ] Cami armored (tu sprite, con el parpadeo) junto a Jair y Rikka.
-- [ ] **Blaster+:** dispara desde el puño, sin números en el menú. Es muy fuerte a propósito (el armored es «un trámite»). ¿Lo bajo?
+- [ ] **La transformación:** Cami empieza normal. Llena su barra (Objetos › 4Low-Co) y usa **★ Armored**: se cubre con la armadura (tu sprite, con el parpadeo) y ese es su turno. El turno siguiente ya pelea como armored.
+- [ ] **Blaster+:** dispara desde el puño, sin números en el menú. Lo bajé de 22 a 16 (ya no borra soldados de un tiro).
 - [ ] **El botón BERSERK:** grande, azul y blanco, siempre listo (sin porcentaje; la tarjeta de Cami no tiene barra).
 - [ ] **Berserk:** se le cierra el casco (cambia al sprite con visor y cañones), grita «¡Agáchense!» y Jair y Rikka se agachan; va al medio y suelta el frenesí: la espiral cada vez más cargada y misiles que explotan, 7,5 segundos. ¿Es la monstruosidad que buscabas? ¿Las explosiones tapan demasiado?
-- [ ] Al terminar: se saca el casco y **pierde la armadura: vuelve a ser la Cami de siempre** (traje azul, sus ataques y su barra) el resto de la pelea. El turno siguiente descansa agachada y después vuelve a elegir.
+- [ ] Al terminar: se saca el casco y **pierde la armadura: vuelve a ser la Cami de siempre** (traje azul, sus ataques y su barra) el resto de la pelea. El turno siguiente descansa agachada y después vuelve a elegir. **El Armored ya no aparece** en su menú (un especial+ por pelea).
 

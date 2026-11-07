@@ -506,6 +506,7 @@
     "{quien} levanta el puño de la armadura y dispara. El blaster ahora tiene más ganas que ella.": "{quien} raises her armored fist and fires. The blaster is more into it than she is.",
     "Berserk": "Berserk",
     "A {quien} se le cierra el casco sobre la cara. El visor se enciende. Del hombro le salen dos cañones.": "The helmet snaps shut over {quien}'s face. The visor lights up. Two cannons come out of her shoulders.",
-    "[Prueba] Cami armored contra los soldados del molino. El Berserk está siempre listo: después, Cami descansa un turno.": "[Test] Armored Cami against the mill soldiers. Berserk is always ready: afterwards, Cami rests one turn."
+    "[Prueba] Cami contra los soldados del molino. Llena su barra (Objetos › 4Low-Co) y usa el Armored: se transforma y desde el turno siguiente ataca con la armadura.": "[Test] Cami against the mill soldiers. Fill her bar (Items › 4Low-Co) and use Armored: she transforms and attacks in armor from the next turn.",
+    "{quien} se cubre de placas de metal blancas y azules. La armadura se cierra sola, pieza por pieza.": "{quien} is covered in white and blue metal plates. The armor closes by itself, piece by piece."
   }
 }

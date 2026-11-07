@@ -53,6 +53,9 @@ import {
   type Objeto,
   type Progreso,
   ataqueCopiado,
+  type Heroe,
+  statsEn,
+  conEsencia,
 } from '../engine/batalla';
 import charlasJson from '../data/charlas_batalla.json';
 import fondosJson from '../data/fondos_batalla.json';
@@ -1352,8 +1355,50 @@ function Pelea({
   /** Los refuerzos que llegaron en este turno (actúan al final del turno). */
   const llegaronEnTurno = useRef<string[]>([]);
   /** El ataque que eligió un héroe (el mismo que usa `actuarHeroe`). */
-  const ataqueDeComando = (h: Luchador, c: Extract<Comando, { tipo: 'atacar' }>) =>
-    equipados(d.personajes[h.clave], h.nivel, progreso?.equipo?.[h.clave], sueltosQueTengo(progreso?.cassettes).map((x) => ataqueHeroeEn(lang, x)), progreso?.especialesGanados).ataques[c.ataque];
+  /**
+   * Lo que tiene equipado un héroe en su forma actual. Una forma (Cami armored) trae sus propios ataques y no usa lo
+   * elegido ni los cassettes; el especial+ que lo transforma desaparece una vez usado (uno por pelea).
+   */
+  const equipoDe = (h: Luchador) => {
+    const f = d.personajes[h.clave];
+    const e = f.forma
+      ? equipados(f, h.nivel)
+      : equipados(f, h.nivel, progreso?.equipo?.[h.clave], sueltosQueTengo(progreso?.cassettes).map((x) => ataqueHeroeEn(lang, x)), progreso?.especialesGanados);
+    return { ataques: e.ataques, especiales: e.especiales.filter((x) => !(x.transforma && h.especialMas)) };
+  };
+  /**
+   * Cambia la forma de un héroe a mitad de la pelea (los especiales+): su ficha, su hoja, sus ataques y sus números
+   * (ATQ, DEF y VEL de la forma en su nivel; la vida no cambia). Los datos de la pelea son una copia de esta pelea.
+   */
+  const cambiarForma = (l: Luchador, ficha: Omit<Heroe, 'nivel'>) => {
+    const f = batallaEn({ ...d, personajes: { [l.clave]: { ...ficha, nivel: l.nivel } } } as DatosBatalla, lang).personajes[l.clave];
+    d.personajes[l.clave] = f;
+    const s = conEsencia(statsEn(f.base, f.crece, l.nivel), l.esencia);
+    l.atq = s.atq;
+    l.def = s.def;
+    l.vel = s.vel;
+    l.usados = {};
+    efecto(l.id, 'aparece', 900);
+    forzar();
+  };
+  /** El especial que transforma (el Armored): gasta el turno; desde ese momento ya es la otra forma (la armadura protege). */
+  const transformar = async (h: Luchador, e: Especial) => {
+    const forma = FICHAS.formas?.[e.transforma!];
+    h.carga = 0;
+    forzar();
+    await avisar(e, d.personajes[h.clave].sprite, true);
+    await decir(fmt(e.texto, { quien: h.nombre }));
+    if (!forma) return;
+    playChip('carga');
+    luz(h.id, e.color, true);
+    setFogonazo({ key: Math.random(), color: e.color });
+    await espera(400);
+    cambiarForma(h, forma);
+    playChip('cambio');
+    await espera(500);
+    await decir(fmt(t('batalla.transformada'), { quien: h.nombre }));
+  };
+  const ataqueDeComando = (h: Luchador, c: Extract<Comando, { tipo: 'atacar' }>) => equipoDe(h).ataques[c.ataque];
   const actuarHeroe = async (h: Luchador, c: Comando) => {
     const enemigos = b.current.enemigos.filter(vivo);
     // Pedir perdón tiene que ser seguido: si hace otra cosa, se vuelve a empezar (y si la ataca, es traición).
@@ -1437,7 +1482,9 @@ function Pelea({
       return decir(fmt(t('batalla.recibe'), { quien: h.nombre, n }));
     }
     if (c.tipo === 'especial') {
-      const esp = equipados(d.personajes[h.clave], h.nivel, progreso?.equipo?.[h.clave], sueltosQueTengo(progreso?.cassettes).map((a) => ataqueHeroeEn(lang, a)), progreso?.especialesGanados).especiales[c.cual] ?? d.personajes[h.clave].especial!;
+      const esp = equipoDe(h).especiales[c.cual] ?? d.personajes[h.clave].especial!;
+      // El Armored (Cami): se transforma; gasta este turno.
+      if (esp.transforma) return transformar(h, esp);
       // El Multicebo: no golpea; un cebo normal delante de cada héroe en pie.
       if (esp.multicebo) {
         h.carga = 0;
@@ -1497,7 +1544,7 @@ function Pelea({
       return lineas(funciona ? 'hablar_ok' : 'hablar_no', { objetivo: e.nombre });
     }
     if (c.tipo !== 'atacar') return;
-    const elegido = equipados(d.personajes[h.clave], h.nivel, progreso?.equipo?.[h.clave], sueltosQueTengo(progreso?.cassettes).map((a) => ataqueHeroeEn(lang, a)), progreso?.especialesGanados).ataques[c.ataque];
+    const elegido = equipoDe(h).ataques[c.ataque];
     gastarUso(h, elegido);
     // La copia de Lady: el daño y el efecto de lo último que le pegaron, con su animación (BIBLIA_RPG, sección 22).
     const ataque = ataqueCopiado(elegido, h.copiado);
@@ -2065,13 +2112,12 @@ function Pelea({
       return n;
     });
     if (cfg.vuelve_a && FICHAS.heroes[cfg.vuelve_a]) {
-      const forma = batallaEn({ ...d, personajes: { [l.clave]: { ...FICHAS.heroes[cfg.vuelve_a], nivel: l.nivel } } } as DatosBatalla, lang).personajes[l.clave];
-      d.personajes[l.clave] = forma;
-      l.usados = {};
+      cambiarForma(l, FICHAS.heroes[cfg.vuelve_a]);
       l.carga = 0;
-      efecto(l.id, 'aparece', 900);
       playChip('cambio');
     }
+    // Un especial+ por pelea (decisión del autor): ya no se puede volver a transformar.
+    l.especialMas = true;
     luz(l.id, e.color);
     await deslizar(l.id, null);
     if (suyos.length) {
@@ -2543,7 +2589,7 @@ function Pelea({
   const heroe = b.current.heroes.find((h) => h.id === eligiendo);
   // Lo equipado (docs/BIBLIA_RPG.md, sección 18): hasta 3 ataques y 2 especiales; los especiales comparten la barra y,
   // cuando está llena, se elige cuál.
-  const equipo = heroe ? equipados(d.personajes[heroe.clave], heroe.nivel, progreso?.equipo?.[heroe.clave], sueltosQueTengo(progreso?.cassettes).map((a) => ataqueHeroeEn(lang, a)), progreso?.especialesGanados) : undefined;
+  const equipo = heroe ? equipoDe(heroe) : undefined;
   const ataques = equipo?.ataques ?? [];
   const especiales = equipo?.especiales ?? [];
   const comandos = [t('batalla.atacar'), t('batalla.hablar'), t('batalla.esquivar'), t('batalla.objetos'), t('batalla.huir')];
@@ -2595,8 +2641,8 @@ function Pelea({
           playChip('vacio');
           return setMensaje({ texto: t('batalla.bomba_ya'), n: Math.random() });
         }
-        // A todos: no hace falta elegir.
-        if (especial.objetivo === 'todos') return listo({ tipo: 'especial', objetivo: vivosDe('enemigo')[0]?.id ?? '', cual });
+        // A todos, o una transformación (no le pega a nadie): no hace falta elegir.
+        if (especial.objetivo === 'todos' || especial.transforma) return listo({ tipo: 'especial', objetivo: vivosDe('enemigo')[0]?.id ?? '', cual });
         return setMenu({ paso: 'objetivo', i: 0, lado: 'enemigo', luego: (o) => ({ tipo: 'especial', objetivo: o, cual }) });
       }
       if (ataques[i] && quedan(heroe, ataques[i]) <= 0) {

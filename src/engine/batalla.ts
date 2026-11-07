@@ -94,6 +94,12 @@ export interface Especial {
    */
   berserk?: { sprite: string; grito?: string; ms?: number; vuelve_a?: string };
   /**
+   * Transforma (el Armored de Cami): no golpea; gasta el turno y el héroe toma la forma `transforma` (una ficha de
+   * `formas` en personajes.json), con otra hoja, otros ataques y otras estadísticas desde ese momento. Un especial+ por
+   * pelea: después de usar el especial+ de la forma, ya no puede volver a transformarse (`especialMas`).
+   */
+  transforma?: string;
+  /**
    * Sin barra (el Berserk): siempre se puede usar, sale en el menú como un botón grande, sin porcentaje, y después el
    * que lo usó descansa este número de turnos (`agotado` del luchador).
    */
@@ -186,6 +192,8 @@ export interface Heroe {
   descanso_textos?: { empieza: string; termina: string };
   /** En el menú, sus ataques no muestran números (ni usos ni poder): Cami armored. */
   sin_numeros?: boolean;
+  /** Es una forma (Cami armored): trae sus propios ataques y no usa lo que el jugador equipó. */
+  forma?: boolean;
   /** Ataca de lejos: no se acerca, y sale una bala de su pistola que impacta en el objetivo (Cami). */
   distancia?: boolean;
   /** Tamaño en pantalla respecto de los demás (1: normal). */
@@ -543,6 +551,8 @@ export interface Luchador {
   protegido: number;
   /** Descansa (después del Berserk): turnos que no actúa. */
   agotado?: number;
+  /** Ya usó su especial+ en esta pelea (uno por pelea, decisión del autor): no se puede volver a transformar. */
+  especialMas?: boolean;
   /** En modo bola (la sombra de roca): turnos que le quedan, la DEF que suma, qué parte del daño devuelve y cómo rueda. */
   espinas?: { turnos: number; def: number; devuelve: number; rodar: Ataque };
   /** Cuántas veces usó cada ataque con usos limitados en esta pelea (por nombre). */
