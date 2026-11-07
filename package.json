@@ -14,6 +14,7 @@
     "e2e": "playwright test",
     "guion:exportar": "node tools/guion.mjs exportar",
     "guion:importar": "node tools/guion.mjs importar",
+    "avance": "node tools/avance_dialogos.mjs",
     "sprites": "node --max-old-space-size=12000 tools/sprites.mjs && python -I tools/igualar_piel.py",
     "fondos": "node tools/fondos.mjs",
     "og": "node tools/og.mjs",

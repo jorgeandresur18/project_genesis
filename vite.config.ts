@@ -3,6 +3,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import fs from 'node:fs';
 import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 /**
  * El editor de diálogos en vivo (pedido del autor, 2026-11-06; solo en `npm run dev`): el juego lee y guarda lo que el
@@ -37,6 +38,14 @@ export default defineConfig({
       name: 'ediciones-en-vivo',
       apply: 'serve',
       configureServer(server) {
+        // El avance de la revisión de diálogos, al día en cada visita (tools/avance_dialogos.mjs).
+        server.middlewares.use('/__avance', async (req, res) => {
+          const archivo = pathToFileURL(path.resolve(__dirname, 'tools/avance_dialogos.mjs')).href + '?t=' + Date.now();
+          const { generarAvance } = await import(archivo);
+          const cap = new URL(req.url ?? '/', 'http://x').searchParams.get('cap') ?? 'cap01';
+          res.setHeader('Content-Type', 'text/html; charset=utf-8');
+          res.end(generarAvance(__dirname, cap));
+        });
         // La marca ✓: GET la lista; POST { escena, poner } la pone (aprobada por el autor) o la quita.
         server.middlewares.use('/__revisadas', (req, res) => {
           res.setHeader('Content-Type', 'application/json; charset=utf-8');

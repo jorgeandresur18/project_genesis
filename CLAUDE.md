@@ -118,5 +118,8 @@ Para trabajar desde cualquier computadora. El detalle de cada sesión está en `
 - **Editor de diálogos en vivo** (solo en `npm run dev`): «✎ Editar» en la caja de diálogo; lo que el autor guarda va a
   `docs/guion/ediciones_en_vivo.json` (original y texto nuevo). Para aplicarlo: leer ese archivo, corregir la redacción,
   pasarlo al JSON de la historia con el inglés y vaciarlo. Ver `docs/SPEC.md`.
+- **Avance de la revisión de diálogos:** `npm run avance` arma `docs/guion/avance_cap01.html` (cada línea con su estado: ✓ tuya,
+  ✓ aprobada, por aplicar, borrador de Claude o sin revisar); con `npm run dev`, al día en `/__avance` (`?cap=cap02` para otro).
+  Regenerarlo después de aplicar ediciones.
 - **Nombres:** las chicas reales son **Milka** (base de Cami) y **Ari** (Arianni, base de Rikka); Jordan pasó a llamarse
   **Jordy** (gay, discreto). Cami es bisexual (canon). Todo en `docs/CANON.md`.
