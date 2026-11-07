@@ -193,6 +193,8 @@ abajo de espaldas) cuando toque.
 
 ## Ideas anotadas (por diseñar)
 
+- **Rikka diosa lunar** (del autor, 2026-11-07): su especial+ (como el armored de Cami), basado en la princesa Kaguya. Ataques de corte lunar y Luz de luna (confunde a los rivales, cura al equipo; ella termina confundida). **Falta:** dónde se gana en el Capítulo 3 y los sprites (del autor, más adelante). Diseño en `docs/BIBLIA_RPG.md`, sección 27.
+
 - **La pelea de práctica (Capítulo 1, en prueba):** hecha en `desarrollo` (batalla `guia`, escenas `cap01_tu*`): **antes de publicar en `main`, preguntarle al autor si va**.
 - **La sombra de roca (Capítulo 1, en prueba):** la pelea del claro de las cuatro estaciones está hecha en `desarrollo`, pero el autor la quiere pensar: **antes de publicar en `main`, preguntarle si va** (si no, se quita la pelea de `cap01_g7b_022c6` y vuelve la muerte directa).
 

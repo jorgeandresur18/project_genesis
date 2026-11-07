@@ -862,8 +862,25 @@ casco con visor y los dos cañones), por ahora solo el idle; el parpadeo sale de
   vuelve a su lugar y los suyos se paran. **Pierde la armadura:** vuelve a ser Cami (su ficha de siempre: sus ataques,
   su barra y el tobillo) por el resto de la pelea (`vuelve_a`), y **descansa un turno** (agachada). Código: `berserk` en `Batalla.tsx`; el campo `berserk` del especial.
 - **Falta (arte del autor):** las animaciones de ataque del armored y del berserk. Mientras tanto usa el idle.
-- **Pendiente del autor:** cómo entra al juego (el molino del Capítulo 2) y la propuesta de Claude del Armored como
-  modo de 3 turnos (ver la bitácora del 2026-11-07).
+- **Pendiente del autor:** cómo entra al juego (el molino del Capítulo 2).
+
+## 27. Los especiales+ (regla del autor, 2026-11-07)
+
+Un **especial+** es una transformación: el personaje toma otra forma con **ataques fuertes** y un especial+ que hace un
+**gran efecto pero trae una consecuencia**. **Regla para todos:** al usar el especial+, cuando termina su animación,
+**vuelve a su forma base** (su ficha de siempre) por el resto de la pelea. Hechos o planeados:
+
+| Forma | Ataques en esa forma | Especial+ | La consecuencia |
+|---|---|---|---|
+| Cami armored (hecha, prueba) | Blaster+ | **Berserk:** el frenesí de balas y misiles a todos | Vuelve a Cami y descansa un turno |
+| Rikka diosa lunar (por hacer, Capítulo 3) | Ráfagas de corte lunar con la espada | **Luz de luna:** confunde a los rivales y cura algo al equipo | Vuelve a Rikka y queda **confundida** ella también |
+
+**Rikka diosa lunar** (basada en la princesa Kaguya; la Primavera está basada en Japón; ver `docs/CANON.md`). Ideas de
+Claude para cuando lleguen los sprites (por confirmar): las ráfagas como medias lunas repartidas entre los rivales (como
+la «Ola de petróleo»), cada corte más flojo que el Blaster+; la cura, una cuarta parte de la vida a cada uno (ella
+incluida); a los jefes la confusión les dura menos (1 turno); un rival que ya tiene otro estado no se confunde (un solo
+estado a la vez); el botón en plateado y lila; la pantalla azul plateada con la luna llena detrás. Se gana en el
+Capítulo 3 (`TODO(canon)`: dónde).
 
 ## 16. Pendientes e ideas
 
