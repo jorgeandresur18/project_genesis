@@ -134,6 +134,19 @@ export function DialogBox({ dialogue, aiVowels, hasChoices, onAdvance, globo = f
       )}
       {conEditor && !reaccion && editando === null && (
         <button
+          className={`dialog-listo ${revisada ? 'dialog-listo-quitar' : ''}`}
+          onClick={(e) => {
+            e.stopPropagation();
+            void marcarRevisada(escena!, !revisada);
+          }}
+          onMouseDown={(e) => e.preventDefault()}
+          title={revisada ? 'Quitar la marca ✓' : 'Marcar esta línea como lista (✓)'}
+        >
+          {revisada ? 'Quitar ✓' : '✓ Listo'}
+        </button>
+      )}
+      {conEditor && !reaccion && editando === null && (
+        <button
           className="dialog-editar"
           onClick={(e) => {
             e.stopPropagation();
