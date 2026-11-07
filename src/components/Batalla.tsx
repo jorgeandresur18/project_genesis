@@ -26,7 +26,6 @@ import {
   seConfunde,
   quedan,
   gastarUso,
-  yaTiene,
   vanPerdiendo,
   falla,
   conQuejidos,
@@ -43,7 +42,6 @@ import {
   ganarXp,
   seRetira,
   usarObjeto,
-  protegidoDe,
   puedeRecibir,
   varsDeProgreso,
   vivo,
@@ -97,6 +95,18 @@ import {
   sumarEnemigo,
   type EstadoPelea,
   idNuevo,
+  type Comando,
+  esAtaque,
+  objetivoVivo,
+  cortarRacha,
+  puedeActuarHeroe,
+  tienePrioridad,
+  resolverObjeto,
+  tipoDeAtaque,
+  efectoRepetido,
+  curarse,
+  hablarFunciona,
+  pedirPerdon,
 } from '../engine/turnos';
 import { BASE, PausaContexto, SpriteHoja, anguloDisparo, cargarHoja, rectSprite, type Anim, type Hoja } from './batalla/sprites';
 import { AvisoEspecial, CajaCasillas, Figura, Tarjeta, conNumeros, type Casillas } from './batalla/escena';
@@ -146,13 +156,6 @@ const CLON_ESCALA = 0.9;
 const CARGA_CLON_MS = 1500;
 type Bala = { key: number; x: number; y: number; dx: number; dy: number; ms: number; color: string; rafaga: boolean };
 
-type Comando =
-  | { tipo: 'atacar'; ataque: number; objetivo: string }
-  | { tipo: 'hablar'; objetivo: string }
-  | { tipo: 'esquivar' }
-  | { tipo: 'objeto'; clave: string; objetivo: string }
-  | { tipo: 'especial'; objetivo: string; cual: number }
-  | { tipo: 'huir' };
 type Menu =
   | { paso: 'comando'; i: number }
   | { paso: 'ataque'; i: number }
@@ -780,7 +783,7 @@ function Pelea({
     // Lo que eligió cada héroe (sin elegir, nadie: descansan todos).
     const elecciones: [Luchador, Comando][] = [];
     // Solo atacar (o el especial) la cansa: hablar, esquivar o usar un objeto no le hacen doler el tobillo.
-    const ataca = (c: Comando) => c.tipo === 'atacar' || c.tipo === 'especial';
+    const ataca = esAtaque;
     if (!opciones.length) {
       await lineas('descanso');
       b.current.actuaron = [];
@@ -811,12 +814,7 @@ function Pelea({
     }
     // El orden del turno (engine/turnos.ts, `ordenDelTurno`): primero esquivar, protegerse, los objetos y los cebos;
     // después héroes y enemigos mezclados, del más rápido al más lento (empate: el héroe).
-    const prioridad = (h: Luchador, c: Comando) => {
-      if (c.tipo === 'esquivar' || c.tipo === 'objeto') return true;
-      if (c.tipo !== 'atacar') return false;
-      const a = ataqueDeComando(h, c);
-      return !!(a?.cebo || a?.alMismo);
-    };
+    const prioridad = (h: Luchador, c: Comando) => tienePrioridad(c, c.tipo === 'atacar' ? ataqueDeComando(h, c) : undefined);
     llegaronEnTurno.current = [];
     const orden = ordenDelTurno<Comando | null>([
       ...elecciones.map(([h, c]) => ({ l: h, prioridad: prioridad(h, c), dato: c })),
@@ -836,17 +834,9 @@ function Pelea({
           continue;
         }
         const h = l;
-        if (!vivo(h)) {
-          if (c.tipo === 'objeto') b.current.mochila[c.clave]++;
-          continue;
-        }
-        // Dormido, congelado o paralizado por un enemigo más rápido en este mismo turno: ya no actúa.
-        if (noActua(h) || h.desterrado) {
-          if (c.tipo === 'objeto') b.current.mochila[c.clave]++;
-          continue;
-        }
-        // Si ya no queda ningún enemigo (antes del jefe), los ataques de este turno se pierden.
-        if (c.tipo !== 'objeto' && c.tipo !== 'esquivar' && !b.current.enemigos.some(vivo)) continue;
+        // Caído, dormido, congelado o paralizado por alguien más rápido en este turno (el objeto vuelve a la
+        // mochila), o ya no queda a quién atacar: no actúa.
+        if (!puedeActuarHeroe(b.current, h, c)) continue;
         await actuarHeroe(h, c);
         if (b.current.perdona) return 'perdona';
         // La autodestrucción o un cebo explosivo pueden terminarla de golpe.
@@ -1326,16 +1316,13 @@ function Pelea({
     equipados(d.personajes[h.clave], h.nivel, progreso?.equipo?.[h.clave], sueltosQueTengo(progreso?.cassettes).map((x) => ataqueHeroeEn(lang, x)), progreso?.especialesGanados).ataques[c.ataque];
   const actuarHeroe = async (h: Luchador, c: Comando) => {
     const enemigos = b.current.enemigos.filter(vivo);
-    // Pedir perdón tiene que ser seguido: si hace otra cosa, se vuelve a empezar.
-    if (c.tipo !== 'hablar' && b.current.racha) {
-      // Le pidieron perdón y ahora la atacan: no se lo perdona (la Mega Bola Tóxica, en su próximo turno).
-      if ((c.tipo === 'atacar' || c.tipo === 'especial') && !arena) b.current.traicion = h.id;
-      b.current.racha = 0;
+    // Pedir perdón tiene que ser seguido: si hace otra cosa, se vuelve a empezar (y si la ataca, es traición).
+    if (cortarRacha(b.current, h, c, !!arena)) {
       const p = enemigos.map((e) => d.enemigos[e.clave].perdon).find(Boolean);
       if (p?.corta) await decir(p.corta, p.quien);
     }
     // Si su objetivo ya cayó, va contra el primero que quede.
-    const objetivo = (oid: string) => enemigos.find((e) => e.id === oid) ?? enemigos[0];
+    const objetivo = (oid: string) => objetivoVivo(b.current, oid)!;
     if (c.tipo === 'esquivar') {
       h.esquivando = true;
       cargar(h, CARGA.esquivar);
@@ -1345,34 +1332,16 @@ function Pelea({
     if (c.tipo === 'objeto') {
       const o = d.objetos[c.clave];
       const destino = objetivoDe(o);
-      const rivales = b.current.enemigos.filter(vivo);
-      // Objetos libres: el elegido (de cualquier lado) o, si el objeto es de grupo, todo su lado.
-      const elegidoX = [...b.current.heroes, ...rivales].find((x) => x.id === c.objetivo && vivo(x));
-      const lado = elegidoX ? (elegidoX.lado === 'heroe' ? b.current.heroes.filter(vivo) : rivales) : [];
-      const blancos: Luchador[] = o.revive
-        ? [...b.current.heroes, ...b.current.enemigos].filter((x) => x.id === c.objetivo && !vivo(x))
-        : !elegidoX
-          ? []
-          : destino === 'equipo' || destino === 'rivales'
-            ? lado
-            : [elegidoX];
-      // Si ya no hay a quién (revivir a alguien que se levantó, o el rival cayó): el objeto vuelve a la mochila.
-      if (!blancos.length) {
-        b.current.mochila[c.clave]++;
-        return decir(t(o.revive ? 'batalla.nadie_caido' : 'batalla.sin_blanco'));
-      }
-      const yaEstan = blancos.map((x) => yaTiene(x, o));
-      if (yaEstan.every(Boolean)) {
-        b.current.mochila[c.clave]++;
+      // A quién le llega (engine/turnos.ts); si no se usa, ya volvió a la mochila.
+      const r = resolverObjeto(b.current, d, c);
+      if (r.tipo === 'nadie') return decir(t(r.revive ? 'batalla.nadie_caido' : 'batalla.sin_blanco'));
+      if (r.tipo === 'ya') {
         playChip('vacio');
-        return decir(fmt(t('batalla.ya_tiene_objeto'), { quien: blancos.map((x) => x.nombre).join(' y '), estado: t(`batalla.estado_${yaEstan[0]}`) }));
+        return decir(fmt(t('batalla.ya_tiene_objeto'), { quien: r.blancos.map((x) => x.nombre).join(' y '), estado: t(`batalla.estado_${r.estado}`) }));
       }
-      // A los que ya lo tienen no les hace nada.
-      blancos.splice(0, blancos.length, ...blancos.filter((_, i) => !yaEstan[i]));
-      // A los que protege lo que llevan puesto (la flor de pureza contra la confusión), tampoco; pero el objeto se gasta.
-      const protegidos = blancos.filter((x) => protegidoDe(x, o));
+      const { blancos, protegidos } = r;
+      // A los que protege lo que llevan puesto (la flor de pureza contra la confusión), nada; pero el objeto se gasta.
       if (protegidos.length) {
-        blancos.splice(0, blancos.length, ...blancos.filter((x) => !protegidoDe(x, o)));
         for (const x of protegidos) numero(x.id, '—', 'falla');
         playChip('vacio');
         await decir(fmt(t('batalla.objeto_protegido'), { quien: protegidos.map((x) => x.nombre).join(' y ') }));
@@ -1470,17 +1439,15 @@ function Pelea({
       // manera (las charlas).
       const p = yo === 'jair' ? en.perdon : undefined;
       if (p) {
-        const i = Math.min(b.current.racha, p.veces - 1);
-        b.current.racha++;
+        const { vez: i } = pedirPerdon(b.current, p.veces);
         const confusa = p.pide_confundido?.[i];
         await decir(fmt(dicho(p.pide[i] ?? azar(d.personajes[h.clave].hablar), confusa ? [confusa] : undefined), { objetivo: e.nombre }), h.nombre, estado);
         await decir(p.responde[i], p.quien);
-        if (b.current.racha >= p.veces) b.current.perdona = true;
         return;
       }
       await decir(fmt(dicho(azar(charla?.dice ?? d.personajes[h.clave].hablar), d.personajes[h.clave].hablar_confundido), { objetivo: e.nombre }), h.nombre, estado);
       // Al jefe no se lo distrae.
-      const funciona = !en.jefe && Math.random() < d.hablar;
+      const funciona = hablarFunciona(d, e);
       const contesta = charla?.[funciona ? 'ok' : 'no'];
       if (contesta?.length) await decir(fmt(azar(contesta), { objetivo: h.nombre }), charla?.narra ? undefined : e.nombre);
       else if (en.responde) await decir(azar(funciona ? en.responde.ok : en.responde.no), en.responde.quien);
@@ -1492,13 +1459,14 @@ function Pelea({
     gastarUso(h, elegido);
     // La copia de Lady: el daño y el efecto de lo último que le pegaron, con su animación (BIBLIA_RPG, sección 22).
     const ataque = ataqueCopiado(elegido, h.copiado);
-    if (ataque.cebo) return dejarCebo(h, ataque);
-    if (ataque.autodestruccion) {
+    const tipo = tipoDeAtaque(ataque);
+    if (tipo === 'cebo') return dejarCebo(h, ataque);
+    if (tipo === 'autodestruccion') {
       await decir(fmt(ataque.texto, { quien: h.nombre }));
       void animar(h.id, 'ko');
-      return mostrarExplosion(autodestruir(b.current, d, h, ataque.autodestruccion));
+      return mostrarExplosion(autodestruir(b.current, d, h, ataque.autodestruccion!));
     }
-    if (ataque.cura) {
+    if (tipo === 'cura') {
       // Se cura (Rikka, Ctrl+Z de Jair): carga y lo rodea el aura verde de la curación.
       cargar(h, CARGA.atacar);
       await decir(fmt(ataque.texto, { quien: h.nombre }));
@@ -1506,14 +1474,13 @@ function Pelea({
       efecto(h.id, 'cura', 1400);
       luz(h.id, '#7dffb0', true);
       await espera(700);
-      const antes = h.ps;
-      h.ps = Math.min(h.psMax, h.ps + Math.round(h.psMax * ataque.cura));
-      numero(h.id, `+${h.ps - antes}`, 'cura');
+      const n = curarse(h, ataque.cura!);
+      numero(h.id, `+${n}`, 'cura');
       forzar();
-      return decir(fmt(t('batalla.se_cura'), { quien: h.nombre, n: h.ps - antes }));
+      return decir(fmt(t('batalla.se_cura'), { quien: h.nombre, n }));
     }
     // Sobre sí mismo (potenciarse, protegerse): no se elige a quién; brilla dorado y aplica el efecto como un objeto.
-    if (ataque.alMismo && ataque.aplica) {
+    if (tipo === 'al_mismo' && ataque.aplica) {
       cargar(h, CARGA.atacar);
       await decir(fmt(ataque.texto, { quien: h.nombre }));
       void animar(h.id, 'ataque', 750);
@@ -1526,7 +1493,7 @@ function Pelea({
       return decir(fmt(t(ataque.aplica.protege ? 'batalla.se_protege' : 'batalla.se_potencia'), { quien: h.nombre, n }));
     }
     // A todos los rivales: ataca desde su lugar y cada golpe puede fallar.
-    if (ataque.objetivo === 'todos') {
+    if (tipo === 'todos') {
       const blancos = b.current.enemigos.filter(vivo);
       await decir(fmt(ataque.texto, { quien: h.nombre, objetivo: blancos.map((x) => x.nombre).join(', ') }));
       cargar(h, CARGA.atacar);
@@ -1552,18 +1519,17 @@ function Pelea({
     await decir(fmt(ataque.texto, { quien: h.nombre, objetivo: e.nombre }));
     // Los ataques de efecto (el beso, la parálisis) no pegan: dejan al blanco confundido o paralizado. Si ya lo
     // está, no se acumula: se pierde el turno, pero no el uso.
-    const ya = (ataque.confunde || ataque.paraliza) && yaTiene(e, ataque);
+    const ya = efectoRepetido(h, e, ataque);
     if (ya) {
-      if (h.usados?.[ataque.nombre]) h.usados[ataque.nombre]--;
       playChip('vacio');
       return decir(fmt(t('batalla.ya_tiene_ataque'), { quien: e.nombre, estado: t(`batalla.estado_${ya}`) }));
     }
-    if (ataque.confunde) {
+    if (tipo === 'confunde') {
       cargar(h, CARGA.atacar);
       e.copiado = ataque;
       return besar(h, ataque, [e]);
     }
-    if (ataque.paraliza) {
+    if (tipo === 'paraliza') {
       cargar(h, CARGA.atacar);
       void animar(h.id, 'ataque', 750);
       playChip('paralisis');

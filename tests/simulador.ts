@@ -12,7 +12,6 @@ import {
   CONFUSION,
   cargar,
   disponibles,
-  noActua,
   equipados,
   especialListo,
   esquiva,
@@ -58,6 +57,7 @@ import {
   ordenDelTurno,
   sufreAlFinal,
   idNuevo,
+  puedeActuarHeroe,
 } from '../src/engine/turnos';
 
 /** Los golpes del cañón salen de la hoja del Capitán, como en el juego. */
@@ -232,7 +232,8 @@ function pelea(D: DatosBatalla, listo: boolean, esencias: boolean) {
     for (const { l, dato } of orden) {
       if (!vivo(l)) continue;
       if (dato === 'heroe') {
-        if (noActua(l) || l.desterrado || !s.enemigos.some(vivo)) continue;
+        // Las mismas reglas del juego para perder la acción (el simulador decide qué hace recién al actuar).
+        if (!puedeActuarHeroe(s, l, { tipo: 'atacar', ataque: 0, objetivo: '' })) continue;
         actuarHeroe(l);
         if (seRetiraElJefe()) return { s, gana: true };
       } else {

@@ -766,3 +766,146 @@ export function ordenDelTurno<T>(acciones: { l: Luchador; prioridad?: boolean; d
     })
     .map(({ l, dato }) => ({ l, dato }));
 }
+
+// ---------------------------------------------------------------------------------------------------------------
+// El turno de los héroes, sin dibujo (etapa 3 de partir `Batalla.tsx`). Lo que el jugador eligió en el menú se
+// resuelve aquí: a quién le llega un objeto, si se pierde el turno, qué tipo de ataque es, qué pasa al hablar.
+// `Batalla.tsx` muestra el resultado (mensajes, sprites, sonidos); el simulador del balance usa lo mismo.
+// ---------------------------------------------------------------------------------------------------------------
+
+/** Lo que un héroe puede elegir en el menú de la pelea. */
+export type Comando =
+  | { tipo: 'atacar'; ataque: number; objetivo: string }
+  | { tipo: 'hablar'; objetivo: string }
+  | { tipo: 'esquivar' }
+  | { tipo: 'objeto'; clave: string; objetivo: string }
+  | { tipo: 'especial'; objetivo: string; cual: number }
+  | { tipo: 'huir' };
+
+/** Solo atacar (o el especial) cansa (Cami) y rompe un pedido de perdón con traición. */
+export const esAtaque = (c: Comando) => c.tipo === 'atacar' || c.tipo === 'especial';
+
+/** Si su objetivo ya cayó, va contra el primero que quede. */
+export const objetivoVivo = (estado: EstadoPelea, oid: string): Luchador | undefined => {
+  const enemigos = estado.enemigos.filter(vivo);
+  return enemigos.find((e) => e.id === oid) ?? enemigos[0];
+};
+
+/**
+ * Pedir perdón tiene que ser seguido: si el héroe hace otra cosa, la racha se corta. Si además la ataca (fuera de la
+ * arena), es traición: la Mega Bola Tóxica, en su próximo turno. Devuelve si se cortó una racha.
+ */
+export function cortarRacha(estado: EstadoPelea, h: Luchador, c: Comando, arena = false): boolean {
+  if (c.tipo === 'hablar' || !estado.racha) return false;
+  if (esAtaque(c) && !arena) estado.traicion = h.id;
+  estado.racha = 0;
+  return true;
+}
+
+/**
+ * Antes de actuar: si el héroe cayó, quedó dormido, congelado, paralizado o desterrado por alguien más rápido en este
+ * mismo turno, pierde la acción (y un objeto elegido vuelve a la mochila). Si ya no queda ningún enemigo (antes del
+ * jefe), atacar o hablar se pierde; esquivar y los objetos, no.
+ */
+export function puedeActuarHeroe(estado: EstadoPelea, h: Luchador, c: Comando): boolean {
+  if (!vivo(h) || noActua(h) || h.desterrado) {
+    if (c.tipo === 'objeto') estado.mochila[c.clave]++;
+    return false;
+  }
+  return c.tipo === 'objeto' || c.tipo === 'esquivar' || estado.enemigos.some(vivo);
+}
+
+/** Va antes que todos en el orden del turno: esquivar, los objetos, los cebos y lo que se hace sobre sí mismo. */
+export function tienePrioridad(c: Comando, ataque?: Ataque): boolean {
+  if (c.tipo === 'esquivar' || c.tipo === 'objeto') return true;
+  if (c.tipo !== 'atacar') return false;
+  return !!(ataque?.cebo || ataque?.alMismo);
+}
+
+export type ObjetoResuelto =
+  /** No hay a quién (revivir a alguien que ya se levantó, o el elegido cayó): el objeto vuelve a la mochila. */
+  | { tipo: 'nadie'; revive: boolean }
+  /** Todos ya tienen ese estado: vuelve a la mochila. */
+  | { tipo: 'ya'; blancos: Luchador[]; estado: string }
+  /** Se usa: `blancos` lo reciben; a `protegidos` (la flor de pureza contra la confusión) no les hace nada. */
+  | { tipo: 'usa'; blancos: Luchador[]; protegidos: Luchador[] };
+
+/**
+ * A quién le llega un objeto. Los objetos son libres: el elegido (de cualquier lado) o, si el objeto es de grupo,
+ * todo su lado; revivir, solo a un caído. Si no se usa, vuelve a la mochila (ya se descontó al elegirlo).
+ */
+export function resolverObjeto(estado: EstadoPelea, d: DatosBatalla, c: Extract<Comando, { tipo: 'objeto' }>): ObjetoResuelto {
+  const o = d.objetos[c.clave];
+  const destino = o.objetivo ?? 'aliado';
+  const rivales = estado.enemigos.filter(vivo);
+  const elegido = [...estado.heroes, ...rivales].find((x) => x.id === c.objetivo && vivo(x));
+  const lado = elegido ? (elegido.lado === 'heroe' ? estado.heroes.filter(vivo) : rivales) : [];
+  const todos: Luchador[] = o.revive
+    ? [...estado.heroes, ...estado.enemigos].filter((x) => x.id === c.objetivo && !vivo(x))
+    : !elegido
+      ? []
+      : destino === 'equipo' || destino === 'rivales'
+        ? lado
+        : [elegido];
+  if (!todos.length) {
+    estado.mochila[c.clave]++;
+    return { tipo: 'nadie', revive: !!o.revive };
+  }
+  const yaEstan = todos.map((x) => yaTiene(x, o));
+  if (yaEstan.every(Boolean)) {
+    estado.mochila[c.clave]++;
+    return { tipo: 'ya', blancos: todos, estado: yaEstan[0]! };
+  }
+  // A los que ya lo tienen no les hace nada; a los que protege lo que llevan puesto, tampoco (pero se gasta).
+  const sinEstado = todos.filter((_, i) => !yaEstan[i]);
+  const protegido = (x: Luchador) => !!o.confunde && !!x.equipo?.sinConfusion;
+  return { tipo: 'usa', blancos: sinEstado.filter((x) => !protegido(x)), protegidos: sinEstado.filter(protegido) };
+}
+
+/** Qué hace un ataque normal (no el especial), en el orden en que lo revisa la pelea. */
+export type TipoAtaque = 'cebo' | 'autodestruccion' | 'cura' | 'al_mismo' | 'todos' | 'confunde' | 'paraliza' | 'golpe';
+export function tipoDeAtaque(a: Ataque): TipoAtaque {
+  if (a.cebo) return 'cebo';
+  if (a.autodestruccion) return 'autodestruccion';
+  if (a.cura) return 'cura';
+  if (a.alMismo && a.aplica) return 'al_mismo';
+  if (a.objetivo === 'todos') return 'todos';
+  if (a.confunde) return 'confunde';
+  if (a.paraliza) return 'paraliza';
+  return 'golpe';
+}
+
+/**
+ * Un ataque de efecto (el beso, la parálisis) contra quien ya tiene un estado no se acumula: se pierde el turno,
+ * pero no el uso. Devuelve el estado que ya tenía (y devuelve el uso), o null si el ataque sigue.
+ */
+export function efectoRepetido(h: Luchador, e: Luchador, a: Ataque): string | null {
+  const ya = (a.confunde || a.paraliza) && yaTiene(e, a);
+  if (!ya) return null;
+  if (h.usados?.[a.nombre]) h.usados[a.nombre]--;
+  return ya;
+}
+
+/** Se cura una parte de su vida máxima (Rikka, Ctrl+Z de Jair). Devuelve cuánto subió. */
+export function curarse(h: Luchador, parte: number): number {
+  const antes = h.ps;
+  h.ps = Math.min(h.psMax, h.ps + Math.round(h.psMax * parte));
+  return h.ps - antes;
+}
+
+/** «Hablar»: si el rival se distrae. Al jefe no se lo distrae; a un clon, nadie lo convence. */
+export function hablarFunciona(d: DatosBatalla, e: Luchador, azar: () => number = Math.random): boolean {
+  if (e.clon !== undefined || d.enemigos[e.clave]?.jefe) return false;
+  return azar() < d.hablar;
+}
+
+/**
+ * Pedirle perdón (Nikki): cada vez sube la racha; con `veces` seguidas, perdona y termina la pelea. Devuelve qué
+ * vez es (para la frase) y si ya perdonó.
+ */
+export function pedirPerdon(estado: EstadoPelea, veces: number): { vez: number; perdona: boolean } {
+  const vez = Math.min(estado.racha, veces - 1);
+  estado.racha++;
+  if (estado.racha >= veces) estado.perdona = true;
+  return { vez, perdona: !!estado.perdona };
+}
