@@ -42,6 +42,10 @@ HOJAS = {
                                'montana2': 'montana2', 'derrotado': 'derrotado', 'agachado': 'agachado', 'bola': 'bola'}),
     # Las piedras que lanza (vuelo e impacto morado): el estallido de los meteoritos.
     'piedras': ('piedras', {'idle': 'idle', 'impacto': 'impacto'}),
+    # Cami armored (la armadura, sin casco) y su berserk (casco con visor y dos cañones). Por ahora, solo el idle; el
+    # parpadeo se arma con el parche del HTML (ver parpadeo_de_parche).
+    'armored': ('cami_armored', {'idle': 'idle'}),
+    'berserk': ('cami_berserk', {'idle': 'idle'}),
 }
 
 
@@ -372,6 +376,30 @@ def recortar_roca(meta: dict):
     a['retirada'] = {**a['agachado'], 'loop': False}
 
 
+def parpadeo_de_parche(im: np.ndarray, c: dict, meta: dict) -> np.ndarray:
+    """El pestañeo de las hojas que lo traen como parche (Cami armored y berserk): sobre el primer cuadro del idle se
+    pintan los ojos a medias, cerrados y a medias otra vez, y queda como la fila «pestaneo» (la usa el juego)."""
+    b = c.get('blink')
+    if not b or b.get('type') != 'patch':
+        return im
+    fw, fh = c['fw'], c['fh']
+    base = im[0:fh, 0:fw].copy()
+    fila = np.zeros((fh, fw * 3, 4), im.dtype)
+    for i, cual in enumerate(['half', 'closed', 'half']):
+        q = base.copy()
+        for x, y, r, g, bb in b[cual]:
+            if 0 <= x < fw and 0 <= y < fh:
+                q[y, x] = [r, g, bb, 255]
+        fila[:, i * fw:(i + 1) * fw] = q
+    meta['animations']['pestaneo'] = {'row': im.shape[0] // fh, 'frames': 3, 'fps': 10, 'loop': False}
+    ancho = max(im.shape[1], fila.shape[1])
+    return np.concatenate([np.pad(im, ((0, 0), (0, ancho - im.shape[1]), (0, 0))), np.pad(fila, ((0, 0), (0, ancho - fila.shape[1]), (0, 0)))])
+
+
+# De dónde sale el Blaster+ de Cami armored: el puño adelantado (en el cuadro, mirando a la derecha).
+PUNO_ARMORED = [88, 60]
+
+
 def main():
     ruta = Path(sys.argv[1]) if len(sys.argv) > 1 else RAIZ / 'docs' / 'sprites de prueba' / 'sprites rpg.html'
     solo = set(sys.argv[2:])
@@ -436,6 +464,12 @@ def main():
             im = np.concatenate([np.pad(im, ((0, 0), (0, ancho - im.shape[1]), (0, 0))), np.pad(fila, ((0, 0), (0, ancho - fila.shape[1]), (0, 0)))])
             if proy:
                 meta['proyectiles'] = {'beso': proy}
+        if nombre in ('cami_armored', 'cami_berserk'):
+            im = parpadeo_de_parche(im, c, meta)
+            meta['ancla_disparo'] = [56, 58]
+        if nombre == 'cami_armored':
+            # Sin fila de ataque todavía: dispara desde el puño en cualquier cuadro (usa el idle).
+            meta['disparos'] = {'ataque': {str(f): [PUNO_ARMORED] for f in range(c['anims']['idle']['frames'])}}
         if nombre == 'sombra':
             meta['viaje'] = viaje(c['anims']['desgarro']['seq'])
             p = proyectil(ruta)

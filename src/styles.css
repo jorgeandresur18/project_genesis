@@ -3867,3 +3867,12 @@ button.cassette:hover .cassette-imagen { transform: translateY(-2px) rotate(-3de
   image-rendering: pixelated; rotate: var(--ang); scale: var(--k); opacity: 0; animation: pedrusco-llega ease-in both; }
 @keyframes pedrusco-llega { 0% { opacity: 0; translate: 0 0; } 15%, 90% { opacity: 1; } 100% { opacity: 0; translate: var(--dx) var(--dy); } }
 .batalla-pedrusco .batalla-sprite { zoom: 1; }
+/* El Berserk de Cami armored: las balas de la espiral (bolitas de luz) y algún misil; los suyos, agachados. */
+.batalla-bala-espiral { position: absolute; z-index: 7; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle, #fff 0 35%, var(--c) 60%, transparent 72%); box-shadow: 0 0 6px var(--c), 0 0 14px var(--c);
+  animation: bala-espiral linear forwards; }
+.batalla-bala-espiral.misil { width: 26px; height: 9px; margin: -4.5px 0 0 -13px; border-radius: 40% 60% 60% 40%; rotate: var(--ang);
+  background: linear-gradient(90deg, transparent, #ff7a2f 35%, #ffe2a8 80%, #fff); box-shadow: 0 0 8px #ff9a3c, 0 0 18px #ff7a2f; }
+@keyframes bala-espiral { to { translate: var(--dx) var(--dy); } }
+.batalla-figura.agachado-berserk .batalla-sprite { translate: 0 18%; scale: 1.06 0.78; transform-origin: bottom; filter: brightness(0.85); transition: translate 0.2s, scale 0.2s; }
+@media (prefers-reduced-motion: reduce) { .batalla-bala-espiral { animation-duration: 0.01s !important; } }

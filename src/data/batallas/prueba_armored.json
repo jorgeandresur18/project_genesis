@@ -1,0 +1,212 @@
+{
+  "titulo": "Prueba: Cami armored",
+  "fondo": "PLACEHOLDER:almacen_molino",
+  "heroes": [
+    "cami",
+    "jair",
+    "rikka"
+  ],
+  "personajes": {
+    "cami": {
+      "nivel": 20,
+      "seguido": true,
+      "sprite": "batalla/cami_armored",
+      "base": {
+        "ps": 44,
+        "atq": 8,
+        "def": 9,
+        "vel": 12
+      },
+      "ataques": [
+        {
+          "nombre": "Blaster+",
+          "poder": 22,
+          "usos": 30,
+          "texto": "{quien} levanta el puño de la armadura y dispara. El blaster ahora tiene más ganas que ella."
+        }
+      ],
+      "especial": {
+        "nombre": "Berserk",
+        "poder": 6,
+        "golpes": 18,
+        "objetivo": "todos",
+        "color": "#5ee0ff",
+        "ojos": [
+          46,
+          38,
+          26,
+          14
+        ],
+        "posicion": "centro",
+        "texto": "A {quien} se le cierra el casco sobre la cara. El visor se enciende. Del hombro le salen dos cañones.",
+        "berserk": {
+          "sprite": "batalla/cami_berserk"
+        }
+      },
+      "aprende": [],
+      "especiales_extra": [],
+      "descanso": "",
+      "_nota": "Con la armadura no siente el tobillo: actúa todos los turnos y no se agacha a descansar."
+    },
+    "jair": {
+      "nivel": 8
+    },
+    "rikka": {
+      "nivel": 13
+    }
+  },
+  "enemigos": [
+    "soldado",
+    "capitan"
+  ],
+  "horda": {
+    "enemigo": "soldado",
+    "al_inicio": 2,
+    "niveles": [
+      10,
+      12,
+      12,
+      12
+    ]
+  },
+  "jefe": {
+    "enemigo": "capitan",
+    "nivel": 18
+  },
+  "botin": {
+    "probabilidad": 0.6,
+    "objetos": [
+      "atq",
+      "def",
+      "vida",
+      "vida",
+      "carga",
+      "revivir"
+    ]
+  },
+  "esquivar": 0.5,
+  "hablar": 0.4,
+  "huir": false,
+  "dialogos": {
+    "hablar_ok": [
+      {
+        "quien": "Voz",
+        "texto": "{objetivo} se queda pensando. Pierde su próximo ataque."
+      }
+    ],
+    "hablar_no": [
+      {
+        "quien": "Voz",
+        "texto": "{objetivo} no le hace caso."
+      }
+    ],
+    "esquiva_ok": [
+      {
+        "quien": "Voz",
+        "texto": "¡{quien} lo esquiva!"
+      }
+    ],
+    "botin": [
+      {
+        "quien": "Voz",
+        "texto": "Al {objetivo} se le cae algo: {objeto}. Va a la mochila."
+      }
+    ],
+    "ayuda": [
+      {
+        "quien": "Voz",
+        "texto": "Algo cae del techo y rebota en el piso: {objeto}. Nadie pregunta de dónde. Va a la mochila."
+      }
+    ],
+    "inicio": [
+      {
+        "quien": "Voz",
+        "texto": "[Prueba] Cami armored contra los soldados del molino. Usa «Objetos › carga» para llenar la barra y ver el Berserk."
+      }
+    ],
+    "refuerzos": [
+      {
+        "quien": "Voz",
+        "texto": "[Prueba] Entra otro soldado."
+      }
+    ],
+    "jefe": [
+      {
+        "quien": "Voz",
+        "texto": "[Prueba] Llega el capitán."
+      }
+    ],
+    "jefe_huye": [
+      {
+        "quien": "Voz",
+        "texto": "[Prueba] El capitán se retira."
+      }
+    ],
+    "victoria": [
+      {
+        "quien": "Voz",
+        "texto": "[Prueba] Ganaron."
+      }
+    ],
+    "derrota": [
+      {
+        "quien": "Voz",
+        "texto": "[Prueba] Perdieron."
+      }
+    ],
+    "huir_no": [
+      {
+        "quien": "Voz",
+        "texto": "[Relleno] No se puede huir."
+      }
+    ],
+    "huir": [
+      {
+        "quien": "Voz",
+        "texto": "[Relleno] Escapan."
+      }
+    ],
+    "descanso": [
+      {
+        "quien": "Voz",
+        "texto": "[Relleno] Necesita un segundo."
+      }
+    ],
+    "cae_jair": [
+      {
+        "quien": "Voz",
+        "texto": "[Relleno] Jair cae."
+      }
+    ]
+  },
+  "objetos": [
+    "atq",
+    "def",
+    "vida",
+    "carga",
+    "caramelo_rancio",
+    "revivir",
+    "veneno_ratas",
+    "condon"
+  ],
+  "ayuda": {
+    "umbral": 0.35,
+    "cae": 0.3,
+    "objeto": "vida",
+    "critico": 0.1
+  },
+  "musica_jefe": "audio/musica/combate_arcade.mp3",
+  "musica": "audio/musica/combate_arcade.mp3",
+  "_nota": "Pelea de prueba (pedida por el autor, 2026-11-07): Cami armored con el Blaster+ y el especial+ Berserk, con Jair y Rikka para ver el «¡Agáchense!». Se abre con ?batalla=prueba_armored. Los sprites de ataque del armored todavía no están (usa el idle). No es canon todavía: el molino del Capítulo 2 sigue con su plantilla.",
+  "premio": {
+    "objetos": {},
+    "vars": {
+      "especial_cami_armored": true
+    }
+  },
+  "mochila_inicial": {
+    "vida": 2,
+    "carga": 3,
+    "revivir": 1
+  }
+}

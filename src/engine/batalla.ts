@@ -87,6 +87,12 @@ export interface Ataque {
  */
 export interface Especial {
   /**
+   * El Berserk de Cami armored (especial+): mientras dura se ve con la hoja `sprite` (el casco y los cañones), grita
+   * `grito` (si no, «¡Agáchense!») a los suyos, que se agachan, y desde el medio de la arena suelta una espiral de balas
+   * por `ms` (si no, 4,2 s); los `golpes` se reparten entre todos los rivales.
+   */
+  berserk?: { sprite: string; grito?: string; ms?: number };
+  /**
    * La bola de defensa (la sombra de roca; decisión del autor, 2026-11-07): un especial que no golpea: se hace bola por `turnos`
    * ([mín, máx], al azar), sube su DEF en `def` y al que le pega de cerca le devuelve esta parte (`devuelve`) del daño
    * con las espinas (los disparos de lejos rebotan). Mientras es bola no usa especiales ni sus otros ataques: solo

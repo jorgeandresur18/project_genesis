@@ -498,5 +498,6 @@
   "batalla.fin_quemado": "{quien}'s burns die down.",
   "batalla.fin_espinas": "{quien} uncurls: no longer a ball of spikes.",
   "batalla.espinas_pincha": "{quien} gets stabbed by the spikes: loses {n} HP.",
-  "batalla.espinas_rebota": "The bullets bounce off the stone."
+  "batalla.espinas_rebota": "The bullets bounce off the stone.",
+  "batalla.berserk_agachense": "Get down!"
 }

@@ -290,3 +290,11 @@ Abrir `http://localhost:5173/?batalla=sombra_roca`. Claude ya vio cada ataque si
 - [ ] **El puño:** se ve entero (con las llamas y la vuelta a la guardia), unos 2,7 segundos. ¿Muy lento?
 - [ ] **La dificultad:** simulada, ~98 % si juegas atento y ~87 % sin cuidado (la bajé porque la sentiste difícil). ¿Ahora sí?
 
+## 26. Cami armored y el Berserk (nuevo, 7 de noviembre)
+
+Abrir `http://localhost:5173/?batalla=prueba_armored`. Para el Berserk, llenar la barra con «Objetos › Recargador» (hay 3 en la mochila).
+- [ ] Cami armored (tu sprite, con el parpadeo) junto a Jair y Rikka.
+- [ ] **Blaster+:** dispara desde el puño. Es muy fuerte a propósito (el armored es «un trámite»). ¿Lo bajo?
+- [ ] **Berserk:** se le cierra el casco (cambia al sprite con visor y cañones), grita «¡Agáchense!» y Jair y Rikka se agachan; va al medio y suelta la espiral de balas con misiles. ¿Son suficientes las balas? ¿Más rápido, más lento, más largo?
+- [ ] Al terminar: se saca el casco, vuelve a su lugar y los otros se paran.
+

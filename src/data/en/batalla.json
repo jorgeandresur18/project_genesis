@@ -495,6 +495,17 @@
     "El monstruo se agacha, se encoge y se vuelve una bola de piedra llena de espinas. Pegarle ahora va a doler.": "The monster crouches, curls up and turns into a stone ball covered in spikes. Hitting it now is going to hurt.",
     "Rodar": "Roll",
     "La bola de espinas rueda contra {objetivo}.": "The spiked ball rolls into {objetivo}.",
-    "Bola de espinas": "Spike Ball"
+    "Bola de espinas": "Spike Ball",
+    "[Prueba] Cami armored contra los soldados del molino. Usa «Objetos › carga» para llenar la barra y ver el Berserk.": "[Test] Armored Cami against the mill soldiers. Use «Items › charge» to fill the bar and see Berserk.",
+    "[Prueba] Entra otro soldado.": "[Test] Another soldier comes in.",
+    "[Prueba] Llega el capitán.": "[Test] The captain arrives.",
+    "[Prueba] El capitán se retira.": "[Test] The captain retreats.",
+    "[Prueba] Ganaron.": "[Test] You won.",
+    "[Prueba] Perdieron.": "[Test] You lost.",
+    "Prueba: Cami armored": "Test: Armored Cami",
+    "Blaster+": "Blaster+",
+    "{quien} levanta el puño de la armadura y dispara. El blaster ahora tiene más ganas que ella.": "{quien} raises her armored fist and fires. The blaster is more into it than she is.",
+    "Berserk": "Berserk",
+    "A {quien} se le cierra el casco sobre la cara. El visor se enciende. Del hombro le salen dos cañones.": "The helmet snaps shut over {quien}'s face. The visor lights up. Two cannons come out of her shoulders."
   }
 }

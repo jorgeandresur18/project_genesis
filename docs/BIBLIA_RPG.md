@@ -838,6 +838,24 @@ La gran montaña se sacó (decisión del autor, 2026-11-07: los dos especiales s
 - Para probar a mano en el navegador (solo en desarrollo): `window.__pelea` tiene el estado y los datos de la pelea
   (forzar un ataque, llenar la barra).
 
+## 26. Cami armored y el Berserk (sprites e idea del autor, 2026-11-07; **pelea de prueba**)
+
+Pelea de prueba: `?batalla=prueba_armored` (Cami armored con Jair y Rikka contra los soldados del molino; no reemplaza
+todavía a `cap02_molino_armored`). Hojas del autor: «armored» (la armadura blanca y azul, sin casco) y «berserk» (el
+casco con visor y los dos cañones), por ahora solo el idle; el parpadeo sale del parche del HTML
+(`tools/batalla_sprites.py … armored berserk` → `public/batalla/cami_armored` y `cami_berserk`).
+
+- **En esta forma tiene solo dos cosas:** el **Blaster+** (un disparo fuerte desde el puño; 22) y el especial+
+  **Berserk**. Con la armadura no siente el tobillo: actúa todos los turnos.
+- **El Berserk:** se le cierra el casco (cambia a la hoja del berserk), les grita a los suyos «¡Agáchense!» (se agachan
+  mientras dura), se planta en el medio de la arena y suelta un infierno de balas en espiral, como en los juegos de
+  naves: cinco brazos que giran hacia un lado y tres hacia el otro, más algún misil naranja directo a un rival (unas 190
+  balas a la vez en pantalla, 4,2 s). Los golpes (6 × 18) se reparten entre todos los rivales. Al terminar se saca el
+  casco, vuelve a su lugar y los suyos se paran. Código: `berserk` en `Batalla.tsx`; el campo `berserk` del especial.
+- **Falta (arte del autor):** las animaciones de ataque del armored y del berserk. Mientras tanto usa el idle.
+- **Pendiente del autor:** cómo entra al juego (el molino del Capítulo 2) y la propuesta de Claude del Armored como
+  modo de 3 turnos (ver la bitácora del 2026-11-07).
+
 ## 16. Pendientes e ideas
 
 | Tema | Estado |

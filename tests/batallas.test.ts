@@ -28,7 +28,8 @@ function hojaValida(sprite: string, extra = false) {
 function especialValido(e: Especial, sprite: string, heroe: boolean) {
   const hoja = JSON.parse(readFileSync(`public/${sprite}.json`, 'utf8'));
   // Los héroes tienen la fila «especial» (con su secuencia de unos 5 segundos); el soldado repite su ataque.
-  if (heroe) expect(hoja.animations.especial, `${sprite}: especial`).toBeTruthy();
+  // El Berserk (Cami armored) no usa esa fila: cambia de hoja y lo dibuja el juego (la espiral de balas).
+  if (heroe && !e.berserk) expect(hoja.animations.especial, `${sprite}: especial`).toBeTruthy();
   // Un sprite de un solo cuadro (placeholder, p. ej. Nikki): los ojos tienen que caer dentro de la imagen.
   if (hoja.cuadro) {
     const [x, y, w, h] = e.ojos;

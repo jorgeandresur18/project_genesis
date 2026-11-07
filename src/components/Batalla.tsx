@@ -1440,6 +1440,8 @@ function Pelea({
         for (const x of b.current.heroes.filter(vivo)) ponerCebo(x);
         return decir(t('batalla.multicebo_aparece'));
       }
+      // El Berserk (Cami armored): el casco y la espiral de balas para todos lados.
+      if (esp.berserk) return berserk(h, esp);
       // La bomba: no golpea, queda en el campo.
       if (esp.bomba) {
         if (!ponerBomba(b.current, h, esp.bomba)) return decir(t('batalla.bomba_ya'));
@@ -1952,6 +1954,107 @@ function Pelea({
     void animar(l.id, 'bola' as Anim);
     luz(l.id, '#ffffff', true);
     await espera(450);
+  };
+  // ---------------------------------------------------------------------------------------------------------------
+  // El Berserk de Cami armored (especial+; idea y sprites del autor, 2026-11-07): se pone el casco (cambia a la hoja
+  // del berserk), les grita a los suyos que se agachen, se planta en el medio de la arena y suelta un infierno de
+  // balas en espiral, como en los juegos de naves, que les pega a todos los rivales.
+  // ---------------------------------------------------------------------------------------------------------------
+  /** Otra hoja para un luchador mientras dura algo (el casco del berserk). */
+  const [spriteDe, setSpriteDe] = useState<Record<string, string>>({});
+  /** Los compañeros agachados mientras Cami dispara para todos lados. */
+  const [agachados, setAgachados] = useState<string[]>([]);
+  /** Las balas del berserk: salen del medio y vuelan en espiral hasta salirse de la pantalla. */
+  const [espiral, setEspiral] = useState<{ key: number; x: number; y: number; dx: number; dy: number; ms: number; color: string; misil: boolean }[]>([]);
+  const berserk = async (l: Luchador, e: Especial) => {
+    const cfg = e.berserk!;
+    l.carga = 0;
+    forzar();
+    await avisar(e, cfg.sprite, true);
+    await decir(fmt(e.texto, { quien: l.nombre }));
+    // Se pone el casco: otra hoja, un destello.
+    setSpriteDe((m) => ({ ...m, [l.id]: cfg.sprite }));
+    luz(l.id, e.color, true);
+    playChip('carga');
+    await espera(500);
+    // A los suyos: que se agachen.
+    const suyos = (l.lado === 'heroe' ? b.current.heroes : b.current.enemigos).filter((x) => x !== l && enCampo(x));
+    if (suyos.length) {
+      await decir(cfg.grito ?? t('batalla.berserk_agachense'), l.nombre);
+      setAgachados(suyos.map((x) => x.id));
+      playChip('salto');
+    }
+    await alCentro(l.id);
+    const rivales = (l.lado === 'heroe' ? b.current.enemigos : b.current.heroes).filter((x) => (l.lado === 'heroe' ? vivo(x) : enCampo(x)));
+    const c = centroDe(l);
+    const base = raiz.current?.getBoundingClientRect();
+    enEspecial.current = true;
+    rivales.forEach((x) => bajoEspecial.current.add(x.id));
+    const dura = cfg.ms ?? 4200;
+    if (c && base) {
+      const lejos = Math.hypot(base.width, base.height) * 0.75;
+      const paso = 70;
+      // Cinco brazos que giran hacia un lado y tres hacia el otro: la espiral.
+      for (let t = 0; t < dura; t += paso) {
+        setTimeout(() => {
+          const nuevas: (typeof espiral)[number][] = [];
+          const giro = t / 520;
+          const brazos: [number, number, string][] = [
+            [5, giro, '#5ee0ff'],
+            [3, -giro * 1.4 + 0.5, '#ffffff'],
+          ];
+          for (const [n, a0, color] of brazos) {
+            for (let i = 0; i < n; i++) {
+              const a = a0 + (i * Math.PI * 2) / n;
+              nuevas.push({ key: Math.random(), x: c.x, y: c.y - 8, dx: Math.cos(a) * lejos, dy: Math.sin(a) * lejos, ms: 1500, color, misil: false });
+            }
+          }
+          // De vez en cuando, un misil derecho a un rival.
+          if (t % (paso * 6) === 0 && rivales.length) {
+            const r = centroDe(rivales[Math.floor(Math.random() * rivales.length)]);
+            if (r) nuevas.push({ key: Math.random(), x: c.x, y: c.y - 8, dx: (r.x - c.x) * 1.6, dy: (r.y - c.y) * 1.6, ms: 900, color: '#ffb85e', misil: true });
+          }
+          setEspiral((v) => [...v, ...nuevas]);
+          setTimeout(() => setEspiral((v) => v.filter((z) => !nuevas.includes(z))), 1600);
+          if (t % (paso * 3) === 0) playChip('disparo');
+        }, t);
+      }
+    }
+    // Los golpes, repartidos a lo largo de la espiral.
+    const golpes = golpesEspecial(e, rivales, rivales.length).map((x, i, todos) => ({ x, ms: 500 + (i * (dura - 700)) / Math.max(1, todos.length - 1) }));
+    const desde = Date.now();
+    let total = 0;
+    for (const g of golpes) {
+      await espera(Math.max(0, g.ms - (Date.now() - desde)));
+      if (!vivo(g.x)) continue;
+      const { n } = await golpear(l, g.x, e.poder, e.color, false);
+      total += n;
+    }
+    await espera(Math.max(0, dura + 900 - (Date.now() - desde)));
+    setEspiral([]);
+    // Se saca el casco y vuelve a su lugar; los suyos se paran.
+    setSpriteDe((m) => {
+      const n = { ...m };
+      delete n[l.id];
+      return n;
+    });
+    luz(l.id, e.color);
+    await deslizar(l.id, null);
+    if (suyos.length) {
+      for (const x of suyos) efecto(x.id, 'se-levanta', 800);
+      setAgachados([]);
+    }
+    for (const x of rivales) {
+      bajoEspecial.current.delete(x.id);
+      if (vivo(x)) setAnims((m) => ({ ...m, [x.id]: 'idle' }));
+    }
+    enEspecial.current = false;
+    for (const id of retenidos.current) void animar(id, 'ko');
+    retenidos.current.clear();
+    forzar();
+    await decir(fmt(t('batalla.especial_total'), { quien: l.nombre, n: total }));
+    await limpiarCebos();
+    for (const x of rivales) if (!vivo(x) && !x.cebo) await alCaer(x);
   };
   /** El rayo del especial del Capitán que sigue más allá de su cuadro, hasta el borde de la pantalla. */
   const [rayoSigue, setRayoSigue] = useState<{ id: string; x: number; y: number; largo: number; ang: number; grosor: number } | null>(null);
@@ -2734,7 +2837,7 @@ function Pelea({
               l={h}
               caido={h.ps === 0 && !retenidos.current.has(h.id)}
               refFigura={(el) => (el ? figuras.current.set(h.id, el) : figuras.current.delete(h.id))}
-              sprite={d.personajes[h.clave].sprite}
+              sprite={spriteDe[h.id] ?? d.personajes[h.clave].sprite}
               escala={d.personajes[h.clave].escala}
               filtro={d.personajes[h.clave].filtro}
               heroe
@@ -2746,7 +2849,7 @@ function Pelea({
                     : (anims[h.id] ?? 'idle')
               }
               alCuadro={(anim, col, hoja) => alCuadro(h, anim, col, hoja)}
-              efecto={efectos[h.id]}
+              efecto={agachados.includes(h.id) ? 'agachado-berserk' : efectos[h.id]}
               alto={aire[h.id] ?? 0}
               vez={veces[h.id] ?? 0}
               especial={d.personajes[h.clave].especial}
@@ -2858,6 +2961,14 @@ function Pelea({
               backgroundImage: `url(${BASE}batalla/meteoritos/meteorito_${m.img}.png)`,
             } as CSSProperties
           }
+          aria-hidden
+        />
+      ))}
+      {espiral.map((x) => (
+        <span
+          key={x.key}
+          className={`batalla-bala-espiral ${x.misil ? 'misil' : ''}`}
+          style={{ left: x.x, top: x.y, '--dx': `${x.dx}px`, '--dy': `${x.dy}px`, '--ang': `${Math.atan2(x.dy, x.dx)}rad`, '--c': x.color, animationDuration: `${x.ms}ms` } as CSSProperties}
           aria-hidden
         />
       ))}

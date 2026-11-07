@@ -498,5 +498,6 @@
   "batalla.fin_quemado": "A {quien} se le apagan las quemaduras.",
   "batalla.fin_espinas": "{quien} se desenrolla: ya no es una bola de espinas.",
   "batalla.espinas_pincha": "{quien} se pincha con las espinas: pierde {n} PS.",
-  "batalla.espinas_rebota": "Las balas rebotan en la piedra."
+  "batalla.espinas_rebota": "Las balas rebotan en la piedra.",
+  "batalla.berserk_agachense": "¡Agáchense!"
 }
