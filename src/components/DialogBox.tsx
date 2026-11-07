@@ -50,6 +50,9 @@ export function DialogBox({ dialogue, aiVowels, hasChoices, onAdvance, globo = f
   const conEditor = EDITOR_EN_VIVO && editable && !!escena;
   const edicion = useEdiciones((s) => (conEditor && escena ? s.mapa[escena] : undefined));
   const guardar = useEdiciones((s) => s.guardar);
+  // La marca ✓: la línea la escribió el autor y la corrigió Claude (ya está en la historia).
+  const revisada = useEdiciones((s) => (conEditor && escena ? !!s.revisadas[escena] : false));
+  const marcarRevisada = useEdiciones((s) => s.marcarRevisada);
   const [editando, setEditando] = useState<string | null>(null);
   const original = dialogue?.text ?? '';
   const text = edicion ? edicion.texto : original;
@@ -95,6 +98,11 @@ export function DialogBox({ dialogue, aiVowels, hasChoices, onAdvance, globo = f
     >
       {dialogue.speaker && <div className={`dialog-speaker ${who?.mono ? 'dialog-speaker-mono' : ''}`}>{render(dialogue.speaker)}</div>}
       {conEditor && edicion && !reaccion && <span className="dialog-editado">EDITADO</span>}
+      {conEditor && revisada && !reaccion && (
+        <span className="dialog-revisada" title="Revisada: la escribiste tú y la corrigió Claude, o la aprobaste tú">
+          ✓
+        </span>
+      )}
       {/* Con el editor (solo en desarrollo): una línea atrás o adelante, al lado de la caja. */}
       {conEditor && editando === null && (
         <>
@@ -167,6 +175,14 @@ export function DialogBox({ dialogue, aiVowels, hasChoices, onAdvance, globo = f
                 Volver al original
               </button>
             )}
+            <button
+              onClick={() => {
+                void marcarRevisada(escena!, !revisada);
+                setEditando(null);
+              }}
+            >
+              {revisada ? 'Quitar ✓' : 'Poner ✓'}
+            </button>
             <button onClick={() => setEditando(null)}>Cancelar</button>
           </div>
           {edicion && <small className="dialog-editor-original">Original: {original}</small>}

@@ -18,6 +18,15 @@ const leerEdiciones = () => {
     return {};
   }
 };
+/** Las líneas que escribió el autor y corrigió Claude, ya en la historia (la marca ✓; `docs/guion/revisadas.json`). */
+const REVISADAS = path.resolve(__dirname, 'docs/guion/revisadas.json');
+const leerRevisadas = () => {
+  try {
+    return JSON.parse(fs.readFileSync(REVISADAS, 'utf8'));
+  } catch {
+    return {};
+  }
+};
 
 export default defineConfig({
   // Rutas relativas: el juego funciona en Vercel, GitHub Pages o itch.io sin cambiar nada.
@@ -28,6 +37,26 @@ export default defineConfig({
       name: 'ediciones-en-vivo',
       apply: 'serve',
       configureServer(server) {
+        // La marca ✓: GET la lista; POST { escena, poner } la pone (aprobada por el autor) o la quita.
+        server.middlewares.use('/__revisadas', (req, res) => {
+          res.setHeader('Content-Type', 'application/json; charset=utf-8');
+          if (req.method === 'GET') return res.end(JSON.stringify(leerRevisadas()));
+          let cuerpo = '';
+          req.on('data', (c) => (cuerpo += c));
+          req.on('end', () => {
+            try {
+              const { escena, poner } = JSON.parse(cuerpo);
+              const todo = leerRevisadas();
+              if (poner) todo[escena] = { fecha: new Date().toISOString().slice(0, 10), origen: 'aprobada' };
+              else delete todo[escena];
+              fs.writeFileSync(REVISADAS, JSON.stringify(todo, null, 2) + String.fromCharCode(10), 'utf8');
+              res.end(JSON.stringify(todo));
+            } catch {
+              res.statusCode = 400;
+              res.end('{}');
+            }
+          });
+        });
         server.middlewares.use('/__ediciones', (req, res) => {
           res.setHeader('Content-Type', 'application/json; charset=utf-8');
           if (req.method === 'GET') return res.end(JSON.stringify(leerEdiciones()));

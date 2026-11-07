@@ -3823,3 +3823,5 @@ button.cassette:hover .cassette-imagen { transform: translateY(-2px) rotate(-3de
 .dialog-flecha-atras { left: -3.1rem; }
 .dialog-flecha-adelante { right: -3.1rem; }
 .dialog-globo .dialog-flecha-atras { left: auto; right: calc(100% + 0.5rem); }
+/* La marca ✓ (con el editor en vivo): la línea la escribió el autor y la corrigió Claude. */
+.dialog-revisada { position: absolute; left: -1rem; top: -1rem; width: 2.6rem; height: 2.6rem; border-radius: 50%; display: grid; place-items: center; background: #2ecc71; color: #fff; font-size: 1.5rem; font-weight: 800; border: 3px solid #0d2b19; box-shadow: 0 0 1rem rgba(46, 204, 113, 0.55); z-index: 2; pointer-events: auto; }

@@ -14,6 +14,10 @@ export interface Edicion {
 
 interface EstadoEdiciones {
   mapa: Record<string, Edicion>;
+  /** Las líneas que escribió el autor y corrigió Claude, ya en la historia (la marca ✓). */
+  revisadas: Record<string, { fecha: string; origen?: string }>;
+  /** Pone (el autor aprueba una línea de Claude) o quita la marca ✓ de una línea. */
+  marcarRevisada: (escena: string, poner: boolean) => Promise<void>;
   /** Guarda el texto nuevo de una escena (o, con `null`, vuelve al original). */
   guardar: (escena: string, texto: string | null, original: string) => Promise<void>;
 }
@@ -22,6 +26,11 @@ const RUTA = '/__ediciones';
 
 export const useEdiciones = create<EstadoEdiciones>((set) => ({
   mapa: {},
+  revisadas: {},
+  marcarRevisada: async (escena, poner) => {
+    const r = await fetch('/__revisadas', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ escena, poner }) });
+    if (r.ok) set({ revisadas: (await r.json()) as Record<string, { fecha: string }> });
+  },
   guardar: async (escena, texto, original) => {
     const r = await fetch(RUTA, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ escena, texto, original }) });
     if (r.ok) set({ mapa: (await r.json()) as Record<string, Edicion> });
@@ -32,5 +41,9 @@ if (EDITOR_EN_VIVO && typeof fetch !== 'undefined' && typeof window !== 'undefin
   fetch(RUTA)
     .then((r) => (r.ok ? r.json() : {}))
     .then((mapa) => useEdiciones.setState({ mapa: mapa as Record<string, Edicion> }))
+    .catch(() => undefined);
+  fetch('/__revisadas')
+    .then((r) => (r.ok ? r.json() : {}))
+    .then((revisadas) => useEdiciones.setState({ revisadas: revisadas as Record<string, { fecha: string }> }))
     .catch(() => undefined);
 }

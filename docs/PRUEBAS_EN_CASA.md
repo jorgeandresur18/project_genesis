@@ -278,3 +278,4 @@ En el Torneo (`npm run dev`, desde Extras):
 - [ ] «Volver al original» la deja como estaba. Mientras escribes, Espacio y Enter no hacen avanzar la historia.
 - [ ] Cuando termines una tanda, avisar a Claude: lee `docs/guion/ediciones_en_vivo.json`, te corrige la redacción y lo aplica con el inglés.
 - [ ] Las flechas ◀ ▶ al lado de la caja: la anterior y la siguiente línea (en las decisiones, ▶ espera a que elijas).
+- [ ] La marca ✓ verde en las líneas que corregiste (por ejemplo, la clienta de la refrigeradora). En el editor, «Poner ✓» en una línea de Claude que apruebes y «Quitar ✓».
