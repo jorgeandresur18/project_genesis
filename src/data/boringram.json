@@ -340,10 +340,22 @@
       "mensajes": [
         {
           "de": "ella",
+          "texto": "hoy me volvio a regañar la jefa",
+          "desbloqueo": "cap01_115n3",
+          "cuando": "-548 12:58"
+        },
+        {
+          "de": "ella",
+          "texto": "no quiero quedarme toda la vida en esta heladeria de mierda",
+          "desbloqueo": "cap01_115n3",
+          "cuando": "-548 12:59"
+        },
+        {
+          "de": "ella",
           "texto": "nunca te vayas de mi vida",
           "destacado": true,
           "desbloqueo": "cap01_115n3",
-          "cuando": "-548 03:12"
+          "cuando": "-548 13:00"
         },
         {
           "de": "ella",

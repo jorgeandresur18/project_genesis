@@ -166,6 +166,12 @@
       "estado": "Active {hace}",
       "mensajes": [
         {
+          "texto": "my boss yelled at me again today"
+        },
+        {
+          "texto": "i don't want to spend my whole life in this shitty ice cream shop"
+        },
+        {
           "texto": "never leave my life"
         },
         {
