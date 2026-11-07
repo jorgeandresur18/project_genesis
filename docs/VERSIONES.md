@@ -3,7 +3,23 @@
 Qué trae cada versión. La que está en curso lleva `-dev` y todavía no se publicó. Cómo se numeran y cómo se publica:
 `docs/METODOLOGIA.md`.
 
-## 1.2.0-dev (en curso, rama `desarrollo`; sin publicar)
+## 1.3.0-dev (en curso, rama `desarrollo`; sin publicar)
+
+- (lo nuevo después de la 1.2.0)
+
+## 1.2.0 (publicada el 8 de noviembre de 2026; etiqueta `v1.2.0`)
+
+**Lo que se ve en la demo publicada (el Capítulo 1):**
+- **Los diálogos del Capítulo 1 corregidos por el autor:** el prólogo condensado y tres pasadas con el editor en vivo, hasta que Jair entra a GENESIS (con inglés). El bar se llama La Lechuza; la escena de GRAVITY con una sola heroína y la «¿heroína piloto?».
+- **La pelea de práctica** apenas Cami se presenta (el cabo de la armadura roja; si se pierde, el final malo «Reprobado»).
+- **La sombra de roca en el claro** («Enfrentar al monstruo» ya no es muerte directa): el gólem de piedra del autor, su fondo del claro con el arroyo congelado, la lluvia de meteoritos y la bola de espinas.
+- **Las peleas más livianas:** las hojas en WebP sin pérdida (de 5,3 MB a 1,9 MB).
+
+**Sigue apagado en lo publicado** (`demo_publica`): los Capítulos 2 y 3, el Torneo, PayFoe y la tienda nueva. Lo que
+sigue solo existe ahí (o tras el PIN de los atajos): Cami armored y Rikka princesa de luna (`prueba_armored`,
+`prueba_luna`), Lady y la KJPoper, y lo de abajo.
+
+**También trae (en desarrollo, para lo que viene):**
 
 - **Torneo:** rivales variados en cada ronda (personajes incluidos); cada peleador se desbloquea con su pelea de la historia; Nikki y el Rey Malvado (al terminar el Capítulo 6) como peleadores; los jefes de la torre con números de héroe; Billy apenas el más fuerte; **la mochila del torneo** (compras con PayFoe desde el menú, objetos traídos de las partidas) y el equipo de cada peleador.
 - **PayFoe:** los tokens de la partida pasan a PayFoe al terminar cada capítulo (eligiendo cuántos); también objetos al torneo.

@@ -205,8 +205,8 @@ abajo de espaldas) cuando toque.
 
 - **Rikka diosa lunar** (del autor, 2026-11-07): su especial+ (como el armored de Cami), basado en la princesa Kaguya. Ataques de corte lunar y Luz de luna (confunde a los rivales, cura al equipo; ella termina confundida). **Falta:** dónde se gana en el Capítulo 3 y los sprites (del autor, más adelante). Diseño en `docs/BIBLIA_RPG.md`, sección 27.
 
-- **La pelea de práctica (Capítulo 1, en prueba):** hecha en `desarrollo` (batalla `guia`, escenas `cap01_tu*`): **antes de publicar en `main`, preguntarle al autor si va**.
-- **La sombra de roca (Capítulo 1, en prueba):** la pelea del claro de las cuatro estaciones está hecha en `desarrollo`, pero el autor la quiere pensar: **antes de publicar en `main`, preguntarle si va** (si no, se quita la pelea de `cap01_g7b_022c6` y vuelve la muerte directa).
+- [x] **La pelea de práctica (Capítulo 1):** aprobada por el autor y publicada en la 1.2.0 (2026-11-08).
+- [x] **La sombra de roca (Capítulo 1):** aprobada por el autor y publicada en la 1.2.0 (2026-11-08), con sus sprites y su fondo.
 
 - **Boringram: cómo se conocieron Jair y Nikki** (del autor, 2026-11-06): desbloqueables que cuentan su vida de antes (el colegio, los «me gusta» sin respuesta, la fiesta a los 22, el primer beso). Falta decidir qué publicaciones son y cuándo se desbloquean (el Boringram de los capítulos lo hace el autor). **Forma (idea del autor):** como los recuerdos de las fotos: un aviso de Noodle en el celular de Jair, «¿Recuerdas esta foto? Hace N años, un día como hoy», que va contando la historia poco a poco. **Hechos** (6 de noviembre): Capítulo 2, el colegio (hace 14 años) y la foto con sus compañeros (13); Capítulo 3, la fiesta (8). **Faltan**, cuando existan sus capítulos: el primer mensaje de Nikki (Capítulo 4) y la primera salida, la noche del beso (Capítulo 5). «Nunca te vayas de mi vida» ya está en el Capítulo 1.
 

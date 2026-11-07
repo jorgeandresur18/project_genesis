@@ -3,7 +3,7 @@
   "inicio": "cap01_001",
   "musica_titulo": "audio/musica/into_the_ciberse.mp3",
   "musica_bootcamp": null,
-  "version": "1.2.0-dev",
+  "version": "1.2.0",
   "payfoe_activo": true,
   "capitulo_maximo": 3,
   "torneo_activo": true,
