@@ -21,7 +21,7 @@ La voz es provocativa: humor negro, sarcasmo y crudeza cotidiana. Provoca, pero 
 
 | Personaje | Cómo habla | Línea de ejemplo |
 | --- | --- | --- |
-| Jair | Autodepreciativo, evasivo, a medio justificarse | "Gano poco, vivo en una caja de zapatos y mi mejor relación es con un ventilador." |
+| Jair | Autodepreciativo, evasivo, a medio justificarse. **Grosero, pero contenido en el trabajo y con desconocidos; con Nikki y bebiendo se suelta, más a cada ronda** (regla del autor, 2026-11-06) | "Gano poco, vivo en una caja de zapatos y mi mejor relación es con un ventilador." / ya en el bar: "Se veía a kilómetros que era una de esas mierdas piramidales." |
 | Nikki | Impulsiva, sarcástica, cariñosa y hiriente a la vez | "Búscate una novia, Jair. Y cuando la encuentres, avísame para ir a odiarla." |
 | Cami | Ironía fría, segura, ataca primero | "Qué lindo: un dios con el sueldo atrasado." |
 | Rikka | Dramática y celosa, dócil con Jair; asoman vestigios de orgullo noble (de su posición, no frente a él); pánico por el dinero | "¿Cuánto cuesta respirar aquí? Es que me da miedo preguntar." |
