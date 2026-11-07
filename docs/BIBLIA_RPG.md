@@ -856,9 +856,11 @@ casco con visor y los dos cañones), por ahora solo el idle; el parpadeo sale de
   turnos.
 - **El Berserk:** se le cierra el casco (cambia a la hoja del berserk), les grita a los suyos «¡Agáchense!» (se agachan
   mientras dura), se planta en el medio de la arena y suelta un infierno de balas en espiral, como en los juegos de
-  naves: cinco brazos que giran hacia un lado y tres hacia el otro, más algún misil naranja directo a un rival (unas 190
-  balas a la vez en pantalla, 4,2 s). Los golpes (6 × 18) se reparten entre todos los rivales. Al terminar se saca el
-  casco, vuelve a su lugar y los suyos se paran. Código: `berserk` en `Batalla.tsx`; el campo `berserk` del especial.
+  naves, cada vez más cargada (de 6 a 10 brazos hacia un lado y de 4 a 7 hacia el otro), y un frenesí de misiles que van
+  a los rivales (o caen cerca) y explotan, con temblores y destellos: más de 600 balas a la vez, 7,5 s (pedido del autor:
+  «una monstruosidad exagerada»). Los golpes (4 × 30) se reparten entre todos los rivales. Al terminar se saca el casco,
+  vuelve a su lugar y los suyos se paran. **Pierde la armadura:** vuelve a ser Cami (su ficha de siempre: sus ataques,
+  su barra y el tobillo) por el resto de la pelea (`vuelve_a`), y **descansa un turno** (agachada). Código: `berserk` en `Batalla.tsx`; el campo `berserk` del especial.
 - **Falta (arte del autor):** las animaciones de ataque del armored y del berserk. Mientras tanto usa el idle.
 - **Pendiente del autor:** cómo entra al juego (el molino del Capítulo 2) y la propuesta de Claude del Armored como
   modo de 3 turnos (ver la bitácora del 2026-11-07).

@@ -59,7 +59,7 @@ import fondosJson from '../data/fondos_batalla.json';
 import { EnergiasHacia } from './EfectosSprite';
 import { EquipoPanel } from './Equipo';
 import { OptionsPanel } from './Panels';
-import { BATALLAS, sueltosQueTengo } from '../engine/batallas';
+import { BATALLAS, FICHAS, sueltosQueTengo } from '../engine/batallas';
 import { ataqueHeroeEn, batallaEn, textoBatalla } from '../engine/batallaTexto';
 import {
   BOMBA_BOTIN,
@@ -200,7 +200,7 @@ export function Batalla({
 }
 
 function Pelea({
-  d,
+  d: datosPelea,
   progreso,
   onGanar,
   onPerder,
@@ -218,6 +218,9 @@ function Pelea({
 }) {
   const t = useT();
   const lang = useLang();
+  // Los personajes, copiados para esta pelea: un héroe puede cambiar de forma a mitad de la pelea (Cami armored vuelve
+  // a su forma base después del Berserk) sin tocar los datos de la pelea, que son de todo el juego.
+  const d = useMemo(() => ({ ...datosPelea, personajes: { ...datosPelea.personajes } }), [datosPelea]);
   // En la vida real (el bar) no cuentan los niveles ni la mochila del juego: Jair todavía no entró a GENESIS.
   const guardado = progreso;
   progreso = d.vida_real ? undefined : progreso;
@@ -1969,6 +1972,13 @@ function Pelea({
   const [agachados, setAgachados] = useState<string[]>([]);
   /** Las balas del berserk: salen del medio y vuelan en espiral hasta salirse de la pantalla. */
   const [espiral, setEspiral] = useState<{ key: number; x: number; y: number; dx: number; dy: number; ms: number; color: string; misil: boolean }[]>([]);
+  /** Las explosiones de los misiles del berserk (donde pegan). */
+  const [explosiones, setExplosiones] = useState<{ key: number; x: number; y: number; k: number }[]>([]);
+  const explotar = (x: number, y: number, k: number) => {
+    const key = Math.random();
+    setExplosiones((v) => [...v, { key, x, y, k }]);
+    setTimeout(() => setExplosiones((v) => v.filter((z) => z.key !== key)), 700);
+  };
   const berserk = async (l: Luchador, e: Especial) => {
     const cfg = e.berserk!;
     if (!e.sin_barra) l.carga = 0;
@@ -1993,33 +2003,45 @@ function Pelea({
     const base = raiz.current?.getBoundingClientRect();
     enEspecial.current = true;
     rivales.forEach((x) => bajoEspecial.current.add(x.id));
-    const dura = cfg.ms ?? 4200;
+    // Un frenesí que no se puede parar (pedido del autor): la espiral, cada vez más cargada, y una lluvia de misiles que
+    // van hasta los rivales (o caen alrededor) y explotan; la pantalla tiembla y destella.
+    const dura = cfg.ms ?? 7500;
     if (c && base) {
       const lejos = Math.hypot(base.width, base.height) * 0.75;
-      const paso = 70;
-      // Cinco brazos que giran hacia un lado y tres hacia el otro: la espiral.
+      const paso = 60;
+      const rivalesEnPantalla = rivales.map(centroDe).filter(Boolean) as { x: number; y: number }[];
       for (let t = 0; t < dura; t += paso) {
         setTimeout(() => {
           const nuevas: (typeof espiral)[number][] = [];
-          const giro = t / 520;
+          const giro = t / 480;
+          // Más brazos a medida que se descontrola.
+          const furia = Math.min(1, t / (dura * 0.6));
           const brazos: [number, number, string][] = [
-            [5, giro, '#5ee0ff'],
-            [3, -giro * 1.4 + 0.5, '#ffffff'],
+            [6 + Math.round(furia * 4), giro, '#5ee0ff'],
+            [4 + Math.round(furia * 3), -giro * 1.4 + 0.5, '#ffffff'],
           ];
           for (const [n, a0, color] of brazos) {
             for (let i = 0; i < n; i++) {
               const a = a0 + (i * Math.PI * 2) / n;
-              nuevas.push({ key: Math.random(), x: c.x, y: c.y - 8, dx: Math.cos(a) * lejos, dy: Math.sin(a) * lejos, ms: 1500, color, misil: false });
+              nuevas.push({ key: Math.random(), x: c.x, y: c.y - 8, dx: Math.cos(a) * lejos, dy: Math.sin(a) * lejos, ms: 1600, color, misil: false });
             }
           }
-          // De vez en cuando, un misil derecho a un rival.
-          if (t % (paso * 6) === 0 && rivales.length) {
-            const r = centroDe(rivales[Math.floor(Math.random() * rivales.length)]);
-            if (r) nuevas.push({ key: Math.random(), x: c.x, y: c.y - 8, dx: (r.x - c.x) * 1.6, dy: (r.y - c.y) * 1.6, ms: 900, color: '#ffb85e', misil: true });
+          // Misiles: varios por tanda, a los rivales o cerca; cada uno explota donde llega.
+          const misiles = 1 + Math.round(furia * 3);
+          for (let m = 0; m < misiles; m++) {
+            const r = rivalesEnPantalla.length && Math.random() < 0.7 ? rivalesEnPantalla[Math.floor(Math.random() * rivalesEnPantalla.length)] : null;
+            const x1 = r ? r.x + (Math.random() - 0.5) * 90 : Math.random() * base.width;
+            const y1 = r ? r.y + (Math.random() - 0.5) * 90 : base.height * (0.35 + Math.random() * 0.5);
+            const ms = 420 + Math.random() * 260;
+            nuevas.push({ key: Math.random(), x: c.x, y: c.y - 8, dx: x1 - c.x, dy: y1 - c.y + 8, ms, color: '#ff5a2f', misil: true });
+            setTimeout(() => explotar(x1, y1, 0.8 + Math.random() * 0.9 + furia * 0.6), ms);
           }
           setEspiral((v) => [...v, ...nuevas]);
-          setTimeout(() => setEspiral((v) => v.filter((z) => !nuevas.includes(z))), 1600);
-          if (t % (paso * 3) === 0) playChip('disparo');
+          setTimeout(() => setEspiral((v) => v.filter((z) => !nuevas.includes(z))), 1700);
+          if (t % (paso * 2) === 0) playChip('disparo');
+          if (t % (paso * 5) === 0) playChip('impacto');
+          if (t % (paso * 9) === 0) setTiembla(Math.random());
+          if (t % (paso * 14) === 0) setFogonazo({ key: Math.random(), color: '#ff9a3c' });
         }, t);
       }
     }
@@ -2035,12 +2057,21 @@ function Pelea({
     }
     await espera(Math.max(0, dura + 900 - (Date.now() - desde)));
     setEspiral([]);
-    // Se saca el casco y vuelve a su lugar; los suyos se paran.
+    // Se saca el casco y vuelve a su lugar; los suyos se paran. Con `vuelve_a`, pierde la armadura: vuelve a su forma
+    // base (su ficha de siempre) por el resto de la pelea.
     setSpriteDe((m) => {
       const n = { ...m };
       delete n[l.id];
       return n;
     });
+    if (cfg.vuelve_a && FICHAS.heroes[cfg.vuelve_a]) {
+      const forma = batallaEn({ ...d, personajes: { [l.clave]: { ...FICHAS.heroes[cfg.vuelve_a], nivel: l.nivel } } } as DatosBatalla, lang).personajes[l.clave];
+      d.personajes[l.clave] = forma;
+      l.usados = {};
+      l.carga = 0;
+      efecto(l.id, 'aparece', 900);
+      playChip('cambio');
+    }
     luz(l.id, e.color);
     await deslizar(l.id, null);
     if (suyos.length) {
@@ -2854,12 +2885,12 @@ function Pelea({
               anim={
                 (anims[h.id] ?? 'idle') === 'idle' && vivo(h) && h.paralizado
                   ? 'paralizado'
-                  : (anims[h.id] ?? 'idle') === 'idle' && vivo(h) && b.current.cansados.has(h.id) && d.personajes[h.clave].descanso
+                  : (anims[h.id] ?? 'idle') === 'idle' && vivo(h) && (b.current.cansados.has(h.id) || !!h.agotado) && d.personajes[h.clave].descanso
                     ? d.personajes[h.clave].descanso!
                     : (anims[h.id] ?? 'idle')
               }
               alCuadro={(anim, col, hoja) => alCuadro(h, anim, col, hoja)}
-              efecto={agachados.includes(h.id) || (vivo(h) && h.agotado) ? 'agachado-berserk' : efectos[h.id]}
+              efecto={agachados.includes(h.id) || (vivo(h) && h.agotado && !d.personajes[h.clave].descanso) ? 'agachado-berserk' : efectos[h.id]}
               alto={aire[h.id] ?? 0}
               vez={veces[h.id] ?? 0}
               especial={d.personajes[h.clave].especial}
@@ -2981,6 +3012,9 @@ function Pelea({
           style={{ left: x.x, top: x.y, '--dx': `${x.dx}px`, '--dy': `${x.dy}px`, '--ang': `${Math.atan2(x.dy, x.dx)}rad`, '--c': x.color, animationDuration: `${x.ms}ms` } as CSSProperties}
           aria-hidden
         />
+      ))}
+      {explosiones.map((x) => (
+        <span key={x.key} className="batalla-explosion-misil" style={{ left: x.x, top: x.y, scale: String(x.k) } as CSSProperties} aria-hidden />
       ))}
       {pedruscos.map((m) => (
         <span

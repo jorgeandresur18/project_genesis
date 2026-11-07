@@ -297,6 +297,6 @@ Abrir `http://localhost:5173/?batalla=prueba_armored`.
 - [ ] Cami armored (tu sprite, con el parpadeo) junto a Jair y Rikka.
 - [ ] **Blaster+:** dispara desde el puño, sin números en el menú. Es muy fuerte a propósito (el armored es «un trámite»). ¿Lo bajo?
 - [ ] **El botón BERSERK:** grande, azul y blanco, siempre listo (sin porcentaje; la tarjeta de Cami no tiene barra).
-- [ ] **Berserk:** se le cierra el casco (cambia al sprite con visor y cañones), grita «¡Agáchense!» y Jair y Rikka se agachan; va al medio y suelta la espiral de balas con misiles. ¿Son suficientes las balas? ¿Más rápido, más lento, más largo?
-- [ ] Al terminar: se saca el casco, vuelve a su lugar y los otros se paran. **El turno siguiente Cami descansa** («recupera el aliento») y después vuelve a elegir.
+- [ ] **Berserk:** se le cierra el casco (cambia al sprite con visor y cañones), grita «¡Agáchense!» y Jair y Rikka se agachan; va al medio y suelta el frenesí: la espiral cada vez más cargada y misiles que explotan, 7,5 segundos. ¿Es la monstruosidad que buscabas? ¿Las explosiones tapan demasiado?
+- [ ] Al terminar: se saca el casco y **pierde la armadura: vuelve a ser la Cami de siempre** (traje azul, sus ataques y su barra) el resto de la pelea. El turno siguiente descansa agachada y después vuelve a elegir.
 

@@ -26,8 +26,8 @@
       ],
       "especial": {
         "nombre": "Berserk",
-        "poder": 6,
-        "golpes": 18,
+        "poder": 4,
+        "golpes": 30,
         "objetivo": "todos",
         "color": "#5ee0ff",
         "ojos": [
@@ -39,7 +39,8 @@
         "posicion": "centro",
         "texto": "A {quien} se le cierra el casco sobre la cara. El visor se enciende. Del hombro le salen dos cañones.",
         "berserk": {
-          "sprite": "batalla/cami_berserk"
+          "sprite": "batalla/cami_berserk",
+          "vuelve_a": "cami"
         },
         "sin_barra": {
           "descanso": 1
@@ -48,7 +49,7 @@
       "aprende": [],
       "especiales_extra": [],
       "descanso": "",
-      "_nota": "Con la armadura no siente el tobillo: actúa todos los turnos. Sin números en el menú (decisión del autor): el Blaster+ sin usos y el Berserk siempre listo (un botón grande); después del Berserk descansa un turno.",
+      "_nota": "Con la armadura no siente el tobillo: actúa todos los turnos. Sin números en el menú (decisión del autor): el Blaster+ sin usos y el Berserk siempre listo (un botón grande). Después del Berserk pierde la armadura: vuelve a ser Cami (su ficha de siempre) y descansa un turno.",
       "sin_numeros": true
     },
     "jair": {

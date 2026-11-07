@@ -89,9 +89,10 @@ export interface Especial {
   /**
    * El Berserk de Cami armored (especial+): mientras dura se ve con la hoja `sprite` (el casco y los cañones), grita
    * `grito` (si no, «¡Agáchense!») a los suyos, que se agachan, y desde el medio de la arena suelta una espiral de balas
-   * por `ms` (si no, 4,2 s); los `golpes` se reparten entre todos los rivales.
+   * y misiles que explotan por `ms` (si no, 7,5 s); los `golpes` se reparten entre todos los rivales. Con `vuelve_a`
+   * (la ficha de un héroe), al terminar pierde la forma y queda así el resto de la pelea (Cami armored → Cami).
    */
-  berserk?: { sprite: string; grito?: string; ms?: number };
+  berserk?: { sprite: string; grito?: string; ms?: number; vuelve_a?: string };
   /**
    * Sin barra (el Berserk): siempre se puede usar, sale en el menú como un botón grande, sin porcentaje, y después el
    * que lo usó descansa este número de turnos (`agotado` del luchador).
