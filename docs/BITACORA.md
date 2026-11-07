@@ -573,3 +573,51 @@ de Rikka en la galería se ven enteros y grandes. CLAUDE.md, al día con el 6 de
 - **El fondo de la sombra de roca (del autor):** `public/batalla/fondos/claro.webp` con su cuadrícula; la roca a la izquierda (junto al arroyo congelado), los héroes a la derecha. Visto con la lluvia de meteoritos.
 - **Berserk, segunda vuelta (autor):** al terminar, Cami pierde la armadura y vuelve a su forma base (su ficha de siempre) el resto de la pelea, y descansa un turno agachada. El frenesí ahora dura 7,5 s, la espiral se va cargando (hasta 17 brazos) y los misiles van a los rivales o cerca y explotan (temblores, destellos; más de 600 balas a la vez); el misil rojo que se escapaba ya no existe (cada misil termina en su explosión). Los personajes de cada pelea se copian al empezar, para poder cambiar de forma sin tocar los datos del juego.
 - **Los especiales+ y Rikka diosa lunar (decisiones del autor):** regla para todos: al terminar la animación de un especial+, se vuelve a la forma base. La Primavera está basada en Japón y la diosa lunar de Rikka en la princesa Kaguya; es su especial+ con la misma dinámica que Cami (ataques fuertes, un gran efecto con consecuencia): ráfagas de corte lunar y Luz de luna (confunde a los rivales, cura al equipo; ella termina confundida). Se gana en el Capítulo 3 (falta dónde). Sprites más adelante. En `docs/CANON.md`, `docs/BIBLIA_RPG.md` (sección 27) y `docs/CRONOGRAMA.md`. El Blaster+ chetado: Claude recomendó bajarlo a 16 y darle más poder por golpe al Berserk contra jefes (sin respuesta todavía).
+
+## Cierre de la sesión: viernes 6, 10:00 → sábado 7 de noviembre, 4:27 (computadora de Jorge)
+
+**Tiempo:** unas **18 horas y media** seguidas del autor con Claude. **99 commits** en `desarrollo` (todos subidos),
+135 archivos tocados (unas 20.700 líneas nuevas y 3.000 quitadas, contando datos, imágenes y documentos). La landing
+(`project_genesis_website`), 5 cambios, al día con GitHub. Pruebas al cierre: **329** de Vitest (1 omitida), rutas
+(55.085 estados, 36 finales), lint y tipos, todo bien; 6 pruebas nuevas en el navegador (`tests/e2e/equipo.spec.ts`,
+`tests/e2e/partidas.spec.ts`).
+
+**Lo que avanzó, por bloques (de la mañana a la madrugada):**
+1. **Publicación y torneo (mañana):** la 1.1.4 y la 1.1.5 publicadas; el torneo con equipo, mochila propia y preparación,
+   rivales variados, sin premios dentro del torneo, rivales que usan su mochila con cabeza; las curas por porcentaje.
+2. **Capítulo 1 (mediodía y tarde):** la pelea de práctica y la sombra de roca (en prueba), el prólogo condensado y
+   aplicado, el bar La Lechuza, el chiste de la refrigeradora; Lady y la KJPoper como peleadoras.
+3. **Canon y tono (tarde):** los dos mundos (el real sucio y áspero; el de la IA cordial), Jair y Nikki (cómo se
+   conocieron, Bryan, la fantasía que nunca fue, el mensaje destacado, sus dos facetas), el Capítulo 4 y 5 (KJ-pop, Ari
+   y Milka), cuánta novela y cuánta pelea lleva cada capítulo.
+4. **Herramientas de diálogo (noche):** el editor en vivo (editar, ✓, borradores, flechas), las dos pasadas del autor
+   (70 y 32 líneas, con inglés), los chistes y referencias del autor, el avance de la revisión (`npm run avance`, «▶ Ir»)
+   y la página «Entornos de prueba» del escritorio (todo en una).
+   **Avance de los diálogos del Capítulo 1:** 231 de 1.389 líneas con ✓ (92 del autor corregidas y 139 aprobadas),
+   **16,6 %**; quedan 20 borradores de Claude por revisar. Capítulos 2 y 3: sin empezar.
+5. **Programación (madrugada):** los turnos de los héroes fuera de `Batalla.tsx` (`engine/turnos.ts`, con 16 pruebas),
+   el arreglo de los ids repetidos (la prueba del Bastión que fallaba por azar), pruebas en el navegador del equipo y de
+   exportar/importar partidas.
+6. **Arte del autor en el juego (madrugada):** **la sombra de roca** con su gólem (puño, montañas de roca, la bola de
+   espinas como especial con pedruscos que se juntan, la lluvia de meteoritos, la desintegración) y **su fondo** del
+   claro; **Cami armored y el Berserk** (pelea de prueba `prueba_armored`: Blaster+, el botón BERSERK, el frenesí de
+   balas y misiles, vuelve a su forma base y descansa un turno).
+7. **Diseño (al final):** la regla de los especiales+ (al terminar vuelven a la forma base) y Rikka diosa lunar
+   (Kaguya; Capítulo 3; sin sprites todavía).
+
+**Lo que decidió el autor hoy (las más grandes):** la sombra de roca más fácil y con la bola de espinas como especial
+(se sacó la gran montaña); Cami armored solo con Blaster+ y Berserk, sin números; los especiales+ vuelven a la forma
+base; la Primavera es Japón y la diosa lunar es Kaguya; el humor sucio vive en el mundo real; Cami, la singularidad que
+GENESIS no filtró.
+
+**Queda pendiente (para la próxima):**
+- **Decisiones cortas:** el Blaster+ chetado (Claude recomienda 22 → 16 y el Berserk 5 × 26 para que le pegue al jefe);
+  si `prueba_armored` reemplaza a la plantilla del molino (`cap02_molino_armored`); el spam de «chicas asiáticas»
+  (`cap01_123`, Claude recomienda «chicas en vivo»); dónde se gana la diosa lunar en el Capítulo 3; si la pelea de
+  práctica y la sombra de roca van a la demo publicada (y publicar la 1.2.0).
+- **Arte del autor:** las animaciones de ataque de Cami armored y berserk; los sprites de Rikka diosa lunar.
+- **Probar en casa:** `docs/PRUEBAS_EN_CASA.md`, secciones 16 a 26 (lo nuevo de hoy: 25, la sombra de roca, y 26, Cami
+  armored).
+- **Diálogos:** los 20 borradores de Claude del Capítulo 1 y seguir la revisión con el editor en vivo.
+- **Programación que Claude puede hacer sola:** revisar cuánto pesa la demo (que abra más rápido en el celular) y buscar
+  más errores como el de los ids repetidos.

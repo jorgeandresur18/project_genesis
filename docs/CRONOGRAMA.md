@@ -121,7 +121,17 @@ La misma proyección, para mirarla en el navegador: `docs/proyeccion.html`.
 
 ---
 
-## Esta noche y el fin de semana (6 al 8 de noviembre, en la computadora de Jorge)
+## Para mañana (después de dormir: sábado 7 y domingo 8 de noviembre)
+
+La sesión del viernes 6 terminó el sábado a las 4:27 (resumen en `docs/BITACORA.md`). Lo primero, cuando vuelvas:
+1. **Probar** las secciones 25 (la sombra de roca con tus sprites y tu fondo: `?batalla=sombra_roca`) y 26 (Cami
+   armored y el Berserk: `?batalla=prueba_armored`) de `docs/PRUEBAS_EN_CASA.md`. Después, las 16 a 24 que quedaban.
+2. **Responder corto:** el Blaster+ (¿22 → 16?), si la prueba del armored pasa al molino del Capítulo 2, el spam de
+   `cap01_123` y dónde se gana la diosa lunar en el Capítulo 3.
+3. **Lo del sábado y el domingo de abajo** sigue en pie (jugar el Capítulo 1 y decidir la demo, los Capítulos 2 y 3, y
+   pensar el 4, el 5 y el 6).
+
+## El fin de semana (lo planeado el 6 (6 al 8 de noviembre, en la computadora de Jorge)
 
 **Esta noche (viernes):**
 1. **Probar** `docs/PRUEBAS_EN_CASA.md`, secciones 16 a 22 (lo de hoy): los recuerdos de Noodle, el torneo con su
