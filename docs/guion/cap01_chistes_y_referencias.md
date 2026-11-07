@@ -110,13 +110,33 @@ directo), *negro* (muerte, enfermedad, violencia, suicidio), *autocrítica* (Jai
 - **`109` (Nikki):** «Pagas tú, que no cargo efectivo. ¡Hip!». Humor de borrachos.
 - **`nk_bad02` (Nikki, final malo):** «Lo maté a cachetadas. ¿Quién se muere de cachetadas?». *Negro* y *absurdo*.
 
-- **Tanda del 7 de noviembre (editor en vivo):** la barra manchada de «cerveza, vodka, saliva, sangre y otros menos
-  agradables» (`022`, *vulgar*); los proyectos archivados para que nadie vea «de dónde me los robé» y los que ya eran
-  robados (`070g3`, `070g5`, *tecnología* y *autocrítica*); las apps que roban datos para «hackers del sur de Asia»
-  (`074`, `081`, *tecnología*); «la cadena de suministro corta» (`095s11`, *vulgar*, sigue al chiste logístico) y la
-  estrategia push-pull (`095s13`, *tecnología*: la jerga de logística para el coqueteo); el cóctel con «diez alcoholes,
-  incluido el antiséptico» (`103e4`, *absurdo*); la rata detrás de la estufa (`120`, *autocrítica*); el spam porno
-  (`123`, *vulgar*); «todo dentro de nuestras políticas de seguridad» (`125`, ironía sobre las IA).
+- **Tanda del 7 de noviembre (editor en vivo, versiones finales):**
+  - **`022`:** la barra manchada de «cerveza, vodka, saliva, sangre y otros menos agradables». *Vulgar*.
+  - **`070g3`, `070g5`:** los proyectos robados que ya eran robados, y archivados para que nadie vea «de dónde me los
+    robé». *Tecnología* y *autocrítica*. **Referencia:** el copiar y pegar de los programadores y los repositorios
+    archivados de GitHub (de solo lectura). Arma la réplica de Nikki («"Archivados"… te rendiste»).
+  - **`074`, `081`:** un juego en serio o apps de verdad, no las que roban datos para «hackers del sur de Asia»; Nikki
+    lo suma a su lista («los hackers asiáticos, la diarrea explosiva y el papel higiénico»). *Tecnología*, callback.
+    **Referencia:** las apps con malware y la venta de datos; las estafas de falso soporte técnico, del mismo oficio de
+    Jair.
+  - **`083b`, `083b3`:** la ronda «con mayor graduación alcohólica»; tibias «como meado de borracho, con espuma y
+    piedras». *Vulgar*, doble sentido: los cálculos y el hielo («en las rocas»; en inglés, «rocks»).
+  - **`095s11`, `095s13`:** «la cadena de suministro corta» y «cariño, inventario o una indirecta para implementar la
+    estrategia push-pull». *Vulgar* y *tecnología*: sigue el chiste logístico de `095s08`–`095s09`. **Referencia:** la
+    estrategia push-pull de la logística y el «tira y afloja» del coqueteo (el pie por debajo de la mesa y el «no te
+    ilusiones» de Nikki lo son).
+  - **`103e0b`:** Nikki mira la pared como si fuera a apoyar la frente en ella y lamentarse por todos sus errores.
+    **Referencia:** el Muro de los Lamentos (se suma a los chistes religiosos: el sacerdote, el exorcista, el kashrut).
+  - **`103e4`:** el cóctel con «diez alcoholes, incluido el antiséptico». *Absurdo*. **Referencia:** los cócteles de
+    muchos licores (como el Long Island) y el alcohol adulterado de los bares baratos.
+  - **`106b2`:** «Qué poca caballerosidad de tu parte»: la que no quiere etiquetas exige caballerosidad. Humor de
+    pareja.
+  - **`120`:** su mejor relación es con la rata que vive detrás de la estufa. *Autocrítica*.
+  - **`123`:** el spam porno de la bandeja de entrada. *Vulgar*.
+  - **`125`, `126`:** GRAVITY lo construye «todo dentro de nuestras políticas de seguridad»; «Seguro es un malware».
+    Meta y *tecnología*. **Referencia:** las políticas de uso de las empresas de IA (lo que GENESIS no va a respetar);
+    el ingeniero que corrige «virus» por el término técnico.
+  - **`bad_correo_004`:** «la boca seca como un cenicero»; «el mismo bucle de siempre» (el título del capítulo).
 
 ## El departamento y la noche
 
