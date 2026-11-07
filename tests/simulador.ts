@@ -57,6 +57,7 @@ import {
   fotoEstados,
   ordenDelTurno,
   sufreAlFinal,
+  idNuevo,
 } from '../src/engine/turnos';
 
 /** Los golpes del cañón salen de la hoja del Capitán, como en el juego. */
@@ -162,7 +163,7 @@ function pelea(D: DatosBatalla, listo: boolean, esencias: boolean) {
       resolverGolpe(s, D, e, r.blanco, Math.max(r.golpe.poder, r.blanco.ps * 50));
     } else if (r.tipo === 'clon') {
       e.carga = 0;
-      hacerClon(s, en.clon!, e, `clon-${Math.random()}`);
+      hacerClon(s, en.clon!, e, idNuevo(s, `${e.clave}-clon`));
     } else if (r.tipo === 'bola') {
       const bt = en.bola_toxica!;
       e.carga = 0;

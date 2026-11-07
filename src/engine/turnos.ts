@@ -61,6 +61,8 @@ export interface EstadoPelea {
   semilla?: string;
   /** Cuántos enemigos ya sortearon su esencia en esta pelea. */
   sorteos?: number;
+  /** Cuántos luchadores nacieron a mitad de la pelea (refuerzos, clones, cebos): da ids que no se repiten (ver `idNuevo`). */
+  nacidos?: number;
   heroes: Luchador[];
   enemigos: Luchador[];
   /** Las monedas de la partida (lo que traía más lo que se gana en esta pelea). */
@@ -358,9 +360,16 @@ export function finDeTurno(estado: EstadoPelea) {
   estado.estadoRecien = [];
 }
 
+/**
+ * Un id que no se repite en la pelea, para los que nacen a mitad de ella. Antes se armaba con la hora (`Date.now()`) y
+ * el largo de la lista: como los caídos salen de la lista, un refuerzo podía heredar el id de uno caído en el mismo
+ * milisegundo, y entonces contaba como «ya premiado» (no daba experiencia ni traía al siguiente de la horda).
+ */
+export const idNuevo = (estado: EstadoPelea, base: string) => `${base}-${(estado.nacidos = (estado.nacidos ?? 0) + 1)}`;
+
 /** Un enemigo entra a la pelea (con algo de barra cargada); los caídos dejan de estar en la lista. */
 export function sumarEnemigo(estado: EstadoPelea, d: DatosBatalla, clave: string, nivel: number, azar: () => number = Math.random): Luchador {
-  const e = crearLuchador(`${clave}-${estado.enemigos.length}-${Date.now()}`, clave, 'enemigo', d.enemigos[clave], nivel);
+  const e = crearLuchador(idNuevo(estado, clave), clave, 'enemigo', d.enemigos[clave], nivel);
   // Su esencia (oculta): los jefes, de verdad; los de la horda, baja (casi no se nota).
   if (estado.semilla) ponerEsencia(e, sortearEsencia(`${estado.semilla}|${d.titulo}|${clave}|${(estado.sorteos = (estado.sorteos ?? 0) + 1)}`, !!d.enemigos[clave].jefe));
   e.carga = Math.floor(azar() * 40);

@@ -96,6 +96,7 @@ import {
   tickBomba,
   sumarEnemigo,
   type EstadoPelea,
+  idNuevo,
 } from '../engine/turnos';
 import { BASE, PausaContexto, SpriteHoja, anguloDisparo, cargarHoja, rectSprite, type Anim, type Hoja } from './batalla/sprites';
 import { AvisoEspecial, CajaCasillas, Figura, Tarjeta, conNumeros, type Casillas } from './batalla/escena';
@@ -506,7 +507,7 @@ function Pelea({
     setFogonazo({ key: Math.random(), color: c.color });
     playChip('destello');
     await espera(180);
-    const { clon: k, costo } = hacerClon(b.current, c, e, `${e.clave}-clon-${Date.now()}`);
+    const { clon: k, costo } = hacerClon(b.current, c, e, idNuevo(b.current, `${e.clave}-clon`));
     numero(e.id, `-${costo}`, 'dano');
     efecto(k.id, 'aparece', 900);
     playChip('vortice');
@@ -584,7 +585,7 @@ function Pelea({
     const r = f?.getBoundingClientRect();
     // Uno solo por héroe: el viejo se va.
     b.current.cebos = b.current.cebos.filter((x) => x.de !== h.id && vivo(x.l));
-    const k = crearCebo(h, `${h.id}-cebo-${Date.now()}`, efectoCebo);
+    const k = crearCebo(h, idNuevo(b.current, `${h.id}-cebo`), efectoCebo);
     // El turno en que aparece cuenta (los enemigos ya pueden pegarle).
     b.current.cebos.push({ l: k, de: h.id, x: r && lado ? r.left - lado.left - r.width * 0.45 : 0, y: r && lado ? r.top - lado.top : 0, turnos: CEBO_TURNOS });
     efecto(k.id, 'aparece-cebo', 700);
