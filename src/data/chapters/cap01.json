@@ -314,7 +314,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "¿Y cuál es el problema? Ni que fuera pecado. Y si lo es, ya se la bendijo un sacerdote: de seguro sus creencias se lo permiten, estimada."
+        "text": "¿Y cuál es el problema? Ni que fuera pecado. Y si lo es, ya se la bendijo un sacerdote. De seguro sus creencias se lo permiten, estimada."
       },
       "choices": [],
       "conditions": [],
@@ -1276,7 +1276,7 @@
       "characters": [],
       "dialogue": {
         "speaker": null,
-        "text": "Luces de neón moradas, una rocola que solo toca canciones de despecho y una barra pegajosa que ha visto cosas."
+        "text": "Luces de neón moradas, una rocola que solo toca canciones de despecho y una barra pegajosa que se ha ensuciado con varios líquidos, como cerveza, vodka, saliva, sangre y otros menos agradables."
       },
       "choices": [],
       "conditions": [],
@@ -1881,7 +1881,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Se llama Bryan. Con y griega. Me dejó en visto hace tres días."
+        "text": "Se llama Bryan. Con y griega. Lo dejé en visto hace tres días."
       },
       "choices": [],
       "conditions": [],
@@ -1965,7 +1965,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Creo que exageras mucho."
+        "text": "¿El del sombrero o el pintor frustrado? De igual manera, exageras."
       },
       "choices": [],
       "conditions": [],
@@ -2049,7 +2049,7 @@
       ],
       "dialogue": {
         "speaker": null,
-        "text": "Nikki abre la boca. La cierra. Sus ojos se vuelven dos puntos negros."
+        "text": "Nikki se queda anonadada."
       },
       "choices": [],
       "conditions": [],
@@ -3654,7 +3654,7 @@
       ],
       "dialogue": {
         "speaker": null,
-        "text": "Jair no toma. Nikki tampoco."
+        "text": "Jair no toma. Nikki tampoco. Los dos se quedan mirando el vaso lleno."
       },
       "choices": [],
       "conditions": [],
@@ -3878,7 +3878,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Geekdump. Donde los programadores suben sus proyectos. Les das estrellas, les haces fork, les mandas pull requests y otros se acreditan robándotelos..."
+        "text": "Geekdump. Donde los programadores suben sus proyectos. Les das estrellas, les haces fork, les mandas pull requests y otros se acreditan robándotelos, a pesar de que ya eran robados..."
       },
       "choices": [],
       "conditions": [],
@@ -3934,7 +3934,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Es exactamente eso."
+        "text": "Es exactamente eso. Aunque mis proyectos están archivados: así nadie los roba ni ve de dónde me los robé."
       },
       "choices": [],
       "conditions": [],
@@ -3990,7 +3990,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Siempre me falta tiempo. O dinero. O... no sé. Algo."
+        "text": "Siempre me falta tiempo. O dinero. O me gana la procrastinación. O... no sé. Algo."
       },
       "choices": [],
       "conditions": [],
@@ -4046,7 +4046,7 @@
       ],
       "dialogue": {
         "speaker": null,
-        "text": "Lo dice mirando el vaso. No queda claro si sigue hablando de videojuegos."
+        "text": "Lo dice mirando el vaso. No queda claro si sigue hablando de proyectos de programación fraudulentos."
       },
       "choices": [],
       "conditions": [],
@@ -4074,7 +4074,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Tengo unos ahorros. Bastantes, en realidad. Podría renunciar y hacer un juego en serio."
+        "text": "Tengo unos ahorros. Bastantes, en realidad. Podría renunciar y hacer apps de verdad, que solucionen problemas de la gente, y no aplicaciones que inyectan scripts maliciosos para robar sus datos y vendérselos a hackers del sur de Asia."
       },
       "choices": [],
       "conditions": [],
@@ -4270,7 +4270,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "La vida ya está pasando, Jair. Esto es la vida. Este bar. Esta cerveza tibia. Tú y yo. Qué importan la diarrea explosiva y el papel higiénico."
+        "text": "La vida ya está pasando, Jair. Esto es la vida. Este bar. Esta cerveza tibia. Tú y yo. Qué importan los hackers asiáticos, la diarrea explosiva y el papel higiénico."
       },
       "choices": [],
       "conditions": [],
@@ -4482,7 +4482,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Otra ronda. Y que esta vez esté fría."
+        "text": "Otra ronda. Y que esta vez esté fría y con mayor graduación alcohólica, por favor."
       },
       "choices": [],
       "conditions": [],
@@ -4538,7 +4538,7 @@
       ],
       "dialogue": {
         "speaker": null,
-        "text": "Están tibias."
+        "text": "Están tibias. Como meado de borracho, con espuma y piedras."
       },
       "choices": [],
       "conditions": [],
@@ -4986,7 +4986,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Nikki, el cantinero."
+        "text": "Nikki, te está escuchando la gente."
       },
       "choices": [],
       "conditions": [],
@@ -5406,7 +5406,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "¿Que estoy cerca?"
+        "text": "¿Que estoy cerca y pago la cuenta?"
       },
       "choices": [],
       "conditions": [],
@@ -5434,7 +5434,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Que te pones tímido. Mira, ya estás rojo. Treinta años y te pones rojo como si nunca hubieras visto a una mujer guapa como yo."
+        "text": "Que te pones tímido. Mira, ya estás rojo. Treinta años y te pones rojo como si nunca hubieras visto a una mujer guapa como yo. No te vayas a propasar conmigo estando así, ya verás."
       },
       "choices": [],
       "conditions": [],
@@ -5462,7 +5462,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "(La veo seguido desde hace ocho años. Igual me pongo tímido y rojo cuando la veo.)"
+        "text": "(La veo seguido desde hace ocho años. Igual me pongo tímido y rojo cuando la veo. Jamás me he propasado con ella.)"
       },
       "choices": [],
       "conditions": [],
@@ -5658,7 +5658,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Porque soy educada. Y porque no lo haces tan mal. Para ser ingeniero."
+        "text": "Porque soy educada. Y porque no lo haces tan mal, a pesar de la cadena de suministro corta."
       },
       "choices": [],
       "conditions": [],
@@ -5714,7 +5714,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "(Ocho años y todavía no sé si eso es cariño o inventario.)"
+        "text": "(Todavía no sé si es por cariño o una indirecta para implementar la estrategia push-pull.)"
       },
       "choices": [],
       "conditions": [],
@@ -5742,7 +5742,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "No te ilusiones. Es el tequila. El tequila me pone buena persona."
+        "text": "No te ilusiones. Es el tequila. El tequila me pone cariñosa."
       },
       "choices": [],
       "conditions": [],
@@ -6189,7 +6189,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Ya. Perfecto. Gracias por la aclaración, doctor."
+        "text": "Ya. Perfecto. Gracias por la aclaración, señor."
       },
       "choices": [],
       "conditions": [],
@@ -6217,7 +6217,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "Pídeme un taxi. Ya. Ahora. O me lo pido yo, que para algo tengo dedos."
+        "text": "Pídeme un taxi. Ya. Ahora. O me lo pido yo. Ya me quiero ir a mi casa, ahora."
       },
       "choices": [
         {
@@ -6397,7 +6397,7 @@
       ],
       "dialogue": {
         "speaker": null,
-        "text": "El dedo se le queda encima de «Confirmar viaje». Un segundo. Dos. Nikki mira la pared como si la pared le debiera plata."
+        "text": "El dedo se le queda encima de «Confirmar viaje». Un segundo. Dos. Nikki mira la pared como si la pared se fuera a lamentar frente a ella."
       },
       "choices": [],
       "conditions": [],
@@ -6565,7 +6565,7 @@
       ],
       "dialogue": {
         "speaker": null,
-        "text": "Señala la pizarra. No el cóctel barato. El de arriba de todo, el que viene con una sombrilla de papel, una cereza y un precio que Jair prefiere no leer dos veces."
+        "text": "Señala la pizarra. No el cóctel barato. El de arriba de todo, el que viene con una sombrilla de papel, una cereza, diez alcoholes, incluido el antiséptico, y un precio que Jair prefiere no leer dos veces."
       },
       "choices": [],
       "conditions": [],
@@ -7489,7 +7489,7 @@
       ],
       "dialogue": {
         "speaker": "Nikki",
-        "text": "¿Dividir? ¿Con todo lo que tienes guardado debajo del colchón? Vete a la mierda, Jair."
+        "text": "¿Dividir? ¿Acaso vas a dejar que pague todo yo? Qué poca caballerosidad de tu parte, Jair."
       },
       "choices": [],
       "conditions": [],
@@ -8044,7 +8044,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Gano poco, vivo en una caja de zapatos y mi mejor relación es con un ventilador. (Y con Nikki. Pero de esa relación no tengo ni el manual ni la garantía.)"
+        "text": "Gano poco, vivo en una caja de zapatos y mi mejor relación es con la rata que vive detrás de mi estufa. (Y con Nikki. Pero de esa relación no tengo ni el manual ni la garantía.)"
       },
       "choices": [],
       "conditions": [],
@@ -8165,7 +8165,7 @@
       "characters": [],
       "dialogue": {
         "speaker": null,
-        "text": "Entre ofertas de tarjetas de crédito y un recordatorio del dentista hay un correo de un remitente que no conoce."
+        "text": "Entre ofertas de tarjetas de crédito, un recordatorio del dentista y el spam lleno de publicidad de páginas pornográficas de chicas asiáticas haciendo lives de cualquier fetiche que les propongan, hay un correo de un remitente que no conoce."
       },
       "choices": [],
       "conditions": [],
@@ -8199,7 +8199,7 @@
       "characters": [],
       "dialogue": {
         "speaker": "Correo",
-        "text": "GRAVITY es un entorno de desarrollo con inteligencia artificial integrada. Describe el mundo que quieres. Nosotros lo construimos."
+        "text": "GRAVITY es un entorno de desarrollo con inteligencia artificial integrada. Describe el mundo que quieres. Nosotros lo construimos, todo dentro de nuestras políticas de seguridad."
       },
       "choices": [],
       "conditions": [],
@@ -8222,7 +8222,7 @@
       ],
       "dialogue": {
         "speaker": "Jair",
-        "text": "Seguro es un virus."
+        "text": "Seguro es un malware."
       },
       "choices": [],
       "conditions": [],
@@ -8299,7 +8299,7 @@
       "characters": [],
       "dialogue": {
         "speaker": null,
-        "text": "Jair manda el correo a la papelera. Después vacía la papelera. Es lo más responsable que ha hecho en toda la noche."
+        "text": "Jair manda el correo a la papelera. Después vacía la papelera. Es lo más responsable que ha hecho en toda la noche, y probablemente en todo el año."
       },
       "choices": [],
       "conditions": [],
@@ -8362,7 +8362,7 @@
       ],
       "dialogue": {
         "speaker": null,
-        "text": "Duerme once horas. Despierta con resaca, un mensaje de Nikki que dice «ya llegue» y la misma vida de siempre."
+        "text": "Duerme once horas. Despierta con resaca, la boca seca como un cenicero y un mensaje de Nikki que dice «ya llegue». El mismo bucle de siempre."
       },
       "choices": [],
       "conditions": [],
@@ -8386,29 +8386,6 @@
       "dialogue": {
         "speaker": "Correo",
         "text": "Tu invitación a GRAVITY ha expirado."
-      },
-      "choices": [],
-      "conditions": [],
-      "audio": null,
-      "ui_effect": null,
-      "next": "cap01_bad_correo_006"
-    },
-    {
-      "scene_id": "cap01_bad_correo_006",
-      "chapter": 1,
-      "background": "fondos/departamento_noche.webp",
-      "video_fondo": null,
-      "loop_video": false,
-      "characters": [
-        {
-          "id": "jair",
-          "sprite": "sprites/jair/base.webp",
-          "pos": "centro"
-        }
-      ],
-      "dialogue": {
-        "speaker": null,
-        "text": "En algún servidor, una inteligencia artificial espera a un usuario que nunca llega. Y la historia que estabas por jugar nunca ocurrió."
       },
       "choices": [],
       "conditions": [],

@@ -11,39 +11,15 @@
     "fecha": "2026-11-06T22:00:00.000Z",
     "autor": "claude"
   },
-  "cap01_067n1": {
-    "original": "Jair no toma. Nikki tampoco.",
-    "texto": "Jair no toma. Nikki tampoco. Los dos se quedan mirando el vaso lleno, como si fuera una prueba de embarazo.",
-    "fecha": "2026-11-06T22:00:00.000Z",
-    "autor": "claude"
-  },
-  "cap01_067n2": {
-    "original": "Bien. Bien. Eso es bueno. Así todo es más fácil.",
-    "texto": "Bien. Bien. Eso es bueno, carajo. Así todo es más fácil.",
-    "fecha": "2026-11-06T22:00:00.000Z",
-    "autor": "claude"
-  },
   "cap01_067n3": {
     "original": "(¿Más fácil qué?)",
     "texto": "(¿Más fácil qué? ¿Seguir fingiendo?)",
     "fecha": "2026-11-06T22:00:00.000Z",
     "autor": "claude"
   },
-  "cap01_083b": {
-    "original": "Otra ronda. Y que esta vez esté fría.",
-    "texto": "Otra ronda. Y que esta vez esté fría, por favor.",
-    "fecha": "2026-11-06T22:00:00.000Z",
-    "autor": "claude"
-  },
   "cap01_083b2": {
     "original": "Siempre están frías.",
     "texto": "Siempre están frías, joven.",
-    "fecha": "2026-11-06T22:00:00.000Z",
-    "autor": "claude"
-  },
-  "cap01_083b3": {
-    "original": "Están tibias.",
-    "texto": "Están tibias. Como meado de gato, pero con espuma.",
     "fecha": "2026-11-06T22:00:00.000Z",
     "autor": "claude"
   },
@@ -137,27 +113,10 @@
     "fecha": "2026-11-06T22:00:00.000Z",
     "autor": "claude"
   },
-  "cap01_bad_correo_001": {
-    "original": "Jair manda el correo a la papelera. Después vacía la papelera. Es lo más responsable que ha hecho en toda la noche.",
-    "texto": "Jair manda el correo a la papelera. Después vacía la papelera. Es lo más responsable que ha hecho en toda la noche, y probablemente en todo el año.",
-    "fecha": "2026-11-06T22:00:00.000Z",
-    "autor": "claude"
-  },
   "cap01_bad_correo_002": {
     "original": "(Ni loco. Le he dicho a cuatrocientos clientes que no abran estas cosas.)",
     "texto": "(Ni loco. Le he dicho a cuatrocientos clientes que no abran estas mierdas.)",
     "fecha": "2026-11-06T22:00:00.000Z",
     "autor": "claude"
-  },
-  "cap01_bad_correo_004": {
-    "original": "Duerme once horas. Despierta con resaca, un mensaje de Nikki que dice «ya llegue» y la misma vida de siempre.",
-    "texto": "Duerme once horas. Despierta con resaca, la boca seca como un cenicero y un mensaje de Nikki que dice «ya llegue». La misma vida de mierda de siempre.",
-    "fecha": "2026-11-06T22:00:00.000Z",
-    "autor": "claude"
-  },
-  "cap01_044": {
-    "original": "Se llama Bryan. Con y griega. Me dejó en visto hace tres días.",
-    "texto": "Se llama Bryan. Con y griega. Lo dejé en visto hace tres días.",
-    "fecha": "2026-11-06T23:00:00.000Z"
   }
 }

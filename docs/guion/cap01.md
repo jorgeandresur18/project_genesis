@@ -17,7 +17,7 @@
 
 `004` **Jair:** Gracias por llamar a soporte técnico, le habla Jair. ¿Ya probó apagando y prendiendo el módem?
 
-`005` **Cliente:** Joven, lo apagué, lo prendí y hasta lo hice bendecir por un sacerdote. Sigue sin internet. ¿Qué necesita, un exorcismo?
+`005` **Cliente:** Joven, lo apagué, lo prendí, lo desenchufé, le soplé como a un cartucho de videojuego y hasta le invité unas cervezas. Sigue sin internet.
 
 `006` **Jair:** (Treinta años. Ingeniero de software. Y mi trabajo es pedirle a la gente que desenchufe cosas y las vuelva a enchufar.)
 
@@ -29,7 +29,7 @@
 
 `o02` **Jair:** Soporte técnico, le habla Jair.
 
-`o03` **Cliente:** Buenas. Quiero saber por qué mi refrigeradora no tiene internet.
+`o03` **Cliente:** Buenas. Quiero saber por qué mi refrigeradora no tiene internet. Ya la hice bendecir por un sacerdote y nada. ¿Qué más tengo que hacer, llamar a un exorcista para que la purifique?
 
 `o04` **Jair:** ¿Su... refrigeradora?
 
@@ -37,11 +37,13 @@
 
 `o06` **Jair:** (Hasta las refrigeradoras tienen expectativas más altas que mi sueldo.) ¿Probó apagándola y prendiéndola?
 
-`o08` **Cliente:** Joven, si la apago se me dañan la carne y la leche. Y esta «inteligente» me las junta en el mismo compartimento. La anterior las tenía separadas.
+`o08` **Cliente:** Joven, si la apago se me dañan la carne y la leche. Y esta refri «inteligente» me las junta en el mismo compartimento. La anterior las tenía separadas.
 
-`o08b` **Jair:** ¿Y cuál es el problema? Ni que fuera pecado. Y si lo es, ya se la bendijo un sacerdote: de seguro sus creencias se lo permiten, estimada.
+`o08b` **Jair:** ¿Y cuál es el problema? Ni que fuera pecado. Y si lo es, ya se la bendijo un sacerdote. De seguro sus creencias se lo permiten, estimada.
 
-`o09` **Jair:** Igual le recomiendo elegir entre la carne, la leche o el internet.
+`o08c` **Cliente:** Igual, la refrigeradora sigue sin internet... Necesito que se solucione esto de inmediato.
+
+`o09` **Jair:** Comprendo, estimada, pero le recomiendo elegir entre la carne, la leche o el internet.
 
 `o10` **Cliente:** ¿Y por qué diablos tengo que elegir?
 
@@ -112,7 +114,7 @@
 
 `020a2` — Vuelve a subir la persiana hasta la mitad y se mete agachada. Jair se queda en la vereda, frente a un cartel donde un helado sonríe más de lo que debería sonreír un helado.
 
-`020a3` — Sale a los cinco minutos, no a los dos: camiseta negra, pantalón negro, el pelo suelto. La gorra va hecha un rollo dentro de la mochila y el delantal asoma por el cierre, como si no quisiera quedarse.
+`020a3` — Sale a los cinco minutos, no a los dos: camiseta negra, pantalón negro, el pelo suelto. La gorra va hecha un rollo dentro del bolso y el delantal asoma por el cierre, como si no quisiera quedarse.
 
 `020a4` **Nikki:** ¿Qué? Así sí me invitan una cerveza. Con uniforme lo único que me piden es que les preste el baño.
 
@@ -136,7 +138,7 @@
 
 `021` — El bar queda a dos cuadras. Se llama La Lechuza. Nadie sabe si es porque abre las veinticuatro horas o por los depredadores sexuales que van a cazar presas jóvenes e ingenuas, como lechuzas tras un ratón.
 
-`022` — Luces de neón moradas, una rocola que solo toca canciones de despecho y una barra pegajosa que ha visto cosas.
+`022` — Luces de neón moradas, una rocola que solo toca canciones de despecho y una barra pegajosa que se ha ensuciado con varios líquidos, como cerveza, vodka, saliva, sangre y otros menos agradables.
 
 `023` **Cantinero:** ¿Qué les sirvo?
 
@@ -152,47 +154,47 @@
 
 `029` **Jair:** Por la tibieza.
 
-`030` — Chocan las botellas. Durante un rato no dicen nada. Ocho años dan para eso: para saber callarse juntos.
+`030` — Chocan las botellas. Durante un rato no dicen nada. Ocho años de casi algo dan para eso: para saber callarse juntos.
 
 `031` **Nikki:** ¿Y? ¿Cómo va la empresa más miserable del mundo?
 
-`032` **Jair:** Me deben medio mes. El supervisor dice que somos familia.
+`032` **Jair:** Me deben medio mes. El supervisor dice que somos una familia.
 
-`033` **Nikki:** Mi jefa también dice eso, la muy hija de puta. La semana pasada me descontó un cono que se cayó solo.
+`033` **Nikki:** Vaya mierda. Mi jefa también dice eso, la muy hija de puta. La semana pasada me descontó un cono que se cayó solo.
 
 `034` **Jair:** ¿Solo?
 
-`035` **Nikki:** Lo empujó un niño. Pero el niño no tiene sueldo, así que lo pagué yo.
+`035` **Nikki:** Lo empujó un niño pendejo. Pero el niño no tiene dinero, y sus padres de seguro tampoco, porque pidieron el cono más barato. Así que lo pagué yo, por «despistada».
 
-`036` **Jair:** Justicia laboral.
+`036` **Jair:** Vaya injusticia.
 
 `037` **Nikki:** Doce horas sonriendo, Jair. Doce. Tengo la cara entrenada. Mira.
 
 `038` — Nikki sonríe. Es una sonrisa perfecta, de cartel publicitario, completamente vacía.
 
-`039` **Jair:** Da un poco de miedo.
+`039` **Jair:** Tu sonrisa me hace sentir incómodo.
 
-`040` **Nikki:** Esa es la idea. Los clientes asustados compran más rápido.
+`040` **Nikki:** Esa es la idea. Los clientes se incomodan, compran más rápido y no hacen tantas preguntas por los sabores de helado.
 
 `041` — Primera cerveza. Ella pide la segunda antes de terminar la primera.
 
 `042` **Nikki:** Bueno, ya. Hablemos de cosas importantes. Mira esto.
 
-`043` — Le pone el celular en la cara. Boringram. El perfil de un tipo con lentes de sol, posando en un gimnasio que obviamente no es suyo.
+`043` — Le pone el celular en la cara. Boringram. El perfil de un tipo con lentes de sol, posando en un gimnasio, en una foto que obviamente subió para presumir su cuerpo fornido.
 
-`044` **Nikki:** Se llama Bryan. Con y griega. Me dejó en visto hace tres días.
+`044` **Nikki:** Se llama Bryan. Con y griega. Lo dejé en visto hace tres días.
 
-`045` **Jair:** Con y griega ya es una bandera roja.
+`045` **Jair:** Sí que eres realmente mala.
 
-`046` **Nikki:** Todo es bandera roja para ti. Si fuera por ti, yo saldría con un ventilador.
+`046` **Nikki:** Para ti siempre soy mala. Si así fuera, sería la mismísima representación del tipo del bigote cuadrado chistoso.
 
-`047` **Jair:** Los ventiladores son leales.
+`047` **Jair:** ¿El del sombrero o el pintor frustrado? De igual manera, exageras.
 
-`048` **Nikki:** Los ventiladores no te invitan a cenar.
+`048` **Nikki:** Exagero porque nadie me invita a cenar.
 
 `049` **Jair:** Bryan tampoco.
 
-`050` — Nikki abre la boca. La cierra. Sus ojos se vuelven dos puntos negros.
+`050` — Nikki se queda anonadada.
 
 `051` **Nikki:** ...
 
@@ -200,37 +202,37 @@
 
 `053` **Jair:** Me la ibas a cobrar igual.
 
-`054` **Nikki:** Ahora te la voy a cobrar con rencor.
+`054` **Nikki:** Te odio. Ahora te la voy a cobrar con rencor.
 
-`055` — Segunda cerveza. La rocola cambia de una canción de despecho a otra idéntica.
+`055` — Segunda cerveza. La rocola cambia de una canción de despecho a otra idéntica, pero más deprimente, como para meterse a la tina con una secadora.
 
 `056` **Nikki:** ¿Y tú? ¿Alguna víctima nueva?
 
-`057` **Jair:** Nadie.
+`057` **Jair:** Nadie. Ni que fuera uno de los tipos que acechan en este bar.
 
-`058` **Nikki:** ¿Nadie, nadie? ¿Ni en una de esas apps?
+`058` **Nikki:** ¿Nadie, nadie? ¿Ni en una de esas apps hot?
 
-`059` **Jair:** Me registré en una. Me hizo match un bot que quería venderme criptomonedas.
+`059` **Jair:** Me registré en una. Me hizo match una chica que quería convencerme de hacer trading con criptomonedas.
 
-`060` **Nikki:** Y le compraste.
+`060` **Nikki:** ¿Y te convenció?
 
-`061` **Jair:** Dos dólares. Por cortesía.
+`061` **Jair:** Se veía a kilómetros que era una de esas mierdas piramidales.
 
 `062` — Nikki se ríe tan fuerte que el cantinero voltea a verlos. Jair se ríe también. Por un segundo, el calor no existe.
 
-`063` **Nikki:** Búscate una novia, Jair. Y cuando la encuentres, avísame para ir a odiarla.
+`063` **Nikki:** Búscate una novia de verdad, Jair. Y cuando la encuentres, avísame para ir a odiarla por puta.
 
 `064` **Jair:** Llevas ocho años diciéndome eso.
 
-`065` **Nikki:** Y tú llevas ocho años sin hacerme caso. Somos un equipo.
+`065` **Nikki:** Y tú llevas ocho años sin aclarar qué somos realmente. Somos un equipo.
 
-`066` **Jair:** (Un equipo. Ella pone las reglas; yo pongo el dinero del taxi.)
+`066` **Jair:** (Un equipo. Ella pone las reglas; yo pongo el dinero de las cervezas.)
 
-`067` — Tercera ronda. Nikki cambia la cerveza por tequila. «Para la digestión», dice. No ha comido nada.
+`067` — Tercera ronda. Nikki cambia la cerveza por tequila. «Para la digestión», dice. No ha comido nada: es un tip para que le agarre más el alcohol.
 
 `067y01` **Nikki:** Juguemos a «Yo nunca». El que haya hecho la cosa, toma.
 
-`067y02` **Jair:** Tenemos treinta años, Nikki.
+`067y02` **Jair:** Tenemos treinta años, Nikki. Ya somos adultos.
 
 `067y03` **Nikki:** Por eso. A los veinte se juega por diversión. A los treinta se juega por información.
 
@@ -252,7 +254,7 @@
 
 `067y12` **Nikki:** Una por el lunes y otra por el jueves. No preguntes.
 
-`067y13` **Nikki:** Yo nunca he buscado a un ex en Boringram a las tres de la mañana.
+`067y13` **Nikki:** Yo nunca le he escrito a un ex por Boringram a las tres de la mañana estando borracha.
 
 `067y14` — Los dos toman. Ninguno comenta.
 
@@ -266,17 +268,17 @@
 
 `067y16_a03` **Nikki:** ¿En serio? ¿Nunca?
 
-`067y16_a04` **Jair:** Yo me sé el nombre de todas.
+`067y16_a04` **Jair:** Yo me sé el nombre de todas con las que he estado.
 
 `067y16_a05` **Nikki:** ¿De las dos?
 
 `067y16_a06` **Jair:** De las tres.
 
-`067y16_a07` **Nikki:** Yo no cuento, idiota. Yo soy... mantenimiento preventivo.
+`067y16_a07` **Nikki:** Yo no cuento, idiota. Yo soy... memoria a corto plazo.
 
-`067y16_a08` **Jair:** (Ocho años de mantenimiento preventivo. Ni una sola actualización.)
+`067y16_a08` **Jair:** (Lleva años de memoria a corto plazo y ni una sola actualización para solucionar ese problema de caché.)
 
-`067y16_a09` **Jair:** Yo nunca he fingido nada en la cama.
+`067y16_a09` **Jair:** Yo nunca he fingido un orgasmo en la cama.
 
 `067y16_a10` — Silencio. Nikki lo mira. Nikki toma. Despacio. Sin dejar de mirarlo.
 
@@ -286,15 +288,15 @@
 
 `067y16_a14` — Los dos toman. Al mismo tiempo. Se miran por encima del vaso.
 
-`067y16_a15` **Nikki:** El cine. La película de los robots.
+`067y16_a15` **Nikki:** El cine. La película del chico que viaja a la tierra de los muertos y tiene un perro.
 
 `067y16_a16` **Jair:** Nunca supe cómo terminaba.
 
-`067y16_a17` **Nikki:** Nadie vio la película, Jair. Nos echaron antes de los créditos.
+`067y16_a17` **Nikki:** Se muere su abuelita y él sigue siendo pobre y miserable, igual que nosotros. Después nos echaron del cine.
 
-`067y17` **Nikki:** Yo nunca... me he enamorado de un amigo.
+`067y17` **Nikki:** Yo nunca... me he acostado con una amistad.
 
-`067y18` — Silencio. La rocola, por crueldad o por casualidad, empieza otra canción de despecho.
+`067y18` — Silencio. La rocola, por crueldad o por casualidad, empieza otra canción de despecho, más deprimente que la anterior, y eso que la anterior ya era lo más deprimente.
 
 `067y19` — Jair mira su vaso. Nikki mira el suyo. Ninguno de los dos deja de mirar el vaso.
 
@@ -307,21 +309,21 @@
 
 `067t2` **Nikki:** Ah.
 
-`067t3` **Nikki:** Bueno. Seguro fue en la universidad. Todo el mundo se enamora de alguien en la universidad.
+`067t3` **Nikki:** Bueno. Seguro fue en la universidad. Todo el mundo hace sus cosas en la universidad.
 
-`067t4` **Jair:** (No fue en la universidad.)
+`067t4` **Jair:** (Jamás me acosté con nadie en la universidad.)
 
 > ⤷ continúa en `067z`
 
-`067n1` — Jair no toma. Nikki tampoco.
+`067n1` — Jair no toma. Nikki tampoco. Los dos se quedan mirando el vaso lleno.
 
 `067n2` **Nikki:** Bien. Bien. Eso es bueno. Así todo es más fácil.
 
 `067n3` **Jair:** (¿Más fácil qué?)
 
-`067z` **Nikki:** Ya me aburrí de este juego. Hablando de juegos... ¿sigues con los tuyos? ¿El de los dragones?
+`067z` **Nikki:** Ya me aburrí de este juego. Hablando de proyectos... ¿sigues con los tuyos? ¿El de las series gratis?
 
-`069` **Jair:** Lo dejé. Y el de la nave espacial. Y el de la granja.
+`069` **Jair:** Lo dejé. Me pusieron una demanda por copyright, con orden de captura de la Interpol. También el de las criptomonedas.
 
 `070` **Nikki:** Tienes más proyectos abandonados que yo exnovios.
 
@@ -329,21 +331,21 @@
 
 `070g2` **Nikki:** ¿En Geek qué?
 
-`070g3` **Jair:** Geekdump. Donde los programadores suben sus proyectos. Les das estrellas, les haces fork, les mandas pull requests...
+`070g3` **Jair:** Geekdump. Donde los programadores suben sus proyectos. Les das estrellas, les haces fork, les mandas pull requests y otros se acreditan robándotelos, a pesar de que ya eran robados...
 
-`070g4` **Nikki:** No entendí ni mierda, pero suena a algo que hacen los que no salen de su casa.
+`070g4` **Nikki:** No entendí ni mierda, pero suena a algo que hacen los que no salen de su casa ni cogen.
 
-`070g5` **Jair:** Es exactamente eso.
+`070g5` **Jair:** Es exactamente eso. Aunque mis proyectos están archivados: así nadie los roba ni ve de dónde me los robé.
 
 `070g6` **Nikki:** «Archivados». Qué palabra tan elegante para decir que te rendiste. Yo también archivé a Bryan.
 
-`071` **Jair:** Siempre me falta tiempo. O dinero. O... no sé. Algo.
+`071` **Jair:** Siempre me falta tiempo. O dinero. O me gana la procrastinación. O... no sé. Algo.
 
 `072` **Nikki:** Te falta terminar las cosas, Jair. Empiezas todo y no terminas nada.
 
-`073` — Lo dice mirando el vaso. No queda claro si sigue hablando de videojuegos.
+`073` — Lo dice mirando el vaso. No queda claro si sigue hablando de proyectos de programación fraudulentos.
 
-`074` **Jair:** Tengo unos ahorros. Bastantes, en realidad. Podría renunciar y hacer un juego en serio.
+`074` **Jair:** Tengo unos ahorros. Bastantes, en realidad. Podría renunciar y hacer apps de verdad, que solucionen problemas de la gente, y no aplicaciones que inyectan scripts maliciosos para robar sus datos y vendérselos a hackers del sur de Asia.
 
 `075` **Nikki:** ¿Bastantes? ¿Tienes putos ahorros y me dejas pedir lo más barato? ¿Y por qué estoy pagando yo?
 
@@ -355,9 +357,9 @@
 
 `079` **Nikki:** ¿Por si acaso qué?
 
-`080` **Jair:** No sé. Por si acaso la vida.
+`080` **Jair:** No sé. Por si acaso la vida, o por si un nuevo virus de diarrea explosiva contagia a todos y agota las reservas de papel higiénico del mundo.
 
-`081` **Nikki:** La vida ya está pasando, Jair. Esto es la vida. Este bar. Esta cerveza tibia. Tú y yo.
+`081` **Nikki:** La vida ya está pasando, Jair. Esto es la vida. Este bar. Esta cerveza tibia. Tú y yo. Qué importan los hackers asiáticos, la diarrea explosiva y el papel higiénico.
 
 `082` — Jair la mira. Nikki está despeinada, con el delantal colgado en la silla y las mejillas rojas. Por un momento parece que va a decir algo más. No lo dice.
 
@@ -367,23 +369,23 @@
 - `082#1` Pedir otra ronda ⟶ va a `083b`
 - `082#2` Hacer un chiste ⟶ va a `083c`
 
-`083a` **Jair:** Nikki. ¿Qué somos?
+`083a` **Jair:** Nikki. ¿Qué somos en realidad?
 
-`083a2` **Nikki:** Uy. Ya empezó.
+`083a2` **Nikki:** Uy. Ya empezaste.
 
-`083a3` **Jair:** Ocho años. Te lo pregunté hace dos años, y hace cinco. Siempre cambias de tema.
+`083a3` **Jair:** Te lo pregunté hace dos años, y hace cinco. Siempre cambias de tema.
 
-`083a4` **Nikki:** Porque es un tema horrible. Somos amigos. Amigos que... a veces. Ya. No le pongas nombre, que los nombres lo arruinan todo.
+`083a4` **Nikki:** Porque es un tema horrible. Somos amigos. Amigos que... a veces. Ya. No le pongas etiqueta, que las etiquetas lo arruinan todo.
 
-`083a5` **Jair:** (Ocho años sin nombre. Como un archivo temporal que nadie se atreve a borrar.)
+`083a5` **Jair:** (Sin etiqueta y sin clasificar. Como un archivo temporal que nadie se atreve a borrar.)
 
 > ⤷ continúa en `084`
 
-`083b` **Jair:** Otra ronda. Y que esta vez esté fría.
+`083b` **Jair:** Otra ronda. Y que esta vez esté fría y con mayor graduación alcohólica, por favor.
 
 `083b2` **Cantinero:** Siempre están frías.
 
-`083b3` — Están tibias.
+`083b3` — Están tibias. Como meado de borracho, con espuma y piedras.
 
 > ⤷ continúa en `084`
 
@@ -394,13 +396,13 @@
 `084` — Cuarta ronda. O quinta. Jair dejó de contar; el cantinero no.
 
 > ♪ música: sad_suspense
-`085` **Nikki:** Bryan ni siquiera me gustaba, ¿sabes? Era un imbécil. Un imbécil con abdominales prestados.
+`085` **Nikki:** Bryan ni siquiera me gustaba, ¿sabes? Era un imbécil. Un imbécil con abdominales firmes.
 
 `086` **Nikki:** Me gustaba que alguien me escribiera «buenos días». Así, sin nada más. Buenos días. Como si importara que yo me despertara.
 
 `087` **Jair:** Nikki...
 
-`088` **Nikki:** No. No me pongas voz de psicólogo, carajo. Tú no sabes arreglar nada que no tenga teclado.
+`088` **Nikki:** No. No me pongas voz de sufrido, mierda. Tú no sabes arreglar nada que no tenga pantalla.
 
 `089` — Se seca los ojos con la manga, con rabia, como si las lágrimas fueran clientes impertinentes.
 
@@ -416,9 +418,9 @@
 
 `089_a06` **Jair:** (Y yo soy el que siempre contesta. Que no es lo mismo que ser alguien.)
 
-`090` **Nikki:** Mi jefa me dijo hoy que a mi atención «le falta alegría». ¡Alegría! Le voy a dar alegría. Le voy a meter la alegría por...
+`090` **Nikki:** Mi jefa me dijo hoy que a mi atención «le falta alegría». ¡Alegría! Le voy a dar alegría. Le voy a meter la alegría por el c...
 
-`091` **Jair:** Nikki, el cantinero.
+`091` **Jair:** Nikki, te está escuchando la gente.
 
 `092` **Nikki:** ...por el congelador. Iba a decir el congelador.
 
@@ -434,7 +436,7 @@
 
 `095r04` **Nikki:** Ven a bailar.
 
-`095r05` **Jair:** No bailo.
+`095r05` **Jair:** No sé bailar.
 
 `095r06` **Nikki:** Ocho años y no has vuelto a bailar conmigo. Desde aquella fiesta.
 
@@ -442,17 +444,17 @@
 
 `095r08` **Nikki:** Todo es personal, Jair. Hasta lo que no haces.
 
-`095r09` — Nikki baila sola entre las mesas, abrazada a la botella como a una pareja que no la pisa. Y sabe moverse. Dos tipos en la barra la miran. Jair los mira a ellos. Es lo más valiente que hace en toda la noche.
+`095r09` — Nikki baila sola entre las mesas, abrazada a la botella como a una pareja que no la pisa. Y sabe moverse. Dos tipos en la barra la miran con ojos desagradables. Jair los mira a ellos. Es lo más valiente que hace en toda la noche.
 
 `095r11` — Cuando la canción termina, Nikki vuelve a la silla, despeinada y sin aire, y se queda mirando a Jair como si fuera la primera vez que lo ve.
 
 `095s01` **Nikki:** ¿Sabes qué me gusta de ti cuando estoy borracha?
 
-`095s02` **Jair:** ¿Que estoy cerca?
+`095s02` **Jair:** ¿Que estoy cerca y pago la cuenta?
 
-`095s03` **Nikki:** Que te pones rojo. Mira, ya estás rojo. Treinta años y te pones rojo como si nunca te hubiera visto sin camisa.
+`095s03` **Nikki:** Que te pones tímido. Mira, ya estás rojo. Treinta años y te pones rojo como si nunca hubieras visto a una mujer guapa como yo. No te vayas a propasar conmigo estando así, ya verás.
 
-`095s04` **Jair:** (Me ha visto sin camisa. Me ha visto sin bastante más. Igual me pongo rojo.)
+`095s04` **Jair:** (La veo seguido desde hace ocho años. Igual me pongo tímido y rojo cuando la veo. Jamás me he propasado con ella.)
 
 `095s05` **Nikki:** Los de la barra me estaban mirando el culo. ¿Viste?
 
@@ -462,17 +464,17 @@
 
 `095s08` **Jair:** Me dio... preocupación logística.
 
-`095s09` **Nikki:** «Preocupación logística». Dios mío. Así hablas en la cama también, ¿no? «Iniciando proceso. No apague el equipo.»
+`095s09` **Nikki:** «Preocupación logística». Dios mío. Así hablas cuando coges, ¿no? «Iniciando proceso. No apague el equipo. Levantando el servidor. Se cayó el servidor.»
 
 `095s10` **Jair:** Nunca te has quejado.
 
-`095s11` **Nikki:** Porque soy educada. Y porque no lo haces tan mal. Para ser ingeniero.
+`095s11` **Nikki:** Porque soy educada. Y porque no lo haces tan mal, a pesar de la cadena de suministro corta.
 
 `095s12` — Por debajo de la mesa, le pasa el pie por la pantorrilla. Sin mirarlo. Como quien revisa que algo siga en su lugar.
 
-`095s13` **Jair:** (Ocho años y todavía no sé si eso es cariño o inventario.)
+`095s13` **Jair:** (Todavía no sé si es por cariño o una indirecta para implementar la estrategia push-pull.)
 
-`095s14` **Nikki:** No te ilusiones. Es el tequila. El tequila me pone buena persona.
+`095s14` **Nikki:** No te ilusiones. Es el tequila. El tequila me pone cariñosa.
 
 `095s15` **Jair:** El tequila te pone otra cosa.
 
@@ -486,9 +488,9 @@
 
 `099` **Nikki:** Oye. Ven acá.
 
-`100` — Lo jala de la camisa —la negra estampada, la de siempre— hasta tenerlo cerca. Huele a tequila y a vainilla de heladería.
+`100` — Lo jala de la camisa —la azul marino, la de siempre— hasta tenerlo cerca. Huele a tequila y a vainilla de heladería.
 
-`101` **Nikki:** Al final... cuando ya todo se acabe, cuando ya nos cansemos de todo... termina conmigo, ¿sí? Prométemelo.
+`101` **Nikki:** Al final... cuando ya todo se acabe, cuando ya nos cansemos de todo... cásate conmigo, ¿sí? Prométemelo.
 
 `102` **Nikki:** Quédate para mí. Bésame.
 
@@ -522,9 +524,9 @@
 
 `103b3` — Lo suelta como si le hubiera quemado la mano. Se le corre el rímel de un lado, solo de un lado, como si hasta para llorar le diera flojera.
 
-`103b4` **Nikki:** Ya. Perfecto. Gracias por la aclaración, doctor.
+`103b4` **Nikki:** Ya. Perfecto. Gracias por la aclaración, señor.
 
-`103b5` **Nikki:** Pídeme un taxi. Ya. Ahora. O me lo pido yo, que para algo tengo dedos.
+`103b5` **Nikki:** Pídeme un taxi. Ya. Ahora. O me lo pido yo. Ya me quiero ir a mi casa, ahora.
 
 
 > **DECISIÓN**
@@ -549,7 +551,7 @@
 
 `103e0` — Jair saca el celular. Abre la app. Escribe la dirección de Nikki de memoria: la sabe mejor que la suya.
 
-`103e0b` — El dedo se le queda encima de «Confirmar viaje». Un segundo. Dos. Nikki mira la pared como si la pared le debiera plata.
+`103e0b` — El dedo se le queda encima de «Confirmar viaje». Un segundo. Dos. Nikki mira la pared como si la pared se fuera a lamentar frente a ella.
 
 `103e0c` **Jair:** (Si aprieto, se va. Y mañana vamos a hacer como que esto no pasó. Como siempre.)
 
@@ -561,7 +563,7 @@
 
 `103e3` **Nikki:** ...Ya. Está bien. Me quedo. Pero quiero ese.
 
-`103e4` — Señala la pizarra. No el cóctel barato. El de arriba de todo, el que viene con una sombrilla de papel, una cereza y un precio que Jair prefiere no leer dos veces.
+`103e4` — Señala la pizarra. No el cóctel barato. El de arriba de todo, el que viene con una sombrilla de papel, una cereza, diez alcoholes, incluido el antiséptico, y un precio que Jair prefiere no leer dos veces.
 
 `103e5` **Jair:** (Me lo merezco.)
 
@@ -667,7 +669,7 @@
 
 `106b` **Jair:** ¿Lo dividimos?
 
-`106b2` **Nikki:** ¿Dividir? ¿Con todo lo que tienes guardado debajo del colchón? Vete a la mierda, Jair.
+`106b2` **Nikki:** ¿Dividir? ¿Acaso vas a dejar que pague todo yo? Qué poca caballerosidad de tu parte, Jair.
 
 `106b3` — Jair paga todo. Más la propina que el cantinero exige con la mirada.
 
@@ -679,7 +681,7 @@
 > ♪ música: nightcity
 `108` — Afuera ya pasó la medianoche. Nikki camina en zigzag hacia la esquina, abrazada todavía a la botella vacía.
 
-`109` **Nikki:** Pídeme un taxi. Pagas tú, que tienes dinero guardado. Yo sé.
+`109` **Nikki:** Pídeme un taxi. Pagas tú, que no cargo efectivo. ¡Hip!
 
 `110` — Jair pide el taxi. Lo paga por adelantado. Le da al chofer la dirección de Nikki dos veces, y una tercera por si acaso.
 
@@ -687,13 +689,13 @@
 `111` **Nikki:** Y lo de hace rato no cuenta, ¿oíste? Estaba borracha. Bueno, estoy. Puta madre, sigo estando.
 
 > solo si insistio_relacion == true
-`112` **Nikki:** Y no me vuelvas a preguntar qué somos. Somos esto. Esto alcanza.
+`112` **Nikki:** Y no me vuelvas a preguntar qué somos. Somos esto. Eso cansa.
 
 `112_a01` **Nikki:** Y no me escribas mañana para preguntarme cómo amanecí. Voy a amanecer como la mierda, como siempre.
 
-`113` **Nikki:** Búscate una novia, Jair.
+`113` **Nikki:** Búscate una novia de verdad, Jair, y no me vayas a decir que soy yo.
 
-`114` — El taxi arranca. Nikki no se despide. Nunca se despide; así no cuenta como irse.
+`114` — El taxi arranca. Nikki se despide de lejos desde la ventanilla del copiloto.
 
 
 ### fondos/calle_noche.webp
@@ -709,7 +711,7 @@
 
 `115n3` **Nikki (hace un año y medio):** nunca te vayas de mi vida
 
-`115n4` — Sin mayúsculas ni punto final, como escribe todo. Jair lo lee como otros leen el horóscopo: casi todas las noches, por si esta vez dice otra cosa.
+`115n4` — Jair lo lee casi todas las noches, por si esta vez dice otra cosa.
 
 `115n5` **Jair:** («Nunca te vayas de mi vida». Y hace diez minutos: «Búscate una novia de verdad, Jair».)
 
@@ -718,7 +720,7 @@
 
 `115n7` — Toca la foto de perfil. Nikki en una fiesta, con un vaso en la mano y una sonrisa que no es la de cartel. La foto la sacó de su Boringram.
 
-`115n8` **Jair:** (Ocho años.)
+`115n8` **Jair:** (Qué bella.)
 
 
 ### fondos/calle_noche.webp
@@ -728,21 +730,21 @@
 
 ### fondos/departamento_noche.webp
 
-`116` — El departamento: un cuarto, un baño y una cocina que también es pasillo. Una caja de zapatos con wifi.
+`116` — El departamento: un cuarto, un baño y una cocina que también es pasillo. Para algunos, un cuchitril; para él, lo que le alcanza con el sueldo que gana.
 
 
 ### fondos/departamento_poster.webp
 
-`117` — Sobre la cama hay un póster de un anime: un chico de cara genérica, con el pelo tapándole los ojos, rodeado de chicas que lo miran como si él fuera la respuesta a algo. Ninguna se parece a la otra. Todas parecen enamoradas por contrato.
+`117` — Sobre la cama hay un póster de un anime: un chico de cara genérica, con el pelo tapándole los ojos, rodeado de chicas que lo miran como si él fuera la respuesta a algo. Todas parecen novias de alquiler, por no decir escorts.
 
-`118` **Jair:** Lo compré en oferta, de un anime que nunca terminé. Ni me acuerdo cómo se llamaba. Ahora me mira cada noche como si supiera algo que yo no.
+`118` **Jair:** Lo compré en oferta, de un anime que nunca terminé. Ni me acuerdo cómo se llamaba. A lo mejor era un hentai de esos donde las chicas tienen pepinillos.
 
 
 ### fondos/departamento_noche.webp
 
 `119` — Prende el ventilador. Prende la PC. Abre el refrigerador, mira adentro y lo cierra. No sabe qué buscaba.
 
-`120` **Jair:** Gano poco, vivo en una caja de zapatos y mi mejor relación es con un ventilador. (Y con Nikki. Pero de esa relación no tengo ni el manual ni la garantía.)
+`120` **Jair:** Gano poco, vivo en una caja de zapatos y mi mejor relación es con la rata que vive detrás de mi estufa. (Y con Nikki. Pero de esa relación no tengo ni el manual ni la garantía.)
 
 > solo si noche == "rechazo"
 `121r1` **Jair:** (Le dije que no. Por primera vez en ocho años, le dije que no.)
@@ -760,13 +762,13 @@
 `122s` — Debería cocinar algo. En vez de eso, revisa el correo. Es lo que hace la gente que no quiere quedarse a solas con sus pensamientos.
 
 > ♪ silencio
-`123` — Entre ofertas de tarjetas de crédito y un recordatorio del dentista hay un correo de un remitente que no conoce.
+`123` — Entre ofertas de tarjetas de crédito, un recordatorio del dentista y el spam lleno de publicidad de páginas pornográficas de chicas asiáticas haciendo lives de cualquier fetiche que les propongan, hay un correo de un remitente que no conoce.
 
 `124` **Correo:** ASUNTO: Has sido seleccionado para el acceso anticipado a GRAVITY.
 
-`125` **Correo:** GRAVITY es un entorno de desarrollo con inteligencia artificial integrada. Describe el mundo que quieres. Nosotros lo construimos.
+`125` **Correo:** GRAVITY es un entorno de desarrollo con inteligencia artificial integrada. Describe el mundo que quieres. Nosotros lo construimos, todo dentro de nuestras políticas de seguridad.
 
-`126` **Jair:** Seguro es un virus.
+`126` **Jair:** Seguro es un malware.
 
 > ⤷ si noche == "anormal" → `bad_anormal_001` · si noche == "sin_bar" → `bad_sinbar_001` · si noche == "rechazo" → `bad_rechazo_001` · si no → `126c`
 
@@ -777,7 +779,7 @@
 - `126c#0` Descargarlo igual ⟶ va a `127`
 - `126c#1` Eliminar el correo ⟶ va a `bad_correo_001`
 
-`bad_correo_001` — Jair manda el correo a la papelera. Después vacía la papelera. Es lo más responsable que ha hecho en toda la noche.
+`bad_correo_001` — Jair manda el correo a la papelera. Después vacía la papelera. Es lo más responsable que ha hecho en toda la noche, y probablemente en todo el año.
 
 `bad_correo_002` **Jair:** (Ni loco. Le he dicho a cuatrocientos clientes que no abran estas cosas.)
 
@@ -787,11 +789,9 @@
 > ♪ silencio
 `bad_correo_003` — Apaga la PC. El ventilador sigue girando, solo, en la oscuridad.
 
-`bad_correo_004` — Duerme once horas. Despierta con resaca, un mensaje de Nikki que dice «ya llegue» y la misma vida de siempre.
+`bad_correo_004` — Duerme once horas. Despierta con resaca, la boca seca como un cenicero y un mensaje de Nikki que dice «ya llegue». El mismo bucle de siempre.
 
 `bad_correo_005` **Correo:** Tu invitación a GRAVITY ha expirado.
-
-`bad_correo_006` — En algún servidor, una inteligencia artificial espera a un usuario que nunca llega. Y la historia que estabas por jugar nunca ocurrió.
 
 
 ### PANTALLA:negro
@@ -978,7 +978,7 @@
 
 `g1_013` **Jair:** (La resaca no me siguió. Lo único que me siguió fue la camisa.)
 
-`g1_014` — La camisa negra estampada. El pantalón beige. Los lentes, intactos. Hasta en sueños se viste igual. Hasta en sueños no tiene otra ropa.
+`g1_014` — La camisa azul marino. El pantalón beige. Los lentes, intactos. Hasta en sueños se viste igual. Hasta en sueños no tiene otra ropa.
 
 `g1_015` — Se revisa los bolsillos. Celular: sin señal, doce por ciento de batería. Billetera: la tarjeta del banco, el recibo del taxi de Nikki y dos monedas.
 
@@ -2556,7 +2556,7 @@
 
 `g6_045` — Los disparos de los soldados le pasan zumbando alrededor, rojos y largos, como las líneas de un gráfico que va en picada.
 
-`g6_046` — Uno le pasa tan cerca que le chamusca la manga. La camisa negra estampada. La de siempre.
+`g6_046` — Uno le pasa tan cerca que le chamusca la manga. La camisa azul marino. La de siempre.
 
 `g6_047` **Jair:** ¡MI CAMISA!
 

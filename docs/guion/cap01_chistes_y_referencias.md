@@ -64,8 +64,9 @@ directo), *negro* (muerte, enfermedad, violencia, suicidio), *autocrítica* (Jai
   *Ironía laboral*.
 - **`043` (narración):** Bryan posando en el gimnasio para presumir su cuerpo. Burla del ego en redes.
   **Referencia:** el «gym selfie» de Instagram (Boringram es su parodia).
-- **`045`–`046`:** «Sí que eres realmente mala» / sería la representación «del tipo del bigote cuadrado chistoso».
-  *Negro*. **Referencia:** Hitler (o, por el «chistoso», Chaplin: queda ambiguo).
+- **`045`–`047`:** «Sí que eres realmente mala» / sería la representación «del tipo del bigote cuadrado chistoso»;
+  Jair: «¿El del sombrero o el pintor frustrado? De igual manera, exageras». *Negro*. **Referencia:** Chaplin (el
+  sombrero) o Hitler (el pintor frustrado): Jair nombra las dos lecturas.
 - **`054` (Nikki):** «Te odio. Ahora te la voy a cobrar con rencor». Humor de pareja.
 - **`055` (narración):** una canción de despecho idéntica pero más deprimente, «como para meterse a la tina con una
   secadora». *Negro* (suicidio).
@@ -108,6 +109,14 @@ directo), *negro* (muerte, enfermedad, violencia, suicidio), *autocrítica* (Jai
   Se cayó el servidor». *Vulgar* y *tecnología* (la impotencia como caída del servidor).
 - **`109` (Nikki):** «Pagas tú, que no cargo efectivo. ¡Hip!». Humor de borrachos.
 - **`nk_bad02` (Nikki, final malo):** «Lo maté a cachetadas. ¿Quién se muere de cachetadas?». *Negro* y *absurdo*.
+
+- **Tanda del 7 de noviembre (editor en vivo):** la barra manchada de «cerveza, vodka, saliva, sangre y otros menos
+  agradables» (`022`, *vulgar*); los proyectos archivados para que nadie vea «de dónde me los robé» y los que ya eran
+  robados (`070g3`, `070g5`, *tecnología* y *autocrítica*); las apps que roban datos para «hackers del sur de Asia»
+  (`074`, `081`, *tecnología*); «la cadena de suministro corta» (`095s11`, *vulgar*, sigue al chiste logístico) y la
+  estrategia push-pull (`095s13`, *tecnología*: la jerga de logística para el coqueteo); el cóctel con «diez alcoholes,
+  incluido el antiséptico» (`103e4`, *absurdo*); la rata detrás de la estufa (`120`, *autocrítica*); el spam porno
+  (`123`, *vulgar*); «todo dentro de nuestras políticas de seguridad» (`125`, ironía sobre las IA).
 
 ## El departamento y la noche
 
