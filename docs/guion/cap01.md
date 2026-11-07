@@ -454,7 +454,7 @@
 
 `095s03` **Nikki:** Que te pones tímido. Mira, ya estás rojo. Treinta años y te pones rojo como si nunca hubieras visto a una mujer guapa como yo.
 
-`095s04` **Jair:** (La veo seguido desde hace ocho años. Igual me pongo tímido y rojo cuando la veo. Jamás me he propasado con ella.)
+`095s04` **Jair:** (La veo seguido desde hace ocho años. Igual me pongo tímido y rojo cuando la veo.)
 
 `095s05` **Nikki:** Los de la barra me estaban mirando el culo. ¿Viste?
 
