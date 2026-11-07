@@ -31,13 +31,16 @@ interface Props {
   escena?: string;
   /** Si se puede editar el texto mientras se juega (en desarrollo y en español). */
   editable?: boolean;
+  /** Con el editor: la línea anterior (si se puede volver). */
+  onAtras?: () => void;
+  puedeAtras?: boolean;
 }
 
 /**
  * Caja de diálogo con efecto máquina de escribir. Se monta de nuevo en cada escena (key = scene_id),
  * así que siempre empieza desde cero. Al terminar marca `textDone` en el estado global.
  */
-export function DialogBox({ dialogue, aiVowels, hasChoices, onAdvance, globo = false, reaccion = null, escena, editable = false }: Props) {
+export function DialogBox({ dialogue, aiVowels, hasChoices, onAdvance, globo = false, reaccion = null, escena, editable = false, onAtras, puedeAtras = false }: Props) {
   const textDone = useStore((s) => s.textDone);
   const setTextDone = useStore((s) => s.setTextDone);
   const speed = useStore((s) => s.settings.textSpeed);
@@ -92,6 +95,35 @@ export function DialogBox({ dialogue, aiVowels, hasChoices, onAdvance, globo = f
     >
       {dialogue.speaker && <div className={`dialog-speaker ${who?.mono ? 'dialog-speaker-mono' : ''}`}>{render(dialogue.speaker)}</div>}
       {conEditor && edicion && !reaccion && <span className="dialog-editado">EDITADO</span>}
+      {/* Con el editor (solo en desarrollo): una línea atrás o adelante, al lado de la caja. */}
+      {conEditor && editando === null && (
+        <>
+          <button
+            className="dialog-flecha dialog-flecha-atras"
+            disabled={!puedeAtras}
+            onClick={(e) => {
+              e.stopPropagation();
+              onAtras?.();
+            }}
+            onMouseDown={(e) => e.preventDefault()}
+            title="Línea anterior"
+          >
+            ◀
+          </button>
+          <button
+            className="dialog-flecha dialog-flecha-adelante"
+            disabled={hasChoices && textDone}
+            onClick={(e) => {
+              e.stopPropagation();
+              onAdvance();
+            }}
+            onMouseDown={(e) => e.preventDefault()}
+            title="Línea siguiente"
+          >
+            ▶
+          </button>
+        </>
+      )}
       {conEditor && !reaccion && editando === null && (
         <button
           className="dialog-editar"

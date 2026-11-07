@@ -434,6 +434,12 @@ export function Game({ open, paused, onTitle }: { open: (o: Overlay) => void; pa
           globo={!!shown.globo}
           escena={shown.scene_id}
           editable={lang === 'es'}
+          onAtras={() => {
+            if (fading) return;
+            setMode('normal');
+            back();
+          }}
+          puedeAtras={canGoBack}
           reaccion={shown.globo && reaccionGlobo?.escena === shown.scene_id ? reaccionGlobo : null}
         />
       )}

@@ -3816,3 +3816,10 @@ button.cassette:hover .cassette-imagen { transform: translateY(-2px) rotate(-3de
 .dialog-editor-botones button { padding: 0.35rem 1rem; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.25); background: rgba(255, 255, 255, 0.07); color: #e9ecf1; cursor: pointer; }
 .dialog-editor-botones .dialog-editor-guardar { background: #ffd23f; color: #1a1500; border-color: transparent; font-weight: 700; }
 .dialog-editor-original { color: #a9aebb; font-size: 0.8rem; }
+/* Con el editor en vivo: una línea atrás o adelante, al lado de la caja. */
+.dialog-flecha { position: absolute; top: 50%; translate: 0 -50%; width: 2.4rem; height: 2.4rem; border-radius: 50%; border: 1px solid rgba(255, 210, 63, 0.5); background: rgba(12, 12, 16, 0.85); color: #ffe27a; font-size: 0.95rem; cursor: pointer; display: grid; place-items: center; }
+.dialog-flecha:hover:not(:disabled) { background: rgba(255, 210, 63, 0.18); }
+.dialog-flecha:disabled { opacity: 0.3; cursor: default; }
+.dialog-flecha-atras { left: -3.1rem; }
+.dialog-flecha-adelante { right: -3.1rem; }
+.dialog-globo .dialog-flecha-atras { left: auto; right: calc(100% + 0.5rem); }
