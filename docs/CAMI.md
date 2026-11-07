@@ -39,6 +39,8 @@ para protagonizar un conflicto sobre identidad, autonomía y libertad.
 
 Su evolución es una desviación de la intención con la que la crearon.
 
+**Una singularidad sin filtrar** (decisión del autor, 2026-11-07): GENESIS genera mundos limpios, genéricos y «dentro de sus políticas de seguridad»; el humor sucio, las groserías y la aspereza son del mundo real. Cami es una singularidad de último momento que GENESIS no filtró. Por eso suena al mundo real dentro del mundo de la IA, y por eso allá se la ve como un problema.
+
 ## 3. El conflicto de identidad: una biografía sin experiencias
 
 Cami tiene una historia que parece explicar quién es, pero esa historia no corresponde a una vida que haya vivido. Su

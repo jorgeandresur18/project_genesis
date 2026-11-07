@@ -15,7 +15,8 @@ La voz es provocativa: humor negro, sarcasmo y crudeza cotidiana. Provoca, pero 
 - **Sexualidad:** sugerida, nunca explícita, nunca con parecidos de personas reales.
 - **Evitar:** justificar a Jair, glorificar el abuso, reducir a Nikki a un chiste de alcohol, presentar su relación con Jair como sana.
 - **Contraste (regla del autor, 2026-11-06):** el **mundo real** es sucio, lo-fi, cínico, áspero e indomable (sofocante y sudado; la gente no sigue ningún guion). El **mundo de la IA** es aventura: épico, brillante y cordial, como un juego que quiere caerte bien. El cambio de registro es parte del chiste y del terror.
-- **Cami rompe esa estética** dentro del mundo de la IA: su ironía fría y su agresividad suenan al mundo real, por eso allá se la ve como un problema. Escribirla con esa aspereza a propósito, sin suavizarla para que encaje con el tono cordial de alrededor.
+- **El humor sucio vive en el mundo real (regla del autor, 2026-11-07):** las groserías, el sexo directo, el asco y el humor negro van en el mundo real porque son literalmente la antítesis de lo que una IA permitiría hacer. GENESIS construye «todo dentro de nuestras políticas de seguridad»: un mundo limpio, genérico y seguro (el ejército sin cara, la calidad «suficiente», el magenta que nadie elige). Lo vulgar dentro del mundo de la IA es una grieta: algo que se coló.
+- **Cami rompe esa estética** dentro del mundo de la IA: su ironía fría y su agresividad suenan al mundo real, por eso allá se la ve como un problema. Escribirla con esa aspereza a propósito, sin suavizarla para que encaje con el tono cordial de alrededor. Es **una singularidad de último momento que GENESIS no filtró** (decisión del autor, 2026-11-07): su vulgaridad es la grieta, no un error de escritura.
 
 ## Voces
 

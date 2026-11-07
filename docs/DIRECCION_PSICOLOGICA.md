@@ -57,6 +57,8 @@ La historia aborda:
 - el autoengaño como refugio;
 - la diferencia entre comprender a alguien y justificar sus actos.
 
+**El humor como frontera entre mundos** (regla del autor, 2026-11-07): el humor sucio, vulgar y negro vive en el mundo real porque es la antítesis de lo que una IA permitiría hacer; el mundo de GENESIS es limpio, genérico y seguro. Lo vulgar dentro del mundo de la IA es una grieta, algo humano que se coló: Cami es una singularidad de último momento que GENESIS no filtró. Ver `docs/TONO.md` (Reglas) y `docs/CAMI.md`.
+
 **Pregunta central de la obra:**
 > ¿Qué ocurre cuando alguien obtiene exactamente la relación que diseñó y descubre que la necesita precisamente porque no puede soportar una relación real?
 
